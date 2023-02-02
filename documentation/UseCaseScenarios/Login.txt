@@ -9,3 +9,4 @@ Alternative Flow(s)
 INVALID LOGIN
 a2 - system fails to validate credentials
 a3 - system informs the user and prompts the user for credentials again
+return to step 1
