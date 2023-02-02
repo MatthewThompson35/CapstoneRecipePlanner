@@ -1,0 +1,8 @@
+Context - User clicks on the ingredients button
+
+Primary Flow
+1 - user clicks ingredients button
+2 - system displays the ingredients page
+
+Alternative Flow(s)
+none

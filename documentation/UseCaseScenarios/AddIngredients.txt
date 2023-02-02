@@ -1,0 +1,14 @@
+Context - User has loaded into the ingredients page and attempts to add an ingredient
+
+Primary Flow
+1 - user selects to add new ingredient
+2 - system displays add ingredient page
+3 - user enters ingredient and quantity
+5 - user clicks add ingredient
+6 - system detects valid input
+7 - system adds ingredient to list and displays ingredient page
+
+Alternative Flow(s)
+USER CANCELS
+a3-5 user clicks cancel
+a4-6 system displays ingredients page

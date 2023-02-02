@@ -1,0 +1,11 @@
+Context - User opens application
+
+Primary Flow
+1 - user inputs credentials
+2 - system successfully validates the users credentials
+3 - system loads into the home page and loads recipes/ingredients
+
+Alternative Flow(s)
+INVALID LOGIN
+a2 - system fails to validate credentials
+a3 - system informs the user and prompts the user for credentials again
