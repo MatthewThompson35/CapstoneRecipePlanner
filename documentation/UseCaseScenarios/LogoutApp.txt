@@ -1,0 +1,5 @@
+Context - None
+
+Primary Flow
+1 - system displays landing page with user's list of recipes
+2 - user logs out of the application
