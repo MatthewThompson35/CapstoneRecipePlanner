@@ -3,27 +3,59 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    header {
+        position: relative;
+        margin: 30px;
+        padding: 20px;
+    }
+    .form-group {
+        position: relative;
+        margin: 6px;
+        padding: 6px;
+    }
+    label {
+        position: relative;
+        margin: 2px;
+        padding: 2px;
+    }
+    form input[type='submit']  {
+        display: inline-block;
+        width: 70px;
+    }
+    .button {
+        position: relative;
+        margin: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+    #submit {
+        width: 75%;
+    }
+</style>
+
+<header>
+    <div style="text-align: center;"> <h1> Welcome to Recipe Planner</h1> </div>
+</header>
+
+<body>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-            <form class="form-horizontal" asp-action="Index">
-                <div class="form-group">
-                   <label class="control-label">Username:</label>
-                    <input asp-for="Username"  class="form-control"type="text" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Password:</label>
-                    <input asp-for="Password" class="form-control" type="password" />
-                </div>
-                <div class="form-group">
-                   <input type="submit" value="Submit" />
-                </div>
-            </form>
+    <form class="form-horizontal" asp-action="Index">
+        <div class="form-group">
+            <label class="control-label">Username:</label>
+            <input asp-for="Username" class="form-control"type="text"/>
         </div>
-        <div class="col-sm-4"></div>
-    </div>
+        <div class="form-group">
+            <label class="control-label">Password:</label>
+            <input asp-for="Password" class="form-control" type="password"/>
+        </div>
+        <div class="button">
+                <input type="submit" value="Login" id="submit" />
+        </div>
+    </form>
 </div>
+</body>
+
 @{
     if (TempData["msg"]!=null)
     {

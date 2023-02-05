@@ -6,15 +6,15 @@ namespace RecipePlannerWebApplication.Models
 {
     public class Database
     {
-        private static MySqlConnection con = new MySqlConnection(Connection.LoginConnectionString);
-        public static int LoginCheck(Login ad)
+        private static MySqlConnection loginConnection = new MySqlConnection(Connection.LoginConnectionString);
+        public static int LoginCheck(Login login)
         {
-            MySqlCommand com = new MySqlCommand("SELECT username FROM login WHERE username=@Username AND password=@Password", con);
-            com.Parameters.AddWithValue("@Username", ad.Username);
-            com.Parameters.AddWithValue("@Password", ad.Password);
+            MySqlCommand loginCommand = new MySqlCommand("SELECT username FROM login WHERE username=@Username AND password=@Password", loginConnection);
+            loginCommand.Parameters.AddWithValue("@Username", login.Username);
+            loginCommand.Parameters.AddWithValue("@Password", login.Password);
 
-            con.Open();
-            MySqlDataReader reader = com.ExecuteReader();
+            loginConnection.Open();
+            MySqlDataReader reader = loginCommand.ExecuteReader();
 
             int result = 0;
             if (reader.Read())
@@ -26,7 +26,7 @@ namespace RecipePlannerWebApplication.Models
                 result = 0;
             }
 
-            con.Close();
+            loginConnection.Close();
             return result;
         }
 
