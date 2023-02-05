@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace RecipePlannerDesktopApplication
 {
-    public partial class Form1 : Form
+    public partial class LoginPage : Form
     {
-        public Form1()
+        public LoginPage()
         {
             InitializeComponent();
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            var username = this.usernameTextBox.Text;
+            var password = this.passwordTextBox.Text;
+            
         }
     }
 }
