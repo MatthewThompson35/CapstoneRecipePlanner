@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RecipePlannerDesktopApplication
 {
-    public partial class Form1 : Form
+    public partial class Homepage : Form
     {
-        public Form1()
+        public Homepage()
         {
             InitializeComponent();
         }
