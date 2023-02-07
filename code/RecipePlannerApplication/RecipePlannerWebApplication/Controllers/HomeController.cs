@@ -17,7 +17,6 @@ namespace RecipePlannerWebApplication.Controllers
 
         public IActionResult Index()
         {
-            Database.PopulateWebDB();
             return View();
         }
 

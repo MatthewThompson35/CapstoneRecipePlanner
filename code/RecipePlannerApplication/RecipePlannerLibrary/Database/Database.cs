@@ -49,7 +49,7 @@ namespace RecipePlannerLibrary.Database
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
             connection.Open();
-            string query = System.IO.File.ReadAllText("..\\..\\..\\RecipePlannerLibrary\\Scripts\\PrepopulateDB.sql");
+            string query = System.IO.File.ReadAllText("..\\RecipePlannerLibrary\\Scripts\\PrepopulateDB.sql");
             using var command = new MySqlCommand(query, connection);
             command.ExecuteNonQuery();
         }
