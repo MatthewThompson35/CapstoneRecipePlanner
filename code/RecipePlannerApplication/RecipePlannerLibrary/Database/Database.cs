@@ -63,5 +63,22 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        public static List<string> ContainsUser(string username)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            List<string> list = new List<string>();
+            string query = @"Select * from login where username=@username;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@userName", MySqlDbType.VarChar).Value = username;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+            return list;
+
+        }
+
     }
 }

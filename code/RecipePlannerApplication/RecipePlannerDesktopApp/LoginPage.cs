@@ -22,28 +22,37 @@ namespace RecipePlannerDesktopApplication
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            Login attempt = new Login();
-            attempt.Username = this.usernameTextBox.Text;
-            attempt.Password = this.passwordTextBox.Text;
-            int result = Database.LoginCheck(attempt);
-            var message = "";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            if (result == 1)
+            this.emptyFieldErrorLabel.Visible = false;
+            if (this.usernameTextBox.Text.Equals("") || this.passwordTextBox.Text.Equals(""))
             {
-                message = "Succesful login";
-                var box = MessageBox.Show(message, "", buttons);
-                if (box == System.Windows.Forms.DialogResult.Yes)
-                {
-                 
-                }
+                this.emptyFieldErrorLabel.Text = "Please fill out all fields";
+                this.emptyFieldErrorLabel.Visible = true;
             }
             else
             {
-                message = "Failed login";
-                var box = MessageBox.Show(message, "", buttons);
-                if (box == System.Windows.Forms.DialogResult.Yes)
+                Login attempt = new Login();
+                attempt.Username = this.usernameTextBox.Text;
+                attempt.Password = this.passwordTextBox.Text;
+                int result = Database.LoginCheck(attempt);
+                var message = "";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                if (result == 1)
                 {
-                    
+                    message = "Succesful login";
+                    var box = MessageBox.Show(message, "", buttons);
+                    if (box == System.Windows.Forms.DialogResult.Yes)
+                    {
+
+                    }
+                }
+                else
+                {
+                    message = "Failed login";
+                    var box = MessageBox.Show(message, "", buttons);
+                    if (box == System.Windows.Forms.DialogResult.Yes)
+                    {
+
+                    }
                 }
             }
             
@@ -51,9 +60,9 @@ namespace RecipePlannerDesktopApplication
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            var username = this.usernameTextBox.Text;
-            var password = this.passwordTextBox.Text;
-            Database.CreateUser(username, password);
+            this.Hide();
+            Form form = new Register();
+            form.ShowDialog();
         }
     }
 }
