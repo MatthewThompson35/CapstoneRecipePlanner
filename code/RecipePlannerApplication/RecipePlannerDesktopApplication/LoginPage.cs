@@ -1,4 +1,5 @@
 ﻿using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace RecipePlannerDesktopApplication
         public LoginPage()
         {
             InitializeComponent();
+            Database.PopulateDB();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -50,7 +52,9 @@ namespace RecipePlannerDesktopApplication
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-
+            var username = this.usernameTextBox.Text;
+            var password = this.passwordTextBox.Text;
+            Database.CreateUser(username, password);
         }
     }
 }

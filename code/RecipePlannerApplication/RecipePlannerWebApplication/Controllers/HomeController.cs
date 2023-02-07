@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
 
@@ -16,6 +17,7 @@ namespace RecipePlannerWebApplication.Controllers
 
         public IActionResult Index()
         {
+            Database.PopulateWebDB();
             return View();
         }
 
