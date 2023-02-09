@@ -28,21 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ingredientsListView = new System.Windows.Forms.ListBox();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
+            this.ingredientsGridView = new System.Windows.Forms.DataGridView();
+            this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.decreaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.increaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ingredientsListView
-            // 
-            this.ingredientsListView.FormattingEnabled = true;
-            this.ingredientsListView.ItemHeight = 15;
-            this.ingredientsListView.Location = new System.Drawing.Point(25, 52);
-            this.ingredientsListView.Name = "ingredientsListView";
-            this.ingredientsListView.Size = new System.Drawing.Size(358, 334);
-            this.ingredientsListView.TabIndex = 0;
             // 
             // button1
             // 
@@ -66,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(25, 29);
+            this.label1.Location = new System.Drawing.Point(12, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(129, 19);
             this.label1.TabIndex = 3;
@@ -82,29 +84,93 @@
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
+            // ingredientsGridView
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.ingredientsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IngredientColumn,
+            this.decreaseQuantityColumn,
+            this.quantityColumn,
+            this.increaseQuantityColumn});
+            this.ingredientsGridView.Location = new System.Drawing.Point(12, 51);
+            this.ingredientsGridView.Name = "ingredientsGridView";
+            this.ingredientsGridView.RowHeadersVisible = false;
+            this.ingredientsGridView.RowTemplate.Height = 25;
+            this.ingredientsGridView.Size = new System.Drawing.Size(388, 346);
+            this.ingredientsGridView.TabIndex = 5;
+            // 
+            // IngredientColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.IngredientColumn.HeaderText = "Ingredient";
+            this.IngredientColumn.Name = "IngredientColumn";
+            this.IngredientColumn.ReadOnly = true;
+            this.IngredientColumn.Width = 205;
+            // 
+            // decreaseQuantityColumn
+            // 
+            this.decreaseQuantityColumn.HeaderText = "";
+            this.decreaseQuantityColumn.Name = "decreaseQuantityColumn";
+            this.decreaseQuantityColumn.Text = "V";
+            this.decreaseQuantityColumn.Width = 40;
+            // 
+            // quantityColumn
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.quantityColumn.HeaderText = "Quantity";
+            this.quantityColumn.Name = "quantityColumn";
+            this.quantityColumn.ReadOnly = true;
+            // 
+            // increaseQuantityColumn
+            // 
+            this.increaseQuantityColumn.HeaderText = "";
+            this.increaseQuantityColumn.Name = "increaseQuantityColumn";
+            this.increaseQuantityColumn.Text = "^";
+            this.increaseQuantityColumn.Width = 40;
+            // 
+            // ingredientBindingSource
+            // 
+            this.ingredientBindingSource.DataSource = typeof(RecipePlannerLibrary.Models.Ingredient);
+            // 
             // IngredientsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 519);
+            this.Controls.Add(this.ingredientsGridView);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.ingredientsListView);
             this.Name = "IngredientsPage";
             this.Text = "IngredientsPage";
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private ListBox ingredientsListView;
         private Button button1;
         private Button button2;
         private Label label1;
         private Button logoutButton;
+        private DataGridView ingredientsGridView;
+        private DataGridViewTextBoxColumn IngredientColumn;
+        private DataGridViewButtonColumn decreaseQuantityColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewButtonColumn increaseQuantityColumn;
+        private BindingSource ingredientBindingSource;
     }
 }
