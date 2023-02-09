@@ -38,12 +38,9 @@ namespace RecipePlannerDesktopApplication
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 if (result == 1)
                 {
-                    message = "Succesful login";
-                    var box = MessageBox.Show(message, "", buttons);
-                    if (box == System.Windows.Forms.DialogResult.Yes)
-                    {
-
-                    }
+                    this.Hide();
+                    IngredientsPage ingredients = new IngredientsPage();
+                    ingredients.Show();
                 }
                 else
                 {
