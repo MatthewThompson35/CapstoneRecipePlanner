@@ -1,0 +1,56 @@
+﻿@model RecipePlannerLibrary.Models.Ingredient
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ingredient Name</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ingredient in ViewBag.ingredients)
+        {
+            <tr id="ingredient-@ingredient.id">
+                <td>@ingredient.id</td>
+                <td>@ingredient.name</td>
+                <td>
+                    <a href="#" onclick="decrementQuantity(@ingredient.id)">-</a>
+                    <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
+                    <a href="#" onclick="incrementQuantity(@ingredient.id)">+</a>
+                </td>
+                <td>
+                    <a href="#" onclick="removeIngredient(@ingredient.id)">Remove</a>
+                 </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" onclick="addIngredient()">Add Ingredient</button>
+
+<script>
+    function incrementQuantity(id) {
+        var quantitySpan = document.getElementById("ingredient-quantity-" + id);
+        var quantity = parseInt(quantitySpan.innerHTML);
+        quantitySpan.innerHTML = ++quantity;
+    }
+
+    function decrementQuantity(id) {
+        var quantitySpan = document.getElementById("ingredient-quantity-" + id);
+        var quantity = parseInt(quantitySpan.innerHTML);
+        if (quantity > 0) {
+            quantitySpan.innerHTML = --quantity;
+        }
+    }
+
+    function removeIngredient(id) {
+        var ingredientRow = document.getElementById("ingredient-" + id);
+        ingredientRow.remove();
+    }
+
+    function addIngredient() {
+        // Your implementation to add a new ingredient to the table
+    }
+</script>

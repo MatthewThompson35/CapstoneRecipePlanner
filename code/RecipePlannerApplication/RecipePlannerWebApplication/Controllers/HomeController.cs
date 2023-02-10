@@ -27,12 +27,15 @@ namespace RecipePlannerWebApplication.Controllers
             if (res == 1)
             {
                 TempData["msg"] = "Successful Login!";
+                ViewBag.ingredients = IngredientDAL.getIngredients();
+                return View("IngredientsPage");
             }
             else
             {
                 TempData["msg"] = "The Username or Password is incorrect.";
+                return View();
             }
-            return View();
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
