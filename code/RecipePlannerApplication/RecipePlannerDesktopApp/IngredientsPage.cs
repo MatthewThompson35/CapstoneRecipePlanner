@@ -21,9 +21,8 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
 
-            var bindingList = new BindingList<Ingredient>(IngredientsPage.GetIngredients);
-            var source = new BindingSource(bindingList, null);
-            this.ingredientsGridView.DataSource = source;
+            var bindingList = new BindingList<Ingredient>(GetIngredients());
+            this.ingredientsGridView.DataSource = bindingList;
 
         }
 
@@ -34,7 +33,7 @@ namespace RecipePlannerDesktopApplication
             login.Show();
         }
 
-        private static IList<Ingredient> GetIngredients()
+        private static List<Ingredient> GetIngredients()
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
             connection.Open();

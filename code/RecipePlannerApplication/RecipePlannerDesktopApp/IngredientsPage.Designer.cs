@@ -37,11 +37,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
+            this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.decreaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.increaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +89,7 @@
             // 
             // ingredientsGridView
             // 
+            this.ingredientsGridView.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -99,7 +103,11 @@
             this.IngredientColumn,
             this.decreaseQuantityColumn,
             this.quantityColumn,
-            this.increaseQuantityColumn});
+            this.increaseQuantityColumn,
+            this.idDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.quantityDataGridViewTextBoxColumn});
+            this.ingredientsGridView.DataSource = this.ingredientBindingSource;
             this.ingredientsGridView.Location = new System.Drawing.Point(12, 51);
             this.ingredientsGridView.Name = "ingredientsGridView";
             this.ingredientsGridView.RowHeadersVisible = false;
@@ -107,8 +115,13 @@
             this.ingredientsGridView.Size = new System.Drawing.Size(388, 346);
             this.ingredientsGridView.TabIndex = 5;
             // 
+            // ingredientBindingSource
+            // 
+            this.ingredientBindingSource.DataSource = typeof(RecipePlannerLibrary.Models.Ingredient);
+            // 
             // IngredientColumn
             // 
+            this.IngredientColumn.DataPropertyName = "name";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.IngredientColumn.HeaderText = "Ingredient";
@@ -120,11 +133,13 @@
             // 
             this.decreaseQuantityColumn.HeaderText = "";
             this.decreaseQuantityColumn.Name = "decreaseQuantityColumn";
-            this.decreaseQuantityColumn.Text = "V";
+            this.decreaseQuantityColumn.Text = "v";
+            this.decreaseQuantityColumn.UseColumnTextForButtonValue = true;
             this.decreaseQuantityColumn.Width = 40;
             // 
             // quantityColumn
             // 
+            this.quantityColumn.DataPropertyName = "quantity";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.quantityColumn.HeaderText = "Quantity";
@@ -136,11 +151,30 @@
             this.increaseQuantityColumn.HeaderText = "";
             this.increaseQuantityColumn.Name = "increaseQuantityColumn";
             this.increaseQuantityColumn.Text = "^";
+            this.increaseQuantityColumn.UseColumnTextForButtonValue = true;
             this.increaseQuantityColumn.Width = 40;
             // 
-            // ingredientBindingSource
+            // idDataGridViewTextBoxColumn
             // 
-            this.ingredientBindingSource.DataSource = typeof(RecipePlannerLibrary.Models.Ingredient);
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "quantity";
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "quantity";
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            this.quantityDataGridViewTextBoxColumn.Visible = false;
             // 
             // IngredientsPage
             // 
@@ -167,10 +201,13 @@
         private Label label1;
         private Button logoutButton;
         private DataGridView ingredientsGridView;
+        private BindingSource ingredientBindingSource;
         private DataGridViewTextBoxColumn IngredientColumn;
         private DataGridViewButtonColumn decreaseQuantityColumn;
         private DataGridViewTextBoxColumn quantityColumn;
         private DataGridViewButtonColumn increaseQuantityColumn;
-        private BindingSource ingredientBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
     }
 }
