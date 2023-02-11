@@ -19,6 +19,17 @@ namespace RecipePlannerWebApplication.Controllers
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("/Views/IngredientsPage", ViewBag.ingredients);
         }
+
+
+        public ActionResult AddIngredient(string txtID, string txtIngredientName, string txtQuantity)
+        {
+            // Add the new ingredient to your data source
+            var ingredient = new Ingredient(Int32.Parse(txtID), txtIngredientName, Int32.Parse(txtQuantity));
+            // Add the ingredient to the list of ingredients (e.g. a database, a collection, etc.)
+
+            // Redirect the user back to the index page to see the updated list of ingredients
+            return RedirectToAction("Index");
+        }
     }
 }
     
