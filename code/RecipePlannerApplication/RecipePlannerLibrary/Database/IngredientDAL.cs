@@ -39,5 +39,16 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
             command.ExecuteNonQuery();
         }
+
+        public static void decrementQuantity(int quantity, int id)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            string query = @"Update ingredient set quantity = @quantity where ingredientID = @id";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity - 1;
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.ExecuteNonQuery();
+        }
     }
 }

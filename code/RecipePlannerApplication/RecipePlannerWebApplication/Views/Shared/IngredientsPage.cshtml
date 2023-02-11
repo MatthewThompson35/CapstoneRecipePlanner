@@ -1,6 +1,6 @@
 ﻿@model List<RecipePlannerLibrary.Models.Ingredient>;
 
-
+<form id="mainform">
 <table class="table">
     <thead>
         <tr>
@@ -17,7 +17,7 @@
                 <td>@ingredient.id</td>
                 <td>@ingredient.name</td>
                 <td>
-                    <a href="#" onclick="decrementQuantity(@ingredient.id)">-</a>
+                    <input type="submit" asp-action="decrementQuantity" value="-" id="@ingredient.id"/>
                     <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
                     <a href="#" onclick="incrementQuantity(@ingredient.id)">+</a>
                 </td>
@@ -28,8 +28,9 @@
         }
     </tbody>
 </table>
+</form>
 
-<form method="post" >
+<form method="post" id="addForm" style="display:none;">
   <div>
     <table>  
       <tr>
@@ -42,11 +43,13 @@
       </tr>
       <tr>
         <td></td>
-        <td><input type="submit" asp-action="AddIngredient" value="Add" /></td>
+        <td><input type="submit" onclick="closeForm()" asp-action="AddIngredient" value="Add" /></td>
+        <td><input type="button" onclick="closeForm()" value="Cancel" id="cancelButton" /></td>
       </tr>
     </table>
   </div>
 </form>
+<input type="button" onclick="openForm()" value="Add Ingredient" id="addIngredient" />
 
 
 
@@ -72,5 +75,15 @@
 
     function addIngredient() {
        
+    }
+
+    function openForm() {
+        document.getElementById("addForm").style.display = "block";
+        document.getElementById("mainform").style.display = "none";
+    }
+
+    function closeForm() {
+        document.getElementById("addForm").style.display = "none";
+        document.getElementById("mainform").style.display = "block";
     }
 </script>
