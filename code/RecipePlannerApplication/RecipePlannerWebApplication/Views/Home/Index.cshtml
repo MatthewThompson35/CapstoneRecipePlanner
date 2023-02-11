@@ -117,17 +117,17 @@
         </form>
     </div>
     <div class="form-popup" id="myForm">
-        <form asp-action="Index" class="form-container">
+        <form class="form-container">
             <label for="Username"><b>Username:</b></label>
-            <input type="text" placeholder="Enter Email" name="username" required>
+            <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
             <label for="Password"><b>Password:</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
             <label for="Password"><b> Reenter Password:</b></label>
-            <input type="password" placeholder="Reenter Password" name="repeatPassword" required>
+            <input type="password" placeholder="Reenter Password" name="repeatPassword" id="" required>
 
-            <button type="submit" class="btn">Register</button>
+            <button type="submit" class="btn" onclick="registerNewUser()">Register</button>
             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </form>
     </div>
@@ -143,6 +143,24 @@
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
         document.getElementById("login").style.display = "block";
+    }
+
+    function registerNewUser() {
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var repeatPassword = document.getElementById("repeatPassword");
+
+
+        if (password.Equals(repeatPassword))
+        {
+            Database.CreateUser(username, password);
+
+            document.getElementById("myForm").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        } else {
+            TempData["msg"] = "The password must match in both fields. Please try again.";
+        }
+       
     }
 </script>
 
