@@ -28,5 +28,16 @@ namespace RecipePlannerLibrary.Database
             }
             return ingredients;
         }
+
+        public static void addIngredient(string name, int quantity)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            string query = @"Insert into ingredient (ingredientName, quantity) values(@name, @quantity);";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
+            command.ExecuteNonQuery();
+        }
     }
 }

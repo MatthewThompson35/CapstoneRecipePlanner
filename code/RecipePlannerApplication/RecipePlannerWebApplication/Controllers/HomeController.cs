@@ -38,6 +38,14 @@ namespace RecipePlannerWebApplication.Controllers
             
         }
 
+        [HttpPost]
+        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
+        {
+            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

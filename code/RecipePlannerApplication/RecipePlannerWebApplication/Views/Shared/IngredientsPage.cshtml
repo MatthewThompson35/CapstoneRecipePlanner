@@ -1,4 +1,5 @@
-﻿@model RecipePlannerLibrary.Models.Ingredient
+﻿@model List<RecipePlannerLibrary.Models.Ingredient>;
+
 
 <table class="table">
     <thead>
@@ -28,13 +29,9 @@
     </tbody>
 </table>
 
-<form method="post">
+<form method="post" >
   <div>
-    <table>
-      <tr>
-        <td>ID:</td>
-        <td><input type="text" name="txtID" /></td>
-      </tr>
+    <table>  
       <tr>
         <td>Ingredient Name:</td>
         <td><input type="text" name="txtIngredientName" /></td>
@@ -45,15 +42,13 @@
       </tr>
       <tr>
         <td></td>
-        <td><input type="submit" value="Add" /></td>
+        <td><input type="submit" asp-action="AddIngredient" value="Add" /></td>
       </tr>
     </table>
   </div>
 </form>
 
 
-
-<button type="button" onclick="addIngredient()">Add Ingredient</button>
 
 <script>
     function incrementQuantity(id) {
