@@ -9,29 +9,88 @@
         margin: 30px;
         padding: 20px;
     }
+
     .form-group {
         position: relative;
         margin: 6px;
         padding: 6px;
     }
+
     label {
         position: relative;
         margin: 2px;
         padding: 2px;
     }
-    form input[type='submit']  {
+
+    form input[type='submit'] {
         display: inline-block;
         width: 70px;
     }
+
     .button {
         position: relative;
         margin: 20px;
         padding: 20px;
         text-align: center;
     }
+
     #submit {
         width: 75%;
     }
+
+    #register {
+        width: 75%;
+    }
+
+    .form-popup {
+        display: none;
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        top: 55%;
+        left: 50%;
+        margin: -200px 0 0 -200px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+
+    .form-container {
+        width: 400px;
+        height: 400px;
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -200px 0 0 -200px;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: white;
+        color: black;
+        padding: 16px 20px;
+        border: 3px solid;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+
 </style>
 
 <header>
@@ -39,25 +98,56 @@
 </header>
 
 <body>
-<div class="container">
-    <form class="form-horizontal" asp-action="Index">
-        <div class="form-group">
-            <label class="control-label">Username:</label>
-            <input asp-for="Username" class="form-control"type="text"/>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Password:</label>
-            <input asp-for="Password" class="form-control" type="password"/>
-        </div>
-        <div class="button">
+    <div class="container" id="login">
+        <form class="form-horizontal" asp-action="Index">
+            <div class="form-group">
+                <label class="control-label">Username:</label>
+                <input asp-for="Username" class="form-control" type="text" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password:</label>
+                <input asp-for="Password" class="form-control" type="password" />
+            </div>
+            <div class="button">
                 <input type="submit" value="Login" id="submit" />
-        </div>
-    </form>
-</div>
+            </div>
+            <div class="button">
+                <input type="button" onclick="openForm()" value="Register" id="register" />
+            </div>
+        </form>
+    </div>
+    <div class="form-popup" id="myForm">
+        <form asp-action="Index" class="form-container">
+            <label for="Username"><b>Username:</b></label>
+            <input type="text" placeholder="Enter Email" name="username" required>
+
+            <label for="Password"><b>Password:</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+
+            <label for="Password"><b> Reenter Password:</b></label>
+            <input type="password" placeholder="Reenter Password" name="repeatPassword" required>
+
+            <button type="submit" class="btn">Register</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
 </body>
 
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+        document.getElementById("login").style.display = "none";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+        document.getElementById("login").style.display = "block";
+    }
+</script>
+
 @{
-    if (TempData["msg"]!=null)
+    if (TempData["msg"] != null)
     {
         <script>
             alert('@TempData["msg"]')
