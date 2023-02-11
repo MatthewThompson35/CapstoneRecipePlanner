@@ -57,12 +57,14 @@ namespace RecipePlannerDesktopApplication
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            // TODO: implement add ingredient button
+            this.displayAddIngredientsPopup();
         }
 
         private void displayAddIngredientsPopup()
         {
-            // TODO: make a popup page for add ingredients button and show
+
+            AddIngredientsPopup ingredientsPopup = new AddIngredientsPopup();
+            ingredientsPopup.Show();
         }
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
