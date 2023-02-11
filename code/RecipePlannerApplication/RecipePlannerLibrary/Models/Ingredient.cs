@@ -1,5 +1,7 @@
 ﻿
 
+using Org.BouncyCastle.Crypto.Tls;
+
 namespace RecipePlannerLibrary.Models
 {
     public class Ingredient
@@ -11,6 +13,12 @@ namespace RecipePlannerLibrary.Models
         public Ingredient(int id, string name, int quantity)
         {
             this.id = id;
+            this.name = name;
+            this.quantity = quantity;
+        }
+
+        public Ingredient(string name, int quantity)
+        {
             this.name = name;
             this.quantity = quantity;
         }
