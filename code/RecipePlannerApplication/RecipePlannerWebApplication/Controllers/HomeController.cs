@@ -39,6 +39,12 @@ namespace RecipePlannerWebApplication.Controllers
         [HttpPost]
         public ActionResult CreateUser(string username, string password, string repeatPassword)
         {
+            List<string> list = Database.ContainsUser(username);
+            if (list.Count() > 0)
+            {
+                TempData["msg"] = "This username is already taken. Please choose another and try again.";
+                return View("Register");
+            }
             if (password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
