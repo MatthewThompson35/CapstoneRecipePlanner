@@ -3,6 +3,7 @@ using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 
 namespace RecipePlannerWebApplication.Controllers
 {
@@ -33,6 +34,31 @@ namespace RecipePlannerWebApplication.Controllers
                 TempData["msg"] = "The Username or Password is incorrect.";
             }
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(string username, string password, string repeatPassword)
+        {
+            if (password.Equals(repeatPassword))
+            {
+                Database.CreateUser(username, password);
+
+                return View("Index");
+
+            }
+            else
+            {
+                TempData["msg"] = "The password must match in both fields. Please try again.";
+                return View("Register");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult OpenRegister()
+        {
+            return View("Register");
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
