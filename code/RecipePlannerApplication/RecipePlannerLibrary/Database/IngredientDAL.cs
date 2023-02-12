@@ -75,5 +75,31 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
             command.ExecuteNonQuery();
         }
+
+
+        public static List<Ingredient> getIngredients(string ingredientName)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            List<Ingredient> ingredients = new List<Ingredient>();
+            var user = ActiveUser.username;
+            string query = @"Select * from ingredient where username=@user and ingredientName = @ingredientName;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = user;
+            command.Parameters.Add("@ingredientName", MySqlDbType.VarChar).Value = ingredientName;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string username = reader.GetString(0);
+                string name = reader.GetString(1);
+                int quantity = reader.GetInt32(2);
+                int id = reader.GetInt32(3);
+
+                Ingredient ingredient = new Ingredient(username, name, quantity, id);
+
+                ingredients.Add(ingredient);
+            }
+            return ingredients;
+        }
     }
 }
