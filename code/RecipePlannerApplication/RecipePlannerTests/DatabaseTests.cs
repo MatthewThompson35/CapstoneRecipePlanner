@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace RecipePlannerTests
 {
     [TestClass]
-    public class DataAccessLayerTests
+    public class DatabaseTests
     {
         [TestMethod]
         public void LoginCheck_Correct_Info()
