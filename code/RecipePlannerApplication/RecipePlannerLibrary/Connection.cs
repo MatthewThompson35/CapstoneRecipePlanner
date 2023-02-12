@@ -6,6 +6,6 @@ namespace RecipePlannerLibrary
 {
     public class Connection
     {
-        public static readonly string ConnectionString = "Server=localhost;Database=capstone;uid=root;pwd=Brandon.2018";
+        public static readonly string ConnectionString = "Server=localhost;Database=capstone;uid=root;pwd=passwordpassword123";
     }
 }
