@@ -1,0 +1,19 @@
+﻿<form method="post" id="addForm">
+    <div>
+        <table>
+            <tr>
+                <td>Ingredient Name:</td>
+                <td><input type="text" name="txtIngredientName" /></td>
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <td><input type="text" name="txtQuantity" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit"  asp-action="AddIngredient" value="Add" /></td>
+                <td><input type="submit"  asp-action="goToIngredientsPage" value="Cancel" id="cancelButton" /></td>
+            </tr>
+        </table>
+    </div>
+</form>

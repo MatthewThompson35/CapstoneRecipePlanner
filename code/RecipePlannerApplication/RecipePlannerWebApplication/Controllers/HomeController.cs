@@ -86,9 +86,27 @@ namespace RecipePlannerWebApplication.Controllers
         [HttpPost]
         public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
         {
-            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
+            {
+                TempData["msg"] = "Please enter values";
+                return View("AddIngredient");
+            }
+            else if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
+            {
+                TempData["msg"] = "Ingredient is already entered";
+                return View("AddIngredient");
+            }
+            else {
+                IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
+                ViewBag.ingredients = IngredientDAL.getIngredients();
+                return View("IngredientsPage", ViewBag.ingredients);
+            }
+        }
+
+        public ActionResult goToIngredientsPage()
+        {
+           ViewBag.ingredients = IngredientDAL.getIngredients();
+           return View("IngredientsPage", ViewBag.ingredients);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
