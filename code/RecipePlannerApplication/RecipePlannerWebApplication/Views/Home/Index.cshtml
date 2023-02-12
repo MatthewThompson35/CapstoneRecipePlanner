@@ -78,25 +78,35 @@
 </head>
 
 <body>
-  <h1>Welcome to Recipe Planner</h1>
-  <div class="container" id="login">
+<h1>Welcome to Recipe Planner</h1>
+<div class="container" id="login">
     <form class="form-horizontal" asp-action="Index">
-      <div class="form-group">
-        <label class="control-label">Username:</label>
-        <input asp-for="Username" class="form-control" type="text" required/>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Password:</label>
-        <input asp-for="Password" class="form-control" type="password" required/>
-      </div>
-      <div class="button">
-        <input type="submit" value="Login" id="submit" />
-      </div>
-      <div class="button">
-        <input type="submit" asp-action="OpenRegister" value="Register" id="register" />
-      </div>
+        <div class="form-group">
+            <label class="control-label">Username:</label>
+            <input asp-for="Username" class="form-control" type="text" id="username"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Password:</label>
+            <input asp-for="Password" class="form-control" type="password" id="password"/>
+        </div>
+        <div class="button">
+            <input type="submit" value="Login" id="submit" onclick="setRequired();"/>
+        </div>
+        <div class="button">
+            <input type="submit" asp-action="OpenRegister" value="Register" id="register" onclick="removeRequired();"/>
+        </div>
     </form>
-  </div>
+</div>
+<script>
+    function setRequired() {
+      document.getElementById("username").required = true;
+      document.getElementById("password").required = true;
+    }
+    function removeRequired() {
+      document.getElementById("username").required = false;
+      document.getElementById("password").required = false;
+    }
+  </script>
 </body>
 
 
