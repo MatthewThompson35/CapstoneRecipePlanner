@@ -4,6 +4,7 @@ using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 
 namespace RecipePlannerWebApplication.Controllers
 {
@@ -107,6 +108,37 @@ namespace RecipePlannerWebApplication.Controllers
         {
            ViewBag.ingredients = IngredientDAL.getIngredients();
            return View("IngredientsPage", ViewBag.ingredients);
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(string username, string password, string repeatPassword)
+        {
+            List<string> list = Database.ContainsUser(username);
+            if (list.Count() > 0)
+            {
+                TempData["msg"] = "This username is already taken. Please choose another and try again.";
+                return View("Register");
+            }
+            if (password.Equals(repeatPassword))
+            {
+                Database.CreateUser(username, password);
+
+                return View("Index");
+
+            }
+            else
+            {
+                TempData["msg"] = "The password must match in both fields. Please try again.";
+                return View("Register");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult OpenRegister()
+        {
+            return View("Register");
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
