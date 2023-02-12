@@ -1,5 +1,14 @@
 ﻿@model List<RecipePlannerLibrary.Models.Ingredient>;
 
+<style>
+    #logout{
+        position: fixed;
+        right: 10px;
+        top: 5px;
+    }
+
+</style>
+
 <form id="mainform">
     <table class="table">
         <thead>
@@ -28,6 +37,7 @@
             }
         </tbody>
     </table>
+    <input type="submit" asp-action="Logout" value="Logout" id="logout" />
     <input type="button" onclick="openForm()" value="Add Ingredient" id="addIngredient" />
 </form>
 
@@ -61,5 +71,8 @@
     function closeForm() {
         document.getElementById("addForm").style.display = "none";
         document.getElementById("mainform").style.display = "block";
+    }
+    function logout() {
+        
     }
 </script>
