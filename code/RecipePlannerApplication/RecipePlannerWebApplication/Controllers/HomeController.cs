@@ -27,7 +27,6 @@ namespace RecipePlannerWebApplication.Controllers
             int res = Database.LoginCheck(ad);
             if (res == 1)
             {
-                TempData["msg"] = "Successful Login!";
                 ActiveUser.username = ad.Username;
                 ViewBag.ingredients = IngredientDAL.getIngredients();
                 return View("IngredientsPage");
@@ -38,6 +37,25 @@ namespace RecipePlannerWebApplication.Controllers
                 return View();
             }
             
+        }
+
+        public ActionResult decrementQuantity(string id)
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = Int32.Parse(id);
+
+            foreach (var item in ViewBag.ingredients)
+            {
+                if (item.id == ingredientID)
+                {
+                    quantity = item.quantity;
+
+                }
+            }
+            IngredientDAL.decrementQuantity(ingredientID, quantity);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
         }
 
         [HttpPost]

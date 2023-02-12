@@ -1,53 +1,55 @@
 ﻿@model List<RecipePlannerLibrary.Models.Ingredient>;
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Ingredient Name</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ingredient in ViewBag.ingredients)
-        {
-            <tr id="ingredient-@ingredient.id">
-                <td>@ingredient.id</td>
-                <td>@ingredient.name</td>
-                <td>
-                    <a href="#" onclick="decrementQuantity(@ingredient.id)">-</a>
-                    <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
-                    <a href="#" onclick="incrementQuantity(@ingredient.id)">+</a>
-                </td>
-                <td>
-                    <a href="#" onclick="removeIngredient(@ingredient.id)">Remove</a>
-                 </td>
+<form id="mainform">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ingredient Name</th>
+                <th>Quantity</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<form method="post" >
-  <div>
-    <table>  
-      <tr>
-        <td>Ingredient Name:</td>
-        <td><input type="text" name="txtIngredientName" /></td>
-      </tr>
-      <tr>
-        <td>Quantity:</td>
-        <td><input type="text" name="txtQuantity" /></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="submit" asp-action="AddIngredient" value="Add" /></td>
-      </tr>
+        </thead>
+        <tbody>
+            @foreach (var ingredient in ViewBag.ingredients)
+            {
+                <tr id="ingredient-@ingredient.id">
+                    <td id="ingredientID">@ingredient.id</td>
+                    <td>@ingredient.name</td>
+                    <td>
+                        <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
+                        <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
+                        <a href="#" onclick="incrementQuantity(@ingredient.id)">+</a>
+                    </td>
+                    <td>
+                        <a href="#" onclick="removeIngredient(@ingredient.id)">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
-  </div>
+    <input type="button" onclick="openForm()" value="Add Ingredient" id="addIngredient" />
 </form>
 
+<form method="post" id="addForm" style="display:none;">
+    <div>
+        <table>
+            <tr>
+                <td>Ingredient Name:</td>
+                <td><input type="text" name="txtIngredientName" /></td>
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <td><input type="text" name="txtQuantity" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" onclick="closeForm()" asp-action="AddIngredient" value="Add" /></td>
+                <td><input type="button" onclick="closeForm()" value="Cancel" id="cancelButton" /></td>
+            </tr>
+        </table>
+    </div>
+</form>
 
 
 <script>
@@ -72,5 +74,14 @@
 
     function addIngredient() {
        
+    }
+
+    function openForm() {
+        document.getElementById("addForm").style.display = "block";
+        document.getElementById("mainform").style.display = "none";
+    }
+    function closeForm() {
+        document.getElementById("addForm").style.display = "none";
+        document.getElementById("mainform").style.display = "block";
     }
 </script>
