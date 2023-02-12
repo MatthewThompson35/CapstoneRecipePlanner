@@ -54,5 +54,26 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
             command.ExecuteNonQuery();
         }
+
+        public static void incrementQuantity(int id, int quantity)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            string query = @"Update ingredient set quantity = @quantity where ingredientID = @id";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity + 1;
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.ExecuteNonQuery();
+        }
+
+        public static void RemoveIngredient(int id)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            string query = @"Delete from ingredient where ingredientID = @id";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.ExecuteNonQuery();
+        }
     }
 }

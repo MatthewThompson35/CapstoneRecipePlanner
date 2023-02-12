@@ -58,6 +58,31 @@ namespace RecipePlannerWebApplication.Controllers
             return View("IngredientsPage", ViewBag.ingredients);
         }
 
+        public ActionResult incrementQuantity(string id)
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = Int32.Parse(id);
+
+            foreach (var item in ViewBag.ingredients)
+            {
+                if (item.id == ingredientID)
+                {
+                    quantity = item.quantity;
+
+                }
+            }
+            IngredientDAL.incrementQuantity(ingredientID, quantity);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
+        }
+
+        public ActionResult removeIngredient(string id) {
+            IngredientDAL.RemoveIngredient(Int32.Parse(id));
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
+        }
+
         [HttpPost]
         public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
         {

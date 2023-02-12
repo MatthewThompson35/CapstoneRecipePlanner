@@ -19,10 +19,10 @@
                     <td>
                         <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
                         <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
-                        <a href="#" onclick="incrementQuantity(@ingredient.id)">+</a>
+                        <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
                     </td>
                     <td>
-                        <a href="#" onclick="removeIngredient(@ingredient.id)">Remove</a>
+                        <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id" />
                     </td>
                 </tr>
             }
@@ -53,28 +53,6 @@
 
 
 <script>
-    function incrementQuantity(id) {
-        var quantitySpan = document.getElementById("ingredient-quantity-" + id);
-        var quantity = parseInt(quantitySpan.innerHTML);
-        quantitySpan.innerHTML = ++quantity;
-    }
-
-    function decrementQuantity(id) {
-        var quantitySpan = document.getElementById("ingredient-quantity-" + id);
-        var quantity = parseInt(quantitySpan.innerHTML);
-        if (quantity > 0) {
-            quantitySpan.innerHTML = --quantity;
-        }
-    }
-
-    function removeIngredient(id) {
-        var ingredientRow = document.getElementById("ingredient-" + id);
-        ingredientRow.remove();
-    }
-
-    function addIngredient() {
-       
-    }
 
     function openForm() {
         document.getElementById("addForm").style.display = "block";
