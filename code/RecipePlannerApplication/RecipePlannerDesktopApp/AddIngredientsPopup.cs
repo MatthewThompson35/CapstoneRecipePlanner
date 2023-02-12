@@ -15,9 +15,12 @@ namespace RecipePlannerDesktopApplication
 {
     public partial class AddIngredientsPopup : Form
     {
-        public AddIngredientsPopup()
+        private IngredientsPage ingredientsPage;
+
+        public AddIngredientsPopup(IngredientsPage ingredientsPage)
         {
             InitializeComponent();
+            this.ingredientsPage = ingredientsPage;
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -61,6 +64,8 @@ namespace RecipePlannerDesktopApplication
 
                 command.ExecuteNonQuery();
             }
+
+            this.ingredientsPage.UpdateIngredientsGridView();
         }
     }
 }

@@ -34,13 +34,22 @@ namespace RecipePlannerDesktopApplication
         private void displayAddIngredientsPopup()
         {
 
-            AddIngredientsPopup ingredientsPopup = new AddIngredientsPopup();
+            AddIngredientsPopup ingredientsPopup = new AddIngredientsPopup(this);
             ingredientsPopup.Show();
         }
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
         {
             // TODO: implement remove ingredient button
+        }
+
+        public void UpdateIngredientsGridView()
+        {
+            var list = IngredientDAL.getIngredients();
+            var bindingList = new BindingList<Ingredient>(list);
+
+            this.ingredientsGridView.DataSource = null;
+            this.ingredientsGridView.DataSource = bindingList;
         }
     }
 }
