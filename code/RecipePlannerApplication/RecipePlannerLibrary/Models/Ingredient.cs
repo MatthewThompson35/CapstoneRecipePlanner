@@ -17,6 +17,13 @@ namespace RecipePlannerLibrary.Models
             this.quantity = quantity;
         }
 
+        public Ingredient(string username, string name, int quantity)
+        {
+            this.username = username;
+            this.name = name;
+            this.quantity = quantity;
+        }
+
         public override string ToString()
         {
             return name + " - Quantity: " + quantity.ToString();
