@@ -45,24 +45,6 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
-        public static void PopulateDB()
-        {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
-            connection.Open();
-            string query = System.IO.File.ReadAllText("..\\RecipePlannerLibrary\\Scripts\\PrepopulateDB.sql");
-            using var command = new MySqlCommand(query, connection);
-            command.ExecuteNonQuery();
-        }
-
-        public static void PopulateWebDB()
-        {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
-            connection.Open();
-            string query = System.IO.File.ReadAllText("..\\RecipePlannerLibrary\\Scripts\\PrepopulateDB.sql");
-            using var command = new MySqlCommand(query, connection);
-            command.ExecuteNonQuery();
-        }
-
         public static List<string> ContainsUser(string username)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
