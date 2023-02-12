@@ -14,6 +14,7 @@ namespace RecipePlannerDesktopApplication
 
             var bindingList = new BindingList<Ingredient>(IngredientDAL.getIngredients());
             this.ingredientsGridView.DataSource = bindingList;
+            this.Refresh();
 
         }
 
@@ -27,6 +28,7 @@ namespace RecipePlannerDesktopApplication
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
             this.displayAddIngredientsPopup();
+            
         }
 
         private void displayAddIngredientsPopup()

@@ -27,7 +27,7 @@ namespace RecipePlannerDesktopApplication
 
             int quantity = Convert.ToInt32(quantityString);
 
-            Ingredient ingredient = new Ingredient(name, quantity);
+            Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity);
 
             this.addIngredient(ingredient);
 
@@ -37,6 +37,7 @@ namespace RecipePlannerDesktopApplication
             {
                 this.Close();
             }
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -50,9 +51,10 @@ namespace RecipePlannerDesktopApplication
             {
                 sqlConn.Open();
 
-                string query = "insert into ingredient values(@ingredientID, @ingredientName, @quantity)";
+                string query = "insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID)";
                 using var command = new MySqlCommand(query, sqlConn);
 
+                command.Parameters.AddWithValue("@username", ingredient.username);
                 command.Parameters.AddWithValue("@ingredientID", ingredient.id);
                 command.Parameters.AddWithValue("@ingredientName", ingredient.name);
                 command.Parameters.AddWithValue("@quantity", ingredient.quantity);
