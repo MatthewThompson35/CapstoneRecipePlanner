@@ -1,5 +1,6 @@
 ﻿using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,7 @@ namespace RecipePlannerDesktopApplication
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 if (result == 1)
                 {
+                    ActiveUser.username = this.usernameTextBox.Text;
                     this.Hide();
                     IngredientsPage ingredients = new IngredientsPage();
                     ingredients.Show();
