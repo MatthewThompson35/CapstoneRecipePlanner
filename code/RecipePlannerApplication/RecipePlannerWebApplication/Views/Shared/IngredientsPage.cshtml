@@ -5,61 +5,155 @@
         position: fixed;
         right: 10px;
         top: 5px;
+        background-color: #d9534f;
+        color: #fff;
     }
 
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    #mainform {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    #addForm {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        display: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        border: 1px solid #e6e6e6;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td {
+        font-size: 18px;
+    }
+
+    #ingredientID {
+        font-weight: bold;
+    }
+
+    input[type="submit"], input[type="button"] {
+        padding: 5px 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #addIngredient {
+        background-color: #33b5e5;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-sizing: border-box;
+    }
 </style>
 
-<form id="mainform">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Ingredient Name</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ingredient in ViewBag.ingredients)
-            {
-                <tr id="ingredient-@ingredient.id">
-                    <td id="ingredientID">@ingredient.id</td>
-                    <td>@ingredient.name</td>
+<div class="container">
+    <form id="mainform">
+        <h1>Ingredients</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ingredient Name</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ingredient in ViewBag.ingredients)
+                {
+                    <tr id="ingredient-@ingredient.id">
+                        <td id="ingredientID">@ingredient.id</td>
+                        <td>@ingredient.name</td>
+                        <td>
+                            <div class="quantity-container">
+                                <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
+                                <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
+                                <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
+                            </div>
+                        </td>
+                        <td>
+                            <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="button-container">
+            <input type="submit" asp-action="Logout" value="Logout" id="logout" class="button button-red" />
+            <input type="button" onclick="openForm()" value="Add Ingredient" id="addIngredient" class="button button-green" />
+        </div>
+    </form>
+
+    <form method="post" id="addForm" style="display:none;">
+        <div>
+            <h2>Add Ingredient</h2>
+            <table>
+                <tr>
+                    <td>Ingredient Name:</td>
+                    <td><input type="text" name="txtIngredientName" class="input-text" /></td>
+                </tr>
+                <tr>
+                    <td>Quantity:</td>
+                    <td><input type="text" name="txtQuantity" class="input-text" /></td>
+                </tr>
+                <tr>
+                    <td></td>
                     <td>
-                        <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
-                        <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
-                        <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
+                        <input type="submit" onclick="closeForm()" asp-action="AddIngredient" value="Add" class="button button-green" />
                     </td>
                     <td>
-                        <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id" />
+                        <input type="button" onclick="closeForm()" value="Cancel" id="cancelButton" class="button button-red" />
                     </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <input type="submit" asp-action="Logout" value="Logout" id="logout" />
-    <input type="button" onclick="openForm()" value="Add Ingredient" id="addIngredient" />
-</form>
-
-<form method="post" id="addForm" style="display:none;">
-    <div>
-        <table>
-            <tr>
-                <td>Ingredient Name:</td>
-                <td><input type="text" name="txtIngredientName" /></td>
-            </tr>
-            <tr>
-                <td>Quantity:</td>
-                <td><input type="text" name="txtQuantity" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" onclick="closeForm()" asp-action="AddIngredient" value="Add" /></td>
-                <td><input type="button" onclick="closeForm()" value="Cancel" id="cancelButton" /></td>
-            </tr>
-        </table>
-    </div>
-</form>
+            </table>
+        </div>
+    </form>
+</div>
 
 
 <script>
