@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
 
@@ -27,6 +28,7 @@ namespace RecipePlannerWebApplication.Controllers
             if (res == 1)
             {
                 TempData["msg"] = "Successful Login!";
+                ActiveUser.username = ad.Username;
                 ViewBag.ingredients = IngredientDAL.getIngredients();
                 return View("IngredientsPage");
             }

@@ -13,16 +13,19 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(Connection.ConnectionString);
             connection.Open();
             List<Ingredient> ingredients = new List<Ingredient>();
-            string query = @"Select * from ingredient;";
+            var user = ActiveUser.username;
+            string query = @"Select * from ingredient where username=@user;";
             using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = user;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id = reader.GetInt32(0);
+                string username = reader.GetString(0);
                 string name = reader.GetString(1);
                 int quantity = reader.GetInt32(2);
+                int id = reader.GetInt32(3);
 
-                Ingredient ingredient = new Ingredient(id, name, quantity);
+                Ingredient ingredient = new Ingredient(username, name, quantity, id);
 
                 ingredients.Add(ingredient);
             }
