@@ -2,8 +2,15 @@
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// Register class
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class Register : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Register"/> class.
+        /// </summary>
         public Register()
         {
             InitializeComponent();
@@ -19,7 +26,7 @@ namespace RecipePlannerDesktopApplication
             }
             else
             {
-                
+
                 var username = this.usernameTextBox.Text;
                 List<string> list = Database.ContainsUser(username);
                 if (list.Count() > 0)
@@ -41,7 +48,7 @@ namespace RecipePlannerDesktopApplication
                     this.passwordErrorLabel.Visible = true;
                 }
             }
-           
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

@@ -1,19 +1,18 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Text;
 
 namespace RecipePlannerLibrary.Database
 {
+    /// <summary>
+    /// Utils Class
+    /// </summary>
     public class Util
     {
 
         /// <summary>
-        /// Gets the hash.
+        /// Gets the hex.
         /// </summary>
         /// <param name="inputString">The input string.</param>
-        /// <returns>Hash</returns>
+        /// <returns>Hex</returns>
         public static string GetHex(string inputString)
         {
             var sb = new StringBuilder();
@@ -26,6 +25,11 @@ namespace RecipePlannerLibrary.Database
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Gets the hash.
+        /// </summary>
+        /// <param name="inputString">The input string.</param>
+        /// <returns>Hash String</returns>
         public static string GetHash(string inputString)
         {
             using var provider = System.Security.Cryptography.MD5.Create();

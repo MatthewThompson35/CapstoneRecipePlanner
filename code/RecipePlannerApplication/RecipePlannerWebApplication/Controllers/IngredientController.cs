@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary.Database;
-using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerWebApplication.Controllers
 {
@@ -21,4 +20,4 @@ namespace RecipePlannerWebApplication.Controllers
         }
     }
 }
-    
+

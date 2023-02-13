@@ -4,7 +4,6 @@ using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
-using System.Reflection.Metadata;
 
 namespace RecipePlannerWebApplication.Controllers
 {
@@ -17,31 +16,45 @@ namespace RecipePlannerWebApplication.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>The view</returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Indexes the specified ad.
+        /// </summary>
+        /// <param name="ad">The ad.</param>
+        /// <returns>The view</returns>
         [HttpPost]
         public IActionResult Index([Bind] Login ad)
         {
             int res = Database.LoginCheck(ad);
             if (res == 1)
             {
-                
-                    ActiveUser.username = ad.Username;
-                    ViewBag.ingredients = IngredientDAL.getIngredients();
-                    return View("IngredientsPage");
-                
+
+                ActiveUser.username = ad.Username;
+                ViewBag.ingredients = IngredientDAL.getIngredients();
+                return View("IngredientsPage");
+
             }
             else
             {
                 TempData["msg"] = "The Username or Password is incorrect.";
                 return View();
             }
-            
+
         }
 
+        /// <summary>
+        /// Decrements the quantity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The View</returns>
         public ActionResult decrementQuantity(string id)
         {
             ViewBag.ingredients = IngredientDAL.getIngredients();
@@ -61,6 +74,11 @@ namespace RecipePlannerWebApplication.Controllers
             return View("IngredientsPage", ViewBag.ingredients);
         }
 
+        /// <summary>
+        /// Increments the quantity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The view</returns>
         public ActionResult incrementQuantity(string id)
         {
             ViewBag.ingredients = IngredientDAL.getIngredients();
@@ -80,12 +98,24 @@ namespace RecipePlannerWebApplication.Controllers
             return View("IngredientsPage", ViewBag.ingredients);
         }
 
-        public ActionResult removeIngredient(string id) {
+        /// <summary>
+        /// Removes the ingredient.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The view</returns>
+        public ActionResult removeIngredient(string id)
+        {
             IngredientDAL.RemoveIngredient(Int32.Parse(id));
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
 
+        /// <summary>
+        /// Adds the ingredient.
+        /// </summary>
+        /// <param name="txtIngredientName">Name of the text ingredient.</param>
+        /// <param name="txtQuantity">The text quantity.</param>
+        /// <returns>The view</returns>
         [HttpPost]
         public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
         {
@@ -99,19 +129,31 @@ namespace RecipePlannerWebApplication.Controllers
                 TempData["msg"] = "Ingredient is already entered";
                 return View("AddIngredient");
             }
-            else {
+            else
+            {
                 IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
                 ViewBag.ingredients = IngredientDAL.getIngredients();
                 return View("IngredientsPage", ViewBag.ingredients);
             }
         }
 
+        /// <summary>
+        /// Goes to ingredients page.
+        /// </summary>
+        /// <returns>The view</returns>
         public ActionResult goToIngredientsPage()
         {
-           ViewBag.ingredients = IngredientDAL.getIngredients();
-           return View("IngredientsPage", ViewBag.ingredients);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
         }
 
+        /// <summary>
+        /// Creates the user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="repeatPassword">The repeat password.</param>
+        /// <returns>The view</returns>
         [HttpPost]
         public ActionResult CreateUser(string username, string password, string repeatPassword)
         {
@@ -136,6 +178,10 @@ namespace RecipePlannerWebApplication.Controllers
 
         }
 
+        /// <summary>
+        /// Opens the register.
+        /// </summary>
+        /// <returns>The view</returns>
         [HttpPost]
         public ActionResult OpenRegister()
         {
@@ -143,6 +189,10 @@ namespace RecipePlannerWebApplication.Controllers
 
         }
 
+        /// <summary>
+        /// Errors this instance.
+        /// </summary>
+        /// <returns>The view</returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
