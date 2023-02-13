@@ -28,9 +28,11 @@ namespace RecipePlannerWebApplication.Controllers
             int res = Database.LoginCheck(ad);
             if (res == 1)
             {
-                ActiveUser.username = ad.Username;
-                ViewBag.ingredients = IngredientDAL.getIngredients();
-                return View("IngredientsPage");
+                
+                    ActiveUser.username = ad.Username;
+                    ViewBag.ingredients = IngredientDAL.getIngredients();
+                    return View("IngredientsPage");
+                
             }
             else
             {
@@ -145,6 +147,11 @@ namespace RecipePlannerWebApplication.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Logout()
+        {
+            return View("Index");
         }
     }
 }
