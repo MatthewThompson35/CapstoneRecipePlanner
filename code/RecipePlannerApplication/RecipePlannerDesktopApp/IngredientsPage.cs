@@ -71,7 +71,34 @@ namespace RecipePlannerDesktopApplication
         private void ingredientsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
+            int columnIndex = e.ColumnIndex;
             this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
+
+            if (this.selectedRow != null)
+            {
+                var id = 0;
+                var name = this.selectedRow.Cells[0].Value;
+                var quantity = (int)this.selectedRow.Cells[2].Value;
+                var list = IngredientDAL.getIngredients();
+                foreach (var item in list)
+                {
+                    if (item.name.Equals(name) && item.quantity == (quantity))
+                    {
+                        id = (int)item.id;
+                    }
+                }
+
+                if (columnIndex == 1)
+                {
+                    IngredientDAL.decrementQuantity(id, quantity);
+                }
+
+                if (columnIndex == 3)
+                {
+                    IngredientDAL.incrementQuantity(id, quantity);
+                }
+                this.UpdateIngredientsGridView();
+            }
         }
     }
 }
