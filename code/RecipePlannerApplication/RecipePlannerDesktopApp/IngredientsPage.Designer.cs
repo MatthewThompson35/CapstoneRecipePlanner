@@ -121,6 +121,7 @@
             this.ingredientsGridView.RowTemplate.Height = 25;
             this.ingredientsGridView.Size = new System.Drawing.Size(443, 461);
             this.ingredientsGridView.TabIndex = 5;
+            this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
             // 
             // IngredientColumn
             // 

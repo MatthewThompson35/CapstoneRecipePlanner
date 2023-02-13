@@ -8,6 +8,7 @@ namespace RecipePlannerDesktopApplication
 {
     public partial class IngredientsPage : Form
     {
+        private DataGridViewRow selectedRow;
         public IngredientsPage()
         {
             InitializeComponent();
@@ -40,7 +41,22 @@ namespace RecipePlannerDesktopApplication
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
         {
-            // TODO: implement remove ingredient button
+            if (this.selectedRow != null)
+            {
+                var id = 0;
+                var name = this.selectedRow.Cells[0].Value;
+                var quantity = (int)this.selectedRow.Cells[2].Value;
+                var list = IngredientDAL.getIngredients();
+                foreach (var item in list)
+                {
+                    if (item.name.Equals(name) && item.quantity == (quantity))
+                    {
+                        id = (int)item.id;
+                    }
+                }
+                IngredientDAL.RemoveIngredient(id);
+                this.UpdateIngredientsGridView();
+            }
         }
 
         public void UpdateIngredientsGridView()
@@ -50,6 +66,12 @@ namespace RecipePlannerDesktopApplication
 
             this.ingredientsGridView.DataSource = null;
             this.ingredientsGridView.DataSource = bindingList;
+        }
+
+        private void ingredientsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
         }
     }
 }
