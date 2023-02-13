@@ -1,13 +1,18 @@
 ﻿using MySql.Data.MySqlClient;
 using RecipePlannerLibrary.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RecipePlannerLibrary.Database
 {
+    /// <summary>
+    /// Ingredient DAL
+    /// </summary>
     public class IngredientDAL
     {
+        /// <summary>
+        /// Gets the ingredients.
+        /// </summary>
+        /// <returns>List of ingredients</returns>
         public static List<Ingredient> getIngredients()
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -32,6 +37,11 @@ namespace RecipePlannerLibrary.Database
             return ingredients;
         }
 
+        /// <summary>
+        /// Adds the ingredient.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="quantity">The quantity.</param>
         public static void addIngredient(string name, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -44,6 +54,11 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Decrements the quantity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="quantity">The quantity.</param>
         public static void decrementQuantity(int id, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -55,6 +70,11 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Increments the quantity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="quantity">The quantity.</param>
         public static void incrementQuantity(int id, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -66,6 +86,10 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Removes the ingredient.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public static void RemoveIngredient(int id)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -77,6 +101,11 @@ namespace RecipePlannerLibrary.Database
         }
 
 
+        /// <summary>
+        /// Gets the ingredients.
+        /// </summary>
+        /// <param name="ingredientName">Name of the ingredient.</param>
+        /// <returns></returns>
         public static List<Ingredient> getIngredients(string ingredientName)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);

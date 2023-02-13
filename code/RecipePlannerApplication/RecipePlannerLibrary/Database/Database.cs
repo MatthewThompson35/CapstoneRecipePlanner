@@ -1,14 +1,23 @@
 ﻿using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.Ocsp;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RecipePlannerLibrary.Database
 {
+    /// <summary>
+    /// Database class
+    /// </summary>
     public class Database
     {
+        /// <summary>
+        /// The login connection
+        /// </summary>
         private static MySqlConnection loginConnection = new MySqlConnection(Connection.ConnectionString);
+
+        /// <summary>
+        /// Logins the check.
+        /// </summary>
+        /// <param name="login">The login.</param>
+        /// <returns></returns>
         public static int LoginCheck(Login login)
         {
             var passwordHash = Util.GetHash(login.Password);
@@ -33,6 +42,11 @@ namespace RecipePlannerLibrary.Database
             return result;
         }
 
+        /// <summary>
+        /// Creates the user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
         public static void CreateUser(string username, string password)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -45,6 +59,11 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Determines whether the specified username contains user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <returns>List of users</returns>
         public static List<string> ContainsUser(string username)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);

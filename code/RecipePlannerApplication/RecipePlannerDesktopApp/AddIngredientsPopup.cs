@@ -1,23 +1,21 @@
 ﻿using MySql.Data.MySqlClient;
 using RecipePlannerLibrary;
-using RecipePlannerLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// Add ingredients page
+    /// </summary>
     public partial class AddIngredientsPopup : Form
     {
         private IngredientsPage ingredientsPage;
 
+        /// <summary>
+        /// Constructor for add ingredients
+        /// </summary>
+        /// <param name="ingredientsPage"></param>
         public AddIngredientsPopup(IngredientsPage ingredientsPage)
         {
             InitializeComponent();

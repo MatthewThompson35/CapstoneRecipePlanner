@@ -1,14 +1,19 @@
-﻿using MySql.Data.MySqlClient;
-using RecipePlannerLibrary;
-using RecipePlannerLibrary.Database;
+﻿using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using System.ComponentModel;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// Ingredients Page
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class IngredientsPage : Form
     {
         private DataGridViewRow selectedRow;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IngredientsPage"/> class.
+        /// </summary>
         public IngredientsPage()
         {
             InitializeComponent();
@@ -22,14 +27,14 @@ namespace RecipePlannerDesktopApplication
         private void logoutButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            LoginPage login= new LoginPage();
+            LoginPage login = new LoginPage();
             login.Show();
         }
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
             this.displayAddIngredientsPopup();
-            
+
         }
 
         private void displayAddIngredientsPopup()
@@ -59,6 +64,9 @@ namespace RecipePlannerDesktopApplication
             }
         }
 
+        /// <summary>
+        /// Updates the ingredients grid view.
+        /// </summary>
         public void UpdateIngredientsGridView()
         {
             var list = IngredientDAL.getIngredients();

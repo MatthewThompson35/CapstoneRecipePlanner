@@ -1,21 +1,18 @@
 ﻿using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// Login Page
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class LoginPage : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginPage"/> class.
+        /// </summary>
         public LoginPage()
         {
             InitializeComponent();
@@ -54,7 +51,7 @@ namespace RecipePlannerDesktopApplication
                     }
                 }
             }
-            
+
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)

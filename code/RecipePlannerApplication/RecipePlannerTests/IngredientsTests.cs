@@ -1,12 +1,4 @@
-﻿using Org.BouncyCastle.Crypto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace RecipePlannerTests
+﻿namespace RecipePlannerTests
 {
     [TestClass]
     public class IngredientsTests
@@ -41,6 +33,6 @@ namespace RecipePlannerTests
             Assert.AreEqual(name + " - Quantity: " + quantity.ToString(), result, "The ToString method returned an incorrect string");
         }
     }
-   
+
 
 }
