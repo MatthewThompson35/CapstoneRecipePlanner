@@ -26,10 +26,15 @@ namespace RecipePlannerDesktopApplication
         {
             string name = this.ingredientNameTextBox.Text;
             string quantityString = this.quantityTextBox.Text;
+            int number;
 
             if (name == null || name.Equals("") || quantityString == null || quantityString.Equals(""))
             {
                 DialogResult dialogResult = MessageBox.Show("Please fill in all fields", "Error", MessageBoxButtons.OK);
+            }
+            else if (!int.TryParse(quantityString, out number))
+            {
+                DialogResult dialogResult = MessageBox.Show("Quantity must be an integer", "Error", MessageBoxButtons.OK);
             }
             else if (IngredientDAL.getIngredients(name).Count > 0)
             {
