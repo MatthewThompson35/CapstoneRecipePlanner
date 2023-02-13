@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipePlannerWebApplication
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipePlannerLibrary", "RecipePlannerLibrary\RecipePlannerLibrary.csproj", "{EF498F02-1D03-4ED0-8223-8178DE010B8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipePlannerDesktopApplication", "RecipePlannerDesktopApp\RecipePlannerDesktopApplication.csproj", "{B9D17AAB-3E93-4BF3-B921-195187E5985C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipePlannerDesktopApplication", "RecipePlannerDesktopApp\RecipePlannerDesktopApplication.csproj", "{B9D17AAB-3E93-4BF3-B921-195187E5985C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipePlannerTests", "RecipePlannerTests\RecipePlannerTests.csproj", "{5C294BEA-D3F3-4FA8-ADC3-15B06C0F883F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B9D17AAB-3E93-4BF3-B921-195187E5985C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D17AAB-3E93-4BF3-B921-195187E5985C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9D17AAB-3E93-4BF3-B921-195187E5985C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C294BEA-D3F3-4FA8-ADC3-15B06C0F883F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C294BEA-D3F3-4FA8-ADC3-15B06C0F883F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C294BEA-D3F3-4FA8-ADC3-15B06C0F883F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C294BEA-D3F3-4FA8-ADC3-15B06C0F883F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
