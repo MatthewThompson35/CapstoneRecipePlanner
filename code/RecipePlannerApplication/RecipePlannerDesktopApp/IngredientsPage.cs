@@ -91,13 +91,14 @@ namespace RecipePlannerDesktopApplication
                 if (columnIndex == 1)
                 {
                     IngredientDAL.decrementQuantity(id, quantity);
+                    this.UpdateIngredientsGridView();
                 }
 
                 if (columnIndex == 3)
                 {
                     IngredientDAL.incrementQuantity(id, quantity);
+                    this.UpdateIngredientsGridView();
                 }
-                this.UpdateIngredientsGridView();
             }
         }
     }
