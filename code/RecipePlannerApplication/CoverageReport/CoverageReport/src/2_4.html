@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone Project Clone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Controllers\IngredientController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Microsoft.AspNetCore.Mvc;
+using RecipePlannerLibrary.Database;
+
+namespace RecipePlannerWebApplication.Controllers
+{
+    public class IngredientsController : Controller
+    {
+        public IActionResult Index()
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+
+        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
+        {
+            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+    }
+}
+
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[9,9,9,10,0],[10,13,10,66,0],[11,13,11,65,0],[12,9,12,10,0],[16,9,16,10,0],[17,13,17,86,0],[18,13,18,66,0],[19,13,19,65,0],[20,9,20,10,0]]);
+    </script>
+  </body>
+</html>

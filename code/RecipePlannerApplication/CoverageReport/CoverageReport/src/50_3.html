@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone Project Clone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Database\Database.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+
+namespace RecipePlannerLibrary.Database
+{
+    /// &lt;summary&gt;
+    /// Database class
+    /// &lt;/summary&gt;
+    public class Database
+    {
+        /// &lt;summary&gt;
+        /// The login connection
+        /// &lt;/summary&gt;
+        private static MySqlConnection loginConnection = new MySqlConnection(Connection.ConnectionString);
+
+        /// &lt;summary&gt;
+        /// Logins the check.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;login&quot;&gt;The login.&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        public static int LoginCheck(Login login)
+        {
+            var passwordHash = Util.GetHash(login.Password);
+            MySqlCommand loginCommand = new MySqlCommand(&quot;SELECT username FROM login WHERE username=@Username AND password=@Password&quot;, loginConnection);
+            loginCommand.Parameters.AddWithValue(&quot;@Username&quot;, login.Username);
+            loginCommand.Parameters.AddWithValue(&quot;@Password&quot;, passwordHash);
+
+            loginConnection.Open();
+            MySqlDataReader reader = loginCommand.ExecuteReader();
+
+            int result = 0;
+            if (reader.Read())
+            {
+                result = 1;
+            }
+            else
+            {
+                result = 0;
+            }
+
+            loginConnection.Close();
+            return result;
+        }
+
+        /// &lt;summary&gt;
+        /// Creates the user.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;param name=&quot;password&quot;&gt;The password.&lt;/param&gt;
+        public static void CreateUser(string username, string password)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query =
+                @&quot;Insert into login (username, password) values (@userName, @password);&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@userName&quot;, MySqlDbType.VarChar).Value = username;
+            command.Parameters.Add(&quot;@password&quot;, MySqlDbType.VarChar).Value = Util.GetHash(password);
+            command.ExecuteNonQuery();
+        }
+
+        /// &lt;summary&gt;
+        /// Determines whether the specified username contains user.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;returns&gt;List of users&lt;/returns&gt;
+        public static List&lt;string&gt; ContainsUser(string username)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            List&lt;string&gt; list = new List&lt;string&gt;();
+            string query = @&quot;Select * from login where username=@username;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@userName&quot;, MySqlDbType.VarChar).Value = username;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+            return list;
+
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,107,1],[22,9,22,10,1],[23,13,23,61,1],[24,13,24,153,1],[25,13,25,79,1],[26,13,26,77,1],[28,13,28,36,1],[29,13,29,67,1],[31,13,31,28,1],[32,13,32,31,1],[33,13,33,14,1],[34,17,34,28,1],[35,13,35,14,1],[37,13,37,14,1],[38,17,38,28,1],[39,13,39,14,1],[41,13,41,37,1],[42,13,42,27,1],[43,9,43,10,1],[51,9,51,10,1],[52,13,52,85,1],[53,13,53,31,1],[54,13,55,90,1],[56,13,56,69,1],[57,13,57,87,1],[58,13,58,101,1],[59,13,59,39,1],[60,9,60,10,1],[68,9,68,10,1],[69,13,69,85,1],[70,13,70,31,1],[71,13,71,52,1],[72,13,72,77,1],[73,13,73,69,1],[74,13,74,87,1],[75,13,75,56,1],[76,13,76,34,1],[77,13,77,14,1],[78,17,78,47,1],[79,13,79,14,1],[80,13,80,25,1],[82,9,82,10,1]]);
+    </script>
+  </body>
+</html>

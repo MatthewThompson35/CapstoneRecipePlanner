@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone Project Clone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Controllers\HomeController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Microsoft.AspNetCore.Mvc;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+using RecipePlannerWebApplication.Models;
+using System.Diagnostics;
+
+namespace RecipePlannerWebApplication.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger&lt;HomeController&gt; _logger;
+
+        public HomeController(ILogger&lt;HomeController&gt; logger)
+        {
+            _logger = logger;
+        }
+
+        /// &lt;summary&gt;
+        /// Indexes this instance.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        /// &lt;summary&gt;
+        /// Indexes the specified ad.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ad&quot;&gt;The ad.&lt;/param&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        [HttpPost]
+        public IActionResult Index([Bind] Login ad)
+        {
+            int res = Database.LoginCheck(ad);
+            if (res == 1)
+            {
+
+                ActiveUser.username = ad.Username;
+                ViewBag.ingredients = IngredientDAL.getIngredients();
+                return View(&quot;IngredientsPage&quot;);
+
+            }
+            else
+            {
+                TempData[&quot;msg&quot;] = &quot;The Username or Password is incorrect.&quot;;
+                return View();
+            }
+
+        }
+
+        /// &lt;summary&gt;
+        /// Decrements the quantity.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The identifier.&lt;/param&gt;
+        /// &lt;returns&gt;The View&lt;/returns&gt;
+        public ActionResult decrementQuantity(string id)
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = Int32.Parse(id);
+
+            foreach (var item in ViewBag.ingredients)
+            {
+                if (item.id == ingredientID)
+                {
+                    quantity = item.quantity;
+
+                }
+            }
+            IngredientDAL.decrementQuantity(ingredientID, quantity);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+        /// &lt;summary&gt;
+        /// Increments the quantity.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The identifier.&lt;/param&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        public ActionResult incrementQuantity(string id)
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = Int32.Parse(id);
+
+            foreach (var item in ViewBag.ingredients)
+            {
+                if (item.id == ingredientID)
+                {
+                    quantity = item.quantity;
+
+                }
+            }
+            IngredientDAL.incrementQuantity(ingredientID, quantity);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+        /// &lt;summary&gt;
+        /// Removes the ingredient.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The identifier.&lt;/param&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        public ActionResult removeIngredient(string id)
+        {
+            IngredientDAL.RemoveIngredient(Int32.Parse(id));
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+        /// &lt;summary&gt;
+        /// Adds the ingredient.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;txtIngredientName&quot;&gt;Name of the text ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;txtQuantity&quot;&gt;The text quantity.&lt;/param&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        [HttpPost]
+        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
+        {
+            if (txtIngredientName == null || txtQuantity == null || txtIngredientName == &quot;&quot; || txtQuantity == &quot;&quot;)
+            {
+                TempData[&quot;msg&quot;] = &quot;Please enter values&quot;;
+                return View(&quot;AddIngredient&quot;);
+            }
+            else if (IngredientDAL.getIngredients(txtIngredientName).Count() &gt; 0)
+            {
+                TempData[&quot;msg&quot;] = &quot;Ingredient is already entered&quot;;
+                return View(&quot;AddIngredient&quot;);
+            }
+            else
+            {
+                IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
+                ViewBag.ingredients = IngredientDAL.getIngredients();
+                return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Goes to ingredients page.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        public ActionResult goToIngredientsPage()
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates the user.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;param name=&quot;password&quot;&gt;The password.&lt;/param&gt;
+        /// &lt;param name=&quot;repeatPassword&quot;&gt;The repeat password.&lt;/param&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        [HttpPost]
+        public ActionResult CreateUser(string username, string password, string repeatPassword)
+        {
+            List&lt;string&gt; list = Database.ContainsUser(username);
+            if (list.Count() &gt; 0)
+            {
+                TempData[&quot;msg&quot;] = &quot;This username is already taken. Please choose another and try again.&quot;;
+                return View(&quot;Register&quot;);
+            }
+            if (password.Equals(repeatPassword))
+            {
+                Database.CreateUser(username, password);
+
+                return View(&quot;Index&quot;);
+
+            }
+            else
+            {
+                TempData[&quot;msg&quot;] = &quot;The password must match in both fields. Please try again.&quot;;
+                return View(&quot;Register&quot;);
+            }
+
+        }
+
+        /// &lt;summary&gt;
+        /// Opens the register.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        [HttpPost]
+        public ActionResult OpenRegister()
+        {
+            return View(&quot;Register&quot;);
+
+        }
+
+        /// &lt;summary&gt;
+        /// Errors this instance.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The view&lt;/returns&gt;
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Logout()
+        {
+            return View(&quot;Index&quot;);
+        }
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,62,0],[15,9,15,10,0],[16,13,16,30,0],[17,9,17,10,0],[24,9,24,10,0],[25,13,25,27,0],[26,9,26,10,0],[35,9,35,10,0],[36,13,36,47,0],[37,13,37,26,0],[38,13,38,14,0],[40,17,40,51,0],[41,17,41,70,0],[42,17,42,48,0],[46,13,46,14,0],[47,17,47,76,0],[48,17,48,31,0],[51,9,51,10,0],[59,9,59,10,0],[60,13,60,66,0],[61,13,61,30,0],[62,13,62,48,0],[64,13,64,20,0],[64,22,64,30,0],[64,31,64,33,0],[64,34,64,53,0],[65,13,65,14,0],[66,17,66,45,0],[67,17,67,18,0],[68,21,68,46,0],[70,17,70,18,0],[71,13,71,14,0],[72,13,72,69,0],[73,13,73,66,0],[74,13,74,65,0],[75,9,75,10,0],[83,9,83,10,0],[84,13,84,66,0],[85,13,85,30,0],[86,13,86,48,0],[88,13,88,20,0],[88,22,88,30,0],[88,31,88,33,0],[88,34,88,53,0],[89,13,89,14,0],[90,17,90,45,0],[91,17,91,18,0],[92,21,92,46,0],[94,17,94,18,0],[95,13,95,14,0],[96,13,96,69,0],[97,13,97,66,0],[98,13,98,65,0],[99,9,99,10,0],[107,9,107,10,0],[108,13,108,61,0],[109,13,109,66,0],[110,13,110,65,0],[111,9,111,10,0],[121,9,121,10,0],[122,13,122,114,0],[123,13,123,14,0],[124,17,124,57,0],[125,17,125,46,0],[127,18,127,82,0],[128,13,128,14,0],[129,17,129,67,0],[130,17,130,46,0],[133,13,133,14,0],[134,17,134,90,0],[135,17,135,70,0],[136,17,136,69,0],[138,9,138,10,0],[145,9,145,10,0],[146,13,146,66,0],[147,13,147,65,0],[148,9,148,10,0],[159,9,159,10,0],[160,13,160,65,0],[161,13,161,34,0],[162,13,162,14,0],[163,17,163,106,0],[164,17,164,41,0],[166,13,166,49,0],[167,13,167,14,0],[168,17,168,57,0],[170,17,170,38,0],[174,13,174,14,0],[175,17,175,95,0],[176,17,176,41,0],[179,9,179,10,0],[187,9,187,10,0],[188,13,188,37,0],[190,9,190,10,0],[198,9,198,10,0],[199,13,199,113,0],[200,9,200,10,0],[203,9,203,10,0],[204,13,204,34,0],[205,9,205,10,0]]);
+    </script>
+  </body>
+</html>

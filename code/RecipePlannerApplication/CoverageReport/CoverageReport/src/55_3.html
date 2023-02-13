@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone Project Clone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\Ingredient.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+
+
+namespace RecipePlannerLibrary.Models
+{
+    /// &lt;summary&gt;
+    /// Ingredient Class
+    /// &lt;/summary&gt;
+    public class Ingredient
+    {
+        /// &lt;summary&gt;
+        /// Gets or sets the username.
+        /// &lt;/summary&gt;
+        /// &lt;value&gt;
+        /// The username.
+        /// &lt;/value&gt;
+        public string? username { get; set; }
+        /// &lt;summary&gt;
+        /// Gets or sets the name.
+        /// &lt;/summary&gt;
+        /// &lt;value&gt;
+        /// The name.
+        /// &lt;/value&gt;
+        public string? name { get; set; }
+        /// &lt;summary&gt;
+        /// Gets or sets the quantity.
+        /// &lt;/summary&gt;
+        /// &lt;value&gt;
+        /// The quantity.
+        /// &lt;/value&gt;
+        public int? quantity { get; set; }
+        /// &lt;summary&gt;
+        /// Gets or sets the identifier.
+        /// &lt;/summary&gt;
+        /// &lt;value&gt;
+        /// The identifier.
+        /// &lt;/value&gt;
+        public int? id { get; set; }
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;Ingredient&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name.&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;The quantity.&lt;/param&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The identifier.&lt;/param&gt;
+        public Ingredient(string username, string name, int quantity, int id)
+        {
+            this.username = username;
+            this.id = id;
+            this.name = name;
+            this.quantity = quantity;
+        }
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;Ingredient&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name.&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;The quantity.&lt;/param&gt;
+        public Ingredient(string username, string name, int quantity)
+        {
+            this.username = username;
+            this.name = name;
+            this.quantity = quantity;
+        }
+
+        /// &lt;summary&gt;
+        /// Converts to string.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// A &lt;see cref=&quot;System.String&quot; /&gt; that represents this instance.
+        /// &lt;/returns&gt;
+        public override string ToString()
+        {
+            return name + &quot; - Quantity: &quot; + quantity.ToString();
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,35,16,39,1],[16,40,16,44,1],[23,31,23,35,1],[23,36,23,40,1],[30,32,30,36,1],[30,37,30,41,1],[37,26,37,30,1],[37,31,37,35,1],[46,9,46,78,1],[47,9,47,10,1],[48,13,48,38,1],[49,13,49,26,1],[50,13,50,30,1],[51,13,51,38,1],[52,9,52,10,1],[60,9,60,70,0],[61,9,61,10,0],[62,13,62,38,0],[63,13,63,30,0],[64,13,64,38,0],[65,9,65,10,0],[74,9,74,10,1],[75,13,75,65,1],[76,9,76,10,1]]);
+    </script>
+  </body>
+</html>

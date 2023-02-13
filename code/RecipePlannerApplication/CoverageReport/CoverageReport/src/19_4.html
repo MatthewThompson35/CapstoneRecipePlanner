@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone Project Clone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\Index.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model RecipePlannerLibrary.Login
+@{
+    ViewData[&quot;Title&quot;] = &quot;Home Page&quot;;
+}
+
+&lt;style&gt;
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 48px;
+        color: #444;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #444;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-sizing: border-box;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    #submit {
+        background-color: #33b5e5;
+        color: #fff;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #register {
+        background-color: #e6e6e6;
+        color: #444;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+&lt;/style&gt;
+
+&lt;head&gt;
+    &lt;title&gt;Recipe Planner&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h1&gt;Welcome to Recipe Planner&lt;/h1&gt;
+&lt;div class=&quot;container&quot; id=&quot;login&quot;&gt;
+    &lt;form class=&quot;form-horizontal&quot; asp-action=&quot;Index&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label class=&quot;control-label&quot;&gt;Username:&lt;/label&gt;
+            &lt;input asp-for=&quot;Username&quot; class=&quot;form-control&quot; type=&quot;text&quot; id=&quot;username&quot;/&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label class=&quot;control-label&quot;&gt;Password:&lt;/label&gt;
+            &lt;input asp-for=&quot;Password&quot; class=&quot;form-control&quot; type=&quot;password&quot; id=&quot;password&quot;/&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;button&quot;&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Login&quot; id=&quot;submit&quot; onclick=&quot;setRequired();&quot;/&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;button&quot;&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;OpenRegister&quot; value=&quot;Register&quot; id=&quot;register&quot; onclick=&quot;removeRequired();&quot;/&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    function setRequired() {
+      document.getElementById(&quot;username&quot;).required = true;
+      document.getElementById(&quot;password&quot;).required = true;
+    }
+    function removeRequired() {
+      document.getElementById(&quot;username&quot;).required = false;
+      document.getElementById(&quot;password&quot;).required = false;
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+
+
+@{
+    if (TempData[&quot;msg&quot;] != null)
+    {
+        &lt;script&gt;
+            alert(&#39;@TempData[&quot;msg&quot;]&#39;)
+        &lt;/script&gt;
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[3,5,3,37,0],[86,1,86,145,0],[90,1,90,145,0],[114,5,114,33,0],[115,5,115,6,0],[117,21,117,37,0],[119,5,119,6,0]]);
+    </script>
+  </body>
+</html>

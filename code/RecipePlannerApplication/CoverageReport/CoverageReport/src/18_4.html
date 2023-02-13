@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone Project Clone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\AddIngredient.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+&lt;form method=&quot;post&quot; id=&quot;addForm&quot;&gt;
+    &lt;div&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Ingredient Name:&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;txtIngredientName&quot; /&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Quantity:&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;txtQuantity&quot; /&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;submit&quot;  asp-action=&quot;AddIngredient&quot; value=&quot;Add&quot; /&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;submit&quot;  asp-action=&quot;goToIngredientsPage&quot; value=&quot;Cancel&quot; id=&quot;cancelButton&quot; /&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+
+@{
+    if (TempData[&quot;msg&quot;] != null)
+    {
+        &lt;script&gt;
+           alert(&#39;@TempData[&quot;msg&quot;]&#39;)
+        &lt;/script&gt;
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[22,5,22,33,0],[23,5,23,6,0],[25,20,25,36,0],[27,5,27,6,0]]);
+    </script>
+  </body>
+</html>
