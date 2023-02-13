@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RecipePlannerLibrary.Database;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -28,19 +29,32 @@ namespace RecipePlannerDesktopApplication
             string name = this.ingredientNameTextBox.Text;
             string quantityString = this.quantityTextBox.Text;
 
-            int quantity = Convert.ToInt32(quantityString);
-
-            Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity);
-
-            this.addIngredient(ingredient);
-
-            DialogResult dialogResult = MessageBox.Show("This ingredient has been added", "Success", MessageBoxButtons.OK);
-
-            if (dialogResult == DialogResult.OK)
+            if (name == null || name.Equals("") || quantityString == null || quantityString.Equals(""))
             {
-                this.Close();
+                DialogResult dialogResult = MessageBox.Show("Please fill in all fields", "Error", MessageBoxButtons.OK);
             }
-            
+            else if (IngredientDAL.getIngredients(name).Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Ingredient is already added", "Error", MessageBoxButtons.OK);
+            }
+            else
+            {
+
+                int quantity = Convert.ToInt32(quantityString);
+
+                Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity);
+
+                this.addIngredient(ingredient);
+
+                DialogResult dialogResult =
+                    MessageBox.Show("This ingredient has been added", "Success", MessageBoxButtons.OK);
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    this.Close();
+                }
+            }
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
