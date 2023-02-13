@@ -4,6 +4,7 @@ using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace RecipePlannerWebApplication.Controllers
 {
@@ -119,16 +120,23 @@ namespace RecipePlannerWebApplication.Controllers
         [HttpPost]
         public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
         {
+	        Regex regex = new Regex("^[0-9]+$");
+
             if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
             {
-                TempData["msg"] = "Please enter values";
+                TempData["msg"] = "Please enter values.";
                 return View("AddIngredient");
             }
             else if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
             {
-                TempData["msg"] = "Ingredient is already entered";
+                TempData["msg"] = "Ingredient is already entered.";
                 return View("AddIngredient");
             }
+            else if (!regex.Match(txtQuantity).Success)
+            {
+	            TempData["msg"] = "Quantity must be an integer.";
+	            return View("AddIngredient");
+			}
             else
             {
                 IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
