@@ -5,7 +5,7 @@ To run this program run the CapstoneDB.sql script in Codes/Scripts Directory and
 
 To generate a code coverage report. Download resharper and dot cover and cover all the tests through resharper. Export the coverage to an html through the circle with an arrow in the top right of the coverage report
 
-To open the coverage report, navigate to code\RecipePlannerApplication\CoverageReport.
+To open the coverage report, navigate to sprints/sprint 1.
 
 Default Users: 
 | Username             | Password | 
