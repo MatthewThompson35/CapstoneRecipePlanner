@@ -35,6 +35,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.ingredientNameTextBox = new System.Windows.Forms.TextBox();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
+            this.errorQuantityTextLabel = new System.Windows.Forms.Label();
+            this.errorTextLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -99,11 +101,33 @@
             this.quantityTextBox.Size = new System.Drawing.Size(144, 27);
             this.quantityTextBox.TabIndex = 6;
             // 
+            // errorQuantityTextLabel
+            // 
+            this.errorQuantityTextLabel.AutoSize = true;
+            this.errorQuantityTextLabel.Location = new System.Drawing.Point(418, 209);
+            this.errorQuantityTextLabel.Name = "errorQuantityTextLabel";
+            this.errorQuantityTextLabel.Size = new System.Drawing.Size(193, 20);
+            this.errorQuantityTextLabel.TabIndex = 7;
+            this.errorQuantityTextLabel.Text = "Quantity must be an integer";
+            this.errorQuantityTextLabel.Visible = false;
+            // 
+            // errorTextLabel
+            // 
+            this.errorTextLabel.AutoSize = true;
+            this.errorTextLabel.Location = new System.Drawing.Point(219, 301);
+            this.errorTextLabel.Name = "errorTextLabel";
+            this.errorTextLabel.Size = new System.Drawing.Size(158, 20);
+            this.errorTextLabel.TabIndex = 8;
+            this.errorTextLabel.Text = "Please fill out all fields";
+            this.errorTextLabel.Visible = false;
+            // 
             // AddIngredientsPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 369);
+            this.Controls.Add(this.errorTextLabel);
+            this.Controls.Add(this.errorQuantityTextLabel);
             this.Controls.Add(this.quantityTextBox);
             this.Controls.Add(this.ingredientNameTextBox);
             this.Controls.Add(this.cancelButton);
@@ -127,5 +151,7 @@
         private Button cancelButton;
         private TextBox ingredientNameTextBox;
         private TextBox quantityTextBox;
+        private Label errorQuantityTextLabel;
+        private Label errorTextLabel;
     }
 }

@@ -30,15 +30,17 @@ namespace RecipePlannerDesktopApplication
 
             if (name == null || name.Equals("") || quantityString == null || quantityString.Equals(""))
             {
-                DialogResult dialogResult = MessageBox.Show("Please fill in all fields", "Error", MessageBoxButtons.OK);
+                this.errorTextLabel.Visible = true;
             }
             else if (!int.TryParse(quantityString, out number))
             {
-                DialogResult dialogResult = MessageBox.Show("Quantity must be an integer", "Error", MessageBoxButtons.OK);
+                this.errorQuantityTextLabel.Visible = true;
             }
             else if (IngredientDAL.getIngredients(name).Count > 0)
             {
-                DialogResult dialogResult = MessageBox.Show("Ingredient is already added", "Error", MessageBoxButtons.OK);
+                this.errorTextLabel.Text = @"This ingredient " + "'" + name + "'" + @" already exists.";
+                this.errorTextLabel.Visible = true;
+                this.errorQuantityTextLabel.Visible = false;
             }
             else
             {
