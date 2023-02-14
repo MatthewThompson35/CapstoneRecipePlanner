@@ -51,14 +51,9 @@ namespace RecipePlannerDesktopApplication
 
                 this.addIngredient(ingredient);
 
-                DialogResult dialogResult =
-                    MessageBox.Show("This ingredient has been added", "Success", MessageBoxButtons.OK);
-
-                if (dialogResult == DialogResult.OK)
-                {
-                    this.Close();
-                    this.ingredientsPage.Show();
-                }
+                this.Close();
+                this.ingredientsPage.Show();
+                
             }
 
         }
