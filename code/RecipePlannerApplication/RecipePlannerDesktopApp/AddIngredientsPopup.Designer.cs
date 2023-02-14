@@ -35,39 +35,43 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.ingredientNameTextBox = new System.Windows.Forms.TextBox();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
+            this.errorQuantityTextLabel = new System.Windows.Forms.Label();
+            this.errorTextLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(183, 9);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(54, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(306, 38);
+            this.label1.Size = new System.Drawing.Size(371, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "Add a New Ingredient";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(106, 117);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(42, 239);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 20);
+            this.label2.Size = new System.Drawing.Size(192, 31);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Insert Ingredient Name:";
+            this.label2.Text = "Ingredient Name:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(106, 170);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(42, 292);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 20);
+            this.label3.Size = new System.Drawing.Size(107, 31);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Insert Quantity:";
+            this.label3.Text = "Quantity:";
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(216, 259);
+            this.submitButton.Location = new System.Drawing.Point(177, 433);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(94, 29);
             this.submitButton.TabIndex = 3;
@@ -77,7 +81,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(410, 259);
+            this.cancelButton.Location = new System.Drawing.Point(177, 526);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(94, 29);
             this.cancelButton.TabIndex = 4;
@@ -87,23 +91,48 @@
             // 
             // ingredientNameTextBox
             // 
-            this.ingredientNameTextBox.Location = new System.Drawing.Point(420, 117);
+            this.ingredientNameTextBox.Location = new System.Drawing.Point(252, 245);
             this.ingredientNameTextBox.Name = "ingredientNameTextBox";
             this.ingredientNameTextBox.Size = new System.Drawing.Size(144, 27);
             this.ingredientNameTextBox.TabIndex = 5;
             // 
             // quantityTextBox
             // 
-            this.quantityTextBox.Location = new System.Drawing.Point(420, 167);
+            this.quantityTextBox.Location = new System.Drawing.Point(252, 296);
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(144, 27);
             this.quantityTextBox.TabIndex = 6;
+            // 
+            // errorQuantityTextLabel
+            // 
+            this.errorQuantityTextLabel.AutoSize = true;
+            this.errorQuantityTextLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.errorQuantityTextLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorQuantityTextLabel.Location = new System.Drawing.Point(252, 337);
+            this.errorQuantityTextLabel.Name = "errorQuantityTextLabel";
+            this.errorQuantityTextLabel.Size = new System.Drawing.Size(193, 20);
+            this.errorQuantityTextLabel.TabIndex = 7;
+            this.errorQuantityTextLabel.Text = "Quantity must be an integer";
+            this.errorQuantityTextLabel.Visible = false;
+            // 
+            // errorTextLabel
+            // 
+            this.errorTextLabel.AutoSize = true;
+            this.errorTextLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorTextLabel.Location = new System.Drawing.Point(177, 480);
+            this.errorTextLabel.Name = "errorTextLabel";
+            this.errorTextLabel.Size = new System.Drawing.Size(158, 20);
+            this.errorTextLabel.TabIndex = 8;
+            this.errorTextLabel.Text = "Please fill out all fields";
+            this.errorTextLabel.Visible = false;
             // 
             // AddIngredientsPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 369);
+            this.ClientSize = new System.Drawing.Size(471, 692);
+            this.Controls.Add(this.errorTextLabel);
+            this.Controls.Add(this.errorQuantityTextLabel);
             this.Controls.Add(this.quantityTextBox);
             this.Controls.Add(this.ingredientNameTextBox);
             this.Controls.Add(this.cancelButton);
@@ -127,5 +156,7 @@
         private Button cancelButton;
         private TextBox ingredientNameTextBox;
         private TextBox quantityTextBox;
+        private Label errorQuantityTextLabel;
+        private Label errorTextLabel;
     }
 }
