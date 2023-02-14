@@ -32,8 +32,7 @@ namespace RecipePlannerDesktopApplication
                 attempt.Username = this.usernameTextBox.Text;
                 attempt.Password = this.passwordTextBox.Text;
                 int result = Database.LoginCheck(attempt);
-                var message = "";
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                
                 if (result == 1)
                 {
                     ActiveUser.username = this.usernameTextBox.Text;
@@ -43,12 +42,8 @@ namespace RecipePlannerDesktopApplication
                 }
                 else
                 {
-                    message = "Failed login";
-                    var box = MessageBox.Show(message, "", buttons);
-                    if (box == System.Windows.Forms.DialogResult.Yes)
-                    {
-
-                    }
+                    this.errorLoginLabel.Visible = true;
+                    this.emptyFieldErrorLabel.Visible = false;
                 }
             }
 

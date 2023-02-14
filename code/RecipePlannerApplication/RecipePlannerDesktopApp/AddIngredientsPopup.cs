@@ -57,6 +57,7 @@ namespace RecipePlannerDesktopApplication
                 if (dialogResult == DialogResult.OK)
                 {
                     this.Close();
+                    this.ingredientsPage.Show();
                 }
             }
 
@@ -65,6 +66,7 @@ namespace RecipePlannerDesktopApplication
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            this.ingredientsPage.Show();
         }
 
         private void addIngredient(Ingredient ingredient)

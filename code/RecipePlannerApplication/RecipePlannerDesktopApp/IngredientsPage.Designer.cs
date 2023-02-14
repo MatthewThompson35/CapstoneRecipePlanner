@@ -119,7 +119,7 @@
             this.ingredientsGridView.RowHeadersVisible = false;
             this.ingredientsGridView.RowHeadersWidth = 51;
             this.ingredientsGridView.RowTemplate.Height = 25;
-            this.ingredientsGridView.Size = new System.Drawing.Size(443, 461);
+            this.ingredientsGridView.Size = new System.Drawing.Size(415, 461);
             this.ingredientsGridView.TabIndex = 5;
             this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
             // 
@@ -152,7 +152,7 @@
             this.quantityColumn.MinimumWidth = 6;
             this.quantityColumn.Name = "quantityColumn";
             this.quantityColumn.ReadOnly = true;
-            this.quantityColumn.Width = 125;
+            this.quantityColumn.Width = 75;
             // 
             // increaseQuantityColumn
             // 

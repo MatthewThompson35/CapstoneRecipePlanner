@@ -39,7 +39,7 @@ namespace RecipePlannerDesktopApplication
 
         private void displayAddIngredientsPopup()
         {
-
+            this.Hide();
             AddIngredientsPopup ingredientsPopup = new AddIngredientsPopup(this);
             ingredientsPopup.Show();
         }
