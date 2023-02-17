@@ -1,0 +1,177 @@
+﻿@model List<RecipePlannerLibrary.Models.Recipe>
+
+@{
+    ViewBag.Title = "Recipes";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        th, td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+
+        #recipe-container {
+            display: flex;
+            margin-top: 50px;
+        }
+
+        #recipe-list {
+            flex: 1;
+        }
+
+            #recipe-list h2 {
+                text-align: center;
+            }
+
+            #recipe-list table {
+                width: 100%;
+            }
+
+            #recipe-list tr {
+                cursor: pointer;
+            }
+
+            #recipe-list td:first-child {
+                width: 80%;
+            }
+
+            #recipe-list td:last-child {
+                width: 20%;
+                text-align: center;
+            }
+
+        #recipe-details {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #recipe-details-box {
+            position: fixed;
+            border: 1px solid black;
+            padding: 10px;
+            width: 20%;
+            top: 150px;
+            height: 600px;
+        }
+
+            #recipe-details-box h3 {
+                margin-top: 0;
+            }
+
+            #recipe-details-box p {
+                margin: 0;
+            }
+
+        #recipe-actions {
+            justify-content: center;
+            align-items: center;
+        }
+
+            #recipe-actions button {
+                margin: 0 10px;
+                padding: 5px 10px;
+                border: none;
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+            }
+
+                #recipe-actions button:hover {
+                    background-color: #3e8e41;
+                }
+
+                #recipe-actions button:active {
+                    background-color: #4CAF50;
+                }
+
+        #logout {
+            position: fixed;
+            right: 10px;
+            top: 5px;
+            background-color: #d9534f;
+            color: #fff;
+        }
+    </style>
+
+    <script>
+        function showRecipe(description) {
+            var recipeDivs = document.querySelectorAll('#recipe-details-box > div');
+
+            for (var i = 0; i < recipeDivs.length; i++) {
+                recipeDivs[i].style.display = 'none';
+            }
+
+            var recipeDiv = document.getElementById(description);
+            recipeDiv.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div id="logout">
+        <input type="submit" asp-action="Logout" value="Logout" id="logout" class="button button-red" />
+    </div>
+
+<div id="recipe-container">
+    <div id="recipe-list">
+        <h2>Recipes</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var recipe in Model)
+            {
+                <tr onclick="showRecipe('@recipe.description')">
+                    <td>@recipe.name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="recipe-details">
+        <div id="recipe-details-box">
+            @foreach (var recipe in Model)
+            {
+                <div id="@recipe.description" style="display:none">
+                    <h3>@recipe.name</h3>
+                    <p>@recipe.description</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div id="recipe-actions">
+    <button>Add Recipe</button>
+    <button>Remove Recipe</button>
+</div>
+</body>
+</html>

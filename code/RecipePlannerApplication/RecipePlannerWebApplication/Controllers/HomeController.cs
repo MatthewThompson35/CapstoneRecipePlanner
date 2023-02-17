@@ -38,9 +38,17 @@ namespace RecipePlannerWebApplication.Controllers
             if (res == 1)
             {
 
-                ActiveUser.username = ad.Username;
-                ViewBag.ingredients = IngredientDAL.getIngredients();
-                return View("IngredientsPage");
+                //ActiveUser.username = ad.Username;
+                //ViewBag.ingredients = IngredientDAL.getIngredients();
+                //return View("IngredientsPage");
+                List<Recipe> recipes = new List<Recipe>();
+                Recipe recipe = new Recipe();
+                recipe.recipeId = 1;
+                recipe.description = "This is a Lasagna";
+                recipe.name = "Lasagna";
+                recipes.Add(recipe);
+                ViewBag.recipes = recipes;
+                return View("RecipePage", ViewBag.recipes);
 
             }
             else
