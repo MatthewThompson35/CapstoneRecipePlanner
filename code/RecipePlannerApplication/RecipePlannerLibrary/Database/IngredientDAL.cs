@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using RecipePlannerLibrary.Models;
+using System;
 using System.Collections.Generic;
 
 namespace RecipePlannerLibrary.Database
@@ -29,8 +30,9 @@ namespace RecipePlannerLibrary.Database
                 string name = reader.GetString(1);
                 int quantity = reader.GetInt32(2);
                 int id = reader.GetInt32(3);
+                string measurement = reader.GetString(4).ToUpper();
 
-                Ingredient ingredient = new Ingredient(username, name, quantity, id);
+                Ingredient ingredient = new Ingredient(username, name, quantity, id, measurement);
 
                 ingredients.Add(ingredient);
             }
@@ -42,15 +44,16 @@ namespace RecipePlannerLibrary.Database
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="quantity">The quantity.</param>
-        public static void addIngredient(string name, int quantity)
+        public static void addIngredient(string name, int quantity, string measurement)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
             connection.Open();
-            string query = @"Insert into ingredient (username, ingredientName, quantity) values(@username, @name, @quantity);";
+            string query = @"Insert into ingredient (username, ingredientName, quantity, measurement) values(@username, @name, @quantity, @measurement);";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
             command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
             command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add("@measurement", MySqlDbType.VarChar).Value = measurement;
             command.ExecuteNonQuery();
         }
 
@@ -123,8 +126,9 @@ namespace RecipePlannerLibrary.Database
                 string name = reader.GetString(1);
                 int quantity = reader.GetInt32(2);
                 int id = reader.GetInt32(3);
+                string measurement = reader.GetString(4);
 
-                Ingredient ingredient = new Ingredient(username, name, quantity, id);
+                Ingredient ingredient = new Ingredient(username, name, quantity, id, measurement);
 
                 ingredients.Add(ingredient);
             }

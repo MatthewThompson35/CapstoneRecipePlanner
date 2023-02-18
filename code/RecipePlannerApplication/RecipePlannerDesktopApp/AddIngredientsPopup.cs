@@ -26,9 +26,10 @@ namespace RecipePlannerDesktopApplication
         {
             string name = this.ingredientNameTextBox.Text;
             string quantityString = this.quantityTextBox.Text;
+            string measure = this.measurementComboBox.Text;
             int number;
 
-            if (name == null || name.Equals("") || quantityString == null || quantityString.Equals(""))
+            if (name == null || name.Equals("") || quantityString == null || quantityString.Equals("") || measure.Equals("") )
             {
                 this.errorTextLabel.Visible = true;
             }
@@ -47,7 +48,7 @@ namespace RecipePlannerDesktopApplication
 
                 int quantity = Convert.ToInt32(quantityString);
 
-                Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity);
+                Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity, 0, measure);
 
                 this.addIngredient(ingredient);
 
@@ -70,13 +71,14 @@ namespace RecipePlannerDesktopApplication
             {
                 sqlConn.Open();
 
-                string query = "insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID)";
+                string query = "insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID, @measurement)";
                 using var command = new MySqlCommand(query, sqlConn);
 
                 command.Parameters.AddWithValue("@username", ingredient.username);
                 command.Parameters.AddWithValue("@ingredientID", ingredient.id);
                 command.Parameters.AddWithValue("@ingredientName", ingredient.name);
                 command.Parameters.AddWithValue("@quantity", ingredient.quantity);
+                command.Parameters.AddWithValue("@measurement", ingredient.measurement);
 
                 command.ExecuteNonQuery();
             }
