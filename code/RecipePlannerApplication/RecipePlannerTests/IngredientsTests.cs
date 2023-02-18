@@ -10,8 +10,9 @@
             string expectedName = "flour";
             int expectedQuantity = 2;
             int expectedId = 1;
+            string measurement = "G";
 
-            Ingredient ingredient = new Ingredient(expectedUsername, expectedName, expectedQuantity, expectedId);
+            Ingredient ingredient = new Ingredient(expectedUsername, expectedName, expectedQuantity, expectedId, measurement);
 
             Assert.AreEqual(expectedUsername, ingredient.username, "The username was not set correctly");
             Assert.AreEqual(expectedName, ingredient.name, "The name was not set correctly");
@@ -26,7 +27,8 @@
             string name = "flour";
             int quantity = 2;
             int id = 1;
-            Ingredient ingredient = new Ingredient(username, name, quantity, id);
+            string measurement = "G";
+            Ingredient ingredient = new Ingredient(username, name, quantity, id, measurement);
 
             string result = ingredient.ToString();
 

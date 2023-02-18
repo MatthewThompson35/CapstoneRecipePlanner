@@ -1,22 +1,87 @@
-﻿<form method="post" id="addForm">
-    <div>
-        <table>
-            <tr>
-                <td>Ingredient Name:</td>
-                <td><input type="text" name="txtIngredientName" /></td>
-            </tr>
-            <tr>
-                <td>Quantity:</td>
-                <td><input type="text" name="txtQuantity" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit"  asp-action="AddIngredient" value="Add" /></td>
-                <td><input type="submit"  asp-action="goToIngredientsPage" value="Cancel" id="cancelButton" /></td>
-            </tr>
-        </table>
+﻿@using RecipePlannerLibrary.Models
+<style>
+    #addForm {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        display: block;
+    }
+
+    #addForm input[type="text"],
+    #addForm select {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-sizing: border-box;
+    }
+
+    #addForm input[type="submit"],
+    #addForm input[type="button"] {
+        padding: 5px 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #33b5e5;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    #addForm #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
+
+    #addForm label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #addForm .form-group {
+        margin-bottom: 15px;
+    }
+
+    #addForm .button-group {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+</style>
+
+
+<form method="post" id="addForm">
+    <div class="form-group">
+        <label for="txtIngredientName">Ingredient Name:</label>
+        <input type="text" name="txtIngredientName" id="txtIngredientName" />
+    </div>
+    <div class="form-group">
+        <label for="txtQuantity">Quantity:</label>
+        <input type="text" name="txtQuantity" id="txtQuantity" />
+    </div>
+    <div class="form-group">
+        <label for="measurement">Measurement:</label>
+        <select name="measurement" id="measurement">
+            @foreach (var measurement in ViewBag.measurements)
+            {
+                <option value="@measurement">@measurement</option>
+            }
+        </select>
+    </div>
+    <div class="button-group">
+        <input type="submit" asp-action="AddIngredient" value="Add" />
+        <input type="submit" asp-action="goToIngredientsPage" value="Cancel" id="cancelButton" />
     </div>
 </form>
+
 
 @{
     if (TempData["msg"] != null)

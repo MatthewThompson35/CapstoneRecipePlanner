@@ -36,7 +36,7 @@ namespace RecipePlannerLibrary.Models
         /// </value>
         public int? id { get; set; }
 
-        public string measurement { get; set; }
+        public string? measurement { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ingredient"/> class.

@@ -5,6 +5,7 @@ using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RecipePlannerWebApplication.Controllers
 {
@@ -38,17 +39,17 @@ namespace RecipePlannerWebApplication.Controllers
             if (res == 1)
             {
 
-                //ActiveUser.username = ad.Username;
-                //ViewBag.ingredients = IngredientDAL.getIngredients();
-                //return View("IngredientsPage");
-                List<Recipe> recipes = new List<Recipe>();
+                ActiveUser.username = ad.Username;
+                ViewBag.ingredients = IngredientDAL.getIngredients();
+                return View("IngredientsPage");
+                /*List<Recipe> recipes = new List<Recipe>();
                 Recipe recipe = new Recipe();
                 recipe.recipeId = 1;
                 recipe.description = "This is a Lasagna";
                 recipe.name = "Lasagna";
                 recipes.Add(recipe);
-                ViewBag.recipes = recipes;
-                return View("RecipePage", ViewBag.recipes);
+                ViewBag.recipes = recipes;*/
+                /*return View("RecipePage", ViewBag.recipes);*/
 
             }
             else
@@ -126,28 +127,30 @@ namespace RecipePlannerWebApplication.Controllers
         /// <param name="txtQuantity">The text quantity.</param>
         /// <returns>The view</returns>
         [HttpPost]
-        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
+        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
         {
-	        Regex regex = new Regex("^[0-9]+$");
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            Regex regex = new Regex("^[0-9]+$");
 
             if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
             {
                 TempData["msg"] = "Please enter values.";
-                return View("AddIngredient");
+                return View("AddIngredient", ViewBag.Measurements);
             }
             else if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
             {
                 TempData["msg"] = "Ingredient is already entered.";
-                return View("AddIngredient");
+                return View("AddIngredient", ViewBag.Measurements);
             }
             else if (!regex.Match(txtQuantity).Success)
             {
 	            TempData["msg"] = "Quantity must be an integer.";
-	            return View("AddIngredient");
+	            return View("AddIngredient", ViewBag.Measurements);
 			}
             else
             {
-                IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
+                IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity), measurement);
                 ViewBag.ingredients = IngredientDAL.getIngredients();
                 return View("IngredientsPage", ViewBag.ingredients);
             }
@@ -161,6 +164,17 @@ namespace RecipePlannerWebApplication.Controllers
         {
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
+        }
+
+        /// <summary>
+        /// Goes to add ingredients page.
+        /// </summary>
+        /// <returns>The view</returns>
+        public ActionResult goToAddIngredientsPage()
+        {
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            return View("AddIngredient", ViewBag.Measurements);
         }
 
         /// <summary>
