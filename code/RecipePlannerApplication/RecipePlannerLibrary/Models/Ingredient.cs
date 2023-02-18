@@ -36,6 +36,8 @@ namespace RecipePlannerLibrary.Models
         /// </value>
         public int? id { get; set; }
 
+        public string measurement { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Ingredient"/> class.
         /// </summary>
@@ -43,12 +45,13 @@ namespace RecipePlannerLibrary.Models
         /// <param name="name">The name.</param>
         /// <param name="quantity">The quantity.</param>
         /// <param name="id">The identifier.</param>
-        public Ingredient(string username, string name, int quantity, int id)
+        public Ingredient(string username, string name, int quantity, int id, string measurement)
         {
             this.username = username;
             this.id = id;
             this.name = name;
             this.quantity = quantity;
+            this.measurement = measurement;
         }
 
         /// <summary>
@@ -63,6 +66,8 @@ namespace RecipePlannerLibrary.Models
             this.name = name;
             this.quantity = quantity;
         }
+
+
 
         /// <summary>
         /// Converts to string.
