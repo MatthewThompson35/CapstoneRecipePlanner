@@ -34,13 +34,15 @@
     }
 
     .table {
+        max-width: 800px;
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
     }
 
-    .table th, .table td {
-        border: 1px solid #e6e6e6;
+    .table th,
+    .table td {
+        border: none;
         padding: 10px;
         text-align: center;
         vertical-align: middle;
@@ -97,7 +99,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Ingredient Name</th>
                 <th>Quantity</th>
                 <th>Actions</th>
@@ -107,12 +108,11 @@
             @foreach (var ingredient in ViewBag.ingredients)
             {
                 <tr id="ingredient-@ingredient.id">
-                    <td id="ingredientID">@ingredient.id</td>
                     <td>@ingredient.name</td>
                     <td>
                         <div class="quantity-container">
                             <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
-                            <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity</span>
+                                <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
                             <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
                         </div>
                     </td>
