@@ -12,9 +12,9 @@ namespace RecipePlannerWebApplication.Controllers
         }
 
 
-        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity)
+        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
         {
-            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity));
+            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity), measurement);
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
