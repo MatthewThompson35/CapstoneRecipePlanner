@@ -149,8 +149,8 @@
             <tbody>
             @foreach (var recipe in Model)
             {
-                <tr onclick="showRecipe('@recipe.description')">
-                    <td>@recipe.name</td>
+                <tr onclick="showRecipe('@recipe.Description')">
+                    <td>@recipe.Name</td>
                 </tr>
             }
             </tbody>
@@ -161,9 +161,9 @@
         <div id="recipe-details-box">
             @foreach (var recipe in Model)
             {
-                <div id="@recipe.description" style="display:none">
-                    <h3>@recipe.name</h3>
-                    <p>@recipe.description</p>
+                <div id="@recipe.Description" style="display:none">
+                    <h3>@recipe.Name</h3>
+                    <p>@recipe.Description</p>
                 </div>
             }
         </div>

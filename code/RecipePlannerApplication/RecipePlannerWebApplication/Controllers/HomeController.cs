@@ -44,7 +44,7 @@ namespace RecipePlannerWebApplication.Controllers
                 return View("IngredientsPage");
                 /*List<Recipe> recipes = new List<Recipe>();
                 Recipe recipe = new Recipe();
-                recipe.recipeId = 1;
+                recipe.RecipeId = 1;
                 recipe.description = "This is a Lasagna";
                 recipe.name = "Lasagna";
                 recipes.Add(recipe);

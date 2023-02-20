@@ -6,10 +6,20 @@ namespace RecipePlannerLibrary.Models
 {
     public class Recipe
     {
-        public int recipeId { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public List<RecipeStep> steps { get; set; }
-        public List<Ingredient> ingredients { get; set; } = new List<Ingredient>();
+        public int RecipeId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<RecipeStep> Steps { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
+
+        public Recipe(int recipeId, string name, string description)
+        {
+            this.RecipeId = recipeId;
+            this.Name = name;
+            this.Description = description;
+            this.Steps = new List<RecipeStep>();
+            this.Ingredients = new List<Ingredient>();
+        }
+
     }
 }
