@@ -39,6 +39,11 @@ namespace RecipePlannerWebApplication.Controllers
             if (res == 1)
             {
                 List<Recipe> recipes = RecipeDAL.getRecipes();
+                foreach (var recipe in recipes)
+                {
+                    recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                    recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId);
+                }
 
                 ViewBag.recipes = recipes;
                 return View("RecipePage", ViewBag.recipes);

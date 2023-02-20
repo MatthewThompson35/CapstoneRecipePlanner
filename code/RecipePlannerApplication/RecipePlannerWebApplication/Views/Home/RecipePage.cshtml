@@ -120,15 +120,26 @@
     </style>
 
     <script>
-        function showRecipe(description) {
+        function showRecipe(recipeId) {
             var recipeDivs = document.querySelectorAll('#recipe-details-box > div');
 
             for (var i = 0; i < recipeDivs.length; i++) {
                 recipeDivs[i].style.display = 'none';
             }
 
-            var recipeDiv = document.getElementById(description);
-            recipeDiv.style.display = 'block';
+            var recipe = document.getElementById(recipeId);
+            recipe.style.display = 'block';
+
+            var name = recipe.querySelector('.recipe-name').innerText;
+            var description = recipe.querySelector('.recipe-description').innerText;
+            var steps = recipe.querySelector('.recipe-steps').innerHTML;
+            var ingredients = recipe.querySelector('.recipe-ingredients').innerHTML;
+
+            var recipeDetails = document.getElementById('recipe-details');
+            recipeDetails.querySelector('.recipe-name').innerText = name;
+            recipeDetails.querySelector('.recipe-description').innerText = description;
+            recipeDetails.querySelector('.recipe-steps').innerHTML = steps;
+            recipeDetails.querySelector('.recipe-ingredients').innerHTML = ingredients;
         }
     </script>
 </head>
@@ -160,10 +171,25 @@
     <div id="recipe-details">
         <div id="recipe-details-box">
             @foreach (var recipe in Model)
-            {
+            {<tr onclick="showRecipe('@recipe.RecipeId')">
+             </tr>
                 <div id="@recipe.Description" style="display:none">
-                    <h3>@recipe.Name</h3>
-                    <p>@recipe.Description</p>
+                    <h3 class="recipe-name">@recipe.Name</h3>
+                    <p class="recipe-description">@recipe.Description</p>
+                    <h4>Steps</h4>
+                    <ol class="recipe-steps">
+                        @foreach (var step in recipe.Steps)
+                        {
+                            <li>@step.stepDescription</li>
+                        }
+                    </ol>
+                    <h4>Ingredients</h4>
+                    <ul class="recipe-ingredients">
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            <li>@ingredient.Quantity @ingredient.IngredientName</li>
+                        }
+                    </ul>
                 </div>
             }
         </div>
