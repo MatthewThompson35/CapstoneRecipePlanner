@@ -38,18 +38,10 @@ namespace RecipePlannerWebApplication.Controllers
             int res = Database.LoginCheck(ad);
             if (res == 1)
             {
+                List<Recipe> recipes = RecipeDAL.getRecipes();
 
-                ActiveUser.username = ad.Username;
-                ViewBag.ingredients = IngredientDAL.getIngredients();
-                return View("IngredientsPage");
-                /*List<Recipe> recipes = new List<Recipe>();
-                Recipe recipe = new Recipe();
-                recipe.RecipeId = 1;
-                recipe.description = "This is a Lasagna";
-                recipe.name = "Lasagna";
-                recipes.Add(recipe);
-                ViewBag.recipes = recipes;*/
-                /*return View("RecipePage", ViewBag.recipes);*/
+                ViewBag.recipes = recipes;
+                return View("RecipePage", ViewBag.recipes);
 
             }
             else
