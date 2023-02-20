@@ -1,0 +1,9 @@
+Context - User logs in
+
+Primary Flow
+1 - System loads recipes to display
+2 - System displays the recipes available to make
+
+Alternative Flow(s)
+BAD CONNECTION
+a1 - system can not retrieve recipes and notifies user to try again later.
