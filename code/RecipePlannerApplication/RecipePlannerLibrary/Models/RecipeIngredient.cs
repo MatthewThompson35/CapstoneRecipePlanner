@@ -10,11 +10,14 @@ namespace RecipePlannerLibrary.Models
         public string IngredientName { get; set; }
         public int Quantity { get; set; }
 
-        public RecipeIngredient(int recipeId, string ingredientName, int quantity)
+        public string Measurement { get; set; }
+
+        public RecipeIngredient(int recipeId, string ingredientName, int quantity, string measurement)
         {
             this.RecipeId = recipeId;
             this.IngredientName = ingredientName;
             this.Quantity = quantity;
+            this.Measurement = measurement;
         }
     }
 }

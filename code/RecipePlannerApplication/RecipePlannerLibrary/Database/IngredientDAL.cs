@@ -48,12 +48,12 @@ namespace RecipePlannerLibrary.Database
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
             connection.Open();
-            string query = @"Insert into ingredient (username, ingredientName, quantity, measurement) values(@username, @name, @quantity, @measurement);";
+            string query = @"Insert into ingredient (username, ingredientName, quantity, Measurement) values(@username, @name, @quantity, @Measurement);";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
             command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
             command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
-            command.Parameters.Add("@measurement", MySqlDbType.VarChar).Value = measurement;
+            command.Parameters.Add("@Measurement", MySqlDbType.VarChar).Value = measurement;
             command.ExecuteNonQuery();
         }
 

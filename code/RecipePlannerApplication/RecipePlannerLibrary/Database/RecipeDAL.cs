@@ -55,8 +55,9 @@ namespace RecipePlannerLibrary.Database
                 int recipeID = reader.GetInt32(0);
                 string ingredientName = reader.GetString(1);
                 int quantity = reader.GetInt32(2);
+                string measurement = reader.GetString(3);
 
-                RecipeIngredient ingredient = new RecipeIngredient(recipeID, ingredientName, quantity);
+                RecipeIngredient ingredient = new RecipeIngredient(recipeID, ingredientName, quantity, measurement);
                 ingredients.Add(ingredient);
             }
             connection.Close();

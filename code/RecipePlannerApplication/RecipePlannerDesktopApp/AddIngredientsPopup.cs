@@ -71,14 +71,14 @@ namespace RecipePlannerDesktopApplication
             {
                 sqlConn.Open();
 
-                string query = "insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID, @measurement)";
+                string query = "insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID, @Measurement)";
                 using var command = new MySqlCommand(query, sqlConn);
 
                 command.Parameters.AddWithValue("@username", ingredient.username);
                 command.Parameters.AddWithValue("@ingredientID", ingredient.id);
                 command.Parameters.AddWithValue("@ingredientName", ingredient.name);
                 command.Parameters.AddWithValue("@quantity", ingredient.quantity);
-                command.Parameters.AddWithValue("@measurement", ingredient.measurement);
+                command.Parameters.AddWithValue("@Measurement", ingredient.measurement);
 
                 command.ExecuteNonQuery();
             }

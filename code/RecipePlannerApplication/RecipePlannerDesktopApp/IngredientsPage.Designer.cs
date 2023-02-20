@@ -157,7 +157,7 @@
             // 
             // Measurement
             // 
-            this.Measurement.DataPropertyName = "measurement";
+            this.Measurement.DataPropertyName = "Measurement";
             this.Measurement.HeaderText = "Measurement";
             this.Measurement.Name = "Measurement";
             // 
