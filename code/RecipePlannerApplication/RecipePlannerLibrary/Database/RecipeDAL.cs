@@ -33,6 +33,7 @@ namespace RecipePlannerLibrary.Database
 
                 recipes.Add(recipe);
             }
+            connection.Close();
             return recipes;
         }
 
@@ -58,7 +59,34 @@ namespace RecipePlannerLibrary.Database
                 RecipeIngredient ingredient = new RecipeIngredient(recipeID, ingredientName, quantity);
                 ingredients.Add(ingredient);
             }
+            connection.Close();
             return ingredients;
+        }
+
+        /// <summary>
+        /// Gets the recipe steps associated with a specified recipeID.
+        /// </summary>
+        /// <returns>List of all steps associated with a specified recipeID</returns>
+        public static List<RecipeStep> getStepsForRecipe(int id)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            List<RecipeStep> steps = new List<RecipeStep>();
+            string query = @"Select * from recipe_step where recipeID=@id;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int recipeID = reader.GetInt32(0);
+                int stepNumber = reader.GetInt32(1);
+                string stepDescription = reader.GetString(2);
+
+                RecipeStep recipeStep = new RecipeStep(recipeID, stepNumber, stepDescription);
+                steps.Add(recipeStep);
+            }
+            connection.Close();
+            return steps;
         }
     }
 }
