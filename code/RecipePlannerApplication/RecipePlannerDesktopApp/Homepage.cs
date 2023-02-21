@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecipePlannerLibrary.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,11 @@ namespace RecipePlannerDesktopApplication
 {
     public partial class Homepage : Form
     {
+
         public Homepage()
         {
             InitializeComponent();
+            this.viewAllRecipes();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -31,6 +34,16 @@ namespace RecipePlannerDesktopApplication
             IngredientsPage ingredientsPage = new IngredientsPage();
 
             ingredientsPage.Show();
+        }
+
+        private void viewAllRecipes()
+        {
+
+            foreach (var recipe in RecipeDAL.getRecipes())
+            {
+                this.recipeListView.Items.Add(recipe.Name);
+            }
+            //RecipeDAL.getRecipes().ForEach(recipe => { recipe.})
         }
     }
 }
