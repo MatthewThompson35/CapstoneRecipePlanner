@@ -16,5 +16,21 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
         }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginPage login = new LoginPage();
+            login.Show();
+        }
+
+        private void viewIngredientsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            IngredientsPage ingredientsPage = new IngredientsPage();
+
+            ingredientsPage.Show();
+        }
     }
 }

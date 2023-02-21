@@ -38,27 +38,29 @@
             // 
             // recipeListView
             // 
-            this.recipeListView.HideSelection = false;
-            this.recipeListView.Location = new System.Drawing.Point(37, 107);
+            this.recipeListView.Location = new System.Drawing.Point(37, 134);
+            this.recipeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.recipeListView.Name = "recipeListView";
-            this.recipeListView.Size = new System.Drawing.Size(433, 300);
+            this.recipeListView.Size = new System.Drawing.Size(433, 374);
             this.recipeListView.TabIndex = 0;
             this.recipeListView.UseCompatibleStateImageBehavior = false;
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(406, 25);
+            this.logoutButton.Location = new System.Drawing.Point(406, 31);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(76, 38);
+            this.logoutButton.Size = new System.Drawing.Size(76, 48);
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(204, 57);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(204, 71);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 29);
             this.label1.TabIndex = 2;
@@ -66,41 +68,46 @@
             // 
             // recipeTextBox
             // 
-            this.recipeTextBox.Location = new System.Drawing.Point(37, 435);
+            this.recipeTextBox.Location = new System.Drawing.Point(37, 544);
+            this.recipeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.recipeTextBox.Multiline = true;
             this.recipeTextBox.Name = "recipeTextBox";
-            this.recipeTextBox.Size = new System.Drawing.Size(433, 123);
+            this.recipeTextBox.Size = new System.Drawing.Size(433, 153);
             this.recipeTextBox.TabIndex = 3;
             // 
             // viewIngredientsButton
             // 
-            this.viewIngredientsButton.Location = new System.Drawing.Point(62, 579);
+            this.viewIngredientsButton.Location = new System.Drawing.Point(62, 724);
+            this.viewIngredientsButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.viewIngredientsButton.Name = "viewIngredientsButton";
-            this.viewIngredientsButton.Size = new System.Drawing.Size(382, 35);
+            this.viewIngredientsButton.Size = new System.Drawing.Size(382, 44);
             this.viewIngredientsButton.TabIndex = 4;
             this.viewIngredientsButton.Text = "View Ingredients";
             this.viewIngredientsButton.UseVisualStyleBackColor = true;
+            this.viewIngredientsButton.Click += new System.EventHandler(this.viewIngredientsButton_Click);
             // 
             // addRecipeButton
             // 
-            this.addRecipeButton.Location = new System.Drawing.Point(62, 640);
+            this.addRecipeButton.Location = new System.Drawing.Point(62, 800);
+            this.addRecipeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addRecipeButton.Name = "addRecipeButton";
-            this.addRecipeButton.Size = new System.Drawing.Size(382, 33);
+            this.addRecipeButton.Size = new System.Drawing.Size(382, 41);
             this.addRecipeButton.TabIndex = 5;
             this.addRecipeButton.Text = "Add Recipe";
             this.addRecipeButton.UseVisualStyleBackColor = true;
             // 
             // Homepage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 733);
+            this.ClientSize = new System.Drawing.Size(514, 916);
             this.Controls.Add(this.addRecipeButton);
             this.Controls.Add(this.viewIngredientsButton);
             this.Controls.Add(this.recipeTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.recipeListView);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Homepage";
             this.Text = "Recipe Planner Homepage";
             this.ResumeLayout(false);
