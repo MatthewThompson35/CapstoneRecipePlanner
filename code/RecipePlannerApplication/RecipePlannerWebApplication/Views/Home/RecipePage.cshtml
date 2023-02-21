@@ -8,13 +8,11 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title>@ViewBag.Title</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+        body { font-family: Arial, sans-serif; }
 
         table {
             border-collapse: collapse;
@@ -22,134 +20,99 @@
         }
 
         th, td {
-            padding: 5px;
             border: 1px solid black;
+            padding: 5px;
         }
 
-        th {
-            background-color: #f2f2f2;
-        }
+        th { background-color: #f2f2f2; }
 
-        tr:hover {
-            background-color: #e2e2e2;
-        }
+        tr:hover { background-color: #e2e2e2; }
 
         #recipe-container {
             display: flex;
             margin-top: 50px;
         }
 
-        #recipe-list {
-            flex: 1;
+        #recipe-list { flex: 1; }
+
+        #recipe-list h2 { text-align: center; }
+
+        #recipe-list table { width: 100%; }
+
+        #recipe-list tr { cursor: pointer; }
+
+        #recipe-list td:first-child { width: 80%; }
+
+        #recipe-list td:last-child {
+            text-align: center;
+            width: 20%;
         }
 
-            #recipe-list h2 {
-                text-align: center;
-            }
-
-            #recipe-list table {
-                width: 100%;
-            }
-
-            #recipe-list tr {
-                cursor: pointer;
-            }
-
-            #recipe-list td:first-child {
-                width: 80%;
-            }
-
-            #recipe-list td:last-child {
-                width: 20%;
-                text-align: center;
-            }
-
         #recipe-details {
-            flex: 1;
-            display: flex;
-            justify-content: center;
             align-items: center;
+            display: flex;
+            flex: 1;
+            justify-content: center;
         }
 
         #recipe-details-box {
-            position: fixed;
             border: 1px solid black;
-            padding: 10px;
-            width: 20%;
-            top: 150px;
             height: 600px;
+            padding: 10px;
+            position: fixed;
+            top: 150px;
+            width: 20%;
         }
 
-            #recipe-details-box h3 {
-                margin-top: 0;
-            }
+        #recipe-details-box h3 { margin-top: 0; }
 
-            #recipe-details-box p {
-                margin: 0;
-            }
+        #recipe-details-box p { margin: 0; }
 
         #recipe-actions {
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
-            #recipe-actions button {
-                margin: 0 10px;
-                padding: 5px 10px;
-                border: none;
-                background-color: #4CAF50;
-                color: white;
-                cursor: pointer;
-            }
+        #recipe-actions button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin: 0 10px;
+            padding: 5px 10px;
+        }
 
-                #recipe-actions button:hover {
-                    background-color: #3e8e41;
-                }
+        #recipe-actions button:hover { background-color: #3e8e41; }
 
-                #recipe-actions button:active {
-                    background-color: #4CAF50;
-                }
+        #recipe-actions button:active { background-color: #4CAF50; }
 
         #logout {
+            background-color: #d9534f;
+            color: #fff;
             position: fixed;
             right: 10px;
             top: 5px;
-            background-color: #d9534f;
-            color: #fff;
         }
     </style>
 
     <script>
         function showRecipe(recipeId) {
-            var recipeDivs = document.querySelectorAll('#recipe-details-box > div');
+            var recipeDiv = document.getElementById(recipeId);
+            var currentDiv = document.querySelector('#recipe-details-box > div[style*="display: block"]');
 
-            for (var i = 0; i < recipeDivs.length; i++) {
-                recipeDivs[i].style.display = 'none';
+            if (currentDiv) {
+                currentDiv.style.display = 'none';
             }
 
-            var recipe = document.getElementById(recipeId);
-            recipe.style.display = 'block';
-
-            var name = recipe.querySelector('.recipe-name').innerText;
-            var description = recipe.querySelector('.recipe-description').innerText;
-            var steps = recipe.querySelector('.recipe-steps').innerHTML;
-            var ingredients = recipe.querySelector('.recipe-ingredients').innerHTML;
-
-            var recipeDetails = document.getElementById('recipe-details');
-            recipeDetails.querySelector('.recipe-name').innerText = name;
-            recipeDetails.querySelector('.recipe-description').innerText = description;
-            recipeDetails.querySelector('.recipe-steps').innerHTML = steps;
-            recipeDetails.querySelector('.recipe-ingredients').innerHTML = ingredients;
+            recipeDiv.style.display = 'block';
         }
     </script>
 </head>
 <body>
-    <div id="logout">
-        <input type="submit" asp-action="Logout" value="Logout" id="logout" class="button button-red" />
-    </div>
 
 <div id="recipe-container">
-    <div id="recipe-list">
+    <button onclick="location.href='@Url.Action("Index")'"id="logout">Logout</button>
+        <div id="recipe-list">
         <h2>Recipes</h2>
         <table>
             <thead>
@@ -160,20 +123,18 @@
             <tbody>
             @foreach (var recipe in Model)
             {
-                <tr onclick="showRecipe('@recipe.Description')">
+                <tr onclick="showRecipe('@recipe.RecipeId')">
                     <td>@recipe.Name</td>
                 </tr>
             }
             </tbody>
         </table>
     </div>
-
     <div id="recipe-details">
-        <div id="recipe-details-box">
+        <div id="recipe-details-box" style="overflow: auto;">
             @foreach (var recipe in Model)
-            {<tr onclick="showRecipe('@recipe.RecipeId')">
-             </tr>
-                <div id="@recipe.Description" style="display:none">
+            {
+                <div id="@recipe.RecipeId" style="display: none">
                     <h3 class="recipe-name">@recipe.Name</h3>
                     <p class="recipe-description">@recipe.Description</p>
                     <h4>Steps</h4>
@@ -187,17 +148,13 @@
                     <ul class="recipe-ingredients">
                         @foreach (var ingredient in recipe.Ingredients)
                         {
-                            <li>@ingredient.Quantity @ingredient.Measurement @ingredient.IngredientName</li>
+                            <li>@ingredient.Quantity @ingredient.IngredientName</li>
                         }
                     </ul>
                 </div>
             }
         </div>
     </div>
-</div>
-<div id="recipe-actions">
-    <button>Add Recipe</button>
-    <button>Remove Recipe</button>
 </div>
 </body>
 </html>

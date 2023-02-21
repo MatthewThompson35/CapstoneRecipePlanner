@@ -18,6 +18,13 @@ namespace RecipePlannerWebApplication.Controllers
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
+        }
     }
 }
 
