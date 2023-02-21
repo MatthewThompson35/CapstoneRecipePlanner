@@ -38,15 +38,9 @@ namespace RecipePlannerWebApplication.Controllers
             int res = Database.LoginCheck(ad);
             if (res == 1)
             {
-                List<Recipe> recipes = RecipeDAL.getRecipes();
-                foreach (var recipe in recipes)
-                {
-                    recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
-                    recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId);
-                }
-
-                ViewBag.recipes = recipes;
-                return View("RecipePage", ViewBag.recipes);
+                ActiveUser.username = ad.Username;
+               this.setupForRecipePage();
+               return View("RecipePage", ViewBag.AvailableRecipes);
 
             }
             else
@@ -55,6 +49,44 @@ namespace RecipePlannerWebApplication.Controllers
                 return View();
             }
 
+        }
+
+        private void setupForRecipePage()
+        {
+            List<Recipe> recipes = RecipeDAL.getRecipes();
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId);
+            }
+            ViewBag.AvailableRecipes = new List<Recipe>();
+            ViewBag.AllRecipes = recipes;
+            foreach (var recipe in ViewBag.AllRecipes)
+            {
+                var add = true;
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                foreach (RecipeIngredient ingredient in recipe.Ingredients)
+                {
+                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                    if (ing != null && ing.Count > 0)
+                    {
+                        if (ing[0].quantity < ingredient.Quantity)
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                    }
+
+
+                }
+                if (add)
+                {
+                    ViewBag.AvailableRecipes.Add(recipe);
+                }
+            }
         }
 
         /// <summary>
