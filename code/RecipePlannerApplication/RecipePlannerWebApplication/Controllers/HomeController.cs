@@ -196,6 +196,16 @@ namespace RecipePlannerWebApplication.Controllers
         }
 
         /// <summary>
+        /// Goes to RecipesPage
+        /// </summary>
+        /// <returns>The view</returns>
+        public ActionResult goToRecipePage()
+        {
+            this.setupForRecipePage();
+            return View("RecipePage", ViewBag.AvailableRecipes);
+        }
+
+        /// <summary>
         /// Goes to add ingredients page.
         /// </summary>
         /// <returns>The view</returns>
