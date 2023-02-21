@@ -22,8 +22,7 @@ namespace RecipePlannerWebApplication.Controllers
         [HttpPost]
         public IActionResult Logout()
         {
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            return View("..//Home//Index");
         }
     }
 }
