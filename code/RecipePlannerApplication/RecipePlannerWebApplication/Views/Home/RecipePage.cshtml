@@ -31,6 +31,7 @@
         #recipe-container {
             display: flex;
             margin-top: 50px;
+            margin-right: 50px;
         }
 
         #recipe-list { flex: 1; }
@@ -52,7 +53,8 @@
             align-items: center;
             display: flex;
             flex: 1;
-            justify-content: center;
+            margin-left: 50px;
+            
         }
 
         #recipe-details-box {
@@ -60,7 +62,7 @@
             height: 600px;
             padding: 10px;
             position: fixed;
-            top: 150px;
+            top: 220px;
             width: 20%;
         }
 
@@ -106,33 +108,51 @@
 
             recipeDiv.style.display = 'block';
         }
+
     </script>
 </head>
 <body>
 
+<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('available-recipes').style.display = 'block';" checked> Show Available Recipes<br>
+<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes<br>
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'"id="logout">Logout</button>
-        <div id="recipe-list">
-        <h2>Recipes</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var recipe in Model)
-            {
-                <tr onclick="showRecipe('@recipe.RecipeId')">
-                    <td>@recipe.Name</td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    </div>
+    <div id="recipe-list">
+            <h2>Recipes</h2>
+            <table id="available-recipes">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var recipe in ViewBag.AvailableRecipes)
+                    {
+                        <tr onclick="showRecipe('@recipe.RecipeId')">
+                            <td>@recipe.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <table id="all-recipes" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var recipe in ViewBag.AllRecipes)
+                    {
+                        <tr onclick="showRecipe('@recipe.RecipeId')">
+                            <td>@recipe.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     <div id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
-            @foreach (var recipe in Model)
+            @foreach (var recipe in ViewBag.AllRecipes)
             {
                 <div id="@recipe.RecipeId" style="display: none">
                     <h3 class="recipe-name">@recipe.Name</h3>
