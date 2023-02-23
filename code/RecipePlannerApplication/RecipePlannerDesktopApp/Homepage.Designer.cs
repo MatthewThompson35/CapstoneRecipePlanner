@@ -43,6 +43,7 @@
             this.recipeListView.Size = new System.Drawing.Size(433, 527);
             this.recipeListView.TabIndex = 0;
             this.recipeListView.UseCompatibleStateImageBehavior = false;
+            this.recipeListView.SelectedIndexChanged += new System.EventHandler(this.recipeListView_SelectedIndexChanged);
             // 
             // logoutButton
             // 
