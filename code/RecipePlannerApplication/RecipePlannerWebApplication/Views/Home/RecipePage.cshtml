@@ -126,12 +126,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var recipe in ViewBag.AvailableRecipes)
-                    {
-                        <tr onclick="showRecipe('@recipe.RecipeId')">
-                            <td>@recipe.Name</td>
-                        </tr>
-                    }
+                @if (ViewBag.AvailableRecipes.Count == 0)
+                {
+                    <tr>
+                        <td colspan="1" style="text-align:center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
+                    </tr>
+                }
+                @foreach (var recipe in ViewBag.AvailableRecipes)
+                {
+                    <tr onclick="showRecipe('@recipe.RecipeId')">
+                        <td>@recipe.Name</td>
+                    </tr>
+                }
                 </tbody>
             </table>
             <table id="all-recipes" style="display: none;">
