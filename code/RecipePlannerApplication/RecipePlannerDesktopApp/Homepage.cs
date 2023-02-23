@@ -43,6 +43,7 @@ namespace RecipePlannerDesktopApplication
             {
                 this.recipeListView.Items.Add(recipe.Name);
             }
+
             //RecipeDAL.getRecipes().ForEach(recipe => { recipe.})
         }
     }

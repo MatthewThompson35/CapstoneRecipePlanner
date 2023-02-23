@@ -31,7 +31,6 @@
             this.recipeListView = new System.Windows.Forms.ListView();
             this.logoutButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.recipeTextBox = new System.Windows.Forms.TextBox();
             this.viewIngredientsButton = new System.Windows.Forms.Button();
             this.addRecipeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -41,7 +40,7 @@
             this.recipeListView.Location = new System.Drawing.Point(37, 134);
             this.recipeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.recipeListView.Name = "recipeListView";
-            this.recipeListView.Size = new System.Drawing.Size(433, 374);
+            this.recipeListView.Size = new System.Drawing.Size(433, 527);
             this.recipeListView.TabIndex = 0;
             this.recipeListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -65,15 +64,6 @@
             this.label1.Size = new System.Drawing.Size(102, 29);
             this.label1.TabIndex = 2;
             this.label1.Text = "Recipes";
-            // 
-            // recipeTextBox
-            // 
-            this.recipeTextBox.Location = new System.Drawing.Point(37, 544);
-            this.recipeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.recipeTextBox.Multiline = true;
-            this.recipeTextBox.Name = "recipeTextBox";
-            this.recipeTextBox.Size = new System.Drawing.Size(433, 153);
-            this.recipeTextBox.TabIndex = 3;
             // 
             // viewIngredientsButton
             // 
@@ -103,7 +93,6 @@
             this.ClientSize = new System.Drawing.Size(514, 916);
             this.Controls.Add(this.addRecipeButton);
             this.Controls.Add(this.viewIngredientsButton);
-            this.Controls.Add(this.recipeTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.recipeListView);
@@ -120,7 +109,6 @@
         private System.Windows.Forms.ListView recipeListView;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox recipeTextBox;
         private System.Windows.Forms.Button viewIngredientsButton;
         private System.Windows.Forms.Button addRecipeButton;
     }
