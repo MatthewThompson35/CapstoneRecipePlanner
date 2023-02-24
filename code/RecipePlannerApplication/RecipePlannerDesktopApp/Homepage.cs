@@ -23,6 +23,8 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
             this.recipes = new List<Recipe>();
+
+            this.showAllRecipesRadioButton.Checked = true;
             
         }
 
@@ -44,33 +46,60 @@ namespace RecipePlannerDesktopApplication
 
         private void viewAllRecipes()
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
-            connection.Open();
-            string query = @"Select * from recipe;";
-            using var command = new MySqlCommand(query, connection);
-            using var reader = command.ExecuteReader();
-            using var sda = new MySqlDataAdapter(query, connection);
-            while (reader.Read())
+            foreach (var recipe in RecipeDAL.getRecipes())
             {
-                int recipeID = reader.GetInt32(0);
-                string name = reader.GetString(1);
-                string description = reader.GetString(2);
-
-                Recipe recipe = new Recipe(recipeID, name, description);
-
-                recipes.Add(recipe);
+                this.recipeListView.Items.Add(recipe.Name);
             }
-            connection.Close();
-            DataTable dt = new DataTable();
+            this.recipeListView.View = View.List;
+        }
 
-            sda.Fill(dt);
+        private void showAvailableRecipes()
+        {
 
-            foreach (DataRow row in dt.Rows)
+            List<Recipe> availableRecipes = new List<Recipe>();
+
+            foreach (var recipe in RecipeDAL.getRecipes())
             {
-                ListViewItem item = new ListViewItem(row["name"].ToString());
-                item.SubItems.Add(row["recipeID"].ToString());
-                this.recipeListView.Items.Add(item);
+                var add = true;
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                foreach (RecipeIngredient ingredient in recipe.Ingredients)
+                {
+                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                    if (ing != null && ing.Count > 0)
+                    {
+                        if (ing[0].quantity < ingredient.Quantity)
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                    }
+
+
+                }
+                if (add)
+                {
+                    availableRecipes.Add(recipe);
+                }
+
+
             }
+
+            if (availableRecipes.Count > 0)
+            {
+                this.noRecipesLabel.Visible = false;
+                foreach (var availableRecipe in availableRecipes)
+                {
+                    this.recipeListView.Items.Add(availableRecipe.Name);
+                }
+            }
+            else
+            {
+                this.noRecipesLabel.Visible = true;
+            }
+
             this.recipeListView.View = View.List;
         }
 
@@ -102,6 +131,7 @@ namespace RecipePlannerDesktopApplication
             if (this.showAllRecipesRadioButton.Checked)
             {
                 this.viewAllRecipes();
+                this.noRecipesLabel.Visible = false;
             }
 
             else
@@ -110,6 +140,19 @@ namespace RecipePlannerDesktopApplication
                 return;
             }
             
+        }
+
+        private void showAvailableRecipesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.showAvailableRecipesRadioButton.Checked)
+            {
+                this.showAvailableRecipes();
+            }
+            else
+            {
+                this.recipeListView.Clear();
+                return;
+            }
         }
     }
 }

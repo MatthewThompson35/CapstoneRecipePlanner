@@ -35,6 +35,7 @@
             this.addRecipeButton = new System.Windows.Forms.Button();
             this.showAvailableRecipesRadioButton = new System.Windows.Forms.RadioButton();
             this.showAllRecipesRadioButton = new System.Windows.Forms.RadioButton();
+            this.noRecipesLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // recipeListView
@@ -99,6 +100,7 @@
             this.showAvailableRecipesRadioButton.TabStop = true;
             this.showAvailableRecipesRadioButton.Text = "Show Available Recipes";
             this.showAvailableRecipesRadioButton.UseVisualStyleBackColor = true;
+            this.showAvailableRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAvailableRecipesRadioButton_CheckedChanged);
             // 
             // showAllRecipesRadioButton
             // 
@@ -112,11 +114,23 @@
             this.showAllRecipesRadioButton.UseVisualStyleBackColor = true;
             this.showAllRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAllRecipesRadioButton_CheckedChanged);
             // 
+            // noRecipesLabel
+            // 
+            this.noRecipesLabel.AutoSize = true;
+            this.noRecipesLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.noRecipesLabel.Location = new System.Drawing.Point(126, 374);
+            this.noRecipesLabel.Name = "noRecipesLabel";
+            this.noRecipesLabel.Size = new System.Drawing.Size(260, 28);
+            this.noRecipesLabel.TabIndex = 8;
+            this.noRecipesLabel.Text = "There are no recipes to show";
+            this.noRecipesLabel.Visible = false;
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 916);
+            this.Controls.Add(this.noRecipesLabel);
             this.Controls.Add(this.showAllRecipesRadioButton);
             this.Controls.Add(this.showAvailableRecipesRadioButton);
             this.Controls.Add(this.addRecipeButton);
@@ -141,6 +155,7 @@
         private System.Windows.Forms.Button addRecipeButton;
         private RadioButton showAvailableRecipesRadioButton;
         private RadioButton showAllRecipesRadioButton;
+        private Label noRecipesLabel;
     }
 }
 
