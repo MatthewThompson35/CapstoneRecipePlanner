@@ -37,8 +37,9 @@ namespace RecipePlannerDesktopApplication
                 {
                     ActiveUser.username = this.usernameTextBox.Text;
                     this.Hide();
-                    IngredientsPage ingredients = new IngredientsPage();
-                    ingredients.Show();
+
+                    Homepage homepage = new Homepage();
+                    homepage.Show();
                 }
                 else
                 {

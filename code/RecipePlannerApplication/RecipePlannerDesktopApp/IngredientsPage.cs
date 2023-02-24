@@ -109,5 +109,13 @@ namespace RecipePlannerDesktopApplication
                 }
             }
         }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Homepage homepage = new Homepage();
+            homepage.Show();
+        }
     }
 }
