@@ -16,7 +16,7 @@ namespace RecipePlannerDesktopApplication
 {
     public partial class Homepage : Form
     {
-        public Recipe currentRecipe { get; set; }
+        private Recipe selectedRecipe;
         public List<Recipe> recipes { get; set; }
 
         public Homepage()
@@ -25,7 +25,14 @@ namespace RecipePlannerDesktopApplication
             this.recipes = new List<Recipe>();
 
             this.showAvailableRecipesRadioButton.Checked = true;
+
             
+
+        }
+
+        public Recipe getSelectedRecipe()
+        {
+            return this.selectedRecipe;
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -48,7 +55,7 @@ namespace RecipePlannerDesktopApplication
         {
             foreach (var recipe in RecipeDAL.getRecipes())
             {
-                this.recipeListView.Items.Add(recipe.Name);
+                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
             }
             this.recipeListView.View = View.List;
         }
@@ -92,7 +99,8 @@ namespace RecipePlannerDesktopApplication
                 this.noRecipesLabel.Visible = false;
                 foreach (var availableRecipe in availableRecipes)
                 {
-                    this.recipeListView.Items.Add(availableRecipe.Name);
+                    //this.recipeListView.Items.Add(availableRecipe.Name);
+                    this.recipeListView.Items.Add(new ListViewItem { Text = availableRecipe.Name, Tag = availableRecipe });
                 }
             }
             else
@@ -107,20 +115,12 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.recipeListView.SelectedItems.Count > 0)
             {
-                //this.currentRecipe = (Recipe) this.recipeListView.SelectedItems[0].Tag;
-                //int recipeId = Convert.ToInt32(this.recipeListView.SelectedItems[0].SubItems[1].Text);
-                //string name = this.recipeListView.SelectedItems[0].Text;
-                //string description = this.recipeListView.SelectedItems[0].SubItems[2].Text;
-
-                //Recipe recipe = new Recipe(recipeId, name, description);
-
-                //string message = "Name: " + this.recipeListView.SelectedItems[0].Text + Environment.NewLine;
-                //message += "ID: " + this.recipeListView.SelectedItems[0].SubItems[1].Text;
-                //MessageBox.Show(message);
+                this.selectedRecipe = (Recipe)this.recipeListView.SelectedItems[0].Tag;
+                
 
                 this.Hide();
 
-                RecipeDetailsPage detailsPage = new RecipeDetailsPage();
+                RecipeDetailsPage detailsPage = new RecipeDetailsPage(this);
                 detailsPage.Show();
                 
             }

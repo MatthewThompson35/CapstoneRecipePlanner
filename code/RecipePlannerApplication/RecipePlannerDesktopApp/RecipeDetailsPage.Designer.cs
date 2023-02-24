@@ -55,6 +55,7 @@
             // 
             // recipeDetailsTextBox
             // 
+            this.recipeDetailsTextBox.Enabled = false;
             this.recipeDetailsTextBox.Location = new System.Drawing.Point(41, 178);
             this.recipeDetailsTextBox.Multiline = true;
             this.recipeDetailsTextBox.Name = "recipeDetailsTextBox";
