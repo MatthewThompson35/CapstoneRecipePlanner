@@ -15,6 +15,10 @@ namespace RecipePlannerDesktopApplication
     {
         private Homepage homepage;
         
+        /// <summary>
+        ///     Initializes the recipe details page for the recipes.
+        /// </summary>
+        /// <param name="page">The homepage.</param>
         public RecipeDetailsPage(Homepage page)
         {
             InitializeComponent();
@@ -36,18 +40,18 @@ namespace RecipePlannerDesktopApplication
         {
             string output = null;
 
-            string description = this.homepage.getSelectedRecipe().Name + Environment.NewLine + this.homepage.getSelectedRecipe().Description + Environment.NewLine + Environment.NewLine;
+            string description = this.homepage.GetSelectedRecipe().Name + Environment.NewLine + this.homepage.GetSelectedRecipe().Description + Environment.NewLine + Environment.NewLine;
 
             string steps = "Steps" + Environment.NewLine;
 
-            foreach (var step in RecipeDAL.getStepsForRecipe(this.homepage.getSelectedRecipe().RecipeId))
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.homepage.GetSelectedRecipe().RecipeId))
             {
                 steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
             }
 
             string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
 
-            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.homepage.getSelectedRecipe().RecipeId))
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId))
             {
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
