@@ -58,6 +58,7 @@ namespace RecipePlannerDesktopApplication
                 this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
             }
             this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
         }
 
         private void showAvailableRecipes()
@@ -109,6 +110,7 @@ namespace RecipePlannerDesktopApplication
             }
 
             this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
         }
 
         private void recipeListView_SelectedIndexChanged(object sender, EventArgs e)
