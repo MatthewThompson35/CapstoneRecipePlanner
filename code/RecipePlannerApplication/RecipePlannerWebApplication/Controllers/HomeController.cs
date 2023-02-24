@@ -5,8 +5,7 @@ using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.Linq;
 namespace RecipePlannerWebApplication.Controllers
 {
     public class HomeController : Controller
@@ -87,6 +86,19 @@ namespace RecipePlannerWebApplication.Controllers
                     ViewBag.AvailableRecipes.Add(recipe);
                 }
             }
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
+        }
+
+        /// <summary>
+        /// Compares the name of the recipes so that it can be sorted alphabetically.
+        /// </summary>
+        /// <param name="recipe1">The recipe1.</param>
+        /// <param name="recipe2">The recipe2.</param>
+        /// <returns></returns>
+        int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
+        {
+            return recipe1.Name.CompareTo(recipe2.Name);
         }
 
         /// <summary>
