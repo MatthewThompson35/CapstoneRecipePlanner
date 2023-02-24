@@ -33,6 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.viewIngredientsButton = new System.Windows.Forms.Button();
             this.addRecipeButton = new System.Windows.Forms.Button();
+            this.showAvailableRecipesRadioButton = new System.Windows.Forms.RadioButton();
+            this.showAllRecipesRadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // recipeListView
@@ -87,11 +89,36 @@
             this.addRecipeButton.Text = "Add Recipe";
             this.addRecipeButton.UseVisualStyleBackColor = true;
             // 
+            // showAvailableRecipesRadioButton
+            // 
+            this.showAvailableRecipesRadioButton.AutoSize = true;
+            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(42, 12);
+            this.showAvailableRecipesRadioButton.Name = "showAvailableRecipesRadioButton";
+            this.showAvailableRecipesRadioButton.Size = new System.Drawing.Size(187, 24);
+            this.showAvailableRecipesRadioButton.TabIndex = 6;
+            this.showAvailableRecipesRadioButton.TabStop = true;
+            this.showAvailableRecipesRadioButton.Text = "Show Available Recipes";
+            this.showAvailableRecipesRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // showAllRecipesRadioButton
+            // 
+            this.showAllRecipesRadioButton.AutoSize = true;
+            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(42, 43);
+            this.showAllRecipesRadioButton.Name = "showAllRecipesRadioButton";
+            this.showAllRecipesRadioButton.Size = new System.Drawing.Size(143, 24);
+            this.showAllRecipesRadioButton.TabIndex = 7;
+            this.showAllRecipesRadioButton.TabStop = true;
+            this.showAllRecipesRadioButton.Text = "Show All Recipes";
+            this.showAllRecipesRadioButton.UseVisualStyleBackColor = true;
+            this.showAllRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAllRecipesRadioButton_CheckedChanged);
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 916);
+            this.Controls.Add(this.showAllRecipesRadioButton);
+            this.Controls.Add(this.showAvailableRecipesRadioButton);
             this.Controls.Add(this.addRecipeButton);
             this.Controls.Add(this.viewIngredientsButton);
             this.Controls.Add(this.label1);
@@ -112,6 +139,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button viewIngredientsButton;
         private System.Windows.Forms.Button addRecipeButton;
+        private RadioButton showAvailableRecipesRadioButton;
+        private RadioButton showAllRecipesRadioButton;
     }
 }
 

@@ -23,7 +23,7 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
             this.recipes = new List<Recipe>();
-            this.viewAllRecipes();
+            
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -95,6 +95,21 @@ namespace RecipePlannerDesktopApplication
                 detailsPage.Show();
                 
             }
+        }
+
+        private void showAllRecipesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.showAllRecipesRadioButton.Checked)
+            {
+                this.viewAllRecipes();
+            }
+
+            else
+            {
+                this.recipeListView.Clear();
+                return;
+            }
+            
         }
     }
 }
