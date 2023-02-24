@@ -24,7 +24,7 @@ namespace RecipePlannerDesktopApplication
             InitializeComponent();
             this.recipes = new List<Recipe>();
 
-            this.showAllRecipesRadioButton.Checked = true;
+            this.showAvailableRecipesRadioButton.Checked = true;
             
         }
 
