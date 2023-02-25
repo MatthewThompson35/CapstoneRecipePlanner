@@ -1,63 +1,73 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Linq;
-namespace RecipePlannerWebApplication.Controllers
+
+namespace RecipePlannerWebApplication.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    #region Data members
+
+    private readonly ILogger<HomeController> _logger;
+
+    #endregion
+
+    #region Constructors
+
+    public HomeController(ILogger<HomeController> logger)
     {
-        private readonly ILogger<HomeController> _logger;
+        this._logger = logger;
+    }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    #endregion
 
-        /// <summary>
-        /// Indexes this instance.
-        /// </summary>
-        /// <returns>The view</returns>
-        public IActionResult Index()
-        {
-            return View();
-        }
+    #region Methods
 
-        /// <summary>
-        /// Indexes the specified ad.
-        /// </summary>
-        /// <param name="ad">The ad.</param>
-        /// <returns>The view</returns>
-        [HttpPost]
-        public IActionResult Index([Bind] Login ad)
+    /// <summary>
+    ///     Indexes this instance.
+    /// </summary>
+    /// <returns>The view</returns>
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    /// <summary>
+    ///     Indexes the specified ad.
+    /// </summary>
+    /// <param name="ad">The ad.</param>
+    /// <returns>The view</returns>
+    [HttpPost]
+    public IActionResult Index([Bind] Login ad)
+    {
+        try
         {
-            int res = Database.LoginCheck(ad);
+            var res = Database.LoginCheck(ad);
             if (res == 1)
             {
                 ActiveUser.username = ad.Username;
-               this.setupForRecipePage();
-               return View("RecipePage", ViewBag.AvailableRecipes);
-
-            }
-            if (res == 2)
-            {
-                TempData["msg"] = "The connection to the server could not be made";
-                return View();
-            }
-            if (res == 0)
-            {
-                TempData["msg"] = "The Username or Password is incorrect.";
-                return View();
+                this.setupForRecipePage();
+                return View("RecipePage", ViewBag.AvailableRecipes);
             }
 
+            TempData["msg"] = "The Username or Password is incorrect.";
             return View();
-
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
         }
 
-        private void setupForRecipePage()
+        return View("Index");
+    }
+
+    private void setupForRecipePage()
+    {
+        try
         {
             List<Recipe> recipes = RecipeDAL.getRecipes();
             foreach (var recipe in recipes)
@@ -65,15 +75,24 @@ namespace RecipePlannerWebApplication.Controllers
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
                 recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId);
             }
+
             this.addToAvailableRecipes(recipes);
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
         }
-        /// <summary>
-        /// Adds to the available recipes if the user can make that recipe.
-        /// </summary>
-        /// <param name="recipes">The recipes.</param>
-        private void addToAvailableRecipes(List<Recipe> recipes)
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+    }
+
+    /// <summary>
+    ///     Adds to the available recipes if the user can make that recipe.
+    /// </summary>
+    /// <param name="recipes">The recipes.</param>
+    private void addToAvailableRecipes(List<Recipe> recipes)
+    {
+        try
         {
             ViewBag.AvailableRecipes = new List<Recipe>();
             ViewBag.AllRecipes = recipes;
@@ -95,168 +114,233 @@ namespace RecipePlannerWebApplication.Controllers
                     {
                         add = false;
                     }
-
-
                 }
+
                 if (add)
                 {
                     ViewBag.AvailableRecipes.Add(recipe);
                 }
             }
         }
-
-        /// <summary>
-        /// Compares the name of the recipes so that it can be sorted alphabetically.
-        /// </summary>
-        /// <param name="recipe1">The recipe1.</param>
-        /// <param name="recipe2">The recipe2.</param>
-        /// <returns></returns>
-        int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
+        catch (Exception ex)
         {
-            return recipe1.Name.CompareTo(recipe2.Name);
+            TempData["msg"] = "The connection to the server could not be made";
         }
+    }
 
-        /// <summary>
-        /// Decrements the quantity.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>The View</returns>
-        public ActionResult decrementQuantity(string id)
+    /// <summary>
+    ///     Compares the name of the recipes so that it can be sorted alphabetically.
+    /// </summary>
+    /// <param name="recipe1">The recipe1.</param>
+    /// <param name="recipe2">The recipe2.</param>
+    /// <returns></returns>
+    private int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
+    {
+        return recipe1.Name.CompareTo(recipe2.Name);
+    }
+
+    /// <summary>
+    ///     Decrements the quantity.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns>The View</returns>
+    public ActionResult decrementQuantity(string id)
+    {
+        try
         {
             ViewBag.ingredients = IngredientDAL.getIngredients();
             var quantity = 0;
-            var ingredientID = Int32.Parse(id);
+            var ingredientID = int.Parse(id);
 
-            quantity = getItemQuantity(ingredientID);
+            quantity = this.getItemQuantity(ingredientID);
             IngredientDAL.decrementQuantity(ingredientID, quantity);
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
-
-        /// <summary>
-        /// Gets the item quantity.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        private int getItemQuantity(int id)
+        catch (Exception ex)
         {
-            var quantity = 0;
-            foreach (var item in ViewBag.ingredients)
-            {
-                if (item.id == id)
-                {
-                    quantity = item.quantity;
-
-                }
-            }
-            return quantity;
+            TempData["msg"] = "The connection to the server could not be made";
         }
 
-        /// <summary>
-        /// Increments the quantity.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>The view</returns>
-        public ActionResult incrementQuantity(string id)
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Gets the item quantity.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns></returns>
+    private int getItemQuantity(int id)
+    {
+        var quantity = 0;
+        foreach (var item in ViewBag.ingredients)
+        {
+            if (item.id == id)
+            {
+                quantity = item.quantity;
+            }
+        }
+
+        return quantity;
+    }
+
+    /// <summary>
+    ///     Increments the quantity.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns>The view</returns>
+    public ActionResult incrementQuantity(string id)
+    {
+        try
         {
             ViewBag.ingredients = IngredientDAL.getIngredients();
             var quantity = 0;
-            var ingredientID = Int32.Parse(id);
+            var ingredientID = int.Parse(id);
 
-            quantity = getItemQuantity(ingredientID);
+            quantity = this.getItemQuantity(ingredientID);
             IngredientDAL.incrementQuantity(ingredientID, quantity);
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
-
-        /// <summary>
-        /// Removes the ingredient.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>The view</returns>
-        public ActionResult removeIngredient(string id)
+        catch (Exception ex)
         {
-            IngredientDAL.RemoveIngredient(Int32.Parse(id));
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Removes the ingredient.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns>The view</returns>
+    public ActionResult removeIngredient(string id)
+    {
+        try
+        {
+            IngredientDAL.RemoveIngredient(int.Parse(id));
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
-
-        /// <summary>
-        /// Adds the ingredient.
-        /// </summary>
-        /// <param name="txtIngredientName">Name of the text ingredient.</param>
-        /// <param name="txtQuantity">The text quantity.</param>
-        /// <returns>The view</returns>
-        [HttpPost]
-        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
+        catch (Exception ex)
         {
-            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
-            ViewBag.Measurements = measurements;
-            Regex regex = new Regex("^[0-9]+$");
+            TempData["msg"] = "The connection to the server could not be made";
+        }
 
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Adds the ingredient.
+    /// </summary>
+    /// <param name="txtIngredientName">Name of the text ingredient.</param>
+    /// <param name="txtQuantity">The text quantity.</param>
+    /// <returns>The view</returns>
+    [HttpPost]
+    public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
+    {
+        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+        ViewBag.Measurements = measurements;
+        var regex = new Regex("^[0-9]+$");
+        try
+        {
             if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
             {
                 TempData["msg"] = "Please enter values.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
-            else if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
+
+            if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
             {
                 TempData["msg"] = "Ingredient is already entered.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
-            else if (!regex.Match(txtQuantity).Success)
+
+            if (!regex.Match(txtQuantity).Success)
             {
-	            TempData["msg"] = "Quantity must be an integer.";
-	            return View("AddIngredient", ViewBag.Measurements);
-			}
-            else
-            {
-                IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity), measurement);
-                ViewBag.ingredients = IngredientDAL.getIngredients();
-                return View("IngredientsPage", ViewBag.ingredients);
+                TempData["msg"] = "Quantity must be an integer.";
+                return View("AddIngredient", ViewBag.Measurements);
             }
+
+            IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
         }
 
-        /// <summary>
-        /// Goes to ingredients page.
-        /// </summary>
-        /// <returns>The view</returns>
-        public ActionResult goToIngredientsPage()
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Goes to ingredients page.
+    /// </summary>
+    /// <returns>The view</returns>
+    public ActionResult goToIngredientsPage()
+    {
+        try
         {
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
 
-        /// <summary>
-        /// Goes to RecipesPage
-        /// </summary>
-        /// <returns>The view</returns>
-        public ActionResult goToRecipePage()
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Goes to RecipesPage
+    /// </summary>
+    /// <returns>The view</returns>
+    public ActionResult goToRecipePage()
+    {
+        try
         {
             this.setupForRecipePage();
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View("Index");
+            }
+
             return View("RecipePage", ViewBag.AvailableRecipes);
         }
-
-        /// <summary>
-        /// Goes to add ingredients page.
-        /// </summary>
-        /// <returns>The view</returns>
-        public ActionResult goToAddIngredientsPage()
+        catch (Exception ex)
         {
-            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
-            ViewBag.Measurements = measurements;
-            return View("AddIngredient", ViewBag.Measurements);
+            TempData["msg"] = "The connection to the server could not be made";
         }
 
-        /// <summary>
-        /// Creates the user.
-        /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="repeatPassword">The repeat password.</param>
-        /// <returns>The view</returns>
-        [HttpPost]
-        public ActionResult CreateUser(string username, string password, string repeatPassword)
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Goes to add ingredients page.
+    /// </summary>
+    /// <returns>The view</returns>
+    public ActionResult goToAddIngredientsPage()
+    {
+        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+        ViewBag.Measurements = measurements;
+        return View("AddIngredient", ViewBag.Measurements);
+    }
+
+    /// <summary>
+    ///     Creates the user.
+    /// </summary>
+    /// <param name="username">The username.</param>
+    /// <param name="password">The password.</param>
+    /// <param name="repeatPassword">The repeat password.</param>
+    /// <returns>The view</returns>
+    [HttpPost]
+    public ActionResult CreateUser(string username, string password, string repeatPassword)
+    {
+        try
         {
             List<string> list = Database.ContainsUser(username);
             if (list.Count() > 0)
@@ -264,48 +348,50 @@ namespace RecipePlannerWebApplication.Controllers
                 TempData["msg"] = "This username is already taken. Please choose another and try again.";
                 return View("Register");
             }
+
             if (password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
 
                 return View("Index");
-
-            }
-            else
-            {
-                TempData["msg"] = "The password must match in both fields. Please try again.";
-                return View("Register");
             }
 
-        }
-
-        /// <summary>
-        /// Opens the register.
-        /// </summary>
-        /// <returns>The view</returns>
-        [HttpPost]
-        public ActionResult OpenRegister()
-        {
+            TempData["msg"] = "The password must match in both fields. Please try again.";
             return View("Register");
-
         }
-
-        /// <summary>
-        /// Errors this instance.
-        /// </summary>
-        /// <returns>The view</returns>
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        catch (Exception ex)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            TempData["msg"] = "The connection to the server could not be made";
         }
 
-        [HttpPost]
-        public IActionResult Logout()
-        {
-            return View("Index");
-        }
-
-
+        return View("Register");
     }
+
+    /// <summary>
+    ///     Opens the register.
+    /// </summary>
+    /// <returns>The view</returns>
+    [HttpPost]
+    public ActionResult OpenRegister()
+    {
+        return View("Register");
+    }
+
+    /// <summary>
+    ///     Errors this instance.
+    /// </summary>
+    /// <returns>The view</returns>
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+    }
+
+    [HttpPost]
+    public IActionResult Logout()
+    {
+        return View("Index");
+    }
+
+    #endregion
 }
