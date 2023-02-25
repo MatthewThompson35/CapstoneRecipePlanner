@@ -6,14 +6,14 @@
     public class Login
     {
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the username for the login.
         /// </summary>
         /// <value>
         /// The username.
         /// </value>
         public string? Username { get; set; }
         /// <summary>
-        /// Gets or sets the password.
+        /// Gets or sets the password for the login.
         /// </summary>
         /// <value>
         /// The password.

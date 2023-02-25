@@ -12,7 +12,7 @@ namespace RecipePlannerLibrary.Database
         #region Methods
 
         /// <summary>
-        ///     Gets the ingredients.
+        ///     Gets the ingredients from the ingredient table.
         /// </summary>
         /// <returns>List of ingredients</returns>
         public static List<Ingredient> getIngredients()
@@ -42,10 +42,11 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Adds the ingredient.
+        ///     Adds the ingredients for the ingredients view.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="quantity">The quantity.</param>
+        /// <param name="name">The name of the ingredient.</param>
+        /// <param name="quantity">The quantity of the ingredient.</param>
+        /// <param name="measurement">The measurement of the ingredient.</param>
         public static void addIngredient(string name, int quantity, string measurement)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -61,10 +62,10 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Decrements the quantity.
+        ///     Decrements the quantity of the ingredient.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="quantity">The quantity.</param>
+        /// <param name="id">The id of the ingredient.</param>
+        /// <param name="quantity">The quantity of the ingredient.</param>
         public static void decrementQuantity(int id, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -77,10 +78,10 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Increments the quantity.
+        ///     Increments the quantity of the ingredient.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="quantity">The quantity.</param>
+        /// <param name="id">The id of the ingredient.</param>
+        /// <param name="quantity">The quantity of the ingredient.</param>
         public static void incrementQuantity(int id, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -93,9 +94,9 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Removes the ingredient.
+        ///     Removes the ingredient from the ingredients view.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="id">The id of the ingredient.</param>
         public static void RemoveIngredient(int id)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -107,10 +108,10 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Gets the ingredients.
+        ///     Gets the ingredients by the specified ingredient name
         /// </summary>
         /// <param name="ingredientName">Name of the ingredient.</param>
-        /// <returns></returns>
+        /// <returns>List of ingredients by ingredient name.</returns>
         public static List<Ingredient> getIngredients(string ingredientName)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);

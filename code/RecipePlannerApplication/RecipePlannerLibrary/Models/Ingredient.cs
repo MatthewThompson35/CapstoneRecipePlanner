@@ -14,37 +14,44 @@ namespace RecipePlannerLibrary.Models
         /// The username.
         /// </value>
         public string? username { get; set; }
+
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the name of the Ingredient.
         /// </summary>
         /// <value>
         /// The name.
         /// </value>
         public string? name { get; set; }
+
         /// <summary>
-        /// Gets or sets the quantity.
+        /// Gets or sets the quantity of the Ingredient.
         /// </summary>
         /// <value>
-        /// The quantity.
+        /// The quantity of the Ingredient.
         /// </value>
         public int? quantity { get; set; }
+
         /// <summary>
-        /// Gets or sets the identifier.
+        /// Gets or sets the identifier of the Ingredient.
         /// </summary>
         /// <value>
-        /// The identifier.
+        /// The id of the Ingredient.
         /// </value>
         public int? id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the measurement of the Ingredient.
+        /// </summary>
+        /// <value>The measurement of the Ingredient.</value>
         public string? measurement { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ingredient"/> class.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="quantity">The quantity.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name of the Ingredient.</param>
+        /// <param name="quantity">The quantity of the Ingredient.</param>
+        /// <param name="id">The id of the Ingredient.</param>
         public Ingredient(string username, string name, int quantity, int id, string measurement)
         {
             this.username = username;
@@ -58,8 +65,8 @@ namespace RecipePlannerLibrary.Models
         /// Initializes a new instance of the <see cref="Ingredient"/> class.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="quantity">The quantity.</param>
+        /// <param name="name">The name of the Ingredient.</param>
+        /// <param name="quantity">The quantity of the Ingredient.</param>
         public Ingredient(string username, string name, int quantity)
         {
             this.username = username;
@@ -70,10 +77,10 @@ namespace RecipePlannerLibrary.Models
 
 
         /// <summary>
-        /// Converts to string.
+        /// Represents a string representation of the Ingredient object
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A string representation that represents this instance.
         /// </returns>
         public override string ToString()
         {

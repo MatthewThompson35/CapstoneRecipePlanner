@@ -9,7 +9,7 @@ namespace RecipePlannerLibrary.Database
     {
 
         /// <summary>
-        /// Gets the hex.
+        /// Gets the hex for password hashing.
         /// </summary>
         /// <param name="inputString">The input string.</param>
         /// <returns>Hex</returns>
@@ -26,7 +26,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        /// Gets the hash.
+        /// Gets the hash for password hashing.
         /// </summary>
         /// <param name="inputString">The input string.</param>
         /// <returns>Hash String</returns>
