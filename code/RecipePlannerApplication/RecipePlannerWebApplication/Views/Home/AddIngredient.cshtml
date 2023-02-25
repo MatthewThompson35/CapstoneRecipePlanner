@@ -81,13 +81,3 @@
         <input type="submit" asp-action="goToIngredientsPage" value="Cancel" id="cancelButton" />
     </div>
 </form>
-
-
-@{
-    if (TempData["msg"] != null)
-    {
-        <script>
-           alert('@TempData["msg"]')
-        </script>
-    }
-}

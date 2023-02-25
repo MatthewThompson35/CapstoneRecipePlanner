@@ -6,6 +6,8 @@ using RecipePlannerWebApplication.Models;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq;
+using NuGet.Protocol.Plugins;
+
 namespace RecipePlannerWebApplication.Controllers
 {
     public class HomeController : Controller
@@ -36,17 +38,15 @@ namespace RecipePlannerWebApplication.Controllers
         {
             int res = Database.LoginCheck(ad);
             if (res == 1)
-            {
+            { 
                 ActiveUser.username = ad.Username;
                this.setupForRecipePage();
                return View("RecipePage", ViewBag.AvailableRecipes);
 
             }
-            else
-            {
-                TempData["msg"] = "The Username or Password is incorrect.";
-                return View();
-            }
+
+            ad.ErrorMessage = "Incorrect username or password";
+            return View(ad);
 
         }
 
