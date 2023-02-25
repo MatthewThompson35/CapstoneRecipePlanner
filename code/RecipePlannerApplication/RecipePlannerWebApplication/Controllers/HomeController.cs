@@ -42,11 +42,18 @@ namespace RecipePlannerWebApplication.Controllers
                return View("RecipePage", ViewBag.AvailableRecipes);
 
             }
-            else
+            if (res == 2)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View();
+            }
+            if (res == 0)
             {
                 TempData["msg"] = "The Username or Password is incorrect.";
                 return View();
             }
+
+            return View();
 
         }
 
@@ -58,6 +65,16 @@ namespace RecipePlannerWebApplication.Controllers
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
                 recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId);
             }
+            this.addToAvailableRecipes(recipes);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
+        }
+        /// <summary>
+        /// Adds to the available recipes if the user can make that recipe.
+        /// </summary>
+        /// <param name="recipes">The recipes.</param>
+        private void addToAvailableRecipes(List<Recipe> recipes)
+        {
             ViewBag.AvailableRecipes = new List<Recipe>();
             ViewBag.AllRecipes = recipes;
             foreach (var recipe in ViewBag.AllRecipes)
@@ -86,8 +103,6 @@ namespace RecipePlannerWebApplication.Controllers
                     ViewBag.AvailableRecipes.Add(recipe);
                 }
             }
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>)CompareRecipesByName);
         }
 
         /// <summary>
@@ -112,17 +127,29 @@ namespace RecipePlannerWebApplication.Controllers
             var quantity = 0;
             var ingredientID = Int32.Parse(id);
 
+            quantity = getItemQuantity(ingredientID);
+            IngredientDAL.decrementQuantity(ingredientID, quantity);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View("IngredientsPage", ViewBag.ingredients);
+        }
+
+        /// <summary>
+        /// Gets the item quantity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        private int getItemQuantity(int id)
+        {
+            var quantity = 0;
             foreach (var item in ViewBag.ingredients)
             {
-                if (item.id == ingredientID)
+                if (item.id == id)
                 {
                     quantity = item.quantity;
 
                 }
             }
-            IngredientDAL.decrementQuantity(ingredientID, quantity);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            return quantity;
         }
 
         /// <summary>
@@ -136,14 +163,7 @@ namespace RecipePlannerWebApplication.Controllers
             var quantity = 0;
             var ingredientID = Int32.Parse(id);
 
-            foreach (var item in ViewBag.ingredients)
-            {
-                if (item.id == ingredientID)
-                {
-                    quantity = item.quantity;
-
-                }
-            }
+            quantity = getItemQuantity(ingredientID);
             IngredientDAL.incrementQuantity(ingredientID, quantity);
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
