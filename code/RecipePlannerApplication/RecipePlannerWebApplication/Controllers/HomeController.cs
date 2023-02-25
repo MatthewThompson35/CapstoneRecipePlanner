@@ -236,34 +236,31 @@ namespace RecipePlannerWebApplication.Controllers
         /// <param name="repeatPassword">The repeat password.</param>
         /// <returns>The view</returns>
         [HttpPost]
-        public ActionResult CreateUser(string username, string password, string repeatPassword)
+		public ActionResult CreateUser(string username, string password, string repeatPassword)
         {
-            List<string> list = Database.ContainsUser(username);
-            if (list.Count() > 0)
-            {
-                TempData["msg"] = "This username is already taken. Please choose another and try again.";
-                return View("Register");
-            }
-            if (password.Equals(repeatPassword))
-            {
-                Database.CreateUser(username, password);
-
-                return View("Index");
-
-            }
-            else
-            {
-                TempData["msg"] = "The password must match in both fields. Please try again.";
-                return View("Register");
-            }
-
+	        List<string> list = Database.ContainsUser(username);
+	        if (list.Count() > 0)
+	        {
+		        ViewBag.Error = "Username already exists. Please choose another and try again.";
+		        return View("Register");
+	        }
+	        if (password.Equals(repeatPassword))
+	        {
+		        Database.CreateUser(username, password);
+		        return View("Index");
+	        }
+	        else
+	        {
+		        ViewBag.Error = "Passwords do not match. Please try again.";
+		        return View("Register");
+	        }
         }
 
-        /// <summary>
-        /// Opens the register.
-        /// </summary>
-        /// <returns>The view</returns>
-        [HttpPost]
+		/// <summary>
+		/// Opens the register.
+		/// </summary>
+		/// <returns>The view</returns>
+		[HttpPost]
         public ActionResult OpenRegister()
         {
             return View("Register");
