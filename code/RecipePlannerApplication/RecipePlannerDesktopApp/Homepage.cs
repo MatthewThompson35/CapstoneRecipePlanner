@@ -17,20 +17,24 @@ namespace RecipePlannerDesktopApplication
     public partial class Homepage : Form
     {
         private Recipe selectedRecipe;
-        public List<Recipe> recipes { get; set; }
+        public List<Recipe> Recipes { get; set; }
 
+        /// <summary>
+        ///     Initializes a Homepage.
+        /// </summary>
         public Homepage()
         {
             InitializeComponent();
-            this.recipes = new List<Recipe>();
+            this.Recipes = new List<Recipe>();
 
             this.showAvailableRecipesRadioButton.Checked = true;
-
-            
-
         }
 
-        public Recipe getSelectedRecipe()
+        /// <summary>
+        ///     Gets a selected recipe.
+        /// </summary>
+        /// <returns>a selected recipe.</returns>
+        public Recipe GetSelectedRecipe()
         {
             return this.selectedRecipe;
         }
@@ -100,7 +104,6 @@ namespace RecipePlannerDesktopApplication
                 this.noRecipesLabel.Visible = false;
                 foreach (var availableRecipe in availableRecipes)
                 {
-                    //this.recipeListView.Items.Add(availableRecipe.Name);
                     this.recipeListView.Items.Add(new ListViewItem { Text = availableRecipe.Name, Tag = availableRecipe });
                 }
             }

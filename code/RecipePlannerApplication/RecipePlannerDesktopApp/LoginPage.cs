@@ -21,6 +21,11 @@ namespace RecipePlannerDesktopApplication
         private void loginButton_Click(object sender, EventArgs e)
         {
             this.emptyFieldErrorLabel.Visible = false;
+            this.loginCheck();
+        }
+
+        private void loginCheck()
+        {
             if (this.usernameTextBox.Text.Equals("") || this.passwordTextBox.Text.Equals(""))
             {
                 this.emptyFieldErrorLabel.Text = "Please fill out all fields";
@@ -32,7 +37,7 @@ namespace RecipePlannerDesktopApplication
                 attempt.Username = this.usernameTextBox.Text;
                 attempt.Password = this.passwordTextBox.Text;
                 int result = Database.LoginCheck(attempt);
-                
+
                 if (result == 1)
                 {
                     ActiveUser.username = this.usernameTextBox.Text;
@@ -47,7 +52,6 @@ namespace RecipePlannerDesktopApplication
                     this.emptyFieldErrorLabel.Visible = false;
                 }
             }
-
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)

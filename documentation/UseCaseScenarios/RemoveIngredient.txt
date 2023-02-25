@@ -5,7 +5,7 @@ Primary Flow
 2 - system directs user to list of ingredients owned
 3 - user selects an ingredient from list
 4 - user clicks on button to remove ingredient
-5 - user is prompted to a popup displaying that remove was successful.
+5 - system validates that the remove is successful
 6 - system updates list of ingredients
 
 
@@ -13,6 +13,6 @@ Alternative Flow(s)
 
 NO INGREDIENT SELECTED
 
-a4 - a popup displays to the user that an ingredient has not been selected.
+a4 - system informs the user that an ingredient has not been selected.
 
 return to step 2

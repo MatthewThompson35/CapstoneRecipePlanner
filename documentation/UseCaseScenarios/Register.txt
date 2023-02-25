@@ -1,0 +1,21 @@
+Context - User opens application
+
+Primary Flow
+1 - user clicks on button to register new user
+2 - system displays registration page
+3 - user inputs new user credentials
+4 - system successfully validates the new user's registration
+5 - system directs user to login page
+
+Alternative Flow(s)
+INVALID REGISTRATION
+a4 - system fails to validate credentials
+a5 - system informs the user and prompts the user for credentials again
+
+return to step 3
+
+CANCELLATION
+a3 - user cancels registration
+a4 - system directs user to login page
+
+return to step 1

@@ -8,7 +8,7 @@ namespace RecipePlannerDesktopApplication
     /// <summary>
     /// Add ingredients page
     /// </summary>
-    public partial class AddIngredientsPopup : Form
+    public partial class AddIngredientsPage : Form
     {
         private IngredientsPage ingredientsPage;
 
@@ -16,7 +16,7 @@ namespace RecipePlannerDesktopApplication
         /// Constructor for add ingredients
         /// </summary>
         /// <param name="ingredientsPage"></param>
-        public AddIngredientsPopup(IngredientsPage ingredientsPage)
+        public AddIngredientsPage(IngredientsPage ingredientsPage)
         {
             InitializeComponent();
             this.ingredientsPage = ingredientsPage;
@@ -27,9 +27,15 @@ namespace RecipePlannerDesktopApplication
             string name = this.ingredientNameTextBox.Text;
             string quantityString = this.quantityTextBox.Text;
             string measure = this.measurementComboBox.Text;
-            int number;
+            int number = 0;
 
-            if (name == null || name.Equals("") || quantityString == null || quantityString.Equals("") || measure.Equals("") )
+            this.submitCheck(name, quantityString, measure, number);
+
+        }
+
+        private void submitCheck(string name, string quantityString, string measure, int number)
+        {
+            if (isTextEmpty(name, quantityString, measure))
             {
                 this.errorTextLabel.Visible = true;
             }
@@ -45,7 +51,6 @@ namespace RecipePlannerDesktopApplication
             }
             else
             {
-
                 int quantity = Convert.ToInt32(quantityString);
 
                 Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity, 0, measure);
@@ -54,9 +59,12 @@ namespace RecipePlannerDesktopApplication
 
                 this.Close();
                 this.ingredientsPage.Show();
-                
             }
+        }
 
+        private static bool isTextEmpty(string name, string quantityString, string measure)
+        {
+            return name == null || name.Equals("") || quantityString == null || quantityString.Equals("") || measure.Equals("");
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

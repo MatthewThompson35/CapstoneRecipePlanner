@@ -33,18 +33,23 @@ namespace RecipePlannerDesktopApplication
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            this.displayAddIngredientsPopup();
+            this.displayAddIngredientsPage();
 
         }
 
-        private void displayAddIngredientsPopup()
+        private void displayAddIngredientsPage()
         {
             this.Hide();
-            AddIngredientsPopup ingredientsPopup = new AddIngredientsPopup(this);
+            AddIngredientsPage ingredientsPopup = new AddIngredientsPage(this);
             ingredientsPopup.Show();
         }
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
+        {
+            this.removeSelectedIngredient();
+        }
+
+        private void removeSelectedIngredient()
         {
             if (this.selectedRow != null)
             {
@@ -59,6 +64,7 @@ namespace RecipePlannerDesktopApplication
                         id = (int)item.id;
                     }
                 }
+
                 IngredientDAL.RemoveIngredient(id);
                 this.UpdateIngredientsGridView();
             }
@@ -82,6 +88,11 @@ namespace RecipePlannerDesktopApplication
             int columnIndex = e.ColumnIndex;
             this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
 
+            this.clickIngredientCell(columnIndex);
+        }
+
+        private void clickIngredientCell(int columnIndex)
+        {
             if (this.selectedRow != null)
             {
                 var id = 0;
