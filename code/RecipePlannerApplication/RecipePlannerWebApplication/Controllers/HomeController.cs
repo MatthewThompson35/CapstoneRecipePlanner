@@ -42,11 +42,18 @@ namespace RecipePlannerWebApplication.Controllers
                return View("RecipePage", ViewBag.AvailableRecipes);
 
             }
-            else
+            if (res == 2)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View();
+            }
+            if (res == 0)
             {
                 TempData["msg"] = "The Username or Password is incorrect.";
                 return View();
             }
+
+            return View();
 
         }
 
