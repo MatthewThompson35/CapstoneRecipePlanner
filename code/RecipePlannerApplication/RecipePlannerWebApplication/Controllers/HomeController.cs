@@ -44,25 +44,23 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Index([Bind] Login ad)
     {
-        try
+        int res = Database.LoginCheck(ad);
+        if (res == 1)
         {
-            var res = Database.LoginCheck(ad);
-            if (res == 1)
-            {
-                ActiveUser.username = ad.Username;
-                this.setupForRecipePage();
-                return View("RecipePage", ViewBag.AvailableRecipes);
-            }
+            ActiveUser.username = ad.Username;
+            this.setupForRecipePage();
+            return View("RecipePage", ViewBag.AvailableRecipes);
 
-            TempData["msg"] = "The Username or Password is incorrect.";
+        }
+        if (res == 2)
+        {
+            ad.ErrorMessage = "The connection to the server could not be made";
             return View();
         }
-        catch (Exception ex)
-        {
-            TempData["msg"] = "The connection to the server could not be made";
-        }
 
-        return View("Index");
+        ad.ErrorMessage = "Incorrect username or password";
+        return View(ad);
+
     }
 
     private void setupForRecipePage()
@@ -247,19 +245,19 @@ public class HomeController : Controller
         {
             if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
             {
-                TempData["msg"] = "Please enter values.";
+                ViewBag.Error = "Please enter values.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
             if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
             {
-                TempData["msg"] = "Ingredient is already entered.";
+                ViewBag.Error = "Ingredient is already entered.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
             if (!regex.Match(txtQuantity).Success)
             {
-                TempData["msg"] = "Quantity must be an integer.";
+                ViewBag.Error = "Quantity must be an integer.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
@@ -345,19 +343,19 @@ public class HomeController : Controller
             List<string> list = Database.ContainsUser(username);
             if (list.Count() > 0)
             {
-                TempData["msg"] = "This username is already taken. Please choose another and try again.";
+                ViewBag.Error = "Username already exists. Please choose another and try again.";
                 return View("Register");
             }
-
             if (password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
-
                 return View("Index");
             }
-
-            TempData["msg"] = "The password must match in both fields. Please try again.";
-            return View("Register");
+            else
+            {
+                ViewBag.Error = "Passwords do not match. Please try again.";
+                return View("Register");
+            }
         }
         catch (Exception ex)
         {
