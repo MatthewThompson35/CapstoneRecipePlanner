@@ -33,11 +33,11 @@ namespace RecipePlannerDesktopApplication
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            this.displayAddIngredientsPage();
+            this.displayAddIngredientsPopup();
 
         }
 
-        private void displayAddIngredientsPage()
+        private void displayAddIngredientsPopup()
         {
             this.Hide();
             AddIngredientsPage ingredientsPopup = new AddIngredientsPage(this);
