@@ -343,19 +343,19 @@ public class HomeController : Controller
             List<string> list = Database.ContainsUser(username);
             if (list.Count() > 0)
             {
-                TempData["msg"] = "This username is already taken. Please choose another and try again.";
+                ViewBag.Error = "Username already exists. Please choose another and try again.";
                 return View("Register");
             }
-
             if (password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
-
                 return View("Index");
             }
-
-            TempData["msg"] = "The password must match in both fields. Please try again.";
-            return View("Register");
+            else
+            {
+                ViewBag.Error = "Passwords do not match. Please try again.";
+                return View("Register");
+            }
         }
         catch (Exception ex)
         {
