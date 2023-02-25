@@ -245,19 +245,19 @@ public class HomeController : Controller
         {
             if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
             {
-                TempData["msg"] = "Please enter values.";
+                ViewBag.Error = "Please enter values.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
             if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
             {
-                TempData["msg"] = "Ingredient is already entered.";
+                ViewBag.Error = "Ingredient is already entered.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
             if (!regex.Match(txtQuantity).Success)
             {
-                TempData["msg"] = "Quantity must be an integer.";
+                ViewBag.Error = "Quantity must be an integer.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
