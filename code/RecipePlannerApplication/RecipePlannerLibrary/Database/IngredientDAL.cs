@@ -42,7 +42,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Adds the ingredients for the ingredients view.
+        ///     Adds the ingredient into the table
         /// </summary>
         /// <param name="name">The name of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
@@ -62,7 +62,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Decrements the quantity of the ingredient.
+        ///     Decrements the quantity of the ingredient in the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
@@ -78,7 +78,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Increments the quantity of the ingredient.
+        ///     Increments the quantity of the ingredient in the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
@@ -94,7 +94,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Removes the ingredient from the ingredients view.
+        ///     Removes the ingredient from the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         public static void RemoveIngredient(int id)

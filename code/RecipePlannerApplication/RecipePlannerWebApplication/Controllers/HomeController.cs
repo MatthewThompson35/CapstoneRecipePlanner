@@ -28,49 +28,43 @@ public class HomeController : Controller
     #region Methods
 
     /// <summary>
-    ///     Indexes this instance.
+    ///     Takes the User to the login page
     /// </summary>
-    /// <returns>The view</returns>
+    /// <returns>The Login Page</returns>
     public IActionResult Index()
     {
         return View();
     }
 
     /// <summary>
-    ///     Indexes the specified ad.
+    ///     Checks the login and goes to recipe page on successful login. Prompts for retry on failed login
     /// </summary>
     /// <param name="ad">The ad.</param>
-    /// <returns>The view</returns>
+    /// <returns>The Recipe Page login on server connection error</returns>
     [HttpPost]
     public IActionResult Index([Bind] Login ad)
     {
         try
         {
-            int res = Database.LoginCheck(ad);
+            var res = Database.LoginCheck(ad);
             if (res == 1)
             {
                 ActiveUser.username = ad.Username;
                 this.setupForRecipePage();
                 return View("RecipePage", ViewBag.AvailableRecipes);
+            }
 
-            }
-            else
-            {
-                ad.ErrorMessage = "Incorrect username or password";
-                return View(ad);
-            }
+            ad.ErrorMessage = "Incorrect username or password";
+            return View(ad);
         }
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
             return View("Index");
         }
-
-
     }
 
-
-private void setupForRecipePage()
+    private void setupForRecipePage()
     {
         try
         {
@@ -138,7 +132,7 @@ private void setupForRecipePage()
     /// </summary>
     /// <param name="recipe1">The recipe1.</param>
     /// <param name="recipe2">The recipe2.</param>
-    /// <returns></returns>
+    /// <returns> 0 or 1 based on which recipe name comes first</returns>
     private int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
     {
         return recipe1.Name.CompareTo(recipe2.Name);
@@ -171,10 +165,10 @@ private void setupForRecipePage()
     }
 
     /// <summary>
-    ///     Gets the item quantity.
+    ///     Gets the item quantity of the ingredient provided.
     /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <returns></returns>
+    /// <param name="id">The ingredient id.</param>
+    /// <returns>The updated quantity</returns>
     private int getItemQuantity(int id)
     {
         var quantity = 0;
@@ -190,10 +184,10 @@ private void setupForRecipePage()
     }
 
     /// <summary>
-    ///     Increments the quantity.
+    ///     Increments the quantity of the ingredient that is provided.
     /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <returns>The view</returns>
+    /// <param name="id">The Ingredient Id.</param>
+    /// <returns>The ingredients page or login on server connection error</returns>
     public ActionResult incrementQuantity(string id)
     {
         try
@@ -216,10 +210,10 @@ private void setupForRecipePage()
     }
 
     /// <summary>
-    ///     Removes the ingredient.
+    ///     Removes the ingredient from list.
     /// </summary>
     /// <param name="id">The identifier.</param>
-    /// <returns>The view</returns>
+    /// <returns>The ingredients page or login on server connection error</returns>
     public ActionResult removeIngredient(string id)
     {
         try
@@ -237,11 +231,11 @@ private void setupForRecipePage()
     }
 
     /// <summary>
-    ///     Adds the ingredient.
+    ///     Adds the ingredient to the list.
     /// </summary>
     /// <param name="txtIngredientName">Name of the text ingredient.</param>
     /// <param name="txtQuantity">The text quantity.</param>
-    /// <returns>The view</returns>
+    /// <returns>The ingredients page or login on server connection error</returns>
     [HttpPost]
     public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
     {
@@ -283,7 +277,7 @@ private void setupForRecipePage()
     /// <summary>
     ///     Goes to ingredients page.
     /// </summary>
-    /// <returns>The view</returns>
+    /// <returns>The ingredients page or login on server connection error</returns>
     public ActionResult goToIngredientsPage()
     {
         try
@@ -302,7 +296,7 @@ private void setupForRecipePage()
     /// <summary>
     ///     Goes to RecipesPage
     /// </summary>
-    /// <returns>The view</returns>
+    /// <returns>The recipes page or login on server connection error</returns>
     public ActionResult goToRecipePage()
     {
         try
@@ -327,7 +321,7 @@ private void setupForRecipePage()
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
-    /// <returns>The view</returns>
+    /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToAddIngredientsPage()
     {
         var measurements = Enum.GetNames(typeof(Measurement)).ToList();
@@ -341,7 +335,7 @@ private void setupForRecipePage()
     /// <param name="username">The username.</param>
     /// <param name="password">The password.</param>
     /// <param name="repeatPassword">The repeat password.</param>
-    /// <returns>The view</returns>
+    /// <returns>The login page or register is user was not added or login on server connection error</returns>
     [HttpPost]
     public ActionResult CreateUser(string username, string password, string repeatPassword)
     {
@@ -353,16 +347,15 @@ private void setupForRecipePage()
                 ViewBag.Error = "Username already exists. Please choose another and try again.";
                 return View("Register");
             }
+
             if (password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
                 return View("Index");
             }
-            else
-            {
-                ViewBag.Error = "Passwords do not match. Please try again.";
-                return View("Register");
-            }
+
+            ViewBag.Error = "Passwords do not match. Please try again.";
+            return View("Register");
         }
         catch (Exception ex)
         {
@@ -375,7 +368,7 @@ private void setupForRecipePage()
     /// <summary>
     ///     Opens the register.
     /// </summary>
-    /// <returns>The view</returns>
+    /// <returns>The register page</returns>
     [HttpPost]
     public ActionResult OpenRegister()
     {
@@ -392,6 +385,10 @@ private void setupForRecipePage()
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 
+    /// <summary>
+    /// Logs out this instance.
+    /// </summary>
+    /// <returns> The login page</returns>
     [HttpPost]
     public IActionResult Logout()
     {
