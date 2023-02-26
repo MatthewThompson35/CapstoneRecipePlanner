@@ -44,26 +44,33 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Index([Bind] Login ad)
     {
-        int res = Database.LoginCheck(ad);
-        if (res == 1)
+        try
         {
-            ActiveUser.username = ad.Username;
-            this.setupForRecipePage();
-            return View("RecipePage", ViewBag.AvailableRecipes);
+            int res = Database.LoginCheck(ad);
+            if (res == 1)
+            {
+                ActiveUser.username = ad.Username;
+                this.setupForRecipePage();
+                return View("RecipePage", ViewBag.AvailableRecipes);
 
+            }
+            else
+            {
+                ad.ErrorMessage = "Incorrect username or password";
+                return View(ad);
+            }
         }
-        if (res == 2)
+        catch (Exception ex)
         {
-            ad.ErrorMessage = "The connection to the server could not be made";
-            return View();
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
         }
 
-        ad.ErrorMessage = "Incorrect username or password";
-        return View(ad);
 
     }
 
-    private void setupForRecipePage()
+
+private void setupForRecipePage()
     {
         try
         {
