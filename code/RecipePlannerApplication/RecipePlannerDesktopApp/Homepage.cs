@@ -14,13 +14,20 @@ using System.Windows.Forms;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    ///     The Homepage partial class.
+    /// </summary>
     public partial class Homepage : Form
     {
         private Recipe selectedRecipe;
+
+        /// <summary>
+        ///     Gets or sets the list of Recipes for the Homepage.
+        /// </summary>
         public List<Recipe> Recipes { get; set; }
 
         /// <summary>
-        ///     Initializes a Homepage.
+        ///     Initializes a Homepage for the recipes.
         /// </summary>
         public Homepage()
         {
@@ -31,7 +38,7 @@ namespace RecipePlannerDesktopApplication
         }
 
         /// <summary>
-        ///     Gets a selected recipe.
+        ///     Gets a selected recipe from the recipes list view in the homepage.
         /// </summary>
         /// <returns>a selected recipe.</returns>
         public Recipe GetSelectedRecipe()

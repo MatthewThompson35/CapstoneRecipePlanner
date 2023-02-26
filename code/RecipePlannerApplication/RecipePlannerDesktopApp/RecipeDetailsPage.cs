@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    ///     Recipe Detail Page partial class.
+    /// </summary>
     public partial class RecipeDetailsPage : Form
     {
         private Homepage homepage;

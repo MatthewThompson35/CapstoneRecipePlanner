@@ -6,14 +6,14 @@ using RecipePlannerLibrary.Models;
 namespace RecipePlannerDesktopApplication
 {
     /// <summary>
-    /// Add ingredients page
+    /// Add ingredients page partial class.
     /// </summary>
     public partial class AddIngredientsPage : Form
     {
         private IngredientsPage ingredientsPage;
 
         /// <summary>
-        /// Constructor for add ingredients
+        /// Initializes the AddIngreedients page with the corresponding ingredients page.
         /// </summary>
         /// <param name="ingredientsPage"></param>
         public AddIngredientsPage(IngredientsPage ingredientsPage)
