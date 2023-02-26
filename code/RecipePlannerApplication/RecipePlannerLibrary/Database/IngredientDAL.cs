@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using RecipePlannerLibrary.Models;
+using System.Collections.Generic;
 
 namespace RecipePlannerLibrary.Database
 {
