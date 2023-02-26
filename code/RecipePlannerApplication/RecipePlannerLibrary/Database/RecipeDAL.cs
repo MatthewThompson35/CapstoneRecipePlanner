@@ -14,10 +14,11 @@ namespace RecipePlannerLibrary.Database
         /// <summary>
         ///     Gets all of the recipes from the recipe table.
         /// </summary>
+        /// <param name="connectionString">The connection string for the table.</param>
         /// <returns>List of all recipes</returns>
-        public static List<Recipe> getRecipes()
+        public static List<Recipe> getRecipes(string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var recipes = new List<Recipe>();
             var query = @"Select * from recipe;";
@@ -42,10 +43,11 @@ namespace RecipePlannerLibrary.Database
         ///     Gets the ingredients associated with a specified recipeID.
         /// </summary>
         /// <param name="id">the recipe id.</param>
+        /// <param name="connectionString">The connection string for the table.</param>
         /// <returns>List of all ingredients associated with specified recipeID</returns>
-        public static List<RecipeIngredient> getIngredientsForRecipe(int id)
+        public static List<RecipeIngredient> getIngredientsForRecipe(int id, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var ingredients = new List<RecipeIngredient>();
             var query = @"Select * from recipe_ingredient where recipeID=@id;";
@@ -72,10 +74,11 @@ namespace RecipePlannerLibrary.Database
         /// </summary>
         ///
         /// <param name="id">The recipe id.</param>
+        /// <param name="connectionString">The connection string for the table.</param>
         /// <returns>List of all steps associated with a specified recipeID</returns>
-        public static List<RecipeStep> getStepsForRecipe(int id)
+        public static List<RecipeStep> getStepsForRecipe(int id, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var steps = new List<RecipeStep>();
             var query = @"Select * from recipe_step where recipeID=@id;";

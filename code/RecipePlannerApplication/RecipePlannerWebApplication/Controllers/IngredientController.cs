@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 
 namespace RecipePlannerWebApplication.Controllers
@@ -14,7 +15,7 @@ namespace RecipePlannerWebApplication.Controllers
 
         public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
         {
-            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity), measurement);
+            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity), measurement, Connection.ConnectionString);
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }

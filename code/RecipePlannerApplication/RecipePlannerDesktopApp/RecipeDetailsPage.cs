@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RecipePlannerLibrary;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -47,14 +48,14 @@ namespace RecipePlannerDesktopApplication
 
             string steps = "Steps" + Environment.NewLine;
 
-            foreach (var step in RecipeDAL.getStepsForRecipe(this.homepage.GetSelectedRecipe().RecipeId))
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
             {
                 steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
             }
 
             string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
 
-            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId))
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
             {
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }

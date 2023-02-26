@@ -64,7 +64,7 @@ namespace RecipePlannerDesktopApplication
 
         private void viewAllRecipes()
         {
-            foreach (var recipe in RecipeDAL.getRecipes())
+            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
             {
                 this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
             }
@@ -77,10 +77,10 @@ namespace RecipePlannerDesktopApplication
 
             List<Recipe> availableRecipes = new List<Recipe>();
 
-            foreach (var recipe in RecipeDAL.getRecipes())
+            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
             {
                 var add = true;
-                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 foreach (RecipeIngredient ingredient in recipe.Ingredients)
                 {
                     var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
