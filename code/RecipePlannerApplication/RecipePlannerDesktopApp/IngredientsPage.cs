@@ -112,9 +112,11 @@ namespace RecipePlannerDesktopApplication
         {
             int rowIndex = e.RowIndex;
             int columnIndex = e.ColumnIndex;
-            this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
-
-            this.clickIngredientCell(columnIndex);
+            if (rowIndex >= 0)
+            {
+                this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
+                this.clickIngredientCell(columnIndex);
+            }
         }
 
         private void clickIngredientCell(int columnIndex)
