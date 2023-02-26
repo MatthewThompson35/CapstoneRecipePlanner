@@ -1,6 +1,4 @@
-﻿
-
-namespace RecipePlannerLibrary.Models
+﻿namespace RecipePlannerLibrary.Models
 {
     /// <summary>
     /// Ingredient Class
@@ -60,21 +58,6 @@ namespace RecipePlannerLibrary.Models
             this.quantity = quantity;
             this.measurement = measurement;
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Ingredient"/> class.
-        /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="name">The name of the Ingredient.</param>
-        /// <param name="quantity">The quantity of the Ingredient.</param>
-        public Ingredient(string username, string name, int quantity)
-        {
-            this.username = username;
-            this.name = name;
-            this.quantity = quantity;
-        }
-
-
 
         /// <summary>
         /// Represents a string representation of the Ingredient object
