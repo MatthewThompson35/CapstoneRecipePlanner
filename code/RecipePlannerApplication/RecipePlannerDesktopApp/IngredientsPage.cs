@@ -5,12 +5,13 @@ using System.ComponentModel;
 namespace RecipePlannerDesktopApplication
 {
     /// <summary>
-    /// Ingredients Page
+    /// Ingredients Page partial class.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class IngredientsPage : Form
     {
         private DataGridViewRow selectedRow;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IngredientsPage"/> class.
         /// </summary>
@@ -71,7 +72,7 @@ namespace RecipePlannerDesktopApplication
         }
 
         /// <summary>
-        /// Updates the ingredients grid view.
+        /// Updates the ingredients view.
         /// </summary>
         public void UpdateIngredientsGridView()
         {

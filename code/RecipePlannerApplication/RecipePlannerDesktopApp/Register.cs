@@ -3,7 +3,7 @@
 namespace RecipePlannerDesktopApplication
 {
     /// <summary>
-    /// Register class
+    /// Register partial class.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class Register : Form

@@ -41,6 +41,7 @@ namespace RecipePlannerLibrary.Database
         /// <summary>
         ///     Gets the ingredients associated with a specified recipeID.
         /// </summary>
+        /// <param name="id">the recipe id.</param>
         /// <returns>List of all ingredients associated with specified recipeID</returns>
         public static List<RecipeIngredient> getIngredientsForRecipe(int id)
         {
@@ -69,6 +70,8 @@ namespace RecipePlannerLibrary.Database
         /// <summary>
         ///     Gets the recipe steps associated with a specified recipeID.
         /// </summary>
+        ///
+        /// <param name="id">The recipe id.</param>
         /// <returns>List of all steps associated with a specified recipeID</returns>
         public static List<RecipeStep> getStepsForRecipe(int id)
         {

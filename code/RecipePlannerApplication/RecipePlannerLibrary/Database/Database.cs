@@ -20,10 +20,10 @@ namespace RecipePlannerLibrary.Database
         #region Methods
 
         /// <summary>
-        ///     Logins the check.
+        ///     Checks to see if the login is accepted.
         /// </summary>
         /// <param name="login">The login.</param>
-        /// <returns></returns>
+        /// <returns>the result</returns>
         public static int LoginCheck(Login login)
         {
             var passwordHash = Util.GetHash(login.Password);
@@ -51,7 +51,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Creates the user.
+        ///     Creates the user for the login.
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>

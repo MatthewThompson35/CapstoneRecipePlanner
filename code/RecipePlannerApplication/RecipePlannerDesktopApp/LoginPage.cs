@@ -5,7 +5,7 @@ using RecipePlannerLibrary.Models;
 namespace RecipePlannerDesktopApplication
 {
     /// <summary>
-    /// Login Page
+    /// Login Page partial class.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class LoginPage : Form

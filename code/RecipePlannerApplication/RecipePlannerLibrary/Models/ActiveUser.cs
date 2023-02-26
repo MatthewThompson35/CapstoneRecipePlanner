@@ -6,10 +6,10 @@
     public static class ActiveUser
     {
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the username for the ActiveUser.
         /// </summary>
         /// <value>
-        /// The username.
+        /// The username of the ActiveUser.
         /// </value>
         public static string? username { get; set; }
     }
