@@ -24,30 +24,39 @@ namespace RecipePlannerDesktopApplication
 
         private void registerCheck()
         {
-            if (this.IsTextEmpty())
+            try
             {
-                this.passwordErrorLabel.Text = "Please fill out all fields";
-                this.passwordErrorLabel.Visible = true;
-            }
-            else
-            {
-                var username = this.usernameTextBox.Text;
-                List<string> list = Database.ContainsUser(username);
-                if (list.Count() > 0)
+                if (this.IsTextEmpty())
                 {
-                    this.passwordErrorLabel.Text = "Username is a duplicate";
+                    this.passwordErrorLabel.Text = "Please fill out all fields";
                     this.passwordErrorLabel.Visible = true;
-                }
-                else if (this.passwordConfirmTextBox.Text.Equals(this.passwordTextBox.Text))
-                {
-                    this.createNewUser(username, out var password);
                 }
                 else
                 {
-                    this.passwordErrorLabel.Text = "Passwords do not match";
-                    this.passwordErrorLabel.Visible = true;
+                    var username = this.usernameTextBox.Text;
+                    List<string> list = Database.ContainsUser(username);
+                    if (list.Count() > 0)
+                    {
+                        this.passwordErrorLabel.Text = "Username is a duplicate";
+                        this.passwordErrorLabel.Visible = true;
+                    }
+                    else if (this.passwordConfirmTextBox.Text.Equals(this.passwordTextBox.Text))
+                    {
+                        this.createNewUser(username, out var password);
+                    }
+                    else
+                    {
+                        this.passwordErrorLabel.Text = "Passwords do not match";
+                        this.passwordErrorLabel.Visible = true;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                this.passwordErrorLabel.Text = "The connection to the server could not be made";
+                this.passwordErrorLabel.Visible = true;
+            }
+            
         }
 
         private void createNewUser(string username, out string password)
