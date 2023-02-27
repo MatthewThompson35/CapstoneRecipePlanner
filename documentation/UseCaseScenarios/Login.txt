@@ -10,3 +10,6 @@ INVALID LOGIN
 a2 - system fails to validate credentials
 a3 - system informs the user and prompts the user for credentials again
 return to step 1
+
+BAD CONNECTION
+a2 - system can not connect to the server and notifies user to try again. And is sent back to the login page.

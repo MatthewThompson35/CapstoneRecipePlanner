@@ -6,4 +6,4 @@ Primary Flow
 
 Alternative Flow(s)
 BAD CONNECTION
-a1 - system can not retrieve recipes and notifies user to try again later.
+a1 - system can not retrieve recipes and notifies user to try again later. And is sent back to the login page.
