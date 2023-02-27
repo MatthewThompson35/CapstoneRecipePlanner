@@ -19,8 +19,17 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
 
-            var bindingList = new BindingList<Ingredient>(IngredientDAL.getIngredients());
-            this.ingredientsGridView.DataSource = bindingList;
+            try
+            {
+                var bindingList = new BindingList<Ingredient>(IngredientDAL.getIngredients());
+                this.ingredientsGridView.DataSource = bindingList;
+                this.Refresh();
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.ingredientsGridView.Enabled = false;
+            }
             this.Refresh();
 
         }
@@ -52,23 +61,31 @@ namespace RecipePlannerDesktopApplication
 
         private void removeSelectedIngredient()
         {
-            if (this.selectedRow != null)
+            try
             {
-                var id = 0;
-                var name = this.selectedRow.Cells[0].Value;
-                var quantity = (int)this.selectedRow.Cells[2].Value;
-                var list = IngredientDAL.getIngredients();
-                foreach (var item in list)
+                if (this.selectedRow != null)
                 {
-                    if (item.name.Equals(name) && item.quantity == (quantity))
+                    var id = 0;
+                    var name = this.selectedRow.Cells[0].Value;
+                    var quantity = (int)this.selectedRow.Cells[2].Value;
+                    var list = IngredientDAL.getIngredients();
+                    foreach (var item in list)
                     {
-                        id = (int)item.id;
+                        if (item.name.Equals(name) && item.quantity == (quantity))
+                        {
+                            id = (int)item.id;
+                        }
                     }
-                }
 
-                IngredientDAL.RemoveIngredient(id);
-                this.UpdateIngredientsGridView();
+                    IngredientDAL.RemoveIngredient(id);
+                    this.UpdateIngredientsGridView();
+                }
             }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+            }
+            
         }
 
         /// <summary>
@@ -76,50 +93,68 @@ namespace RecipePlannerDesktopApplication
         /// </summary>
         public void UpdateIngredientsGridView()
         {
-            var list = IngredientDAL.getIngredients();
-            var bindingList = new BindingList<Ingredient>(list);
+            try
+            {
+                var list = IngredientDAL.getIngredients();
+                var bindingList = new BindingList<Ingredient>(list);
 
-            this.ingredientsGridView.DataSource = null;
-            this.ingredientsGridView.DataSource = bindingList;
+                this.ingredientsGridView.DataSource = null;
+                this.ingredientsGridView.DataSource = bindingList;
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+            }
+            
         }
 
         private void ingredientsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
             int columnIndex = e.ColumnIndex;
-            this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
-
-            this.clickIngredientCell(columnIndex);
+            if (rowIndex >= 0)
+            {
+                this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
+                this.clickIngredientCell(columnIndex);
+            }
         }
 
         private void clickIngredientCell(int columnIndex)
         {
-            if (this.selectedRow != null)
+            try
             {
-                var id = 0;
-                var name = this.selectedRow.Cells[0].Value;
-                var quantity = (int)this.selectedRow.Cells[2].Value;
-                var list = IngredientDAL.getIngredients();
-                foreach (var item in list)
+                if (this.selectedRow != null)
                 {
-                    if (item.name.Equals(name) && item.quantity == (quantity))
+                    var id = 0;
+                    var name = this.selectedRow.Cells[0].Value;
+                    var quantity = (int)this.selectedRow.Cells[2].Value;
+                    var list = IngredientDAL.getIngredients();
+                    foreach (var item in list)
                     {
-                        id = (int)item.id;
+                        if (item.name.Equals(name) && item.quantity == (quantity))
+                        {
+                            id = (int)item.id;
+                        }
+                    }
+
+                    if (columnIndex == 1)
+                    {
+                        IngredientDAL.decrementQuantity(id, quantity);
+                        this.UpdateIngredientsGridView();
+                    }
+
+                    if (columnIndex == 3)
+                    {
+                        IngredientDAL.incrementQuantity(id, quantity);
+                        this.UpdateIngredientsGridView();
                     }
                 }
-
-                if (columnIndex == 1)
-                {
-                    IngredientDAL.decrementQuantity(id, quantity);
-                    this.UpdateIngredientsGridView();
-                }
-
-                if (columnIndex == 3)
-                {
-                    IngredientDAL.incrementQuantity(id, quantity);
-                    this.UpdateIngredientsGridView();
-                }
+            } catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.ingredientsGridView.Enabled = false;
             }
+            
         }
 
         private void backButton_Click(object sender, EventArgs e)

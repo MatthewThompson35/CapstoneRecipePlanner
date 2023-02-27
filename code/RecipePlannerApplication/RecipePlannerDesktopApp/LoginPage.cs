@@ -26,32 +26,41 @@ namespace RecipePlannerDesktopApplication
 
         private void loginCheck()
         {
-            if (this.usernameTextBox.Text.Equals("") || this.passwordTextBox.Text.Equals(""))
+            try
             {
-                this.emptyFieldErrorLabel.Text = "Please fill out all fields";
-                this.emptyFieldErrorLabel.Visible = true;
-            }
-            else
-            {
-                Login attempt = new Login();
-                attempt.Username = this.usernameTextBox.Text;
-                attempt.Password = this.passwordTextBox.Text;
-                int result = Database.LoginCheck(attempt);
-
-                if (result == 1)
+                if (this.usernameTextBox.Text.Equals("") || this.passwordTextBox.Text.Equals(""))
                 {
-                    ActiveUser.username = this.usernameTextBox.Text;
-                    this.Hide();
-
-                    Homepage homepage = new Homepage();
-                    homepage.Show();
+                    this.emptyFieldErrorLabel.Text = "Please fill out all fields";
+                    this.emptyFieldErrorLabel.Visible = true;
                 }
                 else
                 {
-                    this.errorLoginLabel.Visible = true;
-                    this.emptyFieldErrorLabel.Visible = false;
+                    Login attempt = new Login();
+                    attempt.Username = this.usernameTextBox.Text;
+                    attempt.Password = this.passwordTextBox.Text;
+                    int result = Database.LoginCheck(attempt);
+
+                    if (result == 1)
+                    {
+                        ActiveUser.username = this.usernameTextBox.Text;
+                        this.Hide();
+
+                        Homepage homepage = new Homepage();
+                        homepage.Show();
+                    }
+                    else
+                    {
+                        this.errorLoginLabel.Visible = true;
+                        this.emptyFieldErrorLabel.Visible = false;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                this.emptyFieldErrorLabel.Text = "The connection to the server could not be made";
+                this.emptyFieldErrorLabel.Visible = true;
+            }
+            
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)

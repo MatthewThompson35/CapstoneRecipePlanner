@@ -64,17 +64,26 @@ namespace RecipePlannerDesktopApplication
 
         private void viewAllRecipes()
         {
-            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+            try
             {
-                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+                foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+                {
+                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+                }
+
+                this.recipeListView.View = View.List;
+                this.recipeListView.Sorting = SortOrder.Ascending;
             }
-            this.recipeListView.View = View.List;
-            this.recipeListView.Sorting = SortOrder.Ascending;
+            catch (Exception ex)
+            {
+                this.noRecipesLabel.Text = "The connection to the server could not be made";
+                this.noRecipesLabel.Visible = true;
+            }
+            
         }
 
         private void showAvailableRecipes()
         {
-
             List<Recipe> availableRecipes = new List<Recipe>();
 
             foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
@@ -83,44 +92,57 @@ namespace RecipePlannerDesktopApplication
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 foreach (RecipeIngredient ingredient in recipe.Ingredients)
                 {
-                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
-                    if (ing != null && ing.Count > 0)
+                    var add = true;
+                    recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                    foreach (RecipeIngredient ingredient in recipe.Ingredients)
                     {
-                        if (ing[0].quantity < ingredient.Quantity)
+                        var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                        if (ing != null && ing.Count > 0)
+                        {
+                            if (ing[0].quantity < ingredient.Quantity)
+                            {
+                                add = false;
+                            }
+                        }
+                        else
                         {
                             add = false;
                         }
+
+
                     }
-                    else
+
+                    if (add)
                     {
-                        add = false;
+                        availableRecipes.Add(recipe);
                     }
 
 
                 }
-                if (add)
+
+                if (availableRecipes.Count > 0)
                 {
-                    availableRecipes.Add(recipe);
+                    this.noRecipesLabel.Visible = false;
+                    foreach (var availableRecipe in availableRecipes)
+                    {
+                        this.recipeListView.Items.Add(new ListViewItem
+                            { Text = availableRecipe.Name, Tag = availableRecipe });
+                    }
+                }
+                else
+                {
+                    this.noRecipesLabel.Visible = true;
                 }
 
-
+                this.recipeListView.View = View.List;
+                this.recipeListView.Sorting = SortOrder.Ascending;
             }
-
-            if (availableRecipes.Count > 0)
+            catch (Exception ex)
             {
-                this.noRecipesLabel.Visible = false;
-                foreach (var availableRecipe in availableRecipes)
-                {
-                    this.recipeListView.Items.Add(new ListViewItem { Text = availableRecipe.Name, Tag = availableRecipe });
-                }
-            }
-            else
-            {
+                this.noRecipesLabel.Text = "The connection to the server could not be made";
                 this.noRecipesLabel.Visible = true;
             }
-
-            this.recipeListView.View = View.List;
-            this.recipeListView.Sorting = SortOrder.Ascending;
+            
         }
 
         private void recipeListView_SelectedIndexChanged(object sender, EventArgs e)

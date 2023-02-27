@@ -116,13 +116,13 @@
             // 
             // noRecipesLabel
             // 
-            this.noRecipesLabel.AutoSize = true;
             this.noRecipesLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.noRecipesLabel.Location = new System.Drawing.Point(126, 374);
+            this.noRecipesLabel.Location = new System.Drawing.Point(79, 337);
             this.noRecipesLabel.Name = "noRecipesLabel";
-            this.noRecipesLabel.Size = new System.Drawing.Size(260, 28);
+            this.noRecipesLabel.Size = new System.Drawing.Size(344, 112);
             this.noRecipesLabel.TabIndex = 8;
             this.noRecipesLabel.Text = "There are no recipes to show";
+            this.noRecipesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.noRecipesLabel.Visible = false;
             // 
             // Homepage
