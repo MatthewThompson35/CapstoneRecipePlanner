@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Shared\IngredientsPage.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model List&lt;RecipePlannerLibrary.Models.Ingredient&gt;;
+
+&lt;style&gt;
+    #logout{
+        position: fixed;
+        right: 10px;
+        top: 5px;
+        background-color: #d9534f;
+        color: #fff;
+    }
+
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    #mainform {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    #addForm {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        display: none;
+    }
+
+    .table {
+        max-width: 800px;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+        border: none;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td {
+        font-size: 18px;
+    }
+
+    #ingredientID {
+        font-weight: bold;
+    }
+
+    input[type=&quot;submit&quot;], input[type=&quot;button&quot;] {
+        padding: 5px 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #addIngredient {
+        background-color: #33b5e5;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
+
+    input[type=&quot;text&quot;] {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-sizing: border-box;
+    }
+&lt;/style&gt;
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;form id=&quot;mainform&quot;&gt;
+        &lt;h1&gt;Ingredients&lt;/h1&gt;
+        &lt;table class=&quot;table&quot;&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Ingredient Name&lt;/th&gt;
+                &lt;th&gt;Quantity&lt;/th&gt;
+                &lt;th&gt;Actions&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+            @foreach (var ingredient in ViewBag.ingredients)
+            {
+                &lt;tr id=&quot;ingredient-@ingredient.id&quot;&gt;
+                    &lt;td&gt;@ingredient.name&lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;div class=&quot;quantity-container&quot;&gt;
+                            &lt;input type=&quot;submit&quot; asp-action=&quot;decrementQuantity&quot; asp-route-id=&quot;@ingredient.id&quot; value=&quot;-&quot; id=&quot;@ingredient.id&quot; /&gt;
+                                &lt;span id=&quot;ingredient-quantity-@ingredient.id&quot;&gt;@ingredient.quantity @ingredient.measurement&lt;/span&gt;
+                            &lt;input type=&quot;submit&quot; asp-action=&quot;incrementQuantity&quot; asp-route-id=&quot;@ingredient.id&quot; value=&quot;+&quot; id=&quot;@ingredient.id&quot; /&gt;
+                        &lt;/div&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;input type=&quot;submit&quot; asp-action=&quot;removeIngredient&quot; asp-route-id=&quot;@ingredient.id&quot; value=&quot;Remove&quot; id=&quot;@ingredient.id&quot; /&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            }
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;div class=&quot;button-container&quot;&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;Index&quot; value=&quot;Logout&quot; id=&quot;logout&quot; class=&quot;button button-red&quot; /&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;goToAddIngredientsPage&quot; value=&quot;Add Ingredient&quot; id=&quot;addIngredient&quot; class=&quot;button button-green&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+
+    function openForm() {
+        document.getElementById(&quot;addForm&quot;).style.display = &quot;block&quot;;
+        document.getElementById(&quot;mainform&quot;).style.display = &quot;none&quot;;
+    }
+    function closeForm() {
+        document.getElementById(&quot;addForm&quot;).style.display = &quot;none&quot;;
+        document.getElementById(&quot;mainform&quot;).style.display = &quot;block&quot;;
+    }
+&lt;/script&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[108,14,108,21,0],[108,23,108,37,0],[108,38,108,40,0],[108,41,108,60,0],[109,13,109,14,0],[110,36,110,51,0],[111,26,111,42,0],[114,96,114,110,0],[114,125,114,140,0],[115,63,115,78,0],[115,80,115,100,0],[115,101,115,124,0],[116,96,116,110,0],[116,125,116,140,0],[120,91,120,105,0],[120,125,120,140,0],[123,13,123,14,0]]);
+    </script>
+  </body>
+</html>

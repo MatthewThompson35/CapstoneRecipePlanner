@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\RecipePage.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model List&lt;RecipePlannerLibrary.Models.Recipe&gt;
+
+@{
+    ViewBag.Title = &quot;Recipes&quot;;
+}
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;/&gt;
+    &lt;title&gt;@ViewBag.Title&lt;/title&gt;
+
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        th { background-color: #f2f2f2; }
+
+        tr:hover { background-color: #e2e2e2; }
+
+        #recipe-container {
+            display: flex;
+            margin-top: 50px;
+            margin-right: 50px;
+        }
+
+        #recipe-list { flex: 1; }
+
+        #recipe-list h2 { text-align: center; }
+
+        #recipe-list table { width: 100%; }
+
+        #recipe-list tr { cursor: pointer; }
+
+        #recipe-list td:first-child { width: 80%; }
+
+        #recipe-list td:last-child {
+            text-align: center;
+            width: 20%;
+        }
+
+        #recipe-details {
+            align-items: center;
+            display: flex;
+            flex: 1;
+            margin-left: 50px;
+            
+        }
+
+        #recipe-details-box {
+            border: 1px solid black;
+            height: 600px;
+            padding: 10px;
+            position: fixed;
+            top: 220px;
+            width: 20%;
+        }
+
+        #recipe-details-box h3 { margin-top: 0; }
+
+        #recipe-details-box p { margin: 0; }
+
+        #recipe-actions {
+            align-items: center;
+            justify-content: center;
+        }
+
+        #recipe-actions button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin: 0 10px;
+            padding: 5px 10px;
+        }
+
+        #recipe-actions button:hover { background-color: #3e8e41; }
+
+        #recipe-actions button:active { background-color: #4CAF50; }
+
+        #logout {
+            background-color: #d9534f;
+            color: #fff;
+            position: fixed;
+            right: 10px;
+            top: 5px;
+        }
+    &lt;/style&gt;
+
+    &lt;script&gt;
+        function showRecipe(recipeId) {
+            var recipeDiv = document.getElementById(recipeId);
+            var currentDiv = document.querySelector(&#39;#recipe-details-box &gt; div[style*=&quot;display: block&quot;]&#39;);
+
+            if (currentDiv) {
+                currentDiv.style.display = &#39;none&#39;;
+            }
+
+            recipeDiv.style.display = &#39;block&#39;;
+        }
+
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;input type=&quot;radio&quot; name=&quot;recipeDisplay&quot; value=&quot;available&quot; onclick=&quot;document.getElementById(&#39;all-recipes&#39;).style.display = &#39;none&#39;; document.getElementById(&#39;available-recipes&#39;).style.display = &#39;block&#39;;&quot; checked&gt; Show Available Recipes&lt;br&gt;
+&lt;input type=&quot;radio&quot; name=&quot;recipeDisplay&quot; value=&quot;all&quot; onclick=&quot;document.getElementById(&#39;available-recipes&#39;).style.display = &#39;none&#39;; document.getElementById(&#39;all-recipes&#39;).style.display = &#39;table&#39;;&quot;&gt; Show All Recipes&lt;br&gt;
+&lt;div id=&quot;recipe-container&quot;&gt;
+    &lt;button onclick=&quot;location.href=&#39;@Url.Action(&quot;Index&quot;)&#39;&quot;id=&quot;logout&quot;&gt;Logout&lt;/button&gt;
+    &lt;div id=&quot;recipe-list&quot;&gt;
+            &lt;h2&gt;Recipes&lt;/h2&gt;
+            &lt;table id=&quot;available-recipes&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Name&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                @if (ViewBag.AvailableRecipes.Count == 0)
+                {
+                    &lt;tr&gt;
+                        &lt;td colspan=&quot;1&quot; style=&quot;text-align:center;&quot;&gt;Sorry, there are no available recipes that can be made with your current ingredients.&lt;/td&gt;
+                    &lt;/tr&gt;
+                }
+                @foreach (var recipe in ViewBag.AvailableRecipes)
+                {
+                    &lt;tr onclick=&quot;showRecipe(&#39;@recipe.RecipeId&#39;)&quot;&gt;
+                        &lt;td&gt;@recipe.Name&lt;/td&gt;
+                    &lt;/tr&gt;
+                }
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+            &lt;table id=&quot;all-recipes&quot; style=&quot;display: none;&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Name&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    @foreach (var recipe in ViewBag.AllRecipes)
+                    {
+                        &lt;tr onclick=&quot;showRecipe(&#39;@recipe.RecipeId&#39;)&quot;&gt;
+                            &lt;td&gt;@recipe.Name&lt;/td&gt;
+                        &lt;/tr&gt;
+                    }
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;div id=&quot;recipe-details&quot;&gt;
+        &lt;div id=&quot;recipe-details-box&quot; style=&quot;overflow: auto;&quot;&gt;
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                &lt;div id=&quot;@recipe.RecipeId&quot; style=&quot;display: none&quot;&gt;
+                    &lt;h3 class=&quot;recipe-name&quot;&gt;@recipe.Name&lt;/h3&gt;
+                    &lt;p class=&quot;recipe-description&quot;&gt;@recipe.Description&lt;/p&gt;
+                    &lt;h4&gt;Steps&lt;/h4&gt;
+                    &lt;ol class=&quot;recipe-steps&quot;&gt;
+                        @foreach (var step in recipe.Steps)
+                        {
+                            &lt;li&gt;@step.stepDescription&lt;/li&gt;
+                        }
+                    &lt;/ol&gt;
+                    &lt;h4&gt;Ingredients&lt;/h4&gt;
+                    &lt;ul class=&quot;recipe-ingredients&quot;&gt;
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            &lt;li&gt;@ingredient.Quantity @ingredient.IngredientName&lt;/li&gt;
+                        }
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            }
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[4,5,4,31,0],[12,13,12,27,0],[119,37,119,58,0],[129,18,129,58,0],[130,17,130,18,0],[134,17,134,18,0],[135,18,135,25,0],[135,27,135,37,0],[135,38,135,40,0],[135,41,135,65,0],[136,17,136,18,0],[137,46,137,63,0],[138,30,138,42,0],[140,17,140,18,0],[150,22,150,29,0],[150,31,150,41,0],[150,42,150,44,0],[150,45,150,63,0],[151,21,151,22,0],[152,50,152,67,0],[153,34,153,46,0],[155,21,155,22,0],[161,14,161,21,0],[161,23,161,33,0],[161,34,161,36,0],[161,37,161,55,0],[162,13,162,14,0],[163,26,163,43,0],[164,46,164,58,0],[165,52,165,71,0],[168,26,168,33,0],[168,35,168,43,0],[168,44,168,46,0],[168,47,168,59,0],[169,25,169,26,0],[170,34,170,55,0],[171,25,171,26,0],[175,26,175,33,0],[175,35,175,49,0],[175,50,175,52,0],[175,53,175,71,0],[176,25,176,26,0],[177,34,177,54,0],[177,55,177,81,0],[178,25,178,26,0],[181,13,181,14,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\LoginTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class LoginTests
+    {
+        [TestMethod]
+        public void TestLoginInitialization()
+        {
+            string expectedUsername = &quot;&quot;;
+            string expectedPassword = &quot;&quot;;
+            string expectedErrorMessage = &quot;&quot;;
+
+            Login login = new Login();
+
+            Assert.AreEqual(expectedUsername, login.Username);
+            Assert.AreEqual(expectedPassword, login.Password);
+            Assert.AreEqual(expectedErrorMessage, login.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestLoginProperties()
+        {
+            Login login = new Login();
+
+            string expectedUsername = &quot;testuser&quot;;
+            string expectedPassword = &quot;password123&quot;;
+            string expectedErrorMessage = &quot;Invalid username or password.&quot;;
+
+            login.Username = &quot;testuser&quot;;
+            login.Password = &quot;password123&quot;;
+            login.ErrorMessage = &quot;Invalid username or password.&quot;;
+
+            Assert.AreEqual(expectedUsername, login.Username);
+            Assert.AreEqual(expectedPassword, login.Password);
+            Assert.AreEqual(expectedErrorMessage, login.ErrorMessage);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,9,10,10,1],[11,13,11,42,1],[12,13,12,42,1],[13,13,13,46,1],[15,13,15,39,1],[17,13,17,63,1],[18,13,18,63,1],[19,13,19,71,1],[20,9,20,10,1],[24,9,24,10,1],[25,13,25,39,1],[27,13,27,50,1],[28,13,28,53,1],[29,13,29,75,1],[31,13,31,41,1],[32,13,32,44,1],[33,13,33,66,1],[35,13,35,63,1],[36,13,36,63,1],[37,13,37,71,1],[38,9,38,10,1]]);
+    </script>
+  </body>
+</html>

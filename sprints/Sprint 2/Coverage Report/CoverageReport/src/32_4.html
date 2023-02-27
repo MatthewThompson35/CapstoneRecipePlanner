@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\Homepage.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerDesktopApplication
+{
+    partial class Homepage
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            this.recipeListView = new System.Windows.Forms.ListView();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.viewIngredientsButton = new System.Windows.Forms.Button();
+            this.addRecipeButton = new System.Windows.Forms.Button();
+            this.showAvailableRecipesRadioButton = new System.Windows.Forms.RadioButton();
+            this.showAllRecipesRadioButton = new System.Windows.Forms.RadioButton();
+            this.noRecipesLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // recipeListView
+            // 
+            this.recipeListView.Location = new System.Drawing.Point(37, 134);
+            this.recipeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.recipeListView.Name = &quot;recipeListView&quot;;
+            this.recipeListView.Size = new System.Drawing.Size(433, 527);
+            this.recipeListView.TabIndex = 0;
+            this.recipeListView.UseCompatibleStateImageBehavior = false;
+            this.recipeListView.SelectedIndexChanged += new System.EventHandler(this.recipeListView_SelectedIndexChanged);
+            // 
+            // logoutButton
+            // 
+            this.logoutButton.Location = new System.Drawing.Point(406, 31);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.logoutButton.Name = &quot;logoutButton&quot;;
+            this.logoutButton.Size = new System.Drawing.Size(76, 48);
+            this.logoutButton.TabIndex = 1;
+            this.logoutButton.Text = &quot;Logout&quot;;
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Microsoft Sans Serif&quot;, 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(204, 71);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(102, 29);
+            this.label1.TabIndex = 2;
+            this.label1.Text = &quot;Recipes&quot;;
+            // 
+            // viewIngredientsButton
+            // 
+            this.viewIngredientsButton.Location = new System.Drawing.Point(62, 724);
+            this.viewIngredientsButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.viewIngredientsButton.Name = &quot;viewIngredientsButton&quot;;
+            this.viewIngredientsButton.Size = new System.Drawing.Size(382, 44);
+            this.viewIngredientsButton.TabIndex = 4;
+            this.viewIngredientsButton.Text = &quot;View Ingredients&quot;;
+            this.viewIngredientsButton.UseVisualStyleBackColor = true;
+            this.viewIngredientsButton.Click += new System.EventHandler(this.viewIngredientsButton_Click);
+            // 
+            // addRecipeButton
+            // 
+            this.addRecipeButton.Location = new System.Drawing.Point(62, 800);
+            this.addRecipeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.addRecipeButton.Name = &quot;addRecipeButton&quot;;
+            this.addRecipeButton.Size = new System.Drawing.Size(382, 41);
+            this.addRecipeButton.TabIndex = 5;
+            this.addRecipeButton.Text = &quot;Add Recipe&quot;;
+            this.addRecipeButton.UseVisualStyleBackColor = true;
+            // 
+            // showAvailableRecipesRadioButton
+            // 
+            this.showAvailableRecipesRadioButton.AutoSize = true;
+            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(42, 12);
+            this.showAvailableRecipesRadioButton.Name = &quot;showAvailableRecipesRadioButton&quot;;
+            this.showAvailableRecipesRadioButton.Size = new System.Drawing.Size(187, 24);
+            this.showAvailableRecipesRadioButton.TabIndex = 6;
+            this.showAvailableRecipesRadioButton.TabStop = true;
+            this.showAvailableRecipesRadioButton.Text = &quot;Show Available Recipes&quot;;
+            this.showAvailableRecipesRadioButton.UseVisualStyleBackColor = true;
+            this.showAvailableRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAvailableRecipesRadioButton_CheckedChanged);
+            // 
+            // showAllRecipesRadioButton
+            // 
+            this.showAllRecipesRadioButton.AutoSize = true;
+            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(42, 43);
+            this.showAllRecipesRadioButton.Name = &quot;showAllRecipesRadioButton&quot;;
+            this.showAllRecipesRadioButton.Size = new System.Drawing.Size(143, 24);
+            this.showAllRecipesRadioButton.TabIndex = 7;
+            this.showAllRecipesRadioButton.TabStop = true;
+            this.showAllRecipesRadioButton.Text = &quot;Show All Recipes&quot;;
+            this.showAllRecipesRadioButton.UseVisualStyleBackColor = true;
+            this.showAllRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAllRecipesRadioButton_CheckedChanged);
+            // 
+            // noRecipesLabel
+            // 
+            this.noRecipesLabel.AutoSize = true;
+            this.noRecipesLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.noRecipesLabel.Location = new System.Drawing.Point(126, 374);
+            this.noRecipesLabel.Name = &quot;noRecipesLabel&quot;;
+            this.noRecipesLabel.Size = new System.Drawing.Size(260, 28);
+            this.noRecipesLabel.TabIndex = 8;
+            this.noRecipesLabel.Text = &quot;There are no recipes to show&quot;;
+            this.noRecipesLabel.Visible = false;
+            // 
+            // Homepage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(514, 916);
+            this.Controls.Add(this.noRecipesLabel);
+            this.Controls.Add(this.showAllRecipesRadioButton);
+            this.Controls.Add(this.showAvailableRecipesRadioButton);
+            this.Controls.Add(this.addRecipeButton);
+            this.Controls.Add(this.viewIngredientsButton);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.logoutButton);
+            this.Controls.Add(this.recipeListView);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = &quot;Homepage&quot;;
+            this.Text = &quot;Recipe Planner Homepage&quot;;
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ListView recipeListView;
+        private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button viewIngredientsButton;
+        private System.Windows.Forms.Button addRecipeButton;
+        private RadioButton showAvailableRecipesRadioButton;
+        private RadioButton showAllRecipesRadioButton;
+        private Label noRecipesLabel;
+    }
+}
+
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,71,0],[32,13,32,67,0],[33,13,33,60,0],[34,13,34,76,0],[35,13,35,70,0],[36,13,36,91,0],[37,13,37,85,0],[38,13,38,68,0],[39,13,39,34,0],[43,13,43,78,0],[44,13,44,87,0],[45,13,45,57,0],[46,13,46,74,0],[47,13,47,46,0],[48,13,48,73,0],[49,13,49,123,0],[53,13,53,76,0],[54,13,54,85,0],[55,13,55,53,0],[56,13,56,70,0],[57,13,57,44,0],[58,13,58,47,0],[59,13,59,62,0],[60,13,60,89,0],[64,13,64,41,0],[65,13,65,156,0],[66,13,66,70,0],[67,13,67,41,0],[68,13,68,65,0],[69,13,69,38,0],[70,13,70,42,0],[74,13,74,85,0],[75,13,75,94,0],[76,13,76,71,0],[77,13,77,80,0],[78,13,78,53,0],[79,13,79,66,0],[80,13,80,71,0],[81,13,81,107,0],[85,13,85,79,0],[86,13,86,88,0],[87,13,87,59,0],[88,13,88,74,0],[89,13,89,47,0],[90,13,90,54,0],[91,13,91,65,0],[95,13,95,66,0],[96,13,96,94,0],[97,13,97,91,0],[98,13,98,90,0],[99,13,99,63,0],[100,13,100,65,0],[101,13,101,82,0],[102,13,102,81,0],[103,13,103,145,0],[107,13,107,60,0],[108,13,108,88,0],[109,13,109,79,0],[110,13,110,84,0],[111,13,111,57,0],[112,13,112,59,0],[113,13,113,70,0],[114,13,114,75,0],[115,13,115,133,0],[119,13,119,49,0],[120,13,120,150,0],[121,13,121,79,0],[122,13,122,57,0],[123,13,123,73,0],[124,13,124,46,0],[125,13,125,71,0],[126,13,126,49,0],[130,13,130,74,0],[131,13,131,74,0],[132,13,132,65,0],[133,13,133,52,0],[134,13,134,63,0],[135,13,135,69,0],[136,13,136,53,0],[137,13,137,59,0],[138,13,138,44,0],[139,13,139,50,0],[140,13,140,52,0],[141,13,141,72,0],[142,13,142,36,0],[143,13,143,51,0],[144,13,144,38,0],[145,13,145,34,0],[147,9,147,10,0]]);
+    </script>
+  </body>
+</html>
