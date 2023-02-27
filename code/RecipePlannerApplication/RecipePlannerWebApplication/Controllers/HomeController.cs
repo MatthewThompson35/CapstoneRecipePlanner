@@ -68,11 +68,11 @@ public class HomeController : Controller
     {
         try
         {
-            List<Recipe> recipes = RecipeDAL.getRecipes();
+            List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
             foreach (var recipe in recipes)
             {
-                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
-                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId);
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
             }
 
             this.addToAvailableRecipes(recipes);
@@ -98,7 +98,7 @@ public class HomeController : Controller
             foreach (var recipe in ViewBag.AllRecipes)
             {
                 var add = true;
-                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId);
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 foreach (RecipeIngredient ingredient in recipe.Ingredients)
                 {
                     var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
@@ -262,7 +262,7 @@ public class HomeController : Controller
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
-            IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement);
+            IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement, Connection.ConnectionString);
             ViewBag.ingredients = IngredientDAL.getIngredients();
             return View("IngredientsPage", ViewBag.ingredients);
         }

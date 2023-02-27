@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\Register.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary.Database;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    /// Register partial class.
+    /// &lt;/summary&gt;
+    /// &lt;seealso cref=&quot;System.Windows.Forms.Form&quot; /&gt;
+    public partial class Register : Form
+    {
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;Register&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        public Register()
+        {
+            InitializeComponent();
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            this.passwordErrorLabel.Visible = false;
+            this.registerCheck();
+        }
+
+        private void registerCheck()
+        {
+            if (this.IsTextEmpty())
+            {
+                this.passwordErrorLabel.Text = &quot;Please fill out all fields&quot;;
+                this.passwordErrorLabel.Visible = true;
+            }
+            else
+            {
+                var username = this.usernameTextBox.Text;
+                List&lt;string&gt; list = Database.ContainsUser(username);
+                if (list.Count() &gt; 0)
+                {
+                    this.passwordErrorLabel.Text = &quot;Username is a duplicate&quot;;
+                    this.passwordErrorLabel.Visible = true;
+                }
+                else if (this.passwordConfirmTextBox.Text.Equals(this.passwordTextBox.Text))
+                {
+                    this.createNewUser(username, out var password);
+                }
+                else
+                {
+                    this.passwordErrorLabel.Text = &quot;Passwords do not match&quot;;
+                    this.passwordErrorLabel.Visible = true;
+                }
+            }
+        }
+
+        private void createNewUser(string username, out string password)
+        {
+            password = this.passwordTextBox.Text;
+            Database.CreateUser(username, password);
+            this.Hide();
+            Form form = new LoginPage();
+            form.ShowDialog();
+        }
+
+        private bool IsTextEmpty()
+        {
+            return this.usernameTextBox.Text.Equals(&quot;&quot;) || this.passwordTextBox.Text.Equals(&quot;&quot;) || this.passwordConfirmTextBox.Text.Equals(&quot;&quot;);
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form form = new LoginPage();
+            form.ShowDialog();
+        }
+    }
+
+
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,26,0],[15,9,15,10,0],[16,13,16,35,0],[17,9,17,10,0],[20,9,20,10,0],[21,13,21,53,0],[22,13,22,34,0],[23,9,23,10,0],[26,9,26,10,0],[27,13,27,36,0],[28,13,28,14,0],[29,17,29,77,0],[30,17,30,56,0],[31,13,31,14,0],[33,13,33,14,0],[34,17,34,58,0],[35,17,35,69,0],[36,17,36,38,0],[37,17,37,18,0],[38,21,38,78,0],[39,21,39,60,0],[40,17,40,18,0],[41,22,41,93,0],[42,17,42,18,0],[43,21,43,68,0],[44,17,44,18,0],[46,17,46,18,0],[47,21,47,77,0],[48,21,48,60,0],[49,17,49,18,0],[50,13,50,14,0],[51,9,51,10,0],[54,9,54,10,0],[55,13,55,50,0],[56,13,56,53,0],[57,13,57,25,0],[58,13,58,41,0],[59,13,59,31,0],[60,9,60,10,0],[63,9,63,10,0],[64,13,64,144,0],[65,9,65,10,0],[68,9,68,10,0],[69,13,69,25,0],[70,13,70,41,0],[71,13,71,31,0],[72,9,72,10,0]]);
+    </script>
+  </body>
+</html>

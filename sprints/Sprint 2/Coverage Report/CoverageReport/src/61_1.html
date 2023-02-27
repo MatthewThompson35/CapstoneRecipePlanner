@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\IngredientDalTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class IngredientDalTests
+    {
+        [TestMethod]
+        public void TestGetIngredientsWithName()
+        {
+            ActiveUser.username = &quot;global&quot;;
+            List&lt;Ingredient&gt; actualIngredients = IngredientDAL.getIngredients(&quot;cheese&quot;);
+
+            Assert.AreEqual(true, actualIngredients.Count &gt; 0);
+        }
+
+        public void TestGetIngredients()
+        {
+            ActiveUser.username = &quot;global&quot;;
+            List&lt;Ingredient&gt; actualIngredients = IngredientDAL.getIngredients();
+
+            Assert.AreEqual(true, actualIngredients.Count &gt; 0);
+        }
+
+
+        [TestMethod]
+        public void DecrementQuantity()
+        {
+
+            ActiveUser.username = &quot;global&quot;;
+            var list = IngredientDAL.getIngredients();
+            var expectedQuantity = list[0].quantity - 1;
+            IngredientDAL.decrementQuantity((int) list[0].id, (int) list[0].quantity);
+            list = IngredientDAL.getIngredients();
+            Assert.IsNotNull(list[0]);
+            Assert.AreEqual(list[0].quantity, expectedQuantity);
+        }
+
+        [TestMethod]
+        public void IncrementQuantity()
+        {
+
+            ActiveUser.username = &quot;global&quot;;
+            var list = IngredientDAL.getIngredients();
+            var expectedQuantity = list[0].quantity + 1;
+            IngredientDAL.incrementQuantity((int) list[0].id, (int) list[0].quantity);
+            list = IngredientDAL.getIngredients();
+            Assert.IsNotNull(list[0]);
+            Assert.AreEqual(list[0].quantity, expectedQuantity);
+        }
+
+        [TestMethod]
+        public void TestRemoveIngredient()
+        {
+
+            int ingredientId = 900;
+
+            IngredientDAL.RemoveIngredient(ingredientId);
+            ActiveUser.username = &quot;global&quot;;
+            var ingredients = IngredientDAL.getIngredients();
+            Ingredient ingredient = null;
+            foreach (var item in ingredients)
+            {
+                if (item.id == 900)
+                {
+                    ingredient = item;
+                }
+            }
+
+            Assert.IsNull(ingredient);
+        }
+
+        [TestMethod]
+        public void TestAddIngredient()
+        {
+            ActiveUser.username = &quot;global&quot;;
+
+            string name = &quot;Flour&quot;;
+            int quantity = 2;
+            string measurement = &quot;G&quot;;
+
+            IngredientDAL.addIngredient(name, quantity, measurement, Connection.TestsConnectionString);
+
+            using var connection = new MySqlConnection(Connection.TestsConnectionString);
+            connection.Open();
+            var query = @&quot;Select * from ingredient where username = @username and ingredientName = @name&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue(&quot;@username&quot;, ActiveUser.username);
+            command.Parameters.AddWithValue(&quot;@name&quot;, name);
+            using var reader = command.ExecuteReader();
+            
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual(quantity, reader.GetInt32(&quot;quantity&quot;));
+            Assert.AreEqual(measurement, reader.GetString(&quot;Measurement&quot;));
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[11,9,11,10,1],[12,13,12,44,1],[13,13,13,89,1],[15,13,15,64,1],[16,9,16,10,1],[19,9,19,10,0],[20,13,20,44,0],[21,13,21,81,0],[23,13,23,64,0],[24,9,24,10,0],[29,9,29,10,1],[31,13,31,44,1],[32,13,32,55,1],[33,13,33,57,1],[34,13,34,87,1],[35,13,35,51,1],[36,13,36,39,1],[37,13,37,65,1],[38,9,38,10,1],[42,9,42,10,1],[44,13,44,44,1],[45,13,45,55,1],[46,13,46,57,1],[47,13,47,87,1],[48,13,48,51,1],[49,13,49,39,1],[50,13,50,65,1],[51,9,51,10,1],[55,9,55,10,1],[57,13,57,36,1],[59,13,59,58,1],[60,13,60,44,1],[61,13,61,62,1],[62,13,62,42,1],[63,13,63,20,1],[63,22,63,30,1],[63,31,63,33,1],[63,34,63,45,1],[64,13,64,14,1],[65,17,65,36,1],[66,17,66,18,0],[67,21,67,39,0],[68,17,68,18,0],[69,13,69,14,1],[71,13,71,39,1],[72,9,72,10,1],[76,9,76,10,1],[77,13,77,44,1],[79,13,79,35,1],[80,13,80,30,1],[81,13,81,38,1],[83,13,83,104,1],[85,13,85,90,1],[86,13,86,31,1],[87,13,87,107,1],[88,13,88,69,1],[89,13,89,79,1],[90,13,90,60,1],[91,13,91,56,1],[93,13,93,42,1],[94,13,94,68,1],[95,13,95,75,1],[96,9,96,10,1]]);
+    </script>
+  </body>
+</html>

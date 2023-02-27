@@ -47,9 +47,9 @@ namespace RecipePlannerLibrary.Database
         /// <param name="name">The name of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
         /// <param name="measurement">The measurement of the ingredient.</param>
-        public static void addIngredient(string name, int quantity, string measurement)
+        public static void addIngredient(string name, int quantity, string measurement, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query =
                 @"Insert into ingredient (username, ingredientName, quantity, Measurement) values(@username, @name, @quantity, @Measurement);";

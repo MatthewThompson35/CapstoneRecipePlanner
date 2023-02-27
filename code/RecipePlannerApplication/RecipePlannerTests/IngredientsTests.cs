@@ -18,6 +18,7 @@
             Assert.AreEqual(expectedName, ingredient.name, "The name was not set correctly");
             Assert.AreEqual(expectedQuantity, ingredient.quantity, "The quantity was not set correctly");
             Assert.AreEqual(expectedId, ingredient.id, "The id was not set correctly");
+            Assert.AreEqual(measurement, ingredient.measurement, "The measurement was not set correctly");
         }
 
         [TestMethod]
@@ -35,6 +36,4 @@
             Assert.AreEqual(name + " - Quantity: " + quantity.ToString(), result, "The ToString method returned an incorrect string");
         }
     }
-
-
 }

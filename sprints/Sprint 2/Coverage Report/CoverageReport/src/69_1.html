@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\UtilsTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class UtilsTests
+    {
+        [TestMethod]
+        public void TestGetHex()
+        {
+            var inputString = &quot;test&quot;;
+            var expectedResult = &quot;7400650073007400&quot;;
+
+            var result = Util.GetHex(inputString);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void TestGetHash()
+        {
+            var inputString = &quot;test&quot;;
+            var expectedResult = &quot;098f6bcd4621d373cade4e832627b4f6&quot;;
+
+            var result = Util.GetHash(inputString);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,10,1],[9,13,9,38,1],[10,13,10,53,1],[12,13,12,51,1],[14,13,14,53,1],[15,9,15,10,1],[19,9,19,10,1],[20,13,20,38,1],[21,13,21,69,1],[23,13,23,52,1],[25,13,25,53,1],[26,9,26,10,1]]);
+    </script>
+  </body>
+</html>

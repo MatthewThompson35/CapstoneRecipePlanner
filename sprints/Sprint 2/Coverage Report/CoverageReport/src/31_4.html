@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\Homepage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    ///     The Homepage partial class.
+    /// &lt;/summary&gt;
+    public partial class Homepage : Form
+    {
+        private Recipe selectedRecipe;
+
+        /// &lt;summary&gt;
+        ///     Gets or sets the list of Recipes for the Homepage.
+        /// &lt;/summary&gt;
+        public List&lt;Recipe&gt; Recipes { get; set; }
+
+        /// &lt;summary&gt;
+        ///     Initializes a Homepage for the recipes.
+        /// &lt;/summary&gt;
+        public Homepage()
+        {
+            InitializeComponent();
+            this.Recipes = new List&lt;Recipe&gt;();
+
+            this.showAvailableRecipesRadioButton.Checked = true;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets a selected recipe from the recipes list view in the homepage.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;a selected recipe.&lt;/returns&gt;
+        public Recipe GetSelectedRecipe()
+        {
+            return this.selectedRecipe;
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginPage login = new LoginPage();
+            login.Show();
+        }
+
+        private void viewIngredientsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            IngredientsPage ingredientsPage = new IngredientsPage();
+
+            ingredientsPage.Show();
+        }
+
+        private void viewAllRecipes()
+        {
+            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+            {
+                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+            }
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+
+        private void showAvailableRecipes()
+        {
+
+            List&lt;Recipe&gt; availableRecipes = new List&lt;Recipe&gt;();
+
+            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+            {
+                var add = true;
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                foreach (RecipeIngredient ingredient in recipe.Ingredients)
+                {
+                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                    if (ing != null &amp;&amp; ing.Count &gt; 0)
+                    {
+                        if (ing[0].quantity &lt; ingredient.Quantity)
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                    }
+
+
+                }
+                if (add)
+                {
+                    availableRecipes.Add(recipe);
+                }
+
+
+            }
+
+            if (availableRecipes.Count &gt; 0)
+            {
+                this.noRecipesLabel.Visible = false;
+                foreach (var availableRecipe in availableRecipes)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem { Text = availableRecipe.Name, Tag = availableRecipe });
+                }
+            }
+            else
+            {
+                this.noRecipesLabel.Visible = true;
+            }
+
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+
+        private void recipeListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.recipeListView.SelectedItems.Count &gt; 0)
+            {
+                this.selectedRecipe = (Recipe)this.recipeListView.SelectedItems[0].Tag;
+                
+
+                this.Hide();
+
+                RecipeDetailsPage detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+                
+            }
+        }
+
+        private void showAllRecipesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.showAllRecipesRadioButton.Checked)
+            {
+                this.viewAllRecipes();
+                this.noRecipesLabel.Visible = false;
+            }
+
+            else
+            {
+                this.recipeListView.Clear();
+                return;
+            }
+            
+        }
+
+        private void showAvailableRecipesRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.showAvailableRecipesRadioButton.Checked)
+            {
+                this.showAvailableRecipes();
+            }
+            else
+            {
+                this.recipeListView.Clear();
+                return;
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[27,39,27,43,0],[27,44,27,48,0],[32,9,32,26,0],[33,9,33,10,0],[34,13,34,35,0],[35,13,35,47,0],[37,13,37,65,0],[38,9,38,10,0],[45,9,45,10,0],[46,13,46,40,0],[47,9,47,10,0],[50,9,50,10,0],[51,13,51,25,0],[52,13,52,47,0],[53,13,53,26,0],[54,9,54,10,0],[57,9,57,10,0],[58,13,58,25,0],[60,13,60,69,0],[62,13,62,36,0],[63,9,63,10,0],[66,9,66,10,0],[67,13,67,20,0],[67,22,67,32,0],[67,33,67,35,0],[67,36,67,85,0],[68,13,68,14,0],[69,17,69,102,0],[70,13,70,14,0],[71,13,71,50,0],[72,13,72,63,0],[73,9,73,10,0],[76,9,76,10,0],[78,13,78,64,0],[80,13,80,20,0],[80,22,80,32,0],[80,33,80,35,0],[80,36,80,85,0],[81,13,81,14,0],[82,17,82,32,0],[83,17,83,118,0],[84,17,84,24,0],[84,26,84,53,0],[84,54,84,56,0],[84,57,84,75,0],[85,17,85,18,0],[86,21,86,87,0],[87,21,87,54,0],[88,21,88,22,0],[89,25,89,67,0],[90,25,90,26,0],[91,29,91,41,0],[92,25,92,26,0],[93,21,93,22,0],[95,21,95,22,0],[96,25,96,37,0],[97,21,97,22,0],[100,17,100,18,0],[101,17,101,25,0],[102,17,102,18,0],[103,21,103,50,0],[104,17,104,18,0],[107,13,107,14,0],[109,13,109,44,0],[110,13,110,14,0],[111,17,111,53,0],[112,17,112,24,0],[112,26,112,45,0],[112,46,112,48,0],[112,49,112,65,0],[113,17,113,18,0],[114,21,114,124,0],[115,17,115,18,0],[116,13,116,14,0],[118,13,118,14,0],[119,17,119,52,0],[120,13,120,14,0],[122,13,122,50,0],[123,13,123,63,0],[124,9,124,10,0],[127,9,127,10,0],[128,13,128,61,0],[129,13,129,14,0],[130,17,130,88,0],[133,17,133,29,0],[135,17,135,77,0],[136,17,136,36,0],[138,13,138,14,0],[139,9,139,10,0],[142,9,142,10,0],[143,13,143,56,0],[144,13,144,14,0],[145,17,145,39,0],[146,17,146,53,0],[147,13,147,14,0],[150,13,150,14,0],[151,17,151,45,0],[152,17,152,24,0],[155,9,155,10,0],[158,9,158,10,0],[159,13,159,62,0],[160,13,160,14,0],[161,17,161,45,0],[162,13,162,14,0],[164,13,164,14,0],[165,17,165,45,0],[166,17,166,24,0],[168,9,168,10,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeDetailsPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary.Database;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using RecipePlannerLibrary;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    ///     Recipe Detail Page partial class.
+    /// &lt;/summary&gt;
+    public partial class RecipeDetailsPage : Form
+    {
+        private Homepage homepage;
+        
+        /// &lt;summary&gt;
+        ///     Initializes the recipe details page for the recipes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;page&quot;&gt;The homepage.&lt;/param&gt;
+        public RecipeDetailsPage(Homepage page)
+        {
+            InitializeComponent();
+            this.homepage = page;
+
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Homepage homepage = new Homepage();
+            homepage.Show();
+
+        }
+
+        private string displayRecipeDetails()
+        {
+            string output = null;
+
+            string description = this.homepage.GetSelectedRecipe().Name + Environment.NewLine + this.homepage.GetSelectedRecipe().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = &quot;Steps&quot; + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + &quot;. &quot; + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + &quot;Ingredients&quot; + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + &quot; &quot; + ingredient.Measurement + &quot; &quot; + ingredient.IngredientName + Environment.NewLine;
+            }
+            
+            output += description + steps + ingredients;
+            return output;
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[26,9,26,48,0],[27,9,27,10,0],[28,13,28,35,0],[29,13,29,34,0],[31,13,31,74,0],[32,9,32,10,0],[35,9,35,10,0],[36,13,36,25,0],[38,13,38,48,0],[39,13,39,29,0],[41,9,41,10,0],[44,9,44,10,0],[45,13,45,34,0],[47,13,47,187,0],[49,13,49,58,0],[51,13,51,20,0],[51,22,51,30,0],[51,31,51,33,0],[51,34,51,134,0],[52,13,52,14,0],[53,17,53,94,0],[54,13,54,14,0],[56,13,56,92,0],[58,13,58,20,0],[58,22,58,36,0],[58,37,58,39,0],[58,40,58,146,0],[59,13,59,14,0],[60,17,60,139,0],[61,13,61,14,0],[63,13,63,57,0],[64,13,64,27,0],[65,9,65,10,0]]);
+    </script>
+  </body>
+</html>

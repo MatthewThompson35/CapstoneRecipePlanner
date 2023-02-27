@@ -1,10 +1,11 @@
-﻿namespace RecipePlannerTests
+﻿using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests
 {
     [TestClass]
     public class IngredientDalTests
     {
-
-
         [TestMethod]
         public void TestGetIngredientsWithName()
         {
@@ -30,7 +31,7 @@
             ActiveUser.username = "global";
             var list = IngredientDAL.getIngredients();
             var expectedQuantity = list[0].quantity - 1;
-            IngredientDAL.decrementQuantity((int)list[0].id, (int)list[0].quantity);
+            IngredientDAL.decrementQuantity((int) list[0].id, (int) list[0].quantity);
             list = IngredientDAL.getIngredients();
             Assert.IsNotNull(list[0]);
             Assert.AreEqual(list[0].quantity, expectedQuantity);
@@ -43,7 +44,7 @@
             ActiveUser.username = "global";
             var list = IngredientDAL.getIngredients();
             var expectedQuantity = list[0].quantity + 1;
-            IngredientDAL.incrementQuantity((int)list[0].id, (int)list[0].quantity);
+            IngredientDAL.incrementQuantity((int) list[0].id, (int) list[0].quantity);
             list = IngredientDAL.getIngredients();
             Assert.IsNotNull(list[0]);
             Assert.AreEqual(list[0].quantity, expectedQuantity);
@@ -68,6 +69,30 @@
             }
 
             Assert.IsNull(ingredient);
+        }
+
+        [TestMethod]
+        public void TestAddIngredient()
+        {
+            ActiveUser.username = "global";
+
+            string name = "Flour";
+            int quantity = 2;
+            string measurement = "G";
+
+            IngredientDAL.addIngredient(name, quantity, measurement, Connection.TestsConnectionString);
+
+            using var connection = new MySqlConnection(Connection.TestsConnectionString);
+            connection.Open();
+            var query = @"Select * from ingredient where username = @username and ingredientName = @name";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@username", ActiveUser.username);
+            command.Parameters.AddWithValue("@name", name);
+            using var reader = command.ExecuteReader();
+            
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual(quantity, reader.GetInt32("quantity"));
+            Assert.AreEqual(measurement, reader.GetString("Measurement"));
         }
     }
 }
