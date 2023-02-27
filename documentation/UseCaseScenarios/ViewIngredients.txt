@@ -1,8 +1,7 @@
-Context - User clicks on the ingredients button
-
+Context - User selects to go to ingredient page
 Primary Flow
-1 - user clicks ingredients button
-2 - system displays the ingredients page
+1 - system displays the ingredients page
 
 Alternative Flow(s)
-none
+BAD CONNECTION
+a1 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
