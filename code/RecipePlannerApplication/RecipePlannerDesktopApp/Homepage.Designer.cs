@@ -40,6 +40,8 @@
             // 
             // recipeListView
             // 
+            this.recipeListView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.recipeListView.GridLines = true;
             this.recipeListView.Location = new System.Drawing.Point(37, 134);
             this.recipeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.recipeListView.Name = "recipeListView";
@@ -129,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 916);
+            this.ClientSize = new System.Drawing.Size(514, 869);
             this.Controls.Add(this.noRecipesLabel);
             this.Controls.Add(this.showAllRecipesRadioButton);
             this.Controls.Add(this.showAvailableRecipesRadioButton);
