@@ -330,6 +330,15 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    ///     Goes to add ingredients page.
+    /// </summary>
+    /// <returns>The add ingredients page or login on server connection</returns>
+    public ActionResult goToPlannedMealsPage()
+    {
+        return View("PlannedMealsPage");
+    }
+
+    /// <summary>
     ///     Creates the user.
     /// </summary>
     /// <param name="username">The username.</param>
