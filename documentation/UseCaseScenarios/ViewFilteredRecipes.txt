@@ -1,0 +1,12 @@
+Context - User wants to be able to filter recipes by certain tags and is on recipes page
+
+Primary Flow
+1 - User selects which tags to filter by
+2 - System retrieves tagged recipes
+
+Alternative Flow(s) 
+NO RECIPES
+a2 - system notifies user there are no recipes
+return to 1
+BAD CONNECTION
+a2 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
