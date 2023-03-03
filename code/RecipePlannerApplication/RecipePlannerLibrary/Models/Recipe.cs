@@ -35,6 +35,11 @@ namespace RecipePlannerLibrary.Models
         public List<RecipeIngredient> Ingredients { get; set; }
 
         /// <summary>
+        /// Gets or sets the Tags for the Recipe.
+        /// </summary>
+        public List<string> Tags { get; set; }
+
+        /// <summary>
         ///     Initializes the Recipe with the specified recipe id, the recipe name, and the description.
         /// </summary>
         /// <param name="recipeId">The recipe id of the recipe.</param>
@@ -47,6 +52,7 @@ namespace RecipePlannerLibrary.Models
             this.Description = description;
             this.Steps = new List<RecipeStep>();
             this.Ingredients = new List<RecipeIngredient>();
+            this.Tags = new List<string>();
         }
 
     }

@@ -59,11 +59,11 @@
 
         #recipe-details-box {
             border: 1px solid black;
-            height: 600px;
+            height: 640px;
             padding: 10px;
             position: fixed;
-            top: 220px;
-            width: 20%;
+            top: 175px;
+            width: 30%;
         }
 
         #recipe-details-box h3 { margin-top: 0; }
@@ -95,6 +95,38 @@
             right: 10px;
             top: 5px;
         }
+
+        #search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #search-container label {
+            margin-right: 10px;
+        }
+
+        #search-container input[type="text"] {
+            flex: 1;
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        #search-container button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        #search-container button:hover {
+            background-color: #3e8e41;
+        }
+
+        #search-container button:active {
+            background-color: #4CAF50;
+        }
     </style>
 
     <script>
@@ -118,44 +150,49 @@
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'"id="logout">Logout</button>
     <div id="recipe-list">
-            <h2>Recipes</h2>
-            <table id="available-recipes">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @if (ViewBag.AvailableRecipes.Count == 0)
-                {
-                    <tr>
-                        <td colspan="1" style="text-align:center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
-                    </tr>
-                }
-                @foreach (var recipe in ViewBag.AvailableRecipes)
-                {
-                    <tr onclick="showRecipe('@recipe.RecipeId')">
-                        <td>@recipe.Name</td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-            <table id="all-recipes" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var recipe in ViewBag.AllRecipes)
-                    {
-                        <tr onclick="showRecipe('@recipe.RecipeId')">
-                            <td>@recipe.Name</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div id="search-container">
+            <label for="search-bar">Search Tags:</label>
+            <input type="text" id="search-bar" placeholder="Enter tags...">
+            <button onclick="searchRecipes()">Search</button>
         </div>
+        <h2>Recipes</h2>
+        <table id="available-recipes">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (ViewBag.AvailableRecipes.Count == 0)
+            {
+                <tr>
+                    <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
+                </tr>
+            }
+            @foreach (var recipe in ViewBag.AvailableRecipes)
+            {
+                <tr onclick="showRecipe('@recipe.RecipeId')">
+                    <td>@recipe.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <table id="all-recipes" style="display: none;">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                <tr onclick="showRecipe('@recipe.RecipeId')">
+                    <td>@recipe.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
     <div id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
             @foreach (var recipe in ViewBag.AllRecipes)
