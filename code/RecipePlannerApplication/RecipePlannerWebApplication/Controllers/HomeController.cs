@@ -330,6 +330,19 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    ///     Goes to add ingredients page.
+    /// </summary>
+    /// <returns>The add ingredients page or login on server connection</returns>
+    public ActionResult goToPlannedMealsPage()
+    {
+        ViewBag.AllRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+    
+        ViewBag.Header = "This weeks meals";
+        return View("PlannedMealsPage");
+    }
+
+    /// <summary>
     ///     Creates the user.
     /// </summary>
     /// <param name="username">The username.</param>
