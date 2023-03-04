@@ -99,6 +99,32 @@ namespace RecipePlannerLibrary.Database
             return steps;
         }
 
+        /// <summary>
+        ///     Gets the recipe tags associated with a specified recipeID.
+        /// </summary>
+        ///
+        /// <param name="id">The recipe id.</param>
+        /// <param name="connectionString">The connection string for the table.</param>
+        /// <returns>List of all tags associated with a specified recipeID</returns>
+        public static List<string> getTagsForRecipe(int id, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var tags = new List<string>();
+            var query = @"Select * from recipe_tag where recipeID=@id;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var tagName = reader.GetString(1);
+                tags.Add(tagName);
+            }
+
+            connection.Close();
+            return tags;
+        }
+
         #endregion
     }
 }
