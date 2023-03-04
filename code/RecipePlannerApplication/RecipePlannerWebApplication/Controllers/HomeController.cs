@@ -275,22 +275,36 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to ingredients page.
+    /// Goes to ingredients page.
     /// </summary>
-    /// <returns>The ingredients page or login on server connection error</returns>
-    public ActionResult goToIngredientsPage()
+    /// <param name="page">The page.</param>
+    /// <returns> the ingredients page with the specified page of ingredients</returns>
+    public ActionResult goToIngredientsPage(int? page)
     {
         try
         {
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            const int pageSize = 5; // Change this to the desired page size
+            int currentPage = page ?? 1;
+            List<Ingredient> allIngredients = IngredientDAL.getIngredients();
+            int totalIngredients = allIngredients.Count;
+            int totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+
+            List<Ingredient> ingredientsOnPage = allIngredients
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.currentPage = currentPage;
+            ViewBag.totalPages = totalPages;
+            ViewBag.ingredientsOnPage = ingredientsOnPage;
+
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
         }
-
-        return View("Index");
     }
 
     /// <summary>
