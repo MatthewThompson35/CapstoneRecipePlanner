@@ -235,13 +235,10 @@
     document.getElementById("search-button").addEventListener("click", function () {
         var tag = document.getElementById("search-bar").value;
         var recipes = @Html.Raw(Json.Serialize(ViewBag.AllRecipes));
-        console.log(recipes);
 
         var filtered = [];
 
         for (var i = 0; i < recipes.length; i++) {
-            console.log(recipes[i].name);
-            console.log(recipes[i].tags);
             if (recipes[i].tags != null) {
                 for (var j = 0; j < recipes[i].tags.length; j++) {
                     if (recipes[i].tags[j].toLowerCase() == tag.toLowerCase()) {
@@ -266,14 +263,15 @@
             cell.style.textAlign = "center";
             cell.innerHTML = "No recipes found with the entered tag.";
         }
-
+        
+        console.log(recipes);
         for (var i = 0; i < recipes.length; i++) {
             var row = table.insertRow();
             var nameCell = row.insertCell();
             nameCell.innerHTML = recipes[i].name;
             var tagsCell = row.insertCell();
             tagsCell.innerHTML = recipes[i].tags.join(", ");
-            row.setAttribute("onclick", "showRecipe('" + recipes[i].recipeid + "')");
+            row.setAttribute("onclick", "showRecipe('" + recipes[i].recipeId + "')");
             row.style.cursor = "pointer";
         }
 
