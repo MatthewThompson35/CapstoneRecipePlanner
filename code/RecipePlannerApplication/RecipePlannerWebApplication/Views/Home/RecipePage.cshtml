@@ -30,8 +30,8 @@
 
         #recipe-container {
             display: flex;
-            margin-top: 50px;
             margin-right: 50px;
+            margin-top: 50px;
         }
 
         #recipe-list { flex: 1; }
@@ -54,7 +54,6 @@
             display: flex;
             flex: 1;
             margin-left: 50px;
-            
         }
 
         #recipe-details-box {
@@ -97,14 +96,12 @@
         }
 
         #search-container {
-            display: flex;
             align-items: center;
+            display: flex;
             margin-bottom: 20px;
         }
 
-        #search-container label {
-            margin-right: 10px;
-        }
+        #search-container label { margin-right: 10px; }
 
         #search-container input[type="text"] {
             flex: 1;
@@ -120,40 +117,24 @@
             padding: 5px 10px;
         }
 
-        #search-container button:hover {
-            background-color: #3e8e41;
-        }
+        #search-container button:hover { background-color: #3e8e41; }
 
-        #search-container button:active {
-            background-color: #4CAF50;
-        }
+        #search-container button:active { background-color: #4CAF50; }
     </style>
 
-    <script>
-        function showRecipe(recipeId) {
-            var recipeDiv = document.getElementById(recipeId);
-            var currentDiv = document.querySelector('#recipe-details-box > div[style*="display: block"]');
-
-            if (currentDiv) {
-                currentDiv.style.display = 'none';
-            }
-
-            recipeDiv.style.display = 'block';
-        }
-
-    </script>
 </head>
 <body>
-
-<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('available-recipes').style.display = 'block';" checked> Show Available Recipes<br>
-<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes<br>
+<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('available-recipes').style.display='block' ;" checked> Show Available Recipes
+<br>
+<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes
+<br>
 <div id="recipe-container">
-    <button onclick="location.href='@Url.Action("Index")'"id="logout">Logout</button>
+    <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
     <div id="recipe-list">
         <div id="search-container">
             <label for="search-bar">Search Tags:</label>
-            <input type="text" id="search-bar" placeholder="Enter tags...">
-            <button onclick="searchRecipes()">Search</button>
+            <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
+            <input type="submit" value="Filter" id="search-button">
         </div>
         <h2>Recipes</h2>
         <table id="available-recipes">
@@ -192,6 +173,16 @@
             }
             </tbody>
         </table>
+        <table id="filtered-recipes" style="display: none;">
+            <thead>
+            <tr >
+                <th>Name</th>
+                <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
     <div id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
@@ -214,10 +205,82 @@
                             <li>@ingredient.Quantity @ingredient.IngredientName</li>
                         }
                     </ul>
+                    @if (recipe.Tags != null && recipe.Tags.Count > 0) {
+                        <h4>Tags</h4>
+                        <ul class="recipe-tags">
+                            @foreach (var tag in recipe.Tags)
+                            {
+                                <li>@tag</li>
+                            }
+                        </ul>
+                    }
                 </div>
             }
         </div>
     </div>
 </div>
 </body>
+<script>
+    function showRecipe(recipeId) {
+        var recipeDiv = document.getElementById(recipeId);
+        var currentDiv = document.querySelector('#recipe-details-box > div[style*="display: block"]');
+
+        if (currentDiv) {
+            currentDiv.style.display = 'none';
+        }
+
+        recipeDiv.style.display = 'block';
+    }
+
+    document.getElementById("search-button").addEventListener("click", function () {
+        var tag = document.getElementById("search-bar").value;
+        var recipes = @Html.Raw(Json.Serialize(ViewBag.AllRecipes));
+        console.log(recipes);
+
+        var filtered = [];
+
+        for (var i = 0; i < recipes.length; i++) {
+            console.log(recipes[i].name);
+            console.log(recipes[i].tags);
+            if (recipes[i].tags != null) {
+                for (var j = 0; j < recipes[i].tags.length; j++) {
+                    if (recipes[i].tags[j].toLowerCase() == tag.toLowerCase()) {
+                        filtered.push(recipes[i]);
+                        break;
+                    }
+                }
+            }
+        }
+
+        showFilteredRecipes(filtered);
+    });
+
+    function showFilteredRecipes(recipes) {
+        var table = document.getElementById("filtered-recipes").getElementsByTagName("tbody")[0];
+        table.innerHTML = "";
+
+        if (recipes.length == 0) {
+            var row = table.insertRow();
+            var cell = row.insertCell();
+            cell.colSpan = "2";
+            cell.style.textAlign = "center";
+            cell.innerHTML = "No recipes found with the entered tag.";
+        }
+
+        for (var i = 0; i < recipes.length; i++) {
+            var row = table.insertRow();
+            var nameCell = row.insertCell();
+            nameCell.innerHTML = recipes[i].name;
+            var tagsCell = row.insertCell();
+            tagsCell.innerHTML = recipes[i].tags.join(", ");
+            row.setAttribute("onclick", "showRecipe('" + recipes[i].recipeid + "')");
+            row.style.cursor = "pointer";
+        }
+
+        document.getElementById('all-recipes').style.display = 'none';
+        document.getElementById('filtered-recipes').style.display = 'block';
+        document.getElementById('available-recipes').style.display = 'none';
+    }
+
+</script>
 </html>
