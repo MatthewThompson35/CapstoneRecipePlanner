@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
@@ -154,8 +156,8 @@ public class HomeController : Controller
 
             quantity = this.getItemQuantity(ingredientID);
             IngredientDAL.decrementQuantity(ingredientID, quantity);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            this.setupIngredientsPage(ViewBag.currentPage);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -198,9 +200,9 @@ public class HomeController : Controller
             var ingredientID = int.Parse(id);
 
             quantity = this.getItemQuantity(ingredientID);
-            IngredientDAL.incrementQuantity(ingredientID, quantity);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            IngredientDAL.incrementQuantity(ingredientID, quantity);    
+            this.setupIngredientsPage(ViewBag.currentPage);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -220,8 +222,8 @@ public class HomeController : Controller
         try
         {
             IngredientDAL.RemoveIngredient(int.Parse(id));
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            this.setupIngredientsPage(ViewBag.currentPage);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -264,8 +266,9 @@ public class HomeController : Controller
             }
 
             IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement, Connection.ConnectionString);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            int totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count/ 5);
+            this.setupIngredientsPage(totalPages);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -284,21 +287,7 @@ public class HomeController : Controller
     {
         try
         {
-            const int pageSize = 5; // Change this to the desired page size
-            int currentPage = page ?? 1;
-            List<Ingredient> allIngredients = IngredientDAL.getIngredients();
-            int totalIngredients = allIngredients.Count;
-            int totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
-
-            List<Ingredient> ingredientsOnPage = allIngredients
-                .Skip((currentPage - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
-            ViewBag.currentPage = currentPage;
-            ViewBag.totalPages = totalPages;
-            ViewBag.ingredientsOnPage = ingredientsOnPage;
-
+            this.setupIngredientsPage(page);
             return View("IngredientsPage");
         }
         catch (Exception ex)
@@ -306,6 +295,24 @@ public class HomeController : Controller
             TempData["msg"] = "The connection to the server could not be made";
             return View("Index");
         }
+    }
+
+    private void setupIngredientsPage(int? page)
+    {
+        const int pageSize = 5; // Change this to the desired page size
+        int currentPage = page ?? 1;
+        List<Ingredient> allIngredients = IngredientDAL.getIngredients();
+        int totalIngredients = allIngredients.Count;
+        int totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+
+        List<Ingredient> ingredientsOnPage = allIngredients
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        ViewBag.currentPage = currentPage;
+        ViewBag.totalPages = totalPages;
+        ViewBag.ingredientsOnPage = ingredientsOnPage;
     }
 
     /// <summary>

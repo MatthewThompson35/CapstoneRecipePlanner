@@ -1,4 +1,6 @@
-﻿@model List<RecipePlannerLibrary.Models.Ingredient>;
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using RecipePlannerLibrary.Models
+@model List<RecipePlannerLibrary.Models.Ingredient>;
 @{
 }
 <style>
@@ -148,7 +150,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var ingredient in ViewBag.ingredientsOnPage)
+            @foreach (Ingredient ingredient in ViewBag.ingredientsOnPage)
             {
                 <tr id="ingredient-@ingredient.id">
                     <td>@ingredient.name</td>
