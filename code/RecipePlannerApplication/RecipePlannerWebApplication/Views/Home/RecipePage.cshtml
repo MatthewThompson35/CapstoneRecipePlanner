@@ -102,7 +102,7 @@
         }
 
         #search-container label { margin-right: 10px; }
-
+         
         #search-container input[type="text"] {
             flex: 1;
             margin-right: 10px;
@@ -124,9 +124,9 @@
 
 </head>
 <body>
-<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table'; document.getElementById('all-pagination').style.display = 'none';document.getElementById('available-recipes').style.display='block' document.getElementById('available-pagination').style.display = 'block' ;" checked> Show Available Recipes
+<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('available-recipes').style.display='block'; document.getElementById('available-pagination').style.display = 'block'; document.getElementById('all-pagination').style.display = 'none';" checked> Show Available Recipes
 <br>
-<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table'; document.getElementById('available-pagination').style.display = 'none'; document.getElementById('all-pagination').style.display = 'block' document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes
+<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table'; document.getElementById('all-recipes').style.display = 'table'; document.getElementById('available-pagination').style.display = 'none'; document.getElementById('all-pagination').style.display = 'block';"> Show All Recipes
 <br>
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
@@ -137,7 +137,7 @@
             <input type="submit" value="Filter" id="search-button">
         </div>
         <h2>Recipes</h2>
-        <table id="available-recipes">
+        <table id="available-recipes" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
             <thead>
             <tr>
                 <th>Name</th>
@@ -150,7 +150,7 @@
                     <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
                 </tr>
             }
-                    @foreach (var recipe in ViewBag.availableRecipesOnPage)
+            @foreach (var recipe in ViewBag.availableRecipesOnPage)
             {
                 <tr onclick="showRecipe('@recipe.RecipeId')">
                     <td>@recipe.Name</td>
@@ -158,29 +158,30 @@
             }
             </tbody>
         </table>
-        <div id="available-pagination">
+        <div id="available-pagination" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
+
             @if (ViewBag.currentPage > 1)
             {
-                <a href="@Url.Action("goToRecipePage", new { page = ViewBag.currentPage - 1 })" class="btn btn-primary page-button">Previous Page</a>
+                <a href="@Url.Action("goToRecipePage", new {page = ViewBag.currentPage - 1})" class="btn btn-primary page-button">Previous Page</a>
             }
             @for (int i = 1; i <= ViewBag.totalAvailablePages; i++)
             {
-                <a href="@Url.Action("goToRecipePage", new { page = i })" class="btn btn-primary page-button">@i</a>
+                <a href="@Url.Action("goToRecipePage", new {page = i})" class="btn btn-primary page-button">@i</a>
             }
             @if (ViewBag.currentPage < ViewBag.totalPages)
             {
-                <a href="@Url.Action("goToRecipePage", new { page = ViewBag.currentPage + 1 })" class="btn btn-primary page-button">Next Page</a>
+                <a href="@Url.Action("goToRecipePage", new {page = ViewBag.currentPage + 1})" class="btn btn-primary page-button">Next Page</a>
             }
-           
+
         </div>
-        <table id="all-recipes" style="display: none;">
+        <table id="all-recipes" style="@(ViewBag.CurrentSelectedRadio == "all" ? "display: block;" : "display: none;")">
             <thead>
             <tr>
                 <th>Name</th>
             </tr>
             </thead>
             <tbody>
-            @foreach (var recipe in ViewBag.AllRecipes)
+            @foreach (var recipe in ViewBag.allRecipesOnPage)
             {
                 <tr onclick="showRecipe('@recipe.RecipeId')">
                     <td>@recipe.Name</td>
@@ -188,6 +189,22 @@
             }
             </tbody>
         </table>
+
+        <div id="all-pagination" style="@(ViewBag.CurrentSelectedRadio == "all" ? "display: block;" : "display: none;")">
+            @if (ViewBag.currentAllPage > 1)
+            {
+                <a href="@Url.Action("goToRecipePageAll", new {page = ViewBag.currentAllPage - 1})" class="btn btn-primary page-button">Previous Page</a>
+            }
+            @for (int i = 1; i <= ViewBag.totalPages; i++)
+            {
+                <a href="@Url.Action("goToRecipePageAll", new {page = i})" class="btn btn-primary page-button">@i</a>
+            }
+            @if (ViewBag.currentAllPage < ViewBag.totalPages)
+            {
+                <a href="@Url.Action("goToRecipePageAll", new {page = ViewBag.currentAllPage + 1})" class="btn btn-primary page-button">Next Page</a>
+            }
+
+        </div>
         <table id="filtered-recipes" style="display: none;">
             <thead>
             <tr >
@@ -198,7 +215,7 @@
             <tbody>
             </tbody>
         </table>
-        
+
     </div>
     <div id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
@@ -221,7 +238,8 @@
                             <li>@ingredient.Quantity @ingredient.IngredientName</li>
                         }
                     </ul>
-                    @if (recipe.Tags != null && recipe.Tags.Count > 0) {
+                    @if (recipe.Tags != null && recipe.Tags.Count > 0)
+                    {
                         <h4>Tags</h4>
                         <ul class="recipe-tags">
                             @foreach (var tag in recipe.Tags)
