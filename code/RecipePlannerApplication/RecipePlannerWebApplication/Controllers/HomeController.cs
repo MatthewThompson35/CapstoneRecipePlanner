@@ -53,7 +53,7 @@ public class HomeController : Controller
             {
                 ActiveUser.username = ad.Username;
                 this.setupForRecipePage();
-                return View("RecipePage", ViewBag.AvailableRecipes);
+                return View("RecipePage");
             }
 
             ad.ErrorMessage = "Incorrect username or password";
@@ -66,7 +66,7 @@ public class HomeController : Controller
         }
     }
 
-    private void setupForRecipePage()
+    private void setupForRecipePage(int? page = 1)
     {
         try
         {
@@ -78,9 +78,26 @@ public class HomeController : Controller
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
             }
 
+           
             this.addToAvailableRecipes(recipes);
+            const int pageSize = 1;
+            int currentPage = page ?? 1;
+
+            ViewBag.currentPage = currentPage;
             ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
+
+
+            List<Recipe> AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
         }
         catch (Exception ex)
         {
@@ -319,11 +336,11 @@ public class HomeController : Controller
     ///     Goes to RecipesPage
     /// </summary>
     /// <returns>The recipes page or login on server connection error</returns>
-    public ActionResult goToRecipePage()
+    public ActionResult goToRecipePage(int? page)
     {
         try
         {
-            this.setupForRecipePage();
+            this.setupForRecipePage(page);
             if (ViewBag.AvailableRecipes == null)
             {
                 TempData["msg"] = "The connection to the server could not be made";

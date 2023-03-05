@@ -124,9 +124,9 @@
 
 </head>
 <body>
-<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('available-recipes').style.display='block' ;" checked> Show Available Recipes
+<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table'; document.getElementById('all-pagination').style.display = 'none';document.getElementById('available-recipes').style.display='block' document.getElementById('available-pagination').style.display = 'block' ;" checked> Show Available Recipes
 <br>
-<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes
+<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table'; document.getElementById('available-pagination').style.display = 'none'; document.getElementById('all-pagination').style.display = 'block' document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes
 <br>
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
@@ -150,7 +150,7 @@
                     <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
                 </tr>
             }
-            @foreach (var recipe in ViewBag.AvailableRecipes)
+                    @foreach (var recipe in ViewBag.availableRecipesOnPage)
             {
                 <tr onclick="showRecipe('@recipe.RecipeId')">
                     <td>@recipe.Name</td>
@@ -158,6 +158,21 @@
             }
             </tbody>
         </table>
+        <div id="available-pagination">
+            @if (ViewBag.currentPage > 1)
+            {
+                <a href="@Url.Action("goToRecipePage", new { page = ViewBag.currentPage - 1 })" class="btn btn-primary page-button">Previous Page</a>
+            }
+            @for (int i = 1; i <= ViewBag.totalAvailablePages; i++)
+            {
+                <a href="@Url.Action("goToRecipePage", new { page = i })" class="btn btn-primary page-button">@i</a>
+            }
+            @if (ViewBag.currentPage < ViewBag.totalPages)
+            {
+                <a href="@Url.Action("goToRecipePage", new { page = ViewBag.currentPage + 1 })" class="btn btn-primary page-button">Next Page</a>
+            }
+           
+        </div>
         <table id="all-recipes" style="display: none;">
             <thead>
             <tr>
@@ -183,6 +198,7 @@
             <tbody>
             </tbody>
         </table>
+        
     </div>
     <div id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
