@@ -443,6 +443,29 @@ public class HomeController : Controller
         }
     }
 
+    /// <summary>
+    /// Adds the planned meal.
+    /// </summary>
+    /// <param name="recipeId">The recipe identifier.</param>
+    /// <param name="week">The week.</param>
+    /// <param name="day">The day.</param>
+    /// <returns></returns>
+    public ActionResult addPlannedMeal(int recipeId, string week, string day, string type)
+    {
+        int recipeID = recipeId; 
+        string Week = week;
+        string Day = day;
+        string Type = type;
+        var date = DateTime.Now.Date;
+        this.setupForRecipePage();
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+        return View("RecipePage", ViewBag.AvailableRecipes);
+    }
+
 
     /// <summary>
     ///     Goes to add ingredients page.
