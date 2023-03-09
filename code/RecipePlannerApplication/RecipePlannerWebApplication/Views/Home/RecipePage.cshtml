@@ -134,8 +134,9 @@
         <div id="search-container">
             <label for="search-bar">Search Tags:</label>
             <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
-            <input type="submit" value="Filter" id="search-button">
+            <input type="button" value="Filter" id="search-button">
         </div>
+        <div id="filter-tags"></div>
         <h2>Recipes</h2>
         <table id="available-recipes">
             <thead>
@@ -232,8 +233,16 @@
         recipeDiv.style.display = 'block';
     }
 
+    var tags = [];
+
     document.getElementById("search-button").addEventListener("click", function () {
         var tag = document.getElementById("search-bar").value;
+        tags.push(tag);
+        filterRecipes();
+        document.getElementById("search-bar").value = "";
+    });
+
+    function filterRecipes() {
         var recipes = @Html.Raw(Json.Serialize(ViewBag.AllRecipes));
 
         var filtered = [];
@@ -241,7 +250,7 @@
         for (var i = 0; i < recipes.length; i++) {
             if (recipes[i].tags != null) {
                 for (var j = 0; j < recipes[i].tags.length; j++) {
-                    if (recipes[i].tags[j].toLowerCase() == tag.toLowerCase()) {
+                    if (recipes[i].tags[j].toLowerCase() === tags[tags.length - 1].toLowerCase()) {
                         filtered.push(recipes[i]);
                         break;
                     }
@@ -250,7 +259,8 @@
         }
 
         showFilteredRecipes(filtered);
-    });
+        updateFilterTags();
+    }
 
     function showFilteredRecipes(recipes) {
         var table = document.getElementById("filtered-recipes").getElementsByTagName("tbody")[0];
@@ -261,10 +271,9 @@
             var cell = row.insertCell();
             cell.colSpan = "2";
             cell.style.textAlign = "center";
-            cell.innerHTML = "No recipes found with the entered tag.";
+            cell.innerHTML = "No recipes found with the entered tags.";
         }
-        
-        console.log(recipes);
+
         for (var i = 0; i < recipes.length; i++) {
             var row = table.insertRow();
             var nameCell = row.insertCell();
@@ -278,6 +287,35 @@
         document.getElementById('all-recipes').style.display = 'none';
         document.getElementById('filtered-recipes').style.display = 'block';
         document.getElementById('available-recipes').style.display = 'none';
+    }
+
+    function updateFilterTags() {
+        var filterTags = document.getElementById("filter-tags");
+        filterTags.innerHTML = "";
+        for (var i = 0; i < tags.length; i++) {
+            var tag = tags[i];
+            var span = document.createElement("span");
+            span.innerHTML = tag + " <a href='#' onclick='removeFilterTag(\"" + tag + "\")'>x</a>";
+            filterTags.appendChild(span);
+        }
+    }
+
+    function removeFilterTag(tag) {
+        var index = tags.indexOf(tag);
+        if (index > -1) {
+            tags.splice(index, 1);
+            if (tags.length === 0) {
+                showAvailableRecipes();
+            } else {
+                filterRecipes();
+            }
+        }
+    }
+    
+    function showAvailableRecipes() {
+        document.getElementById('all-recipes').style.display = 'none';
+        document.getElementById('filtered-recipes').style.display = 'none';
+        document.getElementById('available-recipes').style.display = 'block';
     }
 
 </script>

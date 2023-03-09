@@ -1,0 +1,16 @@
+Context - User is viewing a recipe's details
+
+Primary Flow
+1 - user finds recipe they would like to add
+2 - user selects it and determines where they want to add it
+3 - system adds it to planned meals
+
+Alternative Flow(s)
+CANCEL
+a2 - user selects to cancel
+return to 1
+
+BAD CONNECTION
+a3 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
+
+
