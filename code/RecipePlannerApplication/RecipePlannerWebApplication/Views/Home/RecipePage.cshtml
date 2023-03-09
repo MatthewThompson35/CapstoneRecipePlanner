@@ -203,7 +203,7 @@
                     <ul class="recipe-ingredients">
                         @foreach (var ingredient in recipe.Ingredients)
                         {
-                            <li>@ingredient.Quantity @ingredient.IngredientName</li>
+                                <li>@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName</li>
                         }
                     </ul>
                     @if (recipe.Tags != null && recipe.Tags.Count > 0) {
@@ -243,7 +243,7 @@
     });
 
     function filterRecipes() {
-        var recipes = @Html.Raw(Json.Serialize(ViewBag.AllRecipes));
+        var recipes = @Html.Raw(Json.Serialize(ViewBag.AvailableRecipes));
 
         var filtered = [];
 
