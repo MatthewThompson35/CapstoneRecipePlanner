@@ -16,10 +16,12 @@
 
         table {
             border-collapse: collapse;
+            display: none;
             margin: 0 auto;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 5px;
         }
@@ -30,19 +32,14 @@
 
         #recipe-container {
             display: flex;
-            margin-right: 50px;
             margin-top: 50px;
-            position: relative;
         }
 
-        #recipe-list {
-            flex: 1;
-            height: 100%;
-        }
+        #recipe-list { flex-basis: 50%; }
 
         #recipe-list h2 { text-align: center; }
 
-        #recipe-list table { width: 70%; }
+        #recipe-list table { width: 100%; }
 
         #recipe-list tr { cursor: pointer; }
 
@@ -53,20 +50,23 @@
             width: 20%;
         }
 
+        #available-recipes { display: table; }
+
         #recipe-details {
             align-items: center;
             display: flex;
-            flex: 1;
+            flex-basis: 50%;
             margin-left: 50px;
         }
 
         #recipe-details-box {
             border: 1px solid black;
             height: 640px;
-            position: absolute;
+            padding: 10px;
+            position: fixed;
+            right: 125px;
             top: 175px;
-            right: 0;
-            width: 30%;
+            width: 40%;
         }
 
         #recipe-details-box h3 { margin-top: 0; }
@@ -79,7 +79,7 @@
         }
 
         #recipe-actions button {
-            background-color: #4CAF50;
+            background-color: #4caf50;
             border: none;
             color: white;
             cursor: pointer;
@@ -89,15 +89,7 @@
 
         #recipe-actions button:hover { background-color: #3e8e41; }
 
-        #recipe-actions button:active { background-color: #4CAF50; }
-
-        #logout {
-            background-color: #d9534f;
-            color: #fff;
-            position: fixed;
-            right: 10px;
-            top: 5px;
-        }
+        #recipe-actions button:active { background-color: #4caf50; }
 
         #search-container {
             align-items: center;
@@ -114,7 +106,7 @@
         }
 
         #search-container button {
-            background-color: #4CAF50;
+            background-color: #4caf50;
             border: none;
             color: white;
             cursor: pointer;
@@ -123,106 +115,126 @@
 
         #search-container button:hover { background-color: #3e8e41; }
 
-        #search-container button:active { background-color: #4CAF50; }
+        #search-container button:active { background-color: #4caf50; }
+
+        #logout {
+            background-color: #e27d60;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            padding: 8px 16px;
+            position: absolute;
+            right: 20px;
+            text-align: center;
+            text-decoration: none;
+            top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #logout:hover { background-color: #c64b3c; }
     </style>
 
 </head>
 <body>
-    <input type="checkbox" id="available-checkbox" onchange="filterRecipes()">
-    <label for="available-checkbox">Show Available Recipes</label>
-    <button onclick="showAllRecipes()">Clear Filters</button>
-    <div id="recipe-container">
-        <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
-        <div id="recipe-list">
-            <div id="search-container">
-                <label for="search-bar">Search Tags:</label>
-                <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
-                <input type="button" value="Filter" id="search-button">
-            </div>
-            <div id="filter-tags"></div>
-            <h2>Recipes</h2>
-            <table id="available-recipes">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (ViewBag.AvailableRecipes.Count == 0)
-                    {
-                        <tr>
-                            <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
-                        </tr>
-                    }
-                    @foreach (var recipe in ViewBag.AvailableRecipes)
-                    {
-                        <tr onclick="showRecipe('@recipe.RecipeId')">
-                            <td>@recipe.Name</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <table id="all-recipes">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var recipe in ViewBag.AllRecipes)
-                    {
-                        <tr onclick="showRecipe('@recipe.RecipeId')">
-                            <td>@recipe.Name</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <table id="filtered-recipes">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Tags</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+<input type="checkbox" id="available-checkbox" onchange="filterRecipes()">
+<label for="available-checkbox">Show Available Recipes</label>
+<button onclick="showAllRecipes()">Clear Filters</button>
+<div id="recipe-container">
+    <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
+    <div id="recipe-list">
+        <div id="search-container">
+            <label for="search-bar">Search Tags:</label>
+            <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
+            <input type="button" value="Filter" id="search-button">
         </div>
-    </div>
-    <div id="recipe-details">
-        <div id="recipe-details-box" style="overflow: auto;">
+        <div id="filter-tags">Filter by Tags: </div>
+        <h2>Recipes</h2>
+        <table id="available-recipes">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (ViewBag.AvailableRecipes.Count == 0)
+            {
+                <tr>
+                    <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
+                </tr>
+            }
+            @foreach (var recipe in ViewBag.AvailableRecipes)
+            {
+                <tr onclick="showRecipe('@recipe.RecipeId')">
+                    <td>@recipe.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <table id="all-recipes">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
-                <div id="@recipe.RecipeId" style="display: none">
-                    <h3 class="recipe-name">@recipe.Name</h3>
-                    <p class="recipe-description">@recipe.Description</p>
-                    <h4>Steps</h4>
-                    <ol class="recipe-steps">
-                        @foreach (var step in recipe.Steps)
+                <tr onclick="showRecipe('@recipe.RecipeId')">
+                    <td>@recipe.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <table id="filtered-recipes">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="recipe-details">
+    <div id="recipe-details-box" style="overflow: auto;">
+        @foreach (var recipe in ViewBag.AllRecipes)
+        {
+            <div id="@recipe.RecipeId" style="display: none">
+                <h3 class="recipe-name">@recipe.Name</h3>
+                <p class="recipe-description">@recipe.Description</p>
+                <h4>Steps</h4>
+                <ol class="recipe-steps">
+                    @foreach (var step in recipe.Steps)
+                    {
+                        <li>@step.stepDescription</li>
+                    }
+                </ol>
+                <h4>Ingredients</h4>
+                <ul class="recipe-ingredients">
+                    @foreach (var ingredient in recipe.Ingredients)
+                    {
+                        <li>@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName</li>
+                    }
+                </ul>
+                @if (recipe.Tags != null && recipe.Tags.Count > 0)
+                {
+                    <h4>Tags</h4>
+                    <ul class="recipe-tags">
+                        @foreach (var tag in recipe.Tags)
                         {
-                            <li>@step.stepDescription</li>
-                        }
-                    </ol>
-                    <h4>Ingredients</h4>
-                    <ul class="recipe-ingredients">
-                        @foreach (var ingredient in recipe.Ingredients)
-                        {
-                                <li>@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName</li>
+                            <li>@tag</li>
                         }
                     </ul>
-                    @if (recipe.Tags != null && recipe.Tags.Count > 0) {
-                        <h4>Tags</h4>
-                        <ul class="recipe-tags">
-                            @foreach (var tag in recipe.Tags)
-                            {
-                                <li>@tag</li>
-                            }
-                        </ul>
-                    }
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
     </div>
+</div>
 </body>
 <script>
     function showRecipe(recipeId) {
@@ -300,7 +312,7 @@
 
     function updateFilterTags() {
         var filterTags = document.getElementById("filter-tags");
-        filterTags.innerHTML = "";
+        filterTags.innerHTML = "Filter by Tags: ";
         for (var i = 0; i < tags.length; i++) {
             var tag = tags[i];
             var span = document.createElement("span");
@@ -314,6 +326,8 @@
         if (index > -1) {
             tags.splice(index, 1);
             if (tags.length === 0) {
+                var filterTags = document.getElementById("filter-tags");
+                filterTags.innerHTML = "Filter by Tags: ";
                 showAvailableRecipes();
             } else {
                 filterRecipes();
@@ -325,6 +339,9 @@
         document.getElementById('all-recipes').style.display = 'none';
         document.getElementById('filtered-recipes').style.display = 'none';
         document.getElementById('available-recipes').style.display = 'block';
+        
+        tags = [];
+        filterRecipes();
     }
 
     function showAllRecipes() {
