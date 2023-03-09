@@ -72,6 +72,8 @@ public class HomeController : Controller
         try
         {
             List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            Dictionary<(string, string), int> thisWeeksMeals =
+                PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
             foreach (var recipe in recipes)
             {
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
@@ -456,7 +458,18 @@ public class HomeController : Controller
         string Week = week;
         string Day = day;
         string Type = type;
-        var date = DateTime.Now.Date;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals("This Week"))
+        {
+            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+        }
+        else
+        {
+            date = this.GetDateOfNextWeekDay(dayOfWeek);
+        }
+        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
         this.setupForRecipePage();
         if (ViewBag.AvailableRecipes == null)
         {
@@ -466,6 +479,17 @@ public class HomeController : Controller
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
+    public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
+    {
+        int daysUntilNextWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek + 7) % 7;
+        return DateTime.Today.AddDays(daysUntilNextWeekDay).Date;
+    }
+
+    public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
+    {
+        int daysUntilNextWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek) % 7;
+        return DateTime.Today.AddDays(daysUntilNextWeekDay).Date;
+    }
 
     /// <summary>
     ///     Goes to add ingredients page.
