@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
@@ -51,7 +54,7 @@ public class HomeController : Controller
             {
                 ActiveUser.username = ad.Username;
                 this.setupForRecipePage();
-                return View("RecipePage", ViewBag.AvailableRecipes);
+                return View("RecipePage");
             }
 
             ad.ErrorMessage = "Incorrect username or password";
@@ -64,7 +67,7 @@ public class HomeController : Controller
         }
     }
 
-    private void setupForRecipePage()
+    private void setupForRecipePage(int? page = 1)
     {
         try
         {
@@ -76,9 +79,37 @@ public class HomeController : Controller
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
             }
 
+           
             this.addToAvailableRecipes(recipes);
+            const int pageSize = 1;
+            int currentPage = page ?? 1;
+
+            ViewBag.currentPage = currentPage;
             ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = recipes.Count;
+            List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
+            List<Recipe> allRecipes = ViewBag.AllRecipes;
+            int currentAllPage = 1;
+
+
+            List<Recipe> AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            List<Recipe> AllRecipesOnPage = allRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.CurrentSelectedRadio = "available";
         }
         catch (Exception ex)
         {
@@ -154,8 +185,8 @@ public class HomeController : Controller
 
             quantity = this.getItemQuantity(ingredientID);
             IngredientDAL.decrementQuantity(ingredientID, quantity);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            this.setupIngredientsPage(ViewBag.currentPage);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -198,9 +229,9 @@ public class HomeController : Controller
             var ingredientID = int.Parse(id);
 
             quantity = this.getItemQuantity(ingredientID);
-            IngredientDAL.incrementQuantity(ingredientID, quantity);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            IngredientDAL.incrementQuantity(ingredientID, quantity);    
+            this.setupIngredientsPage(ViewBag.currentPage);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -220,8 +251,8 @@ public class HomeController : Controller
         try
         {
             IngredientDAL.RemoveIngredient(int.Parse(id));
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            this.setupIngredientsPage(ViewBag.currentPage);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -264,8 +295,9 @@ public class HomeController : Controller
             }
 
             IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement, Connection.ConnectionString);
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            int totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count/ 5);
+            this.setupIngredientsPage(totalPages);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
@@ -276,33 +308,51 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to ingredients page.
+    /// Goes to ingredients page.
     /// </summary>
-    /// <returns>The ingredients page or login on server connection error</returns>
-    public ActionResult goToIngredientsPage()
+    /// <param name="page">The page.</param>
+    /// <returns> the ingredients page with the specified page of ingredients</returns>
+    public ActionResult goToIngredientsPage(int? page)
     {
         try
         {
-            ViewBag.ingredients = IngredientDAL.getIngredients();
-            return View("IngredientsPage", ViewBag.ingredients);
+            this.setupIngredientsPage(page);
+            return View("IngredientsPage");
         }
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
         }
+    }
 
-        return View("Index");
+    private void setupIngredientsPage(int? page)
+    {
+        const int pageSize = 5; // Change this to the desired page size
+        int currentPage = page ?? 1;
+        List<Ingredient> allIngredients = IngredientDAL.getIngredients();
+        int totalIngredients = allIngredients.Count;
+        int totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+
+        List<Ingredient> ingredientsOnPage = allIngredients
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        ViewBag.currentPage = currentPage;
+        ViewBag.totalPages = totalPages;
+        ViewBag.ingredientsOnPage = ingredientsOnPage;
     }
 
     /// <summary>
     ///     Goes to RecipesPage
     /// </summary>
     /// <returns>The recipes page or login on server connection error</returns>
-    public ActionResult goToRecipePage()
+    public ActionResult goToRecipePage(int? page)
     {
         try
         {
-            this.setupForRecipePage();
+            this.setupForRecipePage(page);
             if (ViewBag.AvailableRecipes == null)
             {
                 TempData["msg"] = "The connection to the server could not be made";
@@ -318,6 +368,81 @@ public class HomeController : Controller
 
         return View("Index");
     }
+
+    /// <summary>
+    ///     Goes to RecipesPage
+    /// </summary>
+    /// <returns>The recipes page or login on server connection error</returns>
+    public ActionResult goToRecipePageAll(int? page)
+    {
+        try
+        {
+            this.setupForRecipePageAll(page);
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View("Index");
+            }
+
+            return View("RecipePage", ViewBag.AvailableRecipes);
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    private void setupForRecipePageAll(int? page)
+    {
+        try
+        {
+            List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            int currentPage = 1;
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 1;
+            int currentAllPage = page ?? 1;
+
+            ViewBag.currentAllPage = currentAllPage;
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = recipes.Count;
+            List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
+            List<Recipe> allRecipes = ViewBag.AllRecipes;
+
+
+            List<Recipe> AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            List<Recipe> AllRecipesOnPage = allRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.CurrentSelectedRadio = "all";
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+    }
+
 
     /// <summary>
     ///     Goes to add ingredients page.

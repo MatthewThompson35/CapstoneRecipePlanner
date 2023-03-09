@@ -1,5 +1,8 @@
-﻿@model List<RecipePlannerLibrary.Models.Ingredient>;
-
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using RecipePlannerLibrary.Models
+@model List<RecipePlannerLibrary.Models.Ingredient>;
+@{
+}
 <style>
     #logout{
         position: fixed;
@@ -62,6 +65,7 @@
         font-weight: bold;
     }
 
+
     input[type="submit"], input[type="button"] {
         padding: 5px 10px;
         font-size: 16px;
@@ -74,6 +78,14 @@
         background-color: #33b5e5;
         color: #fff;
         margin-right: 10px;
+    }
+
+    .page-button {
+        background-color: #33b5e5;
+        color: #fff;
+        margin: 5px;
+        flex: 1;
+        margin: 5px;
     }
 
     #cancelButton {
@@ -91,6 +103,39 @@
         border: 1px solid #e6e6e6;
         box-sizing: border-box;
     }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pagination button {
+        background-color: #ddd;
+        color: #333;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .pagination button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .pagination button.active {
+        background-color: #33b5e5;
+        color: #fff;
+    }
 </style>
 
 <div class="container">
@@ -105,27 +150,42 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var ingredient in ViewBag.ingredients)
+            @foreach (Ingredient ingredient in ViewBag.ingredientsOnPage)
             {
                 <tr id="ingredient-@ingredient.id">
                     <td>@ingredient.name</td>
                     <td>
                         <div class="quantity-container">
-                            <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
-                                <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
-                            <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
+                            <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id"/>
+                            <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
+                            <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id"/>
                         </div>
                     </td>
                     <td>
-                        <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id" />
+                        <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id"/>
                     </td>
                 </tr>
             }
             </tbody>
         </table>
+        <div class="pagination">
+            @if (ViewBag.currentPage > 1)
+            {
+                <a href="@Url.Action("goToIngredientsPage", new { page = ViewBag.currentPage - 1 })" class="btn btn-primary page-button">Previous Page</a>
+            }
+            @for (int i = 1; i <= ViewBag.totalPages; i++)
+            {
+                <a href="@Url.Action("goToIngredientsPage", new { page = i })" class="btn btn-primary page-button">@i</a>
+            }
+            @if (ViewBag.currentPage < ViewBag.totalPages)
+            {
+                <a href="@Url.Action("goToIngredientsPage", new { page = ViewBag.currentPage + 1 })" class="btn btn-primary page-button">Next Page</a>
+            }
+           
+        </div>
         <div class="button-container">
-            <input type="submit" asp-action="Index" value="Logout" id="logout" class="button button-red" />
-            <input type="submit" asp-action="goToAddIngredientsPage" value="Add Ingredient" id="addIngredient" class="button button-green" />
+            <input type="submit" asp-action="Index" value="Logout" id="logout" class="button button-red"/>
+            <input type="submit" asp-action="goToAddIngredientsPage" value="Add Ingredient" id="addIngredient" class="button button-green"/>
         </div>
     </form>
 </div>
