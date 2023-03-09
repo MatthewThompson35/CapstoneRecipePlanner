@@ -316,7 +316,7 @@
         for (var i = 0; i < tags.length; i++) {
             var tag = tags[i];
             var span = document.createElement("span");
-            span.innerHTML = tag + " <a href='#' onclick='removeFilterTag(\"" + tag + "\")'>x</a>";
+            span.innerHTML = tag + " <a href='#' onclick='removeFilterTag(\"" + tag + "\")'>x</a>" + "   ";
             filterTags.appendChild(span);
         }
     }
@@ -345,14 +345,17 @@
     }
 
     function showAllRecipes() {
-    document.getElementById('available-checkbox').checked = false;
-    document.getElementById('search-bar').value = '';
-    tags = [];
-    filterRecipes();
-    document.getElementById('all-recipes').style.display = 'table';
-    document.getElementById('filtered-recipes').style.display = 'none';
-    document.getElementById('available-recipes').style.display = 'none';
-}
+        document.getElementById('available-checkbox').checked = false;
+        document.getElementById('search-bar').value = '';
+        tags = [];
+
+        document.getElementById('all-recipes').style.display = 'table';
+        document.getElementById('filtered-recipes').style.display = 'none';
+        document.getElementById('available-recipes').style.display = 'none';
+
+        var filterTags = document.getElementById("filter-tags");
+        filterTags.innerHTML = "Filter by Tags: ";
+    }
 
 </script>
 </html>
