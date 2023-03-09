@@ -32,13 +32,17 @@
             display: flex;
             margin-right: 50px;
             margin-top: 50px;
+            position: relative;
         }
 
-        #recipe-list { flex: 1; }
+        #recipe-list {
+            flex: 1;
+            height: 100%;
+        }
 
         #recipe-list h2 { text-align: center; }
 
-        #recipe-list table { width: 100%; }
+        #recipe-list table { width: 70%; }
 
         #recipe-list tr { cursor: pointer; }
 
@@ -59,9 +63,9 @@
         #recipe-details-box {
             border: 1px solid black;
             height: 640px;
-            padding: 10px;
-            position: fixed;
+            position: absolute;
             top: 175px;
+            right: 0;
             width: 30%;
         }
 
@@ -124,66 +128,66 @@
 
 </head>
 <body>
-<input type="radio" name="recipeDisplay" value="available" onclick="document.getElementById('all-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('available-recipes').style.display='block' ;" checked> Show Available Recipes
-<br>
-<input type="radio" name="recipeDisplay" value="all" onclick="document.getElementById('available-recipes').style.display = 'none'; document.getElementById('filtered-recipes').style.display='none'; document.getElementById('all-recipes').style.display = 'table';"> Show All Recipes
-<br>
-<div id="recipe-container">
-    <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
-    <div id="recipe-list">
-        <div id="search-container">
-            <label for="search-bar">Search Tags:</label>
-            <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
-            <input type="button" value="Filter" id="search-button">
+    <input type="checkbox" id="available-checkbox" onchange="filterRecipes()">
+    <label for="available-checkbox">Show Available Recipes</label>
+    <button onclick="showAllRecipes()">Clear Filters</button>
+    <div id="recipe-container">
+        <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
+        <div id="recipe-list">
+            <div id="search-container">
+                <label for="search-bar">Search Tags:</label>
+                <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
+                <input type="button" value="Filter" id="search-button">
+            </div>
+            <div id="filter-tags"></div>
+            <h2>Recipes</h2>
+            <table id="available-recipes">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.AvailableRecipes.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
+                        </tr>
+                    }
+                    @foreach (var recipe in ViewBag.AvailableRecipes)
+                    {
+                        <tr onclick="showRecipe('@recipe.RecipeId')">
+                            <td>@recipe.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <table id="all-recipes">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var recipe in ViewBag.AllRecipes)
+                    {
+                        <tr onclick="showRecipe('@recipe.RecipeId')">
+                            <td>@recipe.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <table id="filtered-recipes">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-        <div id="filter-tags"></div>
-        <h2>Recipes</h2>
-        <table id="available-recipes">
-            <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            @if (ViewBag.AvailableRecipes.Count == 0)
-            {
-                <tr>
-                    <td colspan="1" style="text-align: center;">Sorry, there are no available recipes that can be made with your current ingredients.</td>
-                </tr>
-            }
-            @foreach (var recipe in ViewBag.AvailableRecipes)
-            {
-                <tr onclick="showRecipe('@recipe.RecipeId')">
-                    <td>@recipe.Name</td>
-                </tr>
-            }
-            </tbody>
-        </table>
-        <table id="all-recipes" style="display: none;">
-            <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var recipe in ViewBag.AllRecipes)
-            {
-                <tr onclick="showRecipe('@recipe.RecipeId')">
-                    <td>@recipe.Name</td>
-                </tr>
-            }
-            </tbody>
-        </table>
-        <table id="filtered-recipes" style="display: none;">
-            <thead>
-            <tr >
-                <th>Name</th>
-                <th>Tags</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
     </div>
     <div id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
@@ -219,7 +223,6 @@
             }
         </div>
     </div>
-</div>
 </body>
 <script>
     function showRecipe(recipeId) {
@@ -234,6 +237,8 @@
     }
 
     var tags = [];
+    var availableCheckbox = document.getElementById("available-checkbox");
+    document.getElementById('available-checkbox').checked = true;
 
     document.getElementById("search-button").addEventListener("click", function () {
         var tag = document.getElementById("search-bar").value;
@@ -243,7 +248,11 @@
     });
 
     function filterRecipes() {
-        var recipes = @Html.Raw(Json.Serialize(ViewBag.AvailableRecipes));
+        var recipes = @Html.Raw(Json.Serialize(ViewBag.AllRecipes));
+
+        if (document.getElementById('available-checkbox').checked) {
+            recipes = @Html.Raw(Json.Serialize(ViewBag.AvailableRecipes));
+        }
 
         var filtered = [];
 
@@ -317,6 +326,16 @@
         document.getElementById('filtered-recipes').style.display = 'none';
         document.getElementById('available-recipes').style.display = 'block';
     }
+
+    function showAllRecipes() {
+    document.getElementById('available-checkbox').checked = false;
+    document.getElementById('search-bar').value = '';
+    tags = [];
+    filterRecipes();
+    document.getElementById('all-recipes').style.display = 'table';
+    document.getElementById('filtered-recipes').style.display = 'none';
+    document.getElementById('available-recipes').style.display = 'none';
+}
 
 </script>
 </html>
