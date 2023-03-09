@@ -269,12 +269,20 @@
         var filtered = [];
 
         for (var i = 0; i < recipes.length; i++) {
+            var matchCount = 0;
             if (recipes[i].tags != null) {
-                for (var j = 0; j < recipes[i].tags.length; j++) {
-                    if (recipes[i].tags[j].toLowerCase() === tags[tags.length - 1].toLowerCase()) {
-                        filtered.push(recipes[i]);
-                        break;
+                for (var j = 0; j < tags.length; j++) {
+                    var lowercaseTag = tags[j].toLowerCase();
+                    for (var k = 0; k < recipes[i].tags.length; k++) {
+                        var lowercaseRecipeTag = recipes[i].tags[k].toLowerCase();
+                        if (lowercaseRecipeTag === lowercaseTag) {
+                            matchCount++;
+                            break;
+                        }
                     }
+                }
+                if (matchCount === tags.length) {
+                    filtered.push(recipes[i]);
                 }
             }
         }
