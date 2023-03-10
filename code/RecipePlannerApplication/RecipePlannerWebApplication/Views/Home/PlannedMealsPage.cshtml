@@ -28,6 +28,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Monday')">Remove</button>
         </td>
         <td>
             <select id="Tuesday" onchange="handleChange('Tuesday')">
@@ -36,6 +37,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Tuesday')">Remove</button>
         </td>
         <td>
             <select id="Wednesday" onchange="handleChange('Wednesday')">
@@ -44,6 +46,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Wednesday')">Remove</button>
         </td>
         <td>
             <select id="Thursday" onchange="handleChange('Thursday')">
@@ -52,6 +55,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Thursday')">Remove</button>
         </td>
         <td>
             <select id="Friday" onchange="handleChange('Friday')">
@@ -60,6 +64,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Friday')">Remove</button>
         </td>
         <td>
             <select id="Saturday" onchange="handleChange('Saturday')">
@@ -68,6 +73,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Saturday')">Remove</button>
         </td>
         <td>
             <select id="Sunday" onchange="handleChange('Sunday')">
@@ -76,6 +82,7 @@
                     <option>@item</option>
                     }
             </select>
+            <button onclick="removeColumn('Sunday')">Remove</button>
         </td>
         <tr>
             <th>Recipe Name</th>
@@ -240,6 +247,26 @@
         handleChange('Saturday');
         handleChange('Sunday');
     };
+    
+    function removeColumn(day){
+        var mealType = document.getElementById(day).value;
+        var dayDetails = day + "Details";
+        var detailsElement = document.getElementById(dayDetails);
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("RemoveThisWeeksMeal", "Home")",
+            data: { day: day, mealType: mealType },
+            success: function (response) {
+                console.log(response);
+                var recipeName = response.recipeName;
+                detailsElement.innerHTML = recipeName;
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+        }
 
     function handleChange(day) {
         var mealType = document.getElementById(day).value;

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Configuration;
+using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace RecipePlannerWebApplication.Controllers;
 
@@ -472,7 +474,56 @@ public class HomeController : Controller
         {
             date = this.GetDateOfNextWeekDay(dayOfWeek);
         }
-        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+
+        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+        {
+            PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, day, type, date, recipeId);
+        }
+        else
+        {
+            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+        }
+        this.setupForRecipePage();
+        if (ViewBag.day == null)
+        {
+            ViewBag.day = "Monday";
+        }
+
+        if (ViewBag.type == null)
+        {
+            ViewBag.type = "Breakfast";
+        }
+
+        if (ViewBag.week == null)
+        {
+            ViewBag.week = "This Week"; 
+        }
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+        return View("RecipePage", ViewBag.AvailableRecipes);
+    }
+
+    public ActionResult UpdateThisWeeksMeal(int recipeId, string week, string day, string type)
+    {
+        int recipeID = recipeId;
+        string Week = week;
+        string Day = day;
+        string Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals("This Week"))
+        {
+            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+        }
+        else
+        {
+            date = this.GetDateOfNextWeekDay(dayOfWeek);
+        }
+        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, Day, Type, date, recipeID);
         this.setupForRecipePage();
         if (ViewBag.AvailableRecipes == null)
         {
@@ -555,6 +606,45 @@ public class HomeController : Controller
         {
             var recipeId = "You have not yet added a meal for this time";
             return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+        }
+    }
+
+    public JsonResult RemoveThisWeeksMeal(string day, string mealType)
+    {
+        try
+        {
+            var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            int recipeId = ThisWeeksMeals[(day, mealType)];
+            DayOfWeek dayOfWeek;
+            Enum.TryParse(day, out dayOfWeek);
+            DateTime date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
+            
+            ViewBag.Header = "This weeks meals";
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+        }
+        catch (Exception ex)
+        {
+            try
+            {
+                var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+                int recipeId = ThisWeeksMeals[(day, mealType)];
+                var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+                string recipeName = "";
+                foreach (var recipe in allRecipes)
+                {
+                    if (recipe.RecipeId == recipeId)
+                    {
+                        recipeName = recipe.Name;
+                    }
+                }
+                return Json(new { RecipeName = recipeName });
+            }
+            catch(Exception ex2)
+            {
+                return Json(new { RecipeName = "You Have not yet added a meal for this time" });
+            }
+            
         }
     }
 

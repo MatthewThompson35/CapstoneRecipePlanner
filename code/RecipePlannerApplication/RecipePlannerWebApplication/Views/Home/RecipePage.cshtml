@@ -283,14 +283,14 @@
                         <option value="@type">@type</option>
                     }
                 </select>
-                @if (ViewBag.Error != null)
-                {
-                    <label class="error" style="color: red">@ViewBag.Error</label>
-                }
+                <div id="errorMessage" style="display: none;">
+                    Are you sure You want to overwrite your previous meal?
+                </div>
 
             </div>
             <div class="button-group">
                 <input type="submit" asp-action="addPlannedMeal" value="Add" />
+                <input type="submit" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
             </div>
         </form>
         <table id="filtered-recipes" style="display: none;">
@@ -343,6 +343,8 @@
 </div>
 </body>
 <script>
+   
+
     function showRecipe(recipeId) {
         var recipeDiv = document.getElementById(recipeId);
         var currentDiv = document.querySelector('#recipe-details-box > div[style*="display: block"]');
@@ -406,6 +408,8 @@
         document.getElementById('filtered-recipes').style.display = 'block';
         document.getElementById('available-recipes').style.display = 'none';
     }
+
+
 
 </script>
 </html>
