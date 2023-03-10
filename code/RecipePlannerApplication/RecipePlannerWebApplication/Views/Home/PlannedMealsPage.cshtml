@@ -4,6 +4,10 @@
 }
 <div>
     <h2>@ViewBag.Header</h2>
+    <form method="post" action="@Url.Action("ToggleWeek", "Home", new { currentWeek = ViewBag.CurrentWeek })">
+        <button>Switch Weeks</button>
+    </form>
+    
 </div>
 <div>
     <table>
@@ -237,6 +241,22 @@
     window.onload = function () {
         doDefaultMeals();
     };
+    
+    function toggleWeek() {
+        if ("@ViewBag.CurrentWeek" === "Next Week") {
+            var url = "@Url.Action("goToPlannedMealsPageNextWeek", "Home")";
+        } else {
+            var url = "@Url.Action("goToPlannedMealsPage", "Home")";
+        }
+        $.ajax({
+          url: url,
+          method: "POST",
+          success: function(response) {
+
+          }
+        });
+    }
+    
 
     function doDefaultMeals() {
         handleChange('Monday');
@@ -252,6 +272,7 @@
         var mealType = document.getElementById(day).value;
         var dayDetails = day + "Details";
         var detailsElement = document.getElementById(dayDetails);
+        
 
         $.ajax({
             type: "GET",
@@ -272,11 +293,12 @@
         var mealType = document.getElementById(day).value;
         var dayDetails = day + "Details";
         var detailsElement = document.getElementById(dayDetails);
+        var week = "@ViewBag.CurrentWeek"
 
         $.ajax({
             type: "GET",
             url: "@Url.Action("GetRecipeName", "Home")",
-            data: { day: day, mealType: mealType },
+            data: { day: day, mealType: mealType, week: week },
             success: function (response) {
                 console.log(response);
                 var recipeName = response.recipeName;
@@ -292,11 +314,12 @@
 
     function showRecipeDetails(day) {
         var mealType = document.getElementById(day).value;
+        var week = "@ViewBag.CurrentWeek"
 
         $.ajax({
             type: "GET",
-            url: "@Url.Action("GetRecipeId", "Home")",
-            data: { day: day, mealType: mealType },
+            url: "@Url.Action("GetRecipeName", "Home")",
+            data: { day: day, mealType: mealType, week: week },
             success: function (response) {
                 console.log(response);
                 var recipeId = response.recipeId;
