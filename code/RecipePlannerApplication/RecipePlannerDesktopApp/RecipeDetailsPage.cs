@@ -74,10 +74,24 @@ namespace RecipePlannerDesktopApplication
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
             var mealsPage = new PlannedMealsPage();
-
             this.Hide();
-
             mealsPage.Show();
+
+        }
+
+        private void showDisplayedRecipe()
+        {
+            this.homepage.GetSelectedRecipe();
+        }
+
+        public string GetDayOfWeek()
+        {
+            return this.daysComboBox.SelectedItem.ToString();
+        }
+
+        public string GetMealType()
+        {
+            return this.mealTypeComboBox.SelectedItem.ToString();
         }
     }
 }
