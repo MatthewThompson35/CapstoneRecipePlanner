@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecipePlannerLibrary;
+using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -29,6 +30,8 @@ namespace RecipePlannerDesktopApplication
             this.homepage = page;
 
             this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
+            this.daysComboBox.DataSource = Enum.GetValues(typeof(DayOfWeek));
+            this.mealTypeComboBox.DataSource = Enum.GetValues(typeof(MealTypes));
         }
 
         private void backButton_Click(object sender, EventArgs e)
