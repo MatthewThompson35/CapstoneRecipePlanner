@@ -74,6 +74,8 @@ public class HomeController : Controller
             List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
             Dictionary<(string, string), int> thisWeeksMeals =
                 PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            Dictionary<(string, string), int> nextWeeksMeals =
+                PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
             foreach (var recipe in recipes)
             {
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
