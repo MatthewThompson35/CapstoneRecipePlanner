@@ -1,4 +1,4 @@
-Contect - User wants to add a meal to their planned meals
+Context - User is viewing a recipe's details
 
 Primary Flow
 1 - user finds recipe they would like to add
@@ -12,5 +12,4 @@ return to 1
 
 BAD CONNECTION
 a3 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
-
 
