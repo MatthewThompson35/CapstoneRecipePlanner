@@ -100,6 +100,7 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -717,11 +718,24 @@
             this.label30.TabIndex = 62;
             this.label30.Text = "Saturday";
             // 
+            // backButton
+            // 
+            this.backButton.AutoSize = true;
+            this.backButton.Location = new System.Drawing.Point(29, 19);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(94, 30);
+            this.backButton.TabIndex = 72;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // PlannedMealsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(469, 1055);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.removeSaturdayBreakfastButton);
             this.Controls.Add(this.removeSaturdayLunchButton);
             this.Controls.Add(this.removeSatudayDinnerButton);
@@ -875,5 +889,6 @@
         private Label label28;
         private Label label29;
         private Label label30;
+        private Button backButton;
     }
 }

@@ -16,5 +16,13 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
         }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var detailsPage = new RecipeDetailsPage();
+            detailsPage.Show();
+        }
+
     }
 }

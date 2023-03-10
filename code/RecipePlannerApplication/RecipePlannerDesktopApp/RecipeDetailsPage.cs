@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -24,9 +25,12 @@ namespace RecipePlannerDesktopApplication
         ///     Initializes the recipe details page for the recipes.
         /// </summary>
         /// <param name="page">The homepage.</param>
-        public RecipeDetailsPage(Homepage page)
+        public RecipeDetailsPage()
         {
             InitializeComponent();
+        }
+
+        public RecipeDetailsPage(Homepage page) :this(){
             this.homepage = page;
 
             this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
@@ -69,7 +73,11 @@ namespace RecipePlannerDesktopApplication
 
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
+            var mealsPage = new PlannedMealsPage();
 
+            this.Hide();
+
+            mealsPage.Show();
         }
     }
 }
