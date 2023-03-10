@@ -182,4 +182,24 @@ public partial class Homepage : Form
     }
 
     #endregion
+
+    private void nextButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void lastPageButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void previousButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void beginningButton_Click(object sender, EventArgs e)
+    {
+
+    }
 }

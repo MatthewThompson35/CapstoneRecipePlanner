@@ -63,5 +63,10 @@ namespace RecipePlannerDesktopApplication
             output += description + steps + ingredients;
             return output;
         }
+
+        private void addToMealPlanButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

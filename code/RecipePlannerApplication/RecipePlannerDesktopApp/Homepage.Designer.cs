@@ -32,10 +32,14 @@
             this.logoutButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.viewIngredientsButton = new System.Windows.Forms.Button();
-            this.addRecipeButton = new System.Windows.Forms.Button();
             this.showAvailableRecipesRadioButton = new System.Windows.Forms.RadioButton();
             this.showAllRecipesRadioButton = new System.Windows.Forms.RadioButton();
             this.noRecipesLabel = new System.Windows.Forms.Label();
+            this.nextButton = new System.Windows.Forms.Button();
+            this.beginningButton = new System.Windows.Forms.Button();
+            this.lastPageButton = new System.Windows.Forms.Button();
+            this.previousButton = new System.Windows.Forms.Button();
+            this.pageCountLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // recipeListView
@@ -71,7 +75,7 @@
             // 
             // viewIngredientsButton
             // 
-            this.viewIngredientsButton.Location = new System.Drawing.Point(62, 724);
+            this.viewIngredientsButton.Location = new System.Drawing.Point(67, 759);
             this.viewIngredientsButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.viewIngredientsButton.Name = "viewIngredientsButton";
             this.viewIngredientsButton.Size = new System.Drawing.Size(382, 44);
@@ -79,16 +83,6 @@
             this.viewIngredientsButton.Text = "View Ingredients";
             this.viewIngredientsButton.UseVisualStyleBackColor = true;
             this.viewIngredientsButton.Click += new System.EventHandler(this.viewIngredientsButton_Click);
-            // 
-            // addRecipeButton
-            // 
-            this.addRecipeButton.Location = new System.Drawing.Point(62, 800);
-            this.addRecipeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.addRecipeButton.Name = "addRecipeButton";
-            this.addRecipeButton.Size = new System.Drawing.Size(382, 41);
-            this.addRecipeButton.TabIndex = 5;
-            this.addRecipeButton.Text = "Add Recipe";
-            this.addRecipeButton.UseVisualStyleBackColor = true;
             // 
             // showAvailableRecipesRadioButton
             // 
@@ -125,15 +119,69 @@
             this.noRecipesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.noRecipesLabel.Visible = false;
             // 
+            // nextButton
+            // 
+            this.nextButton.Location = new System.Drawing.Point(312, 693);
+            this.nextButton.Name = "nextButton";
+            this.nextButton.Size = new System.Drawing.Size(59, 29);
+            this.nextButton.TabIndex = 9;
+            this.nextButton.Text = ">";
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            // 
+            // beginningButton
+            // 
+            this.beginningButton.Location = new System.Drawing.Point(79, 693);
+            this.beginningButton.Name = "beginningButton";
+            this.beginningButton.Size = new System.Drawing.Size(51, 29);
+            this.beginningButton.TabIndex = 10;
+            this.beginningButton.Text = "<|";
+            this.beginningButton.UseVisualStyleBackColor = true;
+            this.beginningButton.Click += new System.EventHandler(this.beginningButton_Click);
+            // 
+            // lastPageButton
+            // 
+            this.lastPageButton.Location = new System.Drawing.Point(377, 693);
+            this.lastPageButton.Name = "lastPageButton";
+            this.lastPageButton.Size = new System.Drawing.Size(51, 29);
+            this.lastPageButton.TabIndex = 11;
+            this.lastPageButton.Text = ">|";
+            this.lastPageButton.UseVisualStyleBackColor = true;
+            this.lastPageButton.Click += new System.EventHandler(this.lastPageButton_Click);
+            // 
+            // previousButton
+            // 
+            this.previousButton.Location = new System.Drawing.Point(136, 693);
+            this.previousButton.Name = "previousButton";
+            this.previousButton.Size = new System.Drawing.Size(59, 29);
+            this.previousButton.TabIndex = 12;
+            this.previousButton.Text = "<";
+            this.previousButton.UseVisualStyleBackColor = true;
+            this.previousButton.Click += new System.EventHandler(this.previousButton_Click);
+            // 
+            // pageCountLabel
+            // 
+            this.pageCountLabel.AutoSize = true;
+            this.pageCountLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.pageCountLabel.Location = new System.Drawing.Point(243, 694);
+            this.pageCountLabel.Name = "pageCountLabel";
+            this.pageCountLabel.Size = new System.Drawing.Size(24, 28);
+            this.pageCountLabel.TabIndex = 13;
+            this.pageCountLabel.Text = "1";
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 916);
+            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.pageCountLabel);
+            this.Controls.Add(this.previousButton);
+            this.Controls.Add(this.lastPageButton);
+            this.Controls.Add(this.beginningButton);
+            this.Controls.Add(this.nextButton);
             this.Controls.Add(this.noRecipesLabel);
             this.Controls.Add(this.showAllRecipesRadioButton);
             this.Controls.Add(this.showAvailableRecipesRadioButton);
-            this.Controls.Add(this.addRecipeButton);
             this.Controls.Add(this.viewIngredientsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logoutButton);
@@ -152,10 +200,14 @@
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button viewIngredientsButton;
-        private System.Windows.Forms.Button addRecipeButton;
         private RadioButton showAvailableRecipesRadioButton;
         private RadioButton showAllRecipesRadioButton;
         private Label noRecipesLabel;
+        private Button nextButton;
+        private Button beginningButton;
+        private Button lastPageButton;
+        private Button previousButton;
+        private Label pageCountLabel;
     }
 }
 
