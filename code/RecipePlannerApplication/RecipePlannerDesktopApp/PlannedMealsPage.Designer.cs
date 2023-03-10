@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedMealsPage));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -100,7 +102,10 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.backButton = new System.Windows.Forms.Button();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -415,165 +420,183 @@
             // 
             // removeSundayBreakfastButton
             // 
+            this.removeSundayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSundayBreakfastButton.Location = new System.Drawing.Point(297, 120);
             this.removeSundayBreakfastButton.Name = "removeSundayBreakfastButton";
             this.removeSundayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeSundayBreakfastButton.TabIndex = 37;
             this.removeSundayBreakfastButton.Text = "Remove";
-            this.removeSundayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeSundayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeSundayDinnerButton
             // 
+            this.removeSundayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSundayDinnerButton.Location = new System.Drawing.Point(297, 190);
             this.removeSundayDinnerButton.Name = "removeSundayDinnerButton";
             this.removeSundayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeSundayDinnerButton.TabIndex = 38;
             this.removeSundayDinnerButton.Text = "Remove";
-            this.removeSundayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeSundayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // removeSundayLunchButton
             // 
+            this.removeSundayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSundayLunchButton.Location = new System.Drawing.Point(297, 155);
             this.removeSundayLunchButton.Name = "removeSundayLunchButton";
             this.removeSundayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeSundayLunchButton.TabIndex = 39;
             this.removeSundayLunchButton.Text = "Remove";
-            this.removeSundayLunchButton.UseVisualStyleBackColor = true;
+            this.removeSundayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeMondayDinnerButton
             // 
+            this.removeMondayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeMondayDinnerButton.Location = new System.Drawing.Point(297, 310);
             this.removeMondayDinnerButton.Name = "removeMondayDinnerButton";
             this.removeMondayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeMondayDinnerButton.TabIndex = 40;
             this.removeMondayDinnerButton.Text = "Remove";
-            this.removeMondayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeMondayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // removeMondayLunchButton
             // 
+            this.removeMondayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeMondayLunchButton.Location = new System.Drawing.Point(297, 275);
             this.removeMondayLunchButton.Name = "removeMondayLunchButton";
             this.removeMondayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeMondayLunchButton.TabIndex = 41;
             this.removeMondayLunchButton.Text = "Remove";
-            this.removeMondayLunchButton.UseVisualStyleBackColor = true;
+            this.removeMondayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeMondayBreakfastButton
             // 
+            this.removeMondayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeMondayBreakfastButton.Location = new System.Drawing.Point(297, 241);
             this.removeMondayBreakfastButton.Name = "removeMondayBreakfastButton";
             this.removeMondayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeMondayBreakfastButton.TabIndex = 42;
             this.removeMondayBreakfastButton.Text = "Remove";
-            this.removeMondayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeMondayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeTuesdayDinnerButton
             // 
+            this.removeTuesdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeTuesdayDinnerButton.Location = new System.Drawing.Point(289, 448);
             this.removeTuesdayDinnerButton.Name = "removeTuesdayDinnerButton";
             this.removeTuesdayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeTuesdayDinnerButton.TabIndex = 43;
             this.removeTuesdayDinnerButton.Text = "Remove";
-            this.removeTuesdayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeTuesdayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // removeTuesdayLunchButton
             // 
+            this.removeTuesdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeTuesdayLunchButton.Location = new System.Drawing.Point(289, 413);
             this.removeTuesdayLunchButton.Name = "removeTuesdayLunchButton";
             this.removeTuesdayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeTuesdayLunchButton.TabIndex = 44;
             this.removeTuesdayLunchButton.Text = "Remove";
-            this.removeTuesdayLunchButton.UseVisualStyleBackColor = true;
+            this.removeTuesdayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeTuesdayBreakfastButton
             // 
+            this.removeTuesdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeTuesdayBreakfastButton.Location = new System.Drawing.Point(289, 378);
             this.removeTuesdayBreakfastButton.Name = "removeTuesdayBreakfastButton";
             this.removeTuesdayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeTuesdayBreakfastButton.TabIndex = 45;
             this.removeTuesdayBreakfastButton.Text = "Remove";
-            this.removeTuesdayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeTuesdayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeThursdayDinnerButton
             // 
+            this.removeThursdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeThursdayDinnerButton.Location = new System.Drawing.Point(290, 728);
             this.removeThursdayDinnerButton.Name = "removeThursdayDinnerButton";
             this.removeThursdayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeThursdayDinnerButton.TabIndex = 46;
             this.removeThursdayDinnerButton.Text = "Remove";
-            this.removeThursdayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeThursdayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // removeWednesdayBreakfastButton
             // 
+            this.removeWednesdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeWednesdayBreakfastButton.Location = new System.Drawing.Point(290, 521);
             this.removeWednesdayBreakfastButton.Name = "removeWednesdayBreakfastButton";
             this.removeWednesdayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeWednesdayBreakfastButton.TabIndex = 47;
             this.removeWednesdayBreakfastButton.Text = "Remove";
-            this.removeWednesdayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeWednesdayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeWednesdayDinnerButton
             // 
+            this.removeWednesdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeWednesdayDinnerButton.Location = new System.Drawing.Point(290, 587);
             this.removeWednesdayDinnerButton.Name = "removeWednesdayDinnerButton";
             this.removeWednesdayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeWednesdayDinnerButton.TabIndex = 48;
             this.removeWednesdayDinnerButton.Text = "Remove";
-            this.removeWednesdayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeWednesdayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // removeThursdayLunchButton
             // 
+            this.removeThursdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeThursdayLunchButton.Location = new System.Drawing.Point(290, 695);
             this.removeThursdayLunchButton.Name = "removeThursdayLunchButton";
             this.removeThursdayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeThursdayLunchButton.TabIndex = 49;
             this.removeThursdayLunchButton.Text = "Remove";
-            this.removeThursdayLunchButton.UseVisualStyleBackColor = true;
+            this.removeThursdayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeWednesdayLunchButton
             // 
+            this.removeWednesdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeWednesdayLunchButton.Location = new System.Drawing.Point(290, 551);
             this.removeWednesdayLunchButton.Name = "removeWednesdayLunchButton";
             this.removeWednesdayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeWednesdayLunchButton.TabIndex = 50;
             this.removeWednesdayLunchButton.Text = "Remove";
-            this.removeWednesdayLunchButton.UseVisualStyleBackColor = true;
+            this.removeWednesdayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeThursdayBreakfastButton
             // 
+            this.removeThursdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeThursdayBreakfastButton.Location = new System.Drawing.Point(290, 660);
             this.removeThursdayBreakfastButton.Name = "removeThursdayBreakfastButton";
             this.removeThursdayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeThursdayBreakfastButton.TabIndex = 51;
             this.removeThursdayBreakfastButton.Text = "Remove";
-            this.removeThursdayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeThursdayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeFridayBreakfastButton
             // 
+            this.removeFridayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeFridayBreakfastButton.Location = new System.Drawing.Point(290, 801);
             this.removeFridayBreakfastButton.Name = "removeFridayBreakfastButton";
             this.removeFridayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeFridayBreakfastButton.TabIndex = 61;
             this.removeFridayBreakfastButton.Text = "Remove";
-            this.removeFridayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeFridayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeFridayLunchButton
             // 
+            this.removeFridayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeFridayLunchButton.Location = new System.Drawing.Point(290, 836);
             this.removeFridayLunchButton.Name = "removeFridayLunchButton";
             this.removeFridayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeFridayLunchButton.TabIndex = 60;
             this.removeFridayLunchButton.Text = "Remove";
-            this.removeFridayLunchButton.UseVisualStyleBackColor = true;
+            this.removeFridayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeFridayDinnerButton
             // 
+            this.removeFridayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeFridayDinnerButton.Location = new System.Drawing.Point(290, 869);
             this.removeFridayDinnerButton.Name = "removeFridayDinnerButton";
             this.removeFridayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeFridayDinnerButton.TabIndex = 59;
             this.removeFridayDinnerButton.Text = "Remove";
-            this.removeFridayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeFridayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // fridayBreakfastTextBox
             // 
@@ -635,30 +658,33 @@
             // 
             // removeSaturdayBreakfastButton
             // 
+            this.removeSaturdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSaturdayBreakfastButton.Location = new System.Drawing.Point(290, 941);
             this.removeSaturdayBreakfastButton.Name = "removeSaturdayBreakfastButton";
             this.removeSaturdayBreakfastButton.Size = new System.Drawing.Size(73, 29);
             this.removeSaturdayBreakfastButton.TabIndex = 71;
             this.removeSaturdayBreakfastButton.Text = "Remove";
-            this.removeSaturdayBreakfastButton.UseVisualStyleBackColor = true;
+            this.removeSaturdayBreakfastButton.UseVisualStyleBackColor = false;
             // 
             // removeSaturdayLunchButton
             // 
+            this.removeSaturdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSaturdayLunchButton.Location = new System.Drawing.Point(290, 976);
             this.removeSaturdayLunchButton.Name = "removeSaturdayLunchButton";
             this.removeSaturdayLunchButton.Size = new System.Drawing.Size(73, 29);
             this.removeSaturdayLunchButton.TabIndex = 70;
             this.removeSaturdayLunchButton.Text = "Remove";
-            this.removeSaturdayLunchButton.UseVisualStyleBackColor = true;
+            this.removeSaturdayLunchButton.UseVisualStyleBackColor = false;
             // 
             // removeSatudayDinnerButton
             // 
+            this.removeSatudayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSatudayDinnerButton.Location = new System.Drawing.Point(290, 1009);
             this.removeSatudayDinnerButton.Name = "removeSatudayDinnerButton";
             this.removeSatudayDinnerButton.Size = new System.Drawing.Size(73, 29);
             this.removeSatudayDinnerButton.TabIndex = 69;
             this.removeSatudayDinnerButton.Text = "Remove";
-            this.removeSatudayDinnerButton.UseVisualStyleBackColor = true;
+            this.removeSatudayDinnerButton.UseVisualStyleBackColor = false;
             // 
             // saturdayBreakfastTextBox
             // 
@@ -718,16 +744,32 @@
             this.label30.TabIndex = 62;
             this.label30.Text = "Saturday";
             // 
-            // backButton
+            // plannerMenuButton
             // 
-            this.backButton.AutoSize = true;
-            this.backButton.Location = new System.Drawing.Point(29, 19);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(94, 30);
-            this.backButton.TabIndex = 72;
-            this.backButton.Text = "Back";
-            this.backButton.UseVisualStyleBackColor = true;
-            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(12, 9);
+            this.plannerMenuButton.Name = "plannerMenuButton";
+            this.plannerMenuButton.Size = new System.Drawing.Size(62, 56);
+            this.plannerMenuButton.TabIndex = 72;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findRecipeToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(156, 28);
+            // 
+            // findRecipeToolStripMenuItem
+            // 
+            this.findRecipeToolStripMenuItem.Name = "findRecipeToolStripMenuItem";
+            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.findRecipeToolStripMenuItem.Text = "Find Recipe";
+            this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
             // 
             // PlannedMealsPage
             // 
@@ -735,7 +777,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(469, 1055);
-            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.removeSaturdayBreakfastButton);
             this.Controls.Add(this.removeSaturdayLunchButton);
             this.Controls.Add(this.removeSatudayDinnerButton);
@@ -810,6 +852,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PlannedMealsPage";
             this.Text = "PlannedMealsPage";
+            this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -889,6 +932,8 @@
         private Label label28;
         private Label label29;
         private Label label30;
-        private Button backButton;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem findRecipeToolStripMenuItem;
     }
 }

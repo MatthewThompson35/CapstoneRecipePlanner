@@ -202,4 +202,18 @@ public partial class Homepage : Form
     {
 
     }
+
+    private void plannerMenuButton_Click(object sender, EventArgs e)
+    {
+        this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
+    }
+
+    private void viewMealPlanToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+
+        var mealPlanPage = new PlannedMealsPage();
+
+        mealPlanPage.Show();
+    }
 }

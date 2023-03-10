@@ -24,5 +24,17 @@ namespace RecipePlannerDesktopApplication
             detailsPage.Show();
         }
 
+        private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var homepage = new Homepage();
+            homepage.Show();
+        }
+
+        private void plannerMenuButton_Click(object sender, EventArgs e)
+        {
+            this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
+        }
     }
 }

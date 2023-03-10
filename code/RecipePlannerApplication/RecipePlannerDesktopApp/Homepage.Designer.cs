@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Homepage));
             this.recipeListView = new System.Windows.Forms.ListView();
             this.logoutButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +42,10 @@
             this.lastPageButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
             this.pageCountLabel = new System.Windows.Forms.Label();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewMealPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // recipeListView
@@ -87,7 +93,7 @@
             // showAvailableRecipesRadioButton
             // 
             this.showAvailableRecipesRadioButton.AutoSize = true;
-            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(42, 12);
+            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(107, 12);
             this.showAvailableRecipesRadioButton.Name = "showAvailableRecipesRadioButton";
             this.showAvailableRecipesRadioButton.Size = new System.Drawing.Size(187, 24);
             this.showAvailableRecipesRadioButton.TabIndex = 6;
@@ -99,7 +105,7 @@
             // showAllRecipesRadioButton
             // 
             this.showAllRecipesRadioButton.AutoSize = true;
-            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(42, 43);
+            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(107, 44);
             this.showAllRecipesRadioButton.Name = "showAllRecipesRadioButton";
             this.showAllRecipesRadioButton.Size = new System.Drawing.Size(143, 24);
             this.showAllRecipesRadioButton.TabIndex = 7;
@@ -169,11 +175,39 @@
             this.pageCountLabel.TabIndex = 13;
             this.pageCountLabel.Text = "1";
             // 
+            // plannerMenuButton
+            // 
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(12, 12);
+            this.plannerMenuButton.Name = "plannerMenuButton";
+            this.plannerMenuButton.Size = new System.Drawing.Size(62, 56);
+            this.plannerMenuButton.TabIndex = 14;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewMealPlanToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(180, 28);
+            // 
+            // viewMealPlanToolStripMenuItem
+            // 
+            this.viewMealPlanToolStripMenuItem.Name = "viewMealPlanToolStripMenuItem";
+            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.viewMealPlanToolStripMenuItem.Text = "View Meal Plan";
+            this.viewMealPlanToolStripMenuItem.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem_Click);
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.pageCountLabel);
             this.Controls.Add(this.previousButton);
             this.Controls.Add(this.lastPageButton);
@@ -189,6 +223,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Homepage";
             this.Text = "Recipe Planner Homepage";
+            this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,6 +243,9 @@
         private Button lastPageButton;
         private Button previousButton;
         private Label pageCountLabel;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem viewMealPlanToolStripMenuItem;
     }
 }
 
