@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
+using Newtonsoft.Json;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
@@ -504,15 +505,86 @@ public class HomeController : Controller
         return View("AddIngredient", ViewBag.Measurements);
     }
 
+    public JsonResult GetRecipeId(string day, string mealType){
+        try
+        {
+            var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            int recipeId = ThisWeeksMeals[(day, mealType)];
+            var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            string recipeName = "";
+            foreach (var recipe in allRecipes)
+            {
+                if (recipe.RecipeId == recipeId)
+                {
+                    recipeName = recipe.Name;
+                }
+            }
+
+
+            ViewBag.Header = "This weeks meals";
+            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
+        }
+        catch (Exception ex)
+        {
+            var recipeId = "You have not yet added a meal for this time";
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+        }
+    }
+
+    public JsonResult GetRecipeName(string day, string mealType)
+    {
+        try
+        {
+            var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            int recipeId = ThisWeeksMeals[(day, mealType)];
+            var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            string recipeName = "";
+            foreach (var recipe in allRecipes)
+            {
+                if (recipe.RecipeId == recipeId)
+                {
+                    recipeName = recipe.Name;
+                }
+            }
+
+
+            ViewBag.Header = "This weeks meals";
+            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
+        }
+        catch (Exception ex)
+        {
+            var recipeId = "You have not yet added a meal for this time";
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+        }
+    }
+
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToPlannedMealsPage()
     {
-        ViewBag.AllRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-        ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-    
+        
+
+        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        foreach (var recipe in recipes)
+        {
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+        }
+
+        ViewBag.AllRecipes = recipes;
+        var breakfast = new List<string>();
+        var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+        List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        foreach (string day in daysOfWeek)
+        {
+            JsonResult json = GetRecipeName(day, "Breakfast");
+            string recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            breakfast.Add(recipeName);
+        }
+        ViewBag.DefaultValues = breakfast;
         ViewBag.Header = "This weeks meals";
         return View("PlannedMealsPage");
     }

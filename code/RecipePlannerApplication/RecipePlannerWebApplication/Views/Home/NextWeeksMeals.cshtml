@@ -1,0 +1,202 @@
+﻿@model IEnumerable<RecipePlannerLibrary.Models.Recipe>
+
+@{
+    ViewBag.Title = "Meal Plan";
+    List<string> mealTypes = new List<string> { "Breakfast", "Lunch", "Dinner" };
+}
+<div>
+    <h2>@ViewBag.Header</h2>
+</div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Meal Type</th>
+                <td>@Html.DropDownList("Monday", new SelectList(mealTypes))</td>
+                <td>@Html.DropDownList("Tuesday", new SelectList(mealTypes))</td>
+                <td>@Html.DropDownList("Wednesday",  new SelectList(mealTypes))</td>
+                <td>@Html.DropDownList("Thursday",  new SelectList(mealTypes))</td>
+                <td>@Html.DropDownList("Friday",  new SelectList(mealTypes))</td>
+                <td>@Html.DropDownList("Saturday",  new SelectList(mealTypes))</td>
+                <td>@Html.DropDownList("Sunday",  new SelectList(mealTypes))</td>
+            </tr>
+            <tr>
+                <th>Recipe Name</th>
+                <td id="MondayDetails"></td>
+                <td id="TuesdayDetails"></td>
+                <td id="WednesdayDetails"></td>
+                <td id="ThursdayDetails"></td>
+                <td id="FridayDetails"></td>
+                <td id="SaturdayDetails"></td>
+                <td id="SundayDetails"></td>
+            </tr>
+            <tr>
+                <th>View Recipes</th>
+                <td>
+                    <button id="MondayButton" disabled>View Recipe</button>
+                </td>
+                <td>
+                    <button id="TuesdayButton" disabled>View Recipe</button>
+                </td>
+                <td>
+                    <button id="WednesdayButton" disabled>View Recipe</button>
+                </td>
+                <td>
+                    <button id="ThursdayButton" disabled>View Recipe</button>
+                </td>
+                <td>
+                    <button id="FridayButton" disabled>View Recipe</button>
+                </td>
+                <td>
+                    <button id="SaturdayButton" disabled>View Recipe</button>
+                </td>
+                <td>
+                    <button id="SundayButton" disabled>View Recipe</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="recipe-details">
+    <div id="recipe-details-box" style="overflow: auto;">
+        @foreach (var recipe in ViewBag.AllRecipes)
+        {
+            <div id="@recipe.RecipeId" style="display: none">
+                <h3 class="recipe-name">@recipe.Name</h3>
+                <p class="recipe-description">@recipe.Description</p>
+                <h4>Steps</h4>
+                <ol class="recipe-steps">
+                    @foreach (var step in recipe.Steps)
+                    {
+                        <li>@step.stepDescription</li>
+                    }
+                </ol>
+                <h4>Ingredients</h4>
+                <ul class="recipe-ingredients">
+                    @foreach (var ingredient in recipe.Ingredients)
+                    {
+                        <li>@ingredient.Quantity @ingredient.IngredientName</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    #recipe-details {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        margin-left: 50px;
+    }
+
+    #recipe-details-box {
+        border: 1px solid black;
+        height: 300px;
+        padding: 10px;
+        position: fixed;
+        top: 350px;
+        width: 79%;
+    }
+
+        #recipe-details-box h3 {
+            margin-top: 0;
+        }
+
+        #recipe-details-box p {
+            margin: 0;
+        }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        top: 200px;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        table-layout: fixed;
+    }
+
+    th,
+    td {
+        width: 125px;
+        text-align: center;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    select {
+        width: 100%;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+    td[id$="Details"] {
+        padding: 16px;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+</style>
+@section scripts {
+    <script>
+        $(function () {
+            $("select").change(function () {
+                var day = $(this).attr("id");
+                var meal = $(this).val();
+                $.ajax({
+                    url: "/Recipe/GetRecipeDetails",
+                    data: { day: day, meal: meal },
+                    success: function (result) {
+                        $("#" + day + "Details").html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
