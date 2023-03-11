@@ -48,23 +48,26 @@
             this.filterButton = new System.Windows.Forms.Button();
             this.activeTagsLbl = new System.Windows.Forms.Label();
             this.filterTagTxt = new System.Windows.Forms.TextBox();
+            this.clearFiltersBtn = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.deleteFilterBtn = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // recipeListView
             // 
-            this.recipeListView.Location = new System.Drawing.Point(32, 149);
+            this.recipeListView.Location = new System.Drawing.Point(32, 154);
             this.recipeListView.Name = "recipeListView";
-            this.recipeListView.Size = new System.Drawing.Size(379, 347);
+            this.recipeListView.Size = new System.Drawing.Size(379, 364);
             this.recipeListView.TabIndex = 0;
             this.recipeListView.UseCompatibleStateImageBehavior = false;
             this.recipeListView.SelectedIndexChanged += new System.EventHandler(this.recipeListView_SelectedIndexChanged);
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(372, 9);
+            this.logoutButton.Location = new System.Drawing.Point(384, 5);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(66, 29);
+            this.logoutButton.Size = new System.Drawing.Size(60, 29);
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -74,15 +77,15 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(175, 121);
+            this.label1.Location = new System.Drawing.Point(32, 125);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 24);
+            this.label1.Size = new System.Drawing.Size(84, 24);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Recipes";
+            this.label1.Text = "Recipes:";
             // 
             // viewIngredientsButton
             // 
-            this.viewIngredientsButton.Location = new System.Drawing.Point(59, 569);
+            this.viewIngredientsButton.Location = new System.Drawing.Point(58, 572);
             this.viewIngredientsButton.Name = "viewIngredientsButton";
             this.viewIngredientsButton.Size = new System.Drawing.Size(334, 33);
             this.viewIngredientsButton.TabIndex = 4;
@@ -93,7 +96,7 @@
             // showAvailableRecipesRadioButton
             // 
             this.showAvailableRecipesRadioButton.AutoSize = true;
-            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(82, 14);
+            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(128, 130);
             this.showAvailableRecipesRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.showAvailableRecipesRadioButton.Name = "showAvailableRecipesRadioButton";
             this.showAvailableRecipesRadioButton.Size = new System.Drawing.Size(148, 19);
@@ -106,7 +109,7 @@
             // showAllRecipesRadioButton
             // 
             this.showAllRecipesRadioButton.AutoSize = true;
-            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(236, 14);
+            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(289, 130);
             this.showAllRecipesRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.showAllRecipesRadioButton.Name = "showAllRecipesRadioButton";
             this.showAllRecipesRadioButton.Size = new System.Drawing.Size(114, 19);
@@ -119,7 +122,7 @@
             // noRecipesLabel
             // 
             this.noRecipesLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.noRecipesLabel.Location = new System.Drawing.Point(69, 253);
+            this.noRecipesLabel.Location = new System.Drawing.Point(68, 289);
             this.noRecipesLabel.Name = "noRecipesLabel";
             this.noRecipesLabel.Size = new System.Drawing.Size(301, 84);
             this.noRecipesLabel.TabIndex = 8;
@@ -129,7 +132,7 @@
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(273, 520);
+            this.nextButton.Location = new System.Drawing.Point(272, 534);
             this.nextButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(52, 22);
@@ -140,7 +143,7 @@
             // 
             // beginningButton
             // 
-            this.beginningButton.Location = new System.Drawing.Point(69, 520);
+            this.beginningButton.Location = new System.Drawing.Point(68, 536);
             this.beginningButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.beginningButton.Name = "beginningButton";
             this.beginningButton.Size = new System.Drawing.Size(45, 22);
@@ -151,7 +154,7 @@
             // 
             // lastPageButton
             // 
-            this.lastPageButton.Location = new System.Drawing.Point(330, 520);
+            this.lastPageButton.Location = new System.Drawing.Point(330, 534);
             this.lastPageButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lastPageButton.Name = "lastPageButton";
             this.lastPageButton.Size = new System.Drawing.Size(45, 22);
@@ -162,7 +165,7 @@
             // 
             // previousButton
             // 
-            this.previousButton.Location = new System.Drawing.Point(119, 520);
+            this.previousButton.Location = new System.Drawing.Point(119, 536);
             this.previousButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.previousButton.Name = "previousButton";
             this.previousButton.Size = new System.Drawing.Size(52, 22);
@@ -175,7 +178,7 @@
             // 
             this.pageCountLabel.AutoSize = true;
             this.pageCountLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.pageCountLabel.Location = new System.Drawing.Point(213, 520);
+            this.pageCountLabel.Location = new System.Drawing.Point(213, 535);
             this.pageCountLabel.Name = "pageCountLabel";
             this.pageCountLabel.Size = new System.Drawing.Size(19, 21);
             this.pageCountLabel.TabIndex = 13;
@@ -186,10 +189,10 @@
             this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
             this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
             this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.plannerMenuButton.Location = new System.Drawing.Point(10, 9);
+            this.plannerMenuButton.Location = new System.Drawing.Point(4, 5);
             this.plannerMenuButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.plannerMenuButton.Name = "plannerMenuButton";
-            this.plannerMenuButton.Size = new System.Drawing.Size(54, 42);
+            this.plannerMenuButton.Size = new System.Drawing.Size(38, 29);
             this.plannerMenuButton.TabIndex = 14;
             this.plannerMenuButton.UseVisualStyleBackColor = false;
             this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
@@ -211,9 +214,9 @@
             // 
             // filterButton
             // 
-            this.filterButton.Location = new System.Drawing.Point(288, 49);
+            this.filterButton.Location = new System.Drawing.Point(261, 26);
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(62, 23);
+            this.filterButton.Size = new System.Drawing.Size(98, 23);
             this.filterButton.TabIndex = 15;
             this.filterButton.Text = "Filter";
             this.filterButton.UseVisualStyleBackColor = true;
@@ -222,7 +225,7 @@
             // activeTagsLbl
             // 
             this.activeTagsLbl.AutoSize = true;
-            this.activeTagsLbl.Location = new System.Drawing.Point(69, 86);
+            this.activeTagsLbl.Location = new System.Drawing.Point(12, 63);
             this.activeTagsLbl.Name = "activeTagsLbl";
             this.activeTagsLbl.Size = new System.Drawing.Size(81, 15);
             this.activeTagsLbl.TabIndex = 16;
@@ -230,16 +233,46 @@
             // 
             // filterTagTxt
             // 
-            this.filterTagTxt.Location = new System.Drawing.Point(82, 50);
+            this.filterTagTxt.Location = new System.Drawing.Point(68, 26);
             this.filterTagTxt.Name = "filterTagTxt";
-            this.filterTagTxt.Size = new System.Drawing.Size(200, 23);
+            this.filterTagTxt.PlaceholderText = " Search for Tag";
+            this.filterTagTxt.Size = new System.Drawing.Size(173, 23);
             this.filterTagTxt.TabIndex = 17;
+            // 
+            // clearFiltersBtn
+            // 
+            this.clearFiltersBtn.Location = new System.Drawing.Point(335, 61);
+            this.clearFiltersBtn.Name = "clearFiltersBtn";
+            this.clearFiltersBtn.Size = new System.Drawing.Size(76, 23);
+            this.clearFiltersBtn.TabIndex = 18;
+            this.clearFiltersBtn.Text = "Clear Filters";
+            this.clearFiltersBtn.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(94, 60);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(138, 23);
+            this.comboBox1.TabIndex = 19;
+            // 
+            // deleteFilterBtn
+            // 
+            this.deleteFilterBtn.Location = new System.Drawing.Point(248, 61);
+            this.deleteFilterBtn.Name = "deleteFilterBtn";
+            this.deleteFilterBtn.Size = new System.Drawing.Size(76, 22);
+            this.deleteFilterBtn.TabIndex = 20;
+            this.deleteFilterBtn.Text = "Remove";
+            this.deleteFilterBtn.UseVisualStyleBackColor = true;
             // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.deleteFilterBtn);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.clearFiltersBtn);
             this.Controls.Add(this.filterTagTxt);
             this.Controls.Add(this.activeTagsLbl);
             this.Controls.Add(this.filterButton);
@@ -284,6 +317,9 @@
         private Button filterButton;
         private Label activeTagsLbl;
         private TextBox filterTagTxt;
+        private Button clearFiltersBtn;
+        private ComboBox comboBox1;
+        private Button deleteFilterBtn;
     }
 }
 
