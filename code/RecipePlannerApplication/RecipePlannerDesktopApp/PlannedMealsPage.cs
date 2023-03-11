@@ -17,6 +17,9 @@ namespace RecipePlannerDesktopApplication
         private List<Label> daysLabels;
         private List<Label> mealTypeDaysLabels;
 
+        public string DayValue { get; set; }
+        public string MealTypeValue { get; set; }
+
         public PlannedMealsPage()
         {
             InitializeComponent();
@@ -25,7 +28,7 @@ namespace RecipePlannerDesktopApplication
 
             this.daysLabels = new List<Label>() { sundayLabel, mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel };
             this.mealTypeDaysLabels = new List<Label>() { sundayBreakfastLabel, sundayLunchLabel, sundayDinnerLabel, mondayBreakfastLabel, mondayLunchLabel, mondayDinnerLabel, tuesdayBreakfastLabel, tuesdayLunchLabel, tuesdayDinnerLabel, wednesdayBreakfastLabel, wednesdayLunchLabel, wednesdayDinnerLabel, thursdayBreakfastLabel, thursdayLunchLabel, thursdayDinnerLabel, fridayBreakfastLabel, fridayLunchLabel, fridayDinnerLabel, saturdayBreakfastLabel, saturdayLunchLabel, saturdayDinnerLabel };
-            this.populateRecipeToCertainDayAndMealType();
+            
 
         }
 
@@ -53,7 +56,7 @@ namespace RecipePlannerDesktopApplication
         {
             foreach (var currentDayLabel in this.daysLabels)
             {
-                if (currentDayLabel.Text.Equals(this.detailsPage.GetDayOfWeek()))
+                if (currentDayLabel.Text.Equals(this.DayValue))
                 {
                     foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
                     {
@@ -140,6 +143,11 @@ namespace RecipePlannerDesktopApplication
                     }
                 }
             }
+        }
+
+        private void PlannedMealsPage_Load(object sender, EventArgs e)
+        {
+            this.populateRecipeToCertainDayAndMealType();
         }
     }
 }

@@ -13,6 +13,7 @@ using RecipePlannerLibrary.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.AxHost;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -78,6 +79,8 @@ namespace RecipePlannerDesktopApplication
 
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
+            //string day = this.daysComboBox.SelectedItem.ToString();
+            //Debug.WriteLine(day);
             var mealsPage = new PlannedMealsPage();
             this.Hide();
             mealsPage.Show();
@@ -107,11 +110,13 @@ namespace RecipePlannerDesktopApplication
 
         public string GetDayOfWeek()
         {
-            string day = "";
-            if (daysComboBox != null && daysComboBox.SelectedItem != null)
-            {
-                day = daysComboBox.SelectedItem.ToString();
-            }
+            string day = this.daysComboBox.SelectedItem.ToString();
+
+            //this.Day = day;
+            //if (daysComboBox != null && daysComboBox.SelectedItem != null)
+            //{
+            //    day = daysComboBox.SelectedItem.ToString();
+            //}
 
             return day;
         }
@@ -124,6 +129,13 @@ namespace RecipePlannerDesktopApplication
                 mealType = this.mealTypeComboBox.SelectedItem.ToString();
             }
             return mealType;
+        }
+
+        private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PlannedMealsPage mealsPage = new PlannedMealsPage();
+
+            mealsPage.DayValue = this.daysComboBox.SelectedItem.ToString();
         }
     }
 }

@@ -75,6 +75,7 @@
             this.daysComboBox.Name = "daysComboBox";
             this.daysComboBox.Size = new System.Drawing.Size(151, 28);
             this.daysComboBox.TabIndex = 3;
+            this.daysComboBox.SelectedIndexChanged += new System.EventHandler(this.daysComboBox_SelectedIndexChanged);
             // 
             // mealTypeComboBox
             // 

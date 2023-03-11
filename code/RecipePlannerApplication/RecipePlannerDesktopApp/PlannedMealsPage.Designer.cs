@@ -852,6 +852,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PlannedMealsPage";
             this.Text = "PlannedMealsPage";
+            this.Load += new System.EventHandler(this.PlannedMealsPage_Load);
             this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
