@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.AxHost;
+using System.Reflection;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -28,14 +30,17 @@ namespace RecipePlannerDesktopApplication
         public RecipeDetailsPage()
         {
             InitializeComponent();
+
+            
         }
 
         public RecipeDetailsPage(Homepage page) :this(){
             this.homepage = page;
-
             this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
-            this.daysComboBox.DataSource = Enum.GetValues(typeof(DayOfWeek));
-            this.mealTypeComboBox.DataSource = Enum.GetValues(typeof(MealTypes));
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -79,19 +84,46 @@ namespace RecipePlannerDesktopApplication
 
         }
 
-        private void showDisplayedRecipe()
+        public Recipe getCurrentRecipe()
         {
-            this.homepage.GetSelectedRecipe();
+            return this.homepage.GetSelectedRecipe();
+        }
+
+        private void populateDayComboBoxValues()
+        {
+            foreach (var currentDay in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                this.daysComboBox.Items.Add(currentDay.ToString());
+            }
+        }
+
+        private void populateMealTypeComboBoxValues()
+        {
+            foreach (var mealType in Enum.GetValues(typeof(MealTypes)))
+            {
+                this.mealTypeComboBox.Items.Add(mealType.ToString());
+            }
         }
 
         public string GetDayOfWeek()
         {
-            return this.daysComboBox.SelectedItem.ToString();
+            string day = "";
+            if (daysComboBox != null && daysComboBox.SelectedItem != null)
+            {
+                day = daysComboBox.SelectedItem.ToString();
+            }
+
+            return day;
         }
 
         public string GetMealType()
         {
-            return this.mealTypeComboBox.SelectedItem.ToString();
+            string mealType = "";
+            if (mealTypeComboBox.SelectedItem != null)
+            {
+                mealType = this.mealTypeComboBox.SelectedItem.ToString();
+            }
+            return mealType;
         }
     }
 }
