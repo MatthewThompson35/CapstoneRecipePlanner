@@ -52,7 +52,7 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed BETWEEN DATE_ADD(DATE(CURDATE()), INTERVAL 1 DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 13 DAY);";
+            WHERE dateUsed BETWEEN DATE_SUB(DATE(CURDATE() + 7), INTERVAL WEEKDAY(CURDATE()+ 7) DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()+ 7), INTERVAL WEEKDAY(CURDATE()+ 7) DAY), INTERVAL 6 DAY);";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
