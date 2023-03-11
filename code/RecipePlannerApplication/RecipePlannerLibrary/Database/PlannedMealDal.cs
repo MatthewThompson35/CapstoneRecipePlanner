@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using RecipePlannerLibrary.Models;
@@ -20,6 +21,7 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
             using var reader = command.ExecuteReader();
+
 
             connection.Close();
         }
@@ -68,7 +70,7 @@ namespace RecipePlannerLibrary.Database
 
         public static void RemoveThisWeekMeal(string connectionString, int id, string day, string type, DateTime date)
         {
-           
+
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"DELETE FROM planned_recipe WHERE recipeID = @id and dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
@@ -78,7 +80,7 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
             using var reader = command.ExecuteReader();
-           
+
         }
 
         public static Boolean exists(string connectionString, string type, DateTime date)
@@ -113,7 +115,8 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
             using var reader = command.ExecuteReader();
         }
-
+    }
+    
         #endregion
     }
 }
