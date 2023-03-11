@@ -39,6 +39,27 @@ namespace RecipePlannerLibrary.Database
             return recipes;
         }
 
+        public static string getRecipeNameById(int recipeId, string connectionString)
+        {
+            Recipe recipe = new Recipe();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @"Select name from recipe where recipeID=@recipeId;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var name = reader.GetString(0);
+
+                recipe.Name = name;
+                //recipe = new Recipe(recipeID, name);
+            }
+
+            connection.Close();
+            return recipe.Name;
+        }
+
         /// <summary>
         ///     Gets the ingredients associated with a specified recipeID.
         /// </summary>

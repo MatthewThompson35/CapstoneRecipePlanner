@@ -55,5 +55,16 @@ namespace RecipePlannerLibrary.Models
             this.Tags = new List<string>();
         }
 
+        public Recipe(int recipeId, string name) 
+        {
+            this.RecipeId = recipeId;
+            this.Name = name;
+        }
+
+        public Recipe()
+        {
+
+        }
+
     }
 }
