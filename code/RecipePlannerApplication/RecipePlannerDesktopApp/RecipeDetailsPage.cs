@@ -45,6 +45,7 @@ namespace RecipePlannerDesktopApplication
 
             this.populateDayComboBoxValues();
             this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
 
             this.selectedDay = "";
             this.selectedMealType = "";
@@ -86,10 +87,16 @@ namespace RecipePlannerDesktopApplication
 
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
-            //string day = this.daysComboBox.SelectedItem.ToString();
-            //Debug.WriteLine(day);
             DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
-            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+
+            if (this.weekComboBox.SelectedItem.Equals("This Week"))
+            {
+                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+            } else
+            {
+                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+            }
+            
             
             var mealsPage = new PlannedMealsPage();
             this.Hide();
@@ -124,6 +131,18 @@ namespace RecipePlannerDesktopApplication
             return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
         }
 
+        public string GetPlannedMealWeek(PlannedMealWeeks mealWeek)
+        {
+            switch (mealWeek)
+            {
+                case PlannedMealWeeks.ThisWeek:
+                    return "This Week";
+                case PlannedMealWeeks.NextWeek:
+                    return "Next Week";
+            }
+            return "";
+        }
+
         public Recipe getCurrentRecipe()
         {
             return this.homepage.GetSelectedRecipe();
@@ -145,28 +164,14 @@ namespace RecipePlannerDesktopApplication
             }
         }
 
-        public string GetDayOfWeek()
+        private void populateWeekComboBoxValues()
         {
-            string day = this.daysComboBox.SelectedItem.ToString();
-
-            //this.Day = day;
-            //if (daysComboBox != null && daysComboBox.SelectedItem != null)
-            //{
-            //    day = daysComboBox.SelectedItem.ToString();
-            //}
-
-            return day;
-        }
-
-        public string GetMealType()
-        {
-            string mealType = "";
-            if (mealTypeComboBox.SelectedItem != null)
+            foreach (var week in Enum.GetValues(typeof(PlannedMealWeeks)))
             {
-                mealType = this.mealTypeComboBox.SelectedItem.ToString();
+                this.weekComboBox.Items.Add(this.GetPlannedMealWeek((PlannedMealWeeks)week));
             }
-            return mealType;
         }
+
 
         private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
