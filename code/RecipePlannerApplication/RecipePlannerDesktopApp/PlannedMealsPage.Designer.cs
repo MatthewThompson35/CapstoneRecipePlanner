@@ -105,7 +105,8 @@
             this.plannerMenuButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.switchWeeksButton = new System.Windows.Forms.Button();
+            this.viewCurrentWeekPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewNextWeekPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -428,6 +429,7 @@
             this.removeSundayBreakfastButton.TabIndex = 37;
             this.removeSundayBreakfastButton.Text = "Remove";
             this.removeSundayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeSundayBreakfastButton.Click += new System.EventHandler(this.removeSundayBreakfastButton_Click);
             // 
             // removeSundayDinnerButton
             // 
@@ -438,6 +440,7 @@
             this.removeSundayDinnerButton.TabIndex = 38;
             this.removeSundayDinnerButton.Text = "Remove";
             this.removeSundayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeSundayDinnerButton.Click += new System.EventHandler(this.removeSundayDinnerButton_Click);
             // 
             // removeSundayLunchButton
             // 
@@ -448,6 +451,7 @@
             this.removeSundayLunchButton.TabIndex = 39;
             this.removeSundayLunchButton.Text = "Remove";
             this.removeSundayLunchButton.UseVisualStyleBackColor = false;
+            this.removeSundayLunchButton.Click += new System.EventHandler(this.removeSundayLunchButton_Click);
             // 
             // removeMondayDinnerButton
             // 
@@ -458,6 +462,7 @@
             this.removeMondayDinnerButton.TabIndex = 40;
             this.removeMondayDinnerButton.Text = "Remove";
             this.removeMondayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeMondayDinnerButton.Click += new System.EventHandler(this.removeMondayDinnerButton_Click);
             // 
             // removeMondayLunchButton
             // 
@@ -468,6 +473,7 @@
             this.removeMondayLunchButton.TabIndex = 41;
             this.removeMondayLunchButton.Text = "Remove";
             this.removeMondayLunchButton.UseVisualStyleBackColor = false;
+            this.removeMondayLunchButton.Click += new System.EventHandler(this.removeMondayLunchButton_Click);
             // 
             // removeMondayBreakfastButton
             // 
@@ -478,6 +484,7 @@
             this.removeMondayBreakfastButton.TabIndex = 42;
             this.removeMondayBreakfastButton.Text = "Remove";
             this.removeMondayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeMondayBreakfastButton.Click += new System.EventHandler(this.removeMondayBreakfastButton_Click);
             // 
             // removeTuesdayDinnerButton
             // 
@@ -488,6 +495,7 @@
             this.removeTuesdayDinnerButton.TabIndex = 43;
             this.removeTuesdayDinnerButton.Text = "Remove";
             this.removeTuesdayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeTuesdayDinnerButton.Click += new System.EventHandler(this.removeTuesdayDinnerButton_Click);
             // 
             // removeTuesdayLunchButton
             // 
@@ -498,6 +506,7 @@
             this.removeTuesdayLunchButton.TabIndex = 44;
             this.removeTuesdayLunchButton.Text = "Remove";
             this.removeTuesdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeTuesdayLunchButton.Click += new System.EventHandler(this.removeTuesdayLunchButton_Click);
             // 
             // removeTuesdayBreakfastButton
             // 
@@ -508,6 +517,7 @@
             this.removeTuesdayBreakfastButton.TabIndex = 45;
             this.removeTuesdayBreakfastButton.Text = "Remove";
             this.removeTuesdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeTuesdayBreakfastButton.Click += new System.EventHandler(this.removeTuesdayBreakfastButton_Click);
             // 
             // removeThursdayDinnerButton
             // 
@@ -518,6 +528,7 @@
             this.removeThursdayDinnerButton.TabIndex = 46;
             this.removeThursdayDinnerButton.Text = "Remove";
             this.removeThursdayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeThursdayDinnerButton.Click += new System.EventHandler(this.removeThursdayDinnerButton_Click);
             // 
             // removeWednesdayBreakfastButton
             // 
@@ -528,6 +539,7 @@
             this.removeWednesdayBreakfastButton.TabIndex = 47;
             this.removeWednesdayBreakfastButton.Text = "Remove";
             this.removeWednesdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeWednesdayBreakfastButton.Click += new System.EventHandler(this.removeWednesdayBreakfastButton_Click);
             // 
             // removeWednesdayDinnerButton
             // 
@@ -538,6 +550,7 @@
             this.removeWednesdayDinnerButton.TabIndex = 48;
             this.removeWednesdayDinnerButton.Text = "Remove";
             this.removeWednesdayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeWednesdayDinnerButton.Click += new System.EventHandler(this.removeWednesdayDinnerButton_Click);
             // 
             // removeThursdayLunchButton
             // 
@@ -548,6 +561,7 @@
             this.removeThursdayLunchButton.TabIndex = 49;
             this.removeThursdayLunchButton.Text = "Remove";
             this.removeThursdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeThursdayLunchButton.Click += new System.EventHandler(this.removeThursdayLunchButton_Click);
             // 
             // removeWednesdayLunchButton
             // 
@@ -558,6 +572,7 @@
             this.removeWednesdayLunchButton.TabIndex = 50;
             this.removeWednesdayLunchButton.Text = "Remove";
             this.removeWednesdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeWednesdayLunchButton.Click += new System.EventHandler(this.removeWednesdayLunchButton_Click);
             // 
             // removeThursdayBreakfastButton
             // 
@@ -568,6 +583,7 @@
             this.removeThursdayBreakfastButton.TabIndex = 51;
             this.removeThursdayBreakfastButton.Text = "Remove";
             this.removeThursdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeThursdayBreakfastButton.Click += new System.EventHandler(this.removeThursdayBreakfastButton_Click);
             // 
             // removeFridayBreakfastButton
             // 
@@ -578,6 +594,7 @@
             this.removeFridayBreakfastButton.TabIndex = 61;
             this.removeFridayBreakfastButton.Text = "Remove";
             this.removeFridayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeFridayBreakfastButton.Click += new System.EventHandler(this.removeFridayBreakfastButton_Click);
             // 
             // removeFridayLunchButton
             // 
@@ -588,6 +605,7 @@
             this.removeFridayLunchButton.TabIndex = 60;
             this.removeFridayLunchButton.Text = "Remove";
             this.removeFridayLunchButton.UseVisualStyleBackColor = false;
+            this.removeFridayLunchButton.Click += new System.EventHandler(this.removeFridayLunchButton_Click);
             // 
             // removeFridayDinnerButton
             // 
@@ -598,6 +616,7 @@
             this.removeFridayDinnerButton.TabIndex = 59;
             this.removeFridayDinnerButton.Text = "Remove";
             this.removeFridayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeFridayDinnerButton.Click += new System.EventHandler(this.removeFridayDinnerButton_Click);
             // 
             // fridayBreakfastTextBox
             // 
@@ -666,6 +685,7 @@
             this.removeSaturdayBreakfastButton.TabIndex = 71;
             this.removeSaturdayBreakfastButton.Text = "Remove";
             this.removeSaturdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeSaturdayBreakfastButton.Click += new System.EventHandler(this.removeSaturdayBreakfastButton_Click);
             // 
             // removeSaturdayLunchButton
             // 
@@ -676,6 +696,7 @@
             this.removeSaturdayLunchButton.TabIndex = 70;
             this.removeSaturdayLunchButton.Text = "Remove";
             this.removeSaturdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeSaturdayLunchButton.Click += new System.EventHandler(this.removeSaturdayLunchButton_Click);
             // 
             // removeSatudayDinnerButton
             // 
@@ -686,6 +707,7 @@
             this.removeSatudayDinnerButton.TabIndex = 69;
             this.removeSatudayDinnerButton.Text = "Remove";
             this.removeSatudayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeSatudayDinnerButton.Click += new System.EventHandler(this.removeSatudayDinnerButton_Click);
             // 
             // saturdayBreakfastTextBox
             // 
@@ -761,29 +783,32 @@
             // 
             this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findRecipeToolStripMenuItem});
+            this.findRecipeToolStripMenuItem,
+            this.viewCurrentWeekPlanToolStripMenuItem,
+            this.viewNextWeekPlanToolStripMenuItem});
             this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
-            this.plannerContextMenuStrip.Size = new System.Drawing.Size(156, 28);
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(235, 76);
             // 
             // findRecipeToolStripMenuItem
             // 
             this.findRecipeToolStripMenuItem.Name = "findRecipeToolStripMenuItem";
-            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
             this.findRecipeToolStripMenuItem.Text = "Find Recipe";
             this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
             // 
-            // switchWeeksButton
+            // viewCurrentWeekPlanToolStripMenuItem
             // 
-            this.switchWeeksButton.BackColor = System.Drawing.Color.MediumSpringGreen;
-            this.switchWeeksButton.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.switchWeeksButton.ForeColor = System.Drawing.Color.Black;
-            this.switchWeeksButton.Location = new System.Drawing.Point(297, 5);
-            this.switchWeeksButton.Name = "switchWeeksButton";
-            this.switchWeeksButton.Size = new System.Drawing.Size(65, 46);
-            this.switchWeeksButton.TabIndex = 73;
-            this.switchWeeksButton.Text = "Switch Weeks";
-            this.switchWeeksButton.UseVisualStyleBackColor = false;
-            this.switchWeeksButton.Click += new System.EventHandler(this.switchWeeksButton_Click);
+            this.viewCurrentWeekPlanToolStripMenuItem.Name = "viewCurrentWeekPlanToolStripMenuItem";
+            this.viewCurrentWeekPlanToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.viewCurrentWeekPlanToolStripMenuItem.Text = "View Current Week Plan";
+            this.viewCurrentWeekPlanToolStripMenuItem.Click += new System.EventHandler(this.viewCurrentWeekPlanToolStripMenuItem_Click);
+            // 
+            // viewNextWeekPlanToolStripMenuItem
+            // 
+            this.viewNextWeekPlanToolStripMenuItem.Name = "viewNextWeekPlanToolStripMenuItem";
+            this.viewNextWeekPlanToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.viewNextWeekPlanToolStripMenuItem.Text = "View Next Week Plan";
+            this.viewNextWeekPlanToolStripMenuItem.Click += new System.EventHandler(this.viewNextWeekPlanToolStripMenuItem_Click);
             // 
             // PlannedMealsPage
             // 
@@ -791,7 +816,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(396, 1055);
-            this.Controls.Add(this.switchWeeksButton);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.removeSaturdayBreakfastButton);
             this.Controls.Add(this.removeSaturdayLunchButton);
@@ -950,6 +974,7 @@
         private Button plannerMenuButton;
         private ContextMenuStrip plannerContextMenuStrip;
         private ToolStripMenuItem findRecipeToolStripMenuItem;
-        private Button switchWeeksButton;
+        private ToolStripMenuItem viewCurrentWeekPlanToolStripMenuItem;
+        private ToolStripMenuItem viewNextWeekPlanToolStripMenuItem;
     }
 }

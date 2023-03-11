@@ -31,9 +31,9 @@ namespace RecipePlannerDesktopApplication
             this.daysLabels = new List<Label>() { mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel, sundayLabel};
             this.mealTypeDaysLabels = new List<Label>() { mondayBreakfastLabel, mondayLunchLabel, mondayDinnerLabel, tuesdayBreakfastLabel, tuesdayLunchLabel, tuesdayDinnerLabel, wednesdayBreakfastLabel, wednesdayLunchLabel, wednesdayDinnerLabel, thursdayBreakfastLabel, thursdayLunchLabel, thursdayDinnerLabel, fridayBreakfastLabel, fridayLunchLabel, fridayDinnerLabel, saturdayBreakfastLabel, saturdayLunchLabel, saturdayDinnerLabel, sundayBreakfastLabel, sundayLunchLabel, sundayDinnerLabel};
             this.mealDayTypeTextBoxes = new List<TextBox> { mondayBreakfastTextBox, mondayLunchTextBox, mondayDinnerTextBox, tuesdayBreakfastTextBox, tuesdayLunchTextBox, tuesdayDinnerTextBox, wednesdayBreakfastTextBox, wednesdayLunchTextBox, wednesdayDinnerTextBox, thursdayBreakfastTextBox, thursdayLunchTextBox, thursdayDinnerTextBox, fridayBreakfastTextBox, fridayLunchTextBox, fridayDinnerTextBox, saturdayBreakfastTextBox, saturdayLunchTextBox, saturdayDinnerTextBox, sundayBreakfastTextBox, sundayLunchTextBox, sundayDinnerTextBox };
-            //this.displayNextWeekMeals();
 
             this.displayThisWeekMeals();
+
         }
 
         private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -257,27 +257,136 @@ namespace RecipePlannerDesktopApplication
                 this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
         }
 
-        private void switchWeeksButton_Click(object sender, EventArgs e)
+        private void removeMondayBreakfastButton_Click(object sender, EventArgs e)
         {
-            bool isNextWeekDisplayed = false;
+            //PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, int id, string day, string type, DateTime date);
+        }
 
-            if (isNextWeekDisplayed)
+        private void removeMondayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeMondayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeTuesdayBreakfastButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeTuesdayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeTuesdayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeWednesdayBreakfastButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeWednesdayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeWednesdayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeThursdayBreakfastButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeThursdayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeThursdayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeFridayBreakfastButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeFridayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeFridayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeSaturdayBreakfastButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeSaturdayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeSatudayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeSundayBreakfastButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeSundayLunchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeSundayDinnerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewCurrentWeekPlanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.weekMealLabel.Text = "This Week's Meals";
+
+            foreach (var textbox in this.mealDayTypeTextBoxes)
             {
-                isNextWeekDisplayed = false;
-
-                this.displayThisWeekMeals();
-
-                this.weekMealLabel.Text = "This Week's Meals";
+                textbox.Clear();
             }
-            else
-            {
-                isNextWeekDisplayed = true;
-
-                this.displayNextWeekMeals();
-
-                this.weekMealLabel.Text = "Next Week's Meals";
-            }
+            this.displayThisWeekMeals();
             this.Refresh();
+
+        }
+
+        private void viewNextWeekPlanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.weekMealLabel.Text = "Next Week's Meals";
+
+            foreach (var textbox in this.mealDayTypeTextBoxes)
+            {
+                textbox.Clear();
+            }
+            this.displayNextWeekMeals();
+
+            this.Refresh();
+
         }
     }
 }
