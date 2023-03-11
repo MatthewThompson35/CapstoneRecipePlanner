@@ -22,6 +22,8 @@ public partial class Homepage : Form
     /// </summary>
     public List<Recipe> Recipes { get; set; }
 
+    private List<string> searchTags;
+
     #endregion
 
     #region Constructors
@@ -33,6 +35,7 @@ public partial class Homepage : Form
     {
         this.InitializeComponent();
         this.Recipes = new List<Recipe>();
+        this.searchTags = new List<string>();
 
         this.showAvailableRecipesRadioButton.Checked = true;
     }
@@ -227,12 +230,18 @@ public partial class Homepage : Form
     private void filterButton_Click(object sender, EventArgs e)
     {
         string tag = this.filterTagTxt.Text;
-        this.activeTagsLbl.Text += tag;
 
-        this.getFilteredRecipes(tag);
+        if (!string.IsNullOrEmpty(tag) && !this.searchTags.Contains(tag))
+        {
+            this.filterTagTxt.Text = "";
+            this.searchTags.Add(tag);
+            this.activeTagsLbl.Text += tag + ", ";
+
+            this.getFilteredRecipes(this.searchTags);
+        }
     }
 
-    private void getFilteredRecipes(string tagFilter)
+    private void getFilteredRecipes(List<string> tagFilters)
     {
         List<Recipe> recipes = new List<Recipe>();
         List<Recipe> filteredRecipes = new List<Recipe>();
@@ -246,24 +255,27 @@ public partial class Homepage : Form
             recipes = this.getAvailableRecipes();
         }
 
-        var availableRecipes = new List<Recipe>();
         try
         {
             foreach (var recipe in recipes)
             {
-                var matchesTag = false;
                 var matchesAllTags = true;
-                foreach (var tag in recipe.Tags)
+                foreach (var tagFilter in tagFilters)
                 {
-                    if (tagFilter.ToLower() == tag.ToLower())
+                    var matchesTag = false;
+                    foreach (var tag in recipe.Tags)
                     {
-                        matchesTag = true;
+                        if (tagFilter.ToLower() == tag.ToLower())
+                        {
+                            matchesTag = true;
+                        }
                     }
-                }
 
-                if (matchesTag == false)
-                {
-                    matchesAllTags = false;
+                    if (matchesTag == false)
+                    {
+                        matchesAllTags = false;
+                        break;
+                    }
                 }
 
                 if (matchesAllTags)
