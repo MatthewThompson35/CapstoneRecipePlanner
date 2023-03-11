@@ -31,6 +31,7 @@ namespace RecipePlannerLibrary.Database
                 var description = reader.GetString(2);
 
                 var recipe = new Recipe(recipeID, name, description);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipeID, connectionString);
 
                 recipes.Add(recipe);
             }

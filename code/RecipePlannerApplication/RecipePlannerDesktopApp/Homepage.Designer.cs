@@ -47,7 +47,7 @@
             this.viewMealPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterButton = new System.Windows.Forms.Button();
             this.activeTagsLbl = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.filterTagTxt = new System.Windows.Forms.TextBox();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,19 +228,19 @@
             this.activeTagsLbl.TabIndex = 16;
             this.activeTagsLbl.Text = "Filter by Tags: ";
             // 
-            // textBox1
+            // filterTagTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(82, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 23);
-            this.textBox1.TabIndex = 17;
+            this.filterTagTxt.Location = new System.Drawing.Point(82, 50);
+            this.filterTagTxt.Name = "filterTagTxt";
+            this.filterTagTxt.Size = new System.Drawing.Size(200, 23);
+            this.filterTagTxt.TabIndex = 17;
             // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.filterTagTxt);
             this.Controls.Add(this.activeTagsLbl);
             this.Controls.Add(this.filterButton);
             this.Controls.Add(this.plannerMenuButton);
@@ -283,7 +283,7 @@
         private ToolStripMenuItem viewMealPlanToolStripMenuItem;
         private Button filterButton;
         private Label activeTagsLbl;
-        private TextBox textBox1;
+        private TextBox filterTagTxt;
     }
 }
 

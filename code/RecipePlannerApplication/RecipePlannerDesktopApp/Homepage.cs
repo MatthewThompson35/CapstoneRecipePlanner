@@ -87,36 +87,9 @@ public partial class Homepage : Form
 
     private void showAvailableRecipes()
     {
-        var availableRecipes = new List<Recipe>();
         try
         {
-            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
-            {
-                var add = true;
-                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-                foreach (var ingredient in recipe.Ingredients)
-                {
-                    {
-                        var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
-                        if (ing != null && ing.Count > 0)
-                        {
-                            if (ing[0].quantity < ingredient.Quantity)
-                            {
-                                add = false;
-                            }
-                        }
-                        else
-                        {
-                            add = false;
-                        }
-                    }
-                }
-
-                if (add)
-                {
-                    availableRecipes.Add(recipe);
-                }
-            }
+            var availableRecipes = this.getAvailableRecipes();
 
             if (availableRecipes.Count > 0)
             {
@@ -140,6 +113,40 @@ public partial class Homepage : Form
             this.noRecipesLabel.Text = "The connection to the server could not be made";
             this.noRecipesLabel.Visible = true;
         }
+    }
+
+    private List<Recipe> getAvailableRecipes()
+    {
+        var availableRecipes = new List<Recipe>();
+        foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+        {
+            var add = true;
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                {
+                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                    if (ing != null && ing.Count > 0)
+                    {
+                        if (ing[0].quantity < ingredient.Quantity)
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                    }
+                }
+            }
+
+            if (add)
+            {
+                availableRecipes.Add(recipe);
+            }
+        }
+
+        return availableRecipes;
     }
 
     private void recipeListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,6 +226,76 @@ public partial class Homepage : Form
 
     private void filterButton_Click(object sender, EventArgs e)
     {
+        string tag = this.filterTagTxt.Text;
+        this.activeTagsLbl.Text += tag;
 
+        this.getFilteredRecipes(tag);
+    }
+
+    private void getFilteredRecipes(string tagFilter)
+    {
+        List<Recipe> recipes = new List<Recipe>();
+        List<Recipe> filteredRecipes = new List<Recipe>();
+
+        if (this.showAllRecipesRadioButton.Checked)
+        {
+            recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        }
+        else
+        {
+            recipes = this.getAvailableRecipes();
+        }
+
+        var availableRecipes = new List<Recipe>();
+        try
+        {
+            foreach (var recipe in recipes)
+            {
+                var matchesTag = false;
+                var matchesAllTags = true;
+                foreach (var tag in recipe.Tags)
+                {
+                    if (tagFilter.ToLower() == tag.ToLower())
+                    {
+                        matchesTag = true;
+                    }
+                }
+
+                if (matchesTag == false)
+                {
+                    matchesAllTags = false;
+                }
+
+                if (matchesAllTags)
+                {
+                    filteredRecipes.Add(recipe);
+                }
+            }
+
+            this.recipeListView.Clear();
+
+            if (filteredRecipes.Count == 0)
+            {
+                this.noRecipesLabel.Visible = true;
+            }
+            else
+            {
+                this.noRecipesLabel.Visible = false;
+            }
+
+            foreach (var recipe in filteredRecipes)
+            {
+                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+            }
+
+
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        catch (Exception ex)
+        {
+            this.noRecipesLabel.Text = "The connection to the server could not be made";
+            this.noRecipesLabel.Visible = true;
+        }
     }
 }
