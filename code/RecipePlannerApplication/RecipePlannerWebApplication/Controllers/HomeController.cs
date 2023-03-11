@@ -1,13 +1,16 @@
-﻿using System.Diagnostics;
+﻿using System.Configuration;
+using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
+using Newtonsoft.Json;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace RecipePlannerWebApplication.Controllers;
 
@@ -72,6 +75,7 @@ public class HomeController : Controller
         try
         {
             List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            
             foreach (var recipe in recipes)
             {
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
@@ -443,6 +447,115 @@ public class HomeController : Controller
         }
     }
 
+    /// <summary>
+    /// Adds the planned meal.
+    /// </summary>
+    /// <param name="recipeId">The recipe identifier.</param>
+    /// <param name="week">The week.</param>
+    /// <param name="day">The day.</param>
+    /// <returns></returns>
+    public ActionResult addPlannedMeal(int recipeId, string week, string day, string type)
+    {
+        int recipeID = recipeId; 
+        string Week = week;
+        string Day = day;
+        string Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals("This Week"))
+        {
+            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+        }
+        else
+        {
+            date = this.GetDateOfNextWeekDay(dayOfWeek);
+        }
+
+        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+        {
+            PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, day, type, date, recipeId);
+        }
+        else
+        {
+            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+        }
+        this.setupForRecipePage();
+        if (ViewBag.day == null)
+        {
+            ViewBag.day = "Monday";
+        }
+
+        if (ViewBag.type == null)
+        {
+            ViewBag.type = "Breakfast";
+        }
+
+        if (ViewBag.week == null)
+        {
+            ViewBag.week = "This Week"; 
+        }
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+        return View("RecipePage", ViewBag.AvailableRecipes);
+    }
+
+    public ActionResult UpdateThisWeeksMeal(int recipeId, string week, string day, string type)
+    {
+        int recipeID = recipeId;
+        string Week = week;
+        string Day = day;
+        string Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals("This Week"))
+        {
+            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+        }
+        else
+        {
+            date = this.GetDateOfNextWeekDay(dayOfWeek);
+        }
+        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, Day, Type, date, recipeID);
+        this.setupForRecipePage();
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+        return View("RecipePage", ViewBag.AvailableRecipes);
+    }
+
+    public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
+    {
+       
+        int daysUntilNextWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek + 7) % 7;
+        DateTime nextWeekDay = DateTime.Today.AddDays(daysUntilNextWeekDay);
+
+        DateTime nextMonday = DateTime.Today.AddDays((int)DayOfWeek.Monday - (int)DateTime.Today.DayOfWeek + 7);
+
+        if (DateTime.Compare(nextWeekDay.Date, nextMonday) < 0)
+        {
+            return nextWeekDay.AddDays(7).Date;
+        }
+
+        return nextWeekDay.Date;
+    }
+
+    public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
+    {
+        
+        int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
+        if (dayOfWeek == DayOfWeek.Sunday)
+        {
+            daysUntilCurrentWeekDay += 7;
+        }
+        return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
+    }
 
     /// <summary>
     ///     Goes to add ingredients page.
@@ -455,16 +568,167 @@ public class HomeController : Controller
         return View("AddIngredient", ViewBag.Measurements);
     }
 
+    public ActionResult ToggleWeek(string currentWeek)
+    {
+        if (currentWeek.Equals("Next Week"))
+        {
+            this.goToPlannedMealsPage();
+        }
+        else
+        {
+            this.goToPlannedMealsPageNextWeek();
+        }
+        return View("PlannedMealsPage");
+
+    }
+    
+
+    public JsonResult GetRecipeName(string day, string mealType, string week)
+    {
+        try
+        {
+            var ThisWeeksMeals = new Dictionary<(string, string), int>();
+            if (week.Equals("Next Week"))
+            {
+                ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
+            }
+            else
+            {
+                ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            }
+            int recipeId = ThisWeeksMeals[(day, mealType)];
+            var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            string recipeName = "";
+            foreach (var recipe in allRecipes)
+            {
+                if (recipe.RecipeId == recipeId)
+                {
+                    recipeName = recipe.Name;
+                }
+            }
+
+
+            ViewBag.Header = "This weeks meals";
+            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
+        }
+        catch (Exception ex)
+        {
+            var recipeId = "You have not yet added a meal for this time";
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+        }
+    }
+
+
+    public JsonResult RemoveThisWeeksMeal(string day, string mealType)
+    {
+        try
+        {
+            var ThisWeeksMeals = new Dictionary<(string, string), int>();
+            if (ViewBag.CurrentWeek.Equals("Next Week"))
+            {
+                 ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
+            }
+            else
+            {
+                ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            }
+           
+            int recipeId = ThisWeeksMeals[(day, mealType)];
+            DayOfWeek dayOfWeek;
+            Enum.TryParse(day, out dayOfWeek);
+            DateTime date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
+            
+            ViewBag.Header = "This weeks meals";
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+        }
+        catch (Exception ex)
+        {
+            try
+            {
+                var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+                int recipeId = ThisWeeksMeals[(day, mealType)];
+                var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+                string recipeName = "";
+                foreach (var recipe in allRecipes)
+                {
+                    if (recipe.RecipeId == recipeId)
+                    {
+                        recipeName = recipe.Name;
+                    }
+                }
+                return Json(new { RecipeName = recipeName });
+            }
+            catch(Exception ex2)
+            {
+                return Json(new { RecipeName = "You Have not yet added a meal for this time" });
+            }
+            
+        }
+    }
+
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToPlannedMealsPage()
     {
-        ViewBag.AllRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-        ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-    
+
+        ViewBag.CurrentWeek = "This Week";
+        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        foreach (var recipe in recipes)
+        {
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+        }
+
+        ViewBag.AllRecipes = recipes;
+        var breakfast = new List<string>();
+        var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+        List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        foreach (string day in daysOfWeek)
+        {
+            JsonResult json = GetRecipeName(day, "Breakfast", "This Week");
+            string recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            breakfast.Add(recipeName);
+        }
+
+        ViewBag.DefaultValues = breakfast;
         ViewBag.Header = "This weeks meals";
+        ViewBag.CurrentWeek = "This Week";
+        return View("PlannedMealsPage");
+    }
+
+    /// <summary>
+    ///     Goes to add ingredients page.
+    /// </summary>
+    /// <returns>The add ingredients page or login on server connection</returns>
+    public ActionResult goToPlannedMealsPageNextWeek()
+    {
+
+
+        ViewBag.CurrentWeek = "Next Week";
+        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        foreach (var recipe in recipes)
+        {
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+        }
+
+        ViewBag.AllRecipes = recipes;
+        var breakfast = new List<string>();
+        List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        foreach (string day in daysOfWeek)
+        {
+            JsonResult json = GetRecipeName(day, "Breakfast", "Next Week");
+            string recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            breakfast.Add(recipeName);
+        }
+        ViewBag.DefaultValues = breakfast;
+        ViewBag.Header = "Next weeks meals";
+        ViewBag.CurrentWeek = "Next Week";
         return View("PlannedMealsPage");
     }
 

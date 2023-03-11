@@ -1,12 +1,15 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerLibrary.Database
 {
     public class PlannedMealDal
     {
+        #region Methods
+
         public static void addPlannedMeal(string connectionString, int recipeId, string day, string type, DateTime date)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -25,7 +28,7 @@ namespace RecipePlannerLibrary.Database
 
         public static Dictionary<(string, string), int> getThisWeeksMeals(string connectionString)
         {
-            Dictionary<(string, string), int> thisWeeksMeals = new Dictionary<(string, string), int>();
+            var thisWeeksMeals = new Dictionary<(string, string), int>();
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"SELECT *
@@ -35,11 +38,12 @@ namespace RecipePlannerLibrary.Database
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int recipeId = reader.GetInt32(0);
-                string day = reader.GetString(1);
-                string type = reader.GetString(2);
+                var recipeId = reader.GetInt32(0);
+                var day = reader.GetString(1);
+                var type = reader.GetString(2);
                 thisWeeksMeals.Add((day, type), recipeId);
             }
+
             return thisWeeksMeals;
         }
 
@@ -50,7 +54,7 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed BETWEEN DATE_ADD(DATE(CURDATE()), INTERVAL 1 DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 13 DAY);";
+            WHERE dateUsed BETWEEN DATE_SUB(DATE(CURDATE() + 7), INTERVAL WEEKDAY(CURDATE()+ 7) DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()+ 7), INTERVAL WEEKDAY(CURDATE()+ 7) DAY), INTERVAL 6 DAY);";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -113,4 +117,5 @@ namespace RecipePlannerLibrary.Database
         }
     }
     
-}
+        #endregion
+    }
