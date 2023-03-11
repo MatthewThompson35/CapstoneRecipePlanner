@@ -326,6 +326,14 @@ public partial class Homepage : Form
 
     private void clearFiltersBtn_Click(object sender, EventArgs e)
     {
+        this.filterTagTxt.Text = "";
+
+        this.tagsCmb.Items.Clear();
+        this.tagsCmb.Text = "";
+
+        this.searchTags.Clear();
+
+        this.getFilteredRecipes(this.searchTags);
 
     }
 }
