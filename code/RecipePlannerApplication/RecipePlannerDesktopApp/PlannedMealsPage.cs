@@ -130,22 +130,24 @@ namespace RecipePlannerDesktopApplication
                             }
                         }
                     }
-                    //foreach (var currentmealDayTypeTextBox in this.mealDayTypeTextBoxes)
-                    //{
-                    //    if (currentmealDayTypeTextBox.Text == null)
-                    //    {
-                    //        currentmealDayTypeTextBox.Text = "Meal has not been added to this time yet";
-                    //    }
-                    //}
+                    
                 }
 
                 
             }
 
-            
+            foreach (var currentmealDayTypeTextBox in this.mealDayTypeTextBoxes)
+            {
+                if (currentmealDayTypeTextBox.Text == "")
+                {
+                    currentmealDayTypeTextBox.Text = "Meal has not been added to this time yet";
+                }
+            }
+
+
         }
 
-            private void plannerMenuButton_Click(object sender, EventArgs e)
+        private void plannerMenuButton_Click(object sender, EventArgs e)
             {
                 this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
             }
