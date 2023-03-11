@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedMealsPage));
-            this.label1 = new System.Windows.Forms.Label();
+            this.weekMealLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.sundayLabel = new System.Windows.Forms.Label();
             this.thursdayLabel = new System.Windows.Forms.Label();
@@ -105,18 +105,19 @@
             this.plannerMenuButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchWeeksButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // weekMealLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(139, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "This Week\'s Meals";
+            this.weekMealLabel.AutoSize = true;
+            this.weekMealLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.weekMealLabel.Location = new System.Drawing.Point(139, 58);
+            this.weekMealLabel.Name = "weekMealLabel";
+            this.weekMealLabel.Size = new System.Drawing.Size(167, 25);
+            this.weekMealLabel.TabIndex = 0;
+            this.weekMealLabel.Text = "This Week\'s Meals";
             // 
             // label2
             // 
@@ -771,12 +772,26 @@
             this.findRecipeToolStripMenuItem.Text = "Find Recipe";
             this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
             // 
+            // switchWeeksButton
+            // 
+            this.switchWeeksButton.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.switchWeeksButton.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.switchWeeksButton.ForeColor = System.Drawing.Color.Black;
+            this.switchWeeksButton.Location = new System.Drawing.Point(297, 5);
+            this.switchWeeksButton.Name = "switchWeeksButton";
+            this.switchWeeksButton.Size = new System.Drawing.Size(65, 46);
+            this.switchWeeksButton.TabIndex = 73;
+            this.switchWeeksButton.Text = "Switch Weeks";
+            this.switchWeeksButton.UseVisualStyleBackColor = false;
+            this.switchWeeksButton.Click += new System.EventHandler(this.switchWeeksButton_Click);
+            // 
             // PlannedMealsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(396, 1055);
+            this.Controls.Add(this.switchWeeksButton);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.removeSaturdayBreakfastButton);
             this.Controls.Add(this.removeSaturdayLunchButton);
@@ -849,7 +864,7 @@
             this.Controls.Add(this.thursdayLabel);
             this.Controls.Add(this.sundayLabel);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.weekMealLabel);
             this.Name = "PlannedMealsPage";
             this.Text = "PlannedMealsPage";
             this.plannerContextMenuStrip.ResumeLayout(false);
@@ -860,7 +875,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label weekMealLabel;
         private Label label2;
         private Label sundayLabel;
         private Label thursdayLabel;
@@ -935,5 +950,6 @@
         private Button plannerMenuButton;
         private ContextMenuStrip plannerContextMenuStrip;
         private ToolStripMenuItem findRecipeToolStripMenuItem;
+        private Button switchWeeksButton;
     }
 }
