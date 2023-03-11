@@ -235,7 +235,8 @@ public partial class Homepage : Form
         {
             this.filterTagTxt.Text = "";
             this.searchTags.Add(tag);
-            this.activeTagsLbl.Text += tag + ", ";
+            this.tagsCmb.Items.Add(tag);
+            this.tagsCmb.SelectedIndex = this.tagsCmb.Items.Count - 1;
 
             this.getFilteredRecipes(this.searchTags);
         }
@@ -309,5 +310,15 @@ public partial class Homepage : Form
             this.noRecipesLabel.Text = "The connection to the server could not be made";
             this.noRecipesLabel.Visible = true;
         }
+    }
+
+    private void deleteFilterBtn_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void clearFiltersBtn_Click(object sender, EventArgs e)
+    {
+
     }
 }

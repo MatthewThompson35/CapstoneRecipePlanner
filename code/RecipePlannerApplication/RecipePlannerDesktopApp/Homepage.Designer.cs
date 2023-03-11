@@ -49,7 +49,7 @@
             this.activeTagsLbl = new System.Windows.Forms.Label();
             this.filterTagTxt = new System.Windows.Forms.TextBox();
             this.clearFiltersBtn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tagsCmb = new System.Windows.Forms.ComboBox();
             this.deleteFilterBtn = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -233,7 +233,7 @@
             // 
             // filterTagTxt
             // 
-            this.filterTagTxt.Location = new System.Drawing.Point(68, 26);
+            this.filterTagTxt.Location = new System.Drawing.Point(73, 26);
             this.filterTagTxt.Name = "filterTagTxt";
             this.filterTagTxt.PlaceholderText = " Search for Tag";
             this.filterTagTxt.Size = new System.Drawing.Size(173, 23);
@@ -247,14 +247,15 @@
             this.clearFiltersBtn.TabIndex = 18;
             this.clearFiltersBtn.Text = "Clear Filters";
             this.clearFiltersBtn.UseVisualStyleBackColor = true;
+            this.clearFiltersBtn.Click += new System.EventHandler(this.clearFiltersBtn_Click);
             // 
-            // comboBox1
+            // tagsCmb
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(94, 60);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(138, 23);
-            this.comboBox1.TabIndex = 19;
+            this.tagsCmb.FormattingEnabled = true;
+            this.tagsCmb.Location = new System.Drawing.Point(94, 60);
+            this.tagsCmb.Name = "tagsCmb";
+            this.tagsCmb.Size = new System.Drawing.Size(138, 23);
+            this.tagsCmb.TabIndex = 19;
             // 
             // deleteFilterBtn
             // 
@@ -264,6 +265,7 @@
             this.deleteFilterBtn.TabIndex = 20;
             this.deleteFilterBtn.Text = "Remove";
             this.deleteFilterBtn.UseVisualStyleBackColor = true;
+            this.deleteFilterBtn.Click += new System.EventHandler(this.deleteFilterBtn_Click);
             // 
             // Homepage
             // 
@@ -271,7 +273,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
             this.Controls.Add(this.deleteFilterBtn);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tagsCmb);
             this.Controls.Add(this.clearFiltersBtn);
             this.Controls.Add(this.filterTagTxt);
             this.Controls.Add(this.activeTagsLbl);
@@ -318,7 +320,7 @@
         private Label activeTagsLbl;
         private TextBox filterTagTxt;
         private Button clearFiltersBtn;
-        private ComboBox comboBox1;
+        private ComboBox tagsCmb;
         private Button deleteFilterBtn;
     }
 }
