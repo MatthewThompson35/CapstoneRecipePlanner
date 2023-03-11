@@ -314,7 +314,14 @@ public partial class Homepage : Form
 
     private void deleteFilterBtn_Click(object sender, EventArgs e)
     {
+        if (this.tagsCmb.SelectedIndex != -1)
+        {
+            this.searchTags.RemoveAt(this.tagsCmb.SelectedIndex);
+            this.tagsCmb.Items.RemoveAt(this.tagsCmb.SelectedIndex);
+            this.tagsCmb.Text = "";
 
+            this.getFilteredRecipes(this.searchTags);
+        }
     }
 
     private void clearFiltersBtn_Click(object sender, EventArgs e)
