@@ -23,6 +23,10 @@ namespace RecipePlannerDesktopApplication
     public partial class RecipeDetailsPage : Form
     {
         private Homepage homepage;
+        private string selectedDay;
+        private string selectedMealType;
+
+        //private PlannedMealDal mealDal;
         
         /// <summary>
         ///     Initializes the recipe details page for the recipes.
@@ -41,6 +45,9 @@ namespace RecipePlannerDesktopApplication
 
             this.populateDayComboBoxValues();
             this.populateMealTypeComboBoxValues();
+
+            this.selectedDay = "";
+            this.selectedMealType = "";
 
         }
 
@@ -81,10 +88,40 @@ namespace RecipePlannerDesktopApplication
         {
             //string day = this.daysComboBox.SelectedItem.ToString();
             //Debug.WriteLine(day);
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
+            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+            
             var mealsPage = new PlannedMealsPage();
             this.Hide();
             mealsPage.Show();
 
+        }
+
+        public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
+        {
+
+            int daysUntilNextWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek + 7) % 7;
+            DateTime nextWeekDay = DateTime.Today.AddDays(daysUntilNextWeekDay);
+
+            DateTime nextMonday = DateTime.Today.AddDays((int)DayOfWeek.Monday - (int)DateTime.Today.DayOfWeek + 7);
+
+            if (DateTime.Compare(nextWeekDay.Date, nextMonday) < 0)
+            {
+                return nextWeekDay.AddDays(7).Date;
+            }
+
+            return nextWeekDay.Date;
+        }
+
+        public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
+        {
+
+            int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
+            if (dayOfWeek == DayOfWeek.Sunday)
+            {
+                daysUntilCurrentWeekDay += 7;
+            }
+            return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
         }
 
         public Recipe getCurrentRecipe()
@@ -133,9 +170,14 @@ namespace RecipePlannerDesktopApplication
 
         private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PlannedMealsPage mealsPage = new PlannedMealsPage();
+            //PlannedMealsPage mealsPage = new PlannedMealsPage();
 
-            mealsPage.DayValue = this.daysComboBox.SelectedItem.ToString();
+            this.selectedDay = this.daysComboBox.SelectedItem.ToString();
+        }
+
+        private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
         }
     }
 }

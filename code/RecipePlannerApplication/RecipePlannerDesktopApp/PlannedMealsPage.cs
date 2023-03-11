@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,15 +30,8 @@ namespace RecipePlannerDesktopApplication
 
             this.daysLabels = new List<Label>() { sundayLabel, mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel };
             this.mealTypeDaysLabels = new List<Label>() { sundayBreakfastLabel, sundayLunchLabel, sundayDinnerLabel, mondayBreakfastLabel, mondayLunchLabel, mondayDinnerLabel, tuesdayBreakfastLabel, tuesdayLunchLabel, tuesdayDinnerLabel, wednesdayBreakfastLabel, wednesdayLunchLabel, wednesdayDinnerLabel, thursdayBreakfastLabel, thursdayLunchLabel, thursdayDinnerLabel, fridayBreakfastLabel, fridayLunchLabel, fridayDinnerLabel, saturdayBreakfastLabel, saturdayLunchLabel, saturdayDinnerLabel };
-            
 
-        }
-
-        private void backButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var detailsPage = new RecipeDetailsPage();
-            detailsPage.Show();
+            PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
         }
 
         private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,11 +138,6 @@ namespace RecipePlannerDesktopApplication
                     }
                 }
             }
-        }
-
-        private void PlannedMealsPage_Load(object sender, EventArgs e)
-        {
-            this.populateRecipeToCertainDayAndMealType();
         }
     }
 }

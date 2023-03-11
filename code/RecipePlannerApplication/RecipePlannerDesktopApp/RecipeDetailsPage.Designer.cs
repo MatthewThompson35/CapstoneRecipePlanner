@@ -84,6 +84,7 @@
             this.mealTypeComboBox.Name = "mealTypeComboBox";
             this.mealTypeComboBox.Size = new System.Drawing.Size(151, 28);
             this.mealTypeComboBox.TabIndex = 4;
+            this.mealTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mealTypeComboBox_SelectedIndexChanged);
             // 
             // label2
             // 
