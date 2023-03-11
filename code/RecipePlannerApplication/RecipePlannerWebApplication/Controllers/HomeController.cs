@@ -421,7 +421,7 @@ public class HomeController : Controller
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
             int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = recipes.Count;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
 
