@@ -33,7 +33,7 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed BETWEEN DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 6 DAY);";
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(NOW());";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -54,7 +54,7 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed BETWEEN DATE_SUB(DATE(CURDATE() + 7), INTERVAL WEEKDAY(CURDATE()+ 7) DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()+ 7), INTERVAL WEEKDAY(CURDATE()+ 7) DAY), INTERVAL 6 DAY);";
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(DATE_ADD(NOW(), INTERVAL 1 WEEK));";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
