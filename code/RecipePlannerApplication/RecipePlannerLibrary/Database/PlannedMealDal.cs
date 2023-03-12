@@ -25,21 +25,22 @@ namespace RecipePlannerLibrary.Database
 
         public static Dictionary<(string, string), int> getThisWeeksMeals(string connectionString)
         {
-            Dictionary<(string, string), int> thisWeeksMeals = new Dictionary<(string, string), int>();
+            var thisWeeksMeals = new Dictionary<(string, string), int>();
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed BETWEEN DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 6 DAY);";
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(NOW());";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int recipeId = reader.GetInt32(0);
-                string day = reader.GetString(1);
-                string type = reader.GetString(2);
+                var recipeId = reader.GetInt32(0);
+                var day = reader.GetString(1);
+                var type = reader.GetString(2);
                 thisWeeksMeals.Add((day, type), recipeId);
             }
+
             return thisWeeksMeals;
         }
 
@@ -50,7 +51,7 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed BETWEEN DATE_ADD(DATE(CURDATE()), INTERVAL 1 DAY) AND DATE_ADD(DATE_SUB(DATE(CURDATE()), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 13 DAY);";
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(DATE_ADD(NOW(), INTERVAL 1 WEEK));";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
