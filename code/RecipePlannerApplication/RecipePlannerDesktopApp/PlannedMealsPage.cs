@@ -259,107 +259,856 @@ namespace RecipePlannerDesktopApplication
 
         private void removeMondayBreakfastButton_Click(object sender, EventArgs e)
         {
-            //PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, int id, string day, string type, DateTime date);
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "mondayLabel" + "mondayBreakfastLabel":
+                                        if (this.mondayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        } else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.mondayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        break;
+
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
+            
         }
 
         private void removeMondayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "mondayLabel" + "mondayLunchLabel":
+                                        if (this.mondayLunchTextBox.Text == "Meal has not been added to this time yet") {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.mondayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
         }
 
         private void removeMondayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "mondayLabel" + "mondayDinnerLabel":
 
+                                        if (this.mondayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        } else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.mondayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
+
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
         }
 
         private void removeTuesdayBreakfastButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "tuesdayLabel" + "tuesdayBreakfastLabel":
+                                        if (this.tuesdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        } else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.tuesdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
         }
 
         private void removeTuesdayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "tuesdayLabel" + "tuesdayLunchLabel":
+                                        if (this.tuesdayLunchTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.tuesdayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
         }
 
         private void removeTuesdayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "tuesdayLabel" + "tuesdayDinnerLabel":
+                                        if (this.tuesdayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.tuesdayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
         }
 
         private void removeWednesdayBreakfastButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "wednesdayLabel" + "wednesdayBreakfastLabel":
+                                        if (this.wednesdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.wednesdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeWednesdayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "wednesdayLabel" + "wednesdayLunchLabel":
+                                        if (this.wednesdayLunchTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.wednesdayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeWednesdayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "wednesdayLabel" + "wednesdayDinnerLabel":
+                                        if (this.wednesdayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.wednesdayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeThursdayBreakfastButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "thursdayLabel" + "thursdayBreakfastLabel":
+                                        if (this.thursdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.thursdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeThursdayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "thursdayLabel" + "thursdayLunchLabel":
+                                        if (this.thursdayLunchTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.thursdayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeThursdayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "thursdayLabel" + "thursdayDinnerLabel":
+                                        if (this.thursdayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.thursdayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeFridayBreakfastButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "fridayLabel" + "fridayBreakfastLabel":
+                                        if (this.fridayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.fridayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeFridayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "fridayLabel" + "fridayLunchLabel":
+                                        if (this.fridayLunchTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.fridayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeFridayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "fridayLabel" + "fridayDinnerLabel":
+                                        if (this.fridayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.fridayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeSaturdayBreakfastButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "saturdayLabel" + "saturdayBreakfastLabel":
+                                        if (this.saturdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.saturdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeSaturdayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "saturdayLabel" + "saturdayLunchLabel":
+                                        if (this.saturdayLunchTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.saturdayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeSatudayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "saturdayLabel" + "saturdayDinnerLabel":
+                                        if (this.saturdayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.saturdayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeSundayBreakfastButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "sundayLabel" + "sundayBreakfastLabel":
+                                        if (this.sundayBreakfastTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.sundayBreakfastTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeSundayLunchButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "sundayLabel" + "sundayLunchLabel":
+                                        if (this.sundayLunchTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.sundayLunchTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void removeSundayDinnerButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
+            {
+                foreach (var currentDayLabel in this.daysLabels)
+                {
+                    if (currentDayLabel.Text.Equals(meal.Key.Item1))
+                    {
+                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        {
+                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            {
+                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                {
+                                    case "sundayLabel" + "sundayDinnerLabel":
+                                        if (this.sundayDinnerTextBox.Text == "Meal has not been added to this time yet")
+                                        {
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                            this.sundayDinnerTextBox.Text = "Meal has not been added to this time yet";
+                                        }
+                                        
+                                        break;
 
+                                    default:
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void viewCurrentWeekPlanToolStripMenuItem_Click(object sender, EventArgs e)
