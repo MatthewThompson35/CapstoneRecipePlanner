@@ -34,8 +34,6 @@
             this.logoutButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.viewIngredientsButton = new System.Windows.Forms.Button();
-            this.showAvailableRecipesRadioButton = new System.Windows.Forms.RadioButton();
-            this.showAllRecipesRadioButton = new System.Windows.Forms.RadioButton();
             this.noRecipesLabel = new System.Windows.Forms.Label();
             this.nextButton = new System.Windows.Forms.Button();
             this.beginningButton = new System.Windows.Forms.Button();
@@ -51,6 +49,8 @@
             this.clearFiltersBtn = new System.Windows.Forms.Button();
             this.tagsCmb = new System.Windows.Forms.ComboBox();
             this.deleteFilterBtn = new System.Windows.Forms.Button();
+            this.availableCheckbox = new System.Windows.Forms.CheckBox();
+            this.allRecipesButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,32 +92,6 @@
             this.viewIngredientsButton.Text = "View Ingredients";
             this.viewIngredientsButton.UseVisualStyleBackColor = true;
             this.viewIngredientsButton.Click += new System.EventHandler(this.viewIngredientsButton_Click);
-            // 
-            // showAvailableRecipesRadioButton
-            // 
-            this.showAvailableRecipesRadioButton.AutoSize = true;
-            this.showAvailableRecipesRadioButton.Location = new System.Drawing.Point(128, 130);
-            this.showAvailableRecipesRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.showAvailableRecipesRadioButton.Name = "showAvailableRecipesRadioButton";
-            this.showAvailableRecipesRadioButton.Size = new System.Drawing.Size(148, 19);
-            this.showAvailableRecipesRadioButton.TabIndex = 6;
-            this.showAvailableRecipesRadioButton.TabStop = true;
-            this.showAvailableRecipesRadioButton.Text = "Show Available Recipes";
-            this.showAvailableRecipesRadioButton.UseVisualStyleBackColor = true;
-            this.showAvailableRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAvailableRecipesRadioButton_CheckedChanged);
-            // 
-            // showAllRecipesRadioButton
-            // 
-            this.showAllRecipesRadioButton.AutoSize = true;
-            this.showAllRecipesRadioButton.Location = new System.Drawing.Point(289, 130);
-            this.showAllRecipesRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.showAllRecipesRadioButton.Name = "showAllRecipesRadioButton";
-            this.showAllRecipesRadioButton.Size = new System.Drawing.Size(114, 19);
-            this.showAllRecipesRadioButton.TabIndex = 7;
-            this.showAllRecipesRadioButton.TabStop = true;
-            this.showAllRecipesRadioButton.Text = "Show All Recipes";
-            this.showAllRecipesRadioButton.UseVisualStyleBackColor = true;
-            this.showAllRecipesRadioButton.CheckedChanged += new System.EventHandler(this.showAllRecipesRadioButton_CheckedChanged);
             // 
             // noRecipesLabel
             // 
@@ -267,11 +241,34 @@
             this.deleteFilterBtn.UseVisualStyleBackColor = true;
             this.deleteFilterBtn.Click += new System.EventHandler(this.deleteFilterBtn_Click);
             // 
+            // availableCheckbox
+            // 
+            this.availableCheckbox.AutoSize = true;
+            this.availableCheckbox.Location = new System.Drawing.Point(242, 131);
+            this.availableCheckbox.Name = "availableCheckbox";
+            this.availableCheckbox.Size = new System.Drawing.Size(117, 19);
+            this.availableCheckbox.TabIndex = 21;
+            this.availableCheckbox.Text = "Available Recipes";
+            this.availableCheckbox.UseVisualStyleBackColor = true;
+            this.availableCheckbox.CheckedChanged += new System.EventHandler(this.showAvailableRecipesCheck_Changed);
+            // 
+            // allRecipesButton
+            // 
+            this.allRecipesButton.Location = new System.Drawing.Point(122, 127);
+            this.allRecipesButton.Name = "allRecipesButton";
+            this.allRecipesButton.Size = new System.Drawing.Size(110, 23);
+            this.allRecipesButton.TabIndex = 22;
+            this.allRecipesButton.Text = "All Recipes";
+            this.allRecipesButton.UseVisualStyleBackColor = true;
+            this.allRecipesButton.Click += new System.EventHandler(this.showAllRecipesButton_Click);
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.allRecipesButton);
+            this.Controls.Add(this.availableCheckbox);
             this.Controls.Add(this.deleteFilterBtn);
             this.Controls.Add(this.tagsCmb);
             this.Controls.Add(this.clearFiltersBtn);
@@ -285,8 +282,6 @@
             this.Controls.Add(this.beginningButton);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.noRecipesLabel);
-            this.Controls.Add(this.showAllRecipesRadioButton);
-            this.Controls.Add(this.showAvailableRecipesRadioButton);
             this.Controls.Add(this.viewIngredientsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logoutButton);
@@ -322,6 +317,8 @@
         private Button clearFiltersBtn;
         private ComboBox tagsCmb;
         private Button deleteFilterBtn;
+        private CheckBox availableCheckbox;
+        private Button allRecipesButton;
     }
 }
 

@@ -59,8 +59,7 @@ public partial class Homepage : Form
             .Skip((this.allPage - 1) * this.pageSize)
             .Take(this.pageSize)
             .ToList();
-
-        this.showAvailableRecipesRadioButton.Checked = true;
+        this.availableCheckbox.Checked = true;
     }
 
     #endregion
@@ -199,9 +198,27 @@ public partial class Homepage : Form
         }
     }
 
-    private void showAllRecipesRadioButton_CheckedChanged(object sender, EventArgs e)
+    private void showAllRecipesButton_Click(object sender, EventArgs e)
     {
-        if (this.showAllRecipesRadioButton.Checked)
+        this.availableCheckbox.Checked = false;
+    }
+
+    private void showAvailableRecipesCheck_Changed(object sender, EventArgs e)
+    {
+        if (this.availableCheckbox.Checked)
+        {
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in this.availablePageOne)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.availablePage = 1;
+            this.pageCountLabel.Text = this.availablePage.ToString();
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        else if (!this.availableCheckbox.Checked)
         {
             this.recipeListView.Items.Clear();
             foreach (var recipe in this.allPageOne)
@@ -212,28 +229,6 @@ public partial class Homepage : Form
             this.allPage = 1;
             this.pageCountLabel.Text = this.allPage.ToString();
             this.noRecipesLabel.Visible = false;
-            this.recipeListView.View = View.List;
-            this.recipeListView.Sorting = SortOrder.Ascending;
-        }
-
-        else
-        {
-            this.recipeListView.Clear();
-        }
-    }
-
-    private void showAvailableRecipesRadioButton_CheckedChanged(object sender, EventArgs e)
-    {
-        if (this.showAvailableRecipesRadioButton.Checked)
-        {
-            this.recipeListView.Items.Clear();
-            foreach (var recipe in this.availablePageOne)
-            {
-                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
-            }
-
-            this.availablePage = 1;
-            this.pageCountLabel.Text = this.availablePage.ToString();
             this.recipeListView.View = View.List;
             this.recipeListView.Sorting = SortOrder.Ascending;
         }
@@ -251,7 +246,7 @@ public partial class Homepage : Form
     /// <returns></returns>
     private void nextButton_Click(object sender, EventArgs e)
     {
-        if (this.showAllRecipesRadioButton.Checked)
+        if (!this.availableCheckbox.Checked)
         {
             if (this.allPage != this.maxAllPage)
             {
@@ -291,50 +286,11 @@ public partial class Homepage : Form
                 this.pageCountLabel.Text = this.availablePage.ToString();
             }
         }
-
-        /*if (this.availableCheckBox.Checked)
-        {
-            if (this.allPage != this.maxAllPage)
-            {
-                this.allPage++;
-                var all = RecipeDAL.getRecipes(Connection.ConnectionString);
-                all.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-                List<Recipe> AllRecipesOnPage = all
-                    .Skip((this.allPage - 1) * this.pageSize)
-                    .Take(this.pageSize)
-                    .ToList();
-                this.recipeListView.Items.Clear();
-                foreach (var recipe in AllRecipesOnPage)
-                {
-                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
-                }
-                this.pageCountLabel.Text = this.allPage.ToString();
-            }
-        }
-        else
-        {
-            if (this.availablePage != this.maxAvailablePage)
-            {
-                this.availablePage++;
-                var available = this.getAvailableRecipes();
-                available.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-                List<Recipe> AvailableRecipesOnPage = available
-                    .Skip((this.availablePage - 1) * this.pageSize)
-                    .Take(this.pageSize)
-                    .ToList();
-                this.recipeListView.Items.Clear();
-                foreach (var recipe in AvailableRecipesOnPage)
-                {
-                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
-                }
-                this.pageCountLabel.Text = this.availablePage.ToString();
-            }
-        }*/
     }
 
     private void lastPageButton_Click(object sender, EventArgs e)
     {
-        if (this.showAllRecipesRadioButton.Checked)
+        if (!this.availableCheckbox.Checked)
         {
             this.allPage = this.maxAllPage;
             var all = RecipeDAL.getRecipes(Connection.ConnectionString);
@@ -368,46 +324,11 @@ public partial class Homepage : Form
 
             this.pageCountLabel.Text = this.availablePage.ToString();
         }
-
-        /*if (this.availableCheckBox.Checked)
-        {
-            this.allPage = this.maxAllPage;
-            var all = RecipeDAL.getRecipes(Connection.ConnectionString);
-            all.Sort((Comparison<Recipe>) this.CompareRecipesByName);
-            List<Recipe> AllRecipesOnPage = all
-                .Skip((this.allPage - 1) * this.pageSize)
-                .Take(this.pageSize)
-                .ToList();
-            this.recipeListView.Items.Clear();
-            foreach (var recipe in AllRecipesOnPage)
-            {
-                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
-            }
-
-            this.pageCountLabel.Text = this.allPage.ToString();
-        }
-        else
-        {
-             this.availablePage = this.maxAvailablePage;
-            var available = this.getAvailableRecipes();
-            available.Sort((Comparison<Recipe>) this.CompareRecipesByName);
-            var AvailableRecipesOnPage = available
-                .Skip((this.availablePage - 1) * this.pageSize)
-                .Take(this.pageSize)
-                .ToList();
-            this.recipeListView.Items.Clear();
-            foreach (var recipe in AvailableRecipesOnPage)
-            {
-                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
-            }
-
-            this.pageCountLabel.Text = this.availablePage.ToString();
-        }*/
     }
 
     private void previousButton_Click(object sender, EventArgs e)
     {
-        if (this.showAllRecipesRadioButton.Checked)
+        if (!this.availableCheckbox.Checked)
         {
             if (this.allPage != 1)
             {
@@ -447,85 +368,11 @@ public partial class Homepage : Form
                 this.pageCountLabel.Text = this.availablePage.ToString();
             }
         }
-
-        /*if (this.availableCheckBox.Checked)
-        {
-            if (this.allPage != 1)
-            {
-                this.allPage--;
-                var all = RecipeDAL.getRecipes(Connection.ConnectionString);
-                all.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-                List<Recipe> AllRecipesOnPage = all
-                    .Skip((this.allPage - 1) * this.pageSize)
-                    .Take(this.pageSize)
-                    .ToList();
-                this.recipeListView.Items.Clear();
-                foreach (var recipe in AllRecipesOnPage)
-                {
-                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
-                }
-                this.pageCountLabel.Text = this.allPage.ToString();
-            }
-        }
-        else
-        {
-            if (this.availablePage != 1)
-            {
-                this.availablePage--;
-                var available = this.getAvailableRecipes();
-                available.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-                List<Recipe> AvailableRecipesOnPage = available
-                    .Skip((this.availablePage - 1) * this.pageSize)
-                    .Take(this.pageSize)
-                    .ToList();
-                this.recipeListView.Items.Clear();
-                foreach (var recipe in AvailableRecipesOnPage)
-                {
-                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
-                }
-                this.pageCountLabel.Text = this.availablePage.ToString();
-            }
-        }*/
     }
 
     private void beginningButton_Click(object sender, EventArgs e)
     {
-        if (this.showAllRecipesRadioButton.Checked)
-        {
-            this.allPage = 1;
-            var all = RecipeDAL.getRecipes(Connection.ConnectionString);
-            all.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-            List<Recipe> AllRecipesOnPage = all
-                .Skip((this.allPage - 1) * this.pageSize)
-                .Take(this.pageSize)
-                .ToList();
-            this.recipeListView.Items.Clear();
-            foreach (var recipe in AllRecipesOnPage)
-            {
-                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
-            }
-
-            this.pageCountLabel.Text = this.allPage.ToString();
-        }
-        else
-        {
-            this.availablePage = 1;
-            var available = this.getAvailableRecipes();
-            available.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-            var AvailableRecipesOnPage = available
-                .Skip((this.availablePage - 1) * this.pageSize)
-                .Take(this.pageSize)
-                .ToList();
-            this.recipeListView.Items.Clear();
-            foreach (var recipe in AvailableRecipesOnPage)
-            {
-                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
-            }
-
-            this.pageCountLabel.Text = this.availablePage.ToString();
-        }
-
-        /*if (this.availableCheckBox.Checked)
+        if (!this.availableCheckbox.Checked)
         {
             this.allPage = 1;
             var all = RecipeDAL.getRecipes(Connection.ConnectionString);
@@ -544,7 +391,7 @@ public partial class Homepage : Form
         }
         else
         {
-             this.availablePage = 1;
+            this.availablePage = 1;
             var available = this.getAvailableRecipes();
             available.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             var AvailableRecipesOnPage = available
@@ -558,7 +405,7 @@ public partial class Homepage : Form
             }
 
             this.pageCountLabel.Text = this.availablePage.ToString();
-        }*/
+        }
     }
 
     private void plannerMenuButton_Click(object sender, EventArgs e)
@@ -595,7 +442,7 @@ public partial class Homepage : Form
         var recipes = new List<Recipe>();
         var filteredRecipes = new List<Recipe>();
 
-        if (this.showAllRecipesRadioButton.Checked)
+        if (!this.availableCheckbox.Checked)
         {
             recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
         }
@@ -681,6 +528,8 @@ public partial class Homepage : Form
         this.searchTags.Clear();
 
         this.getFilteredRecipes(this.searchTags);
+
+        this.showAvailableRecipesCheck_Changed(sender, e);
     }
 
     #endregion
