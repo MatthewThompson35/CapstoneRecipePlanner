@@ -543,25 +543,19 @@ public class HomeController : Controller
 
     public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
     {
-       
-        int daysUntilNextWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek + 7) % 7;
-        DateTime nextWeekDay = DateTime.Today.AddDays(daysUntilNextWeekDay);
-
-        DateTime nextMonday = DateTime.Today.AddDays((int)DayOfWeek.Monday - (int)DateTime.Today.DayOfWeek + 7);
-
-        if (DateTime.Compare(nextWeekDay.Date, nextMonday) < 0)
+        DateTime nextWeek = DateTime.Today.AddDays(7);
+        int daysUntilNextWeekDay = ((int)dayOfWeek - (int)nextWeek.DayOfWeek);
+        if (daysUntilNextWeekDay < 0)
         {
-            return nextWeekDay.AddDays(7).Date;
+            daysUntilNextWeekDay += 7;
         }
-
-        return nextWeekDay.Date;
+        return nextWeek.AddDays(daysUntilNextWeekDay);
     }
 
     public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
     {
-        
         int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
-        if (dayOfWeek == DayOfWeek.Sunday)
+        if (daysUntilCurrentWeekDay < 0)
         {
             daysUntilCurrentWeekDay += 7;
         }
