@@ -272,12 +272,12 @@
         var mealType = document.getElementById(day).value;
         var dayDetails = day + "Details";
         var detailsElement = document.getElementById(dayDetails);
-        
+        var week = "@ViewBag.CurrentWeek"
 
         $.ajax({
             type: "GET",
             url: "@Url.Action("RemoveThisWeeksMeal", "Home")",
-            data: { day: day, mealType: mealType },
+            data: { day: day, mealType: mealType, week: week },
             success: function (response) {
                 console.log(response);
                 var recipeName = response.recipeName;

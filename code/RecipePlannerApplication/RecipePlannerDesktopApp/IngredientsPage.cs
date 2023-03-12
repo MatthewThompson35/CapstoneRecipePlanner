@@ -1,4 +1,5 @@
-﻿using RecipePlannerLibrary.Database;
+﻿using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using System.ComponentModel;
 
@@ -11,6 +12,10 @@ namespace RecipePlannerDesktopApplication
     public partial class IngredientsPage : Form
     {
         private DataGridViewRow selectedRow;
+        private int page = 1;
+        private int pageSize = 8;
+        private int totalPages;
+        private List<Ingredient> pageOneIngredients;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IngredientsPage"/> class.
@@ -21,7 +26,14 @@ namespace RecipePlannerDesktopApplication
 
             try
             {
-                var bindingList = new BindingList<Ingredient>(IngredientDAL.getIngredients());
+               
+                var ingriedents = IngredientDAL.getIngredients();
+                this.totalPages = (int)Math.Ceiling((double)ingriedents.Count / this.pageSize);
+                this.pageOneIngredients = ingriedents
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                var bindingList = new BindingList<Ingredient>(this.pageOneIngredients);
                 this.ingredientsGridView.DataSource = bindingList;
                 this.Refresh();
             }
@@ -95,7 +107,12 @@ namespace RecipePlannerDesktopApplication
         {
             try
             {
-                var list = IngredientDAL.getIngredients();
+                var ingredients = IngredientDAL.getIngredients();
+                this.pageOneIngredients = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                var list = this.pageOneIngredients;
                 var bindingList = new BindingList<Ingredient>(list);
 
                 this.ingredientsGridView.DataSource = null;
@@ -163,6 +180,84 @@ namespace RecipePlannerDesktopApplication
 
             Homepage homepage = new Homepage();
             homepage.Show();
+        }
+
+        private void beginningButton_Click(object sender, EventArgs e)
+        {
+            this.page = 1;
+            var ingredients = IngredientDAL.getIngredients();
+            List<Ingredient> allIngredientsOnPage = ingredients
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+
+
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList<Ingredient>(list);
+
+            this.ingredientsGridView.DataSource = null;
+            this.ingredientsGridView.DataSource = bindingList;
+        }
+
+        private void prevButton_Click(object sender, EventArgs e)
+        {
+            if (this.page != 1)
+            {
+                this.page--;
+                var ingredients = IngredientDAL.getIngredients();
+                List<Ingredient> allIngredientsOnPage = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+
+
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<Ingredient>(list);
+
+                this.ingredientsGridView.DataSource = null;
+                this.ingredientsGridView.DataSource = bindingList;
+            }
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+            if (this.page != this.totalPages)
+            {
+                this.page++;
+                var ingredients = IngredientDAL.getIngredients();
+                List<Ingredient> allIngredientsOnPage = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+               
+
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<Ingredient>(list);
+
+                this.ingredientsGridView.DataSource = null;
+                this.ingredientsGridView.DataSource = bindingList;
+            }
+        }
+
+        private void lastButtonClick(object sender, EventArgs e)
+        {
+            this.page = this.totalPages;
+                var ingredients = IngredientDAL.getIngredients();
+                List<Ingredient> allIngredientsOnPage = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+
+
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<Ingredient>(list);
+
+                this.ingredientsGridView.DataSource = null;
+                this.ingredientsGridView.DataSource = bindingList;
         }
     }
 }

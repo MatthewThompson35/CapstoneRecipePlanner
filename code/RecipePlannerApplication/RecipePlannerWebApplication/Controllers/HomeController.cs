@@ -421,7 +421,7 @@ public class HomeController : Controller
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
             int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = recipes.Count;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
 
@@ -619,12 +619,12 @@ public class HomeController : Controller
     }
 
 
-    public JsonResult RemoveThisWeeksMeal(string day, string mealType)
+    public JsonResult RemoveThisWeeksMeal(string day, string mealType, string week)
     {
         try
         {
             var ThisWeeksMeals = new Dictionary<(string, string), int>();
-            if (ViewBag.CurrentWeek.Equals("Next Week"))
+            if (week.Equals("Next Week"))
             {
                  ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
             }
@@ -636,7 +636,16 @@ public class HomeController : Controller
             int recipeId = ThisWeeksMeals[(day, mealType)];
             DayOfWeek dayOfWeek;
             Enum.TryParse(day, out dayOfWeek);
-            DateTime date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            DateTime date;
+            if (week.Equals("Next Week"))
+            {
+                date = this.GetDateOfNextWeekDay(dayOfWeek);
+            }
+            else
+            {
+                date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            }
+
             PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
             
             ViewBag.Header = "This weeks meals";
