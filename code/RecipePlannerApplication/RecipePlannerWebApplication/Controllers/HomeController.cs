@@ -11,6 +11,7 @@ using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
 using Microsoft.AspNetCore.Http;
+using Google.Protobuf;
 
 namespace RecipePlannerWebApplication.Controllers;
 
@@ -474,7 +475,11 @@ public class HomeController : Controller
 
         if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
         {
-            PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, day, type, date, recipeId);
+            ViewBag.day = day;
+            ViewBag.type = type;
+            ViewBag.date = date;
+            ViewBag.recipeId = recipeId;
+            return View("OverwriteConformation");
         }
         else
         {
@@ -503,6 +508,12 @@ public class HomeController : Controller
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
+    public ActionResult overwriteAddedMeal(string day, string type, string date, int recipeId)
+    {
+        DateTime Date = DateTime.Parse(date);
+        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, day, type, Date, recipeId);
+        return this.goToRecipePage(1);
+    }
     public ActionResult UpdateThisWeeksMeal(int recipeId, string week, string day, string type)
     {
         int recipeID = recipeId;
