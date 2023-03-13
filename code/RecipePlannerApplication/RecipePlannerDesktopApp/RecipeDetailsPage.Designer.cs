@@ -36,6 +36,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.addToMealPlanButton = new System.Windows.Forms.Button();
+            this.weekComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.errorAddToMealPlanLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // backButton
@@ -73,23 +76,23 @@
             this.daysComboBox.FormattingEnabled = true;
             this.daysComboBox.Location = new System.Drawing.Point(41, 681);
             this.daysComboBox.Name = "daysComboBox";
-            this.daysComboBox.Size = new System.Drawing.Size(151, 28);
+            this.daysComboBox.Size = new System.Drawing.Size(91, 28);
             this.daysComboBox.TabIndex = 3;
             this.daysComboBox.SelectedIndexChanged += new System.EventHandler(this.daysComboBox_SelectedIndexChanged);
             // 
             // mealTypeComboBox
             // 
             this.mealTypeComboBox.FormattingEnabled = true;
-            this.mealTypeComboBox.Location = new System.Drawing.Point(228, 681);
+            this.mealTypeComboBox.Location = new System.Drawing.Point(166, 681);
             this.mealTypeComboBox.Name = "mealTypeComboBox";
-            this.mealTypeComboBox.Size = new System.Drawing.Size(151, 28);
+            this.mealTypeComboBox.Size = new System.Drawing.Size(107, 28);
             this.mealTypeComboBox.TabIndex = 4;
             this.mealTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mealTypeComboBox_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(97, 658);
+            this.label2.Location = new System.Drawing.Point(73, 658);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 20);
             this.label2.TabIndex = 5;
@@ -98,7 +101,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(260, 657);
+            this.label3.Location = new System.Drawing.Point(186, 658);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.TabIndex = 6;
@@ -114,11 +117,42 @@
             this.addToMealPlanButton.UseVisualStyleBackColor = true;
             this.addToMealPlanButton.Click += new System.EventHandler(this.addToMealPlanButton_Click);
             // 
+            // weekComboBox
+            // 
+            this.weekComboBox.FormattingEnabled = true;
+            this.weekComboBox.Location = new System.Drawing.Point(302, 681);
+            this.weekComboBox.Name = "weekComboBox";
+            this.weekComboBox.Size = new System.Drawing.Size(91, 28);
+            this.weekComboBox.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(324, 658);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Week";
+            // 
+            // errorAddToMealPlanLabel
+            // 
+            this.errorAddToMealPlanLabel.AutoSize = true;
+            this.errorAddToMealPlanLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorAddToMealPlanLabel.Location = new System.Drawing.Point(53, 720);
+            this.errorAddToMealPlanLabel.Name = "errorAddToMealPlanLabel";
+            this.errorAddToMealPlanLabel.Size = new System.Drawing.Size(316, 20);
+            this.errorAddToMealPlanLabel.TabIndex = 10;
+            this.errorAddToMealPlanLabel.Text = "This meal has already been added for this day.";
+            this.errorAddToMealPlanLabel.Visible = false;
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 795);
+            this.Controls.Add(this.errorAddToMealPlanLabel);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.weekComboBox);
             this.Controls.Add(this.addToMealPlanButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -144,5 +178,8 @@
         private Label label2;
         private Label label3;
         private Button addToMealPlanButton;
+        private ComboBox weekComboBox;
+        private Label label4;
+        private Label errorAddToMealPlanLabel;
     }
 }
