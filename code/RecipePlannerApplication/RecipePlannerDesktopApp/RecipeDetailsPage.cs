@@ -23,6 +23,7 @@ namespace RecipePlannerDesktopApplication
     public partial class RecipeDetailsPage : Form
     {
         private Homepage homepage;
+        private PlannedMealsPage mealsPage;
         private string selectedDay;
         private string selectedMealType;
 
@@ -50,6 +51,17 @@ namespace RecipePlannerDesktopApplication
             this.selectedDay = "";
             this.selectedMealType = "";
 
+        }
+
+        public RecipeDetailsPage(PlannedMealsPage mealsPage) :this()
+        {
+            this.mealsPage = mealsPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromMealPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -85,22 +97,72 @@ namespace RecipePlannerDesktopApplication
             return output;
         }
 
+        private string displayRecipeDetailsFromMealPage()
+        {
+            string output = null;
+
+            string description = this.mealsPage.GetRecipeFromTextBox().Name + Environment.NewLine + this.mealsPage.GetRecipeFromTextBox().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = "Steps" + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients;
+            return output;
+        }
+
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
             DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
 
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfCurrentWeekDay(day)))
+                {
+                    this.errorAddToMealPlanLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorAddToMealPlanLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+                
             } else
             {
-                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfNextWeekDay(day)))
+                {
+                    this.errorAddToMealPlanLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorAddToMealPlanLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+                
             }
             
             
-            var mealsPage = new PlannedMealsPage();
-            this.Hide();
-            mealsPage.Show();
+            //var mealsPage = new PlannedMealsPage();
+            //this.Hide();
+            //mealsPage.Show();
 
         }
 
@@ -177,6 +239,28 @@ namespace RecipePlannerDesktopApplication
         private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
+        }
+
+        private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var homepage = new Homepage();
+            homepage.Show();
+        }
+
+        private void viewMealPlanToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var mealPlanPage = new PlannedMealsPage();
+
+            mealPlanPage.Show();
+        }
+
+        private void plannerMenuButton_Click(object sender, EventArgs e)
+        {
+            this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
         }
     }
 }

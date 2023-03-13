@@ -55,12 +55,20 @@ namespace RecipePlannerLibrary.Models
             this.Tags = new List<string>();
         }
 
+        /// <summary>
+        ///     Initializes the Recipe with the specified recipe id, and recipe name.
+        /// </summary>
+        /// <param name="recipeId">The recipe id of the recipe.</param>
+        /// <param name="name">The name of the recipe.</param>
         public Recipe(int recipeId, string name) 
         {
             this.RecipeId = recipeId;
             this.Name = name;
         }
 
+        /// <summary>
+        ///     Initializes a default recipe object.
+        /// </summary>
         public Recipe()
         {
 
