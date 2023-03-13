@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backButton = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecipeDetailsPage));
             this.label1 = new System.Windows.Forms.Label();
             this.recipeDetailsTextBox = new System.Windows.Forms.TextBox();
             this.daysComboBox = new System.Windows.Forms.ComboBox();
@@ -39,17 +40,12 @@
             this.weekComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.errorAddToMealPlanLabel = new System.Windows.Forms.Label();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewMealPlanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // backButton
-            // 
-            this.backButton.Location = new System.Drawing.Point(14, 24);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(94, 29);
-            this.backButton.TabIndex = 0;
-            this.backButton.Text = "Back";
-            this.backButton.UseVisualStyleBackColor = true;
-            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // label1
             // 
@@ -150,11 +146,47 @@
             this.errorAddToMealPlanLabel.Text = "This meal has already been added for this day.";
             this.errorAddToMealPlanLabel.Visible = false;
             // 
+            // plannerMenuButton
+            // 
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(12, 12);
+            this.plannerMenuButton.Name = "plannerMenuButton";
+            this.plannerMenuButton.Size = new System.Drawing.Size(62, 56);
+            this.plannerMenuButton.TabIndex = 15;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findRecipeToolStripMenuItem,
+            this.viewMealPlanToolStripMenuItem1});
+            this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(180, 52);
+            // 
+            // findRecipeToolStripMenuItem
+            // 
+            this.findRecipeToolStripMenuItem.Name = "findRecipeToolStripMenuItem";
+            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.findRecipeToolStripMenuItem.Text = "Find Recipe";
+            this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
+            // 
+            // viewMealPlanToolStripMenuItem1
+            // 
+            this.viewMealPlanToolStripMenuItem1.Name = "viewMealPlanToolStripMenuItem1";
+            this.viewMealPlanToolStripMenuItem1.Size = new System.Drawing.Size(179, 24);
+            this.viewMealPlanToolStripMenuItem1.Text = "View Meal Plan";
+            this.viewMealPlanToolStripMenuItem1.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem1_Click);
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.errorAddToMealPlanLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.weekComboBox);
@@ -165,17 +197,15 @@
             this.Controls.Add(this.daysComboBox);
             this.Controls.Add(this.recipeDetailsTextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.backButton);
             this.Name = "RecipeDetailsPage";
             this.Text = "RecipeDetailsPage";
+            this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Button backButton;
         private Label label1;
         private TextBox recipeDetailsTextBox;
         private ComboBox daysComboBox;
@@ -186,5 +216,9 @@
         private ComboBox weekComboBox;
         private Label label4;
         private Label errorAddToMealPlanLabel;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem findRecipeToolStripMenuItem;
+        private ToolStripMenuItem viewMealPlanToolStripMenuItem1;
     }
 }

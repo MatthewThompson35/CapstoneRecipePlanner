@@ -214,5 +214,27 @@ namespace RecipePlannerDesktopApplication
         {
             this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
         }
+
+        private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var homepage = new Homepage();
+            homepage.Show();
+        }
+
+        private void viewMealPlanToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var mealPlanPage = new PlannedMealsPage();
+
+            mealPlanPage.Show();
+        }
+
+        private void plannerMenuButton_Click(object sender, EventArgs e)
+        {
+            this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
+        }
     }
 }
