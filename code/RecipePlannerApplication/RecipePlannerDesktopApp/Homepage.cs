@@ -514,7 +514,16 @@ public partial class Homepage : Form
             this.tagsCmb.Items.RemoveAt(this.tagsCmb.SelectedIndex);
             this.tagsCmb.Text = "";
 
-            this.getFilteredRecipes(this.searchTags);
+            if (this.searchTags.Count == 0)
+            {
+                this.showAvailableRecipesCheck_Changed(sender, e);
+            }
+            else
+            {
+                this.getFilteredRecipes(this.searchTags);
+            }
+
+
         }
     }
 

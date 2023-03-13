@@ -189,6 +189,7 @@
             this.sundayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.sundayBreakfastLabel.TabIndex = 7;
             this.sundayBreakfastLabel.Text = "Breakfast:";
+            this.sundayBreakfastLabel.Click += new System.EventHandler(this.sundayBreakfastLabel_Click);
             // 
             // thursdayBreakfastLabel
             // 
@@ -199,6 +200,7 @@
             this.thursdayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.thursdayBreakfastLabel.TabIndex = 8;
             this.thursdayBreakfastLabel.Text = "Breakfast:";
+            this.thursdayBreakfastLabel.Click += new System.EventHandler(this.thursdayBreakfastLabel_Click);
             // 
             // wednesdayBreakfastLabel
             // 
@@ -209,6 +211,7 @@
             this.wednesdayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.wednesdayBreakfastLabel.TabIndex = 9;
             this.wednesdayBreakfastLabel.Text = "Breakfast:";
+            this.wednesdayBreakfastLabel.Click += new System.EventHandler(this.wednesdayBreakfastLabel_Click);
             // 
             // tuesdayBreakfastLabel
             // 
@@ -219,6 +222,7 @@
             this.tuesdayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.tuesdayBreakfastLabel.TabIndex = 10;
             this.tuesdayBreakfastLabel.Text = "Breakfast:";
+            this.tuesdayBreakfastLabel.Click += new System.EventHandler(this.tuesdayBreakfastLabel_Click);
             // 
             // mondayBreakfastLabel
             // 
@@ -229,6 +233,7 @@
             this.mondayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.mondayBreakfastLabel.TabIndex = 11;
             this.mondayBreakfastLabel.Text = "Breakfast:";
+            this.mondayBreakfastLabel.Click += new System.EventHandler(this.mondayBreakfastLabel_Click);
             // 
             // sundayLunchLabel
             // 
@@ -239,6 +244,7 @@
             this.sundayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.sundayLunchLabel.TabIndex = 12;
             this.sundayLunchLabel.Text = "Lunch:";
+            this.sundayLunchLabel.Click += new System.EventHandler(this.sundayLunchLabel_Click);
             // 
             // thursdayLunchLabel
             // 
@@ -249,6 +255,7 @@
             this.thursdayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.thursdayLunchLabel.TabIndex = 13;
             this.thursdayLunchLabel.Text = "Lunch:";
+            this.thursdayLunchLabel.Click += new System.EventHandler(this.thursdayLunchLabel_Click);
             // 
             // wednesdayLunchLabel
             // 
@@ -259,6 +266,7 @@
             this.wednesdayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.wednesdayLunchLabel.TabIndex = 14;
             this.wednesdayLunchLabel.Text = "Lunch:";
+            this.wednesdayLunchLabel.Click += new System.EventHandler(this.wednesdayLunchLabel_Click);
             // 
             // tuesdayLunchLabel
             // 
@@ -269,6 +277,7 @@
             this.tuesdayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.tuesdayLunchLabel.TabIndex = 15;
             this.tuesdayLunchLabel.Text = "Lunch:";
+            this.tuesdayLunchLabel.Click += new System.EventHandler(this.tuesdayLunchLabel_Click);
             // 
             // mondayLunchLabel
             // 
@@ -279,6 +288,7 @@
             this.mondayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.mondayLunchLabel.TabIndex = 16;
             this.mondayLunchLabel.Text = "Lunch:";
+            this.mondayLunchLabel.Click += new System.EventHandler(this.mondayLunchLabel_Click);
             // 
             // sundayDinnerLabel
             // 
@@ -289,6 +299,7 @@
             this.sundayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.sundayDinnerLabel.TabIndex = 17;
             this.sundayDinnerLabel.Text = "Dinner:";
+            this.sundayDinnerLabel.Click += new System.EventHandler(this.sundayDinnerLabel_Click);
             // 
             // thursdayDinnerLabel
             // 
@@ -299,6 +310,7 @@
             this.thursdayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.thursdayDinnerLabel.TabIndex = 18;
             this.thursdayDinnerLabel.Text = "Dinner:";
+            this.thursdayDinnerLabel.Click += new System.EventHandler(this.thursdayDinnerLabel_Click);
             // 
             // tuesdayDinnerLabel
             // 
@@ -309,6 +321,7 @@
             this.tuesdayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.tuesdayDinnerLabel.TabIndex = 19;
             this.tuesdayDinnerLabel.Text = "Dinner:";
+            this.tuesdayDinnerLabel.Click += new System.EventHandler(this.tuesdayDinnerLabel_Click);
             // 
             // wednesdayDinnerLabel
             // 
@@ -319,6 +332,7 @@
             this.wednesdayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.wednesdayDinnerLabel.TabIndex = 20;
             this.wednesdayDinnerLabel.Text = "Dinner:";
+            this.wednesdayDinnerLabel.Click += new System.EventHandler(this.wednesdayDinnerLabel_Click);
             // 
             // mondayDinnerLabel
             // 
@@ -329,6 +343,7 @@
             this.mondayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.mondayDinnerLabel.TabIndex = 21;
             this.mondayDinnerLabel.Text = "Dinner:";
+            this.mondayDinnerLabel.Click += new System.EventHandler(this.mondayDinnerLabel_Click);
             // 
             // sundayBreakfastTextBox
             // 
@@ -699,6 +714,7 @@
             this.fridayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.fridayDinnerLabel.TabIndex = 55;
             this.fridayDinnerLabel.Text = "Dinner:";
+            this.fridayDinnerLabel.Click += new System.EventHandler(this.fridayDinnerLabel_Click);
             // 
             // fridayLunchLabel
             // 
@@ -709,6 +725,7 @@
             this.fridayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.fridayLunchLabel.TabIndex = 54;
             this.fridayLunchLabel.Text = "Lunch:";
+            this.fridayLunchLabel.Click += new System.EventHandler(this.fridayLunchLabel_Click);
             // 
             // fridayBreakfastLabel
             // 
@@ -719,6 +736,7 @@
             this.fridayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.fridayBreakfastLabel.TabIndex = 53;
             this.fridayBreakfastLabel.Text = "Breakfast:";
+            this.fridayBreakfastLabel.Click += new System.EventHandler(this.fridayBreakfastLabel_Click);
             // 
             // fridayLabel
             // 
@@ -799,6 +817,7 @@
             this.saturdayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.saturdayDinnerLabel.TabIndex = 65;
             this.saturdayDinnerLabel.Text = "Dinner:";
+            this.saturdayDinnerLabel.Click += new System.EventHandler(this.saturdayDinnerLabel_Click);
             // 
             // saturdayLunchLabel
             // 
@@ -809,6 +828,7 @@
             this.saturdayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.saturdayLunchLabel.TabIndex = 64;
             this.saturdayLunchLabel.Text = "Lunch:";
+            this.saturdayLunchLabel.Click += new System.EventHandler(this.saturdayLunchLabel_Click);
             // 
             // saturdayBreakfastLabel
             // 
@@ -819,6 +839,7 @@
             this.saturdayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.saturdayBreakfastLabel.TabIndex = 63;
             this.saturdayBreakfastLabel.Text = "Breakfast:";
+            this.saturdayBreakfastLabel.Click += new System.EventHandler(this.saturdayBreakfastLabel_Click);
             // 
             // saturdayLabel
             // 

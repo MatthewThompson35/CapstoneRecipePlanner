@@ -1,5 +1,6 @@
 ﻿using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,8 @@ namespace RecipePlannerDesktopApplication
         private List<Label> mealTypeDaysLabels;
         private List<TextBox> mealDayTypeTextBoxes;
         private bool isNextWeekDisplayed;
+
+        private Recipe readInRecipe;
 
         public string DayValue { get; set; }
         public string MealTypeValue { get; set; }
@@ -1154,6 +1157,437 @@ namespace RecipePlannerDesktopApplication
                             break;
                     }
                 }
+            }
+        }
+
+        public Recipe GetRecipeFromTextBox()
+        {
+            return this.readInRecipe;
+        }
+
+
+
+        private void mondayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            //this.navigateToDetailsPage(this.mondayBreakfastTextBox.Text);
+            var recipeName = this.mondayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+
+
+        }
+
+        private void mondayLunchLabel_Click(object sender, EventArgs e)
+        {
+
+            var recipeName = this.mondayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void mondayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.mondayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void tuesdayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.tuesdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void tuesdayLunchLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.tuesdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void tuesdayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.tuesdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void wednesdayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.wednesdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void wednesdayLunchLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.wednesdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void wednesdayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.wednesdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void thursdayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.thursdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void thursdayLunchLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.thursdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void thursdayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.thursdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void fridayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.fridayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void fridayLunchLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.fridayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void fridayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.fridayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void saturdayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.saturdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void saturdayLunchLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.saturdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void saturdayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.saturdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void sundayBreakfastLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.sundayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void sundayLunchLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.sundayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void sundayDinnerLabel_Click(object sender, EventArgs e)
+        {
+            var recipeName = this.sundayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
             }
         }
     }

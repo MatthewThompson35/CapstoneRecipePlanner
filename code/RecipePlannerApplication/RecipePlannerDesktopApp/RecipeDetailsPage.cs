@@ -23,6 +23,7 @@ namespace RecipePlannerDesktopApplication
     public partial class RecipeDetailsPage : Form
     {
         private Homepage homepage;
+        private PlannedMealsPage mealsPage;
         private string selectedDay;
         private string selectedMealType;
 
@@ -50,6 +51,17 @@ namespace RecipePlannerDesktopApplication
             this.selectedDay = "";
             this.selectedMealType = "";
 
+        }
+
+        public RecipeDetailsPage(PlannedMealsPage mealsPage) :this()
+        {
+            this.mealsPage = mealsPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromMealPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -81,6 +93,30 @@ namespace RecipePlannerDesktopApplication
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
             
+            output += description + steps + ingredients;
+            return output;
+        }
+
+        private string displayRecipeDetailsFromMealPage()
+        {
+            string output = null;
+
+            string description = this.mealsPage.GetRecipeFromTextBox().Name + Environment.NewLine + this.mealsPage.GetRecipeFromTextBox().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = "Steps" + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
+            }
+
             output += description + steps + ingredients;
             return output;
         }
