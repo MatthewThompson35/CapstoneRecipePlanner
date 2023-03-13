@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addIngredientButton = new System.Windows.Forms.Button();
             this.removeIngredientButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,16 +45,20 @@
             this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.backButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
+            this.beginningButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pageLabel = new System.Windows.Forms.Label();
+            this.nextButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // addIngredientButton
             // 
-            this.addIngredientButton.Location = new System.Drawing.Point(85, 567);
-            this.addIngredientButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.addIngredientButton.Location = new System.Drawing.Point(84, 437);
             this.addIngredientButton.Name = "addIngredientButton";
-            this.addIngredientButton.Size = new System.Drawing.Size(302, 45);
+            this.addIngredientButton.Size = new System.Drawing.Size(279, 41);
             this.addIngredientButton.TabIndex = 1;
             this.addIngredientButton.Text = "Add Ingredient";
             this.addIngredientButton.UseVisualStyleBackColor = true;
@@ -62,10 +66,9 @@
             // 
             // removeIngredientButton
             // 
-            this.removeIngredientButton.Location = new System.Drawing.Point(85, 634);
-            this.removeIngredientButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeIngredientButton.Location = new System.Drawing.Point(84, 498);
             this.removeIngredientButton.Name = "removeIngredientButton";
-            this.removeIngredientButton.Size = new System.Drawing.Size(302, 45);
+            this.removeIngredientButton.Size = new System.Drawing.Size(279, 44);
             this.removeIngredientButton.TabIndex = 2;
             this.removeIngredientButton.Text = "Remove Ingredient";
             this.removeIngredientButton.UseVisualStyleBackColor = true;
@@ -75,18 +78,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(14, 62);
+            this.label1.Location = new System.Drawing.Point(24, 90);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 23);
+            this.label1.Size = new System.Drawing.Size(129, 19);
             this.label1.TabIndex = 3;
             this.label1.Text = "Owned Ingredients:";
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(371, 16);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.logoutButton.Location = new System.Drawing.Point(363, 12);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(86, 31);
+            this.logoutButton.Size = new System.Drawing.Size(75, 23);
             this.logoutButton.TabIndex = 4;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -95,14 +97,14 @@
             // ingredientsGridView
             // 
             this.ingredientsGridView.AutoGenerateColumns = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ingredientsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IngredientColumn,
@@ -111,21 +113,20 @@
             this.increaseQuantityColumn,
             this.Measurement});
             this.ingredientsGridView.DataSource = this.ingredientBindingSource;
-            this.ingredientsGridView.Location = new System.Drawing.Point(14, 89);
-            this.ingredientsGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ingredientsGridView.Location = new System.Drawing.Point(24, 112);
             this.ingredientsGridView.Name = "ingredientsGridView";
             this.ingredientsGridView.RowHeadersVisible = false;
             this.ingredientsGridView.RowHeadersWidth = 51;
             this.ingredientsGridView.RowTemplate.Height = 25;
-            this.ingredientsGridView.Size = new System.Drawing.Size(415, 461);
+            this.ingredientsGridView.Size = new System.Drawing.Size(400, 225);
             this.ingredientsGridView.TabIndex = 5;
             this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
             // 
             // IngredientColumn
             // 
             this.IngredientColumn.DataPropertyName = "name";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.IngredientColumn.HeaderText = "Ingredient";
             this.IngredientColumn.MinimumWidth = 6;
             this.IngredientColumn.Name = "IngredientColumn";
@@ -144,8 +145,8 @@
             // quantityColumn
             // 
             this.quantityColumn.DataPropertyName = "quantity";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.quantityColumn.HeaderText = "Quantity";
             this.quantityColumn.MinimumWidth = 6;
             this.quantityColumn.Name = "quantityColumn";
@@ -171,9 +172,10 @@
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(15, 16);
+            this.backButton.Location = new System.Drawing.Point(13, 12);
+            this.backButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(94, 29);
+            this.backButton.Size = new System.Drawing.Size(82, 22);
             this.backButton.TabIndex = 6;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
@@ -182,19 +184,78 @@
             // serverErrorLabel
             // 
             this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.serverErrorLabel.Location = new System.Drawing.Point(137, 9);
+            this.serverErrorLabel.Location = new System.Drawing.Point(145, 9);
             this.serverErrorLabel.Name = "serverErrorLabel";
-            this.serverErrorLabel.Size = new System.Drawing.Size(208, 50);
+            this.serverErrorLabel.Size = new System.Drawing.Size(182, 38);
             this.serverErrorLabel.TabIndex = 7;
             this.serverErrorLabel.Text = "The connection to the server could not be made";
             this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.serverErrorLabel.Visible = false;
             // 
+            // beginningButton
+            // 
+            this.beginningButton.Location = new System.Drawing.Point(24, 357);
+            this.beginningButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.beginningButton.Name = "beginningButton";
+            this.beginningButton.Size = new System.Drawing.Size(54, 34);
+            this.beginningButton.TabIndex = 11;
+            this.beginningButton.Text = "<|";
+            this.beginningButton.UseVisualStyleBackColor = true;
+            this.beginningButton.Click += new System.EventHandler(this.beginningButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(84, 357);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 34);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "<";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.prevButton_Click);
+            // 
+            // pageLabel
+            // 
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.pageLabel.Location = new System.Drawing.Point(215, 369);
+            this.pageLabel.Name = "pageLabel";
+            this.pageLabel.Size = new System.Drawing.Size(19, 21);
+            this.pageLabel.TabIndex = 13;
+            this.pageLabel.Text = "1";
+            // 
+            // nextButton
+            // 
+            this.nextButton.Location = new System.Drawing.Point(308, 358);
+            this.nextButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nextButton.Name = "nextButton";
+            this.nextButton.Size = new System.Drawing.Size(55, 33);
+            this.nextButton.TabIndex = 14;
+            this.nextButton.Text = ">";
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(369, 357);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(55, 33);
+            this.button3.TabIndex = 15;
+            this.button3.Text = ">|";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.lastButtonClick);
+            // 
             // IngredientsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 692);
+            this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.nextButton);
+            this.Controls.Add(this.pageLabel);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.beginningButton);
             this.Controls.Add(this.serverErrorLabel);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.ingredientsGridView);
@@ -202,7 +263,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.removeIngredientButton);
             this.Controls.Add(this.addIngredientButton);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "IngredientsPage";
             this.Text = "IngredientsPage";
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
@@ -229,5 +289,12 @@
         private DataGridViewTextBoxColumn Measurement;
         private Button backButton;
         private Label serverErrorLabel;
+        private Button beginningButton;
+        private Button previousButton;
+        private Button previousBttn;
+        private Button button1;
+        private Label pageLabel;
+        private Button nextButton;
+        private Button button3;
     }
 }

@@ -1,12 +1,15 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerLibrary.Database
 {
     public class PlannedMealDal
     {
+        #region Methods
+
         public static void addPlannedMeal(string connectionString, int recipeId, string day, string type, DateTime date)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -114,4 +117,5 @@ namespace RecipePlannerLibrary.Database
         }
     }
     
-}
+        #endregion
+    }

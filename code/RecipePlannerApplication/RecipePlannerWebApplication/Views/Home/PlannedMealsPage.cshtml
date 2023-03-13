@@ -1,11 +1,13 @@
-﻿@model IEnumerable<RecipePlannerLibrary.Models.Recipe>
-
-@{
+﻿@{
     ViewBag.Title = "Meal Plan";
-    List<string> mealTypes = new List<string> { "Breakfast", "Lunch", "Dinner" };
+    var mealTypes = new List<string> { "Breakfast", "Lunch", "Dinner" };
 }
 <div>
     <h2>@ViewBag.Header</h2>
+    <form method="post" action="@Url.Action("ToggleWeek", "Home", new { currentWeek = ViewBag.CurrentWeek })">
+        <button>Switch Weeks</button>
+    </form>
+    
 </div>
 <div>
     <table>
@@ -22,50 +24,104 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>Meal Type</th>
-                <td>@Html.DropDownList("Monday", new SelectList(mealTypes))</td>
-                <td>@Html.DropDownList("Tuesday", new SelectList(mealTypes))</td>
-                <td>@Html.DropDownList("Wednesday",  new SelectList(mealTypes))</td>
-                <td>@Html.DropDownList("Thursday",  new SelectList(mealTypes))</td>
-                <td>@Html.DropDownList("Friday",  new SelectList(mealTypes))</td>
-                <td>@Html.DropDownList("Saturday",  new SelectList(mealTypes))</td>
-                <td>@Html.DropDownList("Sunday",  new SelectList(mealTypes))</td>
-            </tr>
-            <tr>
-                <th>Recipe Name</th>
-                <td id="MondayDetails"></td>
-                <td id="TuesdayDetails"></td>
-                <td id="WednesdayDetails"></td>
-                <td id="ThursdayDetails"></td>
-                <td id="FridayDetails"></td>
-                <td id="SaturdayDetails"></td>
-                <td id="SundayDetails"></td>
-            </tr>
-            <tr>
-                <th>View Recipes</th>
-                <td>
-                    <button id="MondayButton" disabled>View Recipe</button>
-                </td>
-                <td>
-                    <button id="TuesdayButton" disabled>View Recipe</button>
-                </td>
-                <td>
-                    <button id="WednesdayButton" disabled>View Recipe</button>
-                </td>
-                <td>
-                    <button id="ThursdayButton" disabled>View Recipe</button>
-                </td>
-                <td>
-                    <button id="FridayButton" disabled>View Recipe</button>
-                </td>
-                <td>
-                    <button id="SaturdayButton" disabled>View Recipe</button>
-                </td>
-                <td>
-                    <button id="SundayButton" disabled>View Recipe</button>
-                </td>
-            </tr>
+        <th>Meal Type</th>
+        <td>
+            <select id="Monday" onchange="handleChange('Monday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Monday')">Remove</button>
+        </td>
+        <td>
+            <select id="Tuesday" onchange="handleChange('Tuesday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Tuesday')">Remove</button>
+        </td>
+        <td>
+            <select id="Wednesday" onchange="handleChange('Wednesday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Wednesday')">Remove</button>
+        </td>
+        <td>
+            <select id="Thursday" onchange="handleChange('Thursday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Thursday')">Remove</button>
+        </td>
+        <td>
+            <select id="Friday" onchange="handleChange('Friday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Friday')">Remove</button>
+        </td>
+        <td>
+            <select id="Saturday" onchange="handleChange('Saturday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Saturday')">Remove</button>
+        </td>
+        <td>
+            <select id="Sunday" onchange="handleChange('Sunday')">
+                    @foreach (var item in mealTypes)
+                    {
+                    <option>@item</option>
+                    }
+            </select>
+            <button onclick="removeColumn('Sunday')">Remove</button>
+        </td>
+        <tr>
+            <th>Recipe Name</th>
+            <td id="MondayDetails">@ViewBag.DefaultValues[0]</td>
+            <td id="TuesdayDetails">@ViewBag.DefaultValues[1]</td>
+            <td id="WednesdayDetails">@ViewBag.DefaultValues[2]</td>
+            <td id="ThursdayDetails">@ViewBag.DefaultValues[3]</td>
+            <td id="FridayDetails">@ViewBag.DefaultValues[4]</td>
+            <td id="SaturdayDetails">@ViewBag.DefaultValues[5]</td>
+            <td id="SundayDetails">@ViewBag.DefaultValues[6]</td>
+        </tr>
+        <tr>
+            <th>View Recipes</th>
+            <td>
+                <button id="MondayButton" onclick="showRecipeDetails('Monday')">View Recipe</button>
+            </td>
+            <td>
+                <button id="TuesdayButton" onclick="showRecipeDetails('Tuesday')">View Recipe</button>
+            </td>
+            <td>
+                <button id="WednesdayButton" onclick="showRecipeDetails('Wednesday')">View Recipe</button>
+            </td>
+            <td>
+                <button id="ThursdayButton" onclick="showRecipeDetails('Thursday')">View Recipe</button>
+            </td>
+            <td>
+                <button id="FridayButton" onclick="showRecipeDetails('Friday')">View Recipe</button>
+            </td>
+            <td>
+                <button id="SaturdayButton" onclick="showRecipeDetails('Saturday')">View Recipe</button>
+            </td>
+            <td>
+                <button id="SundayButton" onclick="showRecipeDetails('Sunday')">View Recipe</button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
@@ -101,92 +157,199 @@
         display: flex;
         flex: 1;
         margin-left: 50px;
-            
     }
 
     #recipe-details-box {
         border: 1px solid black;
         height: 300px;
         padding: 10px;
-        position: fixed;
-        top: 350px;
-        width:79%;
+        padding-top: 20px;
+        position: relative;
+        width: 95%;
     }
 
-    #recipe-details-box h3 { margin-top: 0; }
+        #recipe-details-box h3 {
+            margin-top: 0;
+        }
 
-    #recipe-details-box p { margin: 0; }
+        #recipe-details-box p {
+            margin: 0;
+        }
+
     h2 {
-        text-align: center;
         margin-top: 20px;
+        text-align: center;
     }
+
     table {
-        top: 200px;
         border-collapse: collapse;
-        width: 100%;
-        max-width: 800px;
         margin: 0 auto;
+        margin-bottom: 20px;
+        max-width: 800px;
+        padding-bottom: 10px;
         table-layout: fixed;
+        top: 200px;
+        width: 100%;
     }
 
     th,
     td {
-        width: 125px;
-        text-align: center;
-        padding: 8px;
         border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        width: 125px;
     }
+
     th {
         background-color: #f2f2f2;
         font-weight: bold;
     }
 
     select {
-        width: 100%;
-        padding: 8px;
         border: none;
         border-radius: 4px;
         box-sizing: border-box;
+        padding: 8px;
+        width: 100%;
     }
 
     button {
         background-color: #4CAF50;
         border: none;
+        border-radius: 4px;
         color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
         padding: 8px;
         text-align: center;
         text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 4px;
-        cursor: pointer;
     }
 
-    button[disabled] {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
+        button[disabled] {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
 
     td[id$="Details"] {
-        padding: 16px;
         border: 1px solid #ddd;
         border-top: none;
+        padding: 16px;
     }
 </style>
-@section scripts {
-    <script>
-        $(function() {
-            $("select").change(function() {
-                var day = $(this).attr("id");
-                var meal = $(this).val();
-                $.ajax({
-                    url: "/Recipe/GetRecipeDetails",
-                    data: { day: day, meal: meal },
-                    success: function(result) {
-                        $("#" + day + "Details").html(result);
-                    }
-                });
-            });
+<script>
+    window.onload = function () {
+        doDefaultMeals();
+    };
+    
+    function toggleWeek() {
+        if ("@ViewBag.CurrentWeek" === "Next Week") {
+            var url = "@Url.Action("goToPlannedMealsPageNextWeek", "Home")";
+        } else {
+            var url = "@Url.Action("goToPlannedMealsPage", "Home")";
+        }
+        $.ajax({
+          url: url,
+          method: "POST",
+          success: function(response) {
+
+          }
         });
-    </script>
-}
+    }
+    
+
+    function doDefaultMeals() {
+        handleChange('Monday');
+        handleChange('Tuesday');
+        handleChange('Wednesday');
+        handleChange('Thursday');
+        handleChange('Friday');
+        handleChange('Saturday');
+        handleChange('Sunday');
+    };
+    
+    function removeColumn(day){
+        var mealType = document.getElementById(day).value;
+        var dayDetails = day + "Details";
+        var detailsElement = document.getElementById(dayDetails);
+        var week = "@ViewBag.CurrentWeek"
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("RemoveThisWeeksMeal", "Home")",
+            data: { day: day, mealType: mealType, week: week },
+            success: function (response) {
+                console.log(response);
+                var recipeName = response.recipeName;
+                detailsElement.innerHTML = recipeName;
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+        }
+
+    function handleChange(day) {
+        var mealType = document.getElementById(day).value;
+        var dayDetails = day + "Details";
+        var detailsElement = document.getElementById(dayDetails);
+        var week = "@ViewBag.CurrentWeek"
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetRecipeName", "Home")",
+            data: { day: day, mealType: mealType, week: week },
+            success: function (response) {
+                console.log(response);
+                var recipeName = response.recipeName;
+                detailsElement.innerHTML = recipeName;
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+
+        document.getElementById(dayDetails).value = recipeId;
+    }
+
+    function showRecipeDetails(day) {
+        var mealType = document.getElementById(day).value;
+        var week = "@ViewBag.CurrentWeek"
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetRecipeName", "Home")",
+            data: { day: day, mealType: mealType, week: week },
+            success: function (response) {
+                console.log(response);
+                var recipeId = response.recipeId;
+                showRecipe(recipeId);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+
+
+
+
+    function showRecipe(recipeId) {
+        var recipeDetails = document.getElementById("recipe-details-box");
+        var allRecipes = recipeDetails.children;
+        for (var i = 0; i < allRecipes.length; i++) {
+            allRecipes[i].style.display = "none";
+        }
+
+        // Show the recipe details for the specified recipe ID
+        var recipe = document.getElementById(recipeId);
+        recipe.style.display = "block";
+
+        // Set the meal type in the corresponding details cell
+        var detailsCell = document.getElementById(mealType + "Details");
+        detailsCell.innerHTML = "Recipe " + recipeId;
+
+    }
+
+</script>

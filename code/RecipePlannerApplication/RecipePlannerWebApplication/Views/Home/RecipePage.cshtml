@@ -60,6 +60,9 @@
             max-width: 1200px;
         }
 
+        .pagination {
+            margin-top: 20px;
+        }
         #recipe-list {
             background-color: #fff;
             border: 1px solid black;
@@ -100,31 +103,53 @@
             padding: 10px;
         }
 
-        #search-container button {
-            background-color: #4caf50;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 10px 20px;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+            margin-top: 20px;
         }
 
+        .form-group label {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .form-group select {
+            font-size: 16px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        #errorMessage {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type="submit"] {
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
         #search-container button:hover { background-color: #3e8e41; }
 
-        #available-checkbox { margin-right: 10px; }
-
-        #filter-tags {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .tag {
-            background-color: #4caf50;
-            border-radius: 5px;
-            color: #fff;
-            display: inline-block;
-            margin-right: 10px;
-            padding: 5px 10px;
-        }
+        #search-container button:active { background-color: #4CAF50; }
     </style>
 
 </head>
@@ -135,14 +160,14 @@
            <text>checked</text>
        }/>
 <label for="available-checkbox">Show Available Recipes</label>
-<button onclick="showAllRecipes()">Clear Filters</button>
+    <button onclick="showAllRecipes()" class="btn btn-primary page-button" style="margin-left: 20px;">Clear Filters</button>
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
     <div id="recipe-list">
         <div id="search-container">
             <label for="search-bar">Search Tags:</label>
             <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
-            <input type="button" value="Filter" id="search-button">
+                <input type="button" value="Filter" class="btn btn-primary page-button" id="search-button">
         </div>
         <div id="filter-tags">Filter by Tags: </div>
         <br>
@@ -168,8 +193,8 @@
             }
             </tbody>
         </table>
-        <div id="available-pagination" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
-            <br>
+        <div class = "pagination" id="available-pagination" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
+
             @if (ViewBag.currentPage > 1)
             {
                 <a href="@Url.Action("goToRecipePage", new {page = ViewBag.currentPage - 1})" class="btn btn-primary page-button">Previous Page</a>
@@ -198,7 +223,8 @@
             }
             </tbody>
         </table>
-        <div id="all-pagination" style="@(ViewBag.CurrentSelectedRadio == "all" ? "display: block;" : "display: none;")">
+
+        <div class = "pagination" id="all-pagination" style="@(ViewBag.CurrentSelectedRadio == "all" ? "display: block;" : "display: none;")">
             @if (ViewBag.currentAllPage > 1)
             {
                 <a href="@Url.Action("goToRecipePageAll", new {page = ViewBag.currentAllPage - 1})" class="btn btn-primary page-button">Previous Page</a>
@@ -213,6 +239,40 @@
             }
 
         </div>
+        <form method="post" id="addPlannedMeal" style="display: none;">
+            <div class="form-group">
+                <input type="hidden" name="recipeId" id="recipeId" value="">
+                <label for="week">Week:</label>
+                <select name="week" id="week">
+                    @foreach (var week in new[] {"This Week", "Next Week"})
+                    {
+                        <option value="@week">@week</option>
+                    }
+                </select>
+                <label for="day">Day:</label>
+                <select name="day" id="day">
+                    @foreach (var day in new[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"})
+                    {
+                        <option value="@day">@day</option>
+                    }
+                </select>
+                <label for="type">Meal Type:</label>
+                <select name="type" id="type">
+                    @foreach (var type in new[] {"Breakfast", "Lunch", "Dinner"})
+                    {
+                        <option value="@type">@type</option>
+                    }
+                </select>
+                <div id="errorMessage" style="display: none;">
+                    Are you sure You want to overwrite your previous meal?
+                </div>
+
+            </div>
+            <div class="button-group">
+                    <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add" />
+                    <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
+            </div>
+        </form>
         <table id="filtered-recipes" style="display: none;">
             <thead>
             <tr>
@@ -260,16 +320,20 @@
 </div>
 </body>
 <script>
-
     function showRecipe(recipeId) {
         var recipeDiv = document.getElementById(recipeId);
         var currentDiv = document.querySelector('#recipe-details-box > div[style*="display: block"]');
+        var addPlannedMealForm = document.getElementById('addPlannedMeal');
+        var recipeIdInput = addPlannedMealForm.querySelector('input[name="recipeId"]');
+
+        recipeIdInput.value = recipeId;
 
         if (currentDiv) {
             currentDiv.style.display = 'none';
         }
 
         recipeDiv.style.display = 'block';
+        addPlannedMealForm.style.display = 'block';
     }
 
     var tags = [];
