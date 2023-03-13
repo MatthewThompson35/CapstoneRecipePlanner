@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace RecipePlannerLibrary.Database
 {
@@ -39,6 +40,21 @@ namespace RecipePlannerLibrary.Database
                 builder.Append(b.ToString("x2").ToLower());
 
             return builder.ToString();
+        }
+
+        public static DateTime GetDateOfWeekDay(DayOfWeek dayOfWeek, string week)
+        {
+            int daysUntilCurrentWeekDay;
+            if (week.ToLower().Equals("next"))
+            {
+                daysUntilCurrentWeekDay = ((int) dayOfWeek - (int) DateTime.Today.AddDays(7).DayOfWeek);
+            }
+            else
+            {
+                daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
+            }
+
+            return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
         }
 
     }
