@@ -239,7 +239,7 @@
             // 
             this.sundayLunchLabel.AutoSize = true;
             this.sundayLunchLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.sundayLunchLabel.Location = new System.Drawing.Point(18, 973);
+            this.sundayLunchLabel.Location = new System.Drawing.Point(23, 977);
             this.sundayLunchLabel.Name = "sundayLunchLabel";
             this.sundayLunchLabel.Size = new System.Drawing.Size(60, 23);
             this.sundayLunchLabel.TabIndex = 12;
@@ -812,7 +812,7 @@
             // 
             this.saturdayDinnerLabel.AutoSize = true;
             this.saturdayDinnerLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.saturdayDinnerLabel.Location = new System.Drawing.Point(18, 885);
+            this.saturdayDinnerLabel.Location = new System.Drawing.Point(19, 881);
             this.saturdayDinnerLabel.Name = "saturdayDinnerLabel";
             this.saturdayDinnerLabel.Size = new System.Drawing.Size(65, 23);
             this.saturdayDinnerLabel.TabIndex = 65;
@@ -834,7 +834,7 @@
             // 
             this.saturdayBreakfastLabel.AutoSize = true;
             this.saturdayBreakfastLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.saturdayBreakfastLabel.Location = new System.Drawing.Point(18, 803);
+            this.saturdayBreakfastLabel.Location = new System.Drawing.Point(18, 810);
             this.saturdayBreakfastLabel.Name = "saturdayBreakfastLabel";
             this.saturdayBreakfastLabel.Size = new System.Drawing.Size(83, 23);
             this.saturdayBreakfastLabel.TabIndex = 63;
