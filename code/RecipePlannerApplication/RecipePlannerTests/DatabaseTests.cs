@@ -1,4 +1,5 @@
-﻿using RecipePlannerLibrary;
+﻿using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
 
 namespace RecipePlannerTests
 {
@@ -26,11 +27,35 @@ namespace RecipePlannerTests
         }
 
         [TestMethod]
+        public void RemoveUser_RemovesUserWithGivenUsername()
+        {
+            // Arrange
+            string username = "testuser";
+            string password = "testpassword";
+            // Create a test user for removal
+            Database.RemoveUser(username);
+            Database.CreateUser(username, password);
+
+            // Act
+            Database.RemoveUser(username);
+
+            // Assert
+            // Attempt to retrieve the user after removal - this should return null
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query = @"SELECT * FROM login WHERE username = @userName;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userName", username);
+            using var reader = command.ExecuteReader();
+            Assert.IsFalse(reader.Read());
+        }
+
+        [TestMethod]
         public void CreateUser_ValidUsernamePassword()
         {
             string username = "newUser";
             string password = "newPassword";
-
+            Database.RemoveUser(username);
             Database.CreateUser(username, password);
 
             List<string> users = Database.ContainsUser(username);

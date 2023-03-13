@@ -18,5 +18,21 @@
             Assert.AreEqual(0, recipe.Steps.Count);
             Assert.AreEqual(0, recipe.Ingredients.Count);
         }
+
+        [TestMethod]
+        public void RecipeConstructor_SetsRecipeIdAndName()
+        {
+            // Arrange
+            int recipeId = 1;
+            string name = "Test Recipe";
+
+            // Act
+            Recipe recipe = new Recipe(recipeId, name);
+
+            // Assert
+            Assert.AreEqual(recipeId, recipe.RecipeId);
+            Assert.AreEqual(name, recipe.Name);
+        }
     }
 }
+
