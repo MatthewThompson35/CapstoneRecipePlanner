@@ -91,24 +91,26 @@
             // 
             // loginButton
             // 
+            this.loginButton.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.loginButton.Location = new System.Drawing.Point(175, 475);
             this.loginButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(101, 36);
             this.loginButton.TabIndex = 5;
             this.loginButton.Text = "Login";
-            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // RegisterButton
             // 
+            this.RegisterButton.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.RegisterButton.Location = new System.Drawing.Point(175, 563);
             this.RegisterButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(101, 36);
             this.RegisterButton.TabIndex = 6;
             this.RegisterButton.Text = "Register";
-            this.RegisterButton.UseVisualStyleBackColor = true;
+            this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // emptyFieldErrorLabel
