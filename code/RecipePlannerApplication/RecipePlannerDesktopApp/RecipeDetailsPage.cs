@@ -127,16 +127,42 @@ namespace RecipePlannerDesktopApplication
 
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfCurrentWeekDay(day)))
+                {
+                    this.errorAddToMealPlanLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorAddToMealPlanLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+                
             } else
             {
-                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfNextWeekDay(day)))
+                {
+                    this.errorAddToMealPlanLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorAddToMealPlanLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+                
             }
             
             
-            var mealsPage = new PlannedMealsPage();
-            this.Hide();
-            mealsPage.Show();
+            //var mealsPage = new PlannedMealsPage();
+            //this.Hide();
+            //mealsPage.Show();
 
         }
 

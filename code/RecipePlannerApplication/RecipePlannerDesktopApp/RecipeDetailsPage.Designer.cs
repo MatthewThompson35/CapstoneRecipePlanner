@@ -139,11 +139,11 @@
             // 
             this.errorAddToMealPlanLabel.AutoSize = true;
             this.errorAddToMealPlanLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorAddToMealPlanLabel.Location = new System.Drawing.Point(93, 729);
+            this.errorAddToMealPlanLabel.Location = new System.Drawing.Point(118, 730);
             this.errorAddToMealPlanLabel.Name = "errorAddToMealPlanLabel";
-            this.errorAddToMealPlanLabel.Size = new System.Drawing.Size(316, 20);
+            this.errorAddToMealPlanLabel.Size = new System.Drawing.Size(290, 20);
             this.errorAddToMealPlanLabel.TabIndex = 10;
-            this.errorAddToMealPlanLabel.Text = "This meal has already been added for this day.";
+            this.errorAddToMealPlanLabel.Text = "There is a meal already added for this day.";
             this.errorAddToMealPlanLabel.Visible = false;
             // 
             // plannerMenuButton
