@@ -39,7 +39,7 @@
             this.addToMealPlanButton = new System.Windows.Forms.Button();
             this.weekComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.errorAddToMealPlanLabel = new System.Windows.Forms.Label();
+            this.updateSuccessfullyLabel = new System.Windows.Forms.Label();
             this.plannerMenuButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,16 +135,16 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Week";
             // 
-            // errorAddToMealPlanLabel
+            // updateSuccessfullyLabel
             // 
-            this.errorAddToMealPlanLabel.AutoSize = true;
-            this.errorAddToMealPlanLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorAddToMealPlanLabel.Location = new System.Drawing.Point(118, 730);
-            this.errorAddToMealPlanLabel.Name = "errorAddToMealPlanLabel";
-            this.errorAddToMealPlanLabel.Size = new System.Drawing.Size(290, 20);
-            this.errorAddToMealPlanLabel.TabIndex = 10;
-            this.errorAddToMealPlanLabel.Text = "There is a meal already added for this day.";
-            this.errorAddToMealPlanLabel.Visible = false;
+            this.updateSuccessfullyLabel.AutoSize = true;
+            this.updateSuccessfullyLabel.ForeColor = System.Drawing.Color.Green;
+            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(118, 730);
+            this.updateSuccessfullyLabel.Name = "updateSuccessfullyLabel";
+            this.updateSuccessfullyLabel.Size = new System.Drawing.Size(296, 20);
+            this.updateSuccessfullyLabel.TabIndex = 10;
+            this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
+            this.updateSuccessfullyLabel.Visible = false;
             // 
             // plannerMenuButton
             // 
@@ -187,7 +187,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
             this.Controls.Add(this.plannerMenuButton);
-            this.Controls.Add(this.errorAddToMealPlanLabel);
+            this.Controls.Add(this.updateSuccessfullyLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.weekComboBox);
             this.Controls.Add(this.addToMealPlanButton);
@@ -215,7 +215,7 @@
         private Button addToMealPlanButton;
         private ComboBox weekComboBox;
         private Label label4;
-        private Label errorAddToMealPlanLabel;
+        private Label updateSuccessfullyLabel;
         private Button plannerMenuButton;
         private ContextMenuStrip plannerContextMenuStrip;
         private ToolStripMenuItem findRecipeToolStripMenuItem;

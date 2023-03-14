@@ -40,6 +40,10 @@ namespace RecipePlannerDesktopApplication
             
         }
 
+        /// <summary>
+        ///     Initializes the recipe details based on the specified homepage.
+        /// </summary>
+        /// <param name="page">the homepage.</param>
         public RecipeDetailsPage(Homepage page) :this(){
             this.homepage = page;
             this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
@@ -53,6 +57,10 @@ namespace RecipePlannerDesktopApplication
 
         }
 
+        /// <summary>
+        ///     Initializes the recipe details page based on the specified planned meals page.
+        /// </summary>
+        /// <param name="mealsPage">the planned meals page.</param>
         public RecipeDetailsPage(PlannedMealsPage mealsPage) :this()
         {
             this.mealsPage = mealsPage;
@@ -129,11 +137,12 @@ namespace RecipePlannerDesktopApplication
             {
                 if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfCurrentWeekDay(day)))
                 {
-                    this.errorAddToMealPlanLabel.Visible = true;
+                    PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                    this.updateSuccessfullyLabel.Visible = true;
                 }
                 else
                 {
-                    this.errorAddToMealPlanLabel.Visible = false;
+                    this.updateSuccessfullyLabel.Visible = false;
                     PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
 
                     var mealsPage = new PlannedMealsPage();
@@ -145,11 +154,12 @@ namespace RecipePlannerDesktopApplication
             {
                 if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfNextWeekDay(day)))
                 {
-                    this.errorAddToMealPlanLabel.Visible = true;
+                    PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                    this.updateSuccessfullyLabel.Visible = true;
                 }
                 else
                 {
-                    this.errorAddToMealPlanLabel.Visible = false;
+                    this.updateSuccessfullyLabel.Visible = false;
                     PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
 
                     var mealsPage = new PlannedMealsPage();
@@ -158,11 +168,6 @@ namespace RecipePlannerDesktopApplication
                 }
                 
             }
-            
-            
-            //var mealsPage = new PlannedMealsPage();
-            //this.Hide();
-            //mealsPage.Show();
 
         }
 
@@ -231,7 +236,6 @@ namespace RecipePlannerDesktopApplication
 
         private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //PlannedMealsPage mealsPage = new PlannedMealsPage();
 
             this.selectedDay = this.daysComboBox.SelectedItem.ToString();
         }
