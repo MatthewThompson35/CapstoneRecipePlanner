@@ -47,7 +47,8 @@ namespace RecipePlannerLibrary.Database
             int daysUntilCurrentWeekDay;
             if (week.ToLower().Equals("next"))
             {
-                daysUntilCurrentWeekDay = ((int) dayOfWeek - (int) DateTime.Today.AddDays(7).DayOfWeek);
+                daysUntilCurrentWeekDay = ((int) dayOfWeek - (int) DateTime.Today.DayOfWeek);
+                daysUntilCurrentWeekDay += 7;
             }
             else
             {

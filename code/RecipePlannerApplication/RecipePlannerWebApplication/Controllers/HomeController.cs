@@ -643,11 +643,11 @@ public class HomeController : Controller
             DateTime date;
             if (week.Equals("Next Week"))
             {
-                date = Util.GetDateOfWeekDay(dayOfWeek, "this");
+                date = Util.GetDateOfWeekDay(dayOfWeek, "next");
             }
             else
             {
-                date = Util.GetDateOfWeekDay(dayOfWeek, "next");
+                date = Util.GetDateOfWeekDay(dayOfWeek, "this");
             }
 
             PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
