@@ -6,10 +6,20 @@ using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerLibrary.Database
 {
+    /// <summary>
+    ///     The PlannedMealDal class for database incorporation and modification.
+    /// </summary>
     public class PlannedMealDal
     {
         #region Methods
-
+        /// <summary>
+        ///     Adds a planned meal to the database.
+        /// </summary>
+        /// <param name="connectionString">the connection string</param>
+        /// <param name="recipeId">the recipe id.</param>
+        /// <param name="day">the day</param>
+        /// <param name="type">the meal type</param>
+        /// <param name="date">the date for the meal to be added.</param>
         public static void addPlannedMeal(string connectionString, int recipeId, string day, string type, DateTime date)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -26,6 +36,11 @@ namespace RecipePlannerLibrary.Database
             connection.Close();
         }
 
+        /// <summary>
+        ///     Gets all this week's meals based on the specified connection string provided to connect to the database.
+        /// </summary>
+        /// <param name="connectionString">the connection string</param>
+        /// <returns>all of this week's meals from the database.</returns>
         public static Dictionary<(string, string), int> getThisWeeksMeals(string connectionString)
         {
             var thisWeeksMeals = new Dictionary<(string, string), int>();
@@ -47,6 +62,11 @@ namespace RecipePlannerLibrary.Database
             return thisWeeksMeals;
         }
 
+        /// <summary>
+        ///     Gets next week's meals based on the specified connection string provided to connect to the database.
+        /// </summary>
+        /// <param name="connectionString">the connection string.</param>
+        /// <returns>all of next week's meals from the database.</returns>
         public static Dictionary<(string, string), int> getNextWeeksMeals(string connectionString)
         {
             var nextWeeksMeals = new Dictionary<(string, string), int>();
@@ -68,6 +88,14 @@ namespace RecipePlannerLibrary.Database
             return nextWeeksMeals;
         }
 
+        /// <summary>
+        ///     Removes a meal from this week based on the specified connection string, id, day, meal type, and date of the meal.
+        /// </summary>
+        /// <param name="connectionString">the connection string</param>
+        /// <param name="id">the recipe id</param>
+        /// <param name="day">the day</param>
+        /// <param name="type">the meal type</param>
+        /// <param name="date">the date of the meal</param>
         public static void RemoveThisWeekMeal(string connectionString, int id, string day, string type, DateTime date)
         {
 
@@ -83,6 +111,13 @@ namespace RecipePlannerLibrary.Database
 
         }
 
+        /// <summary>
+        ///     Determines whether an item in the database exists from the planned_recipe schema.
+        /// </summary>
+        /// <param name="connectionString">the connection string.</param>
+        /// <param name="type">the meal type</param>
+        /// <param name="date">the date of the meal</param>
+        /// <returns>true if an item exists, otherwise false.</returns>
         public static Boolean exists(string connectionString, string type, DateTime date)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -102,6 +137,14 @@ namespace RecipePlannerLibrary.Database
             }
         }
 
+        /// <summary>
+        ///     Updates a meal from this week based on the specified connection string, day, meal type, and date.
+        /// </summary>
+        /// <param name="connectionString">the connection string.</param>
+        /// <param name="day">the day</param>
+        /// <param name="type">the meal type</param>
+        /// <param name="date">the date of the meal</param>
+        /// <param name="recipeId">the recipe id.</param>
         public static void UpdateThisWeeksMeal(string connectionString, string day, string type, DateTime date,
             int recipeId)
         {

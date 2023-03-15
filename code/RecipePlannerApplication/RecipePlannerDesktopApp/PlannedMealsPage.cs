@@ -26,6 +26,12 @@ namespace RecipePlannerDesktopApplication
         public string DayValue { get; set; }
         public string MealTypeValue { get; set; }
 
+        /// <summary>
+        ///     Initializes a PlannedMealsPage object.
+        ///     
+        ///     Precondition: none
+        ///     Postcondition: the page is shown and initialized.
+        /// </summary>
         public PlannedMealsPage()
         {
             InitializeComponent();
@@ -1160,6 +1166,10 @@ namespace RecipePlannerDesktopApplication
             }
         }
 
+        /// <summary>
+        ///     Gets the Recipe from the textbox of the certain day and meal type.
+        /// </summary>
+        /// <returns>the recipe from the textbox.</returns>
         public Recipe GetRecipeFromTextBox()
         {
             return this.readInRecipe;

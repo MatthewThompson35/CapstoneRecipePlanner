@@ -171,6 +171,11 @@ namespace RecipePlannerDesktopApplication
 
         }
 
+        /// <summary>
+        /// Gets the date of the next week day based on the specified day of the week.
+        /// </summary>
+        /// <param name="dayOfWeek">the day of the week.</param>
+        /// <returns>the date of the next week day.</returns>
         public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
         {
             DateTime nextWeek = DateTime.Today.AddDays(7);
@@ -182,6 +187,11 @@ namespace RecipePlannerDesktopApplication
             return nextWeek.AddDays(daysUntilNextWeekDay);
         }
 
+        /// <summary>
+        /// Gets the date of the current weekday based on the specified day of the week.
+        /// </summary>
+        /// <param name="dayOfWeek">the day of the week.</param>
+        /// <returns>the date of the current week day.</returns>
         public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
         {
             int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
@@ -192,6 +202,11 @@ namespace RecipePlannerDesktopApplication
             return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
         }
 
+        /// <summary>
+        ///     Gets the planned meal week based on the specified meal week for the combobox of meal type.
+        /// </summary>
+        /// <param name="mealWeek">the meal week.</param>
+        /// <returns>a string representation of a meal week.</returns>
         public string GetPlannedMealWeek(PlannedMealWeeks mealWeek)
         {
             switch (mealWeek)
@@ -204,6 +219,10 @@ namespace RecipePlannerDesktopApplication
             return "";
         }
 
+        /// <summary>
+        ///     Gets the current recipe from the homepage selection.
+        /// </summary>
+        /// <returns>the current recipe from the homepage selection.</returns>
         public Recipe getCurrentRecipe()
         {
             return this.homepage.GetSelectedRecipe();

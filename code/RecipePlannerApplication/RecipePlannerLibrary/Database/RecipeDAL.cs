@@ -40,6 +40,12 @@ namespace RecipePlannerLibrary.Database
             return recipes;
         }
 
+        /// <summary>
+        ///     Gets the recipe name by the recipe id.
+        /// </summary>
+        /// <param name="recipeId">the recipe id.</param>
+        /// <param name="connectionString">the connection string.</param>
+        /// <returns>the recipe name.</returns>
         public static string getRecipeNameById(int recipeId, string connectionString)
         {
             Recipe recipe = new Recipe();
@@ -54,13 +60,18 @@ namespace RecipePlannerLibrary.Database
                 var name = reader.GetString(0);
 
                 recipe.Name = name;
-                //recipe = new Recipe(recipeID, name);
             }
 
             connection.Close();
             return recipe.Name;
         }
 
+        /// <summary>
+        ///     Gets the recipe by name.
+        /// </summary>
+        /// <param name="name">the name of the recipe</param>
+        /// <param name="connectionString">the connection string</param>
+        /// <returns>a recipe based on the recipe name.</returns>
         public static Recipe getRecipeByName(string name, string connectionString)
         {
             Recipe recipe = new Recipe();
