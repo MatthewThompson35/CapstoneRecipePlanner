@@ -71,6 +71,31 @@ namespace RecipePlannerTests
         }
 
         /// <summary>
+        /// Tests getting the recipe by name returns correct recipe.
+        /// </summary>
+        [TestMethod]
+        public void GetRecipeByName_ReturnsCorrectRecipe()
+        {
+            // Arrange
+            var name = "Second recipe";
+            var expectedRecipe = new Recipe
+            {
+                RecipeId = 2,
+                Name = "Second recipe",
+                Description = "The second Recipe"
+            };
+
+            // Act
+            var actualRecipe = RecipeDAL.getRecipeByName(name, Connection.TestsConnectionString);
+
+            // Assert
+            Assert.AreEqual(expectedRecipe.RecipeId, actualRecipe.RecipeId);
+            Assert.AreEqual(expectedRecipe.Name, actualRecipe.Name);
+            Assert.AreEqual(expectedRecipe.Description, actualRecipe.Description);
+        }
+
+
+        /// <summary>
         /// Tests the get steps for recipe.
         /// </summary>
         [TestMethod]
