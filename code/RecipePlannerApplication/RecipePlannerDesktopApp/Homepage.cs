@@ -14,11 +14,15 @@ public partial class Homepage : Form
     private Recipe selectedRecipe;
     private int allPage = 1;
     private int availablePage = 1;
+    private int filterPage = 1;
+    private bool filtered;
+    private int maxFilterPage;
     private readonly int maxAllPage;
     private readonly int maxAvailablePage;
-    private readonly int pageSize = 1;
+    private readonly int pageSize = 10;
     private readonly List<Recipe> allPageOne;
     private readonly List<Recipe> availablePageOne;
+    private List<Recipe> filteredRecipes;
 
     private readonly List<string> searchTags;
 
@@ -60,6 +64,7 @@ public partial class Homepage : Form
             .Take(this.pageSize)
             .ToList();
         this.availableCheckbox.Checked = true;
+        this.filteredRecipes = new List<Recipe>();
     }
 
     #endregion
@@ -246,7 +251,27 @@ public partial class Homepage : Form
     /// <returns></returns>
     private void nextButton_Click(object sender, EventArgs e)
     {
-        if (!this.availableCheckbox.Checked)
+        if (this.filtered)
+        {
+            if (this.filterPage != this.maxFilterPage)
+            {
+                this.filterPage++;
+
+                this.filteredRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+                var filteredRecipesOnPage = this.filteredRecipes
+                    .Skip((this.filterPage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in filteredRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+                }
+
+                this.pageCountLabel.Text = this.filterPage.ToString();
+            }
+        }
+        else if (!this.availableCheckbox.Checked)
         {
             if (this.allPage != this.maxAllPage)
             {
@@ -290,7 +315,24 @@ public partial class Homepage : Form
 
     private void lastPageButton_Click(object sender, EventArgs e)
     {
-        if (!this.availableCheckbox.Checked)
+        if (this.filtered)
+        {
+            this.filterPage = this.maxFilterPage;
+
+            this.filteredRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            var filteredRecipesOnPage = this.filteredRecipes
+                .Skip((this.filterPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in filteredRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.pageCountLabel.Text = this.filterPage.ToString();
+        }
+        else if (!this.availableCheckbox.Checked)
         {
             this.allPage = this.maxAllPage;
             var all = RecipeDAL.getRecipes(Connection.ConnectionString);
@@ -328,7 +370,27 @@ public partial class Homepage : Form
 
     private void previousButton_Click(object sender, EventArgs e)
     {
-        if (!this.availableCheckbox.Checked)
+        if (this.filtered)
+        {
+            if (this.filterPage != 1)
+            {
+                this.filterPage--;
+
+                this.filteredRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+                var filteredRecipesOnPage = this.filteredRecipes
+                    .Skip((this.filterPage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in filteredRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+                }
+
+                this.pageCountLabel.Text = this.filterPage.ToString();
+            }
+        }
+        else if (!this.availableCheckbox.Checked)
         {
             if (this.allPage != 1)
             {
@@ -372,7 +434,24 @@ public partial class Homepage : Form
 
     private void beginningButton_Click(object sender, EventArgs e)
     {
-        if (!this.availableCheckbox.Checked)
+        if (this.filtered)
+        {
+            this.filterPage = 1;
+
+            this.filteredRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            var filteredRecipesOnPage = this.filteredRecipes
+                .Skip((this.filterPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in filteredRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+            }
+
+            this.pageCountLabel.Text = this.filterPage.ToString();
+        }
+        else if (!this.availableCheckbox.Checked)
         {
             this.allPage = 1;
             var all = RecipeDAL.getRecipes(Connection.ConnectionString);
@@ -432,7 +511,8 @@ public partial class Homepage : Form
             this.searchTags.Add(tag);
             this.tagsCmb.Items.Add(tag);
             this.tagsCmb.SelectedIndex = this.tagsCmb.Items.Count - 1;
-
+            this.filterPage = 1;
+            this.filtered = true;
             this.getFilteredRecipes(this.searchTags);
         }
     }
@@ -441,7 +521,7 @@ public partial class Homepage : Form
     {
         var recipes = new List<Recipe>();
         var filteredRecipes = new List<Recipe>();
-
+        this.pageCountLabel.Text = this.filterPage.ToString();
         if (!this.availableCheckbox.Checked)
         {
             recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
@@ -491,7 +571,14 @@ public partial class Homepage : Form
                 this.noRecipesLabel.Visible = false;
             }
 
-            foreach (var recipe in filteredRecipes)
+            this.filteredRecipes = filteredRecipes;
+            this.filteredRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            this.maxFilterPage = (int) Math.Ceiling((double) this.filteredRecipes.Count / this.pageSize);
+            var filterPageOne = this.filteredRecipes
+                .Skip((this.filterPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            foreach (var recipe in filterPageOne)
             {
                 this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
             }
@@ -522,15 +609,13 @@ public partial class Homepage : Form
             {
                 this.getFilteredRecipes(this.searchTags);
             }
-
-
         }
     }
 
     private void clearFiltersBtn_Click(object sender, EventArgs e)
     {
         this.filterTagTxt.Text = "";
-
+        this.filtered = false;
         this.tagsCmb.Items.Clear();
         this.tagsCmb.Text = "";
 
