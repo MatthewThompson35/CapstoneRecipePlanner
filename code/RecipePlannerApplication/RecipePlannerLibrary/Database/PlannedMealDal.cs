@@ -1,8 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerLibrary.Database
 {
@@ -31,7 +29,6 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
             using var reader = command.ExecuteReader();
-
 
             connection.Close();
         }
@@ -98,17 +95,16 @@ namespace RecipePlannerLibrary.Database
         /// <param name="date">the date of the meal</param>
         public static void RemoveThisWeekMeal(string connectionString, int id, string day, string type, DateTime date)
         {
-
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
-            var query = @"DELETE FROM planned_recipe WHERE recipeID = @id and dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
+            var query =
+                @"DELETE FROM planned_recipe WHERE recipeID = @id and dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
             command.Parameters.Add("@day", MySqlDbType.VarChar).Value = day;
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
             using var reader = command.ExecuteReader();
-
         }
 
         /// <summary>
@@ -120,16 +116,19 @@ namespace RecipePlannerLibrary.Database
         /// <returns>true if an item exists, otherwise false.</returns>
         public static bool exists(string connectionString, string type, DateTime date)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
 
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(*) > 0 FROM planned_recipe WHERE dateUsed = @date AND mealType = @type", connection);
+                var command =
+                    new MySqlCommand(
+                        "SELECT COUNT(*) > 0 FROM planned_recipe WHERE dateUsed = @date AND mealType = @type",
+                        connection);
                 command.Parameters.AddWithValue("@date", date);
                 command.Parameters.AddWithValue("@type", type);
 
-                long result = (long)command.ExecuteScalar();
-                bool exists = (result > 0);
+                var result = (long) command.ExecuteScalar();
+                var exists = result > 0;
 
                 connection.Close();
 
@@ -150,7 +149,8 @@ namespace RecipePlannerLibrary.Database
         {
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
-            var query = @"Update planned_recipe set recipeID = @id WHERE dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
+            var query =
+                @"Update planned_recipe set recipeID = @id WHERE dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = recipeId;
             command.Parameters.Add("@day", MySqlDbType.VarChar).Value = day;
@@ -158,7 +158,8 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
             using var reader = command.ExecuteReader();
         }
+
+       
     }
-    
-        #endregion
-    }
+    #endregion
+}

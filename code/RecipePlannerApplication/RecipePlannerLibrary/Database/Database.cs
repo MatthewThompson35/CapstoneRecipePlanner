@@ -89,6 +89,21 @@ namespace RecipePlannerLibrary.Database
             return list;
         }
 
+        /// <summary>
+        /// Removes the user with the given username.
+        /// </summary>
+        /// <param name="username">The username of the user to be removed.</param>
+        public static void RemoveUser(string username)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query =
+                @"DELETE FROM login WHERE username = @userName;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@userName", MySqlDbType.VarChar).Value = username;
+            command.ExecuteNonQuery();
+        }
+
         #endregion
     }
 }

@@ -15,6 +15,7 @@ namespace RecipePlannerTests
             Assert.AreEqual(true, actualIngredients.Count > 0);
         }
 
+        [TestMethod]
         public void TestGetIngredients()
         {
             ActiveUser.username = "global";

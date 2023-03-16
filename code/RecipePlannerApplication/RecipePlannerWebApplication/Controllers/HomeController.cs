@@ -1,17 +1,10 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using System.Drawing.Printing;
+﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
-using Newtonsoft.Json;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
-using Microsoft.AspNetCore.Http;
-using Google.Protobuf;
 
 namespace RecipePlannerWebApplication.Controllers;
 
@@ -46,8 +39,11 @@ public class HomeController : Controller
     /// <summary>
     ///     Checks the login and goes to recipe page on successful login. Prompts for retry on failed login
     /// </summary>
-    /// <param name="ad">The ad.</param>
-    /// <returns>The Recipe Page login on server connection error</returns>
+    /// <param name="ad">The Login object containing user credentials</param>
+    /// <returns>
+    ///     The Recipe Page view on successful login, Login Page view with error message on failed login or connection
+    ///     error
+    /// </returns>
     [HttpPost]
     public IActionResult Index([Bind] Login ad)
     {
@@ -76,7 +72,7 @@ public class HomeController : Controller
         try
         {
             List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-            
+
             foreach (var recipe in recipes)
             {
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
@@ -84,31 +80,29 @@ public class HomeController : Controller
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
             }
 
-           
             this.addToAvailableRecipes(recipes);
             const int pageSize = 1;
-            int currentPage = page ?? 1;
+            var currentPage = page ?? 1;
 
             ViewBag.currentPage = currentPage;
             ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
-            int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
             ViewBag.totalPages = recipes.Count;
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
-            int currentAllPage = 1;
+            var currentAllPage = 1;
 
-
-            List<Recipe> AvailableRecipesOnPage = availableRecipes
+            var AvailableRecipesOnPage = availableRecipes
                 .Skip((currentPage - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
             ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
 
-            List<Recipe> AllRecipesOnPage = allRecipes
+            var AllRecipesOnPage = allRecipes
                 .Skip((currentAllPage - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -176,10 +170,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Decrements the quantity.
+    ///     Decrements the quantity of a given ingredient by its id.
     /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <returns>The View</returns>
+    /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <returns>The view of the ingredients page.</returns>
     public ActionResult decrementQuantity(string id)
     {
         try
@@ -202,10 +196,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Gets the item quantity of the ingredient provided.
+    ///     Gets the quantity of the ingredient with the given id.
     /// </summary>
     /// <param name="id">The ingredient id.</param>
-    /// <returns>The updated quantity</returns>
+    /// <returns>The quantity of the ingredient</returns>
     private int getItemQuantity(int id)
     {
         var quantity = 0;
@@ -221,9 +215,9 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Increments the quantity of the ingredient that is provided.
+    ///     Increments the quantity of the ingredient with the given id.
     /// </summary>
-    /// <param name="id">The Ingredient Id.</param>
+    /// <param name="id">The ingredient id.</param>
     /// <returns>The ingredients page or login on server connection error</returns>
     public ActionResult incrementQuantity(string id)
     {
@@ -234,7 +228,7 @@ public class HomeController : Controller
             var ingredientID = int.Parse(id);
 
             quantity = this.getItemQuantity(ingredientID);
-            IngredientDAL.incrementQuantity(ingredientID, quantity);    
+            IngredientDAL.incrementQuantity(ingredientID, quantity);
             this.setupIngredientsPage(ViewBag.currentPage);
             return View("IngredientsPage");
         }
@@ -247,10 +241,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Removes the ingredient from list.
+    ///     Removes the ingredient from the list.
     /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <returns>The ingredients page or login on server connection error</returns>
+    /// <param name="id">The identifier of the ingredient to be removed.</param>
+    /// <returns>The ingredients page or login on server connection error.</returns>
     public ActionResult removeIngredient(string id)
     {
         try
@@ -270,9 +264,10 @@ public class HomeController : Controller
     /// <summary>
     ///     Adds the ingredient to the list.
     /// </summary>
-    /// <param name="txtIngredientName">Name of the text ingredient.</param>
-    /// <param name="txtQuantity">The text quantity.</param>
-    /// <returns>The ingredients page or login on server connection error</returns>
+    /// <param name="txtIngredientName">The name of the ingredient.</param>
+    /// <param name="txtQuantity">The quantity of the ingredient.</param>
+    /// <param name="measurement">The measurement unit of the ingredient.</param>
+    /// <returns>The ingredients page or login on server connection error.</returns>
     [HttpPost]
     public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
     {
@@ -299,8 +294,9 @@ public class HomeController : Controller
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
-            IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement, Connection.ConnectionString);
-            int totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count/ 5);
+            IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
+                Connection.ConnectionString);
+            var totalPages = (int) Math.Ceiling((double) IngredientDAL.getIngredients().Count / 5);
             this.setupIngredientsPage(totalPages);
             return View("IngredientsPage");
         }
@@ -313,10 +309,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Goes to ingredients page.
+    ///     Goes to ingredients page with specified page number.
     /// </summary>
-    /// <param name="page">The page.</param>
-    /// <returns> the ingredients page with the specified page of ingredients</returns>
+    /// <param name="page">The page number to navigate to.</param>
+    /// <returns>Returns the ingredients page with the specified page of ingredients.</returns>
     public ActionResult goToIngredientsPage(int? page)
     {
         try
@@ -334,12 +330,12 @@ public class HomeController : Controller
     private void setupIngredientsPage(int? page)
     {
         const int pageSize = 5; // Change this to the desired page size
-        int currentPage = page ?? 1;
+        var currentPage = page ?? 1;
         List<Ingredient> allIngredients = IngredientDAL.getIngredients();
-        int totalIngredients = allIngredients.Count;
-        int totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+        var totalIngredients = allIngredients.Count;
+        var totalPages = (int) Math.Ceiling((double) totalIngredients / pageSize);
 
-        List<Ingredient> ingredientsOnPage = allIngredients
+        var ingredientsOnPage = allIngredients
             .Skip((currentPage - 1) * pageSize)
             .Take(pageSize)
             .ToList();
@@ -350,9 +346,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to RecipesPage
+    ///     Goes to RecipesPage that displays the available recipes by default with the specified page number
     /// </summary>
-    /// <returns>The recipes page or login on server connection error</returns>
+    /// <param name="page">The page number to navigate to.</param>
+    /// <returns>The recipes page with the specified page or login on server connection error</returns>
     public ActionResult goToRecipePage(int? page)
     {
         try
@@ -375,9 +372,9 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to RecipesPage
+    ///     Goes to RecipesPage that displays all recipes by default with the specified page number
     /// </summary>
-    /// <returns>The recipes page or login on server connection error</returns>
+    /// <returns>The recipes page with the specified page or login on server connection error</returns>
     public ActionResult goToRecipePageAll(int? page)
     {
         try
@@ -411,30 +408,29 @@ public class HomeController : Controller
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
             }
 
-            int currentPage = 1;
+            var currentPage = 1;
             this.addToAvailableRecipes(recipes);
             const int pageSize = 1;
-            int currentAllPage = page ?? 1;
+            var currentAllPage = page ?? 1;
 
             ViewBag.currentAllPage = currentAllPage;
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
-            int totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
+            ViewBag.totalPages = (int) Math.Ceiling((double) recipes.Count / pageSize);
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
 
-
-            List<Recipe> AvailableRecipesOnPage = availableRecipes
+            var AvailableRecipesOnPage = availableRecipes
                 .Skip((currentPage - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
             ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
 
-            List<Recipe> AllRecipesOnPage = allRecipes
+            var AllRecipesOnPage = allRecipes
                 .Skip((currentAllPage - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -449,28 +445,29 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Adds the planned meal.
+    ///     Adds the planned meal to the database.
     /// </summary>
-    /// <param name="recipeId">The recipe identifier.</param>
-    /// <param name="week">The week.</param>
-    /// <param name="day">The day.</param>
-    /// <returns></returns>
+    /// <param name="recipeId">The id for the recipe.</param>
+    /// <param name="week">The week of the meal.</param>
+    /// <param name="day">The day of the meal.</param>
+    /// <param name="type">The meal type</param>
+    /// <returns>The Recipe Page Defaulted to page one</returns>
     public ActionResult addPlannedMeal(int recipeId, string week, string day, string type)
     {
-        int recipeID = recipeId; 
-        string Week = week;
-        string Day = day;
-        string Type = type;
+        var recipeID = recipeId;
+        var Week = week;
+        var Day = day;
+        var Type = type;
         DayOfWeek dayOfWeek;
         Enum.TryParse(day, out dayOfWeek);
         DateTime date;
         if (week.Equals("This Week"))
         {
-            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
         }
         else
         {
-            date = this.GetDateOfNextWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
         }
 
         if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
@@ -481,10 +478,8 @@ public class HomeController : Controller
             ViewBag.recipeId = recipeId;
             return View("OverwriteConformation");
         }
-        else
-        {
-            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
-        }
+
+        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
         this.setupForRecipePage();
         if (ViewBag.day == null)
         {
@@ -498,39 +493,59 @@ public class HomeController : Controller
 
         if (ViewBag.week == null)
         {
-            ViewBag.week = "This Week"; 
+            ViewBag.week = "This Week";
         }
+
         if (ViewBag.AvailableRecipes == null)
         {
             TempData["msg"] = "The connection to the server could not be made";
             return View("Index");
         }
+
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
+    /// <summary>
+    ///     Overwrites the recipe for the specified day and meal type.
+    /// </summary>
+    /// <param name="day">The day of the week.</param>
+    /// <param name="type">The type of meal (e.g. breakfast, lunch, dinner).</param>
+    /// <param name="date">The date of the meal.</param>
+    /// <param name="recipeId">The ID of the recipe to use.</param>
+    /// <returns>The recipes page or login on server connection error.</returns>
     public ActionResult overwriteAddedMeal(string day, string type, string date, int recipeId)
     {
-        DateTime Date = DateTime.Parse(date);
+        var Date = DateTime.Parse(date);
         PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, day, type, Date, recipeId);
         return this.goToRecipePage(1);
     }
+
+    /// <summary>
+    ///     Updates the planned meal for a given recipe on a specific week day.
+    /// </summary>
+    /// <param name="recipeId">The ID of the recipe to update.</param>
+    /// <param name="week">The week to update the planned meal for.</param>
+    /// <param name="day">The day of the week to update the planned meal for.</param>
+    /// <param name="type">The type of meal to update (e.g. breakfast, lunch, dinner).</param>
+    /// <returns>The updated recipes page or login on server connection error.</returns>
     public ActionResult UpdateThisWeeksMeal(int recipeId, string week, string day, string type)
     {
-        int recipeID = recipeId;
-        string Week = week;
-        string Day = day;
-        string Type = type;
+        var recipeID = recipeId;
+        var Week = week;
+        var Day = day;
+        var Type = type;
         DayOfWeek dayOfWeek;
         Enum.TryParse(day, out dayOfWeek);
         DateTime date;
         if (week.Equals("This Week"))
         {
-            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
         }
         else
         {
-            date = this.GetDateOfNextWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
         }
+
         PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, Day, Type, date, recipeID);
         this.setupForRecipePage();
         if (ViewBag.AvailableRecipes == null)
@@ -538,29 +553,10 @@ public class HomeController : Controller
             TempData["msg"] = "The connection to the server could not be made";
             return View("Index");
         }
+
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
-    public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
-    {
-        DateTime nextWeek = DateTime.Today.AddDays(7);
-        int daysUntilNextWeekDay = ((int)dayOfWeek - (int)nextWeek.DayOfWeek);
-        if (daysUntilNextWeekDay < 0)
-        {
-            daysUntilNextWeekDay += 7;
-        }
-        return nextWeek.AddDays(daysUntilNextWeekDay);
-    }
-
-    public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
-    {
-        int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
-        if (daysUntilCurrentWeekDay < 0)
-        {
-            daysUntilCurrentWeekDay += 7;
-        }
-        return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
-    }
 
     /// <summary>
     ///     Goes to add ingredients page.
@@ -573,6 +569,11 @@ public class HomeController : Controller
         return View("AddIngredient", ViewBag.Measurements);
     }
 
+    /// <summary>
+    ///     Toggles the week for Planned Meals page.
+    /// </summary>
+    /// <param name="currentWeek">The current week.</param>
+    /// <returns>The planned meals page based on which week is given</returns>
     public ActionResult ToggleWeek(string currentWeek)
     {
         if (currentWeek.Equals("Next Week"))
@@ -583,10 +584,9 @@ public class HomeController : Controller
         {
             this.goToPlannedMealsPageNextWeek();
         }
-        return View("PlannedMealsPage");
 
+        return View("PlannedMealsPage");
     }
-    
 
     public JsonResult GetRecipeName(string day, string mealType, string week)
     {
@@ -601,9 +601,10 @@ public class HomeController : Controller
             {
                 ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
             }
-            int recipeId = ThisWeeksMeals[(day, mealType)];
+
+            var recipeId = ThisWeeksMeals[(day, mealType)];
             var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-            string recipeName = "";
+            var recipeName = "";
             foreach (var recipe in allRecipes)
             {
                 if (recipe.RecipeId == recipeId)
@@ -612,17 +613,15 @@ public class HomeController : Controller
                 }
             }
 
-
             ViewBag.Header = "This weeks meals";
-            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
+            return Json(new {RecipeId = recipeId, RecipeName = recipeName});
         }
         catch (Exception ex)
         {
             var recipeId = "You have not yet added a meal for this time";
-            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+            return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
         }
     }
-
 
     public JsonResult RemoveThisWeeksMeal(string day, string mealType, string week)
     {
@@ -631,39 +630,39 @@ public class HomeController : Controller
             var ThisWeeksMeals = new Dictionary<(string, string), int>();
             if (week.Equals("Next Week"))
             {
-                 ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
+                ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
             }
             else
             {
                 ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
             }
-           
-            int recipeId = ThisWeeksMeals[(day, mealType)];
+
+            var recipeId = ThisWeeksMeals[(day, mealType)];
             DayOfWeek dayOfWeek;
             Enum.TryParse(day, out dayOfWeek);
             DateTime date;
             if (week.Equals("Next Week"))
             {
-                date = this.GetDateOfNextWeekDay(dayOfWeek);
+                date = Util.GetDateOfWeekDay(dayOfWeek, "next");
             }
             else
             {
-                date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+                date = Util.GetDateOfWeekDay(dayOfWeek, "this");
             }
 
             PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
-            
+
             ViewBag.Header = "This weeks meals";
-            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+            return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
         }
         catch (Exception ex)
         {
             try
             {
                 var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
-                int recipeId = ThisWeeksMeals[(day, mealType)];
+                var recipeId = ThisWeeksMeals[(day, mealType)];
                 var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-                string recipeName = "";
+                var recipeName = "";
                 foreach (var recipe in allRecipes)
                 {
                     if (recipe.RecipeId == recipeId)
@@ -671,13 +670,13 @@ public class HomeController : Controller
                         recipeName = recipe.Name;
                     }
                 }
-                return Json(new { RecipeName = recipeName });
+
+                return Json(new {RecipeName = recipeName});
             }
-            catch(Exception ex2)
+            catch (Exception ex2)
             {
-                return Json(new { RecipeName = "You Have not yet added a meal for this time" });
+                return Json(new {RecipeName = "You Have not yet added a meal for this time"});
             }
-            
         }
     }
 
@@ -687,7 +686,6 @@ public class HomeController : Controller
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToPlannedMealsPage()
     {
-
         ViewBag.CurrentWeek = "This Week";
         List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
         foreach (var recipe in recipes)
@@ -700,11 +698,12 @@ public class HomeController : Controller
         ViewBag.AllRecipes = recipes;
         var breakfast = new List<string>();
         var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
-        List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-        foreach (string day in daysOfWeek)
+        var daysOfWeek = new List<string>
+            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        foreach (var day in daysOfWeek)
         {
-            JsonResult json = GetRecipeName(day, "Breakfast", "This Week");
-            string recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var json = this.GetRecipeName(day, "Breakfast", "This Week");
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
 
@@ -720,8 +719,6 @@ public class HomeController : Controller
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToPlannedMealsPageNextWeek()
     {
-
-
         ViewBag.CurrentWeek = "Next Week";
         List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
         foreach (var recipe in recipes)
@@ -733,13 +730,15 @@ public class HomeController : Controller
 
         ViewBag.AllRecipes = recipes;
         var breakfast = new List<string>();
-        List<string> daysOfWeek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-        foreach (string day in daysOfWeek)
+        var daysOfWeek = new List<string>
+            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        foreach (var day in daysOfWeek)
         {
-            JsonResult json = GetRecipeName(day, "Breakfast", "Next Week");
-            string recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var json = this.GetRecipeName(day, "Breakfast", "Next Week");
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
+
         ViewBag.DefaultValues = breakfast;
         ViewBag.Header = "Next weeks meals";
         ViewBag.CurrentWeek = "Next Week";
@@ -803,7 +802,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Logs out this instance.
+    ///     Logs out this instance.
     /// </summary>
     /// <returns> The login page</returns>
     [HttpPost]

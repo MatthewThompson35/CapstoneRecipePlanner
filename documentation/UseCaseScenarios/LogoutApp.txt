@@ -1,4 +1,4 @@
-Context - None
+Context - User is on a page with a logout button
 
 Primary Flow
 1 - system displays landing page with user's list of recipes
