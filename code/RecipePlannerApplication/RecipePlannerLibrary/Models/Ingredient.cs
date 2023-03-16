@@ -50,6 +50,8 @@
         /// <param name="name">The name of the Ingredient.</param>
         /// <param name="quantity">The quantity of the Ingredient.</param>
         /// <param name="id">The id of the Ingredient.</param>
+        /// <precondition> none </precondition>
+        /// <postcondition>this.username = username && this.id = id && this.name = name && this.quantity = quantity && this.measurement = measurement</postcondition>
         public Ingredient(string username, string name, int quantity, int id, string measurement)
         {
             this.username = username;
