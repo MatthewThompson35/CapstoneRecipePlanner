@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\capstone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\AddIngredientsPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    /// Add ingredients page partial class.
+    /// &lt;/summary&gt;
+    public partial class AddIngredientsPage : Form
+    {
+        private IngredientsPage ingredientsPage;
+
+        /// &lt;summary&gt;
+        /// Initializes the AddIngreedients page with the corresponding ingredients page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientsPage&quot;&gt;&lt;/param&gt;
+        public AddIngredientsPage(IngredientsPage ingredientsPage)
+        {
+            InitializeComponent();
+            this.ingredientsPage = ingredientsPage;
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            string name = this.ingredientNameTextBox.Text;
+            string quantityString = this.quantityTextBox.Text;
+            string measure = this.measurementComboBox.Text;
+            int number = 0;
+
+            this.submitCheck(name, quantityString, measure, number);
+
+        }
+
+        private void submitCheck(string name, string quantityString, string measure, int number)
+        {
+            try
+            {
+                if (isTextEmpty(name, quantityString, measure))
+                {
+                    this.errorTextLabel.Visible = true;
+                }
+                else if (!int.TryParse(quantityString, out number))
+                {
+                    this.errorQuantityTextLabel.Visible = true;
+                }
+                else if (IngredientDAL.getIngredients(name).Count &gt; 0)
+                {
+                    this.errorTextLabel.Text = @&quot;This ingredient &quot; + &quot;&#39;&quot; + name + &quot;&#39;&quot; + @&quot; already exists.&quot;;
+                    this.errorTextLabel.Visible = true;
+                    this.errorQuantityTextLabel.Visible = false;
+                }
+                else
+                {
+                    int quantity = Convert.ToInt32(quantityString);
+
+                    Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity, 0, measure);
+
+                    this.addIngredient(ingredient);
+
+                    this.Close();
+                    this.ingredientsPage.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.errorTextLabel.Text = &quot;The connection to the server could not be made&quot;;
+                this.errorTextLabel.Visible = true;
+            }
+            
+        }
+
+        private static bool isTextEmpty(string name, string quantityString, string measure)
+        {
+            return name == null || name.Equals(&quot;&quot;) || quantityString == null || quantityString.Equals(&quot;&quot;) || measure.Equals(&quot;&quot;);
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.ingredientsPage.Show();
+        }
+
+        private void addIngredient(Ingredient ingredient)
+        {
+            using (MySqlConnection sqlConn = new MySqlConnection(Connection.ConnectionString))
+            {
+                sqlConn.Open();
+
+                string query = &quot;insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID, @Measurement)&quot;;
+                using var command = new MySqlCommand(query, sqlConn);
+
+                command.Parameters.AddWithValue(&quot;@username&quot;, ingredient.username);
+                command.Parameters.AddWithValue(&quot;@ingredientID&quot;, ingredient.id);
+                command.Parameters.AddWithValue(&quot;@ingredientName&quot;, ingredient.name);
+                command.Parameters.AddWithValue(&quot;@quantity&quot;, ingredient.quantity);
+                command.Parameters.AddWithValue(&quot;@Measurement&quot;, ingredient.measurement);
+
+                command.ExecuteNonQuery();
+            }
+
+            this.ingredientsPage.UpdateIngredientsGridView();
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[19,9,19,67,0],[20,9,20,10,0],[21,13,21,35,0],[22,13,22,52,0],[23,9,23,10,0],[26,9,26,10,0],[27,13,27,59,0],[28,13,28,63,0],[29,13,29,60,0],[30,13,30,28,0],[32,13,32,69,0],[34,9,34,10,0],[37,9,37,10,0],[39,13,39,14,0],[40,17,40,64,0],[41,17,41,18,0],[42,21,42,56,0],[43,17,43,18,0],[44,22,44,68,0],[45,17,45,18,0],[46,21,46,64,0],[47,17,47,18,0],[48,22,48,71,0],[49,17,49,18,0],[50,21,50,109,0],[51,21,51,56,0],[52,21,52,65,0],[53,17,53,18,0],[55,17,55,18,0],[56,21,56,68,0],[58,21,58,109,0],[60,21,60,52,0],[62,21,62,34,0],[63,21,63,49,0],[64,17,64,18,0],[65,13,65,14,0],[66,13,66,33,0],[67,13,67,14,0],[68,17,68,93,0],[69,17,69,52,0],[70,13,70,14,0],[72,9,72,10,0],[75,9,75,10,0],[76,13,76,129,0],[77,9,77,10,0],[80,9,80,10,0],[81,13,81,26,0],[82,13,82,41,0],[83,9,83,10,0],[86,9,86,10,0],[87,20,87,94,0],[88,13,88,14,0],[89,17,89,32,0],[91,17,91,132,0],[92,17,92,70,0],[94,17,94,83,0],[95,17,95,81,0],[96,17,96,85,0],[97,17,97,83,0],[98,17,98,89,0],[100,17,100,43,0],[101,13,101,14,0],[103,13,103,62,0],[104,9,104,10,0]]);
+    </script>
+  </body>
+</html>

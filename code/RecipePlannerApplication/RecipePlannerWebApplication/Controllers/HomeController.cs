@@ -463,11 +463,11 @@ public class HomeController : Controller
         DateTime date;
         if (week.Equals("This Week"))
         {
-            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
         }
         else
         {
-            date = this.GetDateOfNextWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
         }
 
         if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
@@ -539,11 +539,11 @@ public class HomeController : Controller
         DateTime date;
         if (week.Equals("This Week"))
         {
-            date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
         }
         else
         {
-            date = this.GetDateOfNextWeekDay(dayOfWeek);
+            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
         }
 
         PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, Day, Type, date, recipeID);
@@ -557,38 +557,6 @@ public class HomeController : Controller
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
-    /// <summary>
-    ///     Gets the date of next week day.
-    /// </summary>
-    /// <param name="dayOfWeek">The day of week.</param>
-    /// <returns>The date of the weekday given</returns>
-    public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
-    {
-        var nextWeek = DateTime.Today.AddDays(7);
-        var daysUntilNextWeekDay = (int) dayOfWeek - (int) nextWeek.DayOfWeek;
-        if (daysUntilNextWeekDay < 0)
-        {
-            daysUntilNextWeekDay += 7;
-        }
-
-        return nextWeek.AddDays(daysUntilNextWeekDay);
-    }
-
-    /// <summary>
-    ///     Gets the date of current week day.
-    /// </summary>
-    /// <param name="dayOfWeek">The day of week.</param>
-    /// <returns>The date of the weekday given</returns>
-    public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
-    {
-        var daysUntilCurrentWeekDay = (int) dayOfWeek - (int) DateTime.Today.DayOfWeek;
-        if (daysUntilCurrentWeekDay < 0)
-        {
-            daysUntilCurrentWeekDay += 7;
-        }
-
-        return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
-    }
 
     /// <summary>
     ///     Goes to add ingredients page.
@@ -675,11 +643,11 @@ public class HomeController : Controller
             DateTime date;
             if (week.Equals("Next Week"))
             {
-                date = this.GetDateOfNextWeekDay(dayOfWeek);
+                date = Util.GetDateOfWeekDay(dayOfWeek, "next");
             }
             else
             {
-                date = this.GetDateOfCurrentWeekDay(dayOfWeek);
+                date = Util.GetDateOfWeekDay(dayOfWeek, "this");
             }
 
             PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);

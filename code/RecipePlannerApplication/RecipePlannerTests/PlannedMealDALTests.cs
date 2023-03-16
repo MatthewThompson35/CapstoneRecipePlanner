@@ -47,6 +47,7 @@ namespace RecipePlannerTests
 
                 // Assert
                 Assert.IsTrue(PlannedMealDal.exists(this.connectionString, type, date));
+                PlannedMealDal.RemoveThisWeekMeal(this.connectionString, recipeId, day, type, date);
             }
 
             [TestMethod]
@@ -66,6 +67,8 @@ namespace RecipePlannerTests
 
                 // Assert
                 Assert.AreEqual(1, thisWeeksMeals.Count);
+                PlannedMealDal.RemoveThisWeekMeal(this.connectionString, recipeId, day, type, date);
+
             }
 
             [TestMethod]
@@ -88,6 +91,7 @@ namespace RecipePlannerTests
 
                 // Assert
                 Assert.AreEqual(1, nextWeeksMeals.Count);
+                PlannedMealDal.RemoveThisWeekMeal(this.connectionString, recipeId, day, type, date);
             }
 
            
@@ -106,6 +110,7 @@ namespace RecipePlannerTests
 
                 // Assert
                 Assert.IsTrue(exists);
+                PlannedMealDal.RemoveThisWeekMeal(this.connectionString, 1, "Monday", type, date);
             }
 
             [TestMethod]

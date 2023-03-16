@@ -23,8 +23,12 @@ namespace RecipePlannerDesktopApplication
     public partial class RecipeDetailsPage : Form
     {
         private Homepage homepage;
+        private PlannedMealsPage mealsPage;
         private string selectedDay;
         private string selectedMealType;
+
+        private bool isYesButtonClicked = false;
+        private bool isNoButtonClicked = false;
 
         //private PlannedMealDal mealDal;
         
@@ -39,6 +43,10 @@ namespace RecipePlannerDesktopApplication
             
         }
 
+        /// <summary>
+        ///     Initializes the recipe details based on the specified homepage.
+        /// </summary>
+        /// <param name="page">the homepage.</param>
         public RecipeDetailsPage(Homepage page) :this(){
             this.homepage = page;
             this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
@@ -50,6 +58,21 @@ namespace RecipePlannerDesktopApplication
             this.selectedDay = "";
             this.selectedMealType = "";
 
+        }
+
+        /// <summary>
+        ///     Initializes the recipe details page based on the specified planned meals page.
+        /// </summary>
+        /// <param name="mealsPage">the planned meals page.</param>
+        public RecipeDetailsPage(PlannedMealsPage mealsPage) :this()
+        {
+            this.mealsPage = mealsPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromMealPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -85,46 +108,129 @@ namespace RecipePlannerDesktopApplication
             return output;
         }
 
+        private string displayRecipeDetailsFromMealPage()
+        {
+            string output = null;
+
+            string description = this.mealsPage.GetRecipeFromTextBox().Name + Environment.NewLine + this.mealsPage.GetRecipeFromTextBox().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = "Steps" + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients;
+            return output;
+        }
+
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
             DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
 
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "this")))
+                {
+                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+
+                }
+                else
+                {
+                    this.updateSuccessfullyLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+                
             } else
             {
-                PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "next")))
+                {
+                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+
+                }
+                else
+                {
+                    this.updateSuccessfullyLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+                
             }
-            
-            
-            var mealsPage = new PlannedMealsPage();
+
+        }
+
+        private void NoButton_Click(object? sender, EventArgs e)
+        {
+            var page = new Homepage();
+
             this.Hide();
-            mealsPage.Show();
-
+            page.Show();
         }
 
-        public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
+        private void YesButton_Click(object? sender, EventArgs e)
         {
-            DateTime nextWeek = DateTime.Today.AddDays(7);
-            int daysUntilNextWeekDay = ((int)dayOfWeek - (int)nextWeek.DayOfWeek);
-            if (daysUntilNextWeekDay < 0)
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
+
+            if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                daysUntilNextWeekDay += 7;
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"), this.homepage.GetSelectedRecipe().RecipeId);
+                this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
+                this.updateSuccessfullyLabel.ForeColor = Color.Green;
+                this.updateSuccessfullyLabel.Visible = true;
+
+                this.Hide();
+                this.homepage.Show();
             }
-            return nextWeek.AddDays(daysUntilNextWeekDay);
+            else
+            {
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"), this.homepage.GetSelectedRecipe().RecipeId);
+                this.updateSuccessfullyLabel.Visible = true;
+                this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
+                this.updateSuccessfullyLabel.ForeColor = Color.Green;
+                this.updateSuccessfullyLabel.Visible = true;
+
+                this.Hide();
+                this.homepage.Show();
+            }
+
+            this.yesButton.Visible = false;
+            this.noButton.Visible = false;
+            this.addToMealPlanButton.Visible = true;
         }
 
-        public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
-        {
-            int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
-            if (daysUntilCurrentWeekDay < 0)
-            {
-                daysUntilCurrentWeekDay += 7;
-            }
-            return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
-        }
 
+        /// <summary>
+        ///     Gets the planned meal week based on the specified meal week for the combobox of meal type.
+        /// </summary>
+        /// <param name="mealWeek">the meal week.</param>
+        /// <returns>a string representation of a meal week.</returns>
         public string GetPlannedMealWeek(PlannedMealWeeks mealWeek)
         {
             switch (mealWeek)
@@ -137,6 +243,10 @@ namespace RecipePlannerDesktopApplication
             return "";
         }
 
+        /// <summary>
+        ///     Gets the current recipe from the homepage selection.
+        /// </summary>
+        /// <returns>the current recipe from the homepage selection.</returns>
         public Recipe getCurrentRecipe()
         {
             return this.homepage.GetSelectedRecipe();
@@ -169,7 +279,6 @@ namespace RecipePlannerDesktopApplication
 
         private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //PlannedMealsPage mealsPage = new PlannedMealsPage();
 
             this.selectedDay = this.daysComboBox.SelectedItem.ToString();
         }
@@ -177,6 +286,28 @@ namespace RecipePlannerDesktopApplication
         private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
+        }
+
+        private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var homepage = new Homepage();
+            homepage.Show();
+        }
+
+        private void viewMealPlanToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var mealPlanPage = new PlannedMealsPage();
+
+            mealPlanPage.Show();
+        }
+
+        private void plannerMenuButton_Click(object sender, EventArgs e)
+        {
+            this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
         }
     }
 }
