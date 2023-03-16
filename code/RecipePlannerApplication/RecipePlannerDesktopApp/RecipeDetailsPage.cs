@@ -30,7 +30,6 @@ namespace RecipePlannerDesktopApplication
         private bool isYesButtonClicked = false;
         private bool isNoButtonClicked = false;
 
-        //private PlannedMealDal mealDal;
         
         /// <summary>
         ///     Initializes the recipe details page for the recipes.
@@ -230,6 +229,8 @@ namespace RecipePlannerDesktopApplication
         ///     Gets the planned meal week based on the specified meal week for the combobox of meal type.
         /// </summary>
         /// <param name="mealWeek">the meal week.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>a string representation of a meal week.</returns>
         public string GetPlannedMealWeek(PlannedMealWeeks mealWeek)
         {
@@ -246,6 +247,8 @@ namespace RecipePlannerDesktopApplication
         /// <summary>
         ///     Gets the current recipe from the homepage selection.
         /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>the current recipe from the homepage selection.</returns>
         public Recipe getCurrentRecipe()
         {
