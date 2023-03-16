@@ -23,9 +23,6 @@ namespace RecipePlannerDesktopApplication
 
         private Recipe readInRecipe;
 
-        public string DayValue { get; set; }
-        public string MealTypeValue { get; set; }
-
         /// <summary>
         ///     Initializes a PlannedMealsPage object.
         ///     
