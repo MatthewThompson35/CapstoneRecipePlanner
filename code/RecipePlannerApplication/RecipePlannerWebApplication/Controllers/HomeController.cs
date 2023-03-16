@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
@@ -94,7 +95,7 @@ public class HomeController : Controller
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
             var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = recipes.Count;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize); ;
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
             var currentAllPage = 1;
@@ -665,6 +666,7 @@ public class HomeController : Controller
             return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
         }
     }
+
 
     /// <summary>
     /// Removes the meal at the specified planned meal slot.
