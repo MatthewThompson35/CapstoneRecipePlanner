@@ -138,7 +138,7 @@ namespace RecipePlannerDesktopApplication
 
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfCurrentWeekDay(day)))
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "this")))
                 {
                     this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
                     this.updateSuccessfullyLabel.ForeColor = Color.Red;
@@ -148,30 +148,11 @@ namespace RecipePlannerDesktopApplication
                     this.updateSuccessfullyLabel.Visible = true;
                     this.addToMealPlanButton.Visible = false;
 
-                    //this.yesButton.Click += YesButton_Click;
-                    //this.noButton.Click += NoButton_Click;
-
-                    //if (isYesButtonClicked)
-                    //{
-                    //    this.yesButton.Click += YesButton_Click;
-
-                    //    PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
-                    //    this.updateSuccessfullyLabel.Visible = true;
-                    //}
-
-                    //else if (isNoButtonClicked)
-                    //{
-                    //    this.noButton.Click += NoButton_Click;
-                    //}
-
-                    
-                    //PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
-                    //this.updateSuccessfullyLabel.Visible = true;
                 }
                 else
                 {
                     this.updateSuccessfullyLabel.Visible = false;
-                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day));
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"));
 
                     var mealsPage = new PlannedMealsPage();
                     this.Hide();
@@ -180,15 +161,21 @@ namespace RecipePlannerDesktopApplication
                 
             } else
             {
-                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfNextWeekDay(day)))
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "next")))
                 {
-                    PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
                     this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+
                 }
                 else
                 {
                     this.updateSuccessfullyLabel.Visible = false;
-                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day));
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"));
 
                     var mealsPage = new PlannedMealsPage();
                     this.Hide();
@@ -213,18 +200,24 @@ namespace RecipePlannerDesktopApplication
 
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"), this.homepage.GetSelectedRecipe().RecipeId);
                 this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
+
+                this.Hide();
+                this.homepage.Show();
             }
             else
             {
-                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"), this.homepage.GetSelectedRecipe().RecipeId);
                 this.updateSuccessfullyLabel.Visible = true;
                 this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
+
+                this.Hide();
+                this.homepage.Show();
             }
 
             this.yesButton.Visible = false;
@@ -232,36 +225,6 @@ namespace RecipePlannerDesktopApplication
             this.addToMealPlanButton.Visible = true;
         }
 
-        /// <summary>
-        /// Gets the date of the next week day based on the specified day of the week.
-        /// </summary>
-        /// <param name="dayOfWeek">the day of the week.</param>
-        /// <returns>the date of the next week day.</returns>
-        public DateTime GetDateOfNextWeekDay(DayOfWeek dayOfWeek)
-        {
-            DateTime nextWeek = DateTime.Today.AddDays(7);
-            int daysUntilNextWeekDay = ((int)dayOfWeek - (int)nextWeek.DayOfWeek);
-            if (daysUntilNextWeekDay < 0)
-            {
-                daysUntilNextWeekDay += 7;
-            }
-            return nextWeek.AddDays(daysUntilNextWeekDay);
-        }
-
-        /// <summary>
-        /// Gets the date of the current weekday based on the specified day of the week.
-        /// </summary>
-        /// <param name="dayOfWeek">the day of the week.</param>
-        /// <returns>the date of the current week day.</returns>
-        public DateTime GetDateOfCurrentWeekDay(DayOfWeek dayOfWeek)
-        {
-            int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
-            if (daysUntilCurrentWeekDay < 0)
-            {
-                daysUntilCurrentWeekDay += 7;
-            }
-            return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
-        }
 
         /// <summary>
         ///     Gets the planned meal week based on the specified meal week for the combobox of meal type.

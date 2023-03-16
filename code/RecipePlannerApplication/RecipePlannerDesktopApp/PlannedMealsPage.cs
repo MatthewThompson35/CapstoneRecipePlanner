@@ -621,7 +621,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Monday, "next"));
                                 this.mondayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
                             break;
@@ -633,7 +633,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Monday, "next"));
                                 this.mondayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
                             break;
@@ -646,7 +646,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Monday, "next"));
                                 this.mondayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -658,7 +658,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Tuesday, "next"));
                                 this.tuesdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -671,7 +671,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Tuesday, "next"));
                                 this.tuesdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -684,7 +684,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Tuesday, "next"));
                                 this.tuesdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -696,7 +696,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Wednesday, "next"));
                                 this.wednesdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -709,7 +709,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Wednesday, "next"));
                                 this.wednesdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -721,7 +721,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Wednesday, "next"));
                                 this.wednesdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -734,7 +734,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Thursday, "next"));
                                 this.thursdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -747,7 +747,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Thursday, "next"));
                                 this.thursdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -760,7 +760,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Thursday, "next"));
                                 this.thursdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -772,7 +772,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Friday, "next"));
                                 this.fridayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -784,7 +784,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Friday, "next"));
                                 this.fridayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -796,7 +796,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Friday, "next"));
                                 this.fridayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -809,7 +809,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Saturday, "next"));
                                 this.saturdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -822,7 +822,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Saturday, "next"));
                                 this.saturdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -835,7 +835,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Saturday, "next"));
                                 this.saturdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -847,7 +847,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Sunday, "next"));
                                 this.sundayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -860,7 +860,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Sunday, "next"));
                                 this.sundayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -872,7 +872,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfNextWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Sunday, "next"));
                                 this.sundayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -902,7 +902,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Monday, "this"));
                                 this.mondayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
                             break;
@@ -914,7 +914,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Monday, "this"));
                                 this.mondayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
                             break;
@@ -927,7 +927,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Monday, "this"));
                                 this.mondayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -939,7 +939,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Tuesday, "this"));
                                 this.tuesdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -952,7 +952,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Tuesday, "this"));
                                 this.tuesdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -965,7 +965,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Tuesday, "this"));
                                 this.tuesdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -977,7 +977,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Wednesday, "this"));
                                 this.wednesdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -990,7 +990,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Wednesday, "this"));
                                 this.wednesdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1002,7 +1002,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Wednesday, "this"));
                                 this.wednesdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1015,7 +1015,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Thursday, "this"));
                                 this.thursdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1028,7 +1028,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Thursday, "this"));
                                 this.thursdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1041,7 +1041,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Thursday, "this"));
                                 this.thursdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1053,7 +1053,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Friday, "this"));
                                 this.fridayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1065,7 +1065,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Friday, "this"));
                                 this.fridayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1077,7 +1077,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Friday, "this"));
                                 this.fridayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1090,7 +1090,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Saturday, "this"));
                                 this.saturdayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1103,7 +1103,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Saturday, "this"));
                                 this.saturdayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1116,7 +1116,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Saturday, "this"));
                                 this.saturdayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1128,7 +1128,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Sunday, "this"));
                                 this.sundayBreakfastTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1141,7 +1141,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Sunday, "this"));
                                 this.sundayLunchTextBox.Text = "Meal has not been added to this time yet";
                             }
 
@@ -1153,7 +1153,7 @@ namespace RecipePlannerDesktopApplication
                             }
                             else
                             {
-                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, this.detailsPage.GetDateOfCurrentWeekDay((DayOfWeek)Enum.Parse(typeof(DayOfWeek), meal.Key.Item1)));
+                                PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, meal.Value, meal.Key.Item1, meal.Key.Item2, Util.GetDateOfWeekDay(DayOfWeek.Sunday, "this"));
                                 this.sundayDinnerTextBox.Text = "Meal has not been added to this time yet";
                             }
 
