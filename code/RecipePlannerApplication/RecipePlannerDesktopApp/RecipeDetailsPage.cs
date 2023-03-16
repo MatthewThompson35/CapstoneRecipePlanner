@@ -145,20 +145,24 @@ namespace RecipePlannerDesktopApplication
 
                     this.yesButton.Visible = true;
                     this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
                     this.addToMealPlanButton.Visible = false;
 
-                    if (isYesButtonClicked)
-                    {
-                        this.yesButton.Click += YesButton_Click;
+                    //this.yesButton.Click += YesButton_Click;
+                    //this.noButton.Click += NoButton_Click;
 
-                        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
-                        this.updateSuccessfullyLabel.Visible = true;
-                    }
+                    //if (isYesButtonClicked)
+                    //{
+                    //    this.yesButton.Click += YesButton_Click;
 
-                    else if (isNoButtonClicked)
-                    {
-                        this.noButton.Click += NoButton_Click;
-                    }
+                    //    PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                    //    this.updateSuccessfullyLabel.Visible = true;
+                    //}
+
+                    //else if (isNoButtonClicked)
+                    //{
+                    //    this.noButton.Click += NoButton_Click;
+                    //}
 
                     
                     //PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
@@ -197,16 +201,35 @@ namespace RecipePlannerDesktopApplication
 
         private void NoButton_Click(object? sender, EventArgs e)
         {
-            this.isNoButtonClicked = true;
+            var page = new Homepage();
+
+            this.Hide();
+            page.Show();
         }
 
         private void YesButton_Click(object? sender, EventArgs e)
         {
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
 
-            this.isYesButtonClicked = true;
+            if (this.weekComboBox.SelectedItem.Equals("This Week"))
+            {
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
+                this.updateSuccessfullyLabel.ForeColor = Color.Green;
+                this.updateSuccessfullyLabel.Visible = true;
+            }
+            else
+            {
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfNextWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                this.updateSuccessfullyLabel.Visible = true;
+                this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
+                this.updateSuccessfullyLabel.ForeColor = Color.Green;
+                this.updateSuccessfullyLabel.Visible = true;
+            }
 
-            //PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
-            //this.updateSuccessfullyLabel.Visible = true;
+            this.yesButton.Visible = false;
+            this.noButton.Visible = false;
+            this.addToMealPlanButton.Visible = true;
         }
 
         /// <summary>

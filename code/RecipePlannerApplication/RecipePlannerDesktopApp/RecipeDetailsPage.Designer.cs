@@ -193,6 +193,7 @@
             this.yesButton.Text = "Yes";
             this.yesButton.UseVisualStyleBackColor = false;
             this.yesButton.Visible = false;
+            this.yesButton.Click += new System.EventHandler(this.YesButton_Click);
             // 
             // noButton
             // 
@@ -204,6 +205,7 @@
             this.noButton.Text = "No";
             this.noButton.UseVisualStyleBackColor = false;
             this.noButton.Visible = false;
+            this.noButton.Click += new System.EventHandler(this.NoButton_Click);
             // 
             // RecipeDetailsPage
             // 
