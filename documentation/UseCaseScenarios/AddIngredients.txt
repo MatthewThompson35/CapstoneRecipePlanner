@@ -4,9 +4,9 @@ Primary Flow
 1 - user selects to add new ingredient
 2 - system displays add ingredient page
 3 - user enters ingredient and quantity
-5 - user selects add ingredient
-6 - system detects valid input
-7 - system adds ingredient to list and displays ingredient page
+4 - user selects add ingredient
+5 - system detects valid input
+6 - system adds ingredient to list and displays ingredient page
 
 Alternative Flow(s)
 USER CANCELS
