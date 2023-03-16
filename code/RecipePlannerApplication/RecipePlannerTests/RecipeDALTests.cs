@@ -3,9 +3,15 @@ using RecipePlannerLibrary;
 
 namespace RecipePlannerTests
 {
+    /// <summary>
+    /// Test class for Recipe DAL
+    /// </summary>
     [TestClass]
     public class RecipeDALTests
     {
+        /// <summary>
+        /// Tests get recipes.
+        /// </summary>
         [TestMethod]
         public void TestGetRecipes()
         {
@@ -16,6 +22,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(expectedCount, recipes.Count);
         }
 
+        /// <summary>
+        /// Tests get ingredients for recipe.
+        /// </summary>
         [TestMethod]
         public void TestGetIngredientsForRecipe()
         {
@@ -27,6 +36,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(expectedCount, ingredients.Count);
         }
 
+        /// <summary>
+        /// Tests getting  the name of the recipe name by identifier returns correct.
+        /// </summary>
         [TestMethod]
         public void GetRecipeNameById_ReturnsCorrectName()
         {
@@ -41,6 +53,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(expectedName, actualName);
         }
 
+        /// <summary>
+        /// tests the get tags for recipe.
+        /// </summary>
         [TestMethod]
         public void TestGetTagsForRecipe()
         {
@@ -55,6 +70,9 @@ namespace RecipePlannerTests
             CollectionAssert.AreEqual(expectedTags, actualTags);
         }
 
+        /// <summary>
+        /// Tests the get steps for recipe.
+        /// </summary>
         [TestMethod]
         public void TestGetStepsForRecipe()
         {

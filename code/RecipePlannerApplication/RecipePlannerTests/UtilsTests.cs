@@ -1,8 +1,14 @@
 ﻿namespace RecipePlannerTests
 {
+    /// <summary>
+    /// Tests the utils class
+    /// </summary>
     [TestClass]
     public class UtilsTests
     {
+        /// <summary>
+        /// Tests the getHex method
+        /// </summary>
         [TestMethod]
         public void TestGetHex()
         {
@@ -14,6 +20,9 @@
             Assert.AreEqual(expectedResult, result);
         }
 
+        /// <summary>
+        /// Tests the getHash method
+        /// </summary>
         [TestMethod]
         public void TestGetHash()
         {
@@ -25,6 +34,9 @@
             Assert.AreEqual(expectedResult, result);
         }
 
+        /// <summary>
+        /// Tests that getting the date of week day returns correct date for next week.
+        /// </summary>
         [TestMethod]
         public void GetDateOfWeekDay_Returns_CorrectDate_For_NextWeek()
         {
@@ -42,6 +54,9 @@
             Assert.AreEqual(expectedDate, result);
         }
 
+        /// <summary>
+        /// Tests that getting the date of week day returns correct date for current week.
+        /// </summary>
         [TestMethod]
         public void GetDateOfWeekDay_Returns_CorrectDate_For_ThisWeek()
         {
@@ -59,6 +74,9 @@
             Assert.AreEqual(expectedDate, result);
         }
 
+        /// <summary>
+        /// Tests getting the date of week day returns today when day of week is same as today.
+        /// </summary>
         [TestMethod]
         public void GetDateOfWeekDay_Returns_Today_When_DayOfWeek_Is_Same_As_Today()
         {
@@ -74,6 +92,9 @@
             Assert.AreEqual(expectedDate, result);
         }
 
+        /// <summary>
+        /// Tests getting the date of week day is not case sensitive.
+        /// </summary>
         [TestMethod]
         public void GetDateOfWeekDay_Is_Not_Case_Sensitive()
         {

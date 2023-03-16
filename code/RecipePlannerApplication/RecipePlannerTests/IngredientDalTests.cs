@@ -6,6 +6,9 @@ namespace RecipePlannerTests
     [TestClass]
     public class IngredientDalTests
     {
+        /// <summary>
+        /// Tests the count for getIngredients
+        /// </summary>
         [TestMethod]
         public void TestGetIngredientsWithName()
         {
@@ -15,6 +18,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(true, actualIngredients.Count > 0);
         }
 
+        /// <summary>
+        /// Tests the get ingredients.
+        /// </summary>
         [TestMethod]
         public void TestGetIngredients()
         {
@@ -24,7 +30,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(true, actualIngredients.Count > 0);
         }
 
-
+        /// <summary>
+        /// Tests decrementing the quantity.
+        /// </summary>
         [TestMethod]
         public void DecrementQuantity()
         {
@@ -38,6 +46,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(list[0].quantity, expectedQuantity);
         }
 
+        /// <summary>
+        /// Tests incrementing the quantity.
+        /// </summary>
         [TestMethod]
         public void IncrementQuantity()
         {
@@ -51,6 +62,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(list[0].quantity, expectedQuantity);
         }
 
+        /// <summary>
+        /// Tests the remove ingredient.
+        /// </summary>
         [TestMethod]
         public void TestRemoveIngredient()
         {
@@ -72,6 +86,9 @@ namespace RecipePlannerTests
             Assert.IsNull(ingredient);
         }
 
+        /// <summary>
+        /// Tests the add ingredient.
+        /// </summary>
         [TestMethod]
         public void TestAddIngredient()
         {
