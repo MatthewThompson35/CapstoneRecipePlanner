@@ -33,6 +33,21 @@
             Assert.AreEqual(recipeId, recipe.RecipeId);
             Assert.AreEqual(name, recipe.Name);
         }
+
+        [TestMethod]
+        public void Tags_Returns_ExpectedTags()
+        {
+            // Arrange
+            var recipe = new Recipe();
+            var expectedTags = new List<string> { "technology", "programming", "software" };
+
+            // Act
+            recipe.Tags = expectedTags;
+            var resultTags = recipe.Tags;
+
+            // Assert
+            CollectionAssert.AreEqual(expectedTags, resultTags);
+        }
     }
 }
 

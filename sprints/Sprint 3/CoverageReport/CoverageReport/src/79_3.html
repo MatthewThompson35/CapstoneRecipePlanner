@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\capstone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\RecipeStepTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class RecipeStepTests
+    {
+        [TestMethod]
+        public void TestConstructor()
+        {
+            int recipeId = 1;
+            int stepNumber = 2;
+            string stepDescription = &quot;Boil water&quot;;
+
+            RecipeStep step = new RecipeStep(recipeId, stepNumber, stepDescription);
+
+            Assert.AreEqual(recipeId, step.recipeId);
+            Assert.AreEqual(stepNumber, step.stepNumber);
+            Assert.AreEqual(stepDescription, step.stepDescription);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,10,1],[9,13,9,30,1],[10,13,10,32,1],[11,13,11,51,1],[13,13,13,85,1],[15,13,15,54,1],[16,13,16,58,1],[17,13,17,68,1],[18,9,18,10,1]]);
+    </script>
+  </body>
+</html>
