@@ -118,7 +118,7 @@ namespace RecipePlannerLibrary.Database
         /// <param name="type">the meal type</param>
         /// <param name="date">the date of the meal</param>
         /// <returns>true if an item exists, otherwise false.</returns>
-        public static Boolean exists(string connectionString, string type, DateTime date)
+        public static bool exists(string connectionString, string type, DateTime date)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

@@ -27,6 +27,9 @@ namespace RecipePlannerDesktopApplication
         private string selectedDay;
         private string selectedMealType;
 
+        private bool isYesButtonClicked = false;
+        private bool isNoButtonClicked = false;
+
         //private PlannedMealDal mealDal;
         
         /// <summary>
@@ -137,8 +140,29 @@ namespace RecipePlannerDesktopApplication
             {
                 if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, GetDateOfCurrentWeekDay(day)))
                 {
-                    PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
-                    this.updateSuccessfullyLabel.Visible = true;
+                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+
+                    if (isYesButtonClicked)
+                    {
+                        this.yesButton.Click += YesButton_Click;
+
+                        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                        this.updateSuccessfullyLabel.Visible = true;
+                    }
+
+                    else if (isNoButtonClicked)
+                    {
+                        this.noButton.Click += NoButton_Click;
+                    }
+
+                    
+                    //PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+                    //this.updateSuccessfullyLabel.Visible = true;
                 }
                 else
                 {
@@ -169,6 +193,20 @@ namespace RecipePlannerDesktopApplication
                 
             }
 
+        }
+
+        private void NoButton_Click(object? sender, EventArgs e)
+        {
+            this.isNoButtonClicked = true;
+        }
+
+        private void YesButton_Click(object? sender, EventArgs e)
+        {
+
+            this.isYesButtonClicked = true;
+
+            //PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, GetDateOfCurrentWeekDay(day), this.homepage.GetSelectedRecipe().RecipeId);
+            //this.updateSuccessfullyLabel.Visible = true;
         }
 
         /// <summary>

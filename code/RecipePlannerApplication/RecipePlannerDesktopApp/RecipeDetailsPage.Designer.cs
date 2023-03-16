@@ -44,6 +44,8 @@
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMealPlanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.yesButton = new System.Windows.Forms.Button();
+            this.noButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,11 +183,35 @@
             this.viewMealPlanToolStripMenuItem1.Text = "View Meal Plan";
             this.viewMealPlanToolStripMenuItem1.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem1_Click);
             // 
+            // yesButton
+            // 
+            this.yesButton.BackColor = System.Drawing.Color.LawnGreen;
+            this.yesButton.Location = new System.Drawing.Point(61, 770);
+            this.yesButton.Name = "yesButton";
+            this.yesButton.Size = new System.Drawing.Size(94, 29);
+            this.yesButton.TabIndex = 16;
+            this.yesButton.Text = "Yes";
+            this.yesButton.UseVisualStyleBackColor = false;
+            this.yesButton.Visible = false;
+            // 
+            // noButton
+            // 
+            this.noButton.BackColor = System.Drawing.Color.Red;
+            this.noButton.Location = new System.Drawing.Point(358, 770);
+            this.noButton.Name = "noButton";
+            this.noButton.Size = new System.Drawing.Size(94, 29);
+            this.noButton.TabIndex = 17;
+            this.noButton.Text = "No";
+            this.noButton.UseVisualStyleBackColor = false;
+            this.noButton.Visible = false;
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.noButton);
+            this.Controls.Add(this.yesButton);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.updateSuccessfullyLabel);
             this.Controls.Add(this.label4);
@@ -220,5 +246,7 @@
         private ContextMenuStrip plannerContextMenuStrip;
         private ToolStripMenuItem findRecipeToolStripMenuItem;
         private ToolStripMenuItem viewMealPlanToolStripMenuItem1;
+        private Button yesButton;
+        private Button noButton;
     }
 }
