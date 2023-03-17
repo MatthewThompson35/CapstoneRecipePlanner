@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\NextWeeksMeals.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model IEnumerable&lt;RecipePlannerLibrary.Models.Recipe&gt;
+
+@{
+    ViewBag.Title = &quot;Meal Plan&quot;;
+    List&lt;string&gt; mealTypes = new List&lt;string&gt; { &quot;Breakfast&quot;, &quot;Lunch&quot;, &quot;Dinner&quot; };
+}
+&lt;div&gt;
+    &lt;h2&gt;@ViewBag.Header&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;&lt;/th&gt;
+                &lt;th&gt;Monday&lt;/th&gt;
+                &lt;th&gt;Tuesday&lt;/th&gt;
+                &lt;th&gt;Wednesday&lt;/th&gt;
+                &lt;th&gt;Thursday&lt;/th&gt;
+                &lt;th&gt;Friday&lt;/th&gt;
+                &lt;th&gt;Saturday&lt;/th&gt;
+                &lt;th&gt;Sunday&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Meal Type&lt;/th&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Monday&quot;, new SelectList(mealTypes))&lt;/td&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Tuesday&quot;, new SelectList(mealTypes))&lt;/td&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Wednesday&quot;,  new SelectList(mealTypes))&lt;/td&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Thursday&quot;,  new SelectList(mealTypes))&lt;/td&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Friday&quot;,  new SelectList(mealTypes))&lt;/td&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Saturday&quot;,  new SelectList(mealTypes))&lt;/td&gt;
+                &lt;td&gt;@Html.DropDownList(&quot;Sunday&quot;,  new SelectList(mealTypes))&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Recipe Name&lt;/th&gt;
+                &lt;td id=&quot;MondayDetails&quot;&gt;&lt;/td&gt;
+                &lt;td id=&quot;TuesdayDetails&quot;&gt;&lt;/td&gt;
+                &lt;td id=&quot;WednesdayDetails&quot;&gt;&lt;/td&gt;
+                &lt;td id=&quot;ThursdayDetails&quot;&gt;&lt;/td&gt;
+                &lt;td id=&quot;FridayDetails&quot;&gt;&lt;/td&gt;
+                &lt;td id=&quot;SaturdayDetails&quot;&gt;&lt;/td&gt;
+                &lt;td id=&quot;SundayDetails&quot;&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th&gt;View Recipes&lt;/th&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;MondayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;TuesdayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;WednesdayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;ThursdayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;FridayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;SaturdayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button id=&quot;SundayButton&quot; disabled&gt;View Recipe&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;recipe-details&quot;&gt;
+    &lt;div id=&quot;recipe-details-box&quot; style=&quot;overflow: auto;&quot;&gt;
+        @foreach (var recipe in ViewBag.AllRecipes)
+        {
+            &lt;div id=&quot;@recipe.RecipeId&quot; style=&quot;display: none&quot;&gt;
+                &lt;h3 class=&quot;recipe-name&quot;&gt;@recipe.Name&lt;/h3&gt;
+                &lt;p class=&quot;recipe-description&quot;&gt;@recipe.Description&lt;/p&gt;
+                &lt;h4&gt;Steps&lt;/h4&gt;
+                &lt;ol class=&quot;recipe-steps&quot;&gt;
+                    @foreach (var step in recipe.Steps)
+                    {
+                        &lt;li&gt;@step.stepDescription&lt;/li&gt;
+                    }
+                &lt;/ol&gt;
+                &lt;h4&gt;Ingredients&lt;/h4&gt;
+                &lt;ul class=&quot;recipe-ingredients&quot;&gt;
+                    @foreach (var ingredient in recipe.Ingredients)
+                    {
+                        &lt;li&gt;@ingredient.Quantity @ingredient.IngredientName&lt;/li&gt;
+                    }
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        }
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+    #recipe-details {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        margin-left: 50px;
+    }
+
+    #recipe-details-box {
+        border: 1px solid black;
+        height: 300px;
+        padding: 10px;
+        position: fixed;
+        top: 350px;
+        width: 79%;
+    }
+
+        #recipe-details-box h3 {
+            margin-top: 0;
+        }
+
+        #recipe-details-box p {
+            margin: 0;
+        }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        top: 200px;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        table-layout: fixed;
+    }
+
+    th,
+    td {
+        width: 125px;
+        text-align: center;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    select {
+        width: 100%;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+    td[id$=&quot;Details&quot;] {
+        padding: 16px;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+&lt;/style&gt;
+@section scripts {
+    &lt;script&gt;
+        $(function () {
+            $(&quot;select&quot;).change(function () {
+                var day = $(this).attr(&quot;id&quot;);
+                var meal = $(this).val();
+                $.ajax({
+                    url: &quot;/Recipe/GetRecipeDetails&quot;,
+                    data: { day: day, meal: meal },
+                    success: function (result) {
+                        $(&quot;#&quot; + day + &quot;Details&quot;).html(result);
+                    }
+                });
+            });
+        });
+    &lt;/script&gt;
+}@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[4,5,4,33,0],[5,5,5,82,0],[8,10,8,25,0],[27,22,27,77,0],[28,22,28,78,0],[29,22,29,81,0],[30,22,30,80,0],[31,22,31,78,0],[32,22,32,80,0],[33,22,33,78,0],[75,10,75,17,0],[75,19,75,29,0],[75,30,75,32,0],[75,33,75,51,0],[76,9,76,10,0],[77,22,77,39,0],[78,42,78,54,0],[79,48,79,67,0],[82,22,82,29,0],[82,31,82,39,0],[82,40,82,42,0],[82,43,82,55,0],[83,21,83,22,0],[84,30,84,51,0],[85,21,85,22,0],[89,22,89,29,0],[89,31,89,45,0],[89,46,89,48,0],[89,49,89,67,0],[90,21,90,22,0],[91,30,91,50,0],[91,51,91,77,0],[92,21,92,22,0],[95,9,95,10,0]]);
+    </script>
+  </body>
+</html>

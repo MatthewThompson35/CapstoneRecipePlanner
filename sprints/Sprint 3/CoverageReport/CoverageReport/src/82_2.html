@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\IngredientDalTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class IngredientDalTests
+    {
+        /// &lt;summary&gt;
+        /// Tests the count for getIngredients
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetIngredientsWithName()
+        {
+            ActiveUser.username = &quot;global&quot;;
+            List&lt;Ingredient&gt; actualIngredients = IngredientDAL.getIngredients(&quot;cheese&quot;);
+
+            Assert.AreEqual(true, actualIngredients.Count &gt; 0);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests the get ingredients.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetIngredients()
+        {
+            ActiveUser.username = &quot;global&quot;;
+            List&lt;Ingredient&gt; actualIngredients = IngredientDAL.getIngredients();
+
+            Assert.AreEqual(true, actualIngredients.Count &gt; 0);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests decrementing the quantity.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void DecrementQuantity()
+        {
+
+            ActiveUser.username = &quot;global&quot;;
+            var list = IngredientDAL.getIngredients();
+            var expectedQuantity = list[0].quantity - 1;
+            IngredientDAL.decrementQuantity((int) list[0].id, (int) list[0].quantity);
+            list = IngredientDAL.getIngredients();
+            Assert.IsNotNull(list[0]);
+            Assert.AreEqual(list[0].quantity, expectedQuantity);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests incrementing the quantity.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void IncrementQuantity()
+        {
+
+            ActiveUser.username = &quot;global&quot;;
+            var list = IngredientDAL.getIngredients();
+            var expectedQuantity = list[0].quantity + 1;
+            IngredientDAL.incrementQuantity((int) list[0].id, (int) list[0].quantity);
+            list = IngredientDAL.getIngredients();
+            Assert.IsNotNull(list[0]);
+            Assert.AreEqual(list[0].quantity, expectedQuantity);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests the remove ingredient.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestRemoveIngredient()
+        {
+
+            int ingredientId = 900;
+
+            IngredientDAL.RemoveIngredient(ingredientId);
+            ActiveUser.username = &quot;global&quot;;
+            var ingredients = IngredientDAL.getIngredients();
+            Ingredient ingredient = null;
+            foreach (var item in ingredients)
+            {
+                if (item.id == 900)
+                {
+                    ingredient = item;
+                }
+            }
+
+            Assert.IsNull(ingredient);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests the add ingredient.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestAddIngredient()
+        {
+            ActiveUser.username = &quot;global&quot;;
+
+            string name = &quot;Flour&quot;;
+            int quantity = 2;
+            string measurement = &quot;G&quot;;
+
+            IngredientDAL.addIngredient(name, quantity, measurement, Connection.TestsConnectionString);
+
+            using var connection = new MySqlConnection(Connection.TestsConnectionString);
+            connection.Open();
+            var query = @&quot;SELECT i.ingredientID, i.quantity, ii.measurementType FROM ingredient i, ingredient_info ii WHERE i.ingredientID = ii.ingredientID and username=@user;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue(&quot;@user&quot;, ActiveUser.username);
+            command.Parameters.AddWithValue(&quot;@name&quot;, name);
+            using var reader = command.ExecuteReader();
+            
+            Assert.IsTrue(reader.Read());
+            Assert.AreEqual(quantity, reader.GetInt32(&quot;quantity&quot;));
+            Assert.AreEqual(measurement, reader.GetString(&quot;measurementType&quot;));
+
+            IngredientDAL.RemoveIngredient(reader.GetInt32(&quot;ingredientID&quot;));
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,10,1],[15,13,15,44,1],[16,13,16,89,1],[18,13,18,64,1],[19,9,19,10,1],[26,9,26,10,1],[27,13,27,44,1],[28,13,28,81,1],[30,13,30,64,1],[31,9,31,10,1],[38,9,38,10,1],[40,13,40,44,1],[41,13,41,55,1],[42,13,42,57,1],[43,13,43,87,1],[44,13,44,51,1],[45,13,45,39,1],[46,13,46,65,1],[47,9,47,10,1],[54,9,54,10,1],[56,13,56,44,1],[57,13,57,55,1],[58,13,58,57,1],[59,13,59,87,1],[60,13,60,51,1],[61,13,61,39,1],[62,13,62,65,1],[63,9,63,10,1],[70,9,70,10,1],[72,13,72,36,1],[74,13,74,58,1],[75,13,75,44,1],[76,13,76,62,1],[77,13,77,42,1],[78,13,78,20,1],[78,22,78,30,1],[78,31,78,33,1],[78,34,78,45,1],[79,13,79,14,1],[80,17,80,36,1],[81,17,81,18,0],[82,21,82,39,0],[83,17,83,18,0],[84,13,84,14,1],[86,13,86,39,1],[87,9,87,10,1],[94,9,94,10,1],[95,13,95,44,1],[97,13,97,35,1],[98,13,98,30,1],[99,13,99,38,1],[101,13,101,104,1],[103,13,103,90,1],[104,13,104,31,1],[105,13,105,179,1],[106,13,106,69,1],[107,13,107,75,1],[108,13,108,60,1],[109,13,109,56,1],[111,13,111,42,1],[112,13,112,68,1],[113,13,113,79,1],[115,13,115,77,1],[116,9,116,10,1]]);
+    </script>
+  </body>
+</html>

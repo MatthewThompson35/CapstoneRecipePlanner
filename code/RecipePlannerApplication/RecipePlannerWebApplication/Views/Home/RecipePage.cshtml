@@ -239,6 +239,22 @@
             }
 
         </div>
+        <table id="filtered-recipes">
+            <thead>
+            <tr>
+                @if (ViewBag.filterRecipes != null)
+                {
+                    <th>Name</th>
+                    <th>Tags</th>
+                }
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div id="filter-pagination" style="display: none">
+            <p>This is being displayed</p>
+        </div>
         <form method="post" id="addPlannedMeal" style="display: none;">
             <div class="form-group">
                 <input type="hidden" name="recipeId" id="recipeId" value="">
@@ -269,20 +285,10 @@
 
             </div>
             <div class="button-group">
-                    <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add" />
-                    <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
+                <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add" />
+                <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
             </div>
         </form>
-        <table id="filtered-recipes" style="display: none;">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Tags</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
     </div>
     <div id="recipe-details-box" style="overflow: auto;">
         @foreach (var recipe in ViewBag.AllRecipes)
@@ -402,20 +408,82 @@
             cell.innerHTML = "No recipes found with the entered tags.";
         }
 
-        for (var i = 0; i < recipes.length; i++) {
-            var row = table.insertRow();
-            var nameCell = row.insertCell();
-            nameCell.innerHTML = recipes[i].name;
-            var tagsCell = row.insertCell();
-            tagsCell.innerHTML = recipes[i].tags.join(", ");
-            row.setAttribute("onclick", "showRecipe('" + recipes[i].recipeId + "')");
-            row.style.cursor = "pointer";
-        }
+        const itemsPerPage = 10;
+
+        // Retrieve the total number of items to be paginated
+        const totalItems = recipes.length;
+
+        // Calculate the total number of pages
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        
+        // Display the appropriate page of items
+       
+
+    
 
         document.getElementById('all-recipes').style.display = 'none';
         document.getElementById('filtered-recipes').style.display = 'block';
         document.getElementById('available-recipes').style.display = 'none';
+        displayPage(recipes, 1);
     }
+    
+    
+    function displayPage(recipes, pageNumber) {
+        const startIndex = (pageNumber - 1) * 10;
+        const endIndex = startIndex + 10;
+        const itemsToShow = recipes.slice(startIndex, endIndex);
+        var table = document.getElementById("filtered-recipes").getElementsByTagName("tbody")[0];
+        table.innerHTML = "";
+
+        for (var i = 0; i < itemsToShow.length; i++) {
+            var row = table.insertRow();
+            var nameCell = row.insertCell();
+            nameCell.innerHTML = itemsToShow[i].name;
+            var tagsCell = row.insertCell();
+            tagsCell.innerHTML = itemsToShow[i].tags.join(", ");
+            row.setAttribute("onclick", "showRecipe('" + itemsToShow[i].recipeId + "')");
+            row.style.cursor = "pointer";
+        }
+        updatePaginationButtons(recipes, pageNumber);
+    }
+
+    function updatePaginationButtons(recipeList, currentPage) {
+        const paginationContainer = document.querySelector('#filter-pagination');
+        paginationContainer.innerHTML = "";
+        document.getElementById('filter-pagination').style.display = 'block';
+        
+        // Create "previous" button
+        const previousButton = document.createElement('button');
+        previousButton.textContent = 'Previous';
+        previousButton.disabled = currentPage === 1;
+        previousButton.addEventListener('click', () => displayPage(recipeList, currentPage - 1));
+        previousButton.classList.add('btn', 'btn-primary', 'page-button');
+        previousButton.style.margin = '5px';
+        paginationContainer.appendChild(previousButton);
+
+        // Create numbered buttons
+        const totalPages = Math.ceil(recipeList.length / 10);
+        for (let i = 1; i <= totalPages; i++) {
+            const pageNumberButton = document.createElement('button');
+            pageNumberButton.textContent = i;
+            pageNumberButton.disabled = i === currentPage;
+            pageNumberButton.addEventListener('click', () => displayPage(recipeList, i));
+            pageNumberButton.classList.add('btn', 'btn-primary', 'page-button');
+            pageNumberButton.style.margin = '5px';
+            paginationContainer.appendChild(pageNumberButton);
+        }
+
+        // Create "next" button
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Next';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => displayPage(recipeList, currentPage + 1));
+        nextButton.classList.add('btn', 'btn-primary', 'page-button');
+        nextButton.style.margin = '5px';
+        paginationContainer.appendChild(nextButton);
+    }
+
 
     function updateFilterTags() {
         var filterTags = document.getElementById("filter-tags");
@@ -455,6 +523,7 @@
     }
 
     function showAllRecipes() {
+        document.getElementById('filter-pagination').style.display = 'none';
         document.getElementById('available-checkbox').checked = false;
         document.getElementById('search-bar').value = '';
         tags = [];

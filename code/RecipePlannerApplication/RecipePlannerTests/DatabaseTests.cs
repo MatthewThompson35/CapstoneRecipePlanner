@@ -6,6 +6,9 @@ namespace RecipePlannerTests
     [TestClass]
     public class DatabaseTests
     {
+        /// <summary>
+        /// Checks the login for correct information.
+        /// </summary>
         [TestMethod]
         public void LoginCheck_Correct_Info()
         {
@@ -16,6 +19,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(1, result);
         }
 
+        /// <summary>
+        /// Tests login with incorrect info
+        /// </summary>
         [TestMethod]
         public void LoginCheck_Incorrect_Info()
         {
@@ -26,6 +32,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(0, result);
         }
 
+        /// <summary>
+        /// Tests remove user with given username.
+        /// </summary>
         [TestMethod]
         public void RemoveUser_RemovesUserWithGivenUsername()
         {
@@ -50,6 +59,9 @@ namespace RecipePlannerTests
             Assert.IsFalse(reader.Read());
         }
 
+        /// <summary>
+        /// Tests Create the user valid username password.
+        /// </summary>
         [TestMethod]
         public void CreateUser_ValidUsernamePassword()
         {
@@ -62,7 +74,9 @@ namespace RecipePlannerTests
             Assert.IsTrue(users.Contains(username));
         }
 
-
+        /// <summary>
+        /// Tests containsUser whether [contains user valid username].
+        /// </summary>
         [TestMethod]
         public void ContainsUser_ValidUsername()
         {
@@ -73,6 +87,9 @@ namespace RecipePlannerTests
             Assert.IsTrue(result.Contains(username));
         }
 
+        /// <summary>
+        /// Tests containsUser whether [contains user invalid username].
+        /// </summary>
         [TestMethod]
         public void ContainsUser_InvalidUsername()
         {

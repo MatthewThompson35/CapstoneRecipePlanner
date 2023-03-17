@@ -4,16 +4,17 @@ using System.Text;
 namespace RecipePlannerLibrary.Database
 {
     /// <summary>
-    /// Utils Class
+    /// The Utils class to be used throughout the project
     /// </summary>
     public class Util
     {
-
         /// <summary>
-        /// Gets the hex for password hashing.
+        /// Gets the hex string for password hashing.
         /// </summary>
         /// <param name="inputString">The input string.</param>
-        /// <returns>Hex</returns>
+        /// <precondition>The input string must not be null.</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>The hex string generated from the input string</returns>
         public static string GetHex(string inputString)
         {
             var sb = new StringBuilder();
@@ -30,7 +31,9 @@ namespace RecipePlannerLibrary.Database
         /// Gets the hash for password hashing.
         /// </summary>
         /// <param name="inputString">The input string.</param>
-        /// <returns>Hash String</returns>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>A string containing the hashed representation of the input string.</returns>
         public static string GetHash(string inputString)
         {
             using var provider = System.Security.Cryptography.MD5.Create();
@@ -42,6 +45,14 @@ namespace RecipePlannerLibrary.Database
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Gets the date of week day.
+        /// </summary>
+        /// <param name="dayOfWeek">The day of week.</param>
+        /// <param name="week">The week.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>The date time of the weekday given as input.</returns>
         public static DateTime GetDateOfWeekDay(DayOfWeek dayOfWeek, string week)
         {
             int daysUntilCurrentWeekDay;

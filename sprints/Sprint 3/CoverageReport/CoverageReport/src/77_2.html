@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\RecipeIngredientTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    /// &lt;summary&gt;
+    /// Test the recipe Ingredients class
+    /// &lt;/summary&gt;
+    [TestClass]
+    public class RecipeIngredientTests
+    {
+        /// &lt;summary&gt;
+        /// Tests the constructor.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestConstructor()
+        {
+            int recipeId = 1;
+            string ingredientName = &quot;Flour&quot;;
+            int quantity = 2;
+            string measurement = &quot;G&quot;;
+
+            RecipeIngredient ingredient = new RecipeIngredient(recipeId, ingredientName, quantity, measurement);
+
+            Assert.AreEqual(recipeId, ingredient.RecipeId);
+            Assert.AreEqual(ingredientName, ingredient.IngredientName);
+            Assert.AreEqual(quantity, ingredient.Quantity);
+            Assert.AreEqual(measurement, ingredient.Measurement);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,10,1],[15,13,15,30,1],[16,13,16,45,1],[17,13,17,30,1],[18,13,18,38,1],[20,13,20,113,1],[22,13,22,60,1],[23,13,23,72,1],[24,13,24,60,1],[25,13,25,66,1],[26,9,26,10,1]]);
+    </script>
+  </body>
+</html>

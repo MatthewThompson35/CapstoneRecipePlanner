@@ -1,8 +1,14 @@
 ﻿namespace RecipePlannerTests
 {
+    /// <summary>
+    /// Tests the recipe Class
+    /// </summary>
     [TestClass]
     public class RecipeTests
     {
+        /// <summary>
+        /// Tests the constructor.
+        /// </summary>
         [TestMethod]
         public void TestConstructor()
         {
@@ -19,6 +25,9 @@
             Assert.AreEqual(0, recipe.Ingredients.Count);
         }
 
+        /// <summary>
+        /// Tests that the constructor sets recipe id and Name.
+        /// </summary>
         [TestMethod]
         public void RecipeConstructor_SetsRecipeIdAndName()
         {
@@ -34,6 +43,9 @@
             Assert.AreEqual(name, recipe.Name);
         }
 
+        /// <summary>
+        /// Test that getting Tags returns expected tags.
+        /// </summary>
         [TestMethod]
         public void Tags_Returns_ExpectedTags()
         {

@@ -3,6 +3,9 @@
     [TestClass]
     public class IngredientsTests
     {
+        /// <summary>
+        /// Tests the Ingredients Constructor
+        /// </summary>
         [TestMethod]
         public void ConstructorTests()
         {
@@ -21,6 +24,9 @@
             Assert.AreEqual(measurement, ingredient.measurement, "The measurement was not set correctly");
         }
 
+        /// <summary>
+        /// Tests the toString Method
+        /// </summary>
         [TestMethod]
         public void ToStringTest()
         {

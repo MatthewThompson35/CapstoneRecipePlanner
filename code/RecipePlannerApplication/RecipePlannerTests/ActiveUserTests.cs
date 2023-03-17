@@ -3,6 +3,9 @@
     [TestClass]
     public class ActiveUserTests
     {
+        /// <summary>
+        /// Tests the set username method
+        /// </summary>
         [TestMethod]
         public void SetUsername()
         {
@@ -16,8 +19,11 @@
 
             Assert.AreEqual(expectedUsername, actualUsername, "The username was not set correctly");
         }
-
+        /// <summary>
+        /// Tests the method to get the username
+        /// </summary>
         [TestMethod]
+        
         public void GetUsername()
         {
             string expectedUsername = "test";

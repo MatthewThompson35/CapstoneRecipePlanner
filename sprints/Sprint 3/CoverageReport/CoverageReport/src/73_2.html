@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\UtilsTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    /// &lt;summary&gt;
+    /// Tests the utils class
+    /// &lt;/summary&gt;
+    [TestClass]
+    public class UtilsTests
+    {
+        /// &lt;summary&gt;
+        /// Tests the getHex method
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetHex()
+        {
+            var inputString = &quot;test&quot;;
+            var expectedResult = &quot;7400650073007400&quot;;
+
+            var result = Util.GetHex(inputString);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests the getHash method
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetHash()
+        {
+            var inputString = &quot;test&quot;;
+            var expectedResult = &quot;098f6bcd4621d373cade4e832627b4f6&quot;;
+
+            var result = Util.GetHash(inputString);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests that getting the date of week day returns correct date for next week.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetDateOfWeekDay_Returns_CorrectDate_For_NextWeek()
+        {
+            // Arrange
+            DayOfWeek dayOfWeek = DayOfWeek.Tuesday;
+            string week = &quot;next&quot;;
+            DateTime today = DateTime.Today;
+            int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)today.DayOfWeek) + 7;
+            DateTime expectedDate = today.AddDays(daysUntilCurrentWeekDay);
+
+            // Act
+            DateTime result = Util.GetDateOfWeekDay(dayOfWeek, week);
+
+            // Assert
+            Assert.AreEqual(expectedDate, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests that getting the date of week day returns correct date for current week.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetDateOfWeekDay_Returns_CorrectDate_For_ThisWeek()
+        {
+            // Arrange
+            DayOfWeek dayOfWeek = DayOfWeek.Friday;
+            string week = &quot;this&quot;;
+            DateTime today = DateTime.Today;
+            int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)today.DayOfWeek);
+            DateTime expectedDate = today.AddDays(daysUntilCurrentWeekDay);
+
+            // Act
+            DateTime result = Util.GetDateOfWeekDay(dayOfWeek, week);
+
+            // Assert
+            Assert.AreEqual(expectedDate, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests getting the date of week day returns today when day of week is same as today.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetDateOfWeekDay_Returns_Today_When_DayOfWeek_Is_Same_As_Today()
+        {
+            // Arrange
+            DayOfWeek dayOfWeek = DateTime.Today.DayOfWeek;
+            string week = &quot;this&quot;;
+            DateTime expectedDate = DateTime.Today;
+
+            // Act
+            DateTime result = Util.GetDateOfWeekDay(dayOfWeek, week);
+
+            // Assert
+            Assert.AreEqual(expectedDate, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests getting the date of week day is not case sensitive.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetDateOfWeekDay_Is_Not_Case_Sensitive()
+        {
+            // Arrange
+            DayOfWeek dayOfWeek = DayOfWeek.Wednesday;
+            string week = &quot;THIS&quot;;
+            DateTime today = DateTime.Today;
+            int daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)today.DayOfWeek);
+            DateTime expectedDate = today.AddDays(daysUntilCurrentWeekDay);
+
+            // Act
+            DateTime result = Util.GetDateOfWeekDay(dayOfWeek, week);
+
+            // Assert
+            Assert.AreEqual(expectedDate, result);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,10,1],[15,13,15,38,1],[16,13,16,53,1],[18,13,18,51,1],[20,13,20,53,1],[21,9,21,10,1],[28,9,28,10,1],[29,13,29,38,1],[30,13,30,69,1],[32,13,32,52,1],[34,13,34,53,1],[35,9,35,10,1],[42,9,42,10,1],[44,13,44,53,1],[45,13,45,34,1],[46,13,46,45,1],[47,13,47,87,1],[48,13,48,76,1],[51,13,51,70,1],[54,13,54,51,1],[55,9,55,10,1],[62,9,62,10,1],[64,13,64,52,1],[65,13,65,34,1],[66,13,66,45,1],[67,13,67,83,1],[68,13,68,76,1],[71,13,71,70,1],[74,13,74,51,1],[75,9,75,10,1],[82,9,82,10,1],[84,13,84,60,1],[85,13,85,34,1],[86,13,86,52,1],[89,13,89,70,1],[92,13,92,51,1],[93,9,93,10,1],[100,9,100,10,1],[102,13,102,55,1],[103,13,103,34,1],[104,13,104,45,1],[105,13,105,83,1],[106,13,106,76,1],[109,13,109,70,1],[112,13,112,51,1],[113,9,113,10,1]]);
+    </script>
+  </body>
+</html>

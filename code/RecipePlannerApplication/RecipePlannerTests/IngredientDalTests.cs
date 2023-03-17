@@ -6,6 +6,9 @@ namespace RecipePlannerTests
     [TestClass]
     public class IngredientDalTests
     {
+        /// <summary>
+        /// Tests the count for getIngredients
+        /// </summary>
         [TestMethod]
         public void TestGetIngredientsWithName()
         {
@@ -15,6 +18,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(true, actualIngredients.Count > 0);
         }
 
+        /// <summary>
+        /// Tests the get ingredients.
+        /// </summary>
         [TestMethod]
         public void TestGetIngredients()
         {
@@ -24,7 +30,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(true, actualIngredients.Count > 0);
         }
 
-
+        /// <summary>
+        /// Tests decrementing the quantity.
+        /// </summary>
         [TestMethod]
         public void DecrementQuantity()
         {
@@ -38,6 +46,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(list[0].quantity, expectedQuantity);
         }
 
+        /// <summary>
+        /// Tests incrementing the quantity.
+        /// </summary>
         [TestMethod]
         public void IncrementQuantity()
         {
@@ -51,13 +62,16 @@ namespace RecipePlannerTests
             Assert.AreEqual(list[0].quantity, expectedQuantity);
         }
 
+        /// <summary>
+        /// Tests the remove ingredient.
+        /// </summary>
         [TestMethod]
         public void TestRemoveIngredient()
         {
 
             int ingredientId = 900;
 
-            IngredientDAL.RemoveIngredient(ingredientId);
+            IngredientDAL.RemoveIngredient(ingredientId, Connection.TestsConnectionString);
             ActiveUser.username = "global";
             var ingredients = IngredientDAL.getIngredients();
             Ingredient ingredient = null;
@@ -72,6 +86,9 @@ namespace RecipePlannerTests
             Assert.IsNull(ingredient);
         }
 
+        /// <summary>
+        /// Tests the add ingredient.
+        /// </summary>
         [TestMethod]
         public void TestAddIngredient()
         {
@@ -81,19 +98,20 @@ namespace RecipePlannerTests
             int quantity = 2;
             string measurement = "G";
 
+            IngredientDAL.RemoveIngredient(29, Connection.TestsConnectionString);
             IngredientDAL.addIngredient(name, quantity, measurement, Connection.TestsConnectionString);
 
             using var connection = new MySqlConnection(Connection.TestsConnectionString);
             connection.Open();
-            var query = @"Select * from ingredient where username = @username and ingredientName = @name";
+            var query = @"SELECT i.ingredientID, i.quantity, ii.measurementType FROM ingredient i, ingredient_info ii WHERE i.ingredientID = ii.ingredientID and username=@user;";
             using var command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@username", ActiveUser.username);
+            command.Parameters.AddWithValue("@user", ActiveUser.username);
             command.Parameters.AddWithValue("@name", name);
             using var reader = command.ExecuteReader();
             
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(quantity, reader.GetInt32("quantity"));
-            Assert.AreEqual(measurement, reader.GetString("Measurement"));
+            Assert.AreEqual(measurement, reader.GetString("measurementType"));
         }
     }
 }

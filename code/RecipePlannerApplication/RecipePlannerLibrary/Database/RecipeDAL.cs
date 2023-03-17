@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace RecipePlannerLibrary.Database
 {
     /// <summary>
-    ///     Recipe DAL
+    ///     Manages the data and functionality for a Recipe DAL object
     /// </summary>
     public class RecipeDAL
     {
@@ -15,6 +15,8 @@ namespace RecipePlannerLibrary.Database
         ///     Gets all of the recipes from the recipe table.
         /// </summary>
         /// <param name="connectionString">The connection string for the table.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>List of all recipes</returns>
         public static List<Recipe> getRecipes(string connectionString)
         {
@@ -41,10 +43,12 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Gets the recipe name by the recipe id.
+        ///     Gets the recipe name based on the specified recipe id.
         /// </summary>
         /// <param name="recipeId">the recipe id.</param>
         /// <param name="connectionString">the connection string.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>the recipe name.</returns>
         public static string getRecipeNameById(int recipeId, string connectionString)
         {
@@ -67,10 +71,12 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Gets the recipe by name.
+        ///     Gets the recipe with the given name.
         /// </summary>
         /// <param name="name">the name of the recipe</param>
         /// <param name="connectionString">the connection string</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>a recipe based on the recipe name.</returns>
         public static Recipe getRecipeByName(string name, string connectionString)
         {
@@ -102,15 +108,18 @@ namespace RecipePlannerLibrary.Database
         /// </summary>
         /// <param name="id">the recipe id.</param>
         /// <param name="connectionString">The connection string for the table.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>List of all ingredients associated with specified recipeID</returns>
         public static List<RecipeIngredient> getIngredientsForRecipe(int id, string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var ingredients = new List<RecipeIngredient>();
-            var query = @"Select * from recipe_ingredient where recipeID=@id;";
+            var query = @"Select ri.recipeID, ii.ingredientName, ri.quantity, ri.measurement from recipe_ingredient ri, ingredient_info ii where recipeID = @id and ri.ingredientID = ii.ingredientID;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -130,9 +139,10 @@ namespace RecipePlannerLibrary.Database
         /// <summary>
         ///     Gets the recipe steps associated with a specified recipeID.
         /// </summary>
-        ///
         /// <param name="id">The recipe id.</param>
         /// <param name="connectionString">The connection string for the table.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>List of all steps associated with a specified recipeID</returns>
         public static List<RecipeStep> getStepsForRecipe(int id, string connectionString)
         {
@@ -160,9 +170,10 @@ namespace RecipePlannerLibrary.Database
         /// <summary>
         ///     Gets the recipe tags associated with a specified recipeID.
         /// </summary>
-        ///
         /// <param name="id">The recipe id.</param>
         /// <param name="connectionString">The connection string for the table.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>List of all tags associated with a specified recipeID</returns>
         public static List<string> getTagsForRecipe(int id, string connectionString)
         {

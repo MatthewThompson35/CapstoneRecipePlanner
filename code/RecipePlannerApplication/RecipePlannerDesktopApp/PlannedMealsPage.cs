@@ -1,4 +1,4 @@
-﻿using RecipePlannerLibrary;
+using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using System;
@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// THe class for the planned meals page
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class PlannedMealsPage : Form
     {
         private RecipeDetailsPage detailsPage;
@@ -22,6 +26,21 @@ namespace RecipePlannerDesktopApplication
         private bool isNextWeekDisplayed;
 
         private Recipe readInRecipe;
+
+        /// <summary>
+        /// Gets or sets the day value.
+        /// </summary>
+        /// <value>
+        /// The day value.
+        /// </value>
+        public string DayValue { get; set; }
+        /// <summary>
+        /// Gets or sets the meal type value.
+        /// </summary>
+        /// <value>
+        /// The meal type value.
+        /// </value>
+        public string MealTypeValue { get; set; }
 
         /// <summary>
         ///     Initializes a PlannedMealsPage object.

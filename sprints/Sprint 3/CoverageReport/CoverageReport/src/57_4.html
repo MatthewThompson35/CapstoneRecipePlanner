@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Database\PlannedMealDal.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using MySql.Data.MySqlClient;
+
+namespace RecipePlannerLibrary.Database
+{
+    /// &lt;summary&gt;
+    ///     The PlannedMealDal class for database incorporation and modification.
+    /// &lt;/summary&gt;
+    public class PlannedMealDal
+    {
+        #region Methods
+        /// &lt;summary&gt;
+        ///     Adds a planned meal to the database.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string&lt;/param&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;the recipe id.&lt;/param&gt;
+        /// &lt;param name=&quot;day&quot;&gt;the day&lt;/param&gt;
+        /// &lt;param name=&quot;type&quot;&gt;the meal type&lt;/param&gt;
+        /// &lt;param name=&quot;date&quot;&gt;the date for the meal to be added.&lt;/param&gt;
+        public static void addPlannedMeal(string connectionString, int recipeId, string day, string type, DateTime date)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Insert into planned_recipe values (@recipeId, @day, @type, @date)&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@recipeId&quot;, MySqlDbType.Int32).Value = recipeId;
+            command.Parameters.Add(&quot;@day&quot;, MySqlDbType.VarChar).Value = day;
+            command.Parameters.Add(&quot;@type&quot;, MySqlDbType.VarChar).Value = type;
+            command.Parameters.Add(&quot;@date&quot;, MySqlDbType.Date).Value = date;
+            using var reader = command.ExecuteReader();
+
+            connection.Close();
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets all this week&#39;s meals based on the specified connection string provided to connect to the database.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string&lt;/param&gt;
+        /// &lt;returns&gt;all of this week&#39;s meals from the database.&lt;/returns&gt;
+        public static Dictionary&lt;(string, string), int&gt; getThisWeeksMeals(string connectionString)
+        {
+            var thisWeeksMeals = new Dictionary&lt;(string, string), int&gt;();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;SELECT *
+            FROM planned_recipe
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(NOW());&quot;;
+            using var command = new MySqlCommand(query, connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeId = reader.GetInt32(0);
+                var day = reader.GetString(1);
+                var type = reader.GetString(2);
+                thisWeeksMeals.Add((day, type), recipeId);
+            }
+
+            return thisWeeksMeals;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets next week&#39;s meals based on the specified connection string provided to connect to the database.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string.&lt;/param&gt;
+        /// &lt;returns&gt;all of next week&#39;s meals from the database.&lt;/returns&gt;
+        public static Dictionary&lt;(string, string), int&gt; getNextWeeksMeals(string connectionString)
+        {
+            var nextWeeksMeals = new Dictionary&lt;(string, string), int&gt;();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;SELECT *
+            FROM planned_recipe
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(DATE_ADD(NOW(), INTERVAL 1 WEEK));&quot;;
+            using var command = new MySqlCommand(query, connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeId = reader.GetInt32(0);
+                var day = reader.GetString(1);
+                var type = reader.GetString(2);
+                nextWeeksMeals.Add((day, type), recipeId);
+            }
+
+            return nextWeeksMeals;
+        }
+
+        /// &lt;summary&gt;
+        ///     Removes a meal from this week based on the specified connection string, id, day, meal type, and date of the meal.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string&lt;/param&gt;
+        /// &lt;param name=&quot;id&quot;&gt;the recipe id&lt;/param&gt;
+        /// &lt;param name=&quot;day&quot;&gt;the day&lt;/param&gt;
+        /// &lt;param name=&quot;type&quot;&gt;the meal type&lt;/param&gt;
+        /// &lt;param name=&quot;date&quot;&gt;the date of the meal&lt;/param&gt;
+        public static void RemoveThisWeekMeal(string connectionString, int id, string day, string type, DateTime date)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query =
+                @&quot;DELETE FROM planned_recipe WHERE recipeID = @id and dayOfTheWeek = @day and mealType = @type and dateUsed = @date;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            command.Parameters.Add(&quot;@day&quot;, MySqlDbType.VarChar).Value = day;
+            command.Parameters.Add(&quot;@type&quot;, MySqlDbType.VarChar).Value = type;
+            command.Parameters.Add(&quot;@date&quot;, MySqlDbType.Date).Value = date;
+            using var reader = command.ExecuteReader();
+        }
+
+        /// &lt;summary&gt;
+        ///     Determines whether an item in the database exists from the planned_recipe schema.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string.&lt;/param&gt;
+        /// &lt;param name=&quot;type&quot;&gt;the meal type&lt;/param&gt;
+        /// &lt;param name=&quot;date&quot;&gt;the date of the meal&lt;/param&gt;
+        /// &lt;returns&gt;true if an item exists, otherwise false.&lt;/returns&gt;
+        public static bool exists(string connectionString, string type, DateTime date)
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                var command =
+                    new MySqlCommand(
+                        &quot;SELECT COUNT(*) &gt; 0 FROM planned_recipe WHERE dateUsed = @date AND mealType = @type&quot;,
+                        connection);
+                command.Parameters.AddWithValue(&quot;@date&quot;, date);
+                command.Parameters.AddWithValue(&quot;@type&quot;, type);
+
+                var result = (long) command.ExecuteScalar();
+                var exists = result &gt; 0;
+
+                connection.Close();
+
+                return exists;
+            }
+        }
+
+        /// &lt;summary&gt;
+        ///     Updates a meal from this week based on the specified connection string, day, meal type, and date.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string.&lt;/param&gt;
+        /// &lt;param name=&quot;day&quot;&gt;the day&lt;/param&gt;
+        /// &lt;param name=&quot;type&quot;&gt;the meal type&lt;/param&gt;
+        /// &lt;param name=&quot;date&quot;&gt;the date of the meal&lt;/param&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;the recipe id.&lt;/param&gt;
+        public static void UpdateThisWeeksMeal(string connectionString, string day, string type, DateTime date,
+            int recipeId)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query =
+                @&quot;Update planned_recipe set recipeID = @id WHERE dayOfTheWeek = @day and mealType = @type and dateUsed = @date;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = recipeId;
+            command.Parameters.Add(&quot;@day&quot;, MySqlDbType.VarChar).Value = day;
+            command.Parameters.Add(&quot;@type&quot;, MySqlDbType.VarChar).Value = type;
+            command.Parameters.Add(&quot;@date&quot;, MySqlDbType.Date).Value = date;
+            using var reader = command.ExecuteReader();
+        }
+
+       
+    }
+    #endregion
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[22,9,22,10,1],[23,13,23,74,1],[24,13,24,31,1],[25,13,25,94,1],[26,13,26,69,1],[27,13,27,85,1],[28,13,28,77,1],[29,13,29,79,1],[30,13,30,76,1],[31,13,31,56,1],[33,13,33,32,1],[34,9,34,10,1],[42,9,42,10,1],[43,13,43,74,1],[44,13,44,74,1],[45,13,45,31,1],[46,13,48,58,1],[49,13,49,69,1],[50,13,50,56,1],[51,13,51,34,1],[52,13,52,14,1],[53,17,53,51,1],[54,17,54,47,1],[55,17,55,48,1],[56,17,56,59,1],[57,13,57,14,1],[59,13,59,35,1],[60,9,60,10,1],[68,9,68,10,1],[69,13,69,74,1],[70,13,70,74,1],[71,13,71,31,1],[72,13,74,85,1],[75,13,75,69,1],[76,13,76,56,1],[77,13,77,34,1],[78,13,78,14,1],[79,17,79,51,1],[80,17,80,47,1],[81,17,81,48,1],[82,17,82,59,1],[83,13,83,14,1],[85,13,85,35,1],[86,9,86,10,1],[97,9,97,10,1],[98,13,98,74,1],[99,13,99,31,1],[100,13,101,135,1],[102,13,102,69,1],[103,13,103,73,1],[104,13,104,77,1],[105,13,105,79,1],[106,13,106,76,1],[107,13,107,56,1],[108,9,108,10,1],[118,9,118,10,1],[119,20,119,74,1],[120,13,120,14,1],[121,17,121,35,1],[123,17,126,37,1],[127,17,127,64,1],[128,17,128,64,1],[130,17,130,61,1],[131,17,131,41,1],[133,17,133,36,1],[135,17,135,31,1],[137,9,137,10,1],[149,9,149,10,1],[150,13,150,74,1],[151,13,151,31,1],[152,13,153,130,1],[154,13,154,69,1],[155,13,155,79,1],[156,13,156,77,1],[157,13,157,79,1],[158,13,158,76,1],[159,13,159,56,1],[160,9,160,10,1]]);
+    </script>
+  </body>
+</html>

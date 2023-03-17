@@ -45,6 +45,8 @@ namespace RecipePlannerLibrary.Models
         /// <param name="recipeId">The recipe id of the recipe.</param>
         /// <param name="name">The name of the recipe.</param>
         /// <param name="description">The description of the recipe.</param>
+        /// <precondition> none </precondition>
+        /// <postcondition> this.RecipeId = recipeId && this.Name = name && this.Description = description</postcondition>
         public Recipe(int recipeId, string name, string description)
         {
             this.RecipeId = recipeId;
@@ -60,6 +62,8 @@ namespace RecipePlannerLibrary.Models
         /// </summary>
         /// <param name="recipeId">The recipe id of the recipe.</param>
         /// <param name="name">The name of the recipe.</param>
+        /// <precondition> none </precondition>
+        /// <postcondition> this.RecipeId = recipeId && this.Name = name </postcondition>
         public Recipe(int recipeId, string name) 
         {
             this.RecipeId = recipeId;
