@@ -2,122 +2,897 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>C:\Users\matth\Desktop\capstone\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\AddIngredientsPage.cs</title>
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Controllers\HomeController.cs</title>
     <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
   </head>
   <body>
     <pre id="content" class="source-code">
-using MySql.Data.MySqlClient;
+using System.Diagnostics;
+using System.Drawing.Printing;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
+using RecipePlannerWebApplication.Models;
 
-namespace RecipePlannerDesktopApplication
+namespace RecipePlannerWebApplication.Controllers;
+
+public class HomeController : Controller
 {
-    /// &lt;summary&gt;
-    /// Add ingredients page partial class.
-    /// &lt;/summary&gt;
-    public partial class AddIngredientsPage : Form
+    #region Data members
+
+    private readonly ILogger&lt;HomeController&gt; _logger;
+
+    #endregion
+
+    #region Constructors
+
+    public HomeController(ILogger&lt;HomeController&gt; logger)
     {
-        private IngredientsPage ingredientsPage;
+        this._logger = logger;
+    }
 
-        /// &lt;summary&gt;
-        /// Initializes the AddIngreedients page with the corresponding ingredients page.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;ingredientsPage&quot;&gt;&lt;/param&gt;
-        public AddIngredientsPage(IngredientsPage ingredientsPage)
+    #endregion
+
+    #region Methods
+
+    /// &lt;summary&gt;
+    ///     Takes the User to the login page
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The Login Page&lt;/returns&gt;
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    /// &lt;summary&gt;
+    ///     Checks the login and goes to recipe page on successful login. Prompts for retry on failed login
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;ad&quot;&gt;The Login object containing user credentials&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;
+    ///     The Recipe Page view on successful login, Login Page view with error message on failed login or connection
+    ///     error
+    /// &lt;/returns&gt;
+    [HttpPost]
+    public IActionResult Index([Bind] Login ad)
+    {
+        try
         {
-            InitializeComponent();
-            this.ingredientsPage = ingredientsPage;
+            var res = Database.LoginCheck(ad);
+            if (res == 1)
+            {
+                ActiveUser.username = ad.Username;
+                this.setupForRecipePage();
+                return View(&quot;RecipePage&quot;);
+            }
+
+            ad.ErrorMessage = &quot;Incorrect username or password&quot;;
+            return View(ad);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+            return View(&quot;Index&quot;);
+        }
+    }
+
+    private void setupForRecipePage(int? page = 1)
+    {
+        try
+        {
+            List&lt;Recipe&gt; recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 10;
+            var currentPage = page ?? 1;
+
+            ViewBag.currentPage = currentPage;
+            ViewBag.AvailableRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize); ;
+            List&lt;Recipe&gt; availableRecipes = ViewBag.AvailableRecipes;
+            List&lt;Recipe&gt; allRecipes = ViewBag.AllRecipes;
+            var currentAllPage = 1;
+
+            var AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            var AllRecipesOnPage = allRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.CurrentSelectedRadio = &quot;available&quot;;
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+    }
+
+    /// &lt;summary&gt;
+    ///     Adds to the available recipes if the user can make that recipe.
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;If there are available recipes in the database, ViewBag.AvailableRecipes.Count = the amount of recipes available&lt;/postcondition&gt;
+    /// &lt;param name=&quot;recipes&quot;&gt;The recipes.&lt;/param&gt;
+    private void addToAvailableRecipes(List&lt;Recipe&gt; recipes)
+    {
+        try
+        {
+            ViewBag.AvailableRecipes = new List&lt;Recipe&gt;();
+            ViewBag.AllRecipes = recipes;
+            foreach (var recipe in ViewBag.AllRecipes)
+            {
+                var add = true;
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                foreach (RecipeIngredient ingredient in recipe.Ingredients)
+                {
+                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                    if (ing != null &amp;&amp; ing.Count &gt; 0)
+                    {
+                        if (ing[0].quantity &lt; ingredient.Quantity)
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                    }
+                }
+
+                if (add)
+                {
+                    ViewBag.AvailableRecipes.Add(recipe);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+    }
+
+    /// &lt;summary&gt;
+    ///     Compares the name of the recipes so that it can be sorted alphabetically.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;recipe1&quot;&gt;The recipe1.&lt;/param&gt;
+    /// &lt;param name=&quot;recipe2&quot;&gt;The recipe2.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt; 0 or 1 based on which recipe name comes first&lt;/returns&gt;
+    private int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
+    {
+        return recipe1.Name.CompareTo(recipe2.Name);
+    }
+
+    /// &lt;summary&gt;
+    ///     Decrements the quantity of a given ingredient by its id.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient to decrement quantity for.&lt;/param&gt;
+    /// &lt;param name=&quot;page&quot;&gt; The current page of the ingredient&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;Ingredient quantity is decremented in the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The view of the ingredients page.&lt;/returns&gt;
+    public ActionResult decrementQuantity(string id, int page)
+    {
+        try
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = int.Parse(id);
+
+            quantity = this.getItemQuantity(ingredientID);
+            IngredientDAL.decrementQuantity(ingredientID, quantity);
+            this.setupIngredientsPage(page);
+            return View(&quot;IngredientsPage&quot;);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
+        return View(&quot;Index&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Gets the quantity of the ingredient with the given id.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;id&quot;&gt;The ingredient id.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The quantity of the ingredient&lt;/returns&gt;
+    private int getItemQuantity(int id)
+    {
+        var quantity = 0;
+        foreach (var item in ViewBag.ingredients)
         {
-            string name = this.ingredientNameTextBox.Text;
-            string quantityString = this.quantityTextBox.Text;
-            string measure = this.measurementComboBox.Text;
-            int number = 0;
-
-            this.submitCheck(name, quantityString, measure, number);
-
+            if (item.id == id)
+            {
+                quantity = item.quantity;
+            }
         }
 
-        private void submitCheck(string name, string quantityString, string measure, int number)
+        return quantity;
+    }
+
+    /// &lt;summary&gt;
+    ///     Increments the quantity of the ingredient with the given id.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient to decrement quantity for.&lt;/param&gt;
+    /// &lt;param name=&quot;page&quot;&gt; The current page of the ingredient&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;Quantity will be incremented in the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The ingredients page or login on server connection error&lt;/returns&gt;
+    public ActionResult incrementQuantity(string id, int page)
+    {
+        try
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = int.Parse(id);
+
+            quantity = this.getItemQuantity(ingredientID);
+            IngredientDAL.incrementQuantity(ingredientID, quantity);
+            this.setupIngredientsPage(page);
+            return View(&quot;IngredientsPage&quot;);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+
+        return View(&quot;Index&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Removes the ingredient from the list.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient to decrement quantity for.&lt;/param&gt;
+    /// &lt;param name=&quot;page&quot;&gt; The current page of the ingredient&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;Ingredient will be removed from the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The ingredients page or login on server connection error.&lt;/returns&gt;
+    public ActionResult removeIngredient(string id, int page)
+    {
+        try
+        {
+            IngredientDAL.RemoveIngredient(int.Parse(id));
+            this.setupIngredientsPage(page);
+            return View(&quot;IngredientsPage&quot;);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+
+        return View(&quot;Index&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Adds the ingredient to the the database and is then displayed to the user.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;txtIngredientName&quot;&gt;The name of the ingredient.&lt;/param&gt;
+    /// &lt;param name=&quot;txtQuantity&quot;&gt;The quantity of the ingredient.&lt;/param&gt;
+    /// &lt;param name=&quot;measurement&quot;&gt;The measurement unit of the ingredient.&lt;/param&gt;
+    /// &lt;precondition&gt;parameters must not be null, ingredient must not be in database.&lt;/precondition&gt;
+    /// &lt;postcondition&gt;Ingredient is added to the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The ingredients page or login on server connection error.&lt;/returns&gt;
+    [HttpPost]
+    public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
+    {
+        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+        ViewBag.Measurements = measurements;
+        var regex = new Regex(&quot;^[0-9]+$&quot;);
+        try
+        {
+            if (txtIngredientName == null || txtQuantity == null || txtIngredientName == &quot;&quot; || txtQuantity == &quot;&quot;)
+            {
+                ViewBag.Error = &quot;Please enter values.&quot;;
+                return View(&quot;AddIngredient&quot;, ViewBag.Measurements);
+            }
+
+            if (IngredientDAL.getIngredients(txtIngredientName).Count() &gt; 0)
+            {
+                ViewBag.Error = &quot;Ingredient is already entered.&quot;;
+                return View(&quot;AddIngredient&quot;, ViewBag.Measurements);
+            }
+
+            if (!regex.Match(txtQuantity).Success)
+            {
+                ViewBag.Error = &quot;Quantity must be an integer.&quot;;
+                return View(&quot;AddIngredient&quot;, ViewBag.Measurements);
+            }
+
+            IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
+                Connection.ConnectionString);
+            var totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count / 5);
+            this.setupIngredientsPage(totalPages);
+            return View(&quot;IngredientsPage&quot;);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+
+        return View(&quot;Index&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Goes to ingredients page with specified page number.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;page&quot;&gt;The page number to navigate to.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;Returns the ingredients page with the specified page of ingredients.&lt;/returns&gt;
+    public ActionResult goToIngredientsPage(int? page)
+    {
+        try
+        {
+            this.setupIngredientsPage(page);
+            return View(&quot;IngredientsPage&quot;);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+            return View(&quot;Index&quot;);
+        }
+    }
+
+    private void setupIngredientsPage(int? page)
+    {
+        const int pageSize = 5; // Change this to the desired page size
+        var currentPage = page ?? 1;
+        List&lt;Ingredient&gt; allIngredients = IngredientDAL.getIngredients();
+        var totalIngredients = allIngredients.Count;
+        var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+
+        var ingredientsOnPage = allIngredients
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        ViewBag.currentPage = currentPage;
+        ViewBag.totalPages = totalPages;
+        ViewBag.ingredientsOnPage = ingredientsOnPage;
+    }
+
+    /// &lt;summary&gt;
+    ///     Goes to RecipesPage that displays the available recipes by default with the specified page number
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;page&quot;&gt;The page number to navigate to.&lt;/param&gt;
+    /// &lt;precondition&gt;ViewBag.AvailableRecipes != null &lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The recipes page with the specified page or login on server connection error&lt;/returns&gt;
+    public ActionResult goToRecipePage(int? page)
+    {
+        try
+        {
+            this.setupForRecipePage(page);
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+                return View(&quot;Index&quot;);
+            }
+
+            return View(&quot;RecipePage&quot;, ViewBag.AvailableRecipes);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+
+        return View(&quot;Index&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Goes to RecipesPage that displays all recipes by default with the specified page number
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;ViewBag.AvailableRecipes != null&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The recipes page with the specified page or login on server connection error&lt;/returns&gt;
+    public ActionResult goToRecipePageAll(int? page)
+    {
+        try
+        {
+            this.setupForRecipePageAll(page);
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+                return View(&quot;Index&quot;);
+            }
+
+            return View(&quot;RecipePage&quot;, ViewBag.AvailableRecipes);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+
+        return View(&quot;Index&quot;);
+    }
+
+    private void setupForRecipePageAll(int? page)
+    {
+        try
+        {
+            List&lt;Recipe&gt; recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            var currentPage = 1;
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 10;
+            var currentAllPage = page ?? 1;
+
+            ViewBag.currentAllPage = currentAllPage;
+            ViewBag.AvailableRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
+            List&lt;Recipe&gt; availableRecipes = ViewBag.AvailableRecipes;
+            List&lt;Recipe&gt; allRecipes = ViewBag.AllRecipes;
+
+            var AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            var AllRecipesOnPage = allRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.CurrentSelectedRadio = &quot;all&quot;;
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+    }
+
+    /// &lt;summary&gt;
+    ///     Adds the planned meal to the database.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;recipeId&quot;&gt;The id for the recipe.&lt;/param&gt;
+    /// &lt;param name=&quot;week&quot;&gt;The week of the meal.&lt;/param&gt;
+    /// &lt;param name=&quot;day&quot;&gt;The day of the meal.&lt;/param&gt;
+    /// &lt;param name=&quot;type&quot;&gt;The meal type&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;Meal is added to the specified slot in the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The Recipe Page Defaulted to page one&lt;/returns&gt;
+    public ActionResult addPlannedMeal(int recipeId, string week, string day, string type)
+    {
+        var recipeID = recipeId;
+        var Week = week;
+        var Day = day;
+        var Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals(&quot;This Week&quot;))
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, &quot;this&quot;);
+        }
+        else
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, &quot;next&quot;);
+        }
+
+        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+        {
+            ViewBag.day = day;
+            ViewBag.type = type;
+            ViewBag.date = date;
+            ViewBag.recipeId = recipeId;
+            return View(&quot;OverwriteConformation&quot;);
+        }
+
+        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+        this.setupForRecipePage();
+        if (ViewBag.day == null)
+        {
+            ViewBag.day = &quot;Monday&quot;;
+        }
+
+        if (ViewBag.type == null)
+        {
+            ViewBag.type = &quot;Breakfast&quot;;
+        }
+
+        if (ViewBag.week == null)
+        {
+            ViewBag.week = &quot;This Week&quot;;
+        }
+
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+            return View(&quot;Index&quot;);
+        }
+
+        return View(&quot;RecipePage&quot;, ViewBag.AvailableRecipes);
+    }
+
+    /// &lt;summary&gt;
+    ///     Overwrites the recipe for the specified day and meal type.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;day&quot;&gt;The day of the week.&lt;/param&gt;
+    /// &lt;param name=&quot;type&quot;&gt;The type of meal (e.g. breakfast, lunch, dinner).&lt;/param&gt;
+    /// &lt;param name=&quot;date&quot;&gt;The date of the meal.&lt;/param&gt;
+    /// &lt;param name=&quot;recipeId&quot;&gt;The ID of the recipe to use.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;Meal at specified time is overwritten in the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The recipes page or login on server connection error.&lt;/returns&gt;
+    public ActionResult overwriteAddedMeal(string day, string type, string date, int recipeId)
+    {
+        var Date = DateTime.Parse(date);
+        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, day, type, Date, recipeId);
+        return this.goToRecipePage(1);
+    }
+
+    /// &lt;summary&gt;
+    ///     Updates the planned meal for a given recipe on a specific week day.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;recipeId&quot;&gt;The ID of the recipe to update.&lt;/param&gt;
+    /// &lt;param name=&quot;week&quot;&gt;The week to update the planned meal for.&lt;/param&gt;
+    /// &lt;param name=&quot;day&quot;&gt;The day of the week to update the planned meal for.&lt;/param&gt;
+    /// &lt;param name=&quot;type&quot;&gt;The type of meal to update (e.g. breakfast, lunch, dinner).&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;The meal is updated in the database to match the correct values&lt;/postcondition&gt;
+    /// &lt;returns&gt;The updated recipes page or login on server connection error.&lt;/returns&gt;
+    public ActionResult UpdateThisWeeksMeal(int recipeId, string week, string day, string type)
+    {
+        var recipeID = recipeId;
+        var Week = week;
+        var Day = day;
+        var Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals(&quot;This Week&quot;))
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, &quot;this&quot;);
+        }
+        else
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, &quot;next&quot;);
+        }
+
+        PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, Day, Type, date, recipeID);
+        this.setupForRecipePage();
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+            return View(&quot;Index&quot;);
+        }
+
+        return View(&quot;RecipePage&quot;, ViewBag.AvailableRecipes);
+    }
+
+
+    /// &lt;summary&gt;
+    ///     Goes to add ingredients page.
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The add ingredients page or login on server connection&lt;/returns&gt;
+    public ActionResult goToAddIngredientsPage()
+    {
+        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+        ViewBag.Measurements = measurements;
+        return View(&quot;AddIngredient&quot;, ViewBag.Measurements);
+    }
+
+    /// &lt;summary&gt;
+    ///     Toggles the week for Planned Meals page.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;currentWeek&quot;&gt;The current week. (This week or next week)&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The planned meals page based on which week is given&lt;/returns&gt;
+    public ActionResult ToggleWeek(string currentWeek)
+    {
+        if (currentWeek.Equals(&quot;Next Week&quot;))
+        {
+            this.goToPlannedMealsPage();
+        }
+        else
+        {
+            this.goToPlannedMealsPageNextWeek();
+        }
+
+        return View(&quot;PlannedMealsPage&quot;);
+    }
+
+    /// &lt;summary&gt;
+    /// Gets the name of the recipe at the specified planned meal slot.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;day&quot;&gt;The day.&lt;/param&gt;
+    /// &lt;param name=&quot;mealType&quot;&gt;Type of the meal.&lt;/param&gt;
+    /// &lt;param name=&quot;week&quot;&gt;The week.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;The planned meal slot will be updated with the recipe name&lt;/postcondition&gt;
+    /// &lt;returns&gt;The recipeName and RecipeId as a json Result&lt;/returns&gt;
+    public JsonResult GetRecipeName(string day, string mealType, string week)
+    {
+        try
+        {
+            var ThisWeeksMeals = new Dictionary&lt;(string, string), int&gt;();
+            if (week.Equals(&quot;Next Week&quot;))
+            {
+                ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
+            }
+            else
+            {
+                ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            }
+
+            var recipeId = ThisWeeksMeals[(day, mealType)];
+            var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            var recipeName = &quot;&quot;;
+            foreach (var recipe in allRecipes)
+            {
+                if (recipe.RecipeId == recipeId)
+                {
+                    recipeName = recipe.Name;
+                }
+            }
+
+            ViewBag.Header = &quot;This weeks meals&quot;;
+            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
+        }
+        catch (Exception ex)
+        {
+            var recipeId = &quot;You have not yet added a meal for this time&quot;;
+            return Json(new { RecipeId = recipeId, RecipeName = &quot;You Have not yet added a meal for this time&quot; });
+        }
+    }
+
+
+    /// &lt;summary&gt;
+    /// Removes the meal at the specified planned meal slot.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;day&quot;&gt;The day.&lt;/param&gt;
+    /// &lt;param name=&quot;mealType&quot;&gt;Type of the meal.&lt;/param&gt;
+    /// &lt;param name=&quot;week&quot;&gt;The week.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;The planned meal is removed from the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;Returns a Json Result that gives the string that is updated in place of the removed recipe&lt;/returns&gt;
+    public JsonResult RemoveThisWeeksMeal(string day, string mealType, string week)
+    {
+        try
+        {
+            var ThisWeeksMeals = new Dictionary&lt;(string, string), int&gt;();
+            if (week.Equals(&quot;Next Week&quot;))
+            {
+                ThisWeeksMeals = PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString);
+            }
+            else
+            {
+                ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            }
+
+            var recipeId = ThisWeeksMeals[(day, mealType)];
+            DayOfWeek dayOfWeek;
+            Enum.TryParse(day, out dayOfWeek);
+            DateTime date;
+            if (week.Equals(&quot;Next Week&quot;))
+            {
+                date = Util.GetDateOfWeekDay(dayOfWeek, &quot;next&quot;);
+            }
+            else
+            {
+                date = Util.GetDateOfWeekDay(dayOfWeek, &quot;this&quot;);
+            }
+
+            PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
+
+            ViewBag.Header = &quot;This weeks meals&quot;;
+            return Json(new { RecipeId = recipeId, RecipeName = &quot;You Have not yet added a meal for this time&quot; });
+        }
+        catch (Exception ex)
         {
             try
             {
-                if (isTextEmpty(name, quantityString, measure))
+                var ThisWeeksMeals = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+                var recipeId = ThisWeeksMeals[(day, mealType)];
+                var allRecipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+                var recipeName = &quot;&quot;;
+                foreach (var recipe in allRecipes)
                 {
-                    this.errorTextLabel.Visible = true;
+                    if (recipe.RecipeId == recipeId)
+                    {
+                        recipeName = recipe.Name;
+                    }
                 }
-                else if (!int.TryParse(quantityString, out number))
-                {
-                    this.errorQuantityTextLabel.Visible = true;
-                }
-                else if (IngredientDAL.getIngredients(name).Count &gt; 0)
-                {
-                    this.errorTextLabel.Text = @&quot;This ingredient &quot; + &quot;&#39;&quot; + name + &quot;&#39;&quot; + @&quot; already exists.&quot;;
-                    this.errorTextLabel.Visible = true;
-                    this.errorQuantityTextLabel.Visible = false;
-                }
-                else
-                {
-                    int quantity = Convert.ToInt32(quantityString);
 
-                    Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity, 0, measure);
-
-                    this.addIngredient(ingredient);
-
-                    this.Close();
-                    this.ingredientsPage.Show();
-                }
+                return Json(new { RecipeName = recipeName });
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
-                this.errorTextLabel.Text = &quot;The connection to the server could not be made&quot;;
-                this.errorTextLabel.Visible = true;
+                return Json(new { RecipeName = &quot;You Have not yet added a meal for this time&quot; });
             }
-            
-        }
-
-        private static bool isTextEmpty(string name, string quantityString, string measure)
-        {
-            return name == null || name.Equals(&quot;&quot;) || quantityString == null || quantityString.Equals(&quot;&quot;) || measure.Equals(&quot;&quot;);
-        }
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            this.ingredientsPage.Show();
-        }
-
-        private void addIngredient(Ingredient ingredient)
-        {
-            using (MySqlConnection sqlConn = new MySqlConnection(Connection.ConnectionString))
-            {
-                sqlConn.Open();
-
-                string query = &quot;insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID, @Measurement)&quot;;
-                using var command = new MySqlCommand(query, sqlConn);
-
-                command.Parameters.AddWithValue(&quot;@username&quot;, ingredient.username);
-                command.Parameters.AddWithValue(&quot;@ingredientID&quot;, ingredient.id);
-                command.Parameters.AddWithValue(&quot;@ingredientName&quot;, ingredient.name);
-                command.Parameters.AddWithValue(&quot;@quantity&quot;, ingredient.quantity);
-                command.Parameters.AddWithValue(&quot;@Measurement&quot;, ingredient.measurement);
-
-                command.ExecuteNonQuery();
-            }
-
-            this.ingredientsPage.UpdateIngredientsGridView();
         }
     }
-}
 
+    /// &lt;summary&gt;
+    ///     Goes to add ingredients page.
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The add ingredients page or login on server connection&lt;/returns&gt;
+    public ActionResult goToPlannedMealsPage()
+    {
+        ViewBag.CurrentWeek = &quot;This Week&quot;;
+        List&lt;Recipe&gt; recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        foreach (var recipe in recipes)
+        {
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+        }
+
+        ViewBag.AllRecipes = recipes;
+        var breakfast = new List&lt;string&gt;();
+        var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+        var daysOfWeek = new List&lt;string&gt;
+            {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;};
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, &quot;Breakfast&quot;, &quot;This Week&quot;);
+            var recipeName = (string)json.Value.GetType().GetProperty(&quot;RecipeName&quot;).GetValue(json.Value);
+            breakfast.Add(recipeName);
+        }
+
+        ViewBag.DefaultValues = breakfast;
+        ViewBag.Header = &quot;This weeks meals&quot;;
+        ViewBag.CurrentWeek = &quot;This Week&quot;;
+        return View(&quot;PlannedMealsPage&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Goes to add ingredients page.
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The add ingredients page or login on server connection&lt;/returns&gt;
+    public ActionResult goToPlannedMealsPageNextWeek()
+    {
+        ViewBag.CurrentWeek = &quot;Next Week&quot;;
+        List&lt;Recipe&gt; recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        foreach (var recipe in recipes)
+        {
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+        }
+
+        ViewBag.AllRecipes = recipes;
+        var breakfast = new List&lt;string&gt;();
+        var daysOfWeek = new List&lt;string&gt;
+            {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;};
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, &quot;Breakfast&quot;, &quot;Next Week&quot;);
+            var recipeName = (string)json.Value.GetType().GetProperty(&quot;RecipeName&quot;).GetValue(json.Value);
+            breakfast.Add(recipeName);
+        }
+
+        ViewBag.DefaultValues = breakfast;
+        ViewBag.Header = &quot;Next weeks meals&quot;;
+        ViewBag.CurrentWeek = &quot;Next Week&quot;;
+        return View(&quot;PlannedMealsPage&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///    Creates the user.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+    /// &lt;param name=&quot;password&quot;&gt;The password.&lt;/param&gt;
+    /// &lt;param name=&quot;repeatPassword&quot;&gt;The repeat password.&lt;/param&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;The user is added to the database&lt;/postcondition&gt;
+    /// &lt;returns&gt;The login page or register is user was not added or login on server connection error&lt;/returns&gt;
+    [HttpPost]
+    public ActionResult CreateUser(string username, string password, string repeatPassword)
+    {
+        try
+        {
+            List&lt;string&gt; list = Database.ContainsUser(username);
+            if (list.Count() &gt; 0)
+            {
+                ViewBag.Error = &quot;Username already exists. Please choose another and try again.&quot;;
+                return View(&quot;Register&quot;);
+            }
+
+            if (password.Equals(repeatPassword))
+            {
+                Database.CreateUser(username, password);
+                return View(&quot;Index&quot;);
+            }
+
+            ViewBag.Error = &quot;Passwords do not match. Please try again.&quot;;
+            return View(&quot;Register&quot;);
+        }
+        catch (Exception ex)
+        {
+            TempData[&quot;msg&quot;] = &quot;The connection to the server could not be made&quot;;
+        }
+
+        return View(&quot;Register&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Opens the register page.
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt;The register page&lt;/returns&gt;
+    [HttpPost]
+    public ActionResult OpenRegister()
+    {
+        return View(&quot;Register&quot;);
+    }
+
+    /// &lt;summary&gt;
+    ///     Errors this instance.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;The view&lt;/returns&gt;
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    /// &lt;summary&gt;
+    ///     Logs out of this instance.
+    /// &lt;/summary&gt;
+    /// &lt;precondition&gt;none&lt;/precondition&gt;
+    /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+    /// &lt;returns&gt; The login page&lt;/returns&gt;
+    [HttpPost]
+    public IActionResult Logout()
+    {
+        return View(&quot;Index&quot;);
+    }
+
+    #endregion
+}
     </pre>
     <script type="text/javascript">
-      highlightRanges([[19,9,19,67,0],[20,9,20,10,0],[21,13,21,35,0],[22,13,22,52,0],[23,9,23,10,0],[26,9,26,10,0],[27,13,27,59,0],[28,13,28,63,0],[29,13,29,60,0],[30,13,30,28,0],[32,13,32,69,0],[34,9,34,10,0],[37,9,37,10,0],[39,13,39,14,0],[40,17,40,64,0],[41,17,41,18,0],[42,21,42,56,0],[43,17,43,18,0],[44,22,44,68,0],[45,17,45,18,0],[46,21,46,64,0],[47,17,47,18,0],[48,22,48,71,0],[49,17,49,18,0],[50,21,50,109,0],[51,21,51,56,0],[52,21,52,65,0],[53,17,53,18,0],[55,17,55,18,0],[56,21,56,68,0],[58,21,58,109,0],[60,21,60,52,0],[62,21,62,34,0],[63,21,63,49,0],[64,17,64,18,0],[65,13,65,14,0],[66,13,66,33,0],[67,13,67,14,0],[68,17,68,93,0],[69,17,69,52,0],[70,13,70,14,0],[72,9,72,10,0],[75,9,75,10,0],[76,13,76,129,0],[77,9,77,10,0],[80,9,80,10,0],[81,13,81,26,0],[82,13,82,41,0],[83,9,83,10,0],[86,9,86,10,0],[87,20,87,94,0],[88,13,88,14,0],[89,17,89,32,0],[91,17,91,132,0],[92,17,92,70,0],[94,17,94,83,0],[95,17,95,81,0],[96,17,96,85,0],[97,17,97,83,0],[98,17,98,89,0],[100,17,100,43,0],[101,13,101,14,0],[103,13,103,62,0],[104,9,104,10,0]]);
+      highlightRanges([[22,5,22,58,0],[23,5,23,6,0],[24,9,24,31,0],[25,5,25,6,0],[38,5,38,6,0],[39,9,39,23,0],[40,5,40,6,0],[54,5,54,6,0],[56,9,56,10,0],[57,13,57,47,0],[58,13,58,26,0],[59,13,59,14,0],[60,17,60,51,0],[61,17,61,43,0],[62,17,62,43,0],[65,13,65,64,0],[66,13,66,29,0],[68,9,68,29,0],[69,9,69,10,0],[70,13,70,80,0],[71,13,71,34,0],[73,5,73,6,0],[76,5,76,6,0],[78,9,78,10,0],[79,13,79,86,0],[81,13,81,20,0],[81,22,81,32,0],[81,33,81,35,0],[81,36,81,43,0],[82,13,82,14,0],[83,17,83,118,0],[84,17,84,106,0],[85,17,85,104,0],[86,13,86,14,0],[88,13,88,49,0],[90,13,90,41,0],[92,13,92,47,0],[93,13,93,90,0],[94,13,94,84,0],[95,13,95,72,0],[96,13,96,99,0],[97,13,97,63,0],[98,13,98,86,0],[98,87,98,88,0],[99,13,99,70,0],[100,13,100,58,0],[101,13,101,36,0],[103,13,106,27,0],[108,13,108,69,0],[110,13,113,27,0],[115,13,115,57,0],[116,13,116,56,0],[117,9,117,10,0],[118,9,118,29,0],[119,9,119,10,0],[120,13,120,80,0],[121,9,121,10,0],[122,5,122,6,0],[131,5,131,6,0],[133,9,133,10,0],[134,13,134,59,0],[135,13,135,42,0],[136,13,136,20,0],[136,22,136,32,0],[136,33,136,35,0],[136,36,136,54,0],[137,13,137,14,0],[138,17,138,32,0],[139,17,139,118,0],[140,17,140,24,0],[140,26,140,53,0],[140,54,140,56,0],[140,57,140,75,0],[141,17,141,18,0],[142,21,142,87,0],[143,21,143,54,0],[144,21,144,22,0],[145,25,145,67,0],[146,25,146,26,0],[147,29,147,41,0],[148,25,148,26,0],[149,21,149,22,0],[151,21,151,22,0],[152,25,152,37,0],[153,21,153,22,0],[154,17,154,18,0],[156,17,156,25,0],[157,17,157,18,0],[158,21,158,58,0],[159,17,159,18,0],[160,13,160,14,0],[161,9,161,10,0],[162,9,162,29,0],[163,9,163,10,0],[164,13,164,80,0],[165,9,165,10,0],[166,5,166,6,0],[177,5,177,6,0],[178,9,178,53,0],[179,5,179,6,0],[190,5,190,6,0],[192,9,192,10,0],[193,13,193,66,0],[194,13,194,30,0],[195,13,195,46,0],[197,13,197,59,0],[198,13,198,69,0],[199,13,199,45,0],[200,13,200,44,0],[202,9,202,29,0],[203,9,203,10,0],[204,13,204,80,0],[205,9,205,10,0],[207,9,207,30,0],[208,5,208,6,0],[218,5,218,6,0],[219,9,219,26,0],[220,9,220,16,0],[220,18,220,26,0],[220,27,220,29,0],[220,30,220,49,0],[221,9,221,10,0],[222,13,222,31,0],[223,13,223,14,0],[224,17,224,42,0],[225,13,225,14,0],[226,9,226,10,0],[228,9,228,25,0],[229,5,229,6,0],[240,5,240,6,0],[242,9,242,10,0],[243,13,243,66,0],[244,13,244,30,0],[245,13,245,46,0],[247,13,247,59,0],[248,13,248,69,0],[249,13,249,45,0],[250,13,250,44,0],[252,9,252,29,0],[253,9,253,10,0],[254,13,254,80,0],[255,9,255,10,0],[257,9,257,30,0],[258,5,258,6,0],[269,5,269,6,0],[271,9,271,10,0],[272,13,272,59,0],[273,13,273,45,0],[274,13,274,44,0],[276,9,276,29,0],[277,9,277,10,0],[278,13,278,80,0],[279,9,279,10,0],[281,9,281,30,0],[282,5,282,6,0],[295,5,295,6,0],[296,9,296,72,0],[297,9,297,45,0],[298,9,298,43,0],[300,9,300,10,0],[301,13,301,114,0],[302,13,302,14,0],[303,17,303,56,0],[304,17,304,68,0],[307,13,307,77,0],[308,13,308,14,0],[309,17,309,66,0],[310,17,310,68,0],[313,13,313,51,0],[314,13,314,14,0],[315,17,315,64,0],[316,17,316,68,0],[319,13,320,46,0],[321,13,321,98,0],[322,13,322,51,0],[323,13,323,44,0],[325,9,325,29,0],[326,9,326,10,0],[327,13,327,80,0],[328,9,328,10,0],[330,9,330,30,0],[331,5,331,6,0],[341,5,341,6,0],[343,9,343,10,0],[344,13,344,45,0],[345,13,345,44,0],[347,9,347,29,0],[348,9,348,10,0],[349,13,349,80,0],[350,13,350,34,0],[352,5,352,6,0],[355,5,355,6,0],[357,9,357,37,0],[358,9,358,74,0],[359,9,359,53,0],[360,9,360,81,0],[362,9,365,23,0],[367,9,367,43,0],[368,9,368,41,0],[369,9,369,55,0],[370,5,370,6,0],[380,5,380,6,0],[382,9,382,10,0],[383,13,383,43,0],[384,13,384,50,0],[385,13,385,14,0],[386,17,386,84,0],[387,17,387,38,0],[390,13,390,65,0],[392,9,392,29,0],[393,9,393,10,0],[394,13,394,80,0],[395,9,395,10,0],[397,9,397,30,0],[398,5,398,6,0],[407,5,407,6,0],[409,9,409,10,0],[410,13,410,46,0],[411,13,411,50,0],[412,13,412,14,0],[413,17,413,84,0],[414,17,414,38,0],[417,13,417,65,0],[419,9,419,29,0],[420,9,420,10,0],[421,13,421,80,0],[422,9,422,10,0],[424,9,424,30,0],[425,5,425,6,0],[428,5,428,6,0],[430,9,430,10,0],[431,13,431,86,0],[432,13,432,20,0],[432,22,432,32,0],[432,33,432,35,0],[432,36,432,43,0],[433,13,433,14,0],[434,17,434,118,0],[435,17,435,106,0],[436,17,436,104,0],[437,13,437,14,0],[439,13,439,33,0],[440,13,440,49,0],[442,13,442,44,0],[444,13,444,53,0],[445,13,445,90,0],[446,13,446,84,0],[447,13,447,72,0],[448,13,448,99,0],[449,13,449,63,0],[450,13,450,86,0],[451,13,451,70,0],[452,13,452,58,0],[454,13,457,27,0],[459,13,459,69,0],[461,13,464,27,0],[466,13,466,57,0],[467,13,467,50,0],[468,9,468,10,0],[469,9,469,29,0],[470,9,470,10,0],[471,13,471,80,0],[472,9,472,10,0],[473,5,473,6,0],[486,5,486,6,0],[487,9,487,33,0],[488,9,488,25,0],[489,9,489,23,0],[490,9,490,25,0],[492,9,492,43,0],[494,9,494,38,0],[495,9,495,10,0],[496,13,496,61,0],[497,9,497,10,0],[499,9,499,10,0],[500,13,500,61,0],[501,9,501,10,0],[503,9,503,76,0],[504,9,504,10,0],[505,13,505,31,0],[506,13,506,33,0],[507,13,507,33,0],[508,13,508,41,0],[509,13,509,50,0],[512,9,512,95,0],[513,9,513,35,0],[514,9,514,33,0],[515,9,515,10,0],[516,13,516,36,0],[517,9,517,10,0],[519,9,519,34,0],[520,9,520,10,0],[521,13,521,40,0],[522,9,522,10,0],[524,9,524,34,0],[525,9,525,10,0],[526,13,526,40,0],[527,9,527,10,0],[529,9,529,46,0],[530,9,530,10,0],[531,13,531,80,0],[532,13,532,34,0],[535,9,535,61,0],[536,5,536,6,0],[549,5,549,6,0],[550,9,550,41,0],[551,9,551,100,0],[552,9,552,39,0],[553,5,553,6,0],[566,5,566,6,0],[567,9,567,33,0],[568,9,568,25,0],[569,9,569,23,0],[570,9,570,25,0],[572,9,572,43,0],[574,9,574,38,0],[575,9,575,10,0],[576,13,576,61,0],[577,9,577,10,0],[579,9,579,10,0],[580,13,580,61,0],[581,9,581,10,0],[583,9,583,100,0],[584,9,584,35,0],[585,9,585,46,0],[586,9,586,10,0],[587,13,587,80,0],[588,13,588,34,0],[591,9,591,61,0],[592,5,592,6,0],[602,5,602,6,0],[603,9,603,72,0],[604,9,604,45,0],[605,9,605,60,0],[606,5,606,6,0],[616,5,616,6,0],[617,9,617,45,0],[618,9,618,10,0],[619,13,619,41,0],[620,9,620,10,0],[622,9,622,10,0],[623,13,623,49,0],[624,9,624,10,0],[626,9,626,41,0],[627,5,627,6,0],[639,5,639,6,0],[641,9,641,10,0],[642,13,642,74,0],[643,13,643,42,0],[644,13,644,14,0],[645,17,645,96,0],[646,13,646,14,0],[648,13,648,14,0],[649,17,649,96,0],[650,13,650,14,0],[652,13,652,60,0],[653,13,653,80,0],[654,13,654,33,0],[655,13,655,20,0],[655,22,655,32,0],[655,33,655,35,0],[655,36,655,46,0],[656,13,656,14,0],[657,17,657,49,0],[658,17,658,18,0],[659,21,659,46,0],[660,17,660,18,0],[661,13,661,14,0],[663,13,663,49,0],[664,13,664,79,0],[666,9,666,29,0],[667,9,667,10,0],[668,13,668,74,0],[669,13,669,114,0],[671,5,671,6,0],[684,5,684,6,0],[686,9,686,10,0],[687,13,687,74,0],[688,13,688,42,0],[689,13,689,14,0],[690,17,690,96,0],[691,13,691,14,0],[693,13,693,14,0],[694,17,694,96,0],[695,13,695,14,0],[697,13,697,60,0],[699,13,699,47,0],[701,13,701,42,0],[702,13,702,14,0],[703,17,703,65,0],[704,13,704,14,0],[706,13,706,14,0],[707,17,707,65,0],[708,13,708,14,0],[710,13,710,107,0],[712,13,712,49,0],[713,13,713,114,0],[715,9,715,29,0],[716,9,716,10,0],[718,13,718,14,0],[719,17,719,100,0],[720,17,720,64,0],[721,17,721,84,0],[722,17,722,37,0],[723,17,723,24,0],[723,26,723,36,0],[723,37,723,39,0],[723,40,723,50,0],[724,17,724,18,0],[725,21,725,53,0],[726,21,726,22,0],[727,25,727,50,0],[728,21,728,22,0],[729,17,729,18,0],[731,17,731,62,0],[733,13,733,34,0],[734,13,734,14,0],[735,17,735,97,0],[738,5,738,6,0],[747,5,747,6,0],[748,9,748,43,0],[749,9,749,82,0],[750,9,750,16,0],[750,18,750,28,0],[750,29,750,31,0],[750,32,750,39,0],[751,9,751,10,0],[752,13,752,114,0],[753,13,753,102,0],[754,13,754,100,0],[755,9,755,10,0],[757,9,757,38,0],[758,9,758,44,0],[759,9,759,88,0],[760,9,761,92,0],[762,9,762,16,0],[762,18,762,25,0],[762,26,762,28,0],[762,29,762,39,0],[763,9,763,10,0],[764,13,764,74,0],[765,13,765,106,0],[766,13,766,39,0],[767,9,767,10,0],[769,9,769,43,0],[770,9,770,45,0],[771,9,771,43,0],[772,9,772,41,0],[773,5,773,6,0],[782,5,782,6,0],[783,9,783,43,0],[784,9,784,82,0],[785,9,785,16,0],[785,18,785,28,0],[785,29,785,31,0],[785,32,785,39,0],[786,9,786,10,0],[787,13,787,114,0],[788,13,788,102,0],[789,13,789,100,0],[790,9,790,10,0],[792,9,792,38,0],[793,9,793,44,0],[794,9,795,92,0],[796,9,796,16,0],[796,18,796,25,0],[796,26,796,28,0],[796,29,796,39,0],[797,9,797,10,0],[798,13,798,74,0],[799,13,799,106,0],[800,13,800,39,0],[801,9,801,10,0],[803,9,803,43,0],[804,9,804,45,0],[805,9,805,43,0],[806,9,806,41,0],[807,5,807,6,0],[820,5,820,6,0],[822,9,822,10,0],[823,13,823,65,0],[824,13,824,34,0],[825,13,825,14,0],[826,17,826,97,0],[827,17,827,41,0],[830,13,830,49,0],[831,13,831,14,0],[832,17,832,57,0],[833,17,833,38,0],[836,13,836,73,0],[837,13,837,37,0],[839,9,839,29,0],[840,9,840,10,0],[841,13,841,80,0],[842,9,842,10,0],[844,9,844,33,0],[845,5,845,6,0],[855,5,855,6,0],[856,9,856,33,0],[857,5,857,6,0],[865,5,865,6,0],[866,9,866,109,0],[867,5,867,6,0],[877,5,877,6,0],[878,9,878,30,0],[879,5,879,6,0]]);
     </script>
   </body>
 </html>

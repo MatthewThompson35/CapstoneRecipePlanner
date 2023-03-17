@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Database\RecipeDAL.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary.Models;
+using System.Collections.Generic;
+
+namespace RecipePlannerLibrary.Database
+{
+    /// &lt;summary&gt;
+    ///     Recipe DAL
+    /// &lt;/summary&gt;
+    public class RecipeDAL
+    {
+        #region Methods
+
+        /// &lt;summary&gt;
+        ///     Gets all of the recipes from the recipe table.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;The connection string for the table.&lt;/param&gt;
+        /// &lt;returns&gt;List of all recipes&lt;/returns&gt;
+        public static List&lt;Recipe&gt; getRecipes(string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var recipes = new List&lt;Recipe&gt;();
+            var query = @&quot;Select * from recipe;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeID = reader.GetInt32(0);
+                var name = reader.GetString(1);
+                var description = reader.GetString(2);
+
+                var recipe = new Recipe(recipeID, name, description);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipeID, connectionString);
+
+                recipes.Add(recipe);
+            }
+
+            connection.Close();
+            return recipes;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the recipe name by the recipe id.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;the recipe id.&lt;/param&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string.&lt;/param&gt;
+        /// &lt;returns&gt;the recipe name.&lt;/returns&gt;
+        public static string getRecipeNameById(int recipeId, string connectionString)
+        {
+            Recipe recipe = new Recipe();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Select name from recipe where recipeID=@recipeId;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@recipeId&quot;, MySqlDbType.Int32).Value = recipeId;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var name = reader.GetString(0);
+
+                recipe.Name = name;
+            }
+
+            connection.Close();
+            return recipe.Name;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the recipe by name.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;name&quot;&gt;the name of the recipe&lt;/param&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;the connection string&lt;/param&gt;
+        /// &lt;returns&gt;a recipe based on the recipe name.&lt;/returns&gt;
+        public static Recipe getRecipeByName(string name, string connectionString)
+        {
+            Recipe recipe = new Recipe();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Select * from recipe where name = @name;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@name&quot;, MySqlDbType.String).Value = name;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeId = reader.GetInt32(0);
+                var recipeName = reader.GetString(1);
+                var description = reader.GetString(2);
+
+                recipe.RecipeId = recipeId;
+                recipe.Name = recipeName;
+                recipe.Description = description;
+                
+            }
+
+            connection.Close();
+            return recipe;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the ingredients associated with a specified recipeID.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;the recipe id.&lt;/param&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;The connection string for the table.&lt;/param&gt;
+        /// &lt;returns&gt;List of all ingredients associated with specified recipeID&lt;/returns&gt;
+        public static List&lt;RecipeIngredient&gt; getIngredientsForRecipe(int id, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var ingredients = new List&lt;RecipeIngredient&gt;();
+            var query = @&quot;Select ri.recipeID, ii.ingredientName, ri.quantity, ri.measurement from recipe_ingredient ri, ingredient_info ii where recipeID = @id and ri.ingredientID = ii.ingredientID;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            command.Parameters.Add(&quot;@user&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeID = reader.GetInt32(0);
+                var ingredientName = reader.GetString(1);
+                var quantity = reader.GetInt32(2);
+                var measurement = reader.GetString(3);
+
+                var ingredient = new RecipeIngredient(recipeID, ingredientName, quantity, measurement);
+                ingredients.Add(ingredient);
+            }
+
+            connection.Close();
+            return ingredients;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the recipe steps associated with a specified recipeID.
+        /// &lt;/summary&gt;
+        ///
+        /// &lt;param name=&quot;id&quot;&gt;The recipe id.&lt;/param&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;The connection string for the table.&lt;/param&gt;
+        /// &lt;returns&gt;List of all steps associated with a specified recipeID&lt;/returns&gt;
+        public static List&lt;RecipeStep&gt; getStepsForRecipe(int id, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var steps = new List&lt;RecipeStep&gt;();
+            var query = @&quot;Select * from recipe_step where recipeID=@id;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeID = reader.GetInt32(0);
+                var stepNumber = reader.GetInt32(1);
+                var stepDescription = reader.GetString(2);
+
+                var recipeStep = new RecipeStep(recipeID, stepNumber, stepDescription);
+                steps.Add(recipeStep);
+            }
+
+            connection.Close();
+            return steps;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the recipe tags associated with a specified recipeID.
+        /// &lt;/summary&gt;
+        ///
+        /// &lt;param name=&quot;id&quot;&gt;The recipe id.&lt;/param&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;The connection string for the table.&lt;/param&gt;
+        /// &lt;returns&gt;List of all tags associated with a specified recipeID&lt;/returns&gt;
+        public static List&lt;string&gt; getTagsForRecipe(int id, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var tags = new List&lt;string&gt;();
+            var query = @&quot;Select * from recipe_tag where recipeID=@id;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var tagName = reader.GetString(1);
+                tags.Add(tagName);
+            }
+
+            connection.Close();
+            return tags;
+        }
+
+        #endregion
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,9,20,10,1],[21,13,21,74,1],[22,13,22,31,1],[23,13,23,46,1],[24,13,24,50,1],[25,13,25,69,1],[26,13,26,56,1],[27,13,27,34,1],[28,13,28,14,1],[29,17,29,51,1],[30,17,30,48,1],[31,17,31,55,1],[33,17,33,70,1],[34,17,34,86,1],[36,17,36,37,1],[37,13,37,14,1],[39,13,39,32,1],[40,13,40,28,1],[41,9,41,10,1],[50,9,50,10,1],[51,13,51,42,1],[52,13,52,74,1],[53,13,53,31,1],[54,13,54,78,1],[55,13,55,69,1],[56,13,56,85,1],[57,13,57,56,1],[58,13,58,34,1],[59,13,59,14,1],[60,17,60,48,1],[62,17,62,36,1],[63,13,63,14,1],[65,13,65,32,1],[66,13,66,32,1],[67,9,67,10,1],[76,9,76,10,1],[77,13,77,42,1],[78,13,78,74,1],[79,13,79,31,1],[80,13,80,69,1],[81,13,81,69,1],[82,13,82,78,1],[83,13,83,56,1],[84,13,84,34,1],[85,13,85,14,1],[86,17,86,51,1],[87,17,87,54,1],[88,17,88,55,1],[90,17,90,44,1],[91,17,91,42,1],[92,17,92,50,1],[94,13,94,14,1],[96,13,96,32,1],[97,13,97,27,1],[98,9,98,10,1],[107,9,107,10,1],[108,13,108,74,1],[109,13,109,31,1],[110,13,110,60,1],[111,13,111,201,1],[112,13,112,69,1],[113,13,113,73,1],[114,13,114,94,1],[115,13,115,56,1],[116,13,116,34,1],[117,13,117,14,1],[118,17,118,51,1],[119,17,119,58,1],[120,17,120,51,1],[121,17,121,55,1],[123,17,123,104,1],[124,17,124,45,1],[125,13,125,14,1],[127,13,127,32,1],[128,13,128,32,1],[129,9,129,10,1],[139,9,139,10,1],[140,13,140,74,1],[141,13,141,31,1],[142,13,142,48,1],[143,13,143,74,1],[144,13,144,69,1],[145,13,145,73,1],[146,13,146,56,1],[147,13,147,34,1],[148,13,148,14,1],[149,17,149,51,1],[150,17,150,53,1],[151,17,151,59,1],[153,17,153,88,1],[154,17,154,39,1],[155,13,155,14,1],[157,13,157,32,1],[158,13,158,26,1],[159,9,159,10,1],[169,9,169,10,1],[170,13,170,74,1],[171,13,171,31,1],[172,13,172,43,1],[173,13,173,73,1],[174,13,174,69,1],[175,13,175,73,1],[176,13,176,56,1],[177,13,177,34,1],[178,13,178,14,1],[179,17,179,51,1],[180,17,180,35,1],[181,13,181,14,1],[183,13,183,32,1],[184,13,184,25,1],[185,9,185,10,1]]);
+    </script>
+  </body>
+</html>

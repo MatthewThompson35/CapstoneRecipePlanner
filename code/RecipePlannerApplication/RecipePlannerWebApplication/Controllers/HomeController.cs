@@ -90,10 +90,10 @@ public class HomeController : Controller
             var currentPage = page ?? 1;
 
             ViewBag.currentPage = currentPage;
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
-            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
+            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
             ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize); ;
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
@@ -182,10 +182,11 @@ public class HomeController : Controller
     ///     Decrements the quantity of a given ingredient by its id.
     /// </summary>
     /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Ingredient quantity is decremented in the database</postcondition>
     /// <returns>The view of the ingredients page.</returns>
-    public ActionResult decrementQuantity(string id)
+    public ActionResult decrementQuantity(string id, int page)
     {
         try
         {
@@ -195,7 +196,7 @@ public class HomeController : Controller
 
             quantity = this.getItemQuantity(ingredientID);
             IngredientDAL.decrementQuantity(ingredientID, quantity);
-            this.setupIngredientsPage(ViewBag.currentPage);
+            this.setupIngredientsPage(page);
             return View("IngredientsPage");
         }
         catch (Exception ex)
@@ -230,11 +231,12 @@ public class HomeController : Controller
     /// <summary>
     ///     Increments the quantity of the ingredient with the given id.
     /// </summary>
-    /// <param name="id">The ingredient id.</param>
+    /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Quantity will be incremented in the database</postcondition>
     /// <returns>The ingredients page or login on server connection error</returns>
-    public ActionResult incrementQuantity(string id)
+    public ActionResult incrementQuantity(string id, int page)
     {
         try
         {
@@ -244,7 +246,7 @@ public class HomeController : Controller
 
             quantity = this.getItemQuantity(ingredientID);
             IngredientDAL.incrementQuantity(ingredientID, quantity);
-            this.setupIngredientsPage(ViewBag.currentPage);
+            this.setupIngredientsPage(page);
             return View("IngredientsPage");
         }
         catch (Exception ex)
@@ -258,16 +260,17 @@ public class HomeController : Controller
     /// <summary>
     ///     Removes the ingredient from the list.
     /// </summary>
-    /// <param name="id">The identifier of the ingredient to be removed.</param>
+    /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Ingredient will be removed from the database</postcondition>
     /// <returns>The ingredients page or login on server connection error.</returns>
-    public ActionResult removeIngredient(string id)
+    public ActionResult removeIngredient(string id, int page)
     {
         try
         {
             IngredientDAL.RemoveIngredient(int.Parse(id));
-            this.setupIngredientsPage(ViewBag.currentPage);
+            this.setupIngredientsPage(page);
             return View("IngredientsPage");
         }
         catch (Exception ex)
@@ -315,7 +318,7 @@ public class HomeController : Controller
 
             IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
                 Connection.ConnectionString);
-            var totalPages = (int) Math.Ceiling((double) IngredientDAL.getIngredients().Count / 5);
+            var totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count / 5);
             this.setupIngredientsPage(totalPages);
             return View("IngredientsPage");
         }
@@ -354,7 +357,7 @@ public class HomeController : Controller
         var currentPage = page ?? 1;
         List<Ingredient> allIngredients = IngredientDAL.getIngredients();
         var totalIngredients = allIngredients.Count;
-        var totalPages = (int) Math.Ceiling((double) totalIngredients / pageSize);
+        var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
 
         var ingredientsOnPage = allIngredients
             .Skip((currentPage - 1) * pageSize)
@@ -439,12 +442,12 @@ public class HomeController : Controller
             var currentAllPage = page ?? 1;
 
             ViewBag.currentAllPage = currentAllPage;
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
-            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
+            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = (int) Math.Ceiling((double) recipes.Count / pageSize);
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
 
@@ -658,12 +661,12 @@ public class HomeController : Controller
             }
 
             ViewBag.Header = "This weeks meals";
-            return Json(new {RecipeId = recipeId, RecipeName = recipeName});
+            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
         }
         catch (Exception ex)
         {
             var recipeId = "You have not yet added a meal for this time";
-            return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
         }
     }
 
@@ -707,7 +710,7 @@ public class HomeController : Controller
             PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
 
             ViewBag.Header = "This weeks meals";
-            return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
+            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
         }
         catch (Exception ex)
         {
@@ -725,11 +728,11 @@ public class HomeController : Controller
                     }
                 }
 
-                return Json(new {RecipeName = recipeName});
+                return Json(new { RecipeName = recipeName });
             }
             catch (Exception ex2)
             {
-                return Json(new {RecipeName = "You Have not yet added a meal for this time"});
+                return Json(new { RecipeName = "You Have not yet added a meal for this time" });
             }
         }
     }
@@ -759,7 +762,7 @@ public class HomeController : Controller
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Breakfast", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
 
@@ -793,7 +796,7 @@ public class HomeController : Controller
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Breakfast", "Next Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
 
@@ -860,7 +863,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
     /// <summary>

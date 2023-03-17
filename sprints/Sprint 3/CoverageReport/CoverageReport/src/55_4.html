@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Database\Database.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+
+namespace RecipePlannerLibrary.Database
+{
+    /// &lt;summary&gt;
+    /// The database class that is used throughout the project to get information from the database
+    /// &lt;/summary&gt;
+    public class Database
+    {
+        #region Data members
+
+        /// &lt;summary&gt;
+        ///     The login connection
+        /// &lt;/summary&gt;
+        private static readonly MySqlConnection loginConnection = new MySqlConnection(Connection.ConnectionString);
+
+        #endregion
+
+        #region Methods
+
+        /// &lt;summary&gt;
+        ///     Checks to see if the login is valid
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;login&quot;&gt;The login.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;the result. 1 if true. 0 if false&lt;/returns&gt;
+        public static int LoginCheck(Login login)
+        {
+            var passwordHash = Util.GetHash(login.Password);
+            var loginCommand =
+                new MySqlCommand(&quot;SELECT username FROM login WHERE username=@Username AND password=@Password&quot;,
+                    loginConnection);
+            loginCommand.Parameters.AddWithValue(&quot;@Username&quot;, login.Username);
+            loginCommand.Parameters.AddWithValue(&quot;@Password&quot;, passwordHash);
+
+            loginConnection.Open();
+            var reader = loginCommand.ExecuteReader();
+
+            var result = 0;
+            if (reader.Read())
+            {
+                result = 1;
+            }
+            else
+            {
+                result = 0;
+            }
+
+            loginConnection.Close();
+            return result;
+        }
+
+        /// &lt;summary&gt;
+        ///     Creates the user for the login and adds it to the database.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;param name=&quot;password&quot;&gt;The password.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;User is added to the database&lt;/postcondition&gt;
+        public static void CreateUser(string username, string password)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query =
+                @&quot;Insert into login (username, password) values (@userName, @password);&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@userName&quot;, MySqlDbType.VarChar).Value = username;
+            command.Parameters.Add(&quot;@password&quot;, MySqlDbType.VarChar).Value = Util.GetHash(password);
+            command.ExecuteNonQuery();
+        }
+
+        /// &lt;summary&gt;
+        ///     Determines whether the database contains the user.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;List of users that match the user&lt;/returns&gt;
+        public static List&lt;string&gt; ContainsUser(string username)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var list = new List&lt;string&gt;();
+            var query = @&quot;Select * from login where username=@username;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@userName&quot;, MySqlDbType.VarChar).Value = username;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+
+            return list;
+        }
+
+        /// &lt;summary&gt;
+        /// Removes the user with the given username.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;username&quot;&gt;The username of the user to be removed.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;The user is removed from the database&lt;/postcondition&gt;
+        public static void RemoveUser(string username)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query =
+                @&quot;DELETE FROM login WHERE username = @userName;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@userName&quot;, MySqlDbType.VarChar).Value = username;
+            command.ExecuteNonQuery();
+        }
+
+        #endregion
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,9,16,116,1],[30,9,30,10,1],[31,13,31,61,1],[32,13,34,38,1],[35,13,35,79,1],[36,13,36,77,1],[38,13,38,36,1],[39,13,39,55,1],[41,13,41,28,1],[42,13,42,31,1],[43,13,43,14,1],[44,17,44,28,1],[45,13,45,14,1],[47,13,47,14,1],[48,17,48,28,1],[49,13,49,14,1],[51,13,51,37,1],[52,13,52,27,1],[53,9,53,10,1],[63,9,63,10,1],[64,13,64,85,1],[65,13,65,31,1],[66,13,67,90,1],[68,13,68,69,1],[69,13,69,87,1],[70,13,70,101,1],[71,13,71,39,1],[72,9,72,10,1],[82,9,82,10,1],[83,13,83,85,1],[84,13,84,31,1],[85,13,85,43,1],[86,13,86,74,1],[87,13,87,69,1],[88,13,88,87,1],[89,13,89,56,1],[90,13,90,34,1],[91,13,91,14,1],[92,17,92,47,1],[93,13,93,14,1],[95,13,95,25,1],[96,9,96,10,1],[105,9,105,10,1],[106,13,106,85,1],[107,13,107,31,1],[108,13,109,66,1],[110,13,110,69,1],[111,13,111,87,1],[112,13,112,39,1],[113,9,113,10,1]]);
+    </script>
+  </body>
+</html>

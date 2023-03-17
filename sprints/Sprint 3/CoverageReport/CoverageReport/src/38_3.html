@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\Homepage.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerDesktopApplication
+{
+    partial class Homepage
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Homepage));
+            this.recipeListView = new System.Windows.Forms.ListView();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.viewIngredientsButton = new System.Windows.Forms.Button();
+            this.noRecipesLabel = new System.Windows.Forms.Label();
+            this.nextButton = new System.Windows.Forms.Button();
+            this.beginningButton = new System.Windows.Forms.Button();
+            this.lastPageButton = new System.Windows.Forms.Button();
+            this.previousButton = new System.Windows.Forms.Button();
+            this.pageCountLabel = new System.Windows.Forms.Label();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewMealPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.activeTagsLbl = new System.Windows.Forms.Label();
+            this.filterTagTxt = new System.Windows.Forms.TextBox();
+            this.clearFiltersBtn = new System.Windows.Forms.Button();
+            this.tagsCmb = new System.Windows.Forms.ComboBox();
+            this.deleteFilterBtn = new System.Windows.Forms.Button();
+            this.availableCheckbox = new System.Windows.Forms.CheckBox();
+            this.allRecipesButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // recipeListView
+            // 
+            this.recipeListView.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.recipeListView.Location = new System.Drawing.Point(37, 205);
+            this.recipeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.recipeListView.Name = &quot;recipeListView&quot;;
+            this.recipeListView.Size = new System.Drawing.Size(433, 484);
+            this.recipeListView.TabIndex = 0;
+            this.recipeListView.UseCompatibleStateImageBehavior = false;
+            this.recipeListView.SelectedIndexChanged += new System.EventHandler(this.recipeListView_SelectedIndexChanged);
+            // 
+            // logoutButton
+            // 
+            this.logoutButton.Location = new System.Drawing.Point(439, 7);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.logoutButton.Name = &quot;logoutButton&quot;;
+            this.logoutButton.Size = new System.Drawing.Size(69, 39);
+            this.logoutButton.TabIndex = 1;
+            this.logoutButton.Text = &quot;Logout&quot;;
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Microsoft Sans Serif&quot;, 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(37, 167);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(108, 29);
+            this.label1.TabIndex = 2;
+            this.label1.Text = &quot;Recipes:&quot;;
+            // 
+            // viewIngredientsButton
+            // 
+            this.viewIngredientsButton.Location = new System.Drawing.Point(66, 763);
+            this.viewIngredientsButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.viewIngredientsButton.Name = &quot;viewIngredientsButton&quot;;
+            this.viewIngredientsButton.Size = new System.Drawing.Size(382, 44);
+            this.viewIngredientsButton.TabIndex = 4;
+            this.viewIngredientsButton.Text = &quot;View Ingredients&quot;;
+            this.viewIngredientsButton.UseVisualStyleBackColor = true;
+            this.viewIngredientsButton.Click += new System.EventHandler(this.viewIngredientsButton_Click);
+            // 
+            // noRecipesLabel
+            // 
+            this.noRecipesLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.noRecipesLabel.Location = new System.Drawing.Point(78, 385);
+            this.noRecipesLabel.Name = &quot;noRecipesLabel&quot;;
+            this.noRecipesLabel.Size = new System.Drawing.Size(344, 112);
+            this.noRecipesLabel.TabIndex = 8;
+            this.noRecipesLabel.Text = &quot;There are no recipes to show&quot;;
+            this.noRecipesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.noRecipesLabel.Visible = false;
+            // 
+            // nextButton
+            // 
+            this.nextButton.Location = new System.Drawing.Point(311, 712);
+            this.nextButton.Name = &quot;nextButton&quot;;
+            this.nextButton.Size = new System.Drawing.Size(59, 29);
+            this.nextButton.TabIndex = 9;
+            this.nextButton.Text = &quot;&gt;&quot;;
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            // 
+            // beginningButton
+            // 
+            this.beginningButton.Location = new System.Drawing.Point(78, 715);
+            this.beginningButton.Name = &quot;beginningButton&quot;;
+            this.beginningButton.Size = new System.Drawing.Size(51, 29);
+            this.beginningButton.TabIndex = 10;
+            this.beginningButton.Text = &quot;&lt;|&quot;;
+            this.beginningButton.UseVisualStyleBackColor = true;
+            this.beginningButton.Click += new System.EventHandler(this.beginningButton_Click);
+            // 
+            // lastPageButton
+            // 
+            this.lastPageButton.Location = new System.Drawing.Point(377, 712);
+            this.lastPageButton.Name = &quot;lastPageButton&quot;;
+            this.lastPageButton.Size = new System.Drawing.Size(51, 29);
+            this.lastPageButton.TabIndex = 11;
+            this.lastPageButton.Text = &quot;&gt;|&quot;;
+            this.lastPageButton.UseVisualStyleBackColor = true;
+            this.lastPageButton.Click += new System.EventHandler(this.lastPageButton_Click);
+            // 
+            // previousButton
+            // 
+            this.previousButton.Location = new System.Drawing.Point(136, 715);
+            this.previousButton.Name = &quot;previousButton&quot;;
+            this.previousButton.Size = new System.Drawing.Size(59, 29);
+            this.previousButton.TabIndex = 12;
+            this.previousButton.Text = &quot;&lt;&quot;;
+            this.previousButton.UseVisualStyleBackColor = true;
+            this.previousButton.Click += new System.EventHandler(this.previousButton_Click);
+            // 
+            // pageCountLabel
+            // 
+            this.pageCountLabel.AutoSize = true;
+            this.pageCountLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.pageCountLabel.Location = new System.Drawing.Point(243, 713);
+            this.pageCountLabel.Name = &quot;pageCountLabel&quot;;
+            this.pageCountLabel.Size = new System.Drawing.Size(24, 28);
+            this.pageCountLabel.TabIndex = 13;
+            this.pageCountLabel.Text = &quot;1&quot;;
+            // 
+            // plannerMenuButton
+            // 
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject(&quot;plannerMenuButton.BackgroundImage&quot;)));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(5, 7);
+            this.plannerMenuButton.Name = &quot;plannerMenuButton&quot;;
+            this.plannerMenuButton.Size = new System.Drawing.Size(43, 39);
+            this.plannerMenuButton.TabIndex = 14;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewMealPlanToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = &quot;plannerContextMenuStrip&quot;;
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(180, 28);
+            // 
+            // viewMealPlanToolStripMenuItem
+            // 
+            this.viewMealPlanToolStripMenuItem.Name = &quot;viewMealPlanToolStripMenuItem&quot;;
+            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.viewMealPlanToolStripMenuItem.Text = &quot;View Meal Plan&quot;;
+            this.viewMealPlanToolStripMenuItem.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem_Click);
+            // 
+            // filterButton
+            // 
+            this.filterButton.Location = new System.Drawing.Point(298, 35);
+            this.filterButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.filterButton.Name = &quot;filterButton&quot;;
+            this.filterButton.Size = new System.Drawing.Size(112, 31);
+            this.filterButton.TabIndex = 15;
+            this.filterButton.Text = &quot;Filter&quot;;
+            this.filterButton.UseVisualStyleBackColor = true;
+            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
+            // 
+            // activeTagsLbl
+            // 
+            this.activeTagsLbl.AutoSize = true;
+            this.activeTagsLbl.Location = new System.Drawing.Point(14, 84);
+            this.activeTagsLbl.Name = &quot;activeTagsLbl&quot;;
+            this.activeTagsLbl.Size = new System.Drawing.Size(102, 20);
+            this.activeTagsLbl.TabIndex = 16;
+            this.activeTagsLbl.Text = &quot;Filter by Tags: &quot;;
+            // 
+            // filterTagTxt
+            // 
+            this.filterTagTxt.Location = new System.Drawing.Point(83, 35);
+            this.filterTagTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.filterTagTxt.Name = &quot;filterTagTxt&quot;;
+            this.filterTagTxt.PlaceholderText = &quot; Search for Tag&quot;;
+            this.filterTagTxt.Size = new System.Drawing.Size(197, 27);
+            this.filterTagTxt.TabIndex = 17;
+            // 
+            // clearFiltersBtn
+            // 
+            this.clearFiltersBtn.Location = new System.Drawing.Point(383, 81);
+            this.clearFiltersBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.clearFiltersBtn.Name = &quot;clearFiltersBtn&quot;;
+            this.clearFiltersBtn.Size = new System.Drawing.Size(87, 31);
+            this.clearFiltersBtn.TabIndex = 18;
+            this.clearFiltersBtn.Text = &quot;Clear Filters&quot;;
+            this.clearFiltersBtn.UseVisualStyleBackColor = true;
+            this.clearFiltersBtn.Click += new System.EventHandler(this.clearFiltersBtn_Click);
+            // 
+            // tagsCmb
+            // 
+            this.tagsCmb.FormattingEnabled = true;
+            this.tagsCmb.Location = new System.Drawing.Point(107, 80);
+            this.tagsCmb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tagsCmb.Name = &quot;tagsCmb&quot;;
+            this.tagsCmb.Size = new System.Drawing.Size(157, 28);
+            this.tagsCmb.TabIndex = 19;
+            // 
+            // deleteFilterBtn
+            // 
+            this.deleteFilterBtn.Location = new System.Drawing.Point(283, 81);
+            this.deleteFilterBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.deleteFilterBtn.Name = &quot;deleteFilterBtn&quot;;
+            this.deleteFilterBtn.Size = new System.Drawing.Size(87, 29);
+            this.deleteFilterBtn.TabIndex = 20;
+            this.deleteFilterBtn.Text = &quot;Remove&quot;;
+            this.deleteFilterBtn.UseVisualStyleBackColor = true;
+            this.deleteFilterBtn.Click += new System.EventHandler(this.deleteFilterBtn_Click);
+            // 
+            // availableCheckbox
+            // 
+            this.availableCheckbox.AutoSize = true;
+            this.availableCheckbox.Location = new System.Drawing.Point(277, 175);
+            this.availableCheckbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.availableCheckbox.Name = &quot;availableCheckbox&quot;;
+            this.availableCheckbox.Size = new System.Drawing.Size(148, 24);
+            this.availableCheckbox.TabIndex = 21;
+            this.availableCheckbox.Text = &quot;Available Recipes&quot;;
+            this.availableCheckbox.UseVisualStyleBackColor = true;
+            this.availableCheckbox.CheckedChanged += new System.EventHandler(this.showAvailableRecipesCheck_Changed);
+            // 
+            // allRecipesButton
+            // 
+            this.allRecipesButton.Location = new System.Drawing.Point(139, 169);
+            this.allRecipesButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.allRecipesButton.Name = &quot;allRecipesButton&quot;;
+            this.allRecipesButton.Size = new System.Drawing.Size(126, 31);
+            this.allRecipesButton.TabIndex = 22;
+            this.allRecipesButton.Text = &quot;All Recipes&quot;;
+            this.allRecipesButton.UseVisualStyleBackColor = true;
+            this.allRecipesButton.Click += new System.EventHandler(this.showAllRecipesButton_Click);
+            // 
+            // Homepage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.allRecipesButton);
+            this.Controls.Add(this.availableCheckbox);
+            this.Controls.Add(this.deleteFilterBtn);
+            this.Controls.Add(this.tagsCmb);
+            this.Controls.Add(this.clearFiltersBtn);
+            this.Controls.Add(this.filterTagTxt);
+            this.Controls.Add(this.activeTagsLbl);
+            this.Controls.Add(this.filterButton);
+            this.Controls.Add(this.plannerMenuButton);
+            this.Controls.Add(this.pageCountLabel);
+            this.Controls.Add(this.previousButton);
+            this.Controls.Add(this.lastPageButton);
+            this.Controls.Add(this.beginningButton);
+            this.Controls.Add(this.nextButton);
+            this.Controls.Add(this.noRecipesLabel);
+            this.Controls.Add(this.viewIngredientsButton);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.logoutButton);
+            this.Controls.Add(this.recipeListView);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = &quot;Homepage&quot;;
+            this.Text = &quot;Recipe Planner Homepage&quot;;
+            this.plannerContextMenuStrip.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ListView recipeListView;
+        private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button viewIngredientsButton;
+        private RadioButton showAvailableRecipesRadioButton;
+        private RadioButton showAllRecipesRadioButton;
+        private Label noRecipesLabel;
+        private Button nextButton;
+        private Button beginningButton;
+        private Button lastPageButton;
+        private Button previousButton;
+        private Label pageCountLabel;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem viewMealPlanToolStripMenuItem;
+        private Button filterButton;
+        private Label activeTagsLbl;
+        private TextBox filterTagTxt;
+        private Button clearFiltersBtn;
+        private ComboBox tagsCmb;
+        private Button deleteFilterBtn;
+        private CheckBox availableCheckbox;
+        private Button allRecipesButton;
+    }
+}
+
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,69,0],[32,13,32,141,0],[33,13,33,71,0],[34,13,34,67,0],[35,13,35,60,0],[36,13,36,76,0],[37,13,37,68,0],[38,13,38,65,0],[39,13,39,70,0],[40,13,40,69,0],[41,13,41,69,0],[42,13,42,68,0],[43,13,43,72,0],[44,13,44,103,0],[45,13,45,95,0],[46,13,46,67,0],[47,13,47,67,0],[48,13,48,68,0],[49,13,49,70,0],[50,13,50,64,0],[51,13,51,70,0],[52,13,52,74,0],[53,13,53,71,0],[54,13,54,58,0],[55,13,55,34,0],[59,13,59,150,0],[60,13,60,78,0],[61,13,61,87,0],[62,13,62,57,0],[63,13,63,74,0],[64,13,64,46,0],[65,13,65,73,0],[66,13,66,123,0],[70,13,70,75,0],[71,13,71,85,0],[72,13,72,53,0],[73,13,73,70,0],[74,13,74,44,0],[75,13,75,47,0],[76,13,76,62,0],[77,13,77,89,0],[81,13,81,41,0],[82,13,82,156,0],[83,13,83,70,0],[84,13,84,41,0],[85,13,85,65,0],[86,13,86,38,0],[87,13,87,43,0],[91,13,91,85,0],[92,13,92,94,0],[93,13,93,71,0],[94,13,94,80,0],[95,13,95,53,0],[96,13,96,66,0],[97,13,97,71,0],[98,13,98,107,0],[102,13,102,150,0],[103,13,103,78,0],[104,13,104,57,0],[105,13,105,74,0],[106,13,106,46,0],[107,13,107,71,0],[108,13,108,90,0],[109,13,109,49,0],[113,13,113,75,0],[114,13,114,49,0],[115,13,115,68,0],[116,13,116,42,0],[117,13,117,40,0],[118,13,118,60,0],[119,13,119,85,0],[123,13,123,79,0],[124,13,124,59,0],[125,13,125,73,0],[126,13,126,48,0],[127,13,127,46,0],[128,13,128,65,0],[129,13,129,95,0],[133,13,133,79,0],[134,13,134,57,0],[135,13,135,72,0],[136,13,136,47,0],[137,13,137,45,0],[138,13,138,64,0],[139,13,139,93,0],[143,13,143,79,0],[144,13,144,57,0],[145,13,145,72,0],[146,13,146,47,0],[147,13,147,44,0],[148,13,148,64,0],[149,13,149,93,0],[153,13,153,49,0],[154,13,154,147,0],[155,13,155,79,0],[156,13,156,57,0],[157,13,157,72,0],[158,13,158,47,0],[159,13,159,44,0],[163,13,163,79,0],[164,13,164,137,0],[165,13,165,101,0],[166,13,166,78,0],[167,13,167,63,0],[168,13,168,75,0],[169,13,169,50,0],[170,13,170,68,0],[171,13,171,99,0],[175,13,175,93,0],[176,13,177,50,0],[178,13,178,75,0],[179,13,179,82,0],[183,13,183,87,0],[184,13,184,88,0],[185,13,185,72,0],[186,13,186,123,0],[190,13,190,76,0],[191,13,191,85,0],[192,13,192,53,0],[193,13,193,71,0],[194,13,194,45,0],[195,13,195,47,0],[196,13,196,62,0],[197,13,197,89,0],[201,13,201,48,0],[202,13,202,76,0],[203,13,203,55,0],[204,13,204,72,0],[205,13,205,46,0],[206,13,206,58,0],[210,13,210,75,0],[211,13,211,85,0],[212,13,212,53,0],[213,13,213,67,0],[214,13,214,71,0],[215,13,215,45,0],[219,13,219,79,0],[220,13,220,88,0],[221,13,221,59,0],[222,13,222,73,0],[223,13,223,48,0],[224,13,224,57,0],[225,13,225,65,0],[226,13,226,95,0],[230,13,230,51,0],[231,13,231,71,0],[232,13,232,80,0],[233,13,233,43,0],[234,13,234,66,0],[235,13,235,40,0],[239,13,239,79,0],[240,13,240,88,0],[241,13,241,59,0],[242,13,242,73,0],[243,13,243,48,0],[244,13,244,50,0],[245,13,245,65,0],[246,13,246,95,0],[250,13,250,52,0],[251,13,251,82,0],[252,13,252,90,0],[253,13,253,63,0],[254,13,254,76,0],[255,13,255,50,0],[256,13,256,63,0],[257,13,257,67,0],[258,13,258,118,0],[262,13,262,81,0],[263,13,263,89,0],[264,13,264,61,0],[265,13,265,75,0],[266,13,266,49,0],[267,13,267,56,0],[268,13,268,66,0],[269,13,269,101,0],[273,13,273,74,0],[274,13,274,74,0],[275,13,275,65,0],[276,13,276,54,0],[277,13,277,55,0],[278,13,278,53,0],[279,13,279,45,0],[280,13,280,53,0],[281,13,281,50,0],[282,13,282,51,0],[283,13,283,50,0],[284,13,284,55,0],[285,13,285,52,0],[286,13,286,52,0],[287,13,287,52,0],[288,13,288,53,0],[289,13,289,48,0],[290,13,290,52,0],[291,13,291,59,0],[292,13,292,44,0],[293,13,293,50,0],[294,13,294,52,0],[295,13,295,72,0],[296,13,296,36,0],[297,13,297,51,0],[298,13,298,62,0],[299,13,299,38,0],[300,13,300,34,0],[302,9,302,10,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\DatabaseTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class DatabaseTests
+    {
+        /// &lt;summary&gt;
+        /// Checks the login for correct information.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void LoginCheck_Correct_Info()
+        {
+            Login login = new Login { Username = &quot;global&quot;, Password = &quot;user&quot; };
+
+            int result = Database.LoginCheck(login);
+
+            Assert.AreEqual(1, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests login with incorrect info
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void LoginCheck_Incorrect_Info()
+        {
+            Login login = new Login { Username = &quot;user&quot;, Password = &quot;incorrect&quot; };
+
+            int result = Database.LoginCheck(login);
+
+            Assert.AreEqual(0, result);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests remove user with given username.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void RemoveUser_RemovesUserWithGivenUsername()
+        {
+            // Arrange
+            string username = &quot;testuser&quot;;
+            string password = &quot;testpassword&quot;;
+            // Create a test user for removal
+            Database.RemoveUser(username);
+            Database.CreateUser(username, password);
+
+            // Act
+            Database.RemoveUser(username);
+
+            // Assert
+            // Attempt to retrieve the user after removal - this should return null
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query = @&quot;SELECT * FROM login WHERE username = @userName;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue(&quot;@userName&quot;, username);
+            using var reader = command.ExecuteReader();
+            Assert.IsFalse(reader.Read());
+        }
+
+        /// &lt;summary&gt;
+        /// Tests Create the user valid username password.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void CreateUser_ValidUsernamePassword()
+        {
+            string username = &quot;newUser&quot;;
+            string password = &quot;newPassword&quot;;
+            Database.RemoveUser(username);
+            Database.CreateUser(username, password);
+
+            List&lt;string&gt; users = Database.ContainsUser(username);
+            Assert.IsTrue(users.Contains(username));
+        }
+
+        /// &lt;summary&gt;
+        /// Tests containsUser whether [contains user valid username].
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void ContainsUser_ValidUsername()
+        {
+            string username = &quot;global&quot;;
+
+            List&lt;string&gt; result = Database.ContainsUser(username);
+
+            Assert.IsTrue(result.Contains(username));
+        }
+
+        /// &lt;summary&gt;
+        /// Tests containsUser whether [contains user invalid username].
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void ContainsUser_InvalidUsername()
+        {
+            string username = &quot;invalid&quot;;
+
+            List&lt;string&gt; result = Database.ContainsUser(username);
+
+            Assert.AreEqual(0, result.Count);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,10,1],[15,13,15,80,1],[17,13,17,53,1],[19,13,19,40,1],[20,9,20,10,1],[27,9,27,10,1],[28,13,28,83,1],[30,13,30,53,1],[32,13,32,40,1],[33,9,33,10,1],[40,9,40,10,1],[42,13,42,42,1],[43,13,43,46,1],[45,13,45,43,1],[46,13,46,53,1],[49,13,49,43,1],[53,13,53,85,1],[54,13,54,31,1],[55,13,55,76,1],[56,13,56,69,1],[57,13,57,68,1],[58,13,58,56,1],[59,13,59,43,1],[60,9,60,10,1],[67,9,67,10,1],[68,13,68,41,1],[69,13,69,45,1],[70,13,70,43,1],[71,13,71,53,1],[73,13,73,66,1],[74,13,74,53,1],[75,9,75,10,1],[82,9,82,10,1],[83,13,83,40,1],[85,13,85,67,1],[87,13,87,54,1],[88,9,88,10,1],[95,9,95,10,1],[96,13,96,41,1],[98,13,98,67,1],[100,13,100,46,1],[101,9,101,10,1]]);
+    </script>
+  </body>
+</html>

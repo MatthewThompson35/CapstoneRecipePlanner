@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\RecipeIngredient.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace RecipePlannerLibrary.Models
+{
+    /// &lt;summary&gt;
+    ///     The Recipe Ingredient class.
+    /// &lt;/summary&gt;
+    public class RecipeIngredient
+    {
+        /// &lt;summary&gt;
+        /// Gets or sets the Recipe Id for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public int RecipeId { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Ingredient Name for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public string IngredientName { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Quantity for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public int Quantity { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Measurement for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public string Measurement { get; set; }
+
+        /// &lt;summary&gt;
+        /// Initializes the RecipeIngredient with the specified recipeId, ingredient name, quantity, and the measurement.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;ingredientName&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;measurement&quot;&gt;&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.IngredientName = ingredientName &amp;&amp; this.Quantity = quantity &amp;&amp; this.Measurement = measurement&lt;/postcondition&gt;
+        public RecipeIngredient(int recipeId, string ingredientName, int quantity, string measurement)
+        {
+            this.RecipeId = recipeId;
+            this.IngredientName = ingredientName;
+            this.Quantity = quantity;
+            this.Measurement = measurement;
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[15,31,15,35,1],[15,36,15,40,1],[20,40,20,44,1],[20,45,20,49,1],[25,31,25,35,1],[25,36,25,40,1],[30,37,30,41,1],[30,42,30,46,1],[41,9,41,103,1],[42,9,42,10,1],[43,13,43,38,1],[44,13,44,50,1],[45,13,45,38,1],[46,13,46,44,1],[47,9,47,10,1]]);
+    </script>
+  </body>
+</html>

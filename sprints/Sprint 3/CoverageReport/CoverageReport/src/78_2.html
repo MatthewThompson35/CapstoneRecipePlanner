@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\destiny\OneDrive\Desktop\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\RecipeDALTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests
+{
+    /// &lt;summary&gt;
+    /// Test class for Recipe DAL
+    /// &lt;/summary&gt;
+    [TestClass]
+    public class RecipeDALTests
+    {
+        /// &lt;summary&gt;
+        /// Tests get recipes.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetRecipes()
+        {
+            int expectedCount = 2;
+
+            List&lt;Recipe&gt; recipes = RecipeDAL.getRecipes(Connection.TestsConnectionString);
+            
+            Assert.AreEqual(expectedCount, recipes.Count);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests get ingredients for recipe.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetIngredientsForRecipe()
+        {
+            int recipeId = 1;
+            int expectedCount = 2;
+
+            List&lt;RecipeIngredient&gt; ingredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.TestsConnectionString);
+
+            Assert.AreEqual(expectedCount, ingredients.Count);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests getting  the name of the recipe name by identifier returns correct.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetRecipeNameById_ReturnsCorrectName()
+        {
+            // Arrange
+            var recipeId = 1; // Set the recipe ID to test
+            var expectedName = &quot;Bowl of Lucky Charms&quot;; // Set the expected recipe name
+
+            // Act
+            var actualName = RecipeDAL.getRecipeNameById(recipeId, Connection.TestsConnectionString);
+
+            // Assert
+            Assert.AreEqual(expectedName, actualName);
+        }
+
+        /// &lt;summary&gt;
+        /// tests the get tags for recipe.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetTagsForRecipe()
+        {
+            // Arrange
+            int recipeId = 1;
+            var expectedTags = new List&lt;string&gt; { &quot;test&quot; };
+
+            // Act
+            var actualTags = RecipeDAL.getTagsForRecipe(recipeId, Connection.TestsConnectionString);
+
+            // Assert
+            CollectionAssert.AreEqual(expectedTags, actualTags);
+        }
+
+        /// &lt;summary&gt;
+        /// Tests getting the recipe by name returns correct recipe.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetRecipeByName_ReturnsCorrectRecipe()
+        {
+            // Arrange
+            var name = &quot;Second recipe&quot;;
+            var expectedRecipe = new Recipe
+            {
+                RecipeId = 2,
+                Name = &quot;Second recipe&quot;,
+                Description = &quot;The second Recipe&quot;
+            };
+
+            // Act
+            var actualRecipe = RecipeDAL.getRecipeByName(name, Connection.TestsConnectionString);
+
+            // Assert
+            Assert.AreEqual(expectedRecipe.RecipeId, actualRecipe.RecipeId);
+            Assert.AreEqual(expectedRecipe.Name, actualRecipe.Name);
+            Assert.AreEqual(expectedRecipe.Description, actualRecipe.Description);
+        }
+
+
+        /// &lt;summary&gt;
+        /// Tests the get steps for recipe.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestGetStepsForRecipe()
+        {
+            int recipeId = 1;
+            int expectedCount = 3;
+
+            List&lt;RecipeStep&gt; steps = RecipeDAL.getStepsForRecipe(recipeId, Connection.TestsConnectionString);
+
+            Assert.AreEqual(expectedCount, steps.Count);
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[17,9,17,10,1],[18,13,18,35,1],[20,13,20,91,1],[22,13,22,59,1],[23,9,23,10,1],[30,9,30,10,1],[31,13,31,30,1],[32,13,32,35,1],[34,13,34,128,1],[36,13,36,63,1],[37,9,37,10,1],[44,9,44,10,1],[46,13,46,30,1],[47,13,47,55,1],[50,13,50,102,1],[53,13,53,55,1],[54,9,54,10,1],[61,9,61,10,1],[63,13,63,30,1],[64,13,64,60,1],[67,13,67,101,1],[70,13,70,65,1],[71,9,71,10,1],[78,9,78,10,1],[80,13,80,40,1],[81,13,86,15,1],[89,13,89,98,1],[92,13,92,77,1],[93,13,93,69,1],[94,13,94,83,1],[95,9,95,10,1],[103,9,103,10,1],[104,13,104,30,1],[105,13,105,35,1],[107,13,107,110,1],[109,13,109,57,1],[110,9,110,10,1]]);
+    </script>
+  </body>
+</html>
