@@ -1,4 +1,4 @@
-﻿using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Database;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
