@@ -217,7 +217,7 @@
             <tbody>
             @foreach (var recipe in ViewBag.allRecipesOnPage)
             {
-                <tr onclick="showRecipe('@recipe.RecipeId')">
+                <tr onclick="showRecipeshowRecipe('@recipe.RecipeId')">
                     <td>@recipe.Name</td>
                 </tr>
             }
@@ -350,15 +350,19 @@
         
         if(tag != "") {
             tags.push(tag);
+            document.getElementById('filter-pagination').style.display = 'none';
             filterRecipes();
             document.getElementById("search-bar").value = "";
 
             document.getElementById("available-pagination").style.display = 'none';
             document.getElementById("all-pagination").style.display = 'none';
+            
         } else {
+            document.getElementById('filter-pagination').style.display = 'none';
             filterRecipes()
             document.getElementById("available-pagination").style.display = 'none';
             document.getElementById("all-pagination").style.display = 'none';
+            
         }
         
 
@@ -369,7 +373,9 @@
 
         if (document.getElementById('available-checkbox').checked) {
             recipes = @Html.Raw(Json.Serialize(ViewBag.AvailableRecipes));
+            document.getElementById('filter-pagination').style.display = 'none';
         }
+        document.getElementById('filter-pagination').style.display = 'none';
 
         var filtered = [];
 
@@ -425,7 +431,15 @@
         const itemsToShow = recipes.slice(startIndex, endIndex);
         var table = document.getElementById("filtered-recipes").getElementsByTagName("tbody")[0];
         table.innerHTML = "";
-
+        
+         if (recipes.length == 0) {
+            var row = table.insertRow();
+            var cell = row.insertCell();
+            cell.colSpan = "2";
+            cell.style.textAlign = "center";
+            cell.innerHTML = "No recipes found with the entered tags.";
+        }
+        
         for (var i = 0; i < itemsToShow.length; i++) {
             var row = table.insertRow();
             var nameCell = row.insertCell();
@@ -535,7 +549,7 @@
         var availablePagination = document.getElementById("available-pagination");
         var allPagination = document.getElementById("all-pagination");
         var checkbox = document.getElementById("available-checkbox");
-
+        document.getElementById('filter-pagination').style.display = 'none';
         
         var allRecipes = @Html.Raw(Json.Serialize(ViewBag.CurrentSelectedRadio));
 
