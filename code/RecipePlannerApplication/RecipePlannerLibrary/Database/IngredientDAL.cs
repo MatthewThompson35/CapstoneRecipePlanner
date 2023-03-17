@@ -111,9 +111,10 @@ namespace RecipePlannerLibrary.Database
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
             connection.Open();
-            var query = @"Delete from ingredient_info where ingredientID = @id";
+            var query = @"Delete from ingredient where ingredientID = @id AND USERNAME = @USER";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@USER", MySqlDbType.VarChar).Value = ActiveUser.username;
             command.ExecuteNonQuery();
         }
 

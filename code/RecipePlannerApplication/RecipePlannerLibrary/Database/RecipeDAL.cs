@@ -108,9 +108,10 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var ingredients = new List<RecipeIngredient>();
-            var query = @"Select * from recipe_ingredient where recipeID=@id;";
+            var query = @"Select ri.recipeID, ii.ingredientName, ri.quantity, ri.measurement from recipe_ingredient ri, ingredient_info ii where recipeID = @id and ri.ingredientID = ii.ingredientID;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
