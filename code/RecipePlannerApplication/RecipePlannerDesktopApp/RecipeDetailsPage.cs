@@ -18,7 +18,7 @@ using System.Diagnostics;
 namespace RecipePlannerDesktopApplication
 {
     /// <summary>
-    ///     Recipe Detail Page partial class.
+    ///     Recipe Detail Page class.
     /// </summary>
     public partial class RecipeDetailsPage : Form
     {

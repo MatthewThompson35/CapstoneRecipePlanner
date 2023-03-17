@@ -8,7 +8,6 @@ namespace RecipePlannerLibrary.Database
     /// </summary>
     public class Util
     {
-
         /// <summary>
         /// Gets the hex string for password hashing.
         /// </summary>

@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace RecipePlannerLibrary.Database
 {
     /// <summary>
-    ///     Ingredient DAL
+    ///     Manages the data and functionality for a Ingredient DAL object
     /// </summary>
     public class IngredientDAL
     {
@@ -16,7 +16,9 @@ namespace RecipePlannerLibrary.Database
         /// <summary>
         ///     Gets the ingredients from the ingredient table.
         /// </summary>
-        /// <returns>List of ingredients</returns>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of all ingredients</returns>
         public static List<Ingredient> getIngredients()
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -44,11 +46,13 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Adds the ingredient into the table
+        ///     Adds the ingredient with the specified data into the table
         /// </summary>
         /// <param name="name">The name of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
-        /// <param name="measurement">The measurement of the ingredient.</param>
+        /// <param name="measurement">The measurement type of the ingredient.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>The ingredient is added to the database</postcondition>
         public static void addIngredient(string name, int quantity, string measurement, string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -64,10 +68,12 @@ namespace RecipePlannerLibrary.Database
             }
 
         /// <summary>
-        ///     Decrements the quantity of the ingredient in the database.
+        ///     Decrements the quantity of the ingredient with the given id in the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
-        /// <param name="quantity">The quantity of the ingredient.</param>
+        /// <param name="quantity">The current quantity of the ingredient.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>Quantity for the given ingredient is decreased by 1</postcondition>
         public static void decrementQuantity(int id, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -85,6 +91,8 @@ namespace RecipePlannerLibrary.Database
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>Quantity of the given ingredient is incremented by 1</postcondition>
         public static void incrementQuantity(int id, int quantity)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -101,6 +109,8 @@ namespace RecipePlannerLibrary.Database
         ///     Removes the ingredient from the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>Ingredient is removed from the database</postcondition>
         public static void RemoveIngredient(int id)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -116,7 +126,9 @@ namespace RecipePlannerLibrary.Database
         ///     Gets the ingredients by the specified ingredient name
         /// </summary>
         /// <param name="ingredientName">Name of the ingredient.</param>
-        /// <returns>List of ingredients by ingredient name.</returns>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of ingredients that match ingredient name.</returns>
         public static List<Ingredient> getIngredients(string ingredientName)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);

@@ -30,7 +30,7 @@
         public int? quantity { get; set; }
 
         /// <summary>
-        /// Gets or sets the identifier of the Ingredient.
+        /// Gets or sets the id of the Ingredient.
         /// </summary>
         /// <value>
         /// The id of the Ingredient.

@@ -53,7 +53,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Creates the user for the login and adds it to the database.
+        ///     Creates a user with the specified login credentials and adds it to the database.
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
@@ -77,7 +77,7 @@ namespace RecipePlannerLibrary.Database
         /// <param name="username">The username.</param>
         /// <precondition>none</precondition>
         /// <postcondition>none</postcondition>
-        /// <returns>List of users that match the user</returns>
+        /// <returns>List of users that match the username</returns>
         public static List<string> ContainsUser(string username)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);

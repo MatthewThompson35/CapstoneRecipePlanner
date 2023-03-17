@@ -9,6 +9,9 @@ using RecipePlannerWebApplication.Models;
 
 namespace RecipePlannerWebApplication.Controllers;
 
+/// <summary>
+/// Manages the data and functionality for HomeController
+/// </summary>
 public class HomeController : Controller
 {
     #region Data members
@@ -19,6 +22,12 @@ public class HomeController : Controller
 
     #region Constructors
 
+    /// <summary>
+    /// Creates a new instance of a HomeController object with the specified Logger object
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     public HomeController(ILogger<HomeController> logger)
     {
         this._logger = logger;
@@ -474,7 +483,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Adds the planned meal to the database.
+    ///     Adds the planned meal with the specified data to the database.
     /// </summary>
     /// <param name="recipeId">The id for the recipe.</param>
     /// <param name="week">The week of the meal.</param>
@@ -598,7 +607,7 @@ public class HomeController : Controller
     /// </summary>
     /// <precondition>none</precondition>
     /// <postcondition>none</postcondition>
-    /// <returns>The add ingredients page or login on server connection</returns>
+    /// <returns>The add ingredients page or login on bad server connection</returns>
     public ActionResult goToAddIngredientsPage()
     {
         var measurements = Enum.GetNames(typeof(Measurement)).ToList();
@@ -739,11 +748,11 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to add ingredients page.
+    ///     Goes to planned meals page.
     /// </summary>
     /// <precondition>none</precondition>
     /// <postcondition>none</postcondition>
-    /// <returns>The add ingredients page or login on server connection</returns>
+    /// <returns>The planned meals page or login on bad server connection</returns>
     public ActionResult goToPlannedMealsPage()
     {
         ViewBag.CurrentWeek = "This Week";
@@ -774,11 +783,11 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to add ingredients page.
+    ///     Goes to next week's planned meal page.
     /// </summary>
     /// <precondition>none</precondition>
     /// <postcondition>none</postcondition>
-    /// <returns>The add ingredients page or login on server connection</returns>
+    /// <returns>The next week's planned meal page or login on bad server connection</returns>
     public ActionResult goToPlannedMealsPageNextWeek()
     {
         ViewBag.CurrentWeek = "Next Week";

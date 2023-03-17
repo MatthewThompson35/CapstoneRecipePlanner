@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 namespace RecipePlannerLibrary.Database
 {
     /// <summary>
-    ///     The PlannedMealDal class for database incorporation and modification.
+    ///     Manages the data and functionality for the PlannedMealDal class
     /// </summary>
     public class PlannedMealDal
     {
@@ -18,6 +18,8 @@ namespace RecipePlannerLibrary.Database
         /// <param name="day">the day</param>
         /// <param name="type">the meal type</param>
         /// <param name="date">the date for the meal to be added.</param>
+        ///<precondition>none</precondition>
+        ///<postcondition>Planned meal is added to the database</postcondition>
         public static void addPlannedMeal(string connectionString, int recipeId, string day, string type, DateTime date)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -37,6 +39,8 @@ namespace RecipePlannerLibrary.Database
         ///     Gets all this week's meals based on the specified connection string provided to connect to the database.
         /// </summary>
         /// <param name="connectionString">the connection string</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>all of this week's meals from the database.</returns>
         public static Dictionary<(string, string), int> getThisWeeksMeals(string connectionString)
         {
@@ -63,6 +67,8 @@ namespace RecipePlannerLibrary.Database
         ///     Gets next week's meals based on the specified connection string provided to connect to the database.
         /// </summary>
         /// <param name="connectionString">the connection string.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>all of next week's meals from the database.</returns>
         public static Dictionary<(string, string), int> getNextWeeksMeals(string connectionString)
         {
@@ -93,6 +99,8 @@ namespace RecipePlannerLibrary.Database
         /// <param name="day">the day</param>
         /// <param name="type">the meal type</param>
         /// <param name="date">the date of the meal</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>Meal is removed from planned meals</postcondition>
         public static void RemoveThisWeekMeal(string connectionString, int id, string day, string type, DateTime date)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -108,11 +116,13 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Determines whether an item in the database exists from the planned_recipe schema.
+        ///     Determines whether an item in the database exists from the planned_recipe table.
         /// </summary>
         /// <param name="connectionString">the connection string.</param>
         /// <param name="type">the meal type</param>
         /// <param name="date">the date of the meal</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
         /// <returns>true if an item exists, otherwise false.</returns>
         public static bool exists(string connectionString, string type, DateTime date)
         {
@@ -144,6 +154,8 @@ namespace RecipePlannerLibrary.Database
         /// <param name="type">the meal type</param>
         /// <param name="date">the date of the meal</param>
         /// <param name="recipeId">the recipe id.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>Meal is updated in the database</postcondition>
         public static void UpdateThisWeeksMeal(string connectionString, string day, string type, DateTime date,
             int recipeId)
         {
