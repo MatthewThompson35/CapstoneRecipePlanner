@@ -27,9 +27,6 @@ namespace RecipePlannerDesktopApplication
         private string selectedDay;
         private string selectedMealType;
 
-        private bool isYesButtonClicked = false;
-        private bool isNoButtonClicked = false;
-
         //private PlannedMealDal mealDal;
         
         /// <summary>
@@ -39,8 +36,6 @@ namespace RecipePlannerDesktopApplication
         public RecipeDetailsPage()
         {
             InitializeComponent();
-
-            
         }
 
         /// <summary>
