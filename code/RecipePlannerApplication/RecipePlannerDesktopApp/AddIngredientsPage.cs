@@ -84,21 +84,7 @@ namespace RecipePlannerDesktopApplication
 
         private void addIngredient(Ingredient ingredient)
         {
-            using (MySqlConnection sqlConn = new MySqlConnection(Connection.ConnectionString))
-            {
-                sqlConn.Open();
-
-                string query = "insert into ingredient values(@username, @ingredientName, @quantity, @ingredientID, @Measurement)";
-                using var command = new MySqlCommand(query, sqlConn);
-
-                command.Parameters.AddWithValue("@username", ingredient.username);
-                command.Parameters.AddWithValue("@ingredientID", ingredient.id);
-                command.Parameters.AddWithValue("@ingredientName", ingredient.name);
-                command.Parameters.AddWithValue("@quantity", ingredient.quantity);
-                command.Parameters.AddWithValue("@Measurement", ingredient.measurement);
-
-                command.ExecuteNonQuery();
-            }
+            IngredientDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
 
             this.ingredientsPage.UpdateIngredientsGridView();
         }
