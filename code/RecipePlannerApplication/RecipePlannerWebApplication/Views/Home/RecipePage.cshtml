@@ -217,7 +217,7 @@
             <tbody>
             @foreach (var recipe in ViewBag.allRecipesOnPage)
             {
-                <tr onclick="showRecipeshowRecipe('@recipe.RecipeId')">
+                <tr onclick="showRecipe('@recipe.RecipeId')">
                     <td>@recipe.Name</td>
                 </tr>
             }
