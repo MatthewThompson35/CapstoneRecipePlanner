@@ -53,9 +53,8 @@ namespace RecipePlannerLibrary.Database
         {
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
-            try
-            {
-                var query = @"INSERT INTO ingredient_info (ingredientName, measurementType) VALUES (@name, @Measurement); INSERT INTO ingredient (ingredientID, username, quantity) VALUES ((SELECT MAX(ingredientID) FROM ingredient_info), @username, @quantity);";
+
+            var query = @"INSERT INTO ingredient_info (ingredientName, measurementType) VALUES (@name, @Measurement); INSERT INTO ingredient (ingredientID, username, quantity) VALUES ((SELECT MAX(ingredientID) FROM ingredient_info), @username, @quantity);";
                 using var command = new MySqlCommand(query, connection);
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
                 command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
@@ -63,11 +62,6 @@ namespace RecipePlannerLibrary.Database
                 command.Parameters.Add("@Measurement", MySqlDbType.VarChar).Value = measurement;
                 command.ExecuteNonQuery();
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("MySQL error: " + ex.Message);
-            }
-        }
 
         /// <summary>
         ///     Decrements the quantity of the ingredient in the database.

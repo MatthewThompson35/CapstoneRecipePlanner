@@ -102,15 +102,17 @@ namespace RecipePlannerTests
 
             using var connection = new MySqlConnection(Connection.TestsConnectionString);
             connection.Open();
-            var query = @"Select * from ingredient where username = @username and ingredientName = @name";
+            var query = @"SELECT i.ingredientID, i.quantity, ii.measurementType FROM ingredient i, ingredient_info ii WHERE i.ingredientID = ii.ingredientID and username=@user;";
             using var command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@username", ActiveUser.username);
+            command.Parameters.AddWithValue("@user", ActiveUser.username);
             command.Parameters.AddWithValue("@name", name);
             using var reader = command.ExecuteReader();
             
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(quantity, reader.GetInt32("quantity"));
-            Assert.AreEqual(measurement, reader.GetString("Measurement"));
+            Assert.AreEqual(measurement, reader.GetString("measurementType"));
+
+            IngredientDAL.RemoveIngredient(reader.GetInt32("ingredientID"));
         }
     }
 }
