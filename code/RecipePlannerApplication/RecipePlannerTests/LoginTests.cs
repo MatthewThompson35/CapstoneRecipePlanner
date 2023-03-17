@@ -5,6 +5,9 @@ namespace RecipePlannerTests
     [TestClass]
     public class LoginTests
     {
+        /// <summary>
+        /// Tests the login initialization.
+        /// </summary>
         [TestMethod]
         public void TestLoginInitialization()
         {
@@ -19,6 +22,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(expectedErrorMessage, login.ErrorMessage);
         }
 
+        /// <summary>
+        /// Tests the login properties.
+        /// </summary>
         [TestMethod]
         public void TestLoginProperties()
         {

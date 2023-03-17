@@ -30,6 +30,8 @@ namespace RecipePlannerLibrary.Models
         /// <param name="recipeId">The recipe id of the Recipe Step.</param>
         /// <param name="stepNumber">The step number of the Recipe Step.</param>
         /// <param name="stepDescription">The step description of the Recipe Step.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>recipeID = recipeId && stepNumber = stepNumber && stepDescription = stepDescription</postcondition>
         public RecipeStep(int recipeId, int stepNumber, string stepDescription)
         {
             this.recipeId = recipeId;

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
@@ -30,6 +31,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Takes the User to the login page
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The Login Page</returns>
     public IActionResult Index()
     {
@@ -40,6 +43,8 @@ public class HomeController : Controller
     ///     Checks the login and goes to recipe page on successful login. Prompts for retry on failed login
     /// </summary>
     /// <param name="ad">The Login object containing user credentials</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>
     ///     The Recipe Page view on successful login, Login Page view with error message on failed login or connection
     ///     error
@@ -81,7 +86,7 @@ public class HomeController : Controller
             }
 
             this.addToAvailableRecipes(recipes);
-            const int pageSize = 1;
+            const int pageSize = 10;
             var currentPage = page ?? 1;
 
             ViewBag.currentPage = currentPage;
@@ -90,7 +95,7 @@ public class HomeController : Controller
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
             var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = recipes.Count;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize); ;
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
             var currentAllPage = 1;
@@ -119,6 +124,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Adds to the available recipes if the user can make that recipe.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>If there are available recipes in the database, ViewBag.AvailableRecipes.Count = the amount of recipes available</postcondition>
     /// <param name="recipes">The recipes.</param>
     private void addToAvailableRecipes(List<Recipe> recipes)
     {
@@ -163,6 +170,8 @@ public class HomeController : Controller
     /// </summary>
     /// <param name="recipe1">The recipe1.</param>
     /// <param name="recipe2">The recipe2.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns> 0 or 1 based on which recipe name comes first</returns>
     private int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
     {
@@ -173,6 +182,8 @@ public class HomeController : Controller
     ///     Decrements the quantity of a given ingredient by its id.
     /// </summary>
     /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Ingredient quantity is decremented in the database</postcondition>
     /// <returns>The view of the ingredients page.</returns>
     public ActionResult decrementQuantity(string id)
     {
@@ -199,6 +210,8 @@ public class HomeController : Controller
     ///     Gets the quantity of the ingredient with the given id.
     /// </summary>
     /// <param name="id">The ingredient id.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The quantity of the ingredient</returns>
     private int getItemQuantity(int id)
     {
@@ -218,6 +231,8 @@ public class HomeController : Controller
     ///     Increments the quantity of the ingredient with the given id.
     /// </summary>
     /// <param name="id">The ingredient id.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Quantity will be incremented in the database</postcondition>
     /// <returns>The ingredients page or login on server connection error</returns>
     public ActionResult incrementQuantity(string id)
     {
@@ -244,6 +259,8 @@ public class HomeController : Controller
     ///     Removes the ingredient from the list.
     /// </summary>
     /// <param name="id">The identifier of the ingredient to be removed.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Ingredient will be removed from the database</postcondition>
     /// <returns>The ingredients page or login on server connection error.</returns>
     public ActionResult removeIngredient(string id)
     {
@@ -262,11 +279,13 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Adds the ingredient to the list.
+    ///     Adds the ingredient to the the database and is then displayed to the user.
     /// </summary>
     /// <param name="txtIngredientName">The name of the ingredient.</param>
     /// <param name="txtQuantity">The quantity of the ingredient.</param>
     /// <param name="measurement">The measurement unit of the ingredient.</param>
+    /// <precondition>parameters must not be null, ingredient must not be in database.</precondition>
+    /// <postcondition>Ingredient is added to the database</postcondition>
     /// <returns>The ingredients page or login on server connection error.</returns>
     [HttpPost]
     public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
@@ -312,6 +331,8 @@ public class HomeController : Controller
     ///     Goes to ingredients page with specified page number.
     /// </summary>
     /// <param name="page">The page number to navigate to.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>Returns the ingredients page with the specified page of ingredients.</returns>
     public ActionResult goToIngredientsPage(int? page)
     {
@@ -349,6 +370,8 @@ public class HomeController : Controller
     ///     Goes to RecipesPage that displays the available recipes by default with the specified page number
     /// </summary>
     /// <param name="page">The page number to navigate to.</param>
+    /// <precondition>ViewBag.AvailableRecipes != null </precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The recipes page with the specified page or login on server connection error</returns>
     public ActionResult goToRecipePage(int? page)
     {
@@ -374,6 +397,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Goes to RecipesPage that displays all recipes by default with the specified page number
     /// </summary>
+    /// <precondition>ViewBag.AvailableRecipes != null</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The recipes page with the specified page or login on server connection error</returns>
     public ActionResult goToRecipePageAll(int? page)
     {
@@ -410,7 +435,7 @@ public class HomeController : Controller
 
             var currentPage = 1;
             this.addToAvailableRecipes(recipes);
-            const int pageSize = 1;
+            const int pageSize = 10;
             var currentAllPage = page ?? 1;
 
             ViewBag.currentAllPage = currentAllPage;
@@ -451,6 +476,8 @@ public class HomeController : Controller
     /// <param name="week">The week of the meal.</param>
     /// <param name="day">The day of the meal.</param>
     /// <param name="type">The meal type</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Meal is added to the specified slot in the database</postcondition>
     /// <returns>The Recipe Page Defaulted to page one</returns>
     public ActionResult addPlannedMeal(int recipeId, string week, string day, string type)
     {
@@ -512,6 +539,8 @@ public class HomeController : Controller
     /// <param name="type">The type of meal (e.g. breakfast, lunch, dinner).</param>
     /// <param name="date">The date of the meal.</param>
     /// <param name="recipeId">The ID of the recipe to use.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Meal at specified time is overwritten in the database</postcondition>
     /// <returns>The recipes page or login on server connection error.</returns>
     public ActionResult overwriteAddedMeal(string day, string type, string date, int recipeId)
     {
@@ -527,6 +556,8 @@ public class HomeController : Controller
     /// <param name="week">The week to update the planned meal for.</param>
     /// <param name="day">The day of the week to update the planned meal for.</param>
     /// <param name="type">The type of meal to update (e.g. breakfast, lunch, dinner).</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>The meal is updated in the database to match the correct values</postcondition>
     /// <returns>The updated recipes page or login on server connection error.</returns>
     public ActionResult UpdateThisWeeksMeal(int recipeId, string week, string day, string type)
     {
@@ -561,6 +592,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToAddIngredientsPage()
     {
@@ -572,7 +605,9 @@ public class HomeController : Controller
     /// <summary>
     ///     Toggles the week for Planned Meals page.
     /// </summary>
-    /// <param name="currentWeek">The current week.</param>
+    /// <param name="currentWeek">The current week. (This week or next week)</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The planned meals page based on which week is given</returns>
     public ActionResult ToggleWeek(string currentWeek)
     {
@@ -588,6 +623,15 @@ public class HomeController : Controller
         return View("PlannedMealsPage");
     }
 
+    /// <summary>
+    /// Gets the name of the recipe at the specified planned meal slot.
+    /// </summary>
+    /// <param name="day">The day.</param>
+    /// <param name="mealType">Type of the meal.</param>
+    /// <param name="week">The week.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>The planned meal slot will be updated with the recipe name</postcondition>
+    /// <returns>The recipeName and RecipeId as a json Result</returns>
     public JsonResult GetRecipeName(string day, string mealType, string week)
     {
         try
@@ -623,6 +667,16 @@ public class HomeController : Controller
         }
     }
 
+
+    /// <summary>
+    /// Removes the meal at the specified planned meal slot.
+    /// </summary>
+    /// <param name="day">The day.</param>
+    /// <param name="mealType">Type of the meal.</param>
+    /// <param name="week">The week.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>The planned meal is removed from the database</postcondition>
+    /// <returns>Returns a Json Result that gives the string that is updated in place of the removed recipe</returns>
     public JsonResult RemoveThisWeeksMeal(string day, string mealType, string week)
     {
         try
@@ -683,6 +737,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToPlannedMealsPage()
     {
@@ -716,6 +772,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The add ingredients page or login on server connection</returns>
     public ActionResult goToPlannedMealsPageNextWeek()
     {
@@ -746,11 +804,13 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Creates the user.
+    ///    Creates the user.
     /// </summary>
     /// <param name="username">The username.</param>
     /// <param name="password">The password.</param>
     /// <param name="repeatPassword">The repeat password.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>The user is added to the database</postcondition>
     /// <returns>The login page or register is user was not added or login on server connection error</returns>
     [HttpPost]
     public ActionResult CreateUser(string username, string password, string repeatPassword)
@@ -782,8 +842,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Opens the register.
+    ///     Opens the register page.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns>The register page</returns>
     [HttpPost]
     public ActionResult OpenRegister()
@@ -802,8 +864,10 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Logs out this instance.
+    ///     Logs out of this instance.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns> The login page</returns>
     [HttpPost]
     public IActionResult Logout()

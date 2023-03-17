@@ -1,8 +1,14 @@
 ﻿namespace RecipePlannerTests
 {
+    /// <summary>
+    /// Test the recipe step class
+    /// </summary>
     [TestClass]
     public class RecipeStepTests
     {
+        /// <summary>
+        /// Tests the constructor.
+        /// </summary>
         [TestMethod]
         public void TestConstructor()
         {

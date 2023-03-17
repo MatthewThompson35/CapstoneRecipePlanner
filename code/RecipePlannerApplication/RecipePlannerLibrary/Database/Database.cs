@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace RecipePlannerLibrary.Database
 {
     /// <summary>
-    ///     Database class
+    /// The database class that is used throughout the project to get information from the database
     /// </summary>
     public class Database
     {
@@ -20,10 +20,12 @@ namespace RecipePlannerLibrary.Database
         #region Methods
 
         /// <summary>
-        ///     Checks to see if the login is accepted.
+        ///     Checks to see if the login is valid
         /// </summary>
         /// <param name="login">The login.</param>
-        /// <returns>the result</returns>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>the result. 1 if true. 0 if false</returns>
         public static int LoginCheck(Login login)
         {
             var passwordHash = Util.GetHash(login.Password);
@@ -51,10 +53,12 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Creates the user for the login.
+        ///     Creates the user for the login and adds it to the database.
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>User is added to the database</postcondition>
         public static void CreateUser(string username, string password)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -68,10 +72,12 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Determines whether the specified username contains user.
+        ///     Determines whether the database contains the user.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns>List of users</returns>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of users that match the user</returns>
         public static List<string> ContainsUser(string username)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -93,6 +99,8 @@ namespace RecipePlannerLibrary.Database
         /// Removes the user with the given username.
         /// </summary>
         /// <param name="username">The username of the user to be removed.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>The user is removed from the database</postcondition>
         public static void RemoveUser(string username)
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);

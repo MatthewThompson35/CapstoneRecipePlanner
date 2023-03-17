@@ -36,6 +36,8 @@ namespace RecipePlannerLibrary.Models
         /// <param name="ingredientName"></param>
         /// <param name="quantity"></param>
         /// <param name="measurement"></param>
+        /// <precondition>none</precondition>
+        /// <postcondition> this.RecipeId = recipeId && this.IngredientName = ingredientName && this.Quantity = quantity && this.Measurement = measurement</postcondition>
         public RecipeIngredient(int recipeId, string ingredientName, int quantity, string measurement)
         {
             this.RecipeId = recipeId;
