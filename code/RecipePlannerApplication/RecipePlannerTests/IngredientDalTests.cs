@@ -71,7 +71,7 @@ namespace RecipePlannerTests
 
             int ingredientId = 900;
 
-            IngredientDAL.RemoveIngredient(ingredientId);
+            IngredientDAL.RemoveIngredient(ingredientId, Connection.TestsConnectionString);
             ActiveUser.username = "global";
             var ingredients = IngredientDAL.getIngredients();
             Ingredient ingredient = null;
@@ -98,6 +98,7 @@ namespace RecipePlannerTests
             int quantity = 2;
             string measurement = "G";
 
+            IngredientDAL.RemoveIngredient(29, Connection.TestsConnectionString);
             IngredientDAL.addIngredient(name, quantity, measurement, Connection.TestsConnectionString);
 
             using var connection = new MySqlConnection(Connection.TestsConnectionString);
@@ -111,8 +112,6 @@ namespace RecipePlannerTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(quantity, reader.GetInt32("quantity"));
             Assert.AreEqual(measurement, reader.GetString("measurementType"));
-
-            IngredientDAL.RemoveIngredient(reader.GetInt32("ingredientID"));
         }
     }
 }

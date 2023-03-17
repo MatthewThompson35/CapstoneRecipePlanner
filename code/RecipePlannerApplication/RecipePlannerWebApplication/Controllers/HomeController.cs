@@ -279,7 +279,7 @@ public class HomeController : Controller
         try
         {
             page = 1;
-            IngredientDAL.RemoveIngredient(int.Parse(id));
+            IngredientDAL.RemoveIngredient(int.Parse(id), Connection.ConnectionString);
             this.setupIngredientsPage(page);
             return View("IngredientsPage");
         }

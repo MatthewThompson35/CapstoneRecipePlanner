@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 
@@ -96,7 +97,7 @@ public partial class IngredientsPage : Form
                     }
                 }
 
-                IngredientDAL.RemoveIngredient(id);
+                IngredientDAL.RemoveIngredient(id, Connection.ConnectionString);
                 this.UpdateIngredientsGridView();
             }
         }

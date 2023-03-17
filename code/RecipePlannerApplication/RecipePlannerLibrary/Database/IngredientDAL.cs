@@ -58,14 +58,14 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            var query = @"INSERT INTO ingredient_info (ingredientName, measurementType) VALUES (@name, @Measurement); INSERT INTO ingredient (ingredientID, username, quantity) VALUES ((SELECT MAX(ingredientID) FROM ingredient_info), @username, @quantity);";
-                using var command = new MySqlCommand(query, connection);
-                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
-                command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
-                command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
-                command.Parameters.Add("@Measurement", MySqlDbType.VarChar).Value = measurement;
-                command.ExecuteNonQuery();
-            }
+            var query = @"INSERT INTO ingredient_info (ingredientName, measurementType) SELECT @name, @measurement WHERE NOT EXISTS (SELECT 1 FROM ingredient_info WHERE ingredientName = @name); INSERT INTO ingredient (ingredientID, username, quantity) SELECT ingredientID, @username, @quantity FROM ingredient_info WHERE ingredientName = @name;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add("@Measurement", MySqlDbType.VarChar).Value = measurement;
+            command.ExecuteNonQuery();
+        }
 
         /// <summary>
         ///     Decrements the quantity of the ingredient with the given id in the database.
@@ -111,9 +111,9 @@ namespace RecipePlannerLibrary.Database
         /// <param name="id">The id of the ingredient.</param>
         /// <precondition>none</precondition>
         /// <postcondition>Ingredient is removed from the database</postcondition>
-        public static void RemoveIngredient(int id)
+        public static void RemoveIngredient(int id, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"Delete from ingredient where ingredientID = @id AND USERNAME = @USER";
             using var command = new MySqlCommand(query, connection);
