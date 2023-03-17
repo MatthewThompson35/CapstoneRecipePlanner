@@ -269,6 +269,7 @@ public class HomeController : Controller
     {
         try
         {
+            page = 1;
             IngredientDAL.RemoveIngredient(int.Parse(id));
             this.setupIngredientsPage(page);
             return View("IngredientsPage");
