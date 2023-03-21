@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecipeDetailsPage));
             this.label1 = new System.Windows.Forms.Label();
             this.recipeDetailsTextBox = new System.Windows.Forms.TextBox();
             this.daysComboBox = new System.Windows.Forms.ComboBox();
@@ -40,12 +39,12 @@
             this.weekComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.updateSuccessfullyLabel = new System.Windows.Forms.Label();
-            this.plannerMenuButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMealPlanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.yesButton = new System.Windows.Forms.Button();
             this.noButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,11 +60,12 @@
             // 
             // recipeDetailsTextBox
             // 
-            this.recipeDetailsTextBox.Enabled = false;
             this.recipeDetailsTextBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.recipeDetailsTextBox.Location = new System.Drawing.Point(53, 176);
             this.recipeDetailsTextBox.Multiline = true;
             this.recipeDetailsTextBox.Name = "recipeDetailsTextBox";
+            this.recipeDetailsTextBox.ReadOnly = true;
+            this.recipeDetailsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.recipeDetailsTextBox.Size = new System.Drawing.Size(399, 438);
             this.recipeDetailsTextBox.TabIndex = 2;
             // 
@@ -148,18 +148,6 @@
             this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
             this.updateSuccessfullyLabel.Visible = false;
             // 
-            // plannerMenuButton
-            // 
-            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
-            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
-            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.plannerMenuButton.Location = new System.Drawing.Point(12, 12);
-            this.plannerMenuButton.Name = "plannerMenuButton";
-            this.plannerMenuButton.Size = new System.Drawing.Size(62, 56);
-            this.plannerMenuButton.TabIndex = 15;
-            this.plannerMenuButton.UseVisualStyleBackColor = false;
-            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
-            // 
             // plannerContextMenuStrip
             // 
             this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -207,14 +195,25 @@
             this.noButton.Visible = false;
             this.noButton.Click += new System.EventHandler(this.NoButton_Click);
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(46, 39);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(94, 29);
+            this.backButton.TabIndex = 18;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
-            this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.updateSuccessfullyLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.weekComboBox);
@@ -244,11 +243,11 @@
         private ComboBox weekComboBox;
         private Label label4;
         private Label updateSuccessfullyLabel;
-        private Button plannerMenuButton;
         private ContextMenuStrip plannerContextMenuStrip;
         private ToolStripMenuItem findRecipeToolStripMenuItem;
         private ToolStripMenuItem viewMealPlanToolStripMenuItem1;
         private Button yesButton;
         private Button noButton;
+        private Button backButton;
     }
 }
