@@ -255,6 +255,9 @@
         <div id="filter-pagination" style="display: none">
             <p>This is being displayed</p>
         </div>
+    </div>
+        <div id="recipe-details-box" style="overflow: auto; display: flex; flex-direction: column;  height: 1000px;">
+    <div id="addForm">
         <form method="post" id="addPlannedMeal" style="display: none;">
             <div class="form-group">
                 <input type="hidden" name="recipeId" id="recipeId" value="">
@@ -285,12 +288,12 @@
 
             </div>
             <div class="button-group">
-                <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add" />
-                <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
+                <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add"/>
+                <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update"/>
             </div>
         </form>
     </div>
-    <div id="recipe-details-box" style="overflow: auto;">
+    <div id="details">
         @foreach (var recipe in ViewBag.AllRecipes)
         {
             <div id="@recipe.RecipeId" style="display: none">
@@ -323,6 +326,7 @@
             </div>
         }
     </div>
+</div>
 </div>
 </body>
 <script>
