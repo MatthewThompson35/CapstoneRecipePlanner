@@ -9,124 +9,39 @@
     </form>
     
 </div>
-<div>
+<div class="row">
+    <div class="col-md-6"  id="meal-table">
     <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-                <th>Sunday</th>
+        @{ string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }; }
+
+        @for (int i = 0; i < days.Length; i++)
+        {
+            <tr class="day-row" data-day="@days[i]">
+                <td style="background-color: lightblue;" colspan="4">@days[i]</td>
             </tr>
-        </thead>
-        <tbody>
-        <th>Meal Type</th>
-        <td>
-            <select id="Monday" onchange="handleChange('Monday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Monday')">Remove</button>
-        </td>
-        <td>
-            <select id="Tuesday" onchange="handleChange('Tuesday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Tuesday')">Remove</button>
-        </td>
-        <td>
-            <select id="Wednesday" onchange="handleChange('Wednesday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Wednesday')">Remove</button>
-        </td>
-        <td>
-            <select id="Thursday" onchange="handleChange('Thursday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Thursday')">Remove</button>
-        </td>
-        <td>
-            <select id="Friday" onchange="handleChange('Friday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Friday')">Remove</button>
-        </td>
-        <td>
-            <select id="Saturday" onchange="handleChange('Saturday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Saturday')">Remove</button>
-        </td>
-        <td>
-            <select id="Sunday" onchange="handleChange('Sunday')">
-                    @foreach (var item in mealTypes)
-                    {
-                    <option>@item</option>
-                    }
-            </select>
-            <button onclick="removeColumn('Sunday')">Remove</button>
-        </td>
-        <tr>
-            <th>Recipe Name</th>
-            <td id="MondayDetails">@ViewBag.DefaultValues[0]</td>
-            <td id="TuesdayDetails">@ViewBag.DefaultValues[1]</td>
-            <td id="WednesdayDetails">@ViewBag.DefaultValues[2]</td>
-            <td id="ThursdayDetails">@ViewBag.DefaultValues[3]</td>
-            <td id="FridayDetails">@ViewBag.DefaultValues[4]</td>
-            <td id="SaturdayDetails">@ViewBag.DefaultValues[5]</td>
-            <td id="SundayDetails">@ViewBag.DefaultValues[6]</td>
-        </tr>
-        <tr>
-            <th>View Recipes</th>
-            <td>
-                <button id="MondayButton" onclick="showRecipeDetails('Monday')">View Recipe</button>
-            </td>
-            <td>
-                <button id="TuesdayButton" onclick="showRecipeDetails('Tuesday')">View Recipe</button>
-            </td>
-            <td>
-                <button id="WednesdayButton" onclick="showRecipeDetails('Wednesday')">View Recipe</button>
-            </td>
-            <td>
-                <button id="ThursdayButton" onclick="showRecipeDetails('Thursday')">View Recipe</button>
-            </td>
-            <td>
-                <button id="FridayButton" onclick="showRecipeDetails('Friday')">View Recipe</button>
-            </td>
-            <td>
-                <button id="SaturdayButton" onclick="showRecipeDetails('Saturday')">View Recipe</button>
-            </td>
-            <td>
-                <button id="SundayButton" onclick="showRecipeDetails('Sunday')">View Recipe</button>
-            </td>
-        </tr>
-        </tbody>
+            <tr class="details-row hidden" data-day="@days[i]">
+                <td>Breakfast</td>
+                <td id="@($"{days[i]}BreakfastDetails")">@ViewBag.DefaultValues[i]</td>
+                <td><button id="@($"{days[i]}BreakfastButton")" onclick="showRecipeDetails('@days[i]', 'Breakfast')">View Recipe</button></td>
+                <td><button onclick="removeColumn('@days[i]', 'Breakfast')">Remove</button></td>
+            </tr>
+            <tr class="details-row hidden" data-day="@days[i]">
+                <td>Lunch</td>
+                <td id="@($"{days[i]}LunchDetails")">@ViewBag.Lunch[i]</td>
+                <td><button id="@($"{days[i]}LunchButton")" onclick="showRecipeDetails('@days[i]', 'Lunch')">View Recipe</button></td>
+                <td><button onclick="removeColumn('@days[i]', 'Lunch')">Remove</button></td>
+            </tr>
+            <tr class="details-row hidden" data-day="@days[i]">
+                <td>Dinner</td>
+                <td id="@($"{days[i]}DinnerDetails")">@ViewBag.Dinner[i]</td>
+                <td><button id="@($"{days[i]}DinnerButton")" onclick="showRecipeDetails('@days[i]', 'Dinner')">View Recipe</button></td>
+                <td><button onclick="removeColumn('@days[i]','Dinner')">Remove</button></td>
+            </tr>
+        }
     </table>
 </div>
 
-<div id="recipe-details">
+    <div class="col-md-6" id="recipe-details">
     <div id="recipe-details-box" style="overflow: auto;">
         @foreach (var recipe in ViewBag.AllRecipes)
         {
@@ -151,6 +66,8 @@
         }
     </div>
 </div>
+</div>
+
 <style>
     #recipe-details {
         align-items: center;
@@ -161,11 +78,12 @@
 
     #recipe-details-box {
         border: 1px solid black;
-        height: 300px;
+        height: 900px;
         padding: 10px;
         padding-top: 20px;
-        position: relative;
-        width: 95%;
+        top: 160px;
+        position: fixed;
+        width: 38%;
     }
 
         #recipe-details-box h3 {
@@ -236,11 +154,34 @@
         border-top: none;
         padding: 16px;
     }
+
+    .hidden {
+        display: none;
+    }
 </style>
 <script>
     window.onload = function () {
         doDefaultMeals();
     };
+    
+    
+    const dayRows = document.querySelectorAll('.day-row');
+
+    // Add click event listener to each day row
+    dayRows.forEach(dayRow => {
+        dayRow.addEventListener('click', () => {
+            // Get the day for the clicked row
+            const day = dayRow.dataset.day;
+
+            // Get all details rows for the clicked day
+            const detailsRows = document.querySelectorAll(`.details-row[data-day="${day}"]`);
+
+            // Toggle the "hidden" class for each details row
+            detailsRows.forEach(detailsRow => {
+                detailsRow.classList.toggle('hidden');
+            });
+        });
+    });
     
     function toggleWeek() {
         if ("@ViewBag.CurrentWeek" === "Next Week") {
@@ -257,20 +198,8 @@
         });
     }
     
-
-    function doDefaultMeals() {
-        handleChange('Monday');
-        handleChange('Tuesday');
-        handleChange('Wednesday');
-        handleChange('Thursday');
-        handleChange('Friday');
-        handleChange('Saturday');
-        handleChange('Sunday');
-    };
-    
-    function removeColumn(day){
-        var mealType = document.getElementById(day).value;
-        var dayDetails = day + "Details";
+    function removeColumn(day, mealType){
+        var dayDetails = day + mealType + "Details";
         var detailsElement = document.getElementById(dayDetails);
         var week = "@ViewBag.CurrentWeek"
 
@@ -289,31 +218,7 @@
         });
         }
 
-    function handleChange(day) {
-        var mealType = document.getElementById(day).value;
-        var dayDetails = day + "Details";
-        var detailsElement = document.getElementById(dayDetails);
-        var week = "@ViewBag.CurrentWeek"
-
-        $.ajax({
-            type: "GET",
-            url: "@Url.Action("GetRecipeName", "Home")",
-            data: { day: day, mealType: mealType, week: week },
-            success: function (response) {
-                console.log(response);
-                var recipeName = response.recipeName;
-                detailsElement.innerHTML = recipeName;
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
-
-        document.getElementById(dayDetails).value = recipeId;
-    }
-
-    function showRecipeDetails(day) {
-        var mealType = document.getElementById(day).value;
+    function showRecipeDetails(day, mealType) {
         var week = "@ViewBag.CurrentWeek"
 
         $.ajax({
@@ -351,5 +256,6 @@
         detailsCell.innerHTML = "Recipe " + recipeId;
 
     }
+
 
 </script>
