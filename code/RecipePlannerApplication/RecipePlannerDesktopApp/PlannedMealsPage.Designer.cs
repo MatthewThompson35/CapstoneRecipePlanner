@@ -490,9 +490,9 @@
             // 
             this.removeSundayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSundayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeSundayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeSundayBreakfastButton.Location = new System.Drawing.Point(375, 65);
             this.removeSundayBreakfastButton.Name = "removeSundayBreakfastButton";
-            this.removeSundayBreakfastButton.Size = new System.Drawing.Size(121, 32);
+            this.removeSundayBreakfastButton.Size = new System.Drawing.Size(121, 31);
             this.removeSundayBreakfastButton.TabIndex = 37;
             this.removeSundayBreakfastButton.Text = "Remove";
             this.removeSundayBreakfastButton.UseVisualStyleBackColor = false;
@@ -502,9 +502,9 @@
             // 
             this.removeSundayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSundayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeSundayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeSundayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeSundayDinnerButton.Name = "removeSundayDinnerButton";
-            this.removeSundayDinnerButton.Size = new System.Drawing.Size(121, 35);
+            this.removeSundayDinnerButton.Size = new System.Drawing.Size(121, 31);
             this.removeSundayDinnerButton.TabIndex = 38;
             this.removeSundayDinnerButton.Text = "Remove";
             this.removeSundayDinnerButton.UseVisualStyleBackColor = false;
@@ -514,7 +514,7 @@
             // 
             this.removeSundayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSundayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeSundayLunchButton.Location = new System.Drawing.Point(388, 103);
+            this.removeSundayLunchButton.Location = new System.Drawing.Point(375, 103);
             this.removeSundayLunchButton.Name = "removeSundayLunchButton";
             this.removeSundayLunchButton.Size = new System.Drawing.Size(121, 31);
             this.removeSundayLunchButton.TabIndex = 39;
@@ -526,9 +526,9 @@
             // 
             this.removeMondayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeMondayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeMondayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeMondayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeMondayDinnerButton.Name = "removeMondayDinnerButton";
-            this.removeMondayDinnerButton.Size = new System.Drawing.Size(121, 35);
+            this.removeMondayDinnerButton.Size = new System.Drawing.Size(121, 31);
             this.removeMondayDinnerButton.TabIndex = 40;
             this.removeMondayDinnerButton.Text = "Remove";
             this.removeMondayDinnerButton.UseVisualStyleBackColor = false;
@@ -538,9 +538,9 @@
             // 
             this.removeMondayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeMondayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeMondayLunchButton.Location = new System.Drawing.Point(388, 103);
+            this.removeMondayLunchButton.Location = new System.Drawing.Point(375, 103);
             this.removeMondayLunchButton.Name = "removeMondayLunchButton";
-            this.removeMondayLunchButton.Size = new System.Drawing.Size(121, 34);
+            this.removeMondayLunchButton.Size = new System.Drawing.Size(121, 31);
             this.removeMondayLunchButton.TabIndex = 41;
             this.removeMondayLunchButton.Text = "Remove";
             this.removeMondayLunchButton.UseVisualStyleBackColor = false;
@@ -550,9 +550,9 @@
             // 
             this.removeMondayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeMondayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeMondayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeMondayBreakfastButton.Location = new System.Drawing.Point(375, 70);
             this.removeMondayBreakfastButton.Name = "removeMondayBreakfastButton";
-            this.removeMondayBreakfastButton.Size = new System.Drawing.Size(121, 39);
+            this.removeMondayBreakfastButton.Size = new System.Drawing.Size(121, 31);
             this.removeMondayBreakfastButton.TabIndex = 42;
             this.removeMondayBreakfastButton.Text = "Remove";
             this.removeMondayBreakfastButton.UseVisualStyleBackColor = false;
@@ -562,9 +562,9 @@
             // 
             this.removeTuesdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeTuesdayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeTuesdayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeTuesdayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeTuesdayDinnerButton.Name = "removeTuesdayDinnerButton";
-            this.removeTuesdayDinnerButton.Size = new System.Drawing.Size(121, 35);
+            this.removeTuesdayDinnerButton.Size = new System.Drawing.Size(121, 31);
             this.removeTuesdayDinnerButton.TabIndex = 43;
             this.removeTuesdayDinnerButton.Text = "Remove";
             this.removeTuesdayDinnerButton.UseVisualStyleBackColor = false;
@@ -574,9 +574,9 @@
             // 
             this.removeTuesdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeTuesdayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeTuesdayLunchButton.Location = new System.Drawing.Point(388, 103);
+            this.removeTuesdayLunchButton.Location = new System.Drawing.Point(375, 103);
             this.removeTuesdayLunchButton.Name = "removeTuesdayLunchButton";
-            this.removeTuesdayLunchButton.Size = new System.Drawing.Size(121, 35);
+            this.removeTuesdayLunchButton.Size = new System.Drawing.Size(121, 31);
             this.removeTuesdayLunchButton.TabIndex = 44;
             this.removeTuesdayLunchButton.Text = "Remove";
             this.removeTuesdayLunchButton.UseVisualStyleBackColor = false;
@@ -586,9 +586,9 @@
             // 
             this.removeTuesdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeTuesdayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeTuesdayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeTuesdayBreakfastButton.Location = new System.Drawing.Point(375, 70);
             this.removeTuesdayBreakfastButton.Name = "removeTuesdayBreakfastButton";
-            this.removeTuesdayBreakfastButton.Size = new System.Drawing.Size(121, 36);
+            this.removeTuesdayBreakfastButton.Size = new System.Drawing.Size(121, 31);
             this.removeTuesdayBreakfastButton.TabIndex = 45;
             this.removeTuesdayBreakfastButton.Text = "Remove";
             this.removeTuesdayBreakfastButton.UseVisualStyleBackColor = false;
@@ -598,9 +598,9 @@
             // 
             this.removeThursdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeThursdayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeThursdayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeThursdayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeThursdayDinnerButton.Name = "removeThursdayDinnerButton";
-            this.removeThursdayDinnerButton.Size = new System.Drawing.Size(121, 35);
+            this.removeThursdayDinnerButton.Size = new System.Drawing.Size(121, 31);
             this.removeThursdayDinnerButton.TabIndex = 46;
             this.removeThursdayDinnerButton.Text = "Remove";
             this.removeThursdayDinnerButton.UseVisualStyleBackColor = false;
@@ -610,9 +610,9 @@
             // 
             this.removeWednesdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeWednesdayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeWednesdayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeWednesdayBreakfastButton.Location = new System.Drawing.Point(375, 70);
             this.removeWednesdayBreakfastButton.Name = "removeWednesdayBreakfastButton";
-            this.removeWednesdayBreakfastButton.Size = new System.Drawing.Size(121, 34);
+            this.removeWednesdayBreakfastButton.Size = new System.Drawing.Size(121, 31);
             this.removeWednesdayBreakfastButton.TabIndex = 47;
             this.removeWednesdayBreakfastButton.Text = "Remove";
             this.removeWednesdayBreakfastButton.UseVisualStyleBackColor = false;
@@ -622,9 +622,9 @@
             // 
             this.removeWednesdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeWednesdayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeWednesdayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeWednesdayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeWednesdayDinnerButton.Name = "removeWednesdayDinnerButton";
-            this.removeWednesdayDinnerButton.Size = new System.Drawing.Size(121, 37);
+            this.removeWednesdayDinnerButton.Size = new System.Drawing.Size(121, 31);
             this.removeWednesdayDinnerButton.TabIndex = 48;
             this.removeWednesdayDinnerButton.Text = "Remove";
             this.removeWednesdayDinnerButton.UseVisualStyleBackColor = false;
@@ -634,9 +634,9 @@
             // 
             this.removeThursdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeThursdayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeThursdayLunchButton.Location = new System.Drawing.Point(388, 103);
+            this.removeThursdayLunchButton.Location = new System.Drawing.Point(375, 103);
             this.removeThursdayLunchButton.Name = "removeThursdayLunchButton";
-            this.removeThursdayLunchButton.Size = new System.Drawing.Size(121, 37);
+            this.removeThursdayLunchButton.Size = new System.Drawing.Size(121, 31);
             this.removeThursdayLunchButton.TabIndex = 49;
             this.removeThursdayLunchButton.Text = "Remove";
             this.removeThursdayLunchButton.UseVisualStyleBackColor = false;
@@ -646,9 +646,9 @@
             // 
             this.removeWednesdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeWednesdayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeWednesdayLunchButton.Location = new System.Drawing.Point(388, 103);
+            this.removeWednesdayLunchButton.Location = new System.Drawing.Point(375, 103);
             this.removeWednesdayLunchButton.Name = "removeWednesdayLunchButton";
-            this.removeWednesdayLunchButton.Size = new System.Drawing.Size(121, 34);
+            this.removeWednesdayLunchButton.Size = new System.Drawing.Size(121, 31);
             this.removeWednesdayLunchButton.TabIndex = 50;
             this.removeWednesdayLunchButton.Text = "Remove";
             this.removeWednesdayLunchButton.UseVisualStyleBackColor = false;
@@ -658,9 +658,9 @@
             // 
             this.removeThursdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeThursdayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeThursdayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeThursdayBreakfastButton.Location = new System.Drawing.Point(375, 70);
             this.removeThursdayBreakfastButton.Name = "removeThursdayBreakfastButton";
-            this.removeThursdayBreakfastButton.Size = new System.Drawing.Size(121, 38);
+            this.removeThursdayBreakfastButton.Size = new System.Drawing.Size(121, 31);
             this.removeThursdayBreakfastButton.TabIndex = 51;
             this.removeThursdayBreakfastButton.Text = "Remove";
             this.removeThursdayBreakfastButton.UseVisualStyleBackColor = false;
@@ -670,7 +670,7 @@
             // 
             this.removeFridayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeFridayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeFridayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeFridayBreakfastButton.Location = new System.Drawing.Point(375, 65);
             this.removeFridayBreakfastButton.Name = "removeFridayBreakfastButton";
             this.removeFridayBreakfastButton.Size = new System.Drawing.Size(121, 33);
             this.removeFridayBreakfastButton.TabIndex = 61;
@@ -682,7 +682,7 @@
             // 
             this.removeFridayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeFridayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeFridayLunchButton.Location = new System.Drawing.Point(388, 103);
+            this.removeFridayLunchButton.Location = new System.Drawing.Point(375, 103);
             this.removeFridayLunchButton.Name = "removeFridayLunchButton";
             this.removeFridayLunchButton.Size = new System.Drawing.Size(121, 35);
             this.removeFridayLunchButton.TabIndex = 60;
@@ -694,7 +694,7 @@
             // 
             this.removeFridayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeFridayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeFridayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeFridayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeFridayDinnerButton.Name = "removeFridayDinnerButton";
             this.removeFridayDinnerButton.Size = new System.Drawing.Size(121, 34);
             this.removeFridayDinnerButton.TabIndex = 59;
@@ -773,9 +773,9 @@
             // 
             this.removeSaturdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSaturdayBreakfastButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeSaturdayBreakfastButton.Location = new System.Drawing.Point(388, 65);
+            this.removeSaturdayBreakfastButton.Location = new System.Drawing.Point(375, 65);
             this.removeSaturdayBreakfastButton.Name = "removeSaturdayBreakfastButton";
-            this.removeSaturdayBreakfastButton.Size = new System.Drawing.Size(121, 36);
+            this.removeSaturdayBreakfastButton.Size = new System.Drawing.Size(121, 31);
             this.removeSaturdayBreakfastButton.TabIndex = 71;
             this.removeSaturdayBreakfastButton.Text = "Remove";
             this.removeSaturdayBreakfastButton.UseVisualStyleBackColor = false;
@@ -785,9 +785,9 @@
             // 
             this.removeSaturdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSaturdayLunchButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeSaturdayLunchButton.Location = new System.Drawing.Point(388, 102);
+            this.removeSaturdayLunchButton.Location = new System.Drawing.Point(375, 102);
             this.removeSaturdayLunchButton.Name = "removeSaturdayLunchButton";
-            this.removeSaturdayLunchButton.Size = new System.Drawing.Size(121, 34);
+            this.removeSaturdayLunchButton.Size = new System.Drawing.Size(121, 31);
             this.removeSaturdayLunchButton.TabIndex = 70;
             this.removeSaturdayLunchButton.Text = "Remove";
             this.removeSaturdayLunchButton.UseVisualStyleBackColor = false;
@@ -797,9 +797,9 @@
             // 
             this.removeSatudayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.removeSatudayDinnerButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.removeSatudayDinnerButton.Location = new System.Drawing.Point(388, 136);
+            this.removeSatudayDinnerButton.Location = new System.Drawing.Point(375, 136);
             this.removeSatudayDinnerButton.Name = "removeSatudayDinnerButton";
-            this.removeSatudayDinnerButton.Size = new System.Drawing.Size(121, 32);
+            this.removeSatudayDinnerButton.Size = new System.Drawing.Size(121, 31);
             this.removeSatudayDinnerButton.TabIndex = 69;
             this.removeSatudayDinnerButton.Text = "Remove";
             this.removeSatudayDinnerButton.UseVisualStyleBackColor = false;
@@ -929,9 +929,9 @@
             this.mondayPanel.Controls.Add(this.removeMondayBreakfastButton);
             this.mondayPanel.Controls.Add(this.removeMondayLunchButton);
             this.mondayPanel.Controls.Add(this.removeMondayDinnerButton);
-            this.mondayPanel.Location = new System.Drawing.Point(13, 71);
+            this.mondayPanel.Location = new System.Drawing.Point(10, 65);
             this.mondayPanel.Name = "mondayPanel";
-            this.mondayPanel.Size = new System.Drawing.Size(517, 175);
+            this.mondayPanel.Size = new System.Drawing.Size(500, 135);
             this.mondayPanel.TabIndex = 73;
             // 
             // mondayButton
@@ -940,7 +940,7 @@
             this.mondayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.mondayButton.Location = new System.Drawing.Point(0, 0);
             this.mondayButton.Name = "mondayButton";
-            this.mondayButton.Size = new System.Drawing.Size(515, 50);
+            this.mondayButton.Size = new System.Drawing.Size(498, 50);
             this.mondayButton.TabIndex = 0;
             this.mondayButton.Text = "Monday";
             this.mondayButton.UseVisualStyleBackColor = true;
@@ -960,9 +960,9 @@
             this.tuesdayPanel.Controls.Add(this.removeTuesdayBreakfastButton);
             this.tuesdayPanel.Controls.Add(this.removeTuesdayLunchButton);
             this.tuesdayPanel.Controls.Add(this.removeTuesdayDinnerButton);
-            this.tuesdayPanel.Location = new System.Drawing.Point(12, 252);
+            this.tuesdayPanel.Location = new System.Drawing.Point(10, 237);
             this.tuesdayPanel.Name = "tuesdayPanel";
-            this.tuesdayPanel.Size = new System.Drawing.Size(517, 175);
+            this.tuesdayPanel.Size = new System.Drawing.Size(500, 135);
             this.tuesdayPanel.TabIndex = 74;
             // 
             // tuesdayButton
@@ -971,7 +971,7 @@
             this.tuesdayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tuesdayButton.Location = new System.Drawing.Point(0, 0);
             this.tuesdayButton.Name = "tuesdayButton";
-            this.tuesdayButton.Size = new System.Drawing.Size(515, 50);
+            this.tuesdayButton.Size = new System.Drawing.Size(498, 50);
             this.tuesdayButton.TabIndex = 0;
             this.tuesdayButton.Text = "Tuesday";
             this.tuesdayButton.UseVisualStyleBackColor = true;
@@ -991,9 +991,9 @@
             this.wednesdayPanel.Controls.Add(this.removeWednesdayBreakfastButton);
             this.wednesdayPanel.Controls.Add(this.removeWednesdayLunchButton);
             this.wednesdayPanel.Controls.Add(this.removeWednesdayDinnerButton);
-            this.wednesdayPanel.Location = new System.Drawing.Point(12, 430);
+            this.wednesdayPanel.Location = new System.Drawing.Point(10, 400);
             this.wednesdayPanel.Name = "wednesdayPanel";
-            this.wednesdayPanel.Size = new System.Drawing.Size(517, 175);
+            this.wednesdayPanel.Size = new System.Drawing.Size(500, 135);
             this.wednesdayPanel.TabIndex = 75;
             // 
             // wednesdayButton
@@ -1002,7 +1002,7 @@
             this.wednesdayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.wednesdayButton.Location = new System.Drawing.Point(0, 0);
             this.wednesdayButton.Name = "wednesdayButton";
-            this.wednesdayButton.Size = new System.Drawing.Size(515, 50);
+            this.wednesdayButton.Size = new System.Drawing.Size(498, 50);
             this.wednesdayButton.TabIndex = 77;
             this.wednesdayButton.Text = "Wednesday";
             this.wednesdayButton.UseVisualStyleBackColor = true;
@@ -1022,9 +1022,9 @@
             this.thursdayPanel.Controls.Add(this.removeThursdayBreakfastButton);
             this.thursdayPanel.Controls.Add(this.removeThursdayLunchButton);
             this.thursdayPanel.Controls.Add(this.removeThursdayDinnerButton);
-            this.thursdayPanel.Location = new System.Drawing.Point(11, 611);
+            this.thursdayPanel.Location = new System.Drawing.Point(10, 563);
             this.thursdayPanel.Name = "thursdayPanel";
-            this.thursdayPanel.Size = new System.Drawing.Size(517, 175);
+            this.thursdayPanel.Size = new System.Drawing.Size(500, 135);
             this.thursdayPanel.TabIndex = 76;
             // 
             // thursdayButton
@@ -1033,7 +1033,7 @@
             this.thursdayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.thursdayButton.Location = new System.Drawing.Point(0, 0);
             this.thursdayButton.Name = "thursdayButton";
-            this.thursdayButton.Size = new System.Drawing.Size(515, 50);
+            this.thursdayButton.Size = new System.Drawing.Size(498, 50);
             this.thursdayButton.TabIndex = 0;
             this.thursdayButton.Text = "Thursday";
             this.thursdayButton.UseVisualStyleBackColor = true;
@@ -1053,9 +1053,9 @@
             this.fridayPanel.Controls.Add(this.removeFridayBreakfastButton);
             this.fridayPanel.Controls.Add(this.removeFridayLunchButton);
             this.fridayPanel.Controls.Add(this.removeFridayDinnerButton);
-            this.fridayPanel.Location = new System.Drawing.Point(11, 789);
+            this.fridayPanel.Location = new System.Drawing.Point(10, 741);
             this.fridayPanel.Name = "fridayPanel";
-            this.fridayPanel.Size = new System.Drawing.Size(517, 175);
+            this.fridayPanel.Size = new System.Drawing.Size(500, 135);
             this.fridayPanel.TabIndex = 77;
             // 
             // fridayButton
@@ -1064,7 +1064,7 @@
             this.fridayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.fridayButton.Location = new System.Drawing.Point(0, 0);
             this.fridayButton.Name = "fridayButton";
-            this.fridayButton.Size = new System.Drawing.Size(515, 50);
+            this.fridayButton.Size = new System.Drawing.Size(498, 50);
             this.fridayButton.TabIndex = 0;
             this.fridayButton.Text = "Friday";
             this.fridayButton.UseVisualStyleBackColor = true;
@@ -1084,9 +1084,9 @@
             this.saturdayPanel.Controls.Add(this.removeSaturdayBreakfastButton);
             this.saturdayPanel.Controls.Add(this.removeSaturdayLunchButton);
             this.saturdayPanel.Controls.Add(this.removeSatudayDinnerButton);
-            this.saturdayPanel.Location = new System.Drawing.Point(552, 68);
+            this.saturdayPanel.Location = new System.Drawing.Point(10, 913);
             this.saturdayPanel.Name = "saturdayPanel";
-            this.saturdayPanel.Size = new System.Drawing.Size(517, 54);
+            this.saturdayPanel.Size = new System.Drawing.Size(500, 135);
             this.saturdayPanel.TabIndex = 78;
             // 
             // saturdayButton
@@ -1095,7 +1095,7 @@
             this.saturdayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.saturdayButton.Location = new System.Drawing.Point(0, 0);
             this.saturdayButton.Name = "saturdayButton";
-            this.saturdayButton.Size = new System.Drawing.Size(515, 50);
+            this.saturdayButton.Size = new System.Drawing.Size(498, 50);
             this.saturdayButton.TabIndex = 0;
             this.saturdayButton.Text = "Saturday";
             this.saturdayButton.UseVisualStyleBackColor = true;
@@ -1115,9 +1115,9 @@
             this.sundayPanel.Controls.Add(this.removeSundayDinnerButton);
             this.sundayPanel.Controls.Add(this.removeSundayBreakfastButton);
             this.sundayPanel.Controls.Add(this.removeSundayLunchButton);
-            this.sundayPanel.Location = new System.Drawing.Point(562, 645);
+            this.sundayPanel.Location = new System.Drawing.Point(10, 1087);
             this.sundayPanel.Name = "sundayPanel";
-            this.sundayPanel.Size = new System.Drawing.Size(517, 175);
+            this.sundayPanel.Size = new System.Drawing.Size(500, 135);
             this.sundayPanel.TabIndex = 79;
             // 
             // sundayButton
@@ -1126,7 +1126,7 @@
             this.sundayButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.sundayButton.Location = new System.Drawing.Point(0, 0);
             this.sundayButton.Name = "sundayButton";
-            this.sundayButton.Size = new System.Drawing.Size(515, 50);
+            this.sundayButton.Size = new System.Drawing.Size(498, 50);
             this.sundayButton.TabIndex = 0;
             this.sundayButton.Text = "Sunday";
             this.sundayButton.UseVisualStyleBackColor = true;
@@ -1137,7 +1137,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1101, 1055);
+            this.ClientSize = new System.Drawing.Size(514, 823);
             this.Controls.Add(this.sundayPanel);
             this.Controls.Add(this.saturdayPanel);
             this.Controls.Add(this.fridayPanel);

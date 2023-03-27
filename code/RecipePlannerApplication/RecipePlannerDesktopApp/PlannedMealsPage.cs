@@ -1619,13 +1619,13 @@ namespace RecipePlannerDesktopApplication
 
         private void mondayButton_Click(object sender, EventArgs e)
         {
-            if (mondayPanel.Size.Height == 175)
+            if (mondayPanel.Size.Height == 135)
             {
                 mondayPanel.Height = 45;
             }
             else
             {
-                mondayPanel.Height = 175;
+                mondayPanel.Height = 135;
             }
         }
 
@@ -1642,74 +1642,74 @@ namespace RecipePlannerDesktopApplication
 
         private void tuesdayButton_Click(object sender, EventArgs e)
         {
-            if (tuesdayPanel.Height == 175)
+            if (tuesdayPanel.Height == 135)
             {
                 tuesdayPanel.Height = 45;
             }
             else
             {
-                tuesdayPanel.Height = 175;
+                tuesdayPanel.Height = 135;
             }
 
         }
 
         private void wednesdayButton_Click(object sender, EventArgs e)
         {
-            if (wednesdayPanel.Height == 175)
+            if (wednesdayPanel.Height == 135)
             {
                 wednesdayPanel.Height = 45;
             }
             else
             {
-                wednesdayPanel.Height = 175;
+                wednesdayPanel.Height = 135;
             }
         }
 
         private void thursdayButton_Click(object sender, EventArgs e)
         {
-            if (thursdayPanel.Height == 175)
+            if (thursdayPanel.Height == 135)
             {
                 thursdayPanel.Height = 45;
             }
             else
             {
-                thursdayPanel.Height = 175;
+                thursdayPanel.Height = 135;
             }
         }
 
         private void fridayButton_Click(object sender, EventArgs e)
         {
-            if (fridayPanel.Height == 175)
+            if (fridayPanel.Height == 135)
             {
                 fridayPanel.Height = 45;
             }
             else
             {
-                fridayPanel.Height = 175;
+                fridayPanel.Height = 135;
             }
         }
 
         private void saturdayButton_Click(object sender, EventArgs e)
         {
-            if (saturdayPanel.Height == 175)
+            if (saturdayPanel.Height == 135)
             {
                 saturdayPanel.Height = 45;
             }
             else
             {
-                saturdayPanel.Height = 175;
+                saturdayPanel.Height = 135;
             }
         }
 
         private void sundayButton_Click(object sender, EventArgs e)
         {
-            if (sundayPanel.Size.Height == 175)
+            if (sundayPanel.Height == 135)
             {
                 sundayPanel.Height = 45;
             }
             else
             {
-                sundayPanel.Height = 175;
+                sundayPanel.Height = 135;
             }
         }
     }
