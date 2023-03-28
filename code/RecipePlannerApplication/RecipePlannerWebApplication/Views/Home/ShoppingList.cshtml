@@ -1,0 +1,206 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using RecipePlannerLibrary.Models
+<style>
+    #logout {
+        background-color: #d9534f;
+        color: #fff;
+        position: fixed;
+        right: 10px;
+        top: 5px;
+    }
+
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    #mainform {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        margin: 30px auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    #addForm {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        display: none;
+        margin: 30px auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    .table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .table th,
+    .table td {
+        border: none;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td { font-size: 18px; }
+
+    #ingredientID { font-weight: bold; }
+
+
+    input[type="submit"], input[type="button"] {
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    #addIngredient {
+        background-color: #33b5e5;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    .page-button {
+        background-color: #33b5e5;
+        color: #fff;
+        flex: 1;
+        margin: 5px;
+        margin: 5px;
+    }
+
+    #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
+
+    input[type="text"] {
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .pagination {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pagination button.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    .pagination button.active {
+        background-color: #33b5e5;
+        color: #fff;
+    }
+
+    .button {
+        background-color: #33b5e5; 
+        border: none;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        padding: 15px 32px;
+        padding-top: 100px;
+        text-align: center;
+        text-decoration: none;
+    }
+</style>
+
+<div class="container">
+    <form id="mainform">
+        <h1>Shopping List:</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Ingredient Name</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (Ingredient ingredient in ViewBag.ingredientsOnPage)
+            {
+                <tr id="ingredient-@ingredient.id">
+                    <td>@ingredient.name</td>
+                    <td>
+                        <input type="hidden" name="page" value="@ViewBag.currentPage"/>
+                        <div class="quantity-container">
+                            <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id"/>
+                            <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
+                            <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id"/>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id"/>
+                    </td>
+
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="pagination">
+            @if (ViewBag.currentPage > 1)
+            {
+                <a href="@Url.Action("goToIngredientsPage", new {page = ViewBag.currentPage - 1})" class="btn btn-primary page-button">Previous Page</a>
+            }
+            @for (var i = 1; i <= ViewBag.totalPages; i++)
+            {
+                <a href="@Url.Action("goToIngredientsPage", new {page = i})" class="btn btn-primary page-button">@i</a>
+            }
+            @if (ViewBag.currentPage < ViewBag.totalPages)
+            {
+                <a href="@Url.Action("goToIngredientsPage", new {page = ViewBag.currentPage + 1})" class="btn btn-primary page-button">Next Page</a>
+            }
+
+        </div>
+        <div class="button-container">
+            <input type="submit" asp-action="Index" value="Logout" id="logout" class="button button-red"/>
+            <input type="submit" asp-action="goToAddIngredientsPage" value="Add Ingredient" id="addIngredient" class="button button-green"/>
+            <input type="submit" asp-action="goToAddIngredientsPage" value="Purchase Entire Shopping List" id="clearShoppingList" class="button button-green"/>
+        </div>
+    </form>
+</div>
+
+
+<script>
+
+    function openForm() {
+        document.getElementById("addForm").style.display = "block";
+        document.getElementById("mainform").style.display = "none";
+    }
+    function closeForm() {
+        document.getElementById("addForm").style.display = "none";
+        document.getElementById("mainform").style.display = "block";
+    }
+</script>
