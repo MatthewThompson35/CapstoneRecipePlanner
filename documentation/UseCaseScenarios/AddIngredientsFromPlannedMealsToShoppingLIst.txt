@@ -1,0 +1,9 @@
+Context - User is viewing a meal
+Primary Flow
+1 - user selects to add remaining planned meals to shopping list
+2 - system adds the ingredients to the shopping list
+
+Alternative Flow(s)
+
+BAD CONNECTION
+a2 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
