@@ -1,0 +1,17 @@
+Context - User is viewing the shopping list
+
+Primary Flow
+1 - user selects to add new ingredient to shopping list
+2 - system displays add ingredient page
+3 - user enters ingredient and quantity
+4 - user selects add ingredient
+5 - system detects valid input
+6 - system adds ingredient to list and displays shopping list
+
+Alternative Flow(s)
+USER CANCELS
+a3-5 user clicks cancel
+a4-6 system displays shopping list
+
+BAD CONNECTION
+a6 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
