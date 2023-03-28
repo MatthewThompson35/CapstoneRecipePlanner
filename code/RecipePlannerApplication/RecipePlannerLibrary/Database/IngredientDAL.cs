@@ -156,6 +156,38 @@ namespace RecipePlannerLibrary.Database
             return ingredients;
         }
 
+        /// <summary>
+        ///     Gets the ingredients from the shopping list table.
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of all ingredients in the users shopping list</returns>
+        public static List<Ingredient> GetIngredientsFromShoppingList()
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var ingredients = new List<Ingredient>();
+            var user = ActiveUser.username;
+            var query = @"SELECT sl.ingredientID, sl.username, sl.quantity, ii.ingredientName, ii.measurementType FROM shopping_list sl, ingredient_info ii WHERE sl.ingredientID = ii.ingredientID and username=@user;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = user;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var username = reader.GetString(1);
+                var name = reader.GetString(3);
+                var quantity = reader.GetInt32(2);
+                var id = reader.GetInt32(0);
+                var measurement = reader.GetString(4).ToUpper();
+
+                var ingredient = new Ingredient(username, name, quantity, id, measurement);
+
+                ingredients.Add(ingredient);
+            }
+
+            return ingredients;
+        }
+
         #endregion
     }
 }

@@ -406,7 +406,7 @@ public class HomeController : Controller
     {
         const int pageSize = 5;
         var currentPage = page ?? 1;
-        List<Ingredient> allIngredients = IngredientDAL.getIngredients();
+        List<Ingredient> allIngredients = IngredientDAL.GetIngredientsFromShoppingList();
         var totalIngredients = allIngredients.Count;
         var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
 
