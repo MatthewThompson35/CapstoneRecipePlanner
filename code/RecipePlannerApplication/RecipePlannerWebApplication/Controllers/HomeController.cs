@@ -363,9 +363,48 @@ public class HomeController : Controller
         }
     }
 
+    /// <summary>
+    ///     Goes to shopping list page with specified page number.
+    /// </summary>
+    /// <param name="page">The page number to navigate to.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>Returns the shopping list page with the specified page of ingredients.</returns>
+    public ActionResult goToShoppingListPage(int? page)
+    {
+        try
+        {
+            this.setupShoppingListPage(page);
+            return View("ShoppingList");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+    }
+
     private void setupIngredientsPage(int? page)
     {
         const int pageSize = 5; // Change this to the desired page size
+        var currentPage = page ?? 1;
+        List<Ingredient> allIngredients = IngredientDAL.getIngredients();
+        var totalIngredients = allIngredients.Count;
+        var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+
+        var ingredientsOnPage = allIngredients
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        ViewBag.currentPage = currentPage;
+        ViewBag.totalPages = totalPages;
+        ViewBag.ingredientsOnPage = ingredientsOnPage;
+    }
+
+    private void setupShoppingListPage(int? page)
+    {
+        const int pageSize = 5;
         var currentPage = page ?? 1;
         List<Ingredient> allIngredients = IngredientDAL.getIngredients();
         var totalIngredients = allIngredients.Count;
