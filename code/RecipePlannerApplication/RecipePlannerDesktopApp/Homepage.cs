@@ -98,7 +98,7 @@ public partial class Homepage : Form
         login.Show();
     }
 
-    private void viewIngredientsButton_Click(object sender, EventArgs e)
+    private void viewPantryButton_Click(object sender, EventArgs e)
     {
         Hide();
 
