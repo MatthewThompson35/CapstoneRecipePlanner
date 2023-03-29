@@ -1136,6 +1136,8 @@
             // 
             // mealPlanFlowLayoutPanel
             // 
+            this.mealPlanFlowLayoutPanel.AutoScroll = true;
+            this.mealPlanFlowLayoutPanel.AutoScrollMinSize = new System.Drawing.Size(0, 1170);
             this.mealPlanFlowLayoutPanel.Controls.Add(this.mondayPanel);
             this.mealPlanFlowLayoutPanel.Controls.Add(this.tuesdayPanel);
             this.mealPlanFlowLayoutPanel.Controls.Add(this.wednesdayPanel);
@@ -1152,7 +1154,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
             this.Controls.Add(this.mealPlanFlowLayoutPanel);
             this.Controls.Add(this.plannerMenuButton);
