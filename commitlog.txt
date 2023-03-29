@@ -1,0 +1,2659 @@
+commit da6498ec3ccb712f447f9fb316358b249860c6a1
+Merge: 5349ff7 3251e6e
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri Mar 17 19:03:27 2023 -0400
+
+    Merge pull request #68 from MatthewThompson35/Sprint3FeedbackDestiny
+    
+    Updated Use Case Diagram
+
+commit 3251e6eb3fd22a9a918cf7e46e7458a348466f58
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 17 19:02:34 2023 -0400
+
+    Updated Use Case Diagram
+    
+    Added 'Update Planned Meal' and 'Remove Planned Meal' use cases to use case diagram
+
+commit 5349ff7e2ebb6a26077a3f60a9fac3d34c4f7e1c
+Merge: 909585f 73e2b37
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Fri Mar 17 17:52:18 2023 -0400
+
+    Merge pull request #67 from MatthewThompson35/addUseCases
+    
+    Added User cases for removing and Updating Planned meal
+
+commit 73e2b37fa4ccc1e220165ee56038f6a895936b39
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 17 17:23:38 2023 -0400
+
+    Added User cases for removing and Updating Planned meal
+    
+    UseCases are fully updated to match the functionality for this sprint
+
+commit 909585f73cdaf40fb3c3b595c927b5c4701ea715
+Merge: 5113ee7 2fad67d
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Fri Mar 17 17:02:37 2023 -0400
+
+    Merge pull request #66 from MatthewThompson35/fixWebJavaScript
+    
+    Added updated wireframe and script for database
+
+commit 5113ee7a879530ddb4c07b6d8918b7102459a2a1
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri Mar 17 17:00:45 2023 -0400
+
+    Update README.md
+
+commit 2fad67dc8a11b66efc0710a0dadfda3f9fe7a470
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 17 16:59:21 2023 -0400
+
+    Added updated wireframe and script for database
+    
+    Wireframe and script are updated for submission
+
+commit cd70de5d3a2b5f73fa2e2eee25b50dd9071ad97c
+Merge: a2704e7 df4d856
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Mar 17 16:40:45 2023 -0400
+
+    Merge pull request #65 from MatthewThompson35/fixWebJavaScript
+    
+    Fixed bug with showing recipe
+
+commit df4d8562760cc7c4064689fa743cff6349591bd3
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 17 16:39:13 2023 -0400
+
+    Fixed bug with showing recipe
+    
+    recipe is now shown when clicked
+
+commit a2704e7460065a33bf7e1ab7a4fb0ba8a086b434
+Merge: e52af19 dc60e07
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Mar 17 16:33:05 2023 -0400
+
+    Merge pull request #64 from MatthewThompson35/fixWebJavaScript
+    
+    Fixed bugs regarding recipe page.
+
+commit dc60e0756aaad8259cd3c24286c1af352697d2e9
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 17 16:30:19 2023 -0400
+
+    Fixed bugs regarding recipe page.
+    
+    All functionality works
+
+commit e52af19a266ff17651172a27af28728f5991561b
+Merge: 1d825c0 537ac74
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Mar 17 16:03:55 2023 -0400
+
+    Merge pull request #63 from MatthewThompson35/fixWebJavaScript
+    
+    Added measurement to PlannedMeal view Recipe
+
+commit 537ac746e923d9a8f8c9818aaf3f466adab8b22e
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 17 16:00:30 2023 -0400
+
+    Added measurement to PlannedMeal view Recipe
+    
+    Measurement is now on the view recipe page
+
+commit 1d825c0bf3a354a981f708dbe1a09ea1e9f82246
+Merge: 85e746c 4cc03c7
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Fri Mar 17 15:55:22 2023 -0400
+
+    Merge pull request #62 from MatthewThompson35/fixWebJavaScript
+    
+    Fixed RecipePage javascript functions
+
+commit 85e746c601b8a6fb051bc6c7e48e1b2817af0299
+Merge: 699090f 4b70c4b
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri Mar 17 15:54:51 2023 -0400
+
+    Merge pull request #61 from MatthewThompson35/sprint3ClassDiagramFixture
+    
+    Made an update to the class diagram to include the view pages.
+
+commit 4cc03c7386e5082c229d7cd8d384e2e4fcf3ce1d
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 17 15:54:17 2023 -0400
+
+    Fixed RecipePage javascript functions
+    
+    functions are now cleaned up
+
+commit 4b70c4ba744c03005edbafa5955ca5e89043efcc
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 17 15:52:19 2023 -0400
+
+    Made an update to the class diagram to include the view pages.
+    
+    The view pages were needed to be added in the class diagram.
+
+commit 699090fb56ca26db0d8acc2b4d013ef9039df79a
+Merge: 23de833 f646df2
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri Mar 17 15:42:09 2023 -0400
+
+    Merge pull request #60 from MatthewThompson35/Sprint3FeedbackDestiny
+    
+    Merging Sprint 3 feedback fixes to main
+
+commit f646df2c2c9f20f91c59085466b1850a648d449b
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 17 15:40:20 2023 -0400
+
+    Fixed error wth adding ingredient on desktop
+    
+    Desktop application was using the worng add ingredient method. Change code to call the correct method and now it functions correctly without throwing an error
+
+commit 6f643219119b14a4e7843d6a434a32c0f8b485e7
+Merge: cebfe53 23de833
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Mar 17 14:17:58 2023 -0400
+
+    Merge branch 'main' into Sprint3FeedbackDestiny
+
+commit cebfe53b0c70b22abef53e814e75419b9ef11aa5
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 17 14:11:33 2023 -0400
+
+    Fixed bug with adding ingredient
+    
+    Bug was causing duplicate ingredients with different id numbers to be added to the ingrerdient info table. Updated the insert sql statements so that ingredient is added to the ingredient info and ingredient tables with a new id if it does not already exist other wise we get the ingredient id from the ingredient info table and use that to add the ingredient to the ingredient table. Fixed failing tests. Added updated scripts
+
+commit 23de833884bd9f6286e6eb739d5d3eb14f25c4d0
+Merge: 750ba54 2aa11ad
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Thu Mar 16 23:34:32 2023 -0400
+
+    Merge pull request #59 from MatthewThompson35/sprint3ClassDiagram
+    
+    Sprint3 class diagram
+
+commit 78b6ed2069d06a4917b2fc428d771b5043cfc495
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 23:28:13 2023 -0400
+
+    Updated ERD and Use Case Diagram
+    
+    Added 'Edit Ingredient' to ERD and updated ERD to include new ingredient_info table and updated column structures of ingredient and recipe_ingredient tables.
+
+commit 6b78a9ecfedb343a7a83b025c06f7fad81d1466b
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 23:04:55 2023 -0400
+
+    Updated documentation to include mroe information
+    
+    Added more information to class and mehod specifications to properly describe what is going on in the code.
+
+commit 48c6f15773d9b481643fd99e1d896a9d01321492
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 22:08:34 2023 -0400
+
+    Fixed bug with removing ingredient
+    
+    There was a bug that caused the page to change when incrementing or decrementing an ingredient quantity. This issue has been resolved and the program stays on the same page when incrementing or decrementing an ingredient on any page other than the first
+
+commit 93e8ddfa4511f354ae19c6ddfd0f7b2140b1752e
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 22:02:58 2023 -0400
+
+    Updated coverage report
+    
+    Included updated coverage report in project directory
+
+commit 7c47367b58ac66a4932bc3a709353668cd030e53
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 21:50:41 2023 -0400
+
+    Fixed failing unit tests
+    
+    Updated usit tests to check the new table structuresfor ingredient_info, ingredient, and recipe_ingredient so that tests no longer failed and accurately checked the new functionality needed for the restructuring and new columns.
+
+commit 2aa11adfcda83387e8f784afadb1f1862110eb9d
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Mar 16 20:53:13 2023 -0400
+
+    Included the updated class diagram for sprint 3.
+    
+    Included the updated version of the class diagram that entails both the desktop and web side.
+
+commit 943e35b00eccc49f5d9cbbb4cea79d823c67c037
+Merge: 1175c53 4b9cdd7
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 20:49:08 2023 -0400
+
+    Merge branch 'MatthewSprint3Feedback' into Sprint3FeedbackDestiny
+
+commit 1175c53f013da2f5f13a986419a5b869ebf9ad33
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 20:47:14 2023 -0400
+
+    Updated Sprint 3 Backlog
+    
+    Updated completed totals for assigned tasks that have been finished
+
+commit 3a7b9be3728d4ec8bbd6268136e9e8a5747c77c0
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 20:43:22 2023 -0400
+
+    Fixed bug with removing ingredient
+    
+    when removing ingredient, the ingredient was removed from the wrong table which cause view available recipes to break. I updated the sql statement to remove from the correct table and now all issues with viewing available recipes are resolved.
+
+commit 8b9029f41962d16d92f24721f8074075904b5c19
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 16 19:40:12 2023 -0400
+
+    Modifeied code to fit new table structure
+    
+    Modified SQL statements in the IngredientDAL class to join together information from the ingredient_info and ingredient tables in order to properly get all ingredients, add ingredients, remove ingredients, increment ingredients, and decrement ingredients.
+
+commit 4b9cdd73a70731dbc12985124ebeea6a7f9b3582
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 16 19:16:20 2023 -0400
+
+    Updated tests to top up test coverage
+    
+    Test coverage is now good.
+
+commit e4917933f5a797f98f75ad6f3a5a9e45b83a0977
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 16 19:06:33 2023 -0400
+
+    Added documentation to the Desktop
+    
+    Desktop documentation is now updated.
+
+commit 7c1270d3510520a21001f73bebbb1f2a7969dc19
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Mar 16 19:05:41 2023 -0400
+
+    Deleted two properties from PlannedMealsPage.
+    
+    Two properties from the meals page weren't used, so those were removed.
+
+commit 043b73bdc8b8da39420cad19f0e6ee058e457e05
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Mar 16 18:44:24 2023 -0400
+
+    Deleted unused bool variables.
+    
+    The bool variables for the yes/no buttons were not used and are deleted from the details page class.
+
+commit bec4be328833398f45e78803fb17a3f9e7204f13
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 16 18:25:00 2023 -0400
+
+    Added documentation to test classes
+    
+    Test classes now have documentation
+
+commit 49aa44592f5c78bd971b14b2c4073ca8dedb62df
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 16 18:01:46 2023 -0400
+
+    Added Pagination for Web filter
+    
+    Pagination for filtered recipes on web is now functional
+
+commit 67181c6adac57a37d775bedc25c23db8d46120c2
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 16 11:19:16 2023 -0400
+
+    Added pagination to desktop filter.
+    
+    Added pagination to the filtered list on desktop. The page size is now updated to 10
+
+commit 46ec8c83a20853103046d4cc03c55ebe4993e1be
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 16 11:00:40 2023 -0400
+
+    Fixed method specifications for the Library model/web
+    
+    Method specification are updated for the web and for the library model. Page size on the web for recipes is also updated to 10
+
+commit 750ba54b0346396c5a56527c562417757defcca0
+Merge: f1e9c66 801cfbd
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Wed Mar 15 23:08:25 2023 -0400
+
+    Merge pull request #57 from MatthewThompson35/desktopViewPlannedMealRecipeDetails
+    
+    Desktop view planned meal recipe details
+
+commit 801cfbdb906ee51ce8298a850839e30ed474fe72
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Mar 15 23:05:56 2023 -0400
+
+    Fixed the functionality for adding to meal plan and removing a meal.
+
+commit 50c1da3f30cfc66eb46fddf9c50b1a4874a618c0
+Merge: 1e82de0 ffd8118
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Mar 15 22:11:44 2023 -0400
+
+    Fixed merge conflicts
+
+commit 1e82de045a939d03a5b6e7c1eb1e9a118a42ff8a
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Mar 15 22:07:11 2023 -0400
+
+    Cancellation almost done
+
+commit 8fd18a1f4f69d169d41a8047899cbb6b2e265e3d
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Mar 15 21:19:09 2023 -0400
+
+    Partial functionality of cancellation for updating planned meal.
+
+commit ffd8118b92b3bff557b4622d2db4d294f3f66b3a
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Mar 15 20:38:39 2023 -0400
+
+    Added the coverage report
+    
+    Coverage report for sprint 3 is now in the repo
+
+commit a2247da1b1a4994e4c4ff0c1987f528f7fafa9dc
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Mar 15 20:05:20 2023 -0400
+
+    Updated the use case scenarios
+    
+    Added the edit ingredient use case and fixed AddIngredient and Logout use case.
+
+commit e2f66437c9581b0348aefc7ab70f4e2b8af0f526
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Mar 15 19:07:48 2023 -0400
+
+    Fixed the date issue and documented Homecontroller
+    
+    Date methdos now work and HomeController is documented
+
+commit f6649ce0b5de9072f540f98d767f91e430257c2f
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Mar 15 17:02:51 2023 -0400
+
+    Added needed method/class specifications that were missing in 4 classes.
+    
+    Had to include method/class specifications that were missing in 4 classes.
+
+commit 2e2d7e1c961cc6c78b146a82cf310fbd6c5e5b9a
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 21:33:28 2023 -0400
+
+    Changed the restriction to be the update for meal plan.
+    
+    The restriction was not needed for the desktop side, so it is changed to be the update for the meal plan and changed the error label to be a confirmation label in details page.
+
+commit 1b7febda8f334e0e695606006b5ccd91b503098f
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Mar 13 17:00:10 2023 -0400
+
+    Fixed the date issue for planned meals.
+    
+    Now works for all dates even past dates.
+
+commit 1f7ddb7a66a0243a8c1fa3e3fa7d6a26f57b5b56
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 13:09:57 2023 -0400
+
+    Added color to the buttons for the login page.
+    
+    User experience for login page for color
+
+commit 29a53b2930c603186de97dbbf716e12855ea95b2
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 12:43:01 2023 -0400
+
+    Increased text size for listview in homepage.
+    
+    Text for the homepage was small for the listview, so I increased the text size.
+
+commit 08dc6e078362868286391c33f2fcfc36767691ed
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 12:22:27 2023 -0400
+
+    Made functionality for if the meal is already added for that day and meal type.
+    
+    Included functionality for if the meal is already added for that meal plan day and type for details page.
+
+commit 4754dd1d2bbb78e8fbfb55afb100d89cbdc4e8c4
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 11:50:11 2023 -0400
+
+    Changed the back button to be the menu button for displaying the recipe home page and also the meal plan for convenience in details page.
+    
+    Had to fix the user experience of the back button in the recipe details page to show a menu button.
+
+commit f1e9c66d089a0cad485e383eb8c9baac067fa353
+Merge: e41ed8f b3c50e5
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Mon Mar 13 11:11:50 2023 -0400
+
+    Merge pull request #56 from MatthewThompson35/Sprint3TestingAndSpecifications
+    
+    Sprint3 testing and specifications
+
+commit 967a5f63a42d8b8b2d6b8491054127e475cf2da0
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 11:10:09 2023 -0400
+
+    Added method specifications for Recipe class.
+
+commit b3c50e5644a373915c822cdda3d54f6f2da44f8b
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Mar 13 10:57:13 2023 -0400
+
+    Added Method Specifications for the home Controller
+    
+    method specifications for the home controller are updated
+
+commit 84c74cdc9545468f29b45138535823a6f823214e
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Mar 13 10:37:54 2023 -0400
+
+    Added Test code for newly implemented DAL Methods
+    
+    test coverage is nearly 100%
+
+commit 487e3e9104e4c98e4c4a27794eea187b4a872a13
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 10:36:47 2023 -0400
+
+    Included the viewing of the recipe meal to navigate to details page.
+    
+    Also added changes to the homepage for deleting filter.
+
+commit c2e512a6b05892b1c201e9a2299ebbe1d59c5539
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Mar 13 03:08:37 2023 -0400
+
+    Modified the PlannedMealPage to match ratio of homepage.
+    
+    Managed to fix the ratio of the meal page to match the consistency of the homepage and the details page.
+
+commit e41ed8f13c405320b86af3c550194c976b7e1068
+Merge: 9f804fc 6ed1682
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Mon Mar 13 01:14:01 2023 -0400
+
+    Merge pull request #55 from MatthewThompson35/sprint3BacklogUpdate
+    
+    Sprint3 backlog update
+
+commit 6ed168234d660f7e936a39cdca4f0f4e09239cc8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 23:14:26 2023 -0400
+
+    updated the script
+
+commit 237ab962488f01925de135291dd9edb6707f2017
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 23:02:12 2023 -0400
+
+    Updated the sprint backlog
+    
+    changed the values for each group
+
+commit aeb8a00ec80489039aa443c53be427e206f315ed
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 22:54:59 2023 -0400
+
+    Updated the sprint backlog for the whole group
+    
+    All Groups times were updated
+
+commit 3fdf6a56cc3b4916035c3a5cb81b9dda17a8eaad
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Mar 12 22:44:32 2023 -0400
+
+    Modified the ratio of the recipe detail page.
+    
+    Needed to fix the ratio of the details page to match the ratio of the homepage. Also made the text labels larger.
+
+commit 9f804fc2b23f9b1f818567dd4b19962b840bafe7
+Merge: 9816aaa 1172b4e
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Mar 12 22:11:27 2023 -0400
+
+    Merge pull request #54 from MatthewThompson35/desktopNewPlannedMeals
+    
+    Desktop new planned meals
+
+commit 1172b4e51dcc7e4788b52410b34d6ef3ea0a1410
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Mar 12 21:59:30 2023 -0400
+
+    Added my times in sprint 3 backlog.
+
+commit a3cf6673c5dfc8127bc5aafa5e4965790c526f3a
+Merge: 9b3a332 9816aaa
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Mar 12 21:45:01 2023 -0400
+
+    Merged main with conflicts in branch
+
+commit 9816aaa30fb38be541718459df89701aa8645dc6
+Merge: 3b638f4 101f4ea
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Mar 12 21:37:15 2023 -0400
+
+    Merge pull request #53 from MatthewThompson35/desktopCheckboxConversion
+    
+    Implemented the functionality to convert the radio buttons to checkbox
+
+commit 9b3a332afaba6d64c3659e0f69acc53f8a33edef
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Mar 12 21:10:51 2023 -0400
+
+    Changed how the removal functionality is implemented for this and next week's meals.
+
+commit 101f4ea7b766f1638b258431b441159e45407f1f
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 19:58:52 2023 -0400
+
+    Updated the sprint backlog for tasks completed.
+    
+    Updated the sprint backlog for my tasks
+
+commit ecfa28a9902bee32bcb87e8fd123b1dee1032b62
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 19:54:27 2023 -0400
+
+    Implemented the functionality to convert the radio buttons to checkbox and button.
+    
+    Fixed all of the issues that came from switching the buttons. Pagination works, filter works.
+
+commit 93ba1b5ef9cca285815c057aa4ccf312053fbd6f
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Mar 12 17:12:45 2023 -0400
+
+    Monday removal for this week works.
+    
+    Next week's monday is not working for removal
+
+commit 3b638f420b78ce224f2f2e7f648fbb2120b71fa9
+Merge: 6952e58 3e361c1
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Mar 12 13:41:15 2023 -0400
+
+    Merge pull request #52 from MatthewThompson35/plannedMealFixes
+    
+    Planned meal fixes
+
+commit 3e361c1d7b498c3785496e14fe5d74c0c1b61445
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 01:06:18 2023 -0500
+
+    Getting the date of the current week and next week is now functional
+    
+    changed the starting date from monday to sunday
+
+commit b396049bfd349c243b56bafc7256bffabd06d832
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 00:54:55 2023 -0500
+
+    Remove should be functional now
+    
+    retrieval methods now start on sunday
+
+commit 6952e5848ef3e5c994c962bab7c9ba8e8f9174fc
+Merge: 1a5bee9 79527db
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Mar 12 00:36:26 2023 -0500
+
+    Merge pull request #51 from MatthewThompson35/webOverwriteConformation
+    
+    Web overwrite conformation
+
+commit 1a5bee9428910add4ac3a728918215d70ea85c49
+Merge: ec48a82 8353ff1
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Mar 12 00:20:05 2023 -0500
+
+    Merge pull request #50 from MatthewThompson35/desktopPaginationFuncitonality
+    
+    Desktop pagination functionality
+
+commit 79527dbc9ab4574313defe2a7ac3b0f4bc508576
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 12 00:05:20 2023 -0500
+
+    Added Overwrite functionality for planned meals and updated css.
+    
+    Planned meal overwrite is now functional and css on recipe page for adding planned meal now matches the rest of the page.
+
+commit 7c39f17fee0533b9eed8b117c4239ac787053544
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 23:53:03 2023 -0500
+
+    Made an error label for existing meal added to meal plan for future functionality.
+    
+    Included the error label for future functionality of checks.
+
+commit fcf1722142a778fa2ded9cc834485a1a3c20f956
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 23:45:03 2023 -0500
+
+    Included functionality for removing meal plan from certain day and meal type. Also modified meal plan page for text boxes to be readonly.
+    
+    Remove functionality works as expected for meal page. Made the textboxes readonly for text to not be edited.
+
+commit f24ac8a21f7f14881e970a5ea3094bd0ca4edeb9
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 23:19:28 2023 -0500
+
+    Added updated wireframe to repo
+    
+    wireframe updated for sprint 3
+
+commit 8353ff1adae52c65e4884eeac95a0aa518fc41c2
+Merge: c556327 ec48a82
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 23:00:37 2023 -0500
+
+    Merge branch 'main' into desktopPaginationFuncitonality
+
+commit c5563275ae4758357a3817cd93720e9d584393b3
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 22:44:39 2023 -0500
+
+    fixed web remove functionality
+    
+    web remove functionality now works and is ready to be merged
+
+commit ffac571f23a3cb1bec3f5fb9e939e5524d427254
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 17:58:27 2023 -0500
+
+    Changed the meal page switch weeks button to have switching weeks be in the context menu strip instead.
+    
+    Button was removed due to switching not being satisfied. The switching will now occur in the menu context strip.
+
+commit e9693ca2adbeade2fbb04bee5101689e53d8d4ad
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 17:44:27 2023 -0500
+
+    All pagination on desktop is functional
+    
+    pagination for ingredients is now functional
+
+commit b8f6c10ff4150f6d90d82d487e11ae4094612799
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 17:02:19 2023 -0500
+
+    Included the switch weeks button in meal plan page.
+    
+    Partial functionality of button works. Need to modify code to have it fully functional.
+
+commit 74244148dabb038864cafe09e1365a73cf31586a
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 16:26:32 2023 -0500
+
+    recipePage pagination funcitional
+    
+    all recipe pagination is not functional including first page lastpage next page prev page
+
+commit 273c4a9c06b91743e684b8bae246768b41106f77
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 16:01:07 2023 -0500
+
+    Made changes to details page to include week type.
+    
+    A new enumeration needed in order to display the switch of weeks and adding to meal plan for database.
+
+commit ec48a8298c6b900c592603932877d850e116f9dd
+Merge: 10f0bd2 edafbcc
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sat Mar 11 15:43:46 2023 -0500
+
+    Merge pull request #48 from MatthewThompson35/webAddPlannedMeal
+    
+    Web add planned meal
+
+commit 438a2d1e918638b5a4642c986f6d526508a3126e
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 14:56:26 2023 -0500
+
+    "Meal has not been added to this time yet" is displayed for the remaining textboxes in meal page.
+    
+    Code for displaying meal not added text is shown for this week's meals.
+
+commit 77bd00c2afa6e0e27fe7bdeee1f3ea5620c6d2a6
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 14:49:44 2023 -0500
+
+    Included functionality to show all populated planned meals for the meal page.
+    
+    Meal plan population for all recipe meals is shown for this week's meals.
+
+commit 5ba809365981116d5c2b12b17c61ed2d331cc992
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 14:48:06 2023 -0500
+
+    Made additions for both recipedal and recipe classes.
+    
+    I had to get the recipe name from the recipe id, so I included an extra method for getting recipe name by id and modified the Recipe class with extra constructors.
+
+commit edafbcc8fab2f97ff580ea7667d8c5eed59ac699
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 14:46:47 2023 -0500
+
+    Fixed errors cause by merging
+    
+    errors cause by merging is fixed
+
+commit 1f37557d84e9a124d7d5471d14246f8241ee1575
+Merge: 3bc8152 10f0bd2
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 11 13:59:18 2023 -0500
+
+    Fixed merge conflcts
+    
+    Branch is now ready to be merged to main
+
+commit 10f0bd2453ee28419ebb51bd0299d80a74d38709
+Merge: 60a3264 6769760
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Mar 11 13:45:02 2023 -0500
+
+    Merge pull request #49 from MatthewThompson35/desktopFilterTags
+    
+    Merging desktop tag filter functionality to main
+
+commit 6769760fc1ceea2708a3f6da94869807bb734bd3
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 04:38:18 2023 -0500
+
+    Updated sprint backlog
+    
+    Updated sprint backlog to correctly reflect the team members assigned to cover each task.
+
+commit 2bc70dedd67b5dc897b42c8813daa37bf63bc078
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 04:27:38 2023 -0500
+
+    Added functionality to clear all tags at once for desktop app
+    
+    Added fucntionality that allows the user to clear all filters at once. This give the user the opportunity to go back to viewing the complete list of recipes without needing to clear the tags one by one.
+
+commit 1252ea6bd2ec59547a40ee8c98fad001e5ffd80e
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 04:24:00 2023 -0500
+
+    Added remove filter functionality for Desktop App
+    
+    Added fucntionality from removing a specified tag from the filter criteria. This allows the user to update their search preferences as needed and as needs change.
+
+commit 819e08b0d5e817a1a100f355fa935fa816353ad4
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 04:08:14 2023 -0500
+
+    Modified how active filters are displayed to useron desktop app
+    
+    Changed string of filters to a combobox that displays all filters that are actively being used on the recipe list. This makes it easier for users to interact with the list and avoid tiny text clumped together
+
+commit 8b06139165255a0fe600d9c3b6ecffdc5fbae268
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 04:01:24 2023 -0500
+
+    Modified Tag filter UI to include remove and clear all buttons
+    
+    Added buttons that will support the funtionality of removing a search tage and clearing all currently active search tags being used
+
+commit d949393fe443c2c83ff8b87e340dbdeb65b0c6ef
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 03:49:30 2023 -0500
+
+    Modified search tags functionality for desktop app
+    
+    Modified functionality so that user can filter by more than one tag at once and tags that are being used to filter are displayed below the search bar. This new functionality allows users to narrow down the options as much as they need and find recipes that better suit their needs at the time. They can also see all active tag filters
+
+commit 609261492d4b5b08697afd5ecbf767cc930c5c36
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 03:34:11 2023 -0500
+
+    Added functionality to filter recipes by a single tag on desktop
+    
+    Added functionality that allows the user to filter both the avaialble and all recipes lists by a single tag at a time. Future funtionality will be added to allow users to filter by multiple tags at a time
+
+commit 42ea606e8dc2928559332d5eb4862d88dfbb4806
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Mar 11 02:47:10 2023 -0500
+
+    Add UI to filter recipes by tags
+    
+    Added search box, filter button, and filters label to support filter functionality on the desktop application. This will allow user to filter the list of recipes based on the tags entered in the search box.
+
+commit 6b7042bbc01ccef91a7b42c8eac8838749d029ae
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Mar 11 00:34:49 2023 -0500
+
+    Modified functionality for adding a recipe to meal plan.
+
+commit 2807335432a0b9aff4df52418224741f761a098e
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 21:56:59 2023 -0500
+
+    Trying to retrieve combobox values for day and mealtype.
+
+commit a3731908c4011cdb28d873f8b37aa516948b01c5
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 19:59:29 2023 -0500
+
+    Made changes to meal plan page.
+    
+    Testing to see if recipe from details followed by values of 2 comboboxes of day and mealtype is populated.
+
+commit 3bc815275affd10340ad03ac9d870943c088d125
+Merge: e82f785 60a3264
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 10 19:45:18 2023 -0500
+
+    Fixed CSS for merge conflicts
+    
+    CSS is fixed and displays everything like it is supposed to
+
+commit e82f785f9947168c73f96773c3b95a8e86191318
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 10 19:09:28 2023 -0500
+
+    All of planned meals on web is functional
+    
+    Finished fixing all bugs where dropdown would not select the right recipe.
+
+commit 9ad655ea82bab05dbba647cd046313265d7c26f5
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 10 18:48:03 2023 -0500
+
+    Functionality for viewing next week is semi functional
+    
+    functionality for dropdowns on next week does not work
+
+commit 6763b65e89ef0b725d133852f47bbf66d5256ec7
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 17:11:57 2023 -0500
+
+    Modified changes to details page.
+    
+    Included functionality to view meal plan and modified week order of view.
+
+commit 2636179e2d3423ecd667e742069fb4be3270dfc1
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 17:11:11 2023 -0500
+
+    Included more methods for the PlannedMealsDal.
+    
+    More methods are needed for the desktop side.
+
+commit 05125562d5beea8b57bf7e79746908a7eecee023
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 10 15:48:06 2023 -0500
+
+    allow overwrite of meal when adding meal
+    
+    adding confirmation on web proved to be difficult so at the moment it just overwrites when meal is detected
+
+commit 298f4eb52c81dda7aec2dfd99455df1befdb37bf
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 14:22:59 2023 -0500
+
+    Made a menu button with context menu strip for homepage and meal page.
+    
+    Modified the navigation that includes a menu button with context strip to access home or meal plan pages.
+
+commit 9e3c7c1e6ff1e3faf5923ad5f5d0c70569fd5991
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 10 13:40:19 2023 -0500
+
+    Implemented functionality to view planned meals for this week
+    
+    Can now view each planned meal for the week and look at the recipe details of that meal
+
+commit 3c124c18c4d2f703889bc2f7f8c8941c52e805b0
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 13:24:41 2023 -0500
+
+    Included the auto scroll for planned meal page
+    
+    In order to show more of the page, I set the AutoScroll to true to include the vertical scroll bar.
+
+commit b6c8bc0db4a5f2cc150fcbb3543b8193f29a26e9
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 11:10:31 2023 -0500
+
+    Made additions to the recipe details page and other additions.
+    
+    Made the comboboxes show the days of the week and meal type on details page and included the planned meal dal with methods.
+
+commit aaaab345666030591ca83d6b5339761f62b0f08a
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 00:58:52 2023 -0500
+
+    Modified the planned meals page
+    
+    Added Friday and Saturday meals on the page.
+
+commit 831f3fbde05ec79db2bd3de56c0d7d6b46b55402
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 10 00:39:42 2023 -0500
+
+    added DAL method for getting NextWeeks Meals
+    
+    library now has functionality to obtain next weeks meals
+
+commit 739702c08e889c0553eeb779ba35ace30a01a7a5
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Mar 10 00:27:43 2023 -0500
+
+    Modified the Homepage and RecipeDetailsPage
+    
+    For sprint 3, modified the homepage and recipe details page for planned meals and pagination.
+
+commit 60a326440d9054a900932849780f1c595b491ca4
+Merge: 868982a ab5df57
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Thu Mar 9 21:28:01 2023 -0500
+
+    Merge pull request #47 from MatthewThompson35/recipeTagsWeb
+    
+    Merging multuple filter tag functionality
+
+commit ab5df57ebf51322ee837a7e2fbd0002e8b387897
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 21:24:16 2023 -0500
+
+    Fixed all merge conflicts with pagination fucntioanlity and updaterd css
+    
+    Updated CSS so that checkbox and clear button were used instead of radion buttons. mergeed pagination functionality for web in and updated that functionality to work witht he new UI changes. Updated sprint backlog.
+
+commit 8438085325940e049ae4d530b21536329fda2ac0
+Merge: 03a6c0b 868982a
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 14:36:07 2023 -0500
+
+    Merge branch 'main' into recipeTagsWeb
+
+commit 03a6c0b0b11ece07d0afccd11c24205cf1673288
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 02:31:09 2023 -0500
+
+    Modified code so that tags are case insensitive when filtering
+    
+    Modified code so that tags are compared to recipe tags while theyre case insensitive. When checked for equality and finding recipes that have matching tags, we now check regardless of the tags being upper or lower case.
+
+commit f50440038d7f11d1a8af9f1e924c0d156914b740
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 02:08:21 2023 -0500
+
+    Added clear filters functionality
+    
+    Added functionality tied to the clear filters buttons that removes all filter tags and unchecks the available recipes checkbox. This gives the user an opportunity to view a list of all recipes stored in the database.
+
+commit 91b46081fc8bb4fe0d00f34a34e4a4168c52566d
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 02:00:58 2023 -0500
+
+    Fixed bug with removing tag
+    
+    Previously when trying to remove last filter tag, the tag would still show in the filter list but table would update. Modified code so that when last tag is removed from filter list, the filtered tag list shows empty and all available recipes are shown.
+
+commit f4f431acd970654653a0c8cf307edfeb9afe09fb
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 00:32:28 2023 -0500
+
+    Modified filter recipes UI and functionality
+    
+    Changed "Available recipes" radio button to a checkbox and the "all recipes" button to a simple button that clears all of the active filters including tags. This simplifies the UI and helps the user to easily configure how they would like the recipes filtered.
+
+commit e1de5afe9ae88b6d072b3a2266722a13b82bc08b
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Mar 9 00:03:21 2023 -0500
+
+    Added measurement type of an ingredient in recipe details
+    
+    Modified recipe display to show the measurement type of each ingredient needed for a recipe to help users better understand the exact amoint of an ingredient they need to make a certain recipe
+
+commit 9e72d67eb54c4ee83c85fb6e5f7ab726648a53f5
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Wed Mar 8 23:49:23 2023 -0500
+
+    Modified search tags functionality
+    
+    Modified functionality so that user can filter by more than one tag and tags that are being used to filter are displayed below the search bar. This new functionality allows users to narrow down the options as much as they need and find recipes that better suit their needs at the time.
+
+commit a6d3a53c622663c24e80ec4d36a89196185e72ae
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Mar 8 19:52:23 2023 -0500
+
+    Added support for obtaining this weeks meals
+    
+    can now obtain this weeks meals
+
+commit 8795b508982534f5725a561ca1ffd0862ef19220
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Mar 8 16:46:23 2023 -0500
+
+    Setup UI for adding planned Meal
+    
+    planned meal ui for adding is complete and action result is functional. not able to add a meal yet
+
+commit 868982a849cb4b1f8b6ae758aaf4787c1aa1655f
+Merge: dfd3565 e26812a
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Mar 5 23:49:45 2023 -0500
+
+    Merge pull request #46 from MatthewThompson35/sprint3Documentation
+    
+    Updated Use Case Diagram
+
+commit e26812a27357eacae4a606b5988035b80ab60bd3
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Mar 5 23:31:57 2023 -0500
+
+    Updated Use Case Diagram
+    
+    Added 'Add Planned Meal', 'View Planned Meals' and .View Filtered Recipes' use cases to the use case diagram and restructured previous sprint's documentation into their correct directories.
+
+commit dfd356599a8cb027316a31e3275fd70f8a386ea6
+Merge: c7b13c3 52138ec
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Mar 5 23:08:54 2023 -0500
+
+    Merge pull request #45 from MatthewThompson35/sprint3Wireframe
+    
+    Create Capstone Sprint 3 Wireframe.png
+
+commit 52138ec3d68db57b45760864ff459743651b90fa
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 5 19:19:25 2023 -0500
+
+    Create Capstone Sprint 3 Wireframe.png
+    
+    Added Wireframe
+    
+    Updated the sprint 3 wireframe
+
+commit c7b13c3e01988e574ac1e3621df15f218fa37ae6
+Merge: c40f8c2 831a4d4
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sun Mar 5 17:15:03 2023 -0500
+
+    Merge pull request #44 from MatthewThompson35/webPaginatedList
+    
+    Web paginated list
+
+commit 831a4d433d90aa0a95d9e438a4306dea862d3852
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Mar 5 00:36:48 2023 -0500
+
+    Recipes Pagination functional
+    
+    Recipes pagination is functional for available and all recipes. Can not get radio button to be selected based on the clicked page.
+
+commit 1360ee26d6ac80ae6c3e68759a103d70ae75dbb8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 4 22:11:24 2023 -0500
+
+    Fixed Pagination for available recipes
+    
+    Pagination for available recipes now works
+
+commit df44893eba9f440413533e44c63fa61115d9d2b0
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 4 15:34:07 2023 -0500
+
+    Fixed actions for ingredients.
+    
+    Fixed all of the actions for ingredients that broke after adding pagination
+
+commit e5750cddfcea905f689ae78df228748318e5d46e
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 4 14:24:35 2023 -0500
+
+    Merged in tags for web
+    
+    merged in tags for web to reduce merge conflicts
+
+commit 15f92d2e5944f9b99f361072c99171022bbd4184
+Merge: 25864cc 7b09d6a
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Mar 4 14:09:18 2023 -0500
+
+    Merge remote-tracking branch 'origin/recipeTagsWeb' into webPaginatedList
+
+commit c40f8c220e896cd76c67af497cab7b5ae33fe896
+Merge: 41fdcd0 22a9f11
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Mar 3 23:25:27 2023 -0500
+
+    Merge pull request #43 from MatthewThompson35/sprint3UseCases
+    
+    Added relevant use cases.
+
+commit 7b09d6a2b933cb103f89cc0bd53dd067cc61bcd1
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 3 23:23:22 2023 -0500
+
+    Added functionality to show recipe details for filtered-recipes table
+    
+    Modfied functionality so that recipe details are shown in detail box when a recipe is selected in the filtered recipes table.
+
+commit d8d21e1743039147a68e42a27e0b38090a9f6f11
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 3 23:15:28 2023 -0500
+
+    Added Search by Tag functionality
+    
+    Added functionality that allows users to filter all recipes by a specified tag and shows a result table of all recipes that have that tag. Currently recipes can only be filtered by one tag at a time.
+
+commit 25864cc4baff540ef3b6a5c098e77dca89a42e2d
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 3 21:40:11 2023 -0500
+
+    Finished pagination for ingredients page
+    
+    Ingredients page now has pagination it defualts to page size of 5.
+
+commit 90fb7dcf5c18dffcb852d1b79b22ebcaa2097175
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 3 17:18:42 2023 -0500
+
+    Added method to RecipeDAL to get tags for specified recipe id
+    
+    Worte method responsible for getting the tags associated with a given recipe id from the recipe_tag table in the database.
+
+commit beedde8ad18374dd242fcbb45f8531567676dc65
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 3 17:07:34 2023 -0500
+
+    Modified Recipe Page UI to support tag searches
+    
+    Added search box and button to allows user to search for recipes bassed off of their tags/ recipe classifications. Added Tags variable to Recipe model to store all tags associated with a given recipe.
+
+commit 22a9f11872a56adf07d30aea67c85b950a7f6cd9
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Mar 3 13:27:08 2023 -0500
+
+    Added relevant use cases.
+    
+    Added the use cases for AddPlannedMeal, ViewPlannedMeal, and ViewFilteredRecipes
+
+commit 41fdcd00efa52b736efd3b80a9e2dd0f2178fc28
+Merge: faa080b aa75aa8
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri Mar 3 01:54:39 2023 -0500
+
+    Merge pull request #42 from MatthewThompson35/sprint3Documentation
+    
+    Updated ERD
+
+commit faa080b62ebc74c874540dcc7f89c377e4503592
+Merge: c310fb9 ab8b1bc
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Mar 3 00:11:51 2023 -0500
+
+    Merge pull request #41 from MatthewThompson35/webPlannedMealsUI
+    
+    Web planned meals UI
+
+commit aa75aa87f6f799495c2bbd68012420e1585a6f99
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Mar 3 00:05:23 2023 -0500
+
+    Updated ERD
+    
+    Added recipe_tag and planned_recipe tables to the database to support new sprint functionality and updated ERD to properly reflect the new database state.
+
+commit ab8b1bcd75cfe2d7d28eced3478cff2d3f908e41
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 2 20:23:31 2023 -0500
+
+    Added the recipe details box
+    
+    made the recipe details box on the planned meals page
+
+commit 2abb9ec03512284193cd05aa74fc9006c6b38532
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Mar 2 17:27:08 2023 -0500
+
+    Started basic ui for planned meals
+    
+    planned meals ui now has a table and each corresponding day has a dropdown to select which meal type you want to view
+
+commit c310fb939df40a548d400a01e6c28c8b9f712d93
+Merge: 55450e7 e70071b
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Wed Mar 1 09:22:22 2023 -0500
+
+    Merge pull request #40 from MatthewThompson35/sprint_3_backlog
+    
+    Fixed sprint 3 backlog
+
+commit e70071bca1b9c2b2ec74625c95c79144ec1e8f2e
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Mar 1 01:01:36 2023 -0500
+
+    Fixed sprint 3 backlog
+    
+    Updated the sprint 3 backlog to actually have the sprint 3 information
+
+commit 55450e77aa3ed45ac155ace9f6e63fa9a9028d55
+Merge: 5ec9129 1c61ecf
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Tue Feb 28 17:17:25 2023 -0500
+
+    Merge pull request #39 from MatthewThompson35/Sprint3Backlog
+    
+    Create Sprint 3 Backlog - Burndown.xlsx
+
+commit 1c61ecfd3bf8a96436dd6d6d0ea1f5ee26a5861f
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 28 17:15:57 2023 -0500
+
+    Create Sprint 3 Backlog - Burndown.xlsx
+    
+    Created and filled out sprint 3 backlog
+
+commit 5ec91292ee1c400ff3249e00c0e283534ad4caac
+Merge: 6d349c9 ed1ca12
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Tue Feb 28 16:50:02 2023 -0500
+
+    Merge pull request #38 from MatthewThompson35/productBacklogUpdate
+    
+    Updated Product Backlog
+
+commit ed1ca129f3716ee6477f54cb4caa81a6ca215407
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Feb 27 18:07:50 2023 -0500
+
+    Updated Product Backlog
+    
+    Product Backlog is updated for Sprint 3 work
+
+commit 6d349c903c037bef85e05ba8a030a7019af64fbd
+Merge: aeb4a33 22b1601
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sun Feb 26 21:33:07 2023 -0500
+
+    Merge pull request #37 from MatthewThompson35/fixUseCaseScenarios
+    
+    Fixed use case scenarios
+
+commit 22b16018a39b189e7c66291e97b7fa71a940c781
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 21:29:33 2023 -0500
+
+    Fixed use case scenarios
+    
+    Changed use case scenarios to match feedback
+
+commit aeb4a3399862bfde1d6cba39fc7e4203987f11a6
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 26 21:10:14 2023 -0500
+
+    Update README.md
+
+commit a98cdc182fe55301c5ac140300b91d37b95ce0cd
+Merge: bca8b96 a190feb
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 26 21:00:06 2023 -0500
+
+    Merge pull request #36 from MatthewThompson35/unitTests
+    
+    Merging scripts needed to create and populate testing database
+
+commit a190febf3819c8a8892873d917f17b96fb6d5cde
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 20:59:48 2023 -0500
+
+    fixed merge conflicts
+    
+    fixed all of the merge conflicts when merging main in
+
+commit 96e83ad680ed3365b94e26fdde897d93022d954f
+Merge: 7394b85 bca8b96
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 26 20:53:34 2023 -0500
+
+    Merge branch 'main' into unitTests
+
+commit 7394b8524f062c0b6f9180e17908ef9737500207
+Merge: c6dcf43 bd62ad9
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 20:49:36 2023 -0500
+
+    Merge branch 'unitTests' of https://github.com/MatthewThompson35/CapstoneRecipePlanner into unitTests
+
+commit c6dcf43fdf2aeb407b5f29ada72c467fc44d325b
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 20:49:25 2023 -0500
+
+    Added coverage report
+    
+    Generated the coverage report for the project.
+
+commit bd62ad9c151b6be9fc78118767a052594db28c29
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 26 20:40:37 2023 -0500
+
+    Added updated SQL script
+    
+    Added script that includes the creation of the capstone database and it's tables as well as the capstone_tests database and the tables needed to conduct the unit tests.
+
+commit bca8b9651896bcae7e40c8b69e412c248f634e32
+Merge: 769b1e4 4d76d36
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Feb 26 14:55:31 2023 -0500
+
+    Merge pull request #35 from MatthewThompson35/webMethodSpecifications
+    
+    Web method specifications
+
+commit 4d76d3689692c830b4c6f7e0422f416674a31f05
+Merge: 5d65c1d 769b1e4
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 14:29:58 2023 -0500
+
+    Merge branch 'main' into webMethodSpecifications
+
+commit 769b1e4f551d435e6eff73aead232b4c24a5ac03
+Merge: 97f939d fbfabb7
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 26 14:27:14 2023 -0500
+
+    Merge pull request #34 from MatthewThompson35/desktopServerErrors
+    
+    Added server connection errors with try/catch blocks for the pages.
+
+commit fbfabb7341bb1b1234a9b356efc6d2c1be0e69c5
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 26 14:19:38 2023 -0500
+
+    Added server errors to Ingredients Page and fixed the unhandled exception for the cell click
+
+commit 5d65c1d0b3ddc870d17d2ddfaf97f47b72fe3130
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 08:33:48 2023 -0500
+
+    Fixed Desktop GridView Column error.
+    
+    When you click on a grid view column header it no longer throws an error.
+
+commit 28722ba5fda0a0b0c298b44df475ebc188ef24c6
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 08:29:43 2023 -0500
+
+    Cleaned up dal methods
+    
+    Refactored dal methods with code cleanup
+
+commit 9d5a07bccf9675add4a91fbb658edfeee8571687
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 26 08:25:14 2023 -0500
+
+    Refactored the method specifications on webside
+    
+    Made the web specifications be more descriptive and moved diagrams into the documentation folder
+
+commit c4ac77c7cd5ba4aae535292658597b91bdb8dd88
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 26 00:37:23 2023 -0500
+
+    Modified test code to use new test databse
+    
+    Modified code to accept the connection string as a parameter to DAL methods and wrote test code that passes in the connection string for the test database. Wrote tests for the IngredientDAL and RecipeDAL classes in the RecipePlannerLibrary project to ensure the functionality works as expected. Achieved 100% test coverage and all tests passed for these two classes.
+
+commit 34b49832738ee459fd592f5a91fca5a6495acea1
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 26 00:13:37 2023 -0500
+
+    Added server connection errors with try/catch blocks for the pages.
+
+commit cc1596ed8dc91feb7273e0e91b0faf9188065a43
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 25 23:06:17 2023 -0500
+
+    Wrote tests for RecipePlannerLibrary model classes
+    
+    Wrote tests for Ingredient, RecipeIngredient, RecipeStep, and Recipe model classes to ensure all model class functionality works correctly. Recieved 100% test coverage and all tests passed on the model package in the RecipePlannerLibrary project.
+
+commit 97f939d15283e1b0983233c553d49afb247670f0
+Merge: 5f1bdc6 19d7036
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sat Feb 25 19:17:02 2023 -0500
+
+    Merge pull request #33 from MatthewThompson35/desktopMethodSpecifications
+    
+    Desktop method specifications
+
+commit 5f1bdc60e32568dfe2e6769c8b3a3e9b145cb40e
+Merge: e9db512 d06fd28
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sat Feb 25 19:12:23 2023 -0500
+
+    Merge pull request #32 from MatthewThompson35/trycatch
+    
+    Added try catch block back into login
+
+commit d06fd2816e2940d642f48888360a85513159ca23
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 25 19:11:43 2023 -0500
+
+    Added try catch block back into login
+    
+    readded try catch block
+
+commit 19d7036ed6d4d610dc6ad56199ee966c0fd9ed5c
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 25 19:10:23 2023 -0500
+
+    Added descriptive methodd/class specifications for each of the pages classes.
+
+commit e9db51295ea07c8332248ae13dad09653bd47dec
+Merge: 6335467 83764ac
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 25 18:52:42 2023 -0500
+
+    Merge pull request #31 from MatthewThompson35/HandelingWebErrors
+    
+    Modified code to eliminate Web application popups
+
+commit dad6224a4a2e63024ee1a687c050c0ba3d8a4464
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 25 18:51:50 2023 -0500
+
+    Added detailed descriptions for the Database and Models classes.
+
+commit 83764ac28478ad61bc698474ce95030f25559a3a
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 25 18:50:05 2023 -0500
+
+    Modified Add Ingredient Page popups
+    
+    Changed popups to red error labels that notify users when fields are empty, when ingredient is already in database, and when quantity is not numerical .
+
+commit 1905e16efad4ca2081ba85f8328ed7925bfc360b
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 25 18:34:46 2023 -0500
+
+    Modified Register Page popups
+    
+    Changed popups to red error labels that notify users when a username is already taken or when passwords do not match.
+
+commit 568a9d44c437e987de93373cb4510a1cda2031f8
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 25 18:24:31 2023 -0500
+
+    Modified login popups
+    
+    Changed feedback from popups to an error label to let users know when their username or password is incorrect.
+
+commit 633546717036984cd74093ceff83d3ef29926b2e
+Merge: 1eb84ac 7664923
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 25 18:14:34 2023 -0500
+
+    Merge pull request #29 from MatthewThompson35/desktopRefactorsWithAdditions
+    
+    Desktop refactors with additions
+
+commit 1eb84ac5734e6617835dffb00a8a2f066784d838
+Merge: 5a0cd31 7399d18
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sat Feb 25 18:09:33 2023 -0500
+
+    Merge pull request #30 from MatthewThompson35/sprint1FixesMatthew
+    
+    Sprint1 fixes matthew
+
+commit 7399d18afd2adb5aa49e95ac5ae2a4afe26d3fbf
+Merge: 6db3698 5a0cd31
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 25 16:34:01 2023 -0500
+
+    Merge branch 'main' into sprint1FixesMatthew
+
+commit 6db369898f69923c2e14f8d895e715e0af57ca47
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 25 16:32:42 2023 -0500
+
+    Server connection handling
+    
+    All methods that use dal methods on the web side should be handles correctly
+
+commit 5a0cd31b65dd2309c33e9bd0984ac77ffecf8459
+Merge: 6eed207 595d8e0
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sat Feb 25 16:29:45 2023 -0500
+
+    Merge pull request #28 from MatthewThompson35/sprint1FixesMatthew
+    
+    Added error checking in dals and refactored HomeController
+
+commit 7664923edd5e36bedc335f7fad0cee067debc636
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 25 15:46:48 2023 -0500
+
+    Fixed the RemoveIngredient Use Case Scenario for mention of popup
+
+commit 008a2c843e4a77c40c1c9011e85260ce94c76917
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 25 15:41:03 2023 -0500
+
+    Added Register Use Case Scenario
+
+commit a60b6f50e6b8a8f9225e5534e0adc9ce3795b9bd
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 25 15:19:53 2023 -0500
+
+    Updated the class diagram
+
+commit 84c6e71f1dc858832f55a283f2311645fbc12a3e
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 25 14:45:18 2023 -0500
+
+    Changed metond name in IngredientsPage class from displayAddIngredientsPopup to displayAddIngredientsPage
+
+commit 2fd304cf57efea7fbafe0e6af37b38dde2bcee89
+Author: csuser@cs.westga.edu <csuser@cs.westga.edu>
+Date:   Sat Feb 25 14:42:02 2023 -0500
+
+    Revert "Changed the method name from displayAddIngredientsPopup to displayAddIngredientsPage"
+    
+    This reverts commit c6c1a3bc90a9e087db3894a78331e9b784add798.
+
+commit c6c1a3bc90a9e087db3894a78331e9b784add798
+Author: csuser@cs.westga.edu <csuser@cs.westga.edu>
+Date:   Sat Feb 25 14:39:32 2023 -0500
+
+    Changed the method name from displayAddIngredientsPopup to displayAddIngredientsPage
+
+commit 595d8e0580cd06dc9f683692173f9bbdbbf60ecf
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 25 14:00:42 2023 -0500
+
+    Added feedback for login on unsuccessful connection
+    
+    Added error message for when login does not make a successful connection to the server and notifies the user
+
+commit 22729970561dc6a3c9b6337a1991dc4798e72ecf
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Feb 24 21:21:37 2023 -0500
+
+    Refactored method in Controller to simplify code
+    
+    refactored methods in the controller that used logic to be implemented and extracted them to helper methods
+
+commit 797453b56e5380f19eca0c72463326a6181f0b60
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Feb 24 21:08:26 2023 -0500
+
+    Added Error Handling for DAL
+    
+    implemented error handling for the data access layer methods
+
+commit 431c9ecdf256c081e2a5c7b91e607f69a1a66acc
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Feb 24 17:21:35 2023 -0500
+
+    Refactored the View CodeBehinds for pages that need to be refactored.
+
+commit 6eed20770e4c49f44c0e6c5cd7a337acf1dec8f5
+Merge: 03b8673 11dd8dc
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Feb 24 14:59:38 2023 -0500
+
+    Merge pull request #27 from MatthewThompson35/webSorting
+    
+    Made the recipes alphabetical
+
+commit 11dd8dcdec4827345945dbf9b63e035d648149c8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Feb 24 14:42:33 2023 -0500
+
+    Made the recipes alphabetical
+    
+    Recipes are not sorted alphabetically on the web side
+
+commit 03b867392005847e0d320133377f00c0ffd136dc
+Merge: cb7fbd0 73b06a9
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri Feb 24 13:49:11 2023 -0500
+
+    Merge pull request #26 from MatthewThompson35/desktopViewRecipes
+    
+    Desktop view recipes
+
+commit 73b06a91f3234e93b9c24b94269d87c30b3b85b5
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Feb 24 13:45:42 2023 -0500
+
+    Added the default sorting of the recipes in the homepage
+
+commit c3172b1454f3e4f25dbb19d8e50d4283f82a381b
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Feb 24 01:22:13 2023 -0500
+
+    Increased font size for text
+
+commit ad9e59514dbfa3569f2b5e57ecdaa09ca984655e
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Fri Feb 24 01:20:32 2023 -0500
+
+    Recipe Details page functionality for each recipe finished
+
+commit 505c41ca06d58e5e5a3f902baa411bc4fba536e7
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Feb 23 23:12:47 2023 -0500
+
+    Changed the radio button checked to show available recipes
+
+commit e3ff9e483c6231fdbf49dd1b6a3a4876d2e2c69e
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Feb 23 23:04:53 2023 -0500
+
+    Available recipes is working
+
+commit 151c2a2b0ce41d3ce35de4bc63776be38acc7690
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Feb 23 23:04:00 2023 -0500
+
+    Added a back button for the IngredientsPage
+
+commit 0876f163a3f73cba81159b0054f68fc8ec457833
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Feb 23 20:17:04 2023 -0500
+
+    Added radio buttons to homepage for filtering recipes
+
+commit 697bedd98e2744323c29a61bac42bedfe64d1fb7
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Feb 23 00:30:38 2023 -0500
+
+    Able to display the names of the recipes vertically on listview on homepage and when selected, details page appears.
+
+commit 167bd044c0dc1a8a1356f84367b26b2e7a5ebffa
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Feb 22 21:31:10 2023 -0500
+
+    Made the Recipe Details Page for when a recipe is clicked.
+
+commit 70486480d54e994015b711c15f4aa14375927ee5
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Wed Feb 22 21:08:21 2023 -0500
+
+    Changed the UI of the recipes homepage
+
+commit cb7fbd06751f6efef279992159c7b62941de46b3
+Merge: 8252465 b2e88a0
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Wed Feb 22 20:38:28 2023 -0500
+
+    Merge pull request #25 from MatthewThompson35/emptyRecipeLabelWeb
+    
+    Added Label for empty list.
+
+commit b2e88a0182198884390d60573f9b14afbcf07331
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Wed Feb 22 15:47:21 2023 -0500
+
+    Added Label for empty list.
+    
+    Added a label to display telling users that there are not recipes that match their ingredients. Also added the sprint 2 wireframe
+
+commit e49f5a16e714c73fc3ad9160dd555ab93f791689
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Tue Feb 21 18:43:23 2023 -0500
+
+    Partial functionality of view all recipes
+
+commit aa1ab7372e7113d7991754c6b6cb652a68d6a839
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Tue Feb 21 16:58:24 2023 -0500
+
+    Modified the button navigation from Login to Homepage and for the button in homepage of view ingredients to Ingredients Page. Logout button works.
+
+commit 8252465013bb89d54b0ce289ff5b9e355454e050
+Merge: 10c1a66 053a5cc
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Tue Feb 21 16:35:15 2023 -0500
+
+    Merge pull request #24 from MatthewThompson35/viewAvailableRecipesWEB
+    
+    View available recipes web working
+
+commit 053a5cca06535f19f5a7ea7c9b6c10e4b8f2db40
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 21 14:36:34 2023 -0500
+
+    Added functionality to nav bar on the web
+    
+    Fixed nav bar to allow access to ingredients page. Also took nav bar off of login page.
+
+commit f03378d1e4c978a51d4f2155d96eede3183e46cc
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 21 13:52:16 2023 -0500
+
+    Created functionality to only show available recipes
+    
+    Can now view available recipes and all recipes
+
+commit 10c1a664298f60c5212c5bd5fcec5ca3da0fd5da
+Merge: 2488a7e 3d975ec
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Mon Feb 20 23:37:30 2023 -0500
+
+    Merge pull request #23 from MatthewThompson35/recipesFunctionality
+    
+    Merging functionality that allows user to view all recipes stored in the recipe table
+
+commit 3d975ecfe05be5910a27ef0491104cece41eacaa
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 23:35:47 2023 -0500
+
+    Fixed bugs with Logout
+    
+    Fixed issue with no respondant logout button on the recipes and ingredients pages. User can now properly logout of the application and be rerouted to the login page
+
+commit 6ebd2a9b2a8977f36658f7db17ae32dc5d441e5b
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 23:15:51 2023 -0500
+
+    Fixed bug with viewing recipes
+    
+    Fixed bug that caused Recipe details to not show for the first recipe listed in the recipe list. It now shows correctlyonce recipes are reselected in the list.
+
+commit 22571f00700d5ec66965c7ae4f48e57a0f1aca4a
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 18:29:02 2023 -0500
+
+    Modifed recipe_ingredient table and View Recipes UI
+    
+    Added the measurement column to the recipe_ingredient table and modified functionality to display the measurement types in the details box. This helps give the user a better understanding of what quantity of the ingredients they need to complete the recipe.
+
+commit 4f0a035d6a37271f78f3bb19a4dc1ec09bdf00ee
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 18:12:56 2023 -0500
+
+    Included additional Recipe data on View Recipes Page
+    
+    Modified functionality to show steps and ingredients needed for each ingredient. User can now see Recipe name, description, recipe steps, and ingredients need once they select a recipe from the list.
+
+commit 87a1e9796d2d892bd99fd0d7d39a1eff6e9c0955
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 16:59:19 2023 -0500
+
+    Modified functioality to show recipes on View Recipe page
+    
+    Modified functionality to show all recipes from the recipe table in the list on the View Recipe page.
+
+commit 5c30dab407249f7c3efc71e9fa0e3818fe3b02db
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 16:42:26 2023 -0500
+
+    Created fuctionality to get recipe steps from table
+    
+    Created functionality responsible for getting all of the steps associated with a specified recipe from the recipe_step table based on the recipe id
+
+commit b3e26126bac94de99f7fd58cdd52e1f535c5be32
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 16:22:57 2023 -0500
+
+    Created fuctionality to get recipe ingredients from table
+    
+    Created functionality responsible for getting all of the ingredients associated with a specified recipe from the recipe_ingredient table based on the recipe id
+
+commit 05d143efbc458f0a14514ddc04821a2c4b46add1
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 16:05:36 2023 -0500
+
+    Created fuctionality to get all recipes from table
+    
+    Created functionality responsible for getting all of the recipes from the recipe table
+
+commit 23f69958bd81e44d02bba8da375aa6df37a43ec9
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Mon Feb 20 15:47:27 2023 -0500
+
+    Created RecipeStep class
+    
+    Created class responsible for holding the data of a recipe step object including the recipe id of the recipe its associated with and its name and description.
+
+commit 2488a7ef8ca6b386d9b2ada41804fceb501c040f
+Merge: 18f631e ee79c0b
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Mon Feb 20 10:45:01 2023 -0500
+
+    Merge pull request #22 from MatthewThompson35/updateUseCaseScenarios
+
+commit ee79c0b38dc6885968677d481fe254db17f10791
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Feb 20 10:42:33 2023 -0500
+
+    Added ViewRecipe use case
+    
+    Added the view recipe use case scenario
+
+commit 18f631ea46f7cc718ddd70e6756b608a5ed9f27d
+Merge: 30daac1 4c8ef01
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 18 15:48:46 2023 -0500
+
+    Merge pull request #21 from MatthewThompson35/desktopHomepageUI2
+    
+    Made the Recipes homepage UI
+
+commit 30daac1900a0d7a1c6ebf7954a72ca89db633061
+Merge: ee63501 b406111
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sat Feb 18 15:48:29 2023 -0500
+
+    Merge pull request #20 from MatthewThompson35/webMeasurement
+    
+    Updated Sprint documentation
+
+commit 4c8ef01b917bee6dc222bbba6a57ff8db7084dea
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sat Feb 18 15:43:10 2023 -0500
+
+    Made the Recipes homepage UI
+
+commit b40611195d116f40ad8333e0ac297f336bdaf6e2
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 18 15:10:31 2023 -0500
+
+    Updated Sprint documentation
+    
+    Updated use case diagram to include view recipes use case and updated ERD to include recipe, recipe_ingredient, and recipe_step tables added to the database to support new functionality.
+
+commit ee6350170e4f5a0a883087b47f9db7be3d0f4d9f
+Merge: 4569f35 ee5637e
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 18 11:07:59 2023 -0500
+
+    Merge pull request #19 from MatthewThompson35/webMeasurement
+    
+    Pulling new UI and functionality to main
+
+commit ee5637e9197430b930fb25c537e98e9864fd0ac6
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 18 00:51:04 2023 -0500
+
+    Modified View Ingredients UI and functionality
+    
+    Modified view ingredients page to display the unit of measure for each ingredient
+
+commit 98e1e922101997a5ecd1d96fd4749333088c5b8e
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 18 00:31:49 2023 -0500
+
+    Updated add ingredient page
+    
+    Updated add ingredient page to include a measurment dropdown field and modified add ingredient functionality to include measurement type when adding to database
+
+commit 4569f35ba5a4770ef4521187b3a00398b5e71f15
+Merge: b2e5861 be77cbd
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Feb 17 21:56:47 2023 -0500
+
+    Merge pull request #18 from MatthewThompson35/desktopMeasurement
+    
+    Desktop measurement
+
+commit b2e58619ffebb32add64e0320ace4f7349bd8c19
+Merge: cade660 4b696ea
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Feb 17 21:41:38 2023 -0500
+
+    Merge pull request #17 from MatthewThompson35/measurementEnum
+    
+    Addes Sprint 2 backlog and measurement Enum
+
+commit be77cbd57d6e4ea1b2eda6292ffee7827ae65110
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Feb 17 21:00:40 2023 -0500
+
+    Measurement changes working
+
+commit 4b696eae34848b04611b8b6f2fd293df5da24fa8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Feb 17 14:59:26 2023 -0500
+
+    Addes Sprint 2 backlog and measurement Enum
+
+commit cade6606d8f1d506359ae09a49fff5ed8bb2d9d9
+Merge: ac30035 f80a825
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Fri Feb 17 14:38:32 2023 -0500
+
+    Merge pull request #16 from MatthewThompson35/webRecipeUI
+    
+    Created recipe ui on the web side
+
+commit f80a825224dfd8442a07f6e07fc361d724a1ec68
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 16 22:06:33 2023 -0500
+
+    Created recipe ui on the web side
+
+commit ac300352500e73a01df0e1b9a59c1439fa07c258
+Merge: 8afd59b dfb50c3
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Tue Feb 14 11:13:24 2023 -0500
+
+    Merge pull request #15 from MatthewThompson35/desktopFixtures
+    
+    Desktop fixtures
+
+commit dfb50c30ac03d8eb392ea91b8eb465ca7c669c02
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Tue Feb 14 10:47:11 2023 -0500
+
+    Deleted the popup for when user clicks submit.
+
+commit c9139578040d7f317c7d1afb4b4eb9634c20fb7b
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Feb 13 21:18:15 2023 -0500
+
+    Fixed spacing for login page, and add ingredients page. Also modified login to not display popup to match consistency of the register page. Adjusted datagridview in ingredients page.
+
+commit eabd6c009f09bfef6390c6ab6017f1359deb5357
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Mon Feb 13 20:17:09 2023 -0500
+
+    Fixed the error messages for the add ingredient page
+
+commit 8afd59b816b2bc4497ac9ff60f0b896a02e78bc7
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 23:50:23 2023 -0500
+
+    Changed the location of the coverage report
+    
+    Put coverage report in sprint 1 folder
+
+commit 28888b585e7d1987430c3d46de154e3c6e55fdeb
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 23:45:48 2023 -0500
+
+    Update README.md
+
+commit c7834b60e56dad358b89727a72d47990d19604b0
+Merge: 3ed0d1f d5e9cd6
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 23:30:38 2023 -0500
+
+    Merge pull request #14 from MatthewThompson35/documentation
+    
+    Updated sprint 1 backlog
+
+commit d5e9cd617415c4d06e4bd356d97d677ac79e67ff
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 12 23:29:22 2023 -0500
+
+    Updated sprint 1 backlog
+    
+    Finished populating sprint backlog for team estimates and actual times
+
+commit 3ed0d1f811552ef350011f14dbcf4cfa34d20681
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 23:20:16 2023 -0500
+
+    Update README.md
+
+commit dfc4f0f03fe71cc194fda9a1ed94eb68bf4a9a0e
+Merge: 3a93a7e 7d69eb9
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 23:16:54 2023 -0500
+
+    Merge pull request #12 from MatthewThompson35/webBugs
+    
+    merging web bug fixes to main
+
+commit 3a93a7ea0884db35d28f4d08b72d13941a0b8410
+Merge: 857327e 208535c
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sun Feb 12 23:16:44 2023 -0500
+
+    Merge pull request #11 from MatthewThompson35/desktopAddFix
+    
+    Fixed allowing characters in quantity
+
+commit 7d69eb9cbd33fdff3d5089e21fa5ea192fa51e89
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 12 23:12:33 2023 -0500
+
+    Fixed nav bar
+    
+    Removed functionality that is currently not needed
+
+commit 224ade46ebff275210ef8fd6b88e2c24f9926c78
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 12 23:07:26 2023 -0500
+
+    Added input validation to add ingredient on web
+    
+    Modified functionality to check if quantity is an integer.
+
+commit 208535cce897c52f2ab70176d8050631df1c03d6
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 23:01:15 2023 -0500
+
+    Fixed allowing characters in quantity
+
+commit 857327e67493ced274bf4ac6d47a29ecd8d2a9e1
+Merge: 2ff53ea 960bc09
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Sun Feb 12 22:49:14 2023 -0500
+
+    Merge pull request #10 from MatthewThompson35/documentation
+    
+    Documentation
+
+commit 960bc0939adbd028e9fbeb9d00cb89cdf5f35b65
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 22:41:00 2023 -0500
+
+    added coverage report to CoverageReport folder
+
+commit d374b08846ae3b26d24441d93fcf4e2907504bc8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 22:38:44 2023 -0500
+
+    Cleaned up code and added documentation
+
+commit 2ff53eaebefedd20186b1fe14f357d8fc1ec086e
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 20:50:04 2023 -0500
+
+    Update README.md
+
+commit 90f41d1cff9af655772b0d6809fb6f6bc470ca5a
+Merge: 37484b8 838d487
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 20:46:25 2023 -0500
+
+    Merge pull request #9 from MatthewThompson35/desktopIngredientsFunctionality
+    
+    Desktop ingredients functionality
+
+commit 838d487035272ddc17739c6cf09b97a3e8d982e8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 20:42:34 2023 -0500
+
+    fixed functionality for add
+
+commit 4f86b2038ae4488b2e06836a9d88597398115cfc
+Merge: 8fd597d 70cfff8
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 20:34:24 2023 -0500
+
+    Merge branch 'desktopIngredientsFunctionality' of https://github.com/MatthewThompson35/CapstoneRecipePlanner into desktopIngredientsFunctionality
+
+commit 70cfff8fa17cef1c8bbf1afd9875d314c029bd5f
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 20:31:05 2023 -0500
+
+    Fixed remove functionality
+
+commit 36b54fca7983b35be6bccf2ad7b0ddacdf07edac
+Merge: ca052be 37484b8
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 20:17:39 2023 -0500
+
+    Merge branch 'main' into desktopIngredientsFunctionality
+
+commit 37484b894d39467ddeb98e77e75dcb98f5bde64f
+Merge: 23dff46 0421791
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun Feb 12 20:11:42 2023 -0500
+
+    Merge pull request #8 from MatthewThompson35/unitTests
+    
+    Unit tests
+
+commit 8fd597dda1e0a6fc08e5aad1c7e0c413fdaded6e
+Merge: ca052be a79add4
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 19:23:06 2023 -0500
+
+    Merge branch 'unitTests' into desktopIngredientsFunctionality
+
+commit ca052be38398a612bac8e49bd9b37d30657b332b
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 19:21:23 2023 -0500
+
+    Update of the quantity is working
+
+commit 35279d07b2ce32446b67ec19a9faa7a8923a2c6f
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 19:08:28 2023 -0500
+
+    Got the remove ingredient button to function.
+
+commit 89b7ee073cec52923c6a7368c92df8e15f5a1d64
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 18:26:53 2023 -0500
+
+    Functionality of adding ingredient to view is updated and working correctly
+
+commit bac73e315e551ced826ea9871bcfd106fc606f3c
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 17:04:23 2023 -0500
+
+    Added the username for adding functionality to work
+
+commit a79add41d54bbf9275e2f58c33071533722a16fc
+Merge: 0421791 23dff46
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 16:24:30 2023 -0500
+
+    Merge branch 'main' into unitTests
+
+commit 0421791a3449787d29bba2b1644dad3f811e63ae
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 16:24:18 2023 -0500
+
+    Added tests and met coverage criteria
+
+commit 23dff46c9f12b8228881a884e28cc4c4832c0516
+Merge: c82a60f 91a7343
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sun Feb 12 14:45:49 2023 -0500
+
+    Merge pull request #7 from MatthewThompson35/webIngredientsPageFunctionality
+    
+    Merging input validation for web to main
+
+commit 91a73437556a8af88c0b238e0c3b6c4a59f1e22f
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 14:44:30 2023 -0500
+
+    Fixed register button bug
+
+commit 9f9e72eb252c701d132867d0619e3e565a25df05
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 14:09:17 2023 -0500
+
+    Uploaded the recipe planner class diagram
+
+commit bf0f2545187b8d916f25a5d49063ce2eb027f598
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 12 13:53:51 2023 -0500
+
+    Created test project. Not completed yet
+
+commit 5a11db8ffc500e1dc7042f97f77b9e490b51f726
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 12 01:34:23 2023 -0500
+
+    Added input validation for login sceen for web application
+    
+    Added functionality to validate fields are not null on the login screen and notifying user when they are left blank
+
+commit 06bd136aeeb1332734f466060745f47182f21cf9
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 00:54:37 2023 -0500
+
+    Added the add functionality with add popup
+
+commit 6cda093b7dcfda7426bf146847fb2cecf1f9e7ea
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Sun Feb 12 00:33:05 2023 -0500
+
+    Included my password for my end to work for desktop
+
+commit ef2619d483f58455fb83a67bf77528570a08c9f6
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sun Feb 12 00:28:07 2023 -0500
+
+    Completed logout functionality for web application
+    
+    Added logout button to UI and included functionality to return to the login page if logout button is clicked.
+
+commit c82a60f04888dfe9ba3f9ba79d4e49e22048958b
+Merge: b45f882 f601f84
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 23:48:04 2023 -0500
+
+    Merge branch 'main' of https://github.com/MatthewThompson35/CapstoneRecipePlanner
+
+commit b45f882814f2ea24b324243b91bb20511c0efa88
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 23:47:47 2023 -0500
+
+    Create CapstoneDB.sql
+    
+    Added script
+
+commit f601f84dc8f1da129dde0f96c767e842b120ed4e
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 23:41:49 2023 -0500
+
+    Updated project documentation
+    
+    Updated sprint backlog and restructured documentation to be in sprint 1 directory.
+
+commit 3fb0786e72305ff67c7f2704b873675543ce7d32
+Merge: 00f3360 52161da
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 11 23:17:09 2023 -0500
+
+    Merge pull request #6 from MatthewThompson35/webIngredientsPageFunctionality
+    
+    Merging updated Web ingredients page functionality to main
+
+commit 00f3360cbf6518134117ceceedf4515066276681
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 11 23:11:04 2023 -0500
+
+    Update README.md
+
+commit 4f88743f7d12121ef3c631176f5808fe227e0608
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Sat Feb 11 23:05:04 2023 -0500
+
+    Update README.md
+
+commit 52161dab44f73663b5976a0c7aeec8f56cc4e77a
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 22:57:21 2023 -0500
+
+    Fixed error in css
+    
+    Updated css so that web page looked more smooth
+
+commit ef5feb63f6c437661f610a4c94ad27a57080d829
+Merge: e50efa0 7dc8ecc
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 22:56:23 2023 -0500
+
+    Merge branch 'webIngredientsPageFunctionality' of https://github.com/MatthewThompson35/CapstoneRecipePlanner into webIngredientsPageFunctionality
+
+commit e50efa0f8f0b101947f65ab440400a57570c7a7f
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 22:56:14 2023 -0500
+
+    Updated load ingredient list on login
+    
+    Hid password characters, updated how ingredients are loaded in on desktop side after login
+
+commit 7dc8ecc1495194bca839e8bc90d2d158653ebff2
+Merge: d464159 330fbf9
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 22:33:02 2023 -0500
+
+    Merge branch 'projectDocumentation' into webIngredientsPageFunctionality
+
+commit d464159518a4a0e0dc3eda6e0cb0a09d1fe5fc88
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 22:32:19 2023 -0500
+
+    Fixed error labels
+
+commit a40eccb65c72c8af29805aa7a2f5dd7bf2a6ff67
+Merge: d33d328 108775c
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 22:22:20 2023 -0500
+
+    Merge branch 'main' into webIngredientsPageFunctionality
+
+commit d33d3289145e8f335c5286fdaf9f4df753c1b51c
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 22:21:38 2023 -0500
+
+    Completed error checking for adding ingredients
+
+commit 330fbf9af711d868af04ff48831fe9602a372c4c
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 22:13:11 2023 -0500
+
+    Updated Use Case Diagram
+    
+    Added 'Edit Ingredient' and 'Registration' use cases to use case diagram.
+
+commit 4d1686e158688b6f63416ce09cc331a14d12b16f
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 22:07:59 2023 -0500
+
+    Created project ERD
+    
+    Developed ERD to represent the current state of the database used in the project.
+
+commit 914692b4795445142fb059aad1d8572a94905c3d
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 21:56:04 2023 -0500
+
+    Completed basic functionality for ingredient page on the web side
+
+commit 072807b56184a7f12e9495717a28cb8be79103ef
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 21:35:18 2023 -0500
+
+    Fixed quantity increment functionality
+    
+    Updated functionality to change the quantity number in the database after decrement button is pressed in UI
+
+commit 8ad45cc4198176e671697f0bae1f571ecc7dad51
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 20:37:26 2023 -0500
+
+    Modified add ingredient functionality
+    
+    Modified functionality to include new username column value when adding a new ingredient.
+
+commit a6f7003258dc98ace6d96d631782803894b608b3
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 20:31:02 2023 -0500
+
+    Changed functionality toload in ingredients based on user
+    
+    Ingredient table now includes username so functionality needed to be modified to use username to determine which ingredients belong to which user when logging in.
+
+commit 108775c0f7f90cf891f7b8dcde849e7cddf920e6
+Merge: 2d111f1 b0c8574
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sat Feb 11 15:11:33 2023 -0500
+
+    Merge pull request #5 from MatthewThompson35/webRegistration
+    
+    Merge web side user registration functionality to main
+
+commit b0c857405472a280d4eebb13257b76d1e8d64903
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 14:23:26 2023 -0500
+
+    Added field validation to registration page
+    
+    Added fucntionality to check if username is already in database and notify the user that the username is already taken.
+
+commit f492b9fb6062f67c08296ed7bd3a22c677248395
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 11 13:38:59 2023 -0500
+
+    Completed Registration functionality
+    
+    Created Registration page and completed functionality to register a new user with password verification
+
+commit 5cb044452970a6589cd9e7de8a74fed53b47c62d
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sat Feb 11 12:09:39 2023 -0500
+
+    Adding Ingredients is working
+
+commit 938dcdaacb902b01dbac1da61bc99f2e6359d2eb
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Feb 10 23:49:40 2023 -0500
+
+    Added password confirmation functionality
+    
+    Added functionality in html to verify passwords match in input fields for registration.
+
+commit 063a7b6f4ac7dd39c94b3fd4877fbcdcea5b6c8b
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Fri Feb 10 22:17:16 2023 -0500
+
+    Created registration page for web
+    
+    Added UI elements needed for registration functionality on web side.
+
+commit 90a489fd63b22224fc1d9d1cce5ba20e186e4f80
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri Feb 10 20:32:29 2023 -0500
+
+    Progress for ingredients functionality
+
+commit 21f5f5741cc8ba0f162b7459650d91a150b3c550
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 9 20:51:59 2023 -0500
+
+    Created web ingredientsPageUI with simple functionality
+
+commit cad22e4ce201e43bd724241a61ffcf0fe3159c70
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 9 20:49:09 2023 -0500
+
+    Created web ingredients ui with increment decrement and remove functionality
+
+commit 2d111f177d052076c57563ac4dbeb5d148cd59cf
+Merge: f0b3415 ebcfe2c
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Thu Feb 9 19:57:07 2023 -0500
+
+    Merge pull request #4 from MatthewThompson35/desktopIngredientsPage
+    
+    Merge desktop app ingredients page and functionality to main
+
+commit ebcfe2ca56908b8d35768239229a09a65c0a9675
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 9 19:03:26 2023 -0500
+
+    Added ingredient population from ingredient table
+    
+    Added functionality that populates the gridview with ingredients from the ingredients table when page is loaded
+
+commit 4a9779456c1cc5b548e7a00ea4770487ec100899
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 9 18:34:51 2023 -0500
+
+    Restructured ingredients page
+    
+    Replace listview with datagridview so that increase and decrease buttons can be included for quanitity on each row
+
+commit e79c4d8f99a1ec2459a93e0b8ad9da557e7fad2a
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 9 17:00:16 2023 -0500
+
+    Mofied login functionality
+    
+    Modified login functionality to route to ingredients page if login credentials are correct and added logout button and functionality to ingredients page
+
+commit f08b20fae58386381fdec1ab5ef04c30acce1d3c
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 9 16:50:39 2023 -0500
+
+    Created Ingredient Page UI
+    
+    Added new form and UI components needed for owned ingredients page.
+
+commit f0b341516b404fa15a0302886e0d1b12cb557041
+Merge: 06f944b 7aba445
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Tue Feb 7 20:42:18 2023 -0500
+
+    Merge pull request #3 from MatthewThompson35/passwordHashing
+    
+    Password hashing
+
+commit 7aba44539392a24eaf60e8558167ba2257873eeb
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Tue Feb 7 20:38:21 2023 -0500
+
+    Deleted RecipePlannerWebApplication folder due to build errors
+
+commit d1aa69ff2166766d6a988bd78cfdcb66a9bf9a0e
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 7 18:12:52 2023 -0500
+
+    Finished registering users
+
+commit b783fc1f68143008d1699e4367bdc3ee29cb5a23
+Merge: 0e473c3 b192ccb
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 7 16:49:18 2023 -0500
+
+    Merge branch 'passwordHashing' of https://github.com/MatthewThompson35/CapstoneRecipePlanner into passwordHashing
+
+commit 0e473c3754565a5e305679a0607a107a865c100e
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 7 16:48:05 2023 -0500
+
+    Converted desktop app to .NET 6
+
+commit b192ccb778eac2de60b4d8659064ece4cbc31855
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Tue Feb 7 14:57:55 2023 -0500
+
+    downgraded MySQL.Data to 8.0.30
+
+commit 06f944b3e400f3797383f582a61a31742490a5bd
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Mon Feb 6 22:00:59 2023 -0500
+
+    Update README.md
+
+commit d00cab8a59bfb0d25718555d67b860dcaf9fcec4
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Mon Feb 6 21:59:11 2023 -0500
+
+    Update README.md
+
+commit ca3c5335f8a703e4f47689049c1ac870500a4d18
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Feb 6 21:56:00 2023 -0500
+
+    Setup Password Hashing and Populating DB
+    
+    Added in password hashing and created a script that is run on launch to populate the database
+
+commit a06354655936ed6dd8263225dfb3d51898264f82
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Feb 6 19:24:34 2023 -0500
+
+    Tied in Login Functionality
+    
+    Created a project library to use in the solution so that we can reuse code. Tied in login functionality to the desktop application
+
+commit c081977e535c2411f4dbfd7313f2bd2e287e7512
+Merge: 8232ba1 9a16d17
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Mon Feb 6 18:27:45 2023 -0500
+
+    Merge pull request #1 from MatthewThompson35/login
+    
+    Merging Login UI and functionality for web application
+
+commit a45bb103f5617690f4a435d5e91ae901166dc427
+Merge: b6c59dc 9a16d17
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Mon Feb 6 18:22:29 2023 -0500
+
+    Merge remote-tracking branch 'origin/login' into desktopLoginUI
+
+commit b6c59dccd616a123b6bc6aaec40cbe8cd312684c
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun Feb 5 13:44:59 2023 -0500
+
+    Created Login UI for Desktop
+
+commit 9a16d1709c60d631c9b0d628af001577ac3bafa7
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 4 23:39:19 2023 -0500
+
+    Updataed CSS for Webpage
+    
+    Modifiedd CSS file so that login screen looked more cohesive and flowed better. Now matches Sprint 1 wireframe for this screen.
+
+commit 3db7a6b08d669cfb6acd578598e63d185041bdc5
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Sat Feb 4 22:08:09 2023 -0500
+
+    Created Login Page UI (Web) and added login credential validation
+    
+    Created functionality that validates the login credentials that are inputted on the login screen. A prompt returns information to the user on whether the inputted credentials were correct or not.
+
+commit 8232ba18f1db766ca0ed65f03e6d7bac3865efa1
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 2 20:02:07 2023 -0500
+
+    Added sprint 1 backlog
+    
+    Added the sprint 1 backlog to sprints 1 folder
+
+commit 29f011b52d9eabd12038d8e257505c9fcf26dbe2
+Author: JaneraSmith <jsmit189@my.westga.edu>
+Date:   Thu Feb 2 18:50:52 2023 -0500
+
+    Added two use case scenarios
+
+commit 0a2b37ffbb8004b9eba79518c23ade4c04963b9d
+Merge: 2da6368 fb3cfa0
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 2 18:48:25 2023 -0500
+
+    Merge branch 'main' of https://github.com/MatthewThompson35/CapstoneRecipePlanner
+
+commit 2da6368ef68b7ef2db053521d79760cffea2a525
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 2 18:48:15 2023 -0500
+
+    Added technical documentation
+    
+    Added product backlog and Sprint 1 wireframe to repository
+
+commit fb3cfa0fb684477100318ae1c9d2c230e674eac6
+Merge: 1e8ea38 26b34db
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 2 18:41:52 2023 -0500
+
+    Merge branch 'main' of https://github.com/MatthewThompson35/CapstoneRecipePlanner
+
+commit 1e8ea38ab2aa11cacbdfedae819ad1c74e5be5d5
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 2 18:40:56 2023 -0500
+
+    Updated login.txt
+    
+    added return step
+
+commit 26b34dbdf207c0545f591ef5d498be8254d86223
+Author: DHarper04 <93097335+DHarper04@users.noreply.github.com>
+Date:   Thu Feb 2 18:39:39 2023 -0500
+
+    Updated README file
+    
+    Updated readme file to include Project name and purpose
+
+commit ffae2034565ca27fdeb71d9ce3814dab85bf0e24
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Thu Feb 2 18:37:35 2023 -0500
+
+    Added use case scenarios
+    
+    added use case scenarios for adding ingredients, login, and viewing ingredients
+
+commit 950dd7f5f0d4003d3e96de9b9d00f89e47836112
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 2 18:32:05 2023 -0500
+
+    Created Use Case Diagram
+    
+    Created use case diagram that represents the use cases being covered in sprint 1.
+
+commit ff19e38020d3b6a86148e9fda8bcc614fb9835c7
+Author: DHarper04 <dharpe11@my.westga.edu>
+Date:   Thu Feb 2 18:30:09 2023 -0500
+
+    Setup base project structure
+    
+    Created the proper folder structure and added starting web and desktop applications to work off of.
+
+commit 8a4202de8b1a02b0d1dab3fcbf92c604451cc619
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Thu Feb 2 17:19:13 2023 -0500
+
+    Initial commit

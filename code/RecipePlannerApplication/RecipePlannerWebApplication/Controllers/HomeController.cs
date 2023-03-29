@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using RecipePlannerLibrary;
@@ -361,11 +363,50 @@ public class HomeController : Controller
         }
     }
 
+    /// <summary>
+    ///     Goes to shopping list page with specified page number.
+    /// </summary>
+    /// <param name="page">The page number to navigate to.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>Returns the shopping list page with the specified page of ingredients.</returns>
+    public ActionResult goToShoppingListPage(int? page)
+    {
+        try
+        {
+            this.setupShoppingListPage(page);
+            return View("ShoppingList");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+    }
+
     private void setupIngredientsPage(int? page)
     {
         const int pageSize = 5; // Change this to the desired page size
         var currentPage = page ?? 1;
         List<Ingredient> allIngredients = IngredientDAL.getIngredients();
+        var totalIngredients = allIngredients.Count;
+        var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+
+        var ingredientsOnPage = allIngredients
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        ViewBag.currentPage = currentPage;
+        ViewBag.totalPages = totalPages;
+        ViewBag.ingredientsOnPage = ingredientsOnPage;
+    }
+
+    private void setupShoppingListPage(int? page)
+    {
+        const int pageSize = 5;
+        var currentPage = page ?? 1;
+        List<Ingredient> allIngredients = IngredientDAL.GetIngredientsFromShoppingList();
         var totalIngredients = allIngredients.Count;
         var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
 
@@ -766,6 +807,8 @@ public class HomeController : Controller
 
         ViewBag.AllRecipes = recipes;
         var breakfast = new List<string>();
+        var lunch = new List<string>();
+        var dinner = new List<string>();
         var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
         var daysOfWeek = new List<string>
             {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -775,8 +818,22 @@ public class HomeController : Controller
             var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Lunch", "This Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            lunch.Add(recipeName);
+        }
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Dinner", "This Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            dinner.Add(recipeName);
+        }
 
         ViewBag.DefaultValues = breakfast;
+        ViewBag.Lunch = lunch;
+        ViewBag.Dinner = dinner;
         ViewBag.Header = "This weeks meals";
         ViewBag.CurrentWeek = "This Week";
         return View("PlannedMealsPage");
@@ -803,14 +860,30 @@ public class HomeController : Controller
         var breakfast = new List<string>();
         var daysOfWeek = new List<string>
             {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        var lunch = new List<string>();
+        var dinner = new List<string>();
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Breakfast", "Next Week");
             var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Lunch", "Next Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            lunch.Add(recipeName);
+        }
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Dinner", "Next Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            dinner.Add(recipeName);
+        }
 
         ViewBag.DefaultValues = breakfast;
+        ViewBag.Lunch = lunch;
+        ViewBag.Dinner = dinner;
         ViewBag.Header = "Next weeks meals";
         ViewBag.CurrentWeek = "Next Week";
         return View("PlannedMealsPage");

@@ -1,0 +1,11 @@
+Context - User is viewing a recipe's details
+
+Primary Flow
+1 - user finds recipe they have made and would like to remove ingredients from
+2 - user selects to remove the ingredients
+3 - system removes the ingredients from pantry
+
+Alternative Flow(s)
+
+BAD CONNECTION
+a3 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
