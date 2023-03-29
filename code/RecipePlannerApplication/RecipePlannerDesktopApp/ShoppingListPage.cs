@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,36 @@ namespace RecipePlannerDesktopApplication
 {
     public partial class ShoppingListPage : Form
     {
+        private DataGridViewRow selectedRow;
+        private int page = 1;
+        private readonly int pageSize = 8;
+        private readonly int totalPages;
+        private List<Ingredient> pageOneIngredients;
+
         public ShoppingListPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
+            try
+            {
+                var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+                this.totalPages = (int)Math.Ceiling((double)ingredients.Count / this.pageSize);
+                this.pageOneIngredients = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                var bindingList = new BindingList<Ingredient>(this.pageOneIngredients);
+                this.ingredientsGridView.DataSource = bindingList;
+                
+                Refresh();
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.ingredientsGridView.Enabled = false;
+            }
+
+            Refresh();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
