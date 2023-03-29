@@ -159,8 +159,7 @@ namespace RecipePlannerDesktopApplication
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
 
-                this.Hide();
-                this.homepage.Show();
+                this.hideDayMealTypeWeekElements();
             }
             else
             {
@@ -170,8 +169,7 @@ namespace RecipePlannerDesktopApplication
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
 
-                this.Hide();
-                this.homepage.Show();
+                this.hideDayMealTypeWeekElements();
             }
 
             this.yesButton.Visible = false;
@@ -274,6 +272,17 @@ namespace RecipePlannerDesktopApplication
             this.daysComboBox.Visible = true;
             this.mealTypeComboBox.Visible = true;
             this.weekComboBox.Visible = true;
+        }
+
+        private void hideDayMealTypeWeekElements()
+        {
+            this.dayLabel.Visible = false;
+            this.mealTypeLabel.Visible = false;
+            this.weekLabel.Visible = false;
+
+            this.daysComboBox.Visible = false;
+            this.mealTypeComboBox.Visible = false;
+            this.weekComboBox.Visible = false;
         }
 
         private void CheckIfReadyToSubmit()

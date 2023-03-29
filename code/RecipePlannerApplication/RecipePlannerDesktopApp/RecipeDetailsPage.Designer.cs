@@ -148,7 +148,7 @@
             // 
             this.updateSuccessfullyLabel.AutoSize = true;
             this.updateSuccessfullyLabel.ForeColor = System.Drawing.Color.Green;
-            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(114, 158);
+            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(118, 157);
             this.updateSuccessfullyLabel.Name = "updateSuccessfullyLabel";
             this.updateSuccessfullyLabel.Size = new System.Drawing.Size(296, 20);
             this.updateSuccessfullyLabel.TabIndex = 10;
