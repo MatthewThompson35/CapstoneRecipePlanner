@@ -30,15 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
-            this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.decreaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.increaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
@@ -53,6 +48,11 @@
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.decreaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.increaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -79,56 +79,9 @@
             this.ingredientsGridView.RowHeadersVisible = false;
             this.ingredientsGridView.RowHeadersWidth = 51;
             this.ingredientsGridView.RowTemplate.Height = 25;
+            this.ingredientsGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.ingredientsGridView.Size = new System.Drawing.Size(400, 240);
             this.ingredientsGridView.TabIndex = 6;
-            // 
-            // IngredientColumn
-            // 
-            this.IngredientColumn.DataPropertyName = "name";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.IngredientColumn.HeaderText = "Ingredient";
-            this.IngredientColumn.MinimumWidth = 6;
-            this.IngredientColumn.Name = "IngredientColumn";
-            this.IngredientColumn.ReadOnly = true;
-            this.IngredientColumn.Width = 130;
-            // 
-            // decreaseQuantityColumn
-            // 
-            this.decreaseQuantityColumn.HeaderText = "";
-            this.decreaseQuantityColumn.MinimumWidth = 6;
-            this.decreaseQuantityColumn.Name = "decreaseQuantityColumn";
-            this.decreaseQuantityColumn.Text = "-";
-            this.decreaseQuantityColumn.UseColumnTextForButtonValue = true;
-            this.decreaseQuantityColumn.Width = 40;
-            // 
-            // quantityColumn
-            // 
-            this.quantityColumn.DataPropertyName = "quantity";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.quantityColumn.HeaderText = "Quantity";
-            this.quantityColumn.MinimumWidth = 6;
-            this.quantityColumn.Name = "quantityColumn";
-            this.quantityColumn.ReadOnly = true;
-            this.quantityColumn.Width = 60;
-            // 
-            // increaseQuantityColumn
-            // 
-            this.increaseQuantityColumn.HeaderText = "";
-            this.increaseQuantityColumn.MinimumWidth = 6;
-            this.increaseQuantityColumn.Name = "increaseQuantityColumn";
-            this.increaseQuantityColumn.Text = "+";
-            this.increaseQuantityColumn.UseColumnTextForButtonValue = true;
-            this.increaseQuantityColumn.Width = 40;
-            // 
-            // Measurement
-            // 
-            this.Measurement.DataPropertyName = "Measurement";
-            this.Measurement.HeaderText = "Measurement";
-            this.Measurement.MinimumWidth = 6;
-            this.Measurement.Name = "Measurement";
-            this.Measurement.Width = 125;
             // 
             // label1
             // 
@@ -269,6 +222,59 @@
             this.showPantryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.showPantryToolStripMenuItem.Text = "View Pantry";
             this.showPantryToolStripMenuItem.Click += new System.EventHandler(this.showPantryToolStripMenuItem_Click);
+            // 
+            // IngredientColumn
+            // 
+            this.IngredientColumn.DataPropertyName = "name";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.IngredientColumn.HeaderText = "Ingredient";
+            this.IngredientColumn.MinimumWidth = 6;
+            this.IngredientColumn.Name = "IngredientColumn";
+            this.IngredientColumn.ReadOnly = true;
+            this.IngredientColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IngredientColumn.Width = 130;
+            // 
+            // decreaseQuantityColumn
+            // 
+            this.decreaseQuantityColumn.HeaderText = "";
+            this.decreaseQuantityColumn.MinimumWidth = 6;
+            this.decreaseQuantityColumn.Name = "decreaseQuantityColumn";
+            this.decreaseQuantityColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.decreaseQuantityColumn.Text = "-";
+            this.decreaseQuantityColumn.UseColumnTextForButtonValue = true;
+            this.decreaseQuantityColumn.Width = 40;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.DataPropertyName = "quantity";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.quantityColumn.HeaderText = "Quantity";
+            this.quantityColumn.MinimumWidth = 6;
+            this.quantityColumn.Name = "quantityColumn";
+            this.quantityColumn.ReadOnly = true;
+            this.quantityColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.quantityColumn.Width = 60;
+            // 
+            // increaseQuantityColumn
+            // 
+            this.increaseQuantityColumn.HeaderText = "";
+            this.increaseQuantityColumn.MinimumWidth = 6;
+            this.increaseQuantityColumn.Name = "increaseQuantityColumn";
+            this.increaseQuantityColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.increaseQuantityColumn.Text = "+";
+            this.increaseQuantityColumn.UseColumnTextForButtonValue = true;
+            this.increaseQuantityColumn.Width = 40;
+            // 
+            // Measurement
+            // 
+            this.Measurement.DataPropertyName = "Measurement";
+            this.Measurement.HeaderText = "Measurement";
+            this.Measurement.MinimumWidth = 6;
+            this.Measurement.Name = "Measurement";
+            this.Measurement.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Measurement.Width = 125;
             // 
             // ShoppingListPage
             // 

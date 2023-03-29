@@ -48,26 +48,82 @@ namespace RecipePlannerDesktopApplication
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-
+            Hide();
+            var login = new LoginPage();
+            login.Show();
         }
 
         private void beginningButton_Click(object sender, EventArgs e)
         {
+            this.page = 1;
+            var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+            List<Ingredient> allIngredientsOnPage = ingredients
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList<Ingredient>(list);
+
+            this.ingredientsGridView.DataSource = bindingList;
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.page != 1)
+            {
+                this.page--;
+                var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+                List<Ingredient> allIngredientsOnPage = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<Ingredient>(list);
+
+                this.ingredientsGridView.DataSource = bindingList;
+            }
 
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
+            if (this.page != this.totalPages)
+            {
+                this.page++;
+                var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+                List<Ingredient> allIngredientsOnPage = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<Ingredient>(list);
+
+                this.ingredientsGridView.DataSource = bindingList;
+            }
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.page = this.totalPages;
+            var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+            List<Ingredient> allIngredientsOnPage = ingredients
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList<Ingredient>(list);
+
+            this.ingredientsGridView.DataSource = bindingList;
 
         }
 
