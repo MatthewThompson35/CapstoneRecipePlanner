@@ -16,5 +16,45 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
         }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void beginningButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addIngredientButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeIngredientButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
