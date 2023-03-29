@@ -156,13 +156,13 @@
                     <td>
                         <input type="hidden" name="page" value="@ViewBag.currentPage"/>
                         <div class="quantity-container">
-                            <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id"/>
+                            <input type="submit" value="-" id="@ingredient.id"/>
                             <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
-                            <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id"/>
+                            <input type="submit" value="+" id="@ingredient.id"/>
                         </div>
                     </td>
                     <td>
-                        <input type="submit" asp-action="removeIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id"/>
+                        <input type="submit" value="Remove" id="@ingredient.id"/>
                     </td>
 
                 </tr>
@@ -186,8 +186,8 @@
         </div>
         <div class="button-container">
             <input type="submit" asp-action="Index" value="Logout" id="logout" class="button button-red"/>
-            <input type="submit" asp-action="goToAddIngredientsPage" value="Add Ingredient" id="addIngredient" class="button button-green"/>
-            <input type="submit" asp-action="goToAddIngredientsPage" value="Purchase Entire Shopping List" id="clearShoppingList" class="button button-green"/>
+            <input type="submit" value="Add Ingredient" id="addIngredient" class="button button-green"/>
+            <input type="submit" value="Purchase Entire Shopping List" id="clearShoppingList" class="button button-green"/>
         </div>
     </form>
 </div>
