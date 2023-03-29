@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(133, 98);
+            this.label1.Location = new System.Drawing.Point(117, 270);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(251, 38);
             this.label1.TabIndex = 1;
@@ -61,7 +61,7 @@
             // recipeDetailsTextBox
             // 
             this.recipeDetailsTextBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.recipeDetailsTextBox.Location = new System.Drawing.Point(53, 176);
+            this.recipeDetailsTextBox.Location = new System.Drawing.Point(60, 321);
             this.recipeDetailsTextBox.Multiline = true;
             this.recipeDetailsTextBox.Name = "recipeDetailsTextBox";
             this.recipeDetailsTextBox.ReadOnly = true;
@@ -72,7 +72,7 @@
             // daysComboBox
             // 
             this.daysComboBox.FormattingEnabled = true;
-            this.daysComboBox.Location = new System.Drawing.Point(81, 681);
+            this.daysComboBox.Location = new System.Drawing.Point(77, 109);
             this.daysComboBox.Name = "daysComboBox";
             this.daysComboBox.Size = new System.Drawing.Size(91, 28);
             this.daysComboBox.TabIndex = 3;
@@ -81,7 +81,7 @@
             // mealTypeComboBox
             // 
             this.mealTypeComboBox.FormattingEnabled = true;
-            this.mealTypeComboBox.Location = new System.Drawing.Point(206, 681);
+            this.mealTypeComboBox.Location = new System.Drawing.Point(202, 109);
             this.mealTypeComboBox.Name = "mealTypeComboBox";
             this.mealTypeComboBox.Size = new System.Drawing.Size(107, 28);
             this.mealTypeComboBox.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(104, 650);
+            this.label2.Location = new System.Drawing.Point(100, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 28);
             this.label2.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(206, 650);
+            this.label3.Location = new System.Drawing.Point(202, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 28);
             this.label3.TabIndex = 6;
@@ -111,7 +111,7 @@
             // 
             this.addToMealPlanButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.addToMealPlanButton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addToMealPlanButton.Location = new System.Drawing.Point(161, 764);
+            this.addToMealPlanButton.Location = new System.Drawing.Point(157, 192);
             this.addToMealPlanButton.Name = "addToMealPlanButton";
             this.addToMealPlanButton.Size = new System.Drawing.Size(177, 37);
             this.addToMealPlanButton.TabIndex = 7;
@@ -122,7 +122,7 @@
             // weekComboBox
             // 
             this.weekComboBox.FormattingEnabled = true;
-            this.weekComboBox.Location = new System.Drawing.Point(342, 681);
+            this.weekComboBox.Location = new System.Drawing.Point(338, 109);
             this.weekComboBox.Name = "weekComboBox";
             this.weekComboBox.Size = new System.Drawing.Size(91, 28);
             this.weekComboBox.TabIndex = 8;
@@ -131,7 +131,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(358, 650);
+            this.label4.Location = new System.Drawing.Point(354, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 28);
             this.label4.TabIndex = 9;
@@ -141,7 +141,7 @@
             // 
             this.updateSuccessfullyLabel.AutoSize = true;
             this.updateSuccessfullyLabel.ForeColor = System.Drawing.Color.Green;
-            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(118, 730);
+            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(114, 158);
             this.updateSuccessfullyLabel.Name = "updateSuccessfullyLabel";
             this.updateSuccessfullyLabel.Size = new System.Drawing.Size(296, 20);
             this.updateSuccessfullyLabel.TabIndex = 10;
@@ -174,7 +174,7 @@
             // yesButton
             // 
             this.yesButton.BackColor = System.Drawing.Color.LawnGreen;
-            this.yesButton.Location = new System.Drawing.Point(61, 770);
+            this.yesButton.Location = new System.Drawing.Point(57, 198);
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(94, 29);
             this.yesButton.TabIndex = 16;
@@ -186,7 +186,7 @@
             // noButton
             // 
             this.noButton.BackColor = System.Drawing.Color.Red;
-            this.noButton.Location = new System.Drawing.Point(358, 770);
+            this.noButton.Location = new System.Drawing.Point(354, 198);
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(94, 29);
             this.noButton.TabIndex = 17;
@@ -197,9 +197,9 @@
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(46, 39);
+            this.backButton.Location = new System.Drawing.Point(12, 12);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(94, 29);
+            this.backButton.Size = new System.Drawing.Size(63, 29);
             this.backButton.TabIndex = 18;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
