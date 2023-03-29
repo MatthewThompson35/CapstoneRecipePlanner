@@ -33,11 +33,11 @@
             this.recipeDetailsTextBox = new System.Windows.Forms.TextBox();
             this.daysComboBox = new System.Windows.Forms.ComboBox();
             this.mealTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.dayLabel = new System.Windows.Forms.Label();
+            this.mealTypeLabel = new System.Windows.Forms.Label();
             this.addToMealPlanButton = new System.Windows.Forms.Button();
             this.weekComboBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.weekLabel = new System.Windows.Forms.Label();
             this.updateSuccessfullyLabel = new System.Windows.Forms.Label();
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(117, 270);
+            this.label1.Location = new System.Drawing.Point(137, 271);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(251, 38);
             this.label1.TabIndex = 1;
@@ -76,6 +76,7 @@
             this.daysComboBox.Name = "daysComboBox";
             this.daysComboBox.Size = new System.Drawing.Size(91, 28);
             this.daysComboBox.TabIndex = 3;
+            this.daysComboBox.Visible = false;
             this.daysComboBox.SelectedIndexChanged += new System.EventHandler(this.daysComboBox_SelectedIndexChanged);
             // 
             // mealTypeComboBox
@@ -85,33 +86,36 @@
             this.mealTypeComboBox.Name = "mealTypeComboBox";
             this.mealTypeComboBox.Size = new System.Drawing.Size(107, 28);
             this.mealTypeComboBox.TabIndex = 4;
+            this.mealTypeComboBox.Visible = false;
             this.mealTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mealTypeComboBox_SelectedIndexChanged);
             // 
-            // label2
+            // dayLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(100, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 28);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Day";
+            this.dayLabel.AutoSize = true;
+            this.dayLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dayLabel.Location = new System.Drawing.Point(100, 78);
+            this.dayLabel.Name = "dayLabel";
+            this.dayLabel.Size = new System.Drawing.Size(46, 28);
+            this.dayLabel.TabIndex = 5;
+            this.dayLabel.Text = "Day";
+            this.dayLabel.Visible = false;
             // 
-            // label3
+            // mealTypeLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(202, 78);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 28);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Meal Type";
+            this.mealTypeLabel.AutoSize = true;
+            this.mealTypeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mealTypeLabel.Location = new System.Drawing.Point(202, 78);
+            this.mealTypeLabel.Name = "mealTypeLabel";
+            this.mealTypeLabel.Size = new System.Drawing.Size(101, 28);
+            this.mealTypeLabel.TabIndex = 6;
+            this.mealTypeLabel.Text = "Meal Type";
+            this.mealTypeLabel.Visible = false;
             // 
             // addToMealPlanButton
             // 
             this.addToMealPlanButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.addToMealPlanButton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addToMealPlanButton.Location = new System.Drawing.Point(157, 192);
+            this.addToMealPlanButton.Location = new System.Drawing.Point(171, 192);
             this.addToMealPlanButton.Name = "addToMealPlanButton";
             this.addToMealPlanButton.Size = new System.Drawing.Size(177, 37);
             this.addToMealPlanButton.TabIndex = 7;
@@ -126,16 +130,19 @@
             this.weekComboBox.Name = "weekComboBox";
             this.weekComboBox.Size = new System.Drawing.Size(91, 28);
             this.weekComboBox.TabIndex = 8;
+            this.weekComboBox.Visible = false;
+            this.weekComboBox.SelectedIndexChanged += new System.EventHandler(this.weekComboBox_SelectedIndexChanged);
             // 
-            // label4
+            // weekLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(354, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 28);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Week";
+            this.weekLabel.AutoSize = true;
+            this.weekLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.weekLabel.Location = new System.Drawing.Point(354, 78);
+            this.weekLabel.Name = "weekLabel";
+            this.weekLabel.Size = new System.Drawing.Size(60, 28);
+            this.weekLabel.TabIndex = 9;
+            this.weekLabel.Text = "Week";
+            this.weekLabel.Visible = false;
             // 
             // updateSuccessfullyLabel
             // 
@@ -174,7 +181,7 @@
             // yesButton
             // 
             this.yesButton.BackColor = System.Drawing.Color.LawnGreen;
-            this.yesButton.Location = new System.Drawing.Point(57, 198);
+            this.yesButton.Location = new System.Drawing.Point(71, 198);
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(94, 29);
             this.yesButton.TabIndex = 16;
@@ -215,11 +222,11 @@
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.updateSuccessfullyLabel);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.weekLabel);
             this.Controls.Add(this.weekComboBox);
             this.Controls.Add(this.addToMealPlanButton);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.mealTypeLabel);
+            this.Controls.Add(this.dayLabel);
             this.Controls.Add(this.mealTypeComboBox);
             this.Controls.Add(this.daysComboBox);
             this.Controls.Add(this.recipeDetailsTextBox);
@@ -237,11 +244,11 @@
         private TextBox recipeDetailsTextBox;
         private ComboBox daysComboBox;
         private ComboBox mealTypeComboBox;
-        private Label label2;
-        private Label label3;
+        private Label dayLabel;
+        private Label mealTypeLabel;
         private Button addToMealPlanButton;
         private ComboBox weekComboBox;
-        private Label label4;
+        private Label weekLabel;
         private Label updateSuccessfullyLabel;
         private ContextMenuStrip plannerContextMenuStrip;
         private ToolStripMenuItem findRecipeToolStripMenuItem;
