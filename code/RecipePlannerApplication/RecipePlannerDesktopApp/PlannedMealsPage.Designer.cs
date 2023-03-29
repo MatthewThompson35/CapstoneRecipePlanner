@@ -121,6 +121,7 @@
             this.saturdayButton = new System.Windows.Forms.Button();
             this.sundayPanel = new System.Windows.Forms.Panel();
             this.sundayButton = new System.Windows.Forms.Button();
+            this.mealPlanFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.plannerContextMenuStrip.SuspendLayout();
             this.mondayPanel.SuspendLayout();
             this.tuesdayPanel.SuspendLayout();
@@ -129,6 +130,7 @@
             this.fridayPanel.SuspendLayout();
             this.saturdayPanel.SuspendLayout();
             this.sundayPanel.SuspendLayout();
+            this.mealPlanFlowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // weekMealLabel
@@ -929,7 +931,7 @@
             this.mondayPanel.Controls.Add(this.removeMondayBreakfastButton);
             this.mondayPanel.Controls.Add(this.removeMondayLunchButton);
             this.mondayPanel.Controls.Add(this.removeMondayDinnerButton);
-            this.mondayPanel.Location = new System.Drawing.Point(10, 65);
+            this.mondayPanel.Location = new System.Drawing.Point(3, 3);
             this.mondayPanel.Name = "mondayPanel";
             this.mondayPanel.Size = new System.Drawing.Size(500, 135);
             this.mondayPanel.TabIndex = 73;
@@ -960,7 +962,7 @@
             this.tuesdayPanel.Controls.Add(this.removeTuesdayBreakfastButton);
             this.tuesdayPanel.Controls.Add(this.removeTuesdayLunchButton);
             this.tuesdayPanel.Controls.Add(this.removeTuesdayDinnerButton);
-            this.tuesdayPanel.Location = new System.Drawing.Point(10, 237);
+            this.tuesdayPanel.Location = new System.Drawing.Point(3, 144);
             this.tuesdayPanel.Name = "tuesdayPanel";
             this.tuesdayPanel.Size = new System.Drawing.Size(500, 135);
             this.tuesdayPanel.TabIndex = 74;
@@ -991,7 +993,7 @@
             this.wednesdayPanel.Controls.Add(this.removeWednesdayBreakfastButton);
             this.wednesdayPanel.Controls.Add(this.removeWednesdayLunchButton);
             this.wednesdayPanel.Controls.Add(this.removeWednesdayDinnerButton);
-            this.wednesdayPanel.Location = new System.Drawing.Point(10, 400);
+            this.wednesdayPanel.Location = new System.Drawing.Point(3, 285);
             this.wednesdayPanel.Name = "wednesdayPanel";
             this.wednesdayPanel.Size = new System.Drawing.Size(500, 135);
             this.wednesdayPanel.TabIndex = 75;
@@ -1022,7 +1024,7 @@
             this.thursdayPanel.Controls.Add(this.removeThursdayBreakfastButton);
             this.thursdayPanel.Controls.Add(this.removeThursdayLunchButton);
             this.thursdayPanel.Controls.Add(this.removeThursdayDinnerButton);
-            this.thursdayPanel.Location = new System.Drawing.Point(10, 563);
+            this.thursdayPanel.Location = new System.Drawing.Point(3, 426);
             this.thursdayPanel.Name = "thursdayPanel";
             this.thursdayPanel.Size = new System.Drawing.Size(500, 135);
             this.thursdayPanel.TabIndex = 76;
@@ -1053,7 +1055,7 @@
             this.fridayPanel.Controls.Add(this.removeFridayBreakfastButton);
             this.fridayPanel.Controls.Add(this.removeFridayLunchButton);
             this.fridayPanel.Controls.Add(this.removeFridayDinnerButton);
-            this.fridayPanel.Location = new System.Drawing.Point(10, 741);
+            this.fridayPanel.Location = new System.Drawing.Point(3, 567);
             this.fridayPanel.Name = "fridayPanel";
             this.fridayPanel.Size = new System.Drawing.Size(500, 135);
             this.fridayPanel.TabIndex = 77;
@@ -1084,7 +1086,7 @@
             this.saturdayPanel.Controls.Add(this.removeSaturdayBreakfastButton);
             this.saturdayPanel.Controls.Add(this.removeSaturdayLunchButton);
             this.saturdayPanel.Controls.Add(this.removeSatudayDinnerButton);
-            this.saturdayPanel.Location = new System.Drawing.Point(10, 913);
+            this.saturdayPanel.Location = new System.Drawing.Point(3, 708);
             this.saturdayPanel.Name = "saturdayPanel";
             this.saturdayPanel.Size = new System.Drawing.Size(500, 135);
             this.saturdayPanel.TabIndex = 78;
@@ -1115,7 +1117,7 @@
             this.sundayPanel.Controls.Add(this.removeSundayDinnerButton);
             this.sundayPanel.Controls.Add(this.removeSundayBreakfastButton);
             this.sundayPanel.Controls.Add(this.removeSundayLunchButton);
-            this.sundayPanel.Location = new System.Drawing.Point(10, 1087);
+            this.sundayPanel.Location = new System.Drawing.Point(3, 849);
             this.sundayPanel.Name = "sundayPanel";
             this.sundayPanel.Size = new System.Drawing.Size(500, 135);
             this.sundayPanel.TabIndex = 79;
@@ -1132,19 +1134,27 @@
             this.sundayButton.UseVisualStyleBackColor = true;
             this.sundayButton.Click += new System.EventHandler(this.sundayButton_Click);
             // 
+            // mealPlanFlowLayoutPanel
+            // 
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.mondayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.tuesdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.wednesdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.thursdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.fridayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.saturdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.sundayPanel);
+            this.mealPlanFlowLayoutPanel.Location = new System.Drawing.Point(3, 71);
+            this.mealPlanFlowLayoutPanel.Name = "mealPlanFlowLayoutPanel";
+            this.mealPlanFlowLayoutPanel.Size = new System.Drawing.Size(507, 990);
+            this.mealPlanFlowLayoutPanel.TabIndex = 80;
+            // 
             // PlannedMealsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
-            this.Controls.Add(this.sundayPanel);
-            this.Controls.Add(this.saturdayPanel);
-            this.Controls.Add(this.fridayPanel);
-            this.Controls.Add(this.wednesdayPanel);
-            this.Controls.Add(this.thursdayPanel);
-            this.Controls.Add(this.tuesdayPanel);
-            this.Controls.Add(this.mondayPanel);
+            this.Controls.Add(this.mealPlanFlowLayoutPanel);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.weekMealLabel);
@@ -1166,6 +1176,7 @@
             this.saturdayPanel.PerformLayout();
             this.sundayPanel.ResumeLayout(false);
             this.sundayPanel.PerformLayout();
+            this.mealPlanFlowLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1264,5 +1275,6 @@
         private Button saturdayButton;
         private Panel sundayPanel;
         private Button sundayButton;
+        private FlowLayoutPanel mealPlanFlowLayoutPanel;
     }
 }
