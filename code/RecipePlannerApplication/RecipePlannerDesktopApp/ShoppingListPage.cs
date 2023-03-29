@@ -17,11 +17,6 @@ namespace RecipePlannerDesktopApplication
             InitializeComponent();
         }
 
-        private void backButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void logoutButton_Click(object sender, EventArgs e)
         {
 
@@ -54,6 +49,31 @@ namespace RecipePlannerDesktopApplication
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void plannerMenuButton_Click(object sender, EventArgs e)
+        {
+            this.plannerContextMenuStrip.Show(this.plannerMenuButton, 0, this.plannerMenuButton.Height);
+
+        }
+
+        private void showRecipesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+
+            var recipesPage = new Homepage();
+
+            recipesPage.Show();
+        }
+
+        private void showPantryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hide();
+
+            var ingredientPage = new IngredientsPage();
+
+            ingredientPage.Show();
 
         }
     }

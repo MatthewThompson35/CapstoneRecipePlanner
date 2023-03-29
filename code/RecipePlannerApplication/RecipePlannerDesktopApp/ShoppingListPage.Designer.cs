@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
             this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.decreaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -38,7 +40,6 @@
             this.increaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
-            this.backButton = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -48,19 +49,24 @@
             this.beginningButton = new System.Windows.Forms.Button();
             this.removeIngredientButton = new System.Windows.Forms.Button();
             this.addIngredientButton = new System.Windows.Forms.Button();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
+            this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ingredientsGridView
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ingredientsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IngredientColumn,
@@ -79,8 +85,8 @@
             // IngredientColumn
             // 
             this.IngredientColumn.DataPropertyName = "name";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.IngredientColumn.HeaderText = "Ingredient";
             this.IngredientColumn.MinimumWidth = 6;
             this.IngredientColumn.Name = "IngredientColumn";
@@ -99,8 +105,8 @@
             // quantityColumn
             // 
             this.quantityColumn.DataPropertyName = "quantity";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.quantityColumn.HeaderText = "Quantity";
             this.quantityColumn.MinimumWidth = 6;
             this.quantityColumn.Name = "quantityColumn";
@@ -128,22 +134,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(156, 86);
+            this.label1.Location = new System.Drawing.Point(156, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(138, 30);
             this.label1.TabIndex = 7;
             this.label1.Text = "Shopping List";
-            // 
-            // backButton
-            // 
-            this.backButton.Location = new System.Drawing.Point(25, 22);
-            this.backButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(82, 22);
-            this.backButton.TabIndex = 8;
-            this.backButton.Text = "Back";
-            this.backButton.UseVisualStyleBackColor = true;
-            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // logoutButton
             // 
@@ -240,11 +235,47 @@
             this.addIngredientButton.UseVisualStyleBackColor = true;
             this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
             // 
+            // plannerMenuButton
+            // 
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(12, 14);
+            this.plannerMenuButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.plannerMenuButton.Name = "plannerMenuButton";
+            this.plannerMenuButton.Size = new System.Drawing.Size(38, 29);
+            this.plannerMenuButton.TabIndex = 23;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showRecipesToolStripMenuItem,
+            this.showPantryToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(143, 48);
+            // 
+            // showRecipesToolStripMenuItem
+            // 
+            this.showRecipesToolStripMenuItem.Name = "showRecipesToolStripMenuItem";
+            this.showRecipesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showRecipesToolStripMenuItem.Text = "View Recipes";
+            this.showRecipesToolStripMenuItem.Click += new System.EventHandler(this.showRecipesToolStripMenuItem_Click);
+            // 
+            // showPantryToolStripMenuItem
+            // 
+            this.showPantryToolStripMenuItem.Name = "showPantryToolStripMenuItem";
+            this.showPantryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showPantryToolStripMenuItem.Text = "View Pantry";
+            this.showPantryToolStripMenuItem.Click += new System.EventHandler(this.showPantryToolStripMenuItem_Click);
+            // 
             // ShoppingListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.pageLabel);
@@ -254,12 +285,12 @@
             this.Controls.Add(this.addIngredientButton);
             this.Controls.Add(this.serverErrorLabel);
             this.Controls.Add(this.logoutButton);
-            this.Controls.Add(this.backButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ingredientsGridView);
             this.Name = "ShoppingListPage";
             this.Text = "ShoppingListPage";
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
+            this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,7 +305,6 @@
         private DataGridViewButtonColumn increaseQuantityColumn;
         private DataGridViewTextBoxColumn Measurement;
         private Label label1;
-        private Button backButton;
         private Button logoutButton;
         private Label serverErrorLabel;
         private Button button3;
@@ -284,5 +314,9 @@
         private Button beginningButton;
         private Button removeIngredientButton;
         private Button addIngredientButton;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem showRecipesToolStripMenuItem;
+        private ToolStripMenuItem showPantryToolStripMenuItem;
     }
 }
