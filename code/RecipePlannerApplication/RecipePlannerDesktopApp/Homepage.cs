@@ -627,4 +627,13 @@ public partial class Homepage : Form
     }
 
     #endregion
+
+    private void viewShoppingListToolStripMenuItem_Click_1(object sender, EventArgs e)
+    {
+        Hide();
+
+        var shoppingListPage = new ShoppingListPage();
+
+        shoppingListPage.Show();
+    }
 }
