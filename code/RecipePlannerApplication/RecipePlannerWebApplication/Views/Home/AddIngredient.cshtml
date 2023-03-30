@@ -85,8 +85,15 @@
         }
     </div>
     <div class="button-group">
-        <input type="submit" asp-action="AddIngredient" value="Add" />
-        <input type="submit" asp-action="goToIngredientsPage" value="Cancel" id="cancelButton" />
+        @if ((string)ViewBag.page == "pantry")
+        {
+            <input type="submit" asp-action="addIngredient" value="Add" id="addButton" />
+        }
+        else
+        {
+            <input type="submit" asp-action="addShoppingListIngredient" value="Add" id="addShoppingListButton" />
+        }
+        <input type="submit" asp-action="goToShoppingListPage" value="Cancel" id="cancelButton" />
     </div>
 </form>
 

@@ -157,11 +157,11 @@
                     <tr id="ingredient-@ingredient.id">
                         <td>@ingredient.name</td>
                         <td>
-                            <input type="hidden" name="page" value="@ViewBag.currentPage" />
+                            <input type="hidden" name="page" value="@ViewBag.currentPage"/>
                             <div class="quantity-container">
-                                <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
+                                <input type="submit" asp-action="decrementQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id"/>
                                 <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
-                                <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
+                                <input type="submit" asp-action="incrementQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id"/>
                             </div>
                         </td>
                         <td>
