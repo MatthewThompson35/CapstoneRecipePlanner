@@ -219,6 +219,34 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    ///     Decrements the quantity of a given shopping list ingredient by its id.
+    /// </summary>
+    /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="page"> The current page of the ingredient</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Ingredient quantity is decremented in the database</postcondition>
+    /// <returns>The view of the shopping list page.</returns>
+    public ActionResult decrementShoppingListQuantity(string id, int page)
+    {
+        try
+        {
+            var quantity = 0;
+            var ingredientID = int.Parse(id);
+
+            quantity = this.getShoppingListItemQuantity(ingredientID);
+            ShoppingListDAL.decrementQuantity(ingredientID, quantity);
+            this.setupShoppingListPage(page);
+            return View("ShoppingList");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    /// <summary>
     ///     Gets the quantity of the ingredient with the given id.
     /// </summary>
     /// <param name="id">The ingredient id.</param>
@@ -228,11 +256,33 @@ public class HomeController : Controller
     private int getItemQuantity(int id)
     {
         var quantity = 0;
-        foreach (var item in ViewBag.ingredients)
+        foreach (var item in ViewBag.ingredientsOnPage)
         {
             if (item.id == id)
             {
                 quantity = item.quantity;
+            }
+        }
+
+        return quantity;
+    }
+
+    /// <summary>
+    ///     Gets the quantity of the shopping list ingredient with the given id.
+    /// </summary>
+    /// <param name="id">The ingredient id.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>The quantity of the ingredient</returns>
+    private int getShoppingListItemQuantity(int id)
+    {
+        List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+        var quantity = 0;
+        foreach (Ingredient item in shoppingList)
+        {
+            if (item.id == id)
+            {
+                quantity = (int)item.quantity;
             }
         }
 
@@ -269,9 +319,38 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Removes the ingredient from the list.
+    ///     Increments the quantity of the shopping list ingredient with the given id.
     /// </summary>
     /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="page"> The current page of the ingredient</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Quantity will be incremented in the database</postcondition>
+    /// <returns>The shopping list page or login on server connection error</returns>
+    public ActionResult incrementShoppingListQuantity(string id, int page)
+    {
+        try
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            var quantity = 0;
+            var ingredientID = int.Parse(id);
+
+            quantity = this.getShoppingListItemQuantity(ingredientID);
+            ShoppingListDAL.incrementQuantity(ingredientID, quantity);
+            this.setupShoppingListPage(page);
+            return View("ShoppingList");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Removes the ingredient from the list.
+    /// </summary>
+    /// <param name="id">The id of the ingredient to remove.</param>
     /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Ingredient will be removed from the database</postcondition>
@@ -284,6 +363,31 @@ public class HomeController : Controller
             IngredientDAL.RemoveIngredient(int.Parse(id), Connection.ConnectionString);
             this.setupIngredientsPage(page);
             return View("IngredientsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Removes the shopping list ingredient from the list.
+    /// </summary>
+    /// <param name="id">The id of the ingredient to remove.</param>
+    /// <param name="page"> The current page of the ingredient</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>Ingredient will be removed from the database</postcondition>
+    /// <returns>The shopping list page or login on server connection error.</returns>
+    public ActionResult removeShoppingListIngredient(string id, int page)
+    {
+        try
+        {
+            page = 1;
+            ShoppingListDAL.RemoveIngredient(int.Parse(id), Connection.ConnectionString);
+            this.setupShoppingListPage(page);
+            return View("ShoppingList");
         }
         catch (Exception ex)
         {
@@ -333,6 +437,55 @@ public class HomeController : Controller
             var totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count / 5);
             this.setupIngredientsPage(totalPages);
             return View("IngredientsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    /// <summary>
+    ///     Adds the shopping list ingredient to the the database and is then displayed to the user.
+    /// </summary>
+    /// <param name="txtIngredientName">The name of the ingredient.</param>
+    /// <param name="txtQuantity">The quantity of the ingredient.</param>
+    /// <param name="measurement">The measurement unit of the ingredient.</param>
+    /// <precondition>parameters must not be null, ingredient must not be in database.</precondition>
+    /// <postcondition>Shopping listIngredient is added to the database</postcondition>
+    /// <returns>The shopping list page or login on server connection error.</returns>
+    [HttpPost]
+    public ActionResult AddShoppingListIngredient(string txtIngredientName, string txtQuantity, string measurement)
+    {
+        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+        ViewBag.Measurements = measurements;
+        var regex = new Regex("^[0-9]+$");
+        try
+        {
+            if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
+            {
+                ViewBag.Error = "Please enter values.";
+                return View("AddIngredient", ViewBag.Measurements);
+            }
+
+            if (ShoppingListDAL.getIngredients(txtIngredientName).Count() > 0)
+            {
+                ViewBag.Error = "Ingredient is already entered.";
+                return View("AddIngredient", ViewBag.Measurements);
+            }
+
+            if (!regex.Match(txtQuantity).Success)
+            {
+                ViewBag.Error = "Quantity must be an integer.";
+                return View("AddIngredient", ViewBag.Measurements);
+            }
+
+            ShoppingListDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
+                Connection.ConnectionString);
+            var totalPages = (int)Math.Ceiling((double)ShoppingListDAL.getIngredients().Count / 5);
+            this.setupShoppingListPage(totalPages);
+            return View("ShoppingList");
         }
         catch (Exception ex)
         {
@@ -653,6 +806,21 @@ public class HomeController : Controller
     {
         var measurements = Enum.GetNames(typeof(Measurement)).ToList();
         ViewBag.Measurements = measurements;
+        ViewBag.page = "pantry";
+        return View("AddIngredient", ViewBag.Measurements);
+    }
+
+    /// <summary>
+    ///     Goes to add ingredients page for shopping list.
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>The add ingredients page or login on bad server connection</returns>
+    public ActionResult goToAddShoppingListIngredientsPage()
+    {
+        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+        ViewBag.Measurements = measurements;
+        ViewBag.page = "shopping";
         return View("AddIngredient", ViewBag.Measurements);
     }
 
