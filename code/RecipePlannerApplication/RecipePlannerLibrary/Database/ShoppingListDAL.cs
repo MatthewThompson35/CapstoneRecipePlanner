@@ -11,6 +11,10 @@ namespace RecipePlannerLibrary.Database
     /// </summary>
     public class ShoppingListDAL
     {
+        /// <summary>
+        /// Gets the ingredients for the shopping list.
+        /// </summary>
+        /// <returns></returns>
         public static List<Ingredient> getIngredients()
         {
             using var connection = new MySqlConnection(Connection.ConnectionString);
@@ -38,7 +42,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Adds the ingredient with the specified data into the table
+        ///     Adds the shopping list ingredient with the specified data into the table
         /// </summary>
         /// <param name="name">The name of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
@@ -60,7 +64,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Decrements the quantity of the ingredient with the given id in the database.
+        ///     Decrements the quantity of the shopping list ingredient with the given id in the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         /// <param name="quantity">The current quantity of the ingredient.</param>
@@ -79,7 +83,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Increments the quantity of the ingredient in the database.
+        ///     Increments the quantity of the shopping list ingredient in the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
@@ -98,7 +102,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Removes the ingredient from the database.
+        ///     Removes the shopping list ingredient from the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
         /// <precondition>none</precondition>
@@ -115,7 +119,7 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Gets the ingredients by the specified ingredient name
+        ///     Gets the ingredients by the specified ingredient name in the shopping list
         /// </summary>
         /// <param name="ingredientName">Name of the ingredient.</param>
         /// <precondition>none</precondition>

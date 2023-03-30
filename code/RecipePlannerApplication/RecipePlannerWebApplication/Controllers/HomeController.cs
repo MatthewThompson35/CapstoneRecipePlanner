@@ -219,13 +219,13 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Decrements the quantity of a given ingredient by its id.
+    ///     Decrements the quantity of a given shopping list ingredient by its id.
     /// </summary>
     /// <param name="id">The id of the ingredient to decrement quantity for.</param>
     /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Ingredient quantity is decremented in the database</postcondition>
-    /// <returns>The view of the ingredients page.</returns>
+    /// <returns>The view of the shopping list page.</returns>
     public ActionResult decrementShoppingListQuantity(string id, int page)
     {
         try
@@ -268,7 +268,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Gets the quantity of the ingredient with the given id.
+    ///     Gets the quantity of the shopping list ingredient with the given id.
     /// </summary>
     /// <param name="id">The ingredient id.</param>
     /// <precondition>none</precondition>
@@ -325,7 +325,7 @@ public class HomeController : Controller
     /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Quantity will be incremented in the database</postcondition>
-    /// <returns>The ingredients page or login on server connection error</returns>
+    /// <returns>The shopping list page or login on server connection error</returns>
     public ActionResult incrementShoppingListQuantity(string id, int page)
     {
         try
@@ -373,13 +373,13 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Removes the ingredient from the list.
+    ///     Removes the shopping list ingredient from the list.
     /// </summary>
     /// <param name="id">The id of the ingredient to remove.</param>
     /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Ingredient will be removed from the database</postcondition>
-    /// <returns>The ingredients page or login on server connection error.</returns>
+    /// <returns>The shopping list page or login on server connection error.</returns>
     public ActionResult removeShoppingListIngredient(string id, int page)
     {
         try
@@ -447,14 +447,14 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Adds the ingredient to the the database and is then displayed to the user.
+    ///     Adds the shopping list ingredient to the the database and is then displayed to the user.
     /// </summary>
     /// <param name="txtIngredientName">The name of the ingredient.</param>
     /// <param name="txtQuantity">The quantity of the ingredient.</param>
     /// <param name="measurement">The measurement unit of the ingredient.</param>
     /// <precondition>parameters must not be null, ingredient must not be in database.</precondition>
-    /// <postcondition>Ingredient is added to the database</postcondition>
-    /// <returns>The ingredients page or login on server connection error.</returns>
+    /// <postcondition>Shopping listIngredient is added to the database</postcondition>
+    /// <returns>The shopping list page or login on server connection error.</returns>
     [HttpPost]
     public ActionResult AddShoppingListIngredient(string txtIngredientName, string txtQuantity, string measurement)
     {
@@ -811,7 +811,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///     Goes to add ingredients page.
+    ///     Goes to add ingredients page for shopping list.
     /// </summary>
     /// <precondition>none</precondition>
     /// <postcondition>none</postcondition>
