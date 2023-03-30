@@ -14,6 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.AxHost;
 using System.Reflection;
 using System.Diagnostics;
+using Org.BouncyCastle.Asn1.BC;
 
 namespace RecipePlannerDesktopApplication
 {
@@ -29,6 +30,9 @@ namespace RecipePlannerDesktopApplication
 
         private bool isYesButtonClicked = false;
         private bool isNoButtonClicked = false;
+
+        private int filledComboboxCount = 0;
+        private int comboBoxesFilled = 3;
 
         
         /// <summary>
@@ -133,56 +137,7 @@ namespace RecipePlannerDesktopApplication
 
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
-            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
-
-            if (this.weekComboBox.SelectedItem.Equals("This Week"))
-            {
-                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "this")))
-                {
-                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
-                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
-
-                    this.yesButton.Visible = true;
-                    this.noButton.Visible = true;
-                    this.updateSuccessfullyLabel.Visible = true;
-                    this.addToMealPlanButton.Visible = false;
-
-                }
-                else
-                {
-                    this.updateSuccessfullyLabel.Visible = false;
-                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"));
-
-                    var mealsPage = new PlannedMealsPage();
-                    this.Hide();
-                    mealsPage.Show();
-                }
-                
-            } else
-            {
-                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "next")))
-                {
-                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
-                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
-
-                    this.yesButton.Visible = true;
-                    this.noButton.Visible = true;
-                    this.updateSuccessfullyLabel.Visible = true;
-                    this.addToMealPlanButton.Visible = false;
-
-                }
-                else
-                {
-                    this.updateSuccessfullyLabel.Visible = false;
-                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"));
-
-                    var mealsPage = new PlannedMealsPage();
-                    this.Hide();
-                    mealsPage.Show();
-                }
-                
-            }
-
+            this.displayDayMealTypeWeekElements();
         }
 
         private void NoButton_Click(object? sender, EventArgs e)
@@ -204,8 +159,7 @@ namespace RecipePlannerDesktopApplication
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
 
-                this.Hide();
-                this.homepage.Show();
+                this.hideDayMealTypeWeekElements();
             }
             else
             {
@@ -215,8 +169,7 @@ namespace RecipePlannerDesktopApplication
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
 
-                this.Hide();
-                this.homepage.Show();
+                this.hideDayMealTypeWeekElements();
             }
 
             this.yesButton.Visible = false;
@@ -284,11 +237,13 @@ namespace RecipePlannerDesktopApplication
         {
 
             this.selectedDay = this.daysComboBox.SelectedItem.ToString();
+            CheckIfReadyToSubmit();
         }
 
         private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
+            CheckIfReadyToSubmit();
         }
 
         private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -308,9 +263,92 @@ namespace RecipePlannerDesktopApplication
             mealPlanPage.Show();
         }
 
-        private void plannerMenuButton_Click(object sender, EventArgs e)
+        private void displayDayMealTypeWeekElements()
         {
-            this.plannerContextMenuStrip.Show(plannerMenuButton, 0, plannerMenuButton.Height);
+            this.dayLabel.Visible = true;
+            this.mealTypeLabel.Visible = true;
+            this.weekLabel.Visible = true;
+
+            this.daysComboBox.Visible = true;
+            this.mealTypeComboBox.Visible = true;
+            this.weekComboBox.Visible = true;
+        }
+
+        private void hideDayMealTypeWeekElements()
+        {
+            this.dayLabel.Visible = false;
+            this.mealTypeLabel.Visible = false;
+            this.weekLabel.Visible = false;
+
+            this.daysComboBox.Visible = false;
+            this.mealTypeComboBox.Visible = false;
+            this.weekComboBox.Visible = false;
+        }
+
+        private void CheckIfReadyToSubmit()
+        {
+            if (!string.IsNullOrEmpty(selectedDay) && !string.IsNullOrEmpty(selectedMealType) && this.weekComboBox.SelectedItem != null)
+            {
+                submitMealAutomatically();
+            }
+        }
+
+        private void submitMealAutomatically()
+        {
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
+            if (this.weekComboBox.SelectedItem.Equals("This Week"))
+            {
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "this")))
+                {
+                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+
+                }
+                else
+                {
+                    this.updateSuccessfullyLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+
+            }
+            else
+            {
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, "next")))
+                {
+                    this.updateSuccessfullyLabel.Text = "Are you sure you want to overwrite the existing meal?";
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+
+                }
+                else
+                {
+                    this.updateSuccessfullyLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+
+            }
+        }
+
+        private void weekComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckIfReadyToSubmit();
         }
     }
 }
