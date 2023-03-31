@@ -45,6 +45,10 @@
             this.yesButton = new System.Windows.Forms.Button();
             this.noButton = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
+            this.cookButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.comboboxesErrorLabel = new System.Windows.Forms.Label();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -212,12 +216,62 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // cookButton
+            // 
+            this.cookButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.cookButton.Location = new System.Drawing.Point(429, 12);
+            this.cookButton.Name = "cookButton";
+            this.cookButton.Size = new System.Drawing.Size(73, 29);
+            this.cookButton.TabIndex = 19;
+            this.cookButton.Text = "Cook";
+            this.cookButton.UseVisualStyleBackColor = false;
+            this.cookButton.Click += new System.EventHandler(this.cookButton_Click);
+            // 
+            // addButton
+            // 
+            this.addButton.BackColor = System.Drawing.Color.LawnGreen;
+            this.addButton.Location = new System.Drawing.Point(71, 198);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(94, 29);
+            this.addButton.TabIndex = 20;
+            this.addButton.Text = "Add";
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Visible = false;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.BackColor = System.Drawing.Color.Red;
+            this.cancelButton.Location = new System.Drawing.Point(354, 198);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(94, 29);
+            this.cancelButton.TabIndex = 21;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // comboboxesErrorLabel
+            // 
+            this.comboboxesErrorLabel.AutoSize = true;
+            this.comboboxesErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.comboboxesErrorLabel.Location = new System.Drawing.Point(178, 157);
+            this.comboboxesErrorLabel.Name = "comboboxesErrorLabel";
+            this.comboboxesErrorLabel.Size = new System.Drawing.Size(170, 20);
+            this.comboboxesErrorLabel.TabIndex = 22;
+            this.comboboxesErrorLabel.Text = "Please select all options.";
+            this.comboboxesErrorLabel.Visible = false;
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.comboboxesErrorLabel);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.cookButton);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
@@ -256,5 +310,9 @@
         private Button yesButton;
         private Button noButton;
         private Button backButton;
+        private Button cookButton;
+        private Button addButton;
+        private Button cancelButton;
+        private Label comboboxesErrorLabel;
     }
 }

@@ -138,6 +138,7 @@ namespace RecipePlannerDesktopApplication
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
             this.displayDayMealTypeWeekElements();
+            this.displayAddCancelButtons();
         }
 
         private void NoButton_Click(object? sender, EventArgs e)
@@ -235,15 +236,29 @@ namespace RecipePlannerDesktopApplication
 
         private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            this.selectedDay = this.daysComboBox.SelectedItem.ToString();
-            CheckIfReadyToSubmit();
+            if (this.daysComboBox.SelectedItem != null)
+            {
+                this.selectedDay = this.daysComboBox.SelectedItem.ToString();
+            }
+            else
+            {
+                this.daysComboBox.SelectedIndex = -1;
+            }
+            //CheckIfReadyToSubmit();
         }
 
         private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
-            CheckIfReadyToSubmit();
+            if (this.mealTypeComboBox.SelectedItem != null)
+            {
+                this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
+            }
+            else
+            {
+                this.mealTypeComboBox.SelectedIndex = -1;
+            }
+            
+            //CheckIfReadyToSubmit();
         }
 
         private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,15 +300,32 @@ namespace RecipePlannerDesktopApplication
             this.weekComboBox.Visible = false;
         }
 
+        private void displayAddCancelButtons()
+        {
+            this.addButton.Visible = true;
+            this.cancelButton.Visible = true;
+        }
+
+        private void hideAddCancelButtons()
+        {
+            this.addButton.Visible = false;
+            this.cancelButton.Visible = false;
+        }
+
         private void CheckIfReadyToSubmit()
         {
             if (!string.IsNullOrEmpty(selectedDay) && !string.IsNullOrEmpty(selectedMealType) && this.weekComboBox.SelectedItem != null)
             {
-                submitMealAutomatically();
+                this.comboboxesErrorLabel.Visible = false;
+                submitMeal();
+            }
+            else
+            {
+                this.comboboxesErrorLabel.Visible = true;
             }
         }
 
-        private void submitMealAutomatically()
+        private void submitMeal()
         {
             DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
@@ -307,6 +339,7 @@ namespace RecipePlannerDesktopApplication
                     this.noButton.Visible = true;
                     this.updateSuccessfullyLabel.Visible = true;
                     this.addToMealPlanButton.Visible = false;
+                    this.hideAddCancelButtons();
 
                 }
                 else
@@ -331,6 +364,7 @@ namespace RecipePlannerDesktopApplication
                     this.noButton.Visible = true;
                     this.updateSuccessfullyLabel.Visible = true;
                     this.addToMealPlanButton.Visible = false;
+                    this.hideAddCancelButtons();
 
                 }
                 else
@@ -348,7 +382,33 @@ namespace RecipePlannerDesktopApplication
 
         private void weekComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckIfReadyToSubmit();
+            //CheckIfReadyToSubmit();
+        }
+
+        private void cookButton_Click(object sender, EventArgs e)
+        {
+            // removes the ingredients from pantry. Show a confirmation that the recipe is cooked.
+            // also disable button that meal has been cooked.
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            // fully add to meal plan page if all the fields are selected.
+            this.CheckIfReadyToSubmit();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            // show add to meal plan button and hide the elements. DO NOT ADD
+            this.addToMealPlanButton.Visible = true;
+
+            this.mealTypeComboBox.SelectedIndex = -1;
+            this.daysComboBox.SelectedIndex = -1;
+            this.weekComboBox.SelectedIndex = -1;
+
+            this.hideDayMealTypeWeekElements();
+            this.hideAddCancelButtons();
+            
         }
     }
 }
