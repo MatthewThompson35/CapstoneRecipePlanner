@@ -378,10 +378,13 @@ namespace RecipePlannerDesktopApplication
 
         private void cookButton_Click(object sender, EventArgs e)
         {
-            this.removeCookedRecipeIngredients();
-
+            this.isCookedLabel.Text = "Are you sure you want to cook using this recipe? This will remove ingredients.";
             this.isCookedLabel.Visible = true;
-            this.cookButton.Enabled = false;
+            this.isCookedLabel.ForeColor= Color.Red;
+
+            this.cookYesButton.Visible = true;
+            this.cookNoButton.Visible = true;
+
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -464,6 +467,27 @@ namespace RecipePlannerDesktopApplication
                     }
                 }
             }
+        }
+
+        private void cookYesButton_Click(object sender, EventArgs e)
+        {
+            this.removeCookedRecipeIngredients();
+
+            this.isCookedLabel.Visible = true;
+            this.isCookedLabel.Text = "This meal has been cooked";
+            this.isCookedLabel.ForeColor = Color.Green;
+            this.cookButton.Enabled = false;
+
+            this.cookYesButton.Visible = false;
+            this.cookNoButton.Visible = false;
+        }
+
+        private void cookNoButton_Click(object sender, EventArgs e)
+        {
+            this.cookYesButton.Visible = false;
+            this.cookNoButton.Visible = false;
+            this.cookButton.Enabled = true;
+            this.isCookedLabel.Visible = false;
         }
     }
 }

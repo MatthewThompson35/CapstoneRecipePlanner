@@ -50,6 +50,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.comboboxesErrorLabel = new System.Windows.Forms.Label();
             this.isCookedLabel = new System.Windows.Forms.Label();
+            this.cookYesButton = new System.Windows.Forms.Button();
+            this.cookNoButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -265,14 +267,38 @@
             // 
             // isCookedLabel
             // 
-            this.isCookedLabel.AutoSize = true;
             this.isCookedLabel.ForeColor = System.Drawing.Color.Green;
-            this.isCookedLabel.Location = new System.Drawing.Point(171, 43);
+            this.isCookedLabel.Location = new System.Drawing.Point(160, -2);
             this.isCookedLabel.Name = "isCookedLabel";
-            this.isCookedLabel.Size = new System.Drawing.Size(188, 20);
+            this.isCookedLabel.Size = new System.Drawing.Size(207, 73);
             this.isCookedLabel.TabIndex = 23;
             this.isCookedLabel.Text = "This meal has been cooked";
+            this.isCookedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.isCookedLabel.Visible = false;
+            // 
+            // cookYesButton
+            // 
+            this.cookYesButton.BackColor = System.Drawing.Color.LawnGreen;
+            this.cookYesButton.Location = new System.Drawing.Point(118, 74);
+            this.cookYesButton.Name = "cookYesButton";
+            this.cookYesButton.Size = new System.Drawing.Size(94, 29);
+            this.cookYesButton.TabIndex = 24;
+            this.cookYesButton.Text = "Yes";
+            this.cookYesButton.UseVisualStyleBackColor = false;
+            this.cookYesButton.Visible = false;
+            this.cookYesButton.Click += new System.EventHandler(this.cookYesButton_Click);
+            // 
+            // cookNoButton
+            // 
+            this.cookNoButton.BackColor = System.Drawing.Color.Red;
+            this.cookNoButton.Location = new System.Drawing.Point(335, 74);
+            this.cookNoButton.Name = "cookNoButton";
+            this.cookNoButton.Size = new System.Drawing.Size(94, 29);
+            this.cookNoButton.TabIndex = 25;
+            this.cookNoButton.Text = "No";
+            this.cookNoButton.UseVisualStyleBackColor = false;
+            this.cookNoButton.Visible = false;
+            this.cookNoButton.Click += new System.EventHandler(this.cookNoButton_Click);
             // 
             // RecipeDetailsPage
             // 
@@ -280,6 +306,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.cookNoButton);
+            this.Controls.Add(this.cookYesButton);
             this.Controls.Add(this.isCookedLabel);
             this.Controls.Add(this.comboboxesErrorLabel);
             this.Controls.Add(this.cancelButton);
@@ -328,5 +356,7 @@
         private Button cancelButton;
         private Label comboboxesErrorLabel;
         private Label isCookedLabel;
+        private Button cookYesButton;
+        private Button cookNoButton;
     }
 }
