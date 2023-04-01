@@ -161,5 +161,10 @@ namespace RecipePlannerDesktopApplication
             ingredientPage.Show();
 
         }
+
+        private void purchaseShoppingListButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
