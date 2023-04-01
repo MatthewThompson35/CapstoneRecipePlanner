@@ -227,6 +227,174 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    public ActionResult addNeededPlannedMealIngredients()
+    {
+        try
+        {
+            string user = ActiveUser.username;
+            List<Ingredient> totalIngredients = new List<Ingredient>();
+            Dictionary<(string, string), int> remainingMeals =
+                PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+            List<Ingredient> pantry = IngredientDAL.getIngredients();
+            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+
+            foreach (Ingredient shoppingItem in shoppingList)
+            {
+                Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
+
+                if (pantryItem != null)
+                {
+                    pantryItem.quantity += shoppingItem.quantity;
+                }
+                else
+                {
+                    pantry.Add(shoppingItem);
+                }
+            }
+
+            foreach (KeyValuePair<(string, string), int> meal in remainingMeals)
+            {
+                int recipeId = meal.Value;
+                var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
+
+                foreach (RecipeIngredient ingredient in recipeIngredients)
+                {
+                    Ingredient existingIngredient = totalIngredients.Find(i =>
+                        i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+                    if (existingIngredient != null)
+                    {
+                        existingIngredient.quantity += (int) ingredient.Quantity;
+
+                    }
+                    else
+                    {
+                        int id = IngredientDAL.getIngredientId(ingredient.IngredientName);
+                        Ingredient addIngredient = new Ingredient(user, ingredient.IngredientName, id,
+                            ingredient.Quantity,
+                            ingredient.Measurement);
+                        totalIngredients.Add(addIngredient);
+                    }
+                }
+            }
+
+
+            foreach (var ingredient in totalIngredients)
+            {
+                Ingredient pantryItem = pantry.Find(i => i.name == ingredient.name);
+
+                if (pantryItem != null)
+                {
+                    if (ingredient.quantity > pantryItem.quantity)
+                    {
+                        int quantity = (int) ingredient.quantity - (int) pantryItem.quantity;
+                        Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+
+                        if (shoppingListItem != null)
+                        {
+                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                        }
+                        else
+                        {
+                            ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement, Connection.ConnectionString);
+                        }
+                        
+                    }
+                }
+                else
+                {
+                   ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                }
+            }
+            this.setupShoppingListPage(1);
+            return View("ShoppingList");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    public ActionResult addAllPlannedMealIngredients()
+    {
+        try
+        {
+            string user = ActiveUser.username;
+            List<Ingredient> totalIngredients = new List<Ingredient>();
+            Dictionary<(string, string), int> remainingMeals =
+                PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+            List<Ingredient> pantry = IngredientDAL.getIngredients();
+            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+
+            foreach (Ingredient shoppingItem in shoppingList)
+            {
+                Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
+
+                if (pantryItem != null)
+                {
+                    pantryItem.quantity += shoppingItem.quantity;
+                }
+                else
+                {
+                    pantry.Add(shoppingItem);
+                }
+            }
+
+            foreach (KeyValuePair<(string, string), int> meal in remainingMeals)
+            {
+                int recipeId = meal.Value;
+                var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
+
+                foreach (RecipeIngredient ingredient in recipeIngredients)
+                {
+                    Ingredient existingIngredient = totalIngredients.Find(i =>
+                        i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+                    if (existingIngredient != null)
+                    {
+                        existingIngredient.quantity += (int)ingredient.Quantity;
+
+                    }
+                    else
+                    {
+                        int id = IngredientDAL.getIngredientId(ingredient.IngredientName);
+                        Ingredient addIngredient = new Ingredient(user, ingredient.IngredientName, id,
+                            ingredient.Quantity,
+                            ingredient.Measurement);
+                        totalIngredients.Add(addIngredient);
+                    }
+                }
+            }
+
+
+            foreach (var ingredient in totalIngredients)
+            {
+                Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+
+                if (shoppingListItem != null)
+                {
+                    int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
+                   
+                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                }
+                else
+                {
+                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                }
+            }
+            this.setupShoppingListPage(1);
+            return View("ShoppingList");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
     /// <summary>
     ///     Decrements the quantity of a given shopping list ingredient by its id.
     /// </summary>

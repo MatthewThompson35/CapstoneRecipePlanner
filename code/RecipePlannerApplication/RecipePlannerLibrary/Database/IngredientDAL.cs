@@ -177,6 +177,33 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
+        ///     Gets the ingredients by the specified ingredient name
+        /// </summary>
+        /// <param name="ingredientName">Name of the ingredient.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of ingredients that match ingredient name.</returns>
+        public static int getIngredientId(string ingredientName)
+        {
+            int id = 0;
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var ingredients = new List<Ingredient>();
+            var user = ActiveUser.username;
+            var query = @"SELECT ingredientID from ingredient_info where ingredientName = @name;" ;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = ingredientName;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                id = reader.GetInt32(0);
+               
+            }
+
+            return id;
+        }
+
+        /// <summary>
         ///     Gets the ingredients from the shopping list table.
         /// </summary>
         /// <precondition>none</precondition>

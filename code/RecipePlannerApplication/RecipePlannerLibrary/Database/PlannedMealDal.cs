@@ -63,6 +63,27 @@ namespace RecipePlannerLibrary.Database
             return thisWeeksMeals;
         }
 
+        public static Dictionary<(string, string), int> getRemainingMeals(string connectionString)
+        {
+            var thisWeeksMeals = new Dictionary<(string, string), int>();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @"SELECT *
+            FROM planned_recipe
+            WHERE dateUsed >= CURDATE() AND dateUsed <= DATE_ADD(LAST_DAY(DATE_ADD(NOW(), INTERVAL 1 WEEK)), INTERVAL 1 DAY);";
+            using var command = new MySqlCommand(query, connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeId = reader.GetInt32(0);
+                var day = reader.GetString(1);
+                var type = reader.GetString(2);
+                thisWeeksMeals.Add((day, type), recipeId);
+            }
+
+            return thisWeeksMeals;
+        }
+
         /// <summary>
         ///     Gets next week's meals based on the specified connection string provided to connect to the database.
         /// </summary>
