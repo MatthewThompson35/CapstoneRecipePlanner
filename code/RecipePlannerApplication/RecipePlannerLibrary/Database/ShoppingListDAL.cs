@@ -152,5 +152,19 @@ namespace RecipePlannerLibrary.Database
             return ingredients;
         }
 
+        /// <summary>
+        /// Removes all rows from the table where username matches.
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        public static void removeAll(string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @"DELETE FROM shopping_list WHERE USERNAME = @user;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@USER", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+        }
+
     }
 }

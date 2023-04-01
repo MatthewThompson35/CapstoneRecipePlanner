@@ -4,6 +4,7 @@ using System.Drawing.Printing;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
@@ -206,7 +207,15 @@ public class HomeController : Controller
             var ingredientID = int.Parse(id);
 
             quantity = this.getItemQuantity(ingredientID);
-            IngredientDAL.decrementQuantity(ingredientID, quantity);
+            if (quantity > 1)
+            {
+                IngredientDAL.decrementQuantity(ingredientID, quantity);
+            }
+            else
+            {
+                IngredientDAL.RemoveIngredient(ingredientID, Connection.ConnectionString);
+            }
+
             this.setupIngredientsPage(page);
             return View("IngredientsPage");
         }
@@ -234,7 +243,15 @@ public class HomeController : Controller
             var ingredientID = int.Parse(id);
 
             quantity = this.getShoppingListItemQuantity(ingredientID);
-            ShoppingListDAL.decrementQuantity(ingredientID, quantity);
+            if (quantity > 1)
+            {
+                ShoppingListDAL.decrementQuantity(ingredientID, quantity);
+            }
+            else
+            {
+                ShoppingListDAL.RemoveIngredient(ingredientID, Connection.ConnectionString);
+            }
+
             this.setupShoppingListPage(page);
             return View("ShoppingList");
         }
@@ -255,12 +272,13 @@ public class HomeController : Controller
     /// <returns>The quantity of the ingredient</returns>
     private int getItemQuantity(int id)
     {
+        List<Ingredient> pantry = IngredientDAL.getIngredients();
         var quantity = 0;
-        foreach (var item in ViewBag.ingredientsOnPage)
+        foreach (var item in pantry)
         {
             if (item.id == id)
             {
-                quantity = item.quantity;
+                quantity = (int)item.quantity;
             }
         }
 
@@ -292,7 +310,7 @@ public class HomeController : Controller
     /// <summary>
     ///     Increments the quantity of the ingredient with the given id.
     /// </summary>
-    /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="id">The id of the ingredient to increment quantity for.</param>
     /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Quantity will be incremented in the database</postcondition>
@@ -1006,6 +1024,48 @@ public class HomeController : Controller
         ViewBag.CurrentWeek = "This Week";
         return View("PlannedMealsPage");
     }
+
+    public ActionResult purchaseAllShoppingList()
+    {
+        List<Ingredient> list = ShoppingListDAL.getIngredients();
+        List<Ingredient> pantry = IngredientDAL.getIngredients();
+
+        foreach (Ingredient ingredient in list)
+        {
+            bool found = false;
+            // check if ingredient is in the pantry
+            foreach (Ingredient pantryIngredient in pantry)
+            {
+                if (pantryIngredient.id.Equals(ingredient.id))
+                {
+                    // ingredient is in pantry, add quantity
+                    int quantity = (int)pantryIngredient.quantity + (int)ingredient.quantity;
+                    found = true;
+                    IngredientDAL.updateQuantity((int)pantryIngredient.id, quantity);
+                    break;
+                }
+            }
+            // ingredient is not in pantry, add to pantry
+            if (!found)
+            {
+                IngredientDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+            }
+            ShoppingListDAL.removeAll(Connection.ConnectionString);
+        }
+
+
+        try
+        {
+            this.setupIngredientsPage(1);
+            return View("IngredientsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+    }
+
 
     /// <summary>
     ///     Goes to next week's planned meal page.
