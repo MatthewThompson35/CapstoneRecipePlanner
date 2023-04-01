@@ -49,6 +49,7 @@
             this.addButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.comboboxesErrorLabel = new System.Windows.Forms.Label();
+            this.isCookedLabel = new System.Windows.Forms.Label();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -262,12 +263,24 @@
             this.comboboxesErrorLabel.Text = "Please select all options.";
             this.comboboxesErrorLabel.Visible = false;
             // 
+            // isCookedLabel
+            // 
+            this.isCookedLabel.AutoSize = true;
+            this.isCookedLabel.ForeColor = System.Drawing.Color.Green;
+            this.isCookedLabel.Location = new System.Drawing.Point(171, 43);
+            this.isCookedLabel.Name = "isCookedLabel";
+            this.isCookedLabel.Size = new System.Drawing.Size(188, 20);
+            this.isCookedLabel.TabIndex = 23;
+            this.isCookedLabel.Text = "This meal has been cooked";
+            this.isCookedLabel.Visible = false;
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.isCookedLabel);
             this.Controls.Add(this.comboboxesErrorLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
@@ -314,5 +327,6 @@
         private Button addButton;
         private Button cancelButton;
         private Label comboboxesErrorLabel;
+        private Label isCookedLabel;
     }
 }

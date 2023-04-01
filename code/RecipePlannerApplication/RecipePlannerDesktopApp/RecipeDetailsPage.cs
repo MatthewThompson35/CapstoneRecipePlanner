@@ -31,9 +31,6 @@ namespace RecipePlannerDesktopApplication
         private bool isYesButtonClicked = false;
         private bool isNoButtonClicked = false;
 
-        private int filledComboboxCount = 0;
-        private int comboBoxesFilled = 3;
-
         
         /// <summary>
         ///     Initializes the recipe details page for the recipes.
@@ -42,8 +39,6 @@ namespace RecipePlannerDesktopApplication
         public RecipeDetailsPage()
         {
             InitializeComponent();
-
-            
         }
 
         /// <summary>
@@ -244,7 +239,6 @@ namespace RecipePlannerDesktopApplication
             {
                 this.daysComboBox.SelectedIndex = -1;
             }
-            //CheckIfReadyToSubmit();
         }
 
         private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -257,8 +251,6 @@ namespace RecipePlannerDesktopApplication
             {
                 this.mealTypeComboBox.SelectedIndex = -1;
             }
-            
-            //CheckIfReadyToSubmit();
         }
 
         private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -382,24 +374,23 @@ namespace RecipePlannerDesktopApplication
 
         private void weekComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //CheckIfReadyToSubmit();
         }
 
         private void cookButton_Click(object sender, EventArgs e)
         {
-            // removes the ingredients from pantry. Show a confirmation that the recipe is cooked.
-            // also disable button that meal has been cooked.
+            this.removeCookedRecipeIngredients();
+
+            this.isCookedLabel.Visible = true;
+            this.cookButton.Enabled = false;
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            // fully add to meal plan page if all the fields are selected.
             this.CheckIfReadyToSubmit();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            // show add to meal plan button and hide the elements. DO NOT ADD
             this.addToMealPlanButton.Visible = true;
 
             this.mealTypeComboBox.SelectedIndex = -1;
@@ -409,6 +400,70 @@ namespace RecipePlannerDesktopApplication
             this.hideDayMealTypeWeekElements();
             this.hideAddCancelButtons();
             
+        }
+
+        private void removeCookedRecipeIngredients()
+        {
+            int updatedQuantity = 0;
+
+            if (this.homepage != null)
+            {
+                this.handleHomepageRecipeRemoveIngredients(updatedQuantity);
+            }
+
+            if (this.mealsPage != null)
+            {
+                this.handleMealPlanRecipeRemoveIngredients(updatedQuantity);
+            }
+        }
+
+        private void handleHomepageRecipeRemoveIngredients(int updatedQuantity)
+        {
+            foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                foreach (var ingredient in IngredientDAL.getIngredients())
+                {
+                    if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                    {
+                        if (ingredient.quantity >= recipeIngredient.Quantity)
+                        {
+                            updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                            IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                            ingredient.quantity = updatedQuantity;
+
+                            if (ingredient.quantity == 0)
+                            {
+                                IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        private void handleMealPlanRecipeRemoveIngredients(int updatedQuantity)
+        {
+            foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                foreach (var ingredient in IngredientDAL.getIngredients())
+                {
+                    if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                    {
+                        if (ingredient.quantity >= recipeIngredient.Quantity)
+                        {
+                            updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                            IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                            ingredient.quantity = updatedQuantity;
+
+                            if (ingredient.quantity == 0)
+                            {
+                                IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                            }
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
