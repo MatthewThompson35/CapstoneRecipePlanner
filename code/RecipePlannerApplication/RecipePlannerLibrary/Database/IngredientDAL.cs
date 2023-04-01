@@ -106,6 +106,26 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
+        ///     Updates the quantity of the ingredient in the database.
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>Quantity of the given ingredient is updated by the given quantity.</postcondition>
+        /// <param name="id">The id of the ingredient.</param>
+        /// <param name="quantity">The quantity of the ingredient.</param>
+        public static void updateQuantity(int id, int quantity)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query = @"Update ingredient set quantity = @quantity where ingredientID = @id and username = @username";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+
+        }
+
+        /// <summary>
         ///     Removes the ingredient from the database.
         /// </summary>
         /// <param name="id">The id of the ingredient.</param>
