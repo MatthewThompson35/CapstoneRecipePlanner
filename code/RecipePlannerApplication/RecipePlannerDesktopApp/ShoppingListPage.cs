@@ -177,8 +177,10 @@ namespace RecipePlannerDesktopApplication
         private void purchaseShoppingListButton_Click(object sender, EventArgs e)
         {
             this.submitShoppingList();
-            this.purchaseSuccessLabel.Visible = true;
-            this.Refresh();
+
+            var ingredientsPage = new IngredientsPage();
+            this.Hide();
+            ingredientsPage.Show();
         }
 
         private void submitShoppingList()
