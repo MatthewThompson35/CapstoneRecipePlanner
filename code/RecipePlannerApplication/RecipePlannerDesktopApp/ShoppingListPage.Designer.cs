@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
             this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,20 +54,22 @@
             this.showRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseShoppingListButton = new System.Windows.Forms.Button();
+            this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
+            this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ingredientsGridView
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.ingredientsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IngredientColumn,
@@ -88,8 +90,8 @@
             // IngredientColumn
             // 
             this.IngredientColumn.DataPropertyName = "name";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.IngredientColumn.HeaderText = "Ingredient";
             this.IngredientColumn.MinimumWidth = 6;
             this.IngredientColumn.Name = "IngredientColumn";
@@ -110,8 +112,8 @@
             // quantityColumn
             // 
             this.quantityColumn.DataPropertyName = "quantity";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle9;
             this.quantityColumn.HeaderText = "Quantity";
             this.quantityColumn.MinimumWidth = 6;
             this.quantityColumn.Name = "quantityColumn";
@@ -279,7 +281,7 @@
             // 
             // purchaseShoppingListButton
             // 
-            this.purchaseShoppingListButton.Location = new System.Drawing.Point(178, 723);
+            this.purchaseShoppingListButton.Location = new System.Drawing.Point(300, 703);
             this.purchaseShoppingListButton.Name = "purchaseShoppingListButton";
             this.purchaseShoppingListButton.Size = new System.Drawing.Size(165, 58);
             this.purchaseShoppingListButton.TabIndex = 24;
@@ -287,11 +289,33 @@
             this.purchaseShoppingListButton.UseVisualStyleBackColor = true;
             this.purchaseShoppingListButton.Click += new System.EventHandler(this.purchaseShoppingListButton_Click);
             // 
+            // addIngredientsForRemainingMealsButton
+            // 
+            this.addIngredientsForRemainingMealsButton.Location = new System.Drawing.Point(51, 703);
+            this.addIngredientsForRemainingMealsButton.Name = "addIngredientsForRemainingMealsButton";
+            this.addIngredientsForRemainingMealsButton.Size = new System.Drawing.Size(165, 58);
+            this.addIngredientsForRemainingMealsButton.TabIndex = 25;
+            this.addIngredientsForRemainingMealsButton.Text = "Add Ingredients for Remaining Meals";
+            this.addIngredientsForRemainingMealsButton.UseVisualStyleBackColor = true;
+            this.addIngredientsForRemainingMealsButton.Click += new System.EventHandler(this.addIngredientsForRemainingMealsButton_Click);
+            // 
+            // addAllIngredientsCheckbox
+            // 
+            this.addAllIngredientsCheckbox.AutoSize = true;
+            this.addAllIngredientsCheckbox.Location = new System.Drawing.Point(54, 782);
+            this.addAllIngredientsCheckbox.Name = "addAllIngredientsCheckbox";
+            this.addAllIngredientsCheckbox.Size = new System.Drawing.Size(159, 24);
+            this.addAllIngredientsCheckbox.TabIndex = 26;
+            this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
+            this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
+            // 
             // ShoppingListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.addAllIngredientsCheckbox);
+            this.Controls.Add(this.addIngredientsForRemainingMealsButton);
             this.Controls.Add(this.purchaseShoppingListButton);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.button3);
@@ -338,5 +362,7 @@
         private ToolStripMenuItem showRecipesToolStripMenuItem;
         private ToolStripMenuItem showPantryToolStripMenuItem;
         private Button purchaseShoppingListButton;
+        private Button addIngredientsForRemainingMealsButton;
+        private CheckBox addAllIngredientsCheckbox;
     }
 }

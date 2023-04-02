@@ -1739,9 +1739,9 @@ namespace RecipePlannerDesktopApplication
             List<Ingredient> totalIngredients = new List<Ingredient>();
             Dictionary<(string, string), int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
 
-            foreach (var shoppingIngredient in shoppingList)
+            foreach (var shoppingIngredient in shoppingIngredients)
             {
                 Ingredient pantryItem = pantry.Find(i => i.name == shoppingIngredient.name);
 
@@ -1770,17 +1770,17 @@ namespace RecipePlannerDesktopApplication
                     }
                     else
                     {
-                        int id = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
-                        Ingredient addIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, id, recipeIngredient.Quantity, recipeIngredient.Measurement);
+                        int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
+                        Ingredient newIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, ingredientId, recipeIngredient.Quantity, recipeIngredient.Measurement);
 
-                        totalIngredients.Add(addIngredient);
+                        totalIngredients.Add(newIngredient);
                     }
                 }
             }
 
             foreach (var ingredient in totalIngredients)
             {
-                Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+                Ingredient shoppingListItem = shoppingIngredients.Find(i => i.name == ingredient.name);
 
                 if (shoppingListItem != null)
                 {
@@ -1802,9 +1802,9 @@ namespace RecipePlannerDesktopApplication
             Dictionary<(string, string), int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
 
-            foreach (Ingredient shoppingItem in shoppingList)
+            foreach (Ingredient shoppingItem in shoppingIngredients)
             {
                 Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
 
@@ -1823,23 +1823,23 @@ namespace RecipePlannerDesktopApplication
                 int recipeId = meal.Value;
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
-                foreach (RecipeIngredient ingredient in recipeIngredients)
+                foreach (RecipeIngredient recipeIngredient in recipeIngredients)
                 {
                     Ingredient existingIngredient = totalIngredients.Find(i =>
-                        i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+                        i.name == recipeIngredient.IngredientName && i.measurement == recipeIngredient.Measurement);
 
                     if (existingIngredient != null)
                     {
-                        existingIngredient.quantity += (int)ingredient.Quantity;
+                        existingIngredient.quantity += (int)recipeIngredient.Quantity;
 
                     }
                     else
                     {
-                        int id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        Ingredient addIngredient = new Ingredient(user, ingredient.IngredientName, id,
-                            ingredient.Quantity,
-                            ingredient.Measurement);
-                        totalIngredients.Add(addIngredient);
+                        int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
+                        Ingredient newIngredient = new Ingredient(user, recipeIngredient.IngredientName, ingredientId,
+                            recipeIngredient.Quantity,
+                            recipeIngredient.Measurement);
+                        totalIngredients.Add(newIngredient);
                     }
                 }
             }
@@ -1854,7 +1854,7 @@ namespace RecipePlannerDesktopApplication
                     if (ingredient.quantity > pantryItem.quantity)
                     {
                         int quantity = (int)ingredient.quantity - (int)pantryItem.quantity;
-                        Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+                        Ingredient shoppingListItem = shoppingIngredients.Find(i => i.name == ingredient.name);
 
                         if (shoppingListItem != null)
                         {
