@@ -54,6 +54,7 @@
             this.showRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseShoppingListButton = new System.Windows.Forms.Button();
+            this.purchaseSuccessLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -287,11 +288,24 @@
             this.purchaseShoppingListButton.UseVisualStyleBackColor = true;
             this.purchaseShoppingListButton.Click += new System.EventHandler(this.purchaseShoppingListButton_Click);
             // 
+            // purchaseSuccessLabel
+            // 
+            this.purchaseSuccessLabel.AutoSize = true;
+            this.purchaseSuccessLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.purchaseSuccessLabel.ForeColor = System.Drawing.Color.Green;
+            this.purchaseSuccessLabel.Location = new System.Drawing.Point(178, 687);
+            this.purchaseSuccessLabel.Name = "purchaseSuccessLabel";
+            this.purchaseSuccessLabel.Size = new System.Drawing.Size(173, 23);
+            this.purchaseSuccessLabel.TabIndex = 25;
+            this.purchaseSuccessLabel.Text = "Purchase was success";
+            this.purchaseSuccessLabel.Visible = false;
+            // 
             // ShoppingListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.purchaseSuccessLabel);
             this.Controls.Add(this.purchaseShoppingListButton);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.button3);
@@ -338,5 +352,6 @@
         private ToolStripMenuItem showRecipesToolStripMenuItem;
         private ToolStripMenuItem showPantryToolStripMenuItem;
         private Button purchaseShoppingListButton;
+        private Label purchaseSuccessLabel;
     }
 }

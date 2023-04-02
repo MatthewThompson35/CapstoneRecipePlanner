@@ -1,4 +1,5 @@
-﻿using RecipePlannerLibrary.Database;
+﻿using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -164,7 +165,31 @@ namespace RecipePlannerDesktopApplication
 
         private void purchaseShoppingListButton_Click(object sender, EventArgs e)
         {
+            this.submitShoppingList();
+            this.purchaseSuccessLabel.Visible = true;
+        }
 
+        private void submitShoppingList()
+        {
+            int updatedQuantity = 0;
+            foreach (var shoppingIngredient in ShoppingListDAL.getIngredients())
+            {
+                bool shoppingIngredientExists = false;
+                foreach (var ingredient in IngredientDAL.getIngredients())
+                {
+                    if (ingredient.id == shoppingIngredient.id)
+                    {
+                        updatedQuantity = (int)(ingredient.quantity + shoppingIngredient.quantity);
+                        IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                        shoppingIngredientExists = true;
+                    }
+                }
+                if (!shoppingIngredientExists)
+                {
+                    IngredientDAL.addIngredient(shoppingIngredient.name, (int)shoppingIngredient.quantity, shoppingIngredient.measurement, Connection.ConnectionString);
+                }
+                ShoppingListDAL.RemoveIngredient((int)shoppingIngredient.id, Connection.ConnectionString);
+            }
         }
     }
 }
