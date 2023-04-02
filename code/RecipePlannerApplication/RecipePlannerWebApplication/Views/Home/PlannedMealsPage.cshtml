@@ -8,6 +8,13 @@
         <button>Switch Weeks</button>
     </form>
     
+    <form id="addForm" method="post" action="@Url.Action("addNeededPlannedMealIngredients", "Home")">
+
+        <button id="submitButton">Add Ingredients For Remaining Meals</button>
+        <label for="AllIngredients">Add all Ingredients</label>
+        <input type="checkbox" id="AllIngredients" name="ingredientType" value="All">
+    </form>
+
 </div>
 <div class="row">
     <div class="col-md-6"  id="meal-table">
@@ -163,6 +170,17 @@
     window.onload = function () {
         doDefaultMeals();
     };
+
+    var allIngredientsCheckbox = document.getElementById("AllIngredients");
+    var addForm = document.getElementById("addForm");
+
+    allIngredientsCheckbox.addEventListener("change", function () {
+        if (allIngredientsCheckbox.checked) {
+            addForm.action = "@Url.Action("addAllPlannedMealIngredients", "Home")";
+        } else {
+            addForm.action = "@Url.Action("addNeededPlannedMealIngredients", "Home")";
+        }
+    });
     
     
     const dayRows = document.querySelectorAll('.day-row');
