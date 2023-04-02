@@ -144,6 +144,11 @@ namespace RecipePlannerDesktopApplication
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
+            Hide();
+
+            var addIngredient = new AddIngredientsPage(this);
+
+            addIngredient.Show();
 
         }
 
@@ -271,7 +276,7 @@ namespace RecipePlannerDesktopApplication
         }
 
         /// <summary>
-        ///     Updates the ingredients view with the page one ingredients.
+        ///     Updates the shopping list view with the page one shopping list ingredients.
         /// </summary>
         public void UpdateIngredientsGridView()
         {
