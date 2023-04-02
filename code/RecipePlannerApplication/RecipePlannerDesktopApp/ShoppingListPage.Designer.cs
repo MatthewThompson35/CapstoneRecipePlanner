@@ -36,6 +36,7 @@
             this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.incrementCOlumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.measurmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
@@ -51,15 +52,14 @@
             this.showRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseShoppingListButton = new System.Windows.Forms.Button();
-            this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measurementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
-            this.plannerContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).BeginInit();
+            this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ingredientsGridView
@@ -87,14 +87,14 @@
             this.ingredientsGridView.RowTemplate.Height = 25;
             this.ingredientsGridView.Size = new System.Drawing.Size(400, 239);
             this.ingredientsGridView.TabIndex = 25;
-            this.ingredientsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
+            this.ingredientsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellContentClick);
             // 
             // ingredientColumn
             // 
             this.ingredientColumn.DataPropertyName = "name";
             this.ingredientColumn.HeaderText = "Ingredient";
             this.ingredientColumn.Name = "ingredientColumn";
-            this.ingredientColumn.ReadOnly = true;
             this.ingredientColumn.Width = 135;
             // 
             // decrementColumn
@@ -110,7 +110,6 @@
             this.quantityColumn.DataPropertyName = "quantity";
             this.quantityColumn.HeaderText = "Quantity";
             this.quantityColumn.Name = "quantityColumn";
-            this.quantityColumn.ReadOnly = true;
             // 
             // incrementCOlumn
             // 
@@ -125,8 +124,11 @@
             this.measurmentColumn.DataPropertyName = "measurement";
             this.measurmentColumn.HeaderText = "Measurement";
             this.measurmentColumn.Name = "measurmentColumn";
-            this.measurmentColumn.ReadOnly = true;
             this.measurmentColumn.Width = 103;
+            // 
+            // ingredientBindingSource
+            // 
+            this.ingredientBindingSource.DataSource = typeof(RecipePlannerLibrary.Models.Ingredient);
             // 
             // label1
             // 
@@ -280,10 +282,6 @@
             this.purchaseShoppingListButton.UseVisualStyleBackColor = true;
             this.purchaseShoppingListButton.Click += new System.EventHandler(this.purchaseShoppingListButton_Click);
             // 
-            // ingredientBindingSource
-            // 
-            this.ingredientBindingSource.DataSource = typeof(RecipePlannerLibrary.Models.Ingredient);
-            // 
             // usernameDataGridViewTextBoxColumn
             // 
             this.usernameDataGridViewTextBoxColumn.DataPropertyName = "username";
@@ -335,8 +333,8 @@
             this.Name = "ShoppingListPage";
             this.Text = "ShoppingListPage";
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
-            this.plannerContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).EndInit();
+            this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,6 +357,7 @@
         private ToolStripMenuItem showPantryToolStripMenuItem;
         private Button purchaseShoppingListButton;
         private DataGridView ingredientsGridView;
+        private BindingSource ingredientBindingSource;
         private DataGridViewTextBoxColumn ingredientColumn;
         private DataGridViewButtonColumn decrementColumn;
         private DataGridViewTextBoxColumn quantityColumn;
@@ -369,6 +368,5 @@
         private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn measurementDataGridViewTextBoxColumn;
-        private BindingSource ingredientBindingSource;
     }
 }

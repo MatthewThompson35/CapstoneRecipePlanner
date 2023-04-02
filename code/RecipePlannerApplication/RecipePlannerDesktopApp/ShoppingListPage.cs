@@ -156,7 +156,7 @@ namespace RecipePlannerDesktopApplication
                     var id = 0;
                     var name = this.selectedRow.Cells[0].Value;
                     var quantity = (int)this.selectedRow.Cells[2].Value;
-                    var list = IngredientDAL.getIngredients();
+                    var list = ShoppingListDAL.getIngredients();
                     foreach (var item in list)
                     {
                         if (item.name.Equals(name) && item.quantity == quantity)
@@ -294,7 +294,7 @@ namespace RecipePlannerDesktopApplication
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ingredientsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var rowIndex = e.RowIndex;
             var columnIndex = e.ColumnIndex;
@@ -302,6 +302,16 @@ namespace RecipePlannerDesktopApplication
             {
                 this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
                 this.clickIngredientCell(columnIndex);
+            }
+        }
+
+        private void ingredientsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var rowIndex = e.RowIndex;
+            var columnIndex = e.ColumnIndex;
+            if (rowIndex >= 0)
+            {
+                this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
             }
         }
     }
