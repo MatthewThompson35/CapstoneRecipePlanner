@@ -122,6 +122,8 @@
             this.sundayPanel = new System.Windows.Forms.Panel();
             this.sundayButton = new System.Windows.Forms.Button();
             this.mealPlanFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
+            this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
             this.plannerContextMenuStrip.SuspendLayout();
             this.mondayPanel.SuspendLayout();
             this.tuesdayPanel.SuspendLayout();
@@ -923,7 +925,7 @@
             this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.plannerMenuButton.Location = new System.Drawing.Point(11, 9);
             this.plannerMenuButton.Name = "plannerMenuButton";
-            this.plannerMenuButton.Size = new System.Drawing.Size(62, 56);
+            this.plannerMenuButton.Size = new System.Drawing.Size(53, 40);
             this.plannerMenuButton.TabIndex = 72;
             this.plannerMenuButton.UseVisualStyleBackColor = false;
             this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
@@ -1207,11 +1209,34 @@
             this.mealPlanFlowLayoutPanel.Size = new System.Drawing.Size(525, 1048);
             this.mealPlanFlowLayoutPanel.TabIndex = 80;
             // 
+            // addIngredientsForRemainingMealsButton
+            // 
+            this.addIngredientsForRemainingMealsButton.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addIngredientsForRemainingMealsButton.Location = new System.Drawing.Point(369, 0);
+            this.addIngredientsForRemainingMealsButton.Name = "addIngredientsForRemainingMealsButton";
+            this.addIngredientsForRemainingMealsButton.Size = new System.Drawing.Size(136, 49);
+            this.addIngredientsForRemainingMealsButton.TabIndex = 81;
+            this.addIngredientsForRemainingMealsButton.Text = "Add Ingredients for Remaining Meals";
+            this.addIngredientsForRemainingMealsButton.UseVisualStyleBackColor = true;
+            // 
+            // addAllIngredientsCheckbox
+            // 
+            this.addAllIngredientsCheckbox.AutoSize = true;
+            this.addAllIngredientsCheckbox.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addAllIngredientsCheckbox.Location = new System.Drawing.Point(368, 49);
+            this.addAllIngredientsCheckbox.Name = "addAllIngredientsCheckbox";
+            this.addAllIngredientsCheckbox.Size = new System.Drawing.Size(141, 21);
+            this.addAllIngredientsCheckbox.TabIndex = 82;
+            this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
+            this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
+            // 
             // PlannedMealsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.addAllIngredientsCheckbox);
+            this.Controls.Add(this.addIngredientsForRemainingMealsButton);
             this.Controls.Add(this.mealPlanFlowLayoutPanel);
             this.Controls.Add(this.plannerMenuButton);
             this.Controls.Add(this.label2);
@@ -1335,5 +1360,7 @@
         private Panel sundayPanel;
         private Button sundayButton;
         private FlowLayoutPanel mealPlanFlowLayoutPanel;
+        private Button addIngredientsForRemainingMealsButton;
+        private CheckBox addAllIngredientsCheckbox;
     }
 }
