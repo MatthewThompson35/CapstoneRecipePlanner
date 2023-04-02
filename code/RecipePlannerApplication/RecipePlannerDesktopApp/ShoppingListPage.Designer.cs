@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
             this.IngredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,20 +56,21 @@
             this.purchaseShoppingListButton = new System.Windows.Forms.Button();
             this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
             this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
+            this.noIngredientsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ingredientsGridView
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ingredientsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.ingredientsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IngredientColumn,
@@ -90,8 +91,8 @@
             // IngredientColumn
             // 
             this.IngredientColumn.DataPropertyName = "name";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IngredientColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.IngredientColumn.HeaderText = "Ingredient";
             this.IngredientColumn.MinimumWidth = 6;
             this.IngredientColumn.Name = "IngredientColumn";
@@ -112,8 +113,8 @@
             // quantityColumn
             // 
             this.quantityColumn.DataPropertyName = "quantity";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.quantityColumn.HeaderText = "Quantity";
             this.quantityColumn.MinimumWidth = 6;
             this.quantityColumn.Name = "quantityColumn";
@@ -309,11 +310,23 @@
             this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
             this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
             // 
+            // noIngredientsLabel
+            // 
+            this.noIngredientsLabel.AutoSize = true;
+            this.noIngredientsLabel.ForeColor = System.Drawing.Color.Red;
+            this.noIngredientsLabel.Location = new System.Drawing.Point(12, 680);
+            this.noIngredientsLabel.Name = "noIngredientsLabel";
+            this.noIngredientsLabel.Size = new System.Drawing.Size(275, 20);
+            this.noIngredientsLabel.TabIndex = 27;
+            this.noIngredientsLabel.Text = "There are no ingredients needed to add.";
+            this.noIngredientsLabel.Visible = false;
+            // 
             // ShoppingListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.noIngredientsLabel);
             this.Controls.Add(this.addAllIngredientsCheckbox);
             this.Controls.Add(this.addIngredientsForRemainingMealsButton);
             this.Controls.Add(this.purchaseShoppingListButton);
@@ -364,5 +377,6 @@
         private Button purchaseShoppingListButton;
         private Button addIngredientsForRemainingMealsButton;
         private CheckBox addAllIngredientsCheckbox;
+        private Label noIngredientsLabel;
     }
 }
