@@ -35,6 +35,14 @@ namespace RecipePlannerDesktopApplication
                     .ToList();
                 var bindingList = new BindingList<Ingredient>(this.pageOneIngredients);
                 this.ingredientsGridView.DataSource = bindingList;
+
+                if (this.ingredientsGridView.DataSource == null)
+                {
+                    this.purchaseShoppingListButton.Enabled = false;
+                } else
+                {
+                    this.purchaseShoppingListButton.Enabled = true;
+                }
                 
                 Refresh();
             }
