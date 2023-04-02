@@ -152,5 +152,39 @@ namespace RecipePlannerLibrary.Database
             return ingredients;
         }
 
+        /// <summary>
+        ///     Updates the quantity of the ingredient in the database.
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>Quantity of the given ingredient is updated by the given quantity.</postcondition>
+        /// <param name="id">The id of the ingredient.</param>
+        /// <param name="quantity">The quantity of the ingredient.</param>
+        public static void updateQuantity(int id, int quantity)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query = @"Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@username", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+
+        }
+
+        /// <summary>
+        /// Removes all rows from the table where username matches.
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        public static void removeAll(string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @"DELETE FROM shopping_list WHERE USERNAME = @user;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@USER", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+        }
+
     }
 }
