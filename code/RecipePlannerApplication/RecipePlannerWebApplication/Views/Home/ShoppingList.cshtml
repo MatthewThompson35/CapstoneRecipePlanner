@@ -156,13 +156,13 @@
                     <td>
                         <input type="hidden" name="page" value="@ViewBag.currentPage"/>
                         <div class="quantity-container">
-                                <input type="submit" asp-action="decrementShoppingListQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id" />
+                            <input type="submit" asp-action="decrementShoppingListQuantity" asp-route-id="@ingredient.id" value="-" id="@ingredient.id"/>
                             <span id="ingredient-quantity-@ingredient.id">@ingredient.quantity @ingredient.measurement</span>
-                                <input type="submit" asp-action="IncrementShoppingListQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id" />
+                            <input type="submit" asp-action="IncrementShoppingListQuantity" asp-route-id="@ingredient.id" value="+" id="@ingredient.id"/>
                         </div>
                     </td>
                     <td>
-                            <input type="submit" asp-action="RemoveShoppingListIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id" />
+                        <input type="submit" asp-action="RemoveShoppingListIngredient" asp-route-id="@ingredient.id" value="Remove" id="@ingredient.id"/>
                     </td>
 
                 </tr>
@@ -186,14 +186,28 @@
         </div>
         <div class="button-container">
             <input type="submit" asp-action="Index" value="Logout" id="logout" class="button button-red"/>
-            <input type="submit" asp-action="goToAddShoppingListIngredientsPage" value="Add Ingredient" id="addIngredient" class="button button-green" />
-            <input type="submit" asp-action="purchaseAllShoppingList" value="Purchase Entire Shopping List" id="clearShoppingList" class="button button-green" disabled="@(ViewBag.ingredientsOnPage.Count == 0 ? "disabled" : null)" />
+            <input type="submit" asp-action="goToAddShoppingListIngredientsPage" value="Add Ingredient" id="addIngredient" class="button button-green"/>
+            <input type="submit" asp-action="purchaseAllShoppingList" value="Purchase Entire Shopping List" id="clearShoppingList" class="button button-green" disabled="@(ViewBag.ingredientsOnPage.Count == 0 ? "disabled" : null)"/>
+            <input type="submit" asp-action="addNeededPlannedMealIngredients" value="Add needed planned meal ingredients" id="addNeededIngredient" class="button button-green"/>
+            <input type="submit" asp-action="addAllPlannedMealIngredients" value="Add all planned meal ingredients" id="addAllIngredient" class="button button-green"/>
         </div>
+       
     </form>
 </div>
 
 
 <script>
+
+    var allIngredientsCheckbox = document.getElementById("AllIngredients");
+    var addIngredientsForm = document.getElementById("addIngredientsForm");
+
+    allIngredientsCheckbox.addEventListener("change", function () {
+        if (allIngredientsCheckbox.checked) {
+            addIngredientsForm.action = "@Url.Action("addAllPlannedMealIngredients", "Home")";
+        } else {
+            addIngredientsForm.action = "@Url.Action("addNeededPlannedMealIngredients", "Home")";
+        }
+    });
 
     function openForm() {
         document.getElementById("addForm").style.display = "block";
@@ -203,4 +217,5 @@
         document.getElementById("addForm").style.display = "none";
         document.getElementById("mainform").style.display = "block";
     }
+
 </script>
