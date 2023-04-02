@@ -1,4 +1,5 @@
-﻿using RecipePlannerLibrary.Database;
+﻿using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ namespace RecipePlannerDesktopApplication
         private readonly int totalPages;
         private List<Ingredient> pageOneIngredients;
 
+        /// <summary>
+        ///     Initializes a ShoppingListPage object.
+        /// </summary>
         public ShoppingListPage()
         {
             this.InitializeComponent();
@@ -34,6 +38,14 @@ namespace RecipePlannerDesktopApplication
                     .ToList();
                 var bindingList = new BindingList<Ingredient>(this.pageOneIngredients);
                 this.ingredientsGridView.DataSource = bindingList;
+
+                if (this.ingredientsGridView.Rows.Count == 0)
+                {
+                    this.purchaseShoppingListButton.Enabled = false;
+                } else
+                {
+                    this.purchaseShoppingListButton.Enabled = true;
+                }
                 
                 Refresh();
             }
@@ -160,6 +172,38 @@ namespace RecipePlannerDesktopApplication
 
             ingredientPage.Show();
 
+        }
+
+        private void purchaseShoppingListButton_Click(object sender, EventArgs e)
+        {
+            this.submitShoppingList();
+
+            var ingredientsPage = new IngredientsPage();
+            this.Hide();
+            ingredientsPage.Show();
+        }
+
+        private void submitShoppingList()
+        {
+            int updatedQuantity = 0;
+            foreach (var shoppingIngredient in ShoppingListDAL.getIngredients())
+            {
+                bool shoppingIngredientExists = false;
+                foreach (var ingredient in IngredientDAL.getIngredients())
+                {
+                    if (ingredient.id == shoppingIngredient.id)
+                    {
+                        updatedQuantity = (int)(ingredient.quantity + shoppingIngredient.quantity);
+                        IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                        shoppingIngredientExists = true;
+                    }
+                }
+                if (!shoppingIngredientExists)
+                {
+                    IngredientDAL.addIngredient(shoppingIngredient.name, (int)shoppingIngredient.quantity, shoppingIngredient.measurement, Connection.ConnectionString);
+                }
+                ShoppingListDAL.RemoveIngredient((int)shoppingIngredient.id, Connection.ConnectionString);
+            }
         }
     }
 }
