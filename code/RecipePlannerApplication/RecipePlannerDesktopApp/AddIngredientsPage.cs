@@ -19,6 +19,7 @@ namespace RecipePlannerDesktopApplication
         public AddIngredientsPage(IngredientsPage ingredientsPage)
         {
             InitializeComponent();
+
             this.ingredientsPage = ingredientsPage;
         }
 

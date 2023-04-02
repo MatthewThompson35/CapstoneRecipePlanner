@@ -27,10 +27,12 @@ namespace RecipePlannerDesktopApplication
         public ShoppingListPage()
         {
             this.InitializeComponent();
+            this.ingredientsGridView.AutoGenerateColumns = false;
+
 
             try
             {
-                var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+                var ingredients = ShoppingListDAL.getIngredients();
                 this.totalPages = (int)Math.Ceiling((double)ingredients.Count / this.pageSize);
                 this.pageOneIngredients = ingredients
                     .Skip((this.page - 1) * this.pageSize)
@@ -53,6 +55,7 @@ namespace RecipePlannerDesktopApplication
             {
                 this.serverErrorLabel.Visible = true;
                 this.ingredientsGridView.Enabled = false;
+
             }
 
             Refresh();
@@ -68,7 +71,7 @@ namespace RecipePlannerDesktopApplication
         private void beginningButton_Click(object sender, EventArgs e)
         {
             this.page = 1;
-            var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+            var ingredients = ShoppingListDAL.getIngredients();
             List<Ingredient> allIngredientsOnPage = ingredients
                 .Skip((this.page - 1) * this.pageSize)
                 .Take(this.pageSize)
@@ -87,7 +90,7 @@ namespace RecipePlannerDesktopApplication
             if (this.page != 1)
             {
                 this.page--;
-                var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+                var ingredients = ShoppingListDAL.getIngredients();
                 List<Ingredient> allIngredientsOnPage = ingredients
                     .Skip((this.page - 1) * this.pageSize)
                     .Take(this.pageSize)
@@ -107,7 +110,7 @@ namespace RecipePlannerDesktopApplication
             if (this.page != this.totalPages)
             {
                 this.page++;
-                var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+                var ingredients = ShoppingListDAL.getIngredients();
                 List<Ingredient> allIngredientsOnPage = ingredients
                     .Skip((this.page - 1) * this.pageSize)
                     .Take(this.pageSize)
@@ -125,7 +128,7 @@ namespace RecipePlannerDesktopApplication
         private void button3_Click(object sender, EventArgs e)
         {
             this.page = this.totalPages;
-            var ingredients = IngredientDAL.GetIngredientsFromShoppingList();
+            var ingredients = ShoppingListDAL.getIngredients();
             List<Ingredient> allIngredientsOnPage = ingredients
                 .Skip((this.page - 1) * this.pageSize)
                 .Take(this.pageSize)
@@ -146,7 +149,30 @@ namespace RecipePlannerDesktopApplication
 
         private void removeIngredientButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (this.selectedRow != null)
+                {
+                    var id = 0;
+                    var name = this.selectedRow.Cells[0].Value;
+                    var quantity = (int)this.selectedRow.Cells[2].Value;
+                    var list = IngredientDAL.getIngredients();
+                    foreach (var item in list)
+                    {
+                        if (item.name.Equals(name) && item.quantity == quantity)
+                        {
+                            id = (int)item.id;
+                        }
+                    }
 
+                    ShoppingListDAL.RemoveIngredient(id, Connection.ConnectionString);
+                    this.UpdateIngredientsGridView();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+            }
         }
 
         private void plannerMenuButton_Click(object sender, EventArgs e)
@@ -203,6 +229,79 @@ namespace RecipePlannerDesktopApplication
                     IngredientDAL.addIngredient(shoppingIngredient.name, (int)shoppingIngredient.quantity, shoppingIngredient.measurement, Connection.ConnectionString);
                 }
                 ShoppingListDAL.RemoveIngredient((int)shoppingIngredient.id, Connection.ConnectionString);
+            }
+        }
+
+        private void clickIngredientCell(int columnIndex)
+        {
+            try
+            {
+                if (this.selectedRow != null)
+                {
+                    var id = 0;
+                    var name = this.selectedRow.Cells[0].Value;
+                    var quantity = (int)this.selectedRow.Cells[2].Value;
+                    var list = ShoppingListDAL.getIngredients();
+                    foreach (var item in list)
+                    {
+                        if (item.name.Equals(name) && item.quantity == quantity)
+                        {
+                            id = (int)item.id;
+                        }
+                    }
+
+                    if (columnIndex == 3)
+                    {
+                        ShoppingListDAL.incrementQuantity(id, quantity);
+                        this.UpdateIngredientsGridView();
+                    }
+
+                    if (columnIndex == 1)
+                    {
+                        ShoppingListDAL.decrementQuantity(id, quantity);
+                        this.UpdateIngredientsGridView();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.ingredientsGridView.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        ///     Updates the ingredients view with the page one ingredients.
+        /// </summary>
+        public void UpdateIngredientsGridView()
+        {
+            try
+            {
+                var ingredients = ShoppingListDAL.getIngredients();
+                this.pageOneIngredients = ingredients
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                var list = this.pageOneIngredients;
+                var bindingList = new BindingList<Ingredient>(list);
+
+                this.ingredientsGridView.DataSource = null;
+                this.ingredientsGridView.DataSource = bindingList;
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var rowIndex = e.RowIndex;
+            var columnIndex = e.ColumnIndex;
+            if (rowIndex >= 0)
+            {
+                this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
+                this.clickIngredientCell(columnIndex);
             }
         }
     }
