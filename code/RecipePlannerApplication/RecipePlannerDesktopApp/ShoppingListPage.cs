@@ -21,6 +21,9 @@ namespace RecipePlannerDesktopApplication
         private readonly int totalPages;
         private List<Ingredient> pageOneIngredients;
 
+        /// <summary>
+        ///     Initializes a ShoppingListPage object.
+        /// </summary>
         public ShoppingListPage()
         {
             this.InitializeComponent();
@@ -36,7 +39,7 @@ namespace RecipePlannerDesktopApplication
                 var bindingList = new BindingList<Ingredient>(this.pageOneIngredients);
                 this.ingredientsGridView.DataSource = bindingList;
 
-                if (this.ingredientsGridView.DataSource == null)
+                if (this.ingredientsGridView.Rows.Count == 0)
                 {
                     this.purchaseShoppingListButton.Enabled = false;
                 } else
@@ -175,6 +178,7 @@ namespace RecipePlannerDesktopApplication
         {
             this.submitShoppingList();
             this.purchaseSuccessLabel.Visible = true;
+            this.Refresh();
         }
 
         private void submitShoppingList()
