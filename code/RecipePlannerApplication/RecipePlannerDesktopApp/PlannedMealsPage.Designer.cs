@@ -1218,6 +1218,7 @@
             this.addIngredientsForRemainingMealsButton.TabIndex = 81;
             this.addIngredientsForRemainingMealsButton.Text = "Add Ingredients for Remaining Meals";
             this.addIngredientsForRemainingMealsButton.UseVisualStyleBackColor = true;
+            this.addIngredientsForRemainingMealsButton.Click += new System.EventHandler(this.addIngredientsForRemainingMealsButton_Click);
             // 
             // addAllIngredientsCheckbox
             // 
@@ -1229,6 +1230,7 @@
             this.addAllIngredientsCheckbox.TabIndex = 82;
             this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
             this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
+            this.addAllIngredientsCheckbox.CheckedChanged += new System.EventHandler(this.addAllIngredientsCheckbox_CheckedChanged);
             // 
             // PlannedMealsPage
             // 

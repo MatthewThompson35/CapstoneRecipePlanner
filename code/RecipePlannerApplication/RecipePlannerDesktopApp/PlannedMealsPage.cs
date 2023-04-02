@@ -1712,5 +1712,166 @@ namespace RecipePlannerDesktopApplication
                 sundayPanel.Height = 181;
             }
         }
+
+        private void addIngredientsForRemainingMealsButton_Click(object sender, EventArgs e)
+        {
+
+            if (this.addAllIngredientsCheckbox.Checked == true)
+            {
+                this.addAllIngredients();
+            }
+            else
+            {
+                this.addNeededIngredients();
+            }
+
+            var shoppingList = new ShoppingListPage();
+            this.Hide();
+            shoppingList.Show();
+        }
+
+        private void addAllIngredientsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void addAllIngredients()
+        {
+            List<Ingredient> totalIngredients = new List<Ingredient>();
+            Dictionary<(string, string), int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+            List<Ingredient> pantry = IngredientDAL.getIngredients();
+            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+
+            foreach (var shoppingIngredient in shoppingList)
+            {
+                Ingredient pantryItem = pantry.Find(i => i.name == shoppingIngredient.name);
+
+                if (pantryItem != null)
+                {
+                    pantryItem.quantity += shoppingIngredient.quantity;
+                }
+                else
+                {
+                    pantry.Add(shoppingIngredient);
+                }
+            }
+
+            foreach (var meal in remainingMeals)
+            {
+                int recipeId = meal.Value;
+                var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
+
+                foreach (var recipeIngredient in recipeIngredients)
+                {
+                    Ingredient existingIngredient = totalIngredients.Find(i => i.name == recipeIngredient.IngredientName && i.measurement == recipeIngredient.Measurement);
+
+                    if (existingIngredient != null)
+                    {
+                        existingIngredient.quantity += (int)recipeIngredient.Quantity;
+                    }
+                    else
+                    {
+                        int id = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
+                        Ingredient addIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, id, recipeIngredient.Quantity, recipeIngredient.Measurement);
+
+                        totalIngredients.Add(addIngredient);
+                    }
+                }
+            }
+
+            foreach (var ingredient in totalIngredients)
+            {
+                Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+
+                if (shoppingListItem != null)
+                {
+                    int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
+
+                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                }
+                else
+                {
+                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                }
+            }
+        }
+
+        private void addNeededIngredients()
+        {
+            string user = ActiveUser.username;
+            List<Ingredient> totalIngredients = new List<Ingredient>();
+            Dictionary<(string, string), int> remainingMeals =
+                PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+            List<Ingredient> pantry = IngredientDAL.getIngredients();
+            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+
+            foreach (Ingredient shoppingItem in shoppingList)
+            {
+                Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
+
+                if (pantryItem != null)
+                {
+                    pantryItem.quantity += shoppingItem.quantity;
+                }
+                else
+                {
+                    pantry.Add(shoppingItem);
+                }
+            }
+
+            foreach (KeyValuePair<(string, string), int> meal in remainingMeals)
+            {
+                int recipeId = meal.Value;
+                var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
+
+                foreach (RecipeIngredient ingredient in recipeIngredients)
+                {
+                    Ingredient existingIngredient = totalIngredients.Find(i =>
+                        i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+                    if (existingIngredient != null)
+                    {
+                        existingIngredient.quantity += (int)ingredient.Quantity;
+
+                    }
+                    else
+                    {
+                        int id = IngredientDAL.getIngredientId(ingredient.IngredientName);
+                        Ingredient addIngredient = new Ingredient(user, ingredient.IngredientName, id,
+                            ingredient.Quantity,
+                            ingredient.Measurement);
+                        totalIngredients.Add(addIngredient);
+                    }
+                }
+            }
+
+
+            foreach (var ingredient in totalIngredients)
+            {
+                Ingredient pantryItem = pantry.Find(i => i.name == ingredient.name);
+
+                if (pantryItem != null)
+                {
+                    if (ingredient.quantity > pantryItem.quantity)
+                    {
+                        int quantity = (int)ingredient.quantity - (int)pantryItem.quantity;
+                        Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+
+                        if (shoppingListItem != null)
+                        {
+                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                        }
+                        else
+                        {
+                            ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement, Connection.ConnectionString);
+                        }
+
+                    }
+                }
+                else
+                {
+                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                }
+            }
+        }
     }
 }
