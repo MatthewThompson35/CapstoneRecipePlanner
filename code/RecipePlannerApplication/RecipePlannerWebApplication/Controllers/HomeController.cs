@@ -227,6 +227,10 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    /// <summary>
+    /// Adds the needed planned meal ingredients to the shopping list.
+    /// </summary>
+    /// <returns>Shopping List page or login page on connection error</returns>
     public ActionResult addNeededPlannedMealIngredients()
     {
         try
@@ -302,8 +306,8 @@ public class HomeController : Controller
                     }
                 }
                 else
-                {
-                   ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                { 
+                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
                 }
             }
             this.setupShoppingListPage(1);
@@ -317,6 +321,10 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    /// <summary>
+    /// Adds all planned meal ingredients to the shopping list.
+    /// </summary>
+    /// <returns>Shopping List page or login page on connection error</returns>
     public ActionResult addAllPlannedMealIngredients()
     {
         try
