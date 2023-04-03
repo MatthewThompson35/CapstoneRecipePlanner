@@ -43,6 +43,37 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
+        ///     Gets all of the recipes shared with the active user from the shared recipe table.
+        /// </summary>
+        /// <param name="connectionString">The connection string for the table.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of all shared recipes</returns>
+        public static List<Recipe> getSharedRecipes(string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var recipes = new List<Recipe>();
+            var query = @"Select r.recipeID, r.name, r.description from shared_recipe sr, recipe r where r.recipeID = sr.recipeID;";
+            using var command = new MySqlCommand(query, connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var recipeID = reader.GetInt32(0);
+                var name = reader.GetString(1);
+                var description = reader.GetString(2);
+
+                var recipe = new Recipe(recipeID, name, description);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipeID, connectionString);
+
+                recipes.Add(recipe);
+            }
+
+            connection.Close();
+            return recipes;
+        }
+
+        /// <summary>
         ///     Gets the recipe name based on the specified recipe id.
         /// </summary>
         /// <param name="recipeId">the recipe id.</param>

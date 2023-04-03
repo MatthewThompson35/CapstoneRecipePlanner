@@ -134,6 +134,54 @@ public class HomeController : Controller
         }
     }
 
+    private void setupForSharedRecipePage(int? page = 1)
+    {
+        try
+        {
+            List<Recipe> recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 10;
+            var currentPage = page ?? 1;
+
+            ViewBag.currentPage = currentPage;
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize); ;
+            List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
+            List<Recipe> allRecipes = ViewBag.AllRecipes;
+            var currentAllPage = 1;
+
+            var AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            var AllRecipesOnPage = allRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+    }
+
     /// <summary>
     ///     Adds to the available recipes if the user can make that recipe.
     /// </summary>
@@ -1053,7 +1101,7 @@ public class HomeController : Controller
     /// <returns>The shared recipes page or login on bad server connection</returns>
     public ActionResult goToSharedRecipesPage()
     {
-        this.setupForRecipePage(1);
+        this.setupForSharedRecipePage(1);
         return View("SharedRecipes", ViewBag.Measurements);
     }
 

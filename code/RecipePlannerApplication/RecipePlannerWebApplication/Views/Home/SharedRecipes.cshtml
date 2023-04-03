@@ -146,7 +146,7 @@
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
     <div id="recipe-list">
-            <h2><center>Shared Recipes</center></h2>
+        <h2><center>Shared Recipes</center></h2>
         <table id="all-recipes">
             <thead>
             <tr>
@@ -257,3 +257,85 @@
     </div>
 </div>
 </body>
+
+<script>
+    function showRecipe(recipeId) {
+        var recipeID = document.getElementById('recipeID')
+        var cookRecipe = document.getElementById('CookRecipe');
+        var recipeDiv = document.getElementById(recipeId);
+        var currentDiv = document.querySelector('#details > div[style*="display: block"]');
+        var addPlannedMealForm = document.getElementById('addPlannedMeal');
+        var recipeIdInput = addPlannedMealForm.querySelector('input[name="recipeId"]');
+
+        recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
+
+        if (currentDiv) {
+            currentDiv.style.display = 'none';
+        }
+
+        recipeDiv.style.display = 'block';
+        addPlannedMealForm.style.display = 'block';
+        cookRecipe.style.display = "block";
+    }
+    
+    function displayPage(recipes, pageNumber) {
+        const startIndex = (pageNumber - 1) * 10;
+        const endIndex = startIndex + 10;
+        const itemsToShow = recipes.slice(startIndex, endIndex);
+        var table = document.getElementById("filtered-recipes").getElementsByTagName("tbody")[0];
+        table.innerHTML = "";
+
+        if (recipes.length == 0) {
+            var row = table.insertRow();
+            var cell = row.insertCell();
+            cell.colSpan = "2";
+            cell.style.textAlign = "center";
+            cell.innerHTML = "No recipes found with the entered tags.";
+        }
+
+        for (var i = 0; i < itemsToShow.length; i++) {
+            var row = table.insertRow();
+            var nameCell = row.insertCell();
+            nameCell.innerHTML = itemsToShow[i].name;
+            var tagsCell = row.insertCell();
+            tagsCell.innerHTML = itemsToShow[i].tags.join(", ");
+            row.setAttribute("onclick", "showRecipe('" + itemsToShow[i].recipeId + "')");
+            row.style.cursor = "pointer";
+        }
+        updatePaginationButtons(recipes, pageNumber);
+    }
+
+    function updatePaginationButtons(recipeList, currentPage) {
+        const paginationContainer = document.querySelector('#filter-pagination');
+        paginationContainer.innerHTML = "";
+        document.getElementById('filter-pagination').style.display = 'block';
+
+        const previousButton = document.createElement('button');
+        previousButton.textContent = 'Previous';
+        previousButton.disabled = currentPage === 1;
+        previousButton.addEventListener('click', () => displayPage(recipeList, currentPage - 1));
+        previousButton.classList.add('btn', 'btn-primary', 'page-button');
+        previousButton.style.margin = '5px';
+        paginationContainer.appendChild(previousButton);
+
+        const totalPages = Math.ceil(recipeList.length / 10);
+        for (let i = 1; i <= totalPages; i++) {
+            const pageNumberButton = document.createElement('button');
+            pageNumberButton.textContent = i;
+            pageNumberButton.disabled = i === currentPage;
+            pageNumberButton.addEventListener('click', () => displayPage(recipeList, i));
+            pageNumberButton.classList.add('btn', 'btn-primary', 'page-button');
+            pageNumberButton.style.margin = '5px';
+            paginationContainer.appendChild(pageNumberButton);
+        }
+
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Next';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => displayPage(recipeList, currentPage + 1));
+        nextButton.classList.add('btn', 'btn-primary', 'page-button');
+        nextButton.style.margin = '5px';
+        paginationContainer.appendChild(nextButton);
+    }
+</script>
