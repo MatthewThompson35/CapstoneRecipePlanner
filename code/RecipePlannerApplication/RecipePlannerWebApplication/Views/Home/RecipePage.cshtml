@@ -300,7 +300,7 @@
         <div id="details">
             <form id="cookMeal" method="POST">
                 <input type="hidden" id="recipeID" name="recipeID" value="">
-                <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Meal" id="CookRecipe" style="display: none;"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Recipe" id="CookRecipe" style="display: none;"/>
             </form>
             <form id="shareMeal" method="POST" style="display: none">
                 <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
@@ -310,7 +310,7 @@
                 {
                         <label class="error" style="color: red">@ViewBag.ErrorMessage</label>
                 }
-                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Meal" id="ShareRecipe" style="display: none;"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Recipe" id="ShareRecipe" style="display: none;"/>
             </form>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
