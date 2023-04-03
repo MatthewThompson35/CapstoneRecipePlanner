@@ -1,99 +1,96 @@
-﻿@using RecipePlannerLibrary.Models
-<style>
+﻿<style>
     #addForm, #addStepForm {
-        max-width: 600px;
-        margin: 30px auto;
         background-color: #fff;
         border-radius: 5px;
-        padding: 20px;
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
         display: block;
+        margin: 30px auto;
+        max-width: 600px;
+        padding: 20px;
     }
 
-        #addForm input[type="text"],
-        #addStepForm input[type="text"],
-        #addStepForm select,
-        #addForm select {
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #e6e6e6;
-            box-sizing: border-box;
-        }
+    #addForm input[type="text"],
+    #addStepForm input[type="text"],
+    #addStepForm select,
+    #addForm select {
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 100%;
+    }
 
-        #addForm input[type="submit"],
-        #addStepForm input[type="submit"],
-        #addStepForm input[type="button"],
-        #addForm input[type="button"] {
-            padding: 5px 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #33b5e5;
-            color: #fff;
-            margin-right: 10px;
-        }
+    #addForm input[type="submit"],
+    #addStepForm input[type="submit"],
+    #addStepForm input[type="button"],
+    #addForm input[type="button"] {
+        background-color: #33b5e5;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 10px;
+        padding: 5px 10px;
+    }
 
-        #addForm #cancelButton,
-        #addStepForm #cancelButton{
-            background-color: #d9534f;
-            color: #fff;
-            margin-left: 10px;
-        }
+    #addForm #cancelButton,
+    #addStepForm #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
 
-        #addForm label,
-        #addStepForm label{
-            display: block;
-            margin-bottom: 5px;
-            font-size: 18px;
-            font-weight: bold;
-        }
+    #addForm label,
+    #addStepForm label {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-        #addForm .form-group,
-        #addStepFrom .form-group{
-            margin-bottom: 15px;
-        }
+    #addForm .form-group,
+    #addStepFrom .form-group { margin-bottom: 15px; }
 
-        #addForm .button-group,
-        #addStepForm .button-group{
-            margin-top: 20px;
-            text-align: right;
-        }
+    #addForm .button-group,
+    #addStepForm .button-group {
+        margin-top: 20px;
+        text-align: right;
+    }
 
     #addRecipe {
-        max-width: 1200px;
-        margin: 30px auto;
         background-color: #fff;
         border-radius: 5px;
-        padding: 20px;
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
         display: block;
+        margin: 30px auto;
+        max-width: 1200px;
+        padding: 20px;
     }
 
     #addRecipe input[type="text"],
     #addRecipe select {
-        width: 100%;
-        padding: 10px;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-sizing: border-box;
         font-size: 18px;
         margin-bottom: 10px;
-        border-radius: 5px;
-        border: 1px solid #e6e6e6;
-        box-sizing: border-box;
+        padding: 10px;
+        width: 100%;
     }
 
-    #addRecipeinput[type="submit"],
+    #addRecipe input[type="submit"],
     #addRecipe input[type="button"] {
-        padding: 5px 10px;
-        font-size: 16px;
+        background-color: #33b5e5;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
-        background-color: #33b5e5;
         color: #fff;
+        cursor: pointer;
+        font-size: 16px;
         margin-right: 10px;
+        padding: 5px 10px;
     }
 
     #addRecipe #cancelButton {
@@ -104,23 +101,19 @@
 
     #addRecipe label {
         display: block;
-        margin-bottom: 5px;
         font-size: 18px;
         font-weight: bold;
+        margin-bottom: 5px;
     }
 
-    #addRecipe .form-group {
-        margin-bottom: 15px;
-    }
+    #addRecipe .form-group { margin-bottom: 15px; }
 
     #addRecipe .button-group {
         margin-top: 20px;
         text-align: right;
     }
 
-    .form-container label.error {
-        font-size: 14px;
-    }
+    .form-container label.error { font-size: 14px; }
 
 </style>
 
@@ -147,7 +140,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    
+
                     </tbody>
                 </table>
             </div>
@@ -166,7 +159,7 @@
                 </table>
             </div>
         </form>
-        <p>Please add all ingredients and steps in order</p>
+        <h4>Please add all ingredients and steps in order</h4>
     </div>
     <h2>Ingredients</h2>
     <div class="col-md-6">
@@ -177,6 +170,7 @@
             </div>
             <div class="form-group">
                 <label for="txtQuantity">Quantity:</label>
+                <span id="quantity-error" style="color: red;"></span>
                 <input type="text" name="txtQuantity" id="txtQuantity"/>
             </div>
             <div class="form-group">
@@ -207,8 +201,10 @@
             <button onsubmit="addStep()" class="btn btn-primary page-button" id="addStepButton">Add Step</button>
         </form>
     </div>
-    <input type="submit" style="margin-bottom: 20px;" class="btn btn-primary page-button" asp-action="addIngredient" class=""value="Add Recipe" id="addRecipeButton"/>
-    <input type="submit" class="btn btn-primary page-button" asp-action="addShoppingListIngredient" value="Cancel" id="cancelRecipe"/>
+    <form id="buttons">
+        <button onclick="addRecipe()" class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
+        <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
+    </form>
 </div>
 
 
@@ -247,7 +243,7 @@
 
         document.getElementById('recipeStep').value = '';
     });
-    
+
  function addStep() {
 
       var row = document.createElement('tr');
@@ -271,10 +267,85 @@
 
 }
 
+    function addRecipe() {
+        const ingredientsTable = document.getElementById('IngredientsTable');
+        const ingredientsTbody = ingredientsTable.getElementsByTagName('tbody')[0];
+        const ingredientsRows = ingredientsTbody.getElementsByTagName('tr');
+
+        const stepsTable = document.getElementById('StepsTable');
+        const stepsTbody = stepsTable.getElementsByTagName('tbody')[0];
+        const stepsRows = stepsTbody.getElementsByTagName('tr');
+        var errorLabel = document.getElementById('quantity-error');
+        var stepsString = ""
+        var ingredientsString = ""
+        errorLabel.textContent = 'clicked';
+        var step = 1;
+        var ingredient = 1;
+        if (ingredientsRows.length > 0 && stepsRows.length > 0) {
+            for (let i = 0; i < ingredientsRows.length; i++) {
+                const cells = ingredientsRows[i].getElementsByTagName('td');
+                const ingredientString = `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent}`;
+                if (i > 0) {
+                    ingredientsString += `:${ingredientString}`;
+                } else {
+                    ingredientsString = ingredientString;
+                }
+            }
+            for (let i = 0; i < stepsRows.length; i++) {
+                const cells = stepsRows[i].getElementsByTagName('td');
+                const stepString = `${i + 1},${cells[0].textContent}`;
+                if (i > 0) {
+                    stepsString += `:${stepString}`;
+                } else {
+                    stepsString = stepString;
+                }
+            }
+            $.ajax({
+                url: "@Url.Action("AddRecipe", "Home")",
+                method: 'POST',
+                data: { steps: stepsString, ingredients: ingredientsString },
+                success: function (response) {
+                    console.log('Recipe added successfully!');
+                    // Display success message or redirect to another page
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error adding recipe:', error);
+                    // Display error message or take other action
+                }
+            });
+        } else {
+            errorLabel.textContent = 'Both tables must have values!';
+            return;
+        }
+    }
+
+
 function addIngredient() {
   var name = document.getElementById('txtIngredientName').value;
   var quantity = document.getElementById('txtQuantity').value;
   var measurement = document.getElementById('measurement').value;
+  
+  var errorLabel = document.getElementById('quantity-error');
+            if (!errorLabel) {
+              errorLabel = document.createElement('span');
+              errorLabel.id = 'quantity-error';
+              errorLabel.style.color = 'red';
+              var quantityInput = document.getElementById('txtQuantity');
+              quantityInput.parentNode.insertBefore(errorLabel, quantityInput.nextSibling);
+            }
+            errorLabel.textContent = '';
+        if (isNaN(quantity)) {
+            var errorLabel = document.getElementById('quantity-error');
+            if (!errorLabel) {
+              errorLabel = document.createElement('span');
+              errorLabel.id = 'quantity-error';
+              errorLabel.style.color = 'red';
+              var quantityInput = document.getElementById('txtQuantity');
+              quantityInput.parentNode.insertBefore(errorLabel, quantityInput.nextSibling);
+            }
+            errorLabel.textContent = 'Quantity must be an integer.';
+            return; 
+            }
 
 
   var row = document.createElement('tr');
@@ -308,6 +379,7 @@ function addIngredient() {
 
   document.getElementById('txtIngredientName').value = '';
   document.getElementById('txtQuantity').value = '';
+
 }
 
 

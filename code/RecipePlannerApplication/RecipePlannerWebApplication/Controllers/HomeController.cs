@@ -450,6 +450,12 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    public ActionResult AddRecipe(string recipeName, string description, string steps, string ingredients)
+    {
+        this.setupForRecipePageAll(1);
+        return View("RecipePage");
+    }
+
     /// <summary>
     ///     Gets the quantity of the ingredient with the given id.
     /// </summary>
@@ -725,6 +731,7 @@ public class HomeController : Controller
     {
         try
         {
+            ViewBag.test = 1;
             var measurements = Enum.GetNames(typeof(Measurement)).ToList();
             ViewBag.Measurements = measurements;
             ViewBag.page = "pantry";
