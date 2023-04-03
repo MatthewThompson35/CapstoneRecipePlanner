@@ -1053,6 +1053,7 @@ public class HomeController : Controller
     /// <returns>The shared recipes page or login on bad server connection</returns>
     public ActionResult goToSharedRecipesPage()
     {
+        this.setupForRecipePage(1);
         return View("SharedRecipes", ViewBag.Measurements);
     }
 
