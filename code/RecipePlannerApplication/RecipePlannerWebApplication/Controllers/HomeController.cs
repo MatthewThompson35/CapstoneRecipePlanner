@@ -1046,6 +1046,17 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    ///     Goes to shared recipes page.
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>The shared recipes page or login on bad server connection</returns>
+    public ActionResult goToSharedRecipesPage()
+    {
+        return View("SharedRecipes", ViewBag.Measurements);
+    }
+
+    /// <summary>
     ///     Toggles the week for Planned Meals page.
     /// </summary>
     /// <param name="currentWeek">The current week. (This week or next week)</param>
