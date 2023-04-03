@@ -43,10 +43,12 @@
             this.stepDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.recipeIngredientsDataGridView = new System.Windows.Forms.DataGridView();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.ingredientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tagTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recipeIngredientsDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -70,7 +72,7 @@
             // 
             // recipeDescriptionTextBox
             // 
-            this.recipeDescriptionTextBox.Location = new System.Drawing.Point(246, 167);
+            this.recipeDescriptionTextBox.Location = new System.Drawing.Point(246, 152);
             this.recipeDescriptionTextBox.Name = "recipeDescriptionTextBox";
             this.recipeDescriptionTextBox.Size = new System.Drawing.Size(209, 27);
             this.recipeDescriptionTextBox.TabIndex = 2;
@@ -89,7 +91,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(34, 166);
+            this.label3.Location = new System.Drawing.Point(34, 152);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(178, 28);
             this.label3.TabIndex = 4;
@@ -99,7 +101,7 @@
             // 
             this.addButton.BackColor = System.Drawing.Color.Green;
             this.addButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.addButton.Location = new System.Drawing.Point(118, 731);
+            this.addButton.Location = new System.Drawing.Point(118, 768);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(94, 43);
             this.addButton.TabIndex = 5;
@@ -111,7 +113,7 @@
             // 
             this.cancelButton.BackColor = System.Drawing.Color.Red;
             this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cancelButton.Location = new System.Drawing.Point(287, 731);
+            this.cancelButton.Location = new System.Drawing.Point(287, 768);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(94, 43);
             this.cancelButton.TabIndex = 6;
@@ -123,7 +125,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(34, 233);
+            this.label4.Location = new System.Drawing.Point(34, 260);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(125, 28);
             this.label4.TabIndex = 7;
@@ -143,7 +145,7 @@
             this.stepsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.step,
             this.stepDescription});
-            this.stepsDataGridView.Location = new System.Drawing.Point(34, 264);
+            this.stepsDataGridView.Location = new System.Drawing.Point(34, 291);
             this.stepsDataGridView.Name = "stepsDataGridView";
             this.stepsDataGridView.RowHeadersVisible = false;
             this.stepsDataGridView.RowHeadersWidth = 51;
@@ -169,7 +171,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(34, 479);
+            this.label5.Location = new System.Drawing.Point(34, 498);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(176, 28);
             this.label5.TabIndex = 9;
@@ -190,25 +192,13 @@
             this.ingredientName,
             this.quantity,
             this.measurement});
-            this.recipeIngredientsDataGridView.Location = new System.Drawing.Point(34, 510);
+            this.recipeIngredientsDataGridView.Location = new System.Drawing.Point(34, 529);
             this.recipeIngredientsDataGridView.Name = "recipeIngredientsDataGridView";
             this.recipeIngredientsDataGridView.RowHeadersVisible = false;
             this.recipeIngredientsDataGridView.RowHeadersWidth = 51;
             this.recipeIngredientsDataGridView.RowTemplate.Height = 29;
             this.recipeIngredientsDataGridView.Size = new System.Drawing.Size(375, 188);
             this.recipeIngredientsDataGridView.TabIndex = 10;
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(85, 708);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(169, 20);
-            this.errorLabel.TabIndex = 11;
-            this.errorLabel.Text = "Please fill out all fields.";
-            this.errorLabel.Visible = false;
             // 
             // ingredientName
             // 
@@ -231,11 +221,42 @@
             this.measurement.Name = "measurement";
             this.measurement.Width = 124;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(84, 745);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorLabel.TabIndex = 11;
+            this.errorLabel.Text = "Please fill out all fields.";
+            this.errorLabel.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(34, 206);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(108, 28);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Recipe Tag:";
+            // 
+            // tagTextBox
+            // 
+            this.tagTextBox.Location = new System.Drawing.Point(246, 207);
+            this.tagTextBox.Name = "tagTextBox";
+            this.tagTextBox.Size = new System.Drawing.Size(208, 27);
+            this.tagTextBox.TabIndex = 13;
+            // 
             // RecipePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.tagTextBox);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.recipeIngredientsDataGridView);
             this.Controls.Add(this.label5);
@@ -276,5 +297,7 @@
         private DataGridViewTextBoxColumn ingredientName;
         private DataGridViewTextBoxColumn quantity;
         private DataGridViewTextBoxColumn measurement;
+        private Label label6;
+        private TextBox tagTextBox;
     }
 }
