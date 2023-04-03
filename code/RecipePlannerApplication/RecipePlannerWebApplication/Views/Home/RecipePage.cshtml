@@ -60,9 +60,8 @@
             max-width: 1200px;
         }
 
-        .pagination {
-            margin-top: 20px;
-        }
+        .pagination { margin-top: 20px; }
+
         #recipe-list {
             background-color: #fff;
             border: 1px solid black;
@@ -105,22 +104,22 @@
 
 
         .form-group {
+            align-items: left;
             display: flex;
             flex-direction: column;
             justify-content: left;
-            align-items: left;
             margin-top: 20px;
         }
 
         .form-group label {
-            margin-right: 10px;
             font-size: 16px;
+            margin-right: 10px;
         }
 
         .form-group select {
             font-size: 16px;
-            padding: 5px;
             margin-right: 10px;
+            padding: 5px;
         }
 
         #errorMessage {
@@ -139,14 +138,15 @@
         input[type="submit"] {
             border: none;
             color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
+            cursor: pointer;
             display: inline-block;
             font-size: 16px;
             margin: 4px 2px;
-            cursor: pointer;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
         }
+
         #search-container button:hover { background-color: #3e8e41; }
 
         #search-container button:active { background-color: #4CAF50; }
@@ -160,14 +160,14 @@
            <text>checked</text>
        }/>
 <label for="available-checkbox">Show Available Recipes</label>
-    <button onclick="showAllRecipes()" class="btn btn-primary page-button" style="margin-left: 20px;">Clear Filters</button>
+<button onclick="showAllRecipes()" class="btn btn-primary page-button" style="margin-left: 20px;">Clear Filters</button>
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
     <div id="recipe-list">
         <div id="search-container">
             <label for="search-bar">Search Tags:</label>
             <input type="text" id="search-bar" name="tag" placeholder="Enter tags...">
-                <input type="button" value="Filter" class="btn btn-primary page-button" id="search-button">
+            <input type="button" value="Filter" class="btn btn-primary page-button" id="search-button">
         </div>
         <div id="filter-tags">Filter by Tags: </div>
         <br>
@@ -175,7 +175,7 @@
         <form method="post" asp-action="goToAddRecipesPage">
             <input type="submit"  class="btn btn-primary page-button" value="Add Recipe" id="addButton" />
         </form>
-        
+
         <table id="available-recipes" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
             <thead>
             <tr>
@@ -197,7 +197,7 @@
             }
             </tbody>
         </table>
-        <div class = "pagination" id="available-pagination" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
+        <div class="pagination" id="available-pagination" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
 
             @if (ViewBag.currentPage > 1)
             {
@@ -228,7 +228,7 @@
             </tbody>
         </table>
 
-        <div class = "pagination" id="all-pagination" style="@(ViewBag.CurrentSelectedRadio == "all" ? "display: block;" : "display: none;")">
+        <div class="pagination" id="all-pagination" style="@(ViewBag.CurrentSelectedRadio == "all" ? "display: block;" : "display: none;")">
             @if (ViewBag.currentAllPage > 1)
             {
                 <a href="@Url.Action("goToRecipePageAll", new {page = ViewBag.currentAllPage - 1})" class="btn btn-primary page-button">Previous Page</a>
@@ -260,87 +260,95 @@
             <p>This is being displayed</p>
         </div>
     </div>
-        <div id="recipe-details-box" style="overflow: auto; display: flex; flex-direction: column;  height: 1000px;">
-    <div id="addForm">
-        <form method="post" id="addPlannedMeal" style="display: none;">
-            <div class="form-group">
-                <input type="hidden" name="recipeId" id="recipeId" value="">
-                <label for="week">Week:</label>
-                <select name="week" id="week">
-                    @foreach (var week in new[] {"This Week", "Next Week"})
-                    {
-                        <option value="@week">@week</option>
-                    }
-                </select>
-                <label for="day">Day:</label>
-                <select name="day" id="day">
-                    @foreach (var day in new[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"})
-                    {
-                        <option value="@day">@day</option>
-                    }
-                </select>
-                <label for="type">Meal Type:</label>
-                <select name="type" id="type">
-                    @foreach (var type in new[] {"Breakfast", "Lunch", "Dinner"})
-                    {
-                        <option value="@type">@type</option>
-                    }
-                </select>
-                <div id="errorMessage" style="display: none;">
-                    Are you sure You want to overwrite your previous meal?
-                </div>
-
-            </div>
-            <div class="button-group">
-                <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add"/>
-                <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update"/>
-            </div>
-        </form>
-    </div>
-    <div id="details">
-        @foreach (var recipe in ViewBag.AllRecipes)
-        {
-            <div id="@recipe.RecipeId" style="display: none">
-                <h3 class="recipe-name">@recipe.Name</h3>
-                <p class="recipe-description">@recipe.Description</p>
-                <h4>Steps</h4>
-                <ol class="recipe-steps">
-                    @foreach (var step in recipe.Steps)
-                    {
-                        <li>@step.stepDescription</li>
-                    }
-                </ol>
-                <h4>Ingredients</h4>
-                <ul class="recipe-ingredients">
-                    @foreach (var ingredient in recipe.Ingredients)
-                    {
-                        <li>@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName</li>
-                    }
-                </ul>
-                @if (recipe.Tags != null && recipe.Tags.Count > 0)
-                {
-                    <h4>Tags</h4>
-                    <ul class="recipe-tags">
-                        @foreach (var tag in recipe.Tags)
+    <div id="recipe-details-box" style="display: flex; flex-direction: column; height: 1000px; overflow: auto;">
+        <div id="addForm">
+            <form method="post" id="addPlannedMeal" style="display: none;">
+                <div class="form-group">
+                    <input type="hidden" name="recipeId" id="recipeId" value="">
+                    <label for="week">Week:</label>
+                    <select name="week" id="week">
+                        @foreach (var week in new[] {"This Week", "Next Week"})
                         {
-                            <li>@tag</li>
+                            <option value="@week">@week</option>
+                        }
+                    </select>
+                    <label for="day">Day:</label>
+                    <select name="day" id="day">
+                        @foreach (var day in new[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"})
+                        {
+                            <option value="@day">@day</option>
+                        }
+                    </select>
+                    <label for="type">Meal Type:</label>
+                    <select name="type" id="type">
+                        @foreach (var type in new[] {"Breakfast", "Lunch", "Dinner"})
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <div id="errorMessage" style="display: none;">
+                        Are you sure You want to overwrite your previous meal?
+                    </div>
+
+                </div>
+                <div class="button-group">
+                    <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add"/>
+                    <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update"/>
+                </div>
+            </form>
+        </div>
+        <div id="details">
+            <form id="cookMeal" method="POST">
+                <input type="hidden" id="recipeID" name="recipeID" value="">
+                <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Meal" id="CookRecipe" style="display: none;"/>
+            </form>
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                <div id="@recipe.RecipeId" style="display: none">
+                    <h3 class="recipe-name">@recipe.Name</h3>
+                    <p class="recipe-description">@recipe.Description</p>
+                    <h4>Steps</h4>
+                    <ol class="recipe-steps">
+                        @foreach (var step in recipe.Steps)
+                        {
+                            <li>@step.stepDescription</li>
+                        }
+                    </ol>
+                    <h4>Ingredients</h4>
+                    <ul class="recipe-ingredients">
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            <li>@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName</li>
                         }
                     </ul>
-                }
-            </div>
-        }
+                    @if (recipe.Tags != null && recipe.Tags.Count > 0)
+                    {
+                        <h4>Tags</h4>
+                        <ul class="recipe-tags">
+                            @foreach (var tag in recipe.Tags)
+                            {
+                                <li>@tag</li>
+                            }
+                        </ul>
+                    }
+                    <button type="button" onclick="showRecipe('@recipe.RecipeId')">View Recipe</button>
+                </div>
+            }
+        </div>
     </div>
-</div>
 </div>
 </body>
 <script>
     function showRecipe(recipeId) {
+        var recipeID = document.getElementById('recipeID')
+        var cookRecipe = document.getElementById('CookRecipe');
         var recipeDiv = document.getElementById(recipeId);
         var currentDiv = document.querySelector('#details > div[style*="display: block"]');
         var addPlannedMealForm = document.getElementById('addPlannedMeal');
         var recipeIdInput = addPlannedMealForm.querySelector('input[name="recipeId"]');
 
         recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
 
         if (currentDiv) {
             currentDiv.style.display = 'none';
@@ -348,6 +356,7 @@
 
         recipeDiv.style.display = 'block';
         addPlannedMealForm.style.display = 'block';
+        cookRecipe.style.display = "block";
     }
 
     var tags = [];

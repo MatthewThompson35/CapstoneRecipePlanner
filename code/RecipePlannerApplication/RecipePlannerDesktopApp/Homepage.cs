@@ -636,4 +636,13 @@ public partial class Homepage : Form
 
         shoppingListPage.Show();
     }
+
+    private void addRecipeButton_Click(object sender, EventArgs e)
+    {
+        var recipePage = new RecipePage();
+
+        this.Hide();
+
+        recipePage.Show();
+    }
 }

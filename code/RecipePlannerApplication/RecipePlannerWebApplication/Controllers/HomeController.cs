@@ -1436,5 +1436,39 @@ public class HomeController : Controller
         return View("Index");
     }
 
+    /// <summary>
+    ///     Marks recipe as cooked and removes ingredients from pantry
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns> The recipe page</returns>
+    [HttpPost]
+    public IActionResult CookMeal(int recipeID)
+    {
+        var totalIngredients = IngredientDAL.getIngredients();
+        foreach (RecipeIngredient ingredient in
+                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        {
+            Ingredient existingIngredient = totalIngredients.Find(i =>
+                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+            if (existingIngredient != null)
+            {
+                if (existingIngredient.quantity - ingredient.Quantity > 0)
+                {
+                    IngredientDAL.updateQuantity((int)existingIngredient.id, (int)existingIngredient.quantity - (int)ingredient.Quantity);
+                }
+                else
+                {
+                    IngredientDAL.RemoveIngredient((int)existingIngredient.id, Connection.ConnectionString);
+                }
+
+            }
+        }
+
+        this.setupIngredientsPage(1);
+        return View("IngredientsPage");
+    }
+
     #endregion
 }
