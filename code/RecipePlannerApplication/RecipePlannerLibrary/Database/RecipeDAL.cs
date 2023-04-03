@@ -54,8 +54,9 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var recipes = new List<Recipe>();
-            var query = @"Select r.recipeID, r.name, r.description from shared_recipe sr, recipe r where r.recipeID = sr.recipeID;";
+            var query = @"Select r.recipeID, r.name, r.description from shared_recipe sr, recipe r where r.recipeID = sr.recipeID and sr.receiver_username = @user;";
             using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -223,6 +224,26 @@ namespace RecipePlannerLibrary.Database
 
             connection.Close();
             return tags;
+        }
+
+        /// <summary>
+        ///     Shares the recipe with the specified user. Adds recipe to shared recipe table
+        /// </summary>
+        /// <param name="username">The usernname the recipe is being shared to.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>The shared recipe is added to the database</postcondition>
+        public static void shareRecipe(string username, int recipeID, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query =
+                @"INSERT INTO shared_recipe (sender_username, receiver_username, recipeID) VALUES (@senderUsername, @receiverUsername, @recipeID);";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@senderUsername", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.Parameters.Add("@receiverUsername", MySqlDbType.VarChar).Value = username;
+            command.Parameters.Add("@recipeID", MySqlDbType.Int32).Value = recipeID;
+            command.ExecuteNonQuery();
         }
 
         #endregion

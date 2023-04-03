@@ -302,6 +302,12 @@
                 <input type="hidden" id="recipeID" name="recipeID" value="">
                 <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Meal" id="CookRecipe" style="display: none;"/>
             </form>
+            <form id="shareMeal" method="POST">
+                <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
+                <label for="txtUsername">Share to:</label>
+                <input type="text" name="txtUsername" id="txtUsername"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Meal" id="ShareRecipe" style="display: none;"/>
+            </form>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
                 <div id="@recipe.RecipeId" style="display: none">
@@ -340,8 +346,10 @@
 </body>
 <script>
     function showRecipe(recipeId) {
-        var recipeID = document.getElementById('recipeID')
+        var recipeID = document.getElementById('recipeID');
+        var sharedRecipeID = document.getElementById('sharedRecipeID');
         var cookRecipe = document.getElementById('CookRecipe');
+        var shareRecipe = document.getElementById('ShareRecipe');
         var recipeDiv = document.getElementById(recipeId);
         var currentDiv = document.querySelector('#details > div[style*="display: block"]');
         var addPlannedMealForm = document.getElementById('addPlannedMeal');
@@ -349,6 +357,7 @@
 
         recipeIdInput.value = recipeId;
         recipeID.value = recipeId;
+        sharedRecipeID.value = recipeId;
 
         if (currentDiv) {
             currentDiv.style.display = 'none';
@@ -357,6 +366,7 @@
         recipeDiv.style.display = 'block';
         addPlannedMealForm.style.display = 'block';
         cookRecipe.style.display = "block";
+        shareRecipe.style.display = "block";
     }
 
     var tags = [];

@@ -1605,5 +1605,21 @@ public class HomeController : Controller
         return View("IngredientsPage");
     }
 
+    /// <summary>
+    ///     Opens the share recipe form
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns> The recipe page</returns>
+    [HttpPost]
+    public IActionResult ShareMeal(int sharedRecipeID)
+    {
+        string username = Request.Form["txtUsername"];
+        RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
+
+        this.setupForRecipePage();
+        return View("RecipePage");
+    }
+
     #endregion
 }
