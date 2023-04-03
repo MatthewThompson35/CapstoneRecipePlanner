@@ -1613,11 +1613,37 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult ShareMeal(int sharedRecipeID)
     {
-        string username = Request.Form["txtUsername"];
-        RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
+        string username = Request.Form["txtUsername"].ToString();
+        bool isValid = Database.ContainsUser(username).Count != 0;
+        if (isValid)
+        {
+            ViewBag.ErrorMessage = "";
+            RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
+            TempData["SharedRecipeID"] = sharedRecipeID;
+            return RedirectToAction("RecipePage");
+        }
+        else
+        {
+            ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
+            this.setupForRecipePage();
+            return View("RecipePage");
+        }
+    }
 
+    public IActionResult RecipePage()
+    {
+        int sharedRecipeID = 0;
+        if (TempData["SharedRecipeID"] != null)
+        {
+            sharedRecipeID = (int)TempData["SharedRecipeID"];
+        }
+        List<SharedRecipe> allRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+        SharedRecipe sharedRecipe = allRecipes.FirstOrDefault(r => r.Recipe.RecipeId == sharedRecipeID);
+        ViewBag.AllRecipes = allRecipes;
+        ViewBag.SharedRecipe = sharedRecipe;
+        
         this.setupForRecipePage();
-        return View("RecipePage");
+        return View();
     }
 
     #endregion
