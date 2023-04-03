@@ -344,7 +344,7 @@ public class HomeController : Controller
         {
             string user = ActiveUser.username;
             List<Ingredient> totalIngredients = new List<Ingredient>();
-            List< int> remainingMeals =
+            List<int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
