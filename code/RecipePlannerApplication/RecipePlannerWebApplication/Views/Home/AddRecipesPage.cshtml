@@ -55,47 +55,149 @@
             text-align: right;
         }
 
+    #addRecipe {
+        max-width: 1200px;
+        margin: 30px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        display: block;
+    }
+
+    #addRecipe input[type="text"],
+    #addRecipe select {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-sizing: border-box;
+    }
+
+    #addRecipeinput[type="submit"],
+    #addRecipe input[type="button"] {
+        padding: 5px 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #33b5e5;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    #addRecipe #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
+
+    #addRecipe label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #addRecipe .form-group {
+        margin-bottom: 15px;
+    }
+
+    #addRecipe .button-group {
+        margin-top: 20px;
+        text-align: right;
+    }
+
     .form-container label.error {
         font-size: 14px;
     }
 
 </style>
 
-
-<form method="post" id="addForm">
-    <div class="form-group">
-        <label for="recipeName">Recipe Name:</label>
-        <input type="text" name="recipeName" id="recipeName" />
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" id="addRecipe">
+            <div class="form-group">
+                <label for="recipeName">Recipe Name:</label>
+                <input type="text" name="recipeName" id="recipeName"/>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description"/>
+            </div>
+            <div class="form-group">
+                <label for="measurement">Measurement:</label>
+                <select name="Measurement" id="measurement">
+                    @foreach (var measurement in ViewBag.measurements)
+                    {
+                        <option value="@measurement">@measurement</option>
+                    }
+                </select>
+                @if (ViewBag.Error != null)
+                {
+                    <label class="error" style="color: red">@ViewBag.Error</label>
+                }
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <input type="text" name="description" id="description" />
+    <div class="col-md-6">
+        <form method="post" id="addForm">
+            <div class="form-group">
+                <label for="txtIngredientName">Ingredient Name:</label>
+                <input type="text" name="txtIngredientName" id="txtIngredientName"/>
+            </div>
+            <div class="form-group">
+                <label for="txtQuantity">Quantity:</label>
+                <input type="text" name="txtQuantity" id="txtQuantity"/>
+            </div>
+            <div class="form-group">
+                <label for="measurement">Measurement:</label>
+                <select name="Measurement" id="measurement">
+                    @foreach (var measurement in ViewBag.measurements)
+                    {
+                        <option value="@measurement">@measurement</option>
+                    }
+                </select>
+                @if (ViewBag.Error != null)
+                {
+                    <label class="error" style="color: red">@ViewBag.Error</label>
+                }
+            </div>
+            <div class="button-group">
+                <input type="submit" asp-action="addIngredient" value="Add" id="addButton"/>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="measurement">Measurement:</label>
-        <select name="Measurement" id="measurement">
-            @foreach (var measurement in ViewBag.measurements)
-            {
-                <option value="@measurement">@measurement</option>
-            }
-        </select>
-        @if (ViewBag.Error != null)
-        {
-            <label class="error" style="color: red">@ViewBag.Error</label>
-        }
+    <div class="col-md-6">
+        <form method="post" id="addForm">
+            <div class="form-group">
+                <label for="recipeName">Recipe Name:</label>
+                <input type="text" name="recipeName" id="recipeName" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" />
+            </div>
+            <div class="form-group">
+                <label for="measurement">Measurement:</label>
+                <select name="Measurement" id="measurement">
+                    @foreach (var measurement in ViewBag.measurements)
+                    {
+                        <option value="@measurement">@measurement</option>
+                    }
+                </select>
+                @if (ViewBag.Error != null)
+                {
+                    <label class="error" style="color: red">@ViewBag.Error</label>
+                }
+            </div>
+        </form>
     </div>
-    <div class="button-group">
-        @if ((string)ViewBag.page == "pantry")
-        {
-            <input type="submit" asp-action="addIngredient" value="Add" id="addButton" />
-        }
-        else
-        {
-            <input type="submit" asp-action="addShoppingListIngredient" value="Add" id="addShoppingListButton" />
-        }
-        <input type="submit" asp-action="goToShoppingListPage" value="Cancel" id="cancelButton" />
-    </div>
-</form>
+    <input type="submit" asp-action="addIngredient" class=""value="Add" id="addRecipeButton"/>
+    <input type="submit" asp-action="addShoppingListIngredient" value="Cancel" id="cancelRecipe"/>
+</div>
 
 
 @{
