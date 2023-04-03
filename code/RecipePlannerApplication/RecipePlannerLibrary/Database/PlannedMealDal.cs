@@ -63,9 +63,9 @@ namespace RecipePlannerLibrary.Database
             return thisWeeksMeals;
         }
 
-        public static Dictionary<(string, string), int> getRemainingMeals(string connectionString)
+        public static List<int> getRemainingMeals(string connectionString)
         {
-            var thisWeeksMeals = new Dictionary<(string, string), int>();
+            var thisWeeksMeals = new List<int>();
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"SELECT *
@@ -76,9 +76,8 @@ namespace RecipePlannerLibrary.Database
             while (reader.Read())
             {
                 var recipeId = reader.GetInt32(0);
-                var day = reader.GetString(1);
-                var type = reader.GetString(2);
-                thisWeeksMeals.Add((day, type), recipeId);
+               
+                thisWeeksMeals.Add(recipeId);
             }
 
             return thisWeeksMeals;
