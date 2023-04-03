@@ -166,15 +166,15 @@
         <div class="pagination" id="all-pagination">
             @if (ViewBag.currentAllPage > 1)
             {
-                <a href="@Url.Action("goToRecipePageAll", new {page = ViewBag.currentAllPage - 1})" class="btn btn-primary page-button">Previous Page</a>
+                    <a href="@Url.Action("goToSharedRecipePageAll", new {page = ViewBag.currentAllPage - 1})" class="btn btn-primary page-button">Previous Page</a>
             }
             @for (var i = 1; i <= ViewBag.totalPages; i++)
             {
-                <a href="@Url.Action("goToRecipePageAll", new {page = i})" class="btn btn-primary page-button">@i</a>
+                    <a href="@Url.Action("goToSharedRecipePageAll", new {page = i})" class="btn btn-primary page-button">@i</a>
             }
             @if (ViewBag.currentAllPage < ViewBag.totalPages)
             {
-                <a href="@Url.Action("goToRecipePageAll", new {page = ViewBag.currentAllPage + 1})" class="btn btn-primary page-button">Next Page</a>
+                    <a href="@Url.Action("goToSharedRecipePageAll", new {page = ViewBag.currentAllPage + 1})" class="btn btn-primary page-button">Next Page</a>
             }
 
         </div>

@@ -946,6 +946,81 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    ///     Goes to RecipesPage that displays all recipes by default with the specified page number
+    /// </summary>
+    /// <precondition>ViewBag.AvailableRecipes != null</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>The recipes page with the specified page or login on server connection error</returns>
+    public ActionResult goToSharedRecipePageAll(int? page)
+    {
+        try
+        {
+            this.setupForSharedRecipePageAll(page);
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View("Index");
+            }
+
+            return View("SharedRecipes");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    private void setupForSharedRecipePageAll(int? page)
+    {
+        try
+        {
+            List<Recipe> recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            var currentPage = 1;
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 10;
+            var currentAllPage = page ?? 1;
+
+            ViewBag.currentAllPage = currentAllPage;
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
+            List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
+            List<Recipe> allRecipes = ViewBag.AllRecipes;
+
+            var AvailableRecipesOnPage = availableRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            var AllRecipesOnPage = allRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.CurrentSelectedRadio = "all";
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+    }
+
+    /// <summary>
     ///     Adds the planned meal with the specified data to the database.
     /// </summary>
     /// <param name="recipeId">The id for the recipe.</param>
