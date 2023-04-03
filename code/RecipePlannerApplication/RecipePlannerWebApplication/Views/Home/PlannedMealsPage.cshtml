@@ -55,6 +55,20 @@
 
     <div class="col-md-6" id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
+            <form id="cookMeal" method="POST" style="display: none">
+                <input type="hidden" id="recipeID" name="recipeID" value="">
+                <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Meal" id="CookRecipe"/>
+            </form>
+            <form id="shareMeal" method="POST" style="display: none">
+                <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
+                <label for="txtUsername">Share to:</label>
+                <input type="text" name="txtUsername" id="txtUsername"/>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <label class="error" style="color: red">@ViewBag.ErrorMessage</label>
+                }
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Meal" id="ShareRecipe"/>
+            </form>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
                 <div id="@recipe.RecipeId" style="display: none">
@@ -269,10 +283,8 @@
                 console.log(xhr.responseText);
             }
         });
+    
     }
-
-
-
 
 
     function showRecipe(recipeId) {
@@ -281,6 +293,16 @@
         for (var i = 0; i < allRecipes.length; i++) {
             allRecipes[i].style.display = "none";
         }
+        var cookRecipe = document.getElementById('cookMeal');
+        var shareRecipe = document.getElementById('shareMeal');
+        var recipeID = document.getElementById('recipeID');
+        var sharedRecipeID = document.getElementById('sharedRecipeID');
+
+        cookRecipe.style.display = "block";
+        shareRecipe.style.display = "block";
+        recipeID.value = recipeId;
+        sharedRecipeID.value = recipeId;
+
 
         // Show the recipe details for the specified recipe ID
         var recipe = document.getElementById(recipeId);
@@ -289,6 +311,15 @@
         // Set the meal type in the corresponding details cell
         var detailsCell = document.getElementById(mealType + "Details");
         detailsCell.innerHTML = "Recipe " + recipeId;
+        
+        var cookRecipe = document.getElementById('cookMeal');
+        var shareRecipe = document.getElementById('shareMeal');
+        var recipeID = document.getElementById('recipeID');
+
+        cookRecipe.style.display = "block";
+        shareRecipe.style.display = "block";
+        recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
 
     }
 

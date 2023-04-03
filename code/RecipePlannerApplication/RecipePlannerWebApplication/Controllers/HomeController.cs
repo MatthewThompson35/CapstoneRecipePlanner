@@ -1626,7 +1626,7 @@ public class HomeController : Controller
         {
             ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
             this.setupForRecipePage();
-            return View("RecipePage");
+            return RedirectToAction("RecipePage");
         }
     }
 
