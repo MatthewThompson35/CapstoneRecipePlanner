@@ -322,6 +322,7 @@ namespace RecipePlannerDesktopApplication
 
         private void addIngredientsForRemainingMealsButton_Click(object sender, EventArgs e)
         {
+            
             if (this.addAllIngredientsCheckbox.Checked == true)
             {
                 this.addAllIngredients();
@@ -330,6 +331,11 @@ namespace RecipePlannerDesktopApplication
             {
                 this.addNeededIngredients();
             }
+
+            var shoppingList = new ShoppingListPage();
+
+            this.Hide();
+            shoppingList.Show();
         }
 
         private void addAllIngredients()
