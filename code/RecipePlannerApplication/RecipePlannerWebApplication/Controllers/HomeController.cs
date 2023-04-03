@@ -237,7 +237,7 @@ public class HomeController : Controller
         {
             string user = ActiveUser.username;
             List<Ingredient> totalIngredients = new List<Ingredient>();
-            Dictionary<(string, string), int> remainingMeals =
+            List<int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
@@ -256,9 +256,8 @@ public class HomeController : Controller
                 }
             }
 
-            foreach (KeyValuePair<(string, string), int> meal in remainingMeals)
+            foreach (var recipeId in remainingMeals)
             {
-                int recipeId = meal.Value;
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
                 foreach (RecipeIngredient ingredient in recipeIngredients)
@@ -331,7 +330,7 @@ public class HomeController : Controller
         {
             string user = ActiveUser.username;
             List<Ingredient> totalIngredients = new List<Ingredient>();
-            Dictionary<(string, string), int> remainingMeals =
+            List<int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
@@ -350,9 +349,8 @@ public class HomeController : Controller
                 }
             }
 
-            foreach (KeyValuePair<(string, string), int> meal in remainingMeals)
+            foreach (var recipeId in remainingMeals)
             {
-                int recipeId = meal.Value;
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
                 foreach (RecipeIngredient ingredient in recipeIngredients)
