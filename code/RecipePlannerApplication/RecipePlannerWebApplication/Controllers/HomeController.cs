@@ -138,14 +138,18 @@ public class HomeController : Controller
     {
         try
         {
-            List<Recipe> recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            List<SharedRecipe> sharedRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            List<Recipe> recipes = new List<Recipe>();
 
-            foreach (var recipe in recipes)
+            foreach (var sharedRecipe in sharedRecipes)
             {
+                Recipe recipe = sharedRecipe.Recipe;
+
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
             }
+
 
             this.addToAvailableRecipes(recipes);
             const int pageSize = 10;
@@ -162,24 +166,27 @@ public class HomeController : Controller
             List<Recipe> allRecipes = ViewBag.AllRecipes;
             var currentAllPage = 1;
 
-            var AvailableRecipesOnPage = availableRecipes
+            var AvailableRecipesOnPage = sharedRecipes
                 .Skip((currentPage - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
             ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
 
-            var AllRecipesOnPage = allRecipes
+            var AllRecipesOnPage = sharedRecipes
                 .Skip((currentAllPage - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
-            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.AllSharedRecipesOnPage = AllRecipesOnPage;
+            ViewBag.AllRecipes = sharedRecipes;
+            ViewBag.currentAllPage = currentPage;
         }
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
         }
+
     }
 
     /// <summary>
@@ -976,9 +983,12 @@ public class HomeController : Controller
     {
         try
         {
-            List<Recipe> recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
-            foreach (var recipe in recipes)
+            List<SharedRecipe> sharedRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            List<Recipe> recipes = new List<Recipe>();
+
+            foreach (var sharedRecipe in sharedRecipes)
             {
+                Recipe recipe = sharedRecipe.Recipe;
                 recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
@@ -995,9 +1005,9 @@ public class HomeController : Controller
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
             var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
+            ViewBag.totalPages = (int)Math.Ceiling((double)sharedRecipes.Count / pageSize);
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
-            List<Recipe> allRecipes = ViewBag.AllRecipes;
+            List<SharedRecipe> allRecipes = sharedRecipes;
 
             var AvailableRecipesOnPage = availableRecipes
                 .Skip((currentPage - 1) * pageSize)
@@ -1011,7 +1021,7 @@ public class HomeController : Controller
                 .Take(pageSize)
                 .ToList();
 
-            ViewBag.AllRecipesOnPage = AllRecipesOnPage;
+            ViewBag.AllSharedRecipesOnPage = AllRecipesOnPage;
             ViewBag.CurrentSelectedRadio = "all";
         }
         catch (Exception ex)

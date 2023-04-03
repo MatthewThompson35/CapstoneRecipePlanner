@@ -49,25 +49,30 @@ namespace RecipePlannerLibrary.Database
         /// <precondition>none</precondition>
         /// <postcondition>none</postcondition>
         /// <returns>List of all shared recipes</returns>
-        public static List<Recipe> getSharedRecipes(string connectionString)
+        public static List<SharedRecipe> getSharedRecipes(string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
-            var recipes = new List<Recipe>();
-            var query = @"Select r.recipeID, r.name, r.description from shared_recipe sr, recipe r where r.recipeID = sr.recipeID and sr.receiver_username = @user;";
+            var recipes = new List<SharedRecipe>();
+            var query = @"Select * from shared_recipe sr, recipe r where r.recipeID = sr.recipeID and sr.receiver_username = @user;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                var recipeID = reader.GetInt32(0);
-                var name = reader.GetString(1);
-                var description = reader.GetString(2);
+                var name = reader.GetString(4);
+                var description = reader.GetString(5);
 
-                var recipe = new Recipe(recipeID, name, description);
+                var sender = reader.GetString(0);
+                var receiver = reader.GetString(1);
+                var recipeID = reader.GetInt32(2);
+
+
+                Recipe recipe = new Recipe(recipeID, name, description);
                 recipe.Tags = RecipeDAL.getTagsForRecipe(recipeID, connectionString);
 
-                recipes.Add(recipe);
+                var sharedRecipe = new SharedRecipe(recipe, sender, receiver);
+                recipes.Add(sharedRecipe);
             }
 
             connection.Close();
