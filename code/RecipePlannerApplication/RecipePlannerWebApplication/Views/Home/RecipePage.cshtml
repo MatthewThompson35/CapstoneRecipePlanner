@@ -302,7 +302,7 @@
                 <input type="hidden" id="recipeID" name="recipeID" value="">
                 <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Meal" id="CookRecipe" style="display: none;"/>
             </form>
-            <form id="shareMeal" method="POST">
+            <form id="shareMeal" method="POST" style="display: none">
                 <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
                 <label for="txtUsername">Share to:</label>
                 <input type="text" name="txtUsername" id="txtUsername"/>
@@ -353,6 +353,7 @@
         var currentDiv = document.querySelector('#details > div[style*="display: block"]');
         var addPlannedMealForm = document.getElementById('addPlannedMeal');
         var recipeIdInput = addPlannedMealForm.querySelector('input[name="recipeId"]');
+        var sharedMeal = document.getElementById('shareMeal');
 
         recipeIdInput.value = recipeId;
         recipeID.value = recipeId;
@@ -366,6 +367,7 @@
         addPlannedMealForm.style.display = 'block';
         cookRecipe.style.display = "block";
         shareRecipe.style.display = "block";
+        shareMeal.style.display = "block";
     }
 
     var tags = [];

@@ -997,7 +997,7 @@ public class HomeController : Controller
 
             ViewBag.currentSharedPage = currentSharedPage;
 
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AllRecipes = sharedRecipes;
             ViewBag.totalPages = (int) Math.Ceiling((double) sharedRecipes.Count / pageSize);
             var allRecipes = sharedRecipes;
 
