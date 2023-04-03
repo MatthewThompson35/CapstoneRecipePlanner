@@ -53,6 +53,7 @@
             this.availableCheckbox = new System.Windows.Forms.CheckBox();
             this.allRecipesButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addRecipeButton = new System.Windows.Forms.Button();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,10 +91,10 @@
             // 
             // viewPantryButton
             // 
-            this.viewPantryButton.Location = new System.Drawing.Point(66, 763);
+            this.viewPantryButton.Location = new System.Drawing.Point(283, 763);
             this.viewPantryButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.viewPantryButton.Name = "viewPantryButton";
-            this.viewPantryButton.Size = new System.Drawing.Size(382, 44);
+            this.viewPantryButton.Size = new System.Drawing.Size(165, 44);
             this.viewPantryButton.TabIndex = 4;
             this.viewPantryButton.Text = "View Pantry";
             this.viewPantryButton.UseVisualStyleBackColor = true;
@@ -284,11 +285,22 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // addRecipeButton
+            // 
+            this.addRecipeButton.Location = new System.Drawing.Point(78, 765);
+            this.addRecipeButton.Name = "addRecipeButton";
+            this.addRecipeButton.Size = new System.Drawing.Size(165, 42);
+            this.addRecipeButton.TabIndex = 23;
+            this.addRecipeButton.Text = "Add Recipe";
+            this.addRecipeButton.UseVisualStyleBackColor = true;
+            this.addRecipeButton.Click += new System.EventHandler(this.addRecipeButton_Click);
+            // 
             // Homepage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.addRecipeButton);
             this.Controls.Add(this.allRecipesButton);
             this.Controls.Add(this.availableCheckbox);
             this.Controls.Add(this.deleteFilterBtn);
@@ -344,6 +356,7 @@
         private Button allRecipesButton;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem viewShoppingListToolStripMenuItem;
+        private Button addRecipeButton;
     }
 }
 
