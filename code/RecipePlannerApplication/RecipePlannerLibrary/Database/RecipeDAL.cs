@@ -207,7 +207,7 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            var query = @"insert into recipe_tag(recipeID, tagName)";
+            var query = @"insert into recipe_tag(recipeID, tagName) values (@recipeId, @tagName)";
             using var command = new MySqlCommand(query, connection);
 
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
