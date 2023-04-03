@@ -69,7 +69,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             flex: 1;
-            max-width: 600px; /* adjust as needed */
+            max-width: 600px;
             padding: 20px;
             width: 100%;
         }
@@ -173,7 +173,7 @@
         <br>
         <h2>Recipes</h2>
         <form method="post" asp-action="goToAddRecipesPage">
-            <input type="submit"  class="btn btn-primary page-button" value="Add" id="addButton" />
+            <input type="submit"  class="btn btn-primary page-button" value="Add Recipe" id="addButton" />
         </form>
         
         <table id="available-recipes" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
@@ -336,7 +336,7 @@
 <script>
     function showRecipe(recipeId) {
         var recipeDiv = document.getElementById(recipeId);
-        var currentDiv = document.querySelector('#recipe-details-box > div[style*="display: block"]');
+        var currentDiv = document.querySelector('#details > div[style*="display: block"]');
         var addPlannedMealForm = document.getElementById('addPlannedMeal');
         var recipeIdInput = addPlannedMealForm.querySelector('input[name="recipeId"]');
 
