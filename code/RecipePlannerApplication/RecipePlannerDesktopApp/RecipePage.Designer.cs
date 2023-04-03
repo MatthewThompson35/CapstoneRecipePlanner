@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.recipeNameTextBox = new System.Windows.Forms.TextBox();
             this.recipeDescriptionTextBox = new System.Windows.Forms.TextBox();
@@ -38,13 +39,14 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.stepsDataGridView = new System.Windows.Forms.DataGridView();
+            this.step = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stepDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.recipeIngredientsDataGridView = new System.Windows.Forms.DataGridView();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.ingredientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.step = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stepDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recipeIngredientsDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -95,22 +97,26 @@
             // 
             // addButton
             // 
+            this.addButton.BackColor = System.Drawing.Color.Green;
+            this.addButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.addButton.Location = new System.Drawing.Point(118, 731);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(94, 29);
+            this.addButton.Size = new System.Drawing.Size(94, 43);
             this.addButton.TabIndex = 5;
             this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // cancelButton
             // 
+            this.cancelButton.BackColor = System.Drawing.Color.Red;
+            this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cancelButton.Location = new System.Drawing.Point(287, 731);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(94, 29);
+            this.cancelButton.Size = new System.Drawing.Size(94, 43);
             this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label4
@@ -142,8 +148,22 @@
             this.stepsDataGridView.RowHeadersVisible = false;
             this.stepsDataGridView.RowHeadersWidth = 51;
             this.stepsDataGridView.RowTemplate.Height = 29;
-            this.stepsDataGridView.Size = new System.Drawing.Size(451, 188);
+            this.stepsDataGridView.Size = new System.Drawing.Size(315, 188);
             this.stepsDataGridView.TabIndex = 8;
+            // 
+            // step
+            // 
+            this.step.HeaderText = "Step Number";
+            this.step.MinimumWidth = 6;
+            this.step.Name = "step";
+            this.step.Width = 75;
+            // 
+            // stepDescription
+            // 
+            this.stepDescription.HeaderText = "Step Description";
+            this.stepDescription.MinimumWidth = 6;
+            this.stepDescription.Name = "stepDescription";
+            this.stepDescription.Width = 198;
             // 
             // label5
             // 
@@ -157,6 +177,14 @@
             // 
             // recipeIngredientsDataGridView
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.recipeIngredientsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.recipeIngredientsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.recipeIngredientsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ingredientName,
@@ -167,8 +195,20 @@
             this.recipeIngredientsDataGridView.RowHeadersVisible = false;
             this.recipeIngredientsDataGridView.RowHeadersWidth = 51;
             this.recipeIngredientsDataGridView.RowTemplate.Height = 29;
-            this.recipeIngredientsDataGridView.Size = new System.Drawing.Size(451, 188);
+            this.recipeIngredientsDataGridView.Size = new System.Drawing.Size(375, 188);
             this.recipeIngredientsDataGridView.TabIndex = 10;
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(85, 708);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorLabel.TabIndex = 11;
+            this.errorLabel.Text = "Please fill out all fields.";
+            this.errorLabel.Visible = false;
             // 
             // ingredientName
             // 
@@ -182,34 +222,21 @@
             this.quantity.HeaderText = "Quantity";
             this.quantity.MinimumWidth = 6;
             this.quantity.Name = "quantity";
-            this.quantity.Width = 125;
+            this.quantity.Width = 75;
             // 
             // measurement
             // 
             this.measurement.HeaderText = "Measurement";
             this.measurement.MinimumWidth = 6;
             this.measurement.Name = "measurement";
-            this.measurement.Width = 125;
-            // 
-            // step
-            // 
-            this.step.HeaderText = "Step Number";
-            this.step.MinimumWidth = 6;
-            this.step.Name = "step";
-            this.step.Width = 125;
-            // 
-            // stepDescription
-            // 
-            this.stepDescription.HeaderText = "Step Description";
-            this.stepDescription.MinimumWidth = 6;
-            this.stepDescription.Name = "stepDescription";
-            this.stepDescription.Width = 250;
+            this.measurement.Width = 124;
             // 
             // RecipePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.recipeIngredientsDataGridView);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.stepsDataGridView);
@@ -243,10 +270,11 @@
         private DataGridView stepsDataGridView;
         private Label label5;
         private DataGridView recipeIngredientsDataGridView;
+        private Label errorLabel;
+        private DataGridViewTextBoxColumn step;
+        private DataGridViewTextBoxColumn stepDescription;
         private DataGridViewTextBoxColumn ingredientName;
         private DataGridViewTextBoxColumn quantity;
         private DataGridViewTextBoxColumn measurement;
-        private DataGridViewTextBoxColumn step;
-        private DataGridViewTextBoxColumn stepDescription;
     }
 }
