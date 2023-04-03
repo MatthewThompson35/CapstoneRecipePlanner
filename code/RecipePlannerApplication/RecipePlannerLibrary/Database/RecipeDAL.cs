@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Tls;
 using RecipePlannerLibrary.Models;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace RecipePlannerLibrary.Database
 {
@@ -209,7 +211,36 @@ namespace RecipePlannerLibrary.Database
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
             command.Parameters.Add("@description", MySqlDbType.VarChar).Value = description;
+            command.Parameters.Add("@description", MySqlDbType.VarChar).Value = description;
             command.ExecuteNonQuery();
+        }
+
+        public static void addRecipeIngredient(int recipeId, int ingredientId, int quantity, string measurement, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query = @"insert into recipe_ingredient(recipeId, ingredientId, quantity, measurement) SELECT r.recipeId, i.ingredientId, i.quantity, ii.measurementType FROM recipe r JOIN ingredient i ON r.recipeId = i.recipeId JOIN ingredient_info ii ON i.ingredientId = ii.ingredientId WHERE r.recipeId = @recipeId AND i.ingredientId = @ingredientId;";
+
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
+            command.Parameters.Add("@ingredientId", MySqlDbType.Int32).Value = ingredientId;
+            command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add("@measurement", MySqlDbType.VarChar).Value = measurement;
+            command.ExecuteNonQuery();
+        }
+
+        public static void addRecipeStep(int recipeId, int stepNumber, string stepDescription, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query = @"insert into recipe_step(recipeId, stepNumber, stepDescription) SELECT r.recipeId FROM recipe r JOIN recipe_step rs ON r.recipeId = rs.recipeId WHERE r.recipeId = @recipeId;";
+            using var command = new MySqlCommand(query, connection);
+
+            command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
+            command.Parameters.Add("@stepNumber", MySqlDbType.Int32).Value = stepNumber;
+            command.Parameters.Add("@stepDescription", MySqlDbType.VarChar).Value = stepDescription;
         }
 
         #endregion
