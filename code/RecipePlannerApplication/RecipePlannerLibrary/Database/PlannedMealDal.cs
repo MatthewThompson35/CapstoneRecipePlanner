@@ -76,7 +76,7 @@ namespace RecipePlannerLibrary.Database
             while (reader.Read())
             {
                 var recipeId = reader.GetInt32(0);
-
+               
                 thisWeeksMeals.Add(recipeId);
             }
 

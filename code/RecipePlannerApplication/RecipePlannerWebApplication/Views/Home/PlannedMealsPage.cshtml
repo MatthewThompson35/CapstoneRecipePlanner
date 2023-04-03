@@ -13,69 +13,86 @@
         <button id="submitButton">Add Ingredients For Remaining Meals</button>
         <label for="AllIngredients">Add all Ingredients</label>
         <input type="checkbox" id="AllIngredients" name="ingredientType" value="All">
+        @if (ViewBag.error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.error</div>
+        }
     </form>
 
 </div>
 <div class="row">
-    <div class="col-md-6"  id="meal-table">
-    <table>
-        @{ string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }; }
+    
+    <div class="col-md-6" id="meal-table">
+        <table>
+            @{ string[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}; }
 
-        @for (int i = 0; i < days.Length; i++)
-        {
-            <tr class="day-row" data-day="@days[i]">
-                <td style="background-color: lightblue;" colspan="4">@days[i]</td>
-            </tr>
-            <tr class="details-row hidden" data-day="@days[i]">
-                <td>Breakfast</td>
-                <td id="@($"{days[i]}BreakfastDetails")">@ViewBag.DefaultValues[i]</td>
-                <td><button id="@($"{days[i]}BreakfastButton")" onclick="showRecipeDetails('@days[i]', 'Breakfast')">View Recipe</button></td>
-                <td><button onclick="removeColumn('@days[i]', 'Breakfast')">Remove</button></td>
-            </tr>
-            <tr class="details-row hidden" data-day="@days[i]">
-                <td>Lunch</td>
-                <td id="@($"{days[i]}LunchDetails")">@ViewBag.Lunch[i]</td>
-                <td><button id="@($"{days[i]}LunchButton")" onclick="showRecipeDetails('@days[i]', 'Lunch')">View Recipe</button></td>
-                <td><button onclick="removeColumn('@days[i]', 'Lunch')">Remove</button></td>
-            </tr>
-            <tr class="details-row hidden" data-day="@days[i]">
-                <td>Dinner</td>
-                <td id="@($"{days[i]}DinnerDetails")">@ViewBag.Dinner[i]</td>
-                <td><button id="@($"{days[i]}DinnerButton")" onclick="showRecipeDetails('@days[i]', 'Dinner')">View Recipe</button></td>
-                <td><button onclick="removeColumn('@days[i]','Dinner')">Remove</button></td>
-            </tr>
-        }
-    </table>
-</div>
+            @for (int i = 0; i < days.Length; i++)
+            {
+                <tr class="day-row" data-day="@days[i]">
+                    <td style="background-color: #33b5e5;;" colspan="4">@days[i]</td>
+                </tr>
+                <tr class="details-row hidden" data-day="@days[i]">
+                    <td>Breakfast</td>
+                    <td id="@($"{days[i]}BreakfastDetails")">@ViewBag.DefaultValues[i]</td>
+                    <td><button id="@($"{days[i]}BreakfastButton")" onclick="showRecipeDetails('@days[i]', 'Breakfast')">View Recipe</button></td>
+                    <td><button onclick="removeColumn('@days[i]', 'Breakfast')">Remove</button></td>
+                </tr>
+                <tr class="details-row hidden" data-day="@days[i]">
+                    <td>Lunch</td>
+                    <td id="@($"{days[i]}LunchDetails")">@ViewBag.Lunch[i]</td>
+                    <td><button id="@($"{days[i]}LunchButton")" onclick="showRecipeDetails('@days[i]', 'Lunch')">View Recipe</button></td>
+                    <td><button onclick="removeColumn('@days[i]', 'Lunch')">Remove</button></td>
+                </tr>
+                <tr class="details-row hidden" data-day="@days[i]">
+                    <td>Dinner</td>
+                    <td id="@($"{days[i]}DinnerDetails")">@ViewBag.Dinner[i]</td>
+                    <td><button id="@($"{days[i]}DinnerButton")" onclick="showRecipeDetails('@days[i]', 'Dinner')">View Recipe</button></td>
+                    <td><button onclick="removeColumn('@days[i]','Dinner')">Remove</button></td>
+                </tr>
+            }
+        </table>
+    </div>
 
     <div class="col-md-6" id="recipe-details">
-    <div id="recipe-details-box" style="overflow: auto;">
-        @foreach (var recipe in ViewBag.AllRecipes)
-        {
-            <div id="@recipe.RecipeId" style="display: none">
-                <h3 class="recipe-name">@recipe.Name</h3>
-                <p class="recipe-description">@recipe.Description</p>
-                <h4>Steps</h4>
-                <ol class="recipe-steps">
-                    @foreach (var step in recipe.Steps)
-                    {
-                        <li>@step.stepDescription</li>
-                    }
-                </ol>
-                <h4>Ingredients</h4>
-                <ul class="recipe-ingredients">
-                    @foreach (var ingredient in recipe.Ingredients)
-                    {
-                        <li>@ingredient.Quantity @ingredient.Measurement @ingredient.IngredientName</li>
-                    }
-                </ul>
-            </div>
-        }
+        <div id="recipe-details-box" style="overflow: auto;">
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                <div id="@recipe.RecipeId" style="display: none">
+                    <h3 class="recipe-name">@recipe.Name</h3>
+                    <p class="recipe-description">@recipe.Description</p>
+                    <h4>Steps</h4>
+                    <ol class="recipe-steps">
+                        @foreach (var step in recipe.Steps)
+                        {
+                            <li>@step.stepDescription</li>
+                        }
+                    </ol>
+                    <h4>Ingredients</h4>
+                    <ul class="recipe-ingredients">
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            <li>@ingredient.Quantity @ingredient.Measurement @ingredient.IngredientName</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
     </div>
-</div>
 </div>
 
 <style>
+    .alert {
+        height: 30px;
+        width: 600px;
+        text-align: center; 
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    .alert-danger {
+        height: 30px;
+        width: 600px;
+    }
     #recipe-details {
         align-items: center;
         display: flex;
@@ -93,13 +110,13 @@
         width: 38%;
     }
 
-        #recipe-details-box h3 {
-            margin-top: 0;
-        }
+    #recipe-details-box h3 {
+        margin-top: 0;
+    }
 
-        #recipe-details-box p {
-            margin: 0;
-        }
+    #recipe-details-box p {
+        margin: 0;
+    }
 
     h2 {
         margin-top: 20px;
@@ -151,10 +168,10 @@
         text-decoration: none;
     }
 
-        button[disabled] {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
+    button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 
     td[id$="Details"] {
         border: 1px solid #ddd;

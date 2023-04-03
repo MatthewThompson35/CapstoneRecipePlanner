@@ -84,6 +84,7 @@ public class HomeController : Controller
         }
     }
 
+
     private void setupForRecipePage(int? page = 1)
     {
         try
@@ -235,6 +236,7 @@ public class HomeController : Controller
     {
         try
         {
+            var allIngredientsPresent = true;
             string user = ActiveUser.username;
             List<Ingredient> totalIngredients = new List<Ingredient>();
             List<int> remainingMeals =
@@ -295,22 +297,34 @@ public class HomeController : Controller
 
                         if (shoppingListItem != null)
                         {
+                            allIngredientsPresent = false;
                             ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
                         }
                         else
                         {
+                            allIngredientsPresent = false;
                             ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement, Connection.ConnectionString);
                         }
                         
                     }
                 }
                 else
-                { 
+                {
+                    allIngredientsPresent = false;
                     ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
                 }
             }
-            this.setupShoppingListPage(1);
-            return View("ShoppingList");
+            if (allIngredientsPresent)
+            {
+                ViewBag.error = "There are no ingredients needed";
+                this.setupPlannedMeals();
+                return View("PlannedMealsPage");
+            }
+            else
+            {
+                this.setupShoppingListPage(1);
+                return View("ShoppingList");
+            }
         }
         catch (Exception ex)
         {
@@ -382,7 +396,6 @@ public class HomeController : Controller
                 if (shoppingListItem != null)
                 {
                     int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
-                   
                     ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
                 }
                 else
@@ -700,6 +713,22 @@ public class HomeController : Controller
         {
             this.setupIngredientsPage(page);
             return View("IngredientsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+    }
+
+    public ActionResult goToAddRecipesPage()
+    {
+        try
+        {
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            ViewBag.page = "pantry";
+            return View("AddRecipesPage", ViewBag.Measurements);
         }
         catch (Exception ex)
         {
@@ -1240,6 +1269,50 @@ public class HomeController : Controller
         }
     }
 
+    private void setupPlannedMeals()
+    {
+        ViewBag.CurrentWeek = "This Week";
+        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        foreach (var recipe in recipes)
+        {
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+        }
+
+        ViewBag.AllRecipes = recipes;
+        var breakfast = new List<string>();
+        var lunch = new List<string>();
+        var dinner = new List<string>();
+        var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+        var daysOfWeek = new List<string>
+            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Breakfast", "This Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            breakfast.Add(recipeName);
+        }
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Lunch", "This Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            lunch.Add(recipeName);
+        }
+        foreach (var day in daysOfWeek)
+        {
+            var json = this.GetRecipeName(day, "Dinner", "This Week");
+            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            dinner.Add(recipeName);
+        }
+
+        ViewBag.DefaultValues = breakfast;
+        ViewBag.Lunch = lunch;
+        ViewBag.Dinner = dinner;
+        ViewBag.Header = "This weeks meals";
+        ViewBag.CurrentWeek = "This Week";
+    }
+
 
     /// <summary>
     ///     Goes to next week's planned meal page.
@@ -1361,6 +1434,40 @@ public class HomeController : Controller
     public IActionResult Logout()
     {
         return View("Index");
+    }
+
+    /// <summary>
+    ///     Marks recipe as cooked and removes ingredients from pantry
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns> The recipe page</returns>
+    [HttpPost]
+    public IActionResult CookMeal(int recipeID)
+    {
+        var totalIngredients = IngredientDAL.getIngredients();
+        foreach (RecipeIngredient ingredient in
+                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        {
+            Ingredient existingIngredient = totalIngredients.Find(i =>
+                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+            if (existingIngredient != null)
+            {
+                if (existingIngredient.quantity - ingredient.Quantity > 0)
+                {
+                    IngredientDAL.updateQuantity((int)existingIngredient.id, (int)existingIngredient.quantity - (int)ingredient.Quantity);
+                }
+                else
+                {
+                    IngredientDAL.RemoveIngredient((int)existingIngredient.id, Connection.ConnectionString);
+                }
+
+            }
+        }
+
+        this.setupIngredientsPage(1);
+        return View("IngredientsPage");
     }
 
     #endregion
