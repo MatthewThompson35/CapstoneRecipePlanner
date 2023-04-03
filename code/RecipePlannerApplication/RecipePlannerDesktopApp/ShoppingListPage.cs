@@ -341,7 +341,7 @@ namespace RecipePlannerDesktopApplication
         private void addAllIngredients()
         {
             List<Ingredient> totalIngredients = new List<Ingredient>();
-            Dictionary<(string, string), int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+            List<int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
 
@@ -359,9 +359,8 @@ namespace RecipePlannerDesktopApplication
                 }
             }
 
-            foreach (var meal in remainingMeals)
+            foreach (var recipeId in remainingMeals)
             {
-                int recipeId = meal.Value;
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
                 foreach (var recipeIngredient in recipeIngredients)
@@ -403,7 +402,7 @@ namespace RecipePlannerDesktopApplication
         {
             string user = ActiveUser.username;
             List<Ingredient> totalIngredients = new List<Ingredient>();
-            Dictionary<(string, string), int> remainingMeals =
+            List<int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
@@ -422,9 +421,8 @@ namespace RecipePlannerDesktopApplication
                 }
             }
 
-            foreach (KeyValuePair<(string, string), int> meal in remainingMeals)
+            foreach (var recipeId in remainingMeals)
             {
-                int recipeId = meal.Value;
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
                 foreach (RecipeIngredient recipeIngredient in recipeIngredients)
