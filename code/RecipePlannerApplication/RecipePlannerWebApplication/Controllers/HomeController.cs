@@ -84,6 +84,7 @@ public class HomeController : Controller
         }
     }
 
+
     private void setupForRecipePage(int? page = 1)
     {
         try
@@ -714,6 +715,22 @@ public class HomeController : Controller
         {
             this.setupIngredientsPage(page);
             return View("IngredientsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+    }
+
+    public ActionResult goToAddRecipesPage()
+    {
+        try
+        {
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            ViewBag.page = "pantry";
+            return View("AddRecipesPage", ViewBag.Measurements);
         }
         catch (Exception ex)
         {

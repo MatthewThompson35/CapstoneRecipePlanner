@@ -11,6 +11,7 @@ namespace RecipePlannerDesktopApplication
     public partial class AddIngredientsPage : Form
     {
         private IngredientsPage ingredientsPage;
+        private ShoppingListPage shoppingListPage;
 
         /// <summary>
         /// Initializes the AddIngreedients page with the corresponding ingredients page.
@@ -19,7 +20,19 @@ namespace RecipePlannerDesktopApplication
         public AddIngredientsPage(IngredientsPage ingredientsPage)
         {
             InitializeComponent();
+
             this.ingredientsPage = ingredientsPage;
+        }
+
+        /// <summary>
+        /// Initializes the AddIngreedients page with the corresponding ingredients page.
+        /// </summary>
+        /// <param name="ingredientsPage"></param>
+        public AddIngredientsPage(ShoppingListPage shoppingListPage)
+        {
+            InitializeComponent();
+
+            this.shoppingListPage = shoppingListPage;
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -57,10 +70,22 @@ namespace RecipePlannerDesktopApplication
 
                     Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity, 0, measure);
 
-                    this.addIngredient(ingredient);
 
-                    this.Close();
-                    this.ingredientsPage.Show();
+                    if (this.ingredientsPage != null)
+                    {
+                        this.addIngredient(ingredient);
+
+                        this.Close();
+                        this.ingredientsPage.Show();
+                    }
+                    else
+                    {
+                        this.addIngredientShoppingList(ingredient);
+
+                        this.Close();
+                        this.shoppingListPage.Show();
+                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -87,6 +112,13 @@ namespace RecipePlannerDesktopApplication
             IngredientDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
 
             this.ingredientsPage.UpdateIngredientsGridView();
+        }
+
+        private void addIngredientShoppingList(Ingredient ingredient)
+        {
+            ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+
+            this.shoppingListPage.UpdateIngredientsGridView();
         }
     }
 }
