@@ -194,6 +194,24 @@ namespace RecipePlannerLibrary.Database
             return tags;
         }
 
+        /// <summary>
+        ///     Adds a new Recipe to the database.
+        /// </summary>
+        /// <param name="name">the name of the recipe.</param>
+        /// <param name="description">the description of the recipe.</param>
+        /// <param name="connectionString">the connection string to the database.</param>
+        public static void addRecipe(string name, string description, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query = @"insert into recipe(name, description) values(@name, @description);";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
+            command.Parameters.Add("@description", MySqlDbType.VarChar).Value = description;
+            command.ExecuteNonQuery();
+        }
+
         #endregion
     }
 }
