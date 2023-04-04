@@ -271,7 +271,7 @@ namespace RecipePlannerLibrary.Database
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@sender", MySqlDbType.VarChar).Value = sender;
             command.Parameters.Add("@receiver", MySqlDbType.VarChar).Value = receiver;
-            command.Parameters.Add("@sender", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
