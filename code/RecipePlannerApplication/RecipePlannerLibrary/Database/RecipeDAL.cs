@@ -211,7 +211,7 @@ namespace RecipePlannerLibrary.Database
             using var command = new MySqlCommand(query, connection);
 
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
-            command.Parameters.Add("@stepNumber", MySqlDbType.VarChar).Value = tagName;
+            command.Parameters.Add("@tagName", MySqlDbType.VarChar).Value = tagName;
             command.ExecuteNonQuery();
         }
 

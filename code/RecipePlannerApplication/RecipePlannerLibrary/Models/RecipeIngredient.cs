@@ -46,6 +46,12 @@ namespace RecipePlannerLibrary.Models
             this.Measurement = measurement;
         }
 
+        /// <summary>
+        ///     Initializes the RecipeIngredient with the specified ingredient name, quantity, and the measurement.
+        /// </summary>
+        /// <param name="ingredientName">the ingredient name</param>
+        /// <param name="quantity">the quantity</param>
+        /// <param name="measurement">the measurement</param>
         public RecipeIngredient(string ingredientName, int quantity, string measurement)
         {
             this.IngredientName = ingredientName;

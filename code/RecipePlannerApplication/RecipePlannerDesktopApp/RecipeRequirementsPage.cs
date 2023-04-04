@@ -136,13 +136,22 @@ namespace RecipePlannerDesktopApplication
                 measurement = this.measurementTextBox.Text;
             }
 
-            RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
+            if (this.errorIngredientsFieldsLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
 
-            this.recipeIngredients.Add(recipeIngredient);
+                this.recipeIngredients.Add(recipeIngredient);
 
-            this.ingredientSuccessLabel.Visible = true;
+                this.ingredientSuccessLabel.Visible = true;
 
-            this.clearIngredientsFields();
+                this.clearIngredientsFields();
+            }
+
+            
         }
 
         private void clearIngredientsFields()
@@ -217,6 +226,50 @@ namespace RecipePlannerDesktopApplication
             this.tagSuccessLabel.Visible = true;
 
             this.clearTagNameField();
+        }
+
+        private void textBoxesIngredients_Changed(object sender, EventArgs e)
+        {
+            List<TextBox> textBoxes = new List<TextBox>() {
+                this.ingredientNameTextBox, this.quantityTextBox, this.measurementTextBox };
+
+            foreach (var textBox in textBoxes)
+            {
+                if (!String.IsNullOrEmpty(textBox.Text))
+                {
+                    this.ingredientSuccessLabel.Visible = false;
+                }
+            }
+        }
+
+        private void ingredientNameTextBox_Click(object sender, EventArgs e)
+        {
+            this.ingredientSuccessLabel.Visible = false;
+        }
+
+        private void quantityTextBox_Click(object sender, EventArgs e)
+        {
+            this.ingredientSuccessLabel.Visible = false;
+        }
+
+        private void measurementTextBox_Click(object sender, EventArgs e)
+        {
+            this.ingredientSuccessLabel.Visible = false;
+        }
+
+        private void stepNumberTextBox_Click(object sender, EventArgs e)
+        {
+            this.stepsSuccessLabel.Visible = false;
+        }
+
+        private void stepDescriptionTextBox_Click(object sender, EventArgs e)
+        {
+            this.stepsSuccessLabel.Visible = false;
+        }
+
+        private void tagNameTextBox_Click(object sender, EventArgs e)
+        {
+            this.tagSuccessLabel.Visible = false;
         }
     }
 }

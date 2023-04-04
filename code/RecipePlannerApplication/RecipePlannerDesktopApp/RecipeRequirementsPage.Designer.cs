@@ -163,6 +163,7 @@
             this.ingredientNameTextBox.Name = "ingredientNameTextBox";
             this.ingredientNameTextBox.Size = new System.Drawing.Size(162, 27);
             this.ingredientNameTextBox.TabIndex = 10;
+            this.ingredientNameTextBox.Click += new System.EventHandler(this.ingredientNameTextBox_Click);
             // 
             // measurementTextBox
             // 
@@ -170,6 +171,7 @@
             this.measurementTextBox.Name = "measurementTextBox";
             this.measurementTextBox.Size = new System.Drawing.Size(162, 27);
             this.measurementTextBox.TabIndex = 11;
+            this.measurementTextBox.Click += new System.EventHandler(this.measurementTextBox_Click);
             // 
             // quantityTextBox
             // 
@@ -177,6 +179,7 @@
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(162, 27);
             this.quantityTextBox.TabIndex = 12;
+            this.quantityTextBox.Click += new System.EventHandler(this.quantityTextBox_Click);
             // 
             // stepNumberTextBox
             // 
@@ -184,6 +187,7 @@
             this.stepNumberTextBox.Name = "stepNumberTextBox";
             this.stepNumberTextBox.Size = new System.Drawing.Size(44, 27);
             this.stepNumberTextBox.TabIndex = 13;
+            this.stepNumberTextBox.Click += new System.EventHandler(this.stepNumberTextBox_Click);
             // 
             // stepDescriptionTextBox
             // 
@@ -191,6 +195,7 @@
             this.stepDescriptionTextBox.Name = "stepDescriptionTextBox";
             this.stepDescriptionTextBox.Size = new System.Drawing.Size(162, 27);
             this.stepDescriptionTextBox.TabIndex = 14;
+            this.stepDescriptionTextBox.Click += new System.EventHandler(this.stepDescriptionTextBox_Click);
             // 
             // tagNameTextBox
             // 
@@ -198,6 +203,7 @@
             this.tagNameTextBox.Name = "tagNameTextBox";
             this.tagNameTextBox.Size = new System.Drawing.Size(162, 27);
             this.tagNameTextBox.TabIndex = 15;
+            this.tagNameTextBox.Click += new System.EventHandler(this.tagNameTextBox_Click);
             // 
             // addTagButton
             // 

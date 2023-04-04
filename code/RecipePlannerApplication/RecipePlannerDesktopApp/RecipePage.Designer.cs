@@ -40,21 +40,21 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.stepsDataGridView = new System.Windows.Forms.DataGridView();
+            this.step = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stepDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stepsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.recipeIngredientsDataGridView = new System.Windows.Forms.DataGridView();
             this.errorLabel = new System.Windows.Forms.Label();
             this.tagDataGridView = new System.Windows.Forms.DataGridView();
+            this.tagColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tagRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.addRecipeRequirementsButton = new System.Windows.Forms.Button();
             this.ingredientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ingredientsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.step = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stepDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stepsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.tagColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tagRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recipeIngredientsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tagDataGridView)).BeginInit();
@@ -132,7 +132,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(12, 286);
+            this.label4.Location = new System.Drawing.Point(12, 299);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 20);
             this.label4.TabIndex = 7;
@@ -153,14 +153,39 @@
             this.step,
             this.stepDescription,
             this.stepsRemove});
-            this.stepsDataGridView.Location = new System.Drawing.Point(12, 318);
+            this.stepsDataGridView.Location = new System.Drawing.Point(12, 331);
             this.stepsDataGridView.Name = "stepsDataGridView";
             this.stepsDataGridView.RowHeadersVisible = false;
             this.stepsDataGridView.RowHeadersWidth = 51;
             this.stepsDataGridView.RowTemplate.Height = 29;
-            this.stepsDataGridView.Size = new System.Drawing.Size(448, 119);
+            this.stepsDataGridView.Size = new System.Drawing.Size(448, 158);
             this.stepsDataGridView.TabIndex = 8;
             this.stepsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellContentClick);
+            // 
+            // step
+            // 
+            this.step.HeaderText = "Step Number";
+            this.step.MinimumWidth = 6;
+            this.step.Name = "step";
+            this.step.ReadOnly = true;
+            this.step.Width = 75;
+            // 
+            // stepDescription
+            // 
+            this.stepDescription.HeaderText = "Step Description";
+            this.stepDescription.MinimumWidth = 6;
+            this.stepDescription.Name = "stepDescription";
+            this.stepDescription.ReadOnly = true;
+            this.stepDescription.Width = 215;
+            // 
+            // stepsRemove
+            // 
+            this.stepsRemove.HeaderText = "Action";
+            this.stepsRemove.MinimumWidth = 6;
+            this.stepsRemove.Name = "stepsRemove";
+            this.stepsRemove.Text = "Remove";
+            this.stepsRemove.UseColumnTextForButtonValue = true;
+            this.stepsRemove.Width = 150;
             // 
             // label5
             // 
@@ -193,7 +218,7 @@
             this.recipeIngredientsDataGridView.RowHeadersVisible = false;
             this.recipeIngredientsDataGridView.RowHeadersWidth = 51;
             this.recipeIngredientsDataGridView.RowTemplate.Height = 29;
-            this.recipeIngredientsDataGridView.Size = new System.Drawing.Size(448, 125);
+            this.recipeIngredientsDataGridView.Size = new System.Drawing.Size(448, 145);
             this.recipeIngredientsDataGridView.TabIndex = 10;
             this.recipeIngredientsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recipeIngredientsDataGridView_CellContentClick);
             // 
@@ -223,19 +248,37 @@
             this.tagDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tagColumn,
             this.tagRemove});
-            this.tagDataGridView.Location = new System.Drawing.Point(12, 481);
+            this.tagDataGridView.Location = new System.Drawing.Point(12, 521);
             this.tagDataGridView.Name = "tagDataGridView";
             this.tagDataGridView.RowHeadersVisible = false;
             this.tagDataGridView.RowHeadersWidth = 51;
             this.tagDataGridView.RowTemplate.Height = 29;
-            this.tagDataGridView.Size = new System.Drawing.Size(448, 75);
+            this.tagDataGridView.Size = new System.Drawing.Size(448, 135);
             this.tagDataGridView.TabIndex = 15;
             this.tagDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagDataGridView_CellContentClick);
+            // 
+            // tagColumn
+            // 
+            this.tagColumn.HeaderText = "Tag";
+            this.tagColumn.MinimumWidth = 6;
+            this.tagColumn.Name = "tagColumn";
+            this.tagColumn.ReadOnly = true;
+            this.tagColumn.Width = 125;
+            // 
+            // tagRemove
+            // 
+            this.tagRemove.HeaderText = "Action";
+            this.tagRemove.MinimumWidth = 6;
+            this.tagRemove.Name = "tagRemove";
+            this.tagRemove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tagRemove.Text = "Remove";
+            this.tagRemove.UseColumnTextForButtonValue = true;
+            this.tagRemove.Width = 125;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(18, 452);
+            this.label12.Location = new System.Drawing.Point(18, 492);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(90, 20);
             this.label12.TabIndex = 28;
@@ -243,12 +286,14 @@
             // 
             // addRecipeRequirementsButton
             // 
-            this.addRecipeRequirementsButton.Location = new System.Drawing.Point(185, 620);
+            this.addRecipeRequirementsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.addRecipeRequirementsButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.addRecipeRequirementsButton.Location = new System.Drawing.Point(190, 671);
             this.addRecipeRequirementsButton.Name = "addRecipeRequirementsButton";
             this.addRecipeRequirementsButton.Size = new System.Drawing.Size(125, 62);
             this.addRecipeRequirementsButton.TabIndex = 29;
             this.addRecipeRequirementsButton.Text = "Add Recipe Requirements";
-            this.addRecipeRequirementsButton.UseVisualStyleBackColor = true;
+            this.addRecipeRequirementsButton.UseVisualStyleBackColor = false;
             this.addRecipeRequirementsButton.Click += new System.EventHandler(this.addRecipeRequirementsButton_Click);
             // 
             // ingredientName
@@ -273,7 +318,7 @@
             this.measurement.MinimumWidth = 6;
             this.measurement.Name = "measurement";
             this.measurement.ReadOnly = true;
-            this.measurement.Width = 115;
+            this.measurement.Width = 125;
             // 
             // ingredientsRemove
             // 
@@ -282,50 +327,7 @@
             this.ingredientsRemove.Name = "ingredientsRemove";
             this.ingredientsRemove.Text = "Remove";
             this.ingredientsRemove.UseColumnTextForButtonValue = true;
-            this.ingredientsRemove.Width = 125;
-            // 
-            // step
-            // 
-            this.step.HeaderText = "Step Number";
-            this.step.MinimumWidth = 6;
-            this.step.Name = "step";
-            this.step.ReadOnly = true;
-            this.step.Width = 75;
-            // 
-            // stepDescription
-            // 
-            this.stepDescription.HeaderText = "Step Description";
-            this.stepDescription.MinimumWidth = 6;
-            this.stepDescription.Name = "stepDescription";
-            this.stepDescription.ReadOnly = true;
-            this.stepDescription.Width = 198;
-            // 
-            // stepsRemove
-            // 
-            this.stepsRemove.HeaderText = "Action";
-            this.stepsRemove.MinimumWidth = 6;
-            this.stepsRemove.Name = "stepsRemove";
-            this.stepsRemove.Text = "Remove";
-            this.stepsRemove.UseColumnTextForButtonValue = true;
-            this.stepsRemove.Width = 125;
-            // 
-            // tagColumn
-            // 
-            this.tagColumn.HeaderText = "Tag";
-            this.tagColumn.MinimumWidth = 6;
-            this.tagColumn.Name = "tagColumn";
-            this.tagColumn.ReadOnly = true;
-            this.tagColumn.Width = 125;
-            // 
-            // tagRemove
-            // 
-            this.tagRemove.HeaderText = "Action";
-            this.tagRemove.MinimumWidth = 6;
-            this.tagRemove.Name = "tagRemove";
-            this.tagRemove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tagRemove.Text = "Remove";
-            this.tagRemove.UseColumnTextForButtonValue = true;
-            this.tagRemove.Width = 125;
+            this.ingredientsRemove.Width = 127;
             // 
             // RecipePage
             // 
@@ -374,6 +376,8 @@
         private DataGridView tagDataGridView;
         private Label label12;
         private Button addRecipeRequirementsButton;
+        private DataGridViewTextBoxColumn tagColumn;
+        private DataGridViewButtonColumn tagRemove;
         private DataGridViewTextBoxColumn step;
         private DataGridViewTextBoxColumn stepDescription;
         private DataGridViewButtonColumn stepsRemove;
@@ -381,7 +385,5 @@
         private DataGridViewTextBoxColumn quantity;
         private DataGridViewTextBoxColumn measurement;
         private DataGridViewButtonColumn ingredientsRemove;
-        private DataGridViewTextBoxColumn tagColumn;
-        private DataGridViewButtonColumn tagRemove;
     }
 }
