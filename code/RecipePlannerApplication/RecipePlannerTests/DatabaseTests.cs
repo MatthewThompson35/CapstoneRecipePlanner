@@ -99,5 +99,40 @@ namespace RecipePlannerTests
 
             Assert.AreEqual(0, result.Count);
         }
+
+        /// <summary>
+        /// Tests containsUser whether [contains user invalid username].
+        /// </summary>
+        [TestMethod]
+        public void TestGetUsersReturnsNonEmptyList()
+        {
+            // Act: Call the getUsers() method
+            var result = Database.getUsers();
+
+            // Assert: Check that the result is a non-empty list of users
+            Assert.AreEqual(result.Count, 7);
+            Assert.IsTrue(result.Contains("testuser1"));
+            Assert.IsTrue(result.Contains("testuser2"));
+        }
+
+        /*/// <summary>
+        /// Tests containsUser whether [contains user invalid username].
+        /// </summary>
+        [TestMethod]
+        public void TestGetUsersReturnsEmptyList()
+        {
+            // Arrange: Clear the login table in the database
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query = @"DELETE FROM login;";
+            using var command = new MySqlCommand(query, connection);
+            command.ExecuteNonQuery();
+
+            // Act: Call the getUsers() method
+            var result = Database.getUsers();
+
+            // Assert: Check that the result is an empty list of users
+            Assert.AreEqual(0, result.Count);
+        }*/
     }
 }

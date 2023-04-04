@@ -169,6 +169,5 @@ public class PlannedMealDalTests
         Assert.AreEqual(newRecipeId, meals[(day, type)]);
         PlannedMealDal.RemoveThisWeekMeal(this.connectionString, newRecipeId, day, type, date);
     }
-
     #endregion
 }

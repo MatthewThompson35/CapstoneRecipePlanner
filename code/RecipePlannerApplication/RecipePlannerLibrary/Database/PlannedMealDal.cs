@@ -66,6 +66,13 @@ namespace RecipePlannerLibrary.Database
             return thisWeeksMeals;
         }
 
+        /// <summary>
+        /// Gets all remaining meals in planned meals for this week and next week 
+        /// </summary>
+        /// <param name="connectionString">the connection string.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>All of the remaining planned meals in the data base for this week and next week.</returns>
         public static List<int> getRemainingMeals(string connectionString)
         {
             var thisWeeksMeals = new List<int>();
