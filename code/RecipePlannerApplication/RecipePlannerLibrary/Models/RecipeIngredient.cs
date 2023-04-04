@@ -45,5 +45,12 @@ namespace RecipePlannerLibrary.Models
             this.Quantity = quantity;
             this.Measurement = measurement;
         }
+
+        public RecipeIngredient(string ingredientName, int quantity, string measurement)
+        {
+            this.IngredientName = ingredientName;
+            this.Quantity = quantity;
+            this.Measurement = measurement;
+        }
     }
 }

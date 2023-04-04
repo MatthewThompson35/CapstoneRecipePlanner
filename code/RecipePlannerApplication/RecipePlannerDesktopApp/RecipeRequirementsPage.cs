@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,15 @@ namespace RecipePlannerDesktopApplication
 {
     public partial class RecipeRequirementsPage : Form
     {
-        public List<RecipeIngredient> recipeIngredients { get; set; }
+        private List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+
+        //public List<RecipeIngredient> recipeIngredientList = new List<RecipeIngredient>();
         public List<RecipeStep> recipeSteps { get; set; }
         public List<string> tags { get; set; }
+
+        public RecipePage recipePage { get; }
+
+
 
         /// <summary>
         ///     Initializes the recipe requirements page.
@@ -24,9 +31,20 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
 
-            recipeIngredients = new List<RecipeIngredient>();
+            //recipeIngredients = new List<RecipeIngredient>();
             recipeSteps = new List<RecipeStep>();
             tags = new List<string>();
+
+            recipePage = new RecipePage();
+
+            //this.recipeIngredientList = this.recipeIngredients;
+
+            recipePage.recipeIngredients = this.recipeIngredients;
+        }
+
+        public List<RecipeIngredient> GetRecipeIngredients()
+        {
+            return this.recipeIngredients;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -40,10 +58,13 @@ namespace RecipePlannerDesktopApplication
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            var recipePage = new RecipePage();
+
+            foreach (var ingredient in this.recipePage.recipeIngredients)
+            {
+                recipePage.AddRowToIngredientGridView(ingredient.IngredientName, Convert.ToString(ingredient.Quantity), Convert.ToString(ingredient.Measurement));
+            }
 
             this.Hide();
-
             recipePage.Show();
         }
 
@@ -83,15 +104,32 @@ namespace RecipePlannerDesktopApplication
                 measurement = this.measurementTextBox.Text;
             }
 
-            var recipePage = new RecipePage();
+            RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
 
-            recipePage.AddRowToIngredientGridView(ingredientName, quantity, measurement);
-
-            this.Hide();
-            recipePage.Show();
+            recipePage.recipeIngredients.Add(recipeIngredient);
+            //this.recipeIngredients.Add(recipeIngredient);
 
             this.ingredientSuccessLabel.Visible = true;
-                
+
+            this.clearIngredientsFields();
+        }
+
+        private void clearIngredientsFields()
+        {
+            this.ingredientNameTextBox.Clear();
+            this.quantityTextBox.Clear();
+            this.measurementTextBox.Clear();
+        }
+
+        private void clearStepsFields()
+        {
+            this.stepNumberTextBox.Clear();
+            this.stepDescriptionTextBox.Clear();
+        }
+
+        private void clearTagNameField()
+        {
+            this.tagNameTextBox.Clear();
         }
 
         private void addStepButton_Click(object sender, EventArgs e)
