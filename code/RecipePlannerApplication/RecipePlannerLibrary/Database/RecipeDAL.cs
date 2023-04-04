@@ -45,6 +45,43 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
+        ///     Gets all of the recipes shared with the active user from the shared recipe table.
+        /// </summary>
+        /// <param name="connectionString">The connection string for the table.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of all shared recipes</returns>
+        public static List<SharedRecipe> getSharedRecipes(string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var recipes = new List<SharedRecipe>();
+            var query = @"Select * from shared_recipe sr, recipe r where r.recipeID = sr.recipeID and sr.receiver_username = @user;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var name = reader.GetString(4);
+                var description = reader.GetString(5);
+
+                var sender = reader.GetString(0);
+                var receiver = reader.GetString(1);
+                var recipeID = reader.GetInt32(2);
+
+
+                Recipe recipe = new Recipe(recipeID, name, description);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipeID, connectionString);
+
+                var sharedRecipe = new SharedRecipe(recipe, sender, receiver);
+                recipes.Add(sharedRecipe);
+            }
+
+            connection.Close();
+            return recipes;
+        }
+
+        /// <summary>
         ///     Gets the recipe name based on the specified recipe id.
         /// </summary>
         /// <param name="recipeId">the recipe id.</param>
@@ -253,6 +290,26 @@ namespace RecipePlannerLibrary.Database
 
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
             command.Parameters.Add("@tagName", MySqlDbType.VarChar).Value = tagName;
+            command.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        ///     Shares the recipe with the specified user. Adds recipe to shared recipe table
+        /// </summary>
+        /// <param name="username">The usernname the recipe is being shared to.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>The shared recipe is added to the database</postcondition>
+        public static void shareRecipe(string username, int recipeID, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query =
+                @"INSERT INTO shared_recipe (sender_username, receiver_username, recipeID) VALUES (@senderUsername, @receiverUsername, @recipeID);";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@senderUsername", MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.Parameters.Add("@receiverUsername", MySqlDbType.VarChar).Value = username;
+            command.Parameters.Add("@recipeID", MySqlDbType.Int32).Value = recipeID;
             command.ExecuteNonQuery();
         }
 

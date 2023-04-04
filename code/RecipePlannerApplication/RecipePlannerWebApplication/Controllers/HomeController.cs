@@ -1,10 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing.Printing;
-using System.Reflection;
+﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
@@ -14,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace RecipePlannerWebApplication.Controllers;
 
 /// <summary>
-/// Manages the data and functionality for HomeController
+///     Manages the data and functionality for HomeController
 /// </summary>
 public class HomeController : Controller
 {
@@ -27,7 +23,7 @@ public class HomeController : Controller
     #region Constructors
 
     /// <summary>
-    /// Creates a new instance of a HomeController object with the specified Logger object
+    ///     Creates a new instance of a HomeController object with the specified Logger object
     /// </summary>
     /// <param name="logger"></param>
     /// <precondition>none</precondition>
@@ -85,7 +81,6 @@ public class HomeController : Controller
         }
     }
 
-
     private void setupForRecipePage(int? page = 1)
     {
         try
@@ -104,12 +99,13 @@ public class HomeController : Controller
             var currentPage = page ?? 1;
 
             ViewBag.currentPage = currentPage;
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
-            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize); ;
+            ViewBag.totalPages = (int) Math.Ceiling((double) recipes.Count / pageSize);
+            ;
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
             var currentAllPage = 1;
@@ -135,11 +131,68 @@ public class HomeController : Controller
         }
     }
 
+    private void setupForSharedRecipePage(int? page = 1)
+    {
+        try
+        {
+            List<SharedRecipe> sharedRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            var recipes = new List<Recipe>();
+
+            foreach (var sharedRecipe in sharedRecipes)
+            {
+                var recipe = sharedRecipe.Recipe;
+
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 10;
+            var currentPage = page ?? 1;
+
+            ViewBag.currentPage = currentPage;
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
+            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
+            ViewBag.totalAvailablePages = totalAvailablePages;
+            ViewBag.totalPages = (int) Math.Ceiling((double) recipes.Count / pageSize);
+            ;
+            List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
+            List<Recipe> allRecipes = ViewBag.AllRecipes;
+            var currentAllPage = 1;
+
+            var AvailableRecipesOnPage = sharedRecipes
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.availableRecipesOnPage = AvailableRecipesOnPage;
+
+            var AllRecipesOnPage = sharedRecipes
+                .Skip((currentAllPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllSharedRecipesOnPage = AllRecipesOnPage;
+            ViewBag.AllRecipes = sharedRecipes;
+            ViewBag.currentAllPage = currentPage;
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+    }
+
     /// <summary>
     ///     Adds to the available recipes if the user can make that recipe.
     /// </summary>
     /// <precondition>none</precondition>
-    /// <postcondition>If there are available recipes in the database, ViewBag.AvailableRecipes.Count = the amount of recipes available</postcondition>
+    /// <postcondition>
+    ///     If there are available recipes in the database, ViewBag.AvailableRecipes.Count = the amount of recipes
+    ///     available
+    /// </postcondition>
     /// <param name="recipes">The recipes.</param>
     private void addToAvailableRecipes(List<Recipe> recipes)
     {
@@ -230,7 +283,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Adds the needed planned meal ingredients to the shopping list.
+    ///     Adds the needed planned meal ingredients to the shopping list.
     /// </summary>
     /// <returns>Shopping List page or login page on connection error</returns>
     public ActionResult addNeededPlannedMealIngredients()
@@ -238,16 +291,16 @@ public class HomeController : Controller
         try
         {
             var allIngredientsPresent = true;
-            string user = ActiveUser.username;
-            List<Ingredient> totalIngredients = new List<Ingredient>();
-            List<int> remainingMeals =
+            var user = ActiveUser.username;
+            var totalIngredients = new List<Ingredient>();
+            var remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
 
-            foreach (Ingredient shoppingItem in shoppingList)
+            foreach (var shoppingItem in shoppingList)
             {
-                Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
+                var pantryItem = pantry.Find(i => i.name == shoppingItem.name);
 
                 if (pantryItem != null)
                 {
@@ -263,20 +316,19 @@ public class HomeController : Controller
             {
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
-                foreach (RecipeIngredient ingredient in recipeIngredients)
+                foreach (var ingredient in recipeIngredients)
                 {
-                    Ingredient existingIngredient = totalIngredients.Find(i =>
+                    var existingIngredient = totalIngredients.Find(i =>
                         i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
 
                     if (existingIngredient != null)
                     {
-                        existingIngredient.quantity += (int) ingredient.Quantity;
-
+                        existingIngredient.quantity += ingredient.Quantity;
                     }
                     else
                     {
-                        int id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        Ingredient addIngredient = new Ingredient(user, ingredient.IngredientName, id,
+                        var id = IngredientDAL.getIngredientId(ingredient.IngredientName);
+                        var addIngredient = new Ingredient(user, ingredient.IngredientName, id,
                             ingredient.Quantity,
                             ingredient.Measurement);
                         totalIngredients.Add(addIngredient);
@@ -284,48 +336,47 @@ public class HomeController : Controller
                 }
             }
 
-
             foreach (var ingredient in totalIngredients)
             {
-                Ingredient pantryItem = pantry.Find(i => i.name == ingredient.name);
+                var pantryItem = pantry.Find(i => i.name == ingredient.name);
 
                 if (pantryItem != null)
                 {
                     if (ingredient.quantity > pantryItem.quantity)
                     {
-                        int quantity = (int) ingredient.quantity - (int) pantryItem.quantity;
-                        Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+                        var quantity = (int) ingredient.quantity - (int) pantryItem.quantity;
+                        var shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
 
                         if (shoppingListItem != null)
                         {
                             allIngredientsPresent = false;
-                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                            ShoppingListDAL.updateQuantity((int) ingredient.id, quantity);
                         }
                         else
                         {
                             allIngredientsPresent = false;
-                            ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement, Connection.ConnectionString);
+                            ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement,
+                                Connection.ConnectionString);
                         }
-                        
                     }
                 }
                 else
                 {
                     allIngredientsPresent = false;
-                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                    ShoppingListDAL.addIngredient(ingredient.name, (int) ingredient.quantity, ingredient.measurement,
+                        Connection.ConnectionString);
                 }
             }
+
             if (allIngredientsPresent)
             {
                 ViewBag.error = "There are no ingredients needed";
                 this.setupPlannedMeals();
                 return View("PlannedMealsPage");
             }
-            else
-            {
-                this.setupShoppingListPage(1);
-                return View("ShoppingList");
-            }
+
+            this.setupShoppingListPage(1);
+            return View("ShoppingList");
         }
         catch (Exception ex)
         {
@@ -336,23 +387,23 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Adds all planned meal ingredients to the shopping list.
+    ///     Adds all planned meal ingredients to the shopping list.
     /// </summary>
     /// <returns>Shopping List page or login page on connection error</returns>
     public ActionResult addAllPlannedMealIngredients()
     {
         try
         {
-            string user = ActiveUser.username;
-            List<Ingredient> totalIngredients = new List<Ingredient>();
-            List<int> remainingMeals =
+            var user = ActiveUser.username;
+            var totalIngredients = new List<Ingredient>();
+            var remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
             List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
 
-            foreach (Ingredient shoppingItem in shoppingList)
+            foreach (var shoppingItem in shoppingList)
             {
-                Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
+                var pantryItem = pantry.Find(i => i.name == shoppingItem.name);
 
                 if (pantryItem != null)
                 {
@@ -368,20 +419,19 @@ public class HomeController : Controller
             {
                 var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
-                foreach (RecipeIngredient ingredient in recipeIngredients)
+                foreach (var ingredient in recipeIngredients)
                 {
-                    Ingredient existingIngredient = totalIngredients.Find(i =>
+                    var existingIngredient = totalIngredients.Find(i =>
                         i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
 
                     if (existingIngredient != null)
                     {
-                        existingIngredient.quantity += (int)ingredient.Quantity;
-
+                        existingIngredient.quantity += ingredient.Quantity;
                     }
                     else
                     {
-                        int id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        Ingredient addIngredient = new Ingredient(user, ingredient.IngredientName, id,
+                        var id = IngredientDAL.getIngredientId(ingredient.IngredientName);
+                        var addIngredient = new Ingredient(user, ingredient.IngredientName, id,
                             ingredient.Quantity,
                             ingredient.Measurement);
                         totalIngredients.Add(addIngredient);
@@ -389,21 +439,22 @@ public class HomeController : Controller
                 }
             }
 
-
             foreach (var ingredient in totalIngredients)
             {
-                Ingredient shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
+                var shoppingListItem = shoppingList.Find(i => i.name == ingredient.name);
 
                 if (shoppingListItem != null)
                 {
-                    int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
-                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                    var quantity = (int) shoppingListItem.quantity + (int) ingredient.quantity;
+                    ShoppingListDAL.updateQuantity((int) ingredient.id, quantity);
                 }
                 else
                 {
-                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                    ShoppingListDAL.addIngredient(ingredient.name, (int) ingredient.quantity, ingredient.measurement,
+                        Connection.ConnectionString);
                 }
             }
+
             this.setupShoppingListPage(1);
             return View("ShoppingList");
         }
@@ -548,7 +599,7 @@ public class HomeController : Controller
         {
             if (item.id == id)
             {
-                quantity = (int)item.quantity;
+                quantity = (int) item.quantity;
             }
         }
 
@@ -566,11 +617,11 @@ public class HomeController : Controller
     {
         List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
         var quantity = 0;
-        foreach (Ingredient item in shoppingList)
+        foreach (var item in shoppingList)
         {
             if (item.id == id)
             {
-                quantity = (int)item.quantity;
+                quantity = (int) item.quantity;
             }
         }
 
@@ -722,7 +773,7 @@ public class HomeController : Controller
 
             IngredientDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
                 Connection.ConnectionString);
-            var totalPages = (int)Math.Ceiling((double)IngredientDAL.getIngredients().Count / 5);
+            var totalPages = (int) Math.Ceiling((double) IngredientDAL.getIngredients().Count / 5);
             this.setupIngredientsPage(totalPages);
             return View("IngredientsPage");
         }
@@ -771,7 +822,7 @@ public class HomeController : Controller
 
             ShoppingListDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
                 Connection.ConnectionString);
-            var totalPages = (int)Math.Ceiling((double)ShoppingListDAL.getIngredients().Count / 5);
+            var totalPages = (int) Math.Ceiling((double) ShoppingListDAL.getIngredients().Count / 5);
             this.setupShoppingListPage(totalPages);
             return View("ShoppingList");
         }
@@ -848,7 +899,7 @@ public class HomeController : Controller
         var currentPage = page ?? 1;
         List<Ingredient> allIngredients = IngredientDAL.getIngredients();
         var totalIngredients = allIngredients.Count;
-        var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+        var totalPages = (int) Math.Ceiling((double) totalIngredients / pageSize);
 
         var ingredientsOnPage = allIngredients
             .Skip((currentPage - 1) * pageSize)
@@ -866,7 +917,7 @@ public class HomeController : Controller
         var currentPage = page ?? 1;
         List<Ingredient> allIngredients = IngredientDAL.GetIngredientsFromShoppingList();
         var totalIngredients = allIngredients.Count;
-        var totalPages = (int)Math.Ceiling((double)totalIngredients / pageSize);
+        var totalPages = (int) Math.Ceiling((double) totalIngredients / pageSize);
 
         var ingredientsOnPage = allIngredients
             .Skip((currentPage - 1) * pageSize)
@@ -951,12 +1002,12 @@ public class HomeController : Controller
             var currentAllPage = page ?? 1;
 
             ViewBag.currentAllPage = currentAllPage;
-            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
-            ViewBag.AllRecipes.Sort((Comparison<Recipe>)this.CompareRecipesByName);
+            ViewBag.AvailableRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
+            ViewBag.AllRecipes.Sort((Comparison<Recipe>) this.CompareRecipesByName);
             int totalAvailableRecipes = ViewBag.AvailableRecipes.Count;
-            var totalAvailablePages = (int)Math.Ceiling((double)totalAvailableRecipes / pageSize);
+            var totalAvailablePages = (int) Math.Ceiling((double) totalAvailableRecipes / pageSize);
             ViewBag.totalAvailablePages = totalAvailablePages;
-            ViewBag.totalPages = (int)Math.Ceiling((double)recipes.Count / pageSize);
+            ViewBag.totalPages = (int) Math.Ceiling((double) recipes.Count / pageSize);
             List<Recipe> availableRecipes = ViewBag.AvailableRecipes;
             List<Recipe> allRecipes = ViewBag.AllRecipes;
 
@@ -974,6 +1025,72 @@ public class HomeController : Controller
 
             ViewBag.AllRecipesOnPage = AllRecipesOnPage;
             ViewBag.CurrentSelectedRadio = "all";
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+    }
+
+    /// <summary>
+    ///     Goes to RecipesPage that displays all recipes by default with the specified page number
+    /// </summary>
+    /// <precondition>ViewBag.AvailableRecipes != null</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>The recipes page with the specified page or login on server connection error</returns>
+    public ActionResult goToSharedRecipePageAll(int? page)
+    {
+        try
+        {
+            this.setupForSharedRecipePageAll(page);
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View("Index");
+            }
+
+            return View("SharedRecipes");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
+    }
+
+    private void setupForSharedRecipePageAll(int? page)
+    {
+        try
+        {
+            List<SharedRecipe> sharedRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            var recipes = new List<Recipe>();
+
+            foreach (var sharedRecipe in sharedRecipes)
+            {
+                var recipe = sharedRecipe.Recipe;
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            var currentPage = 1;
+            this.addToAvailableRecipes(recipes);
+            const int pageSize = 10;
+            var currentSharedPage = page ?? 1;
+
+            ViewBag.currentSharedPage = currentSharedPage;
+
+            ViewBag.AllRecipes = sharedRecipes;
+            ViewBag.totalPages = (int) Math.Ceiling((double) sharedRecipes.Count / pageSize);
+            var allRecipes = sharedRecipes;
+
+            var AllRecipesOnPage = allRecipes
+                .Skip((currentSharedPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.AllSharedRecipesOnPage = AllRecipesOnPage;
         }
         catch (Exception ex)
         {
@@ -1100,7 +1217,6 @@ public class HomeController : Controller
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
-
     /// <summary>
     ///     Goes to add ingredients page.
     /// </summary>
@@ -1130,6 +1246,18 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    ///     Goes to shared recipes page.
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns>The shared recipes page or login on bad server connection</returns>
+    public ActionResult goToSharedRecipesPage()
+    {
+        this.setupForSharedRecipePage();
+        return View("SharedRecipes", ViewBag.Measurements);
+    }
+
+    /// <summary>
     ///     Toggles the week for Planned Meals page.
     /// </summary>
     /// <param name="currentWeek">The current week. (This week or next week)</param>
@@ -1151,7 +1279,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Gets the name of the recipe at the specified planned meal slot.
+    ///     Gets the name of the recipe at the specified planned meal slot.
     /// </summary>
     /// <param name="day">The day.</param>
     /// <param name="mealType">Type of the meal.</param>
@@ -1185,18 +1313,17 @@ public class HomeController : Controller
             }
 
             ViewBag.Header = "This weeks meals";
-            return Json(new { RecipeId = recipeId, RecipeName = recipeName });
+            return Json(new {RecipeId = recipeId, RecipeName = recipeName});
         }
         catch (Exception ex)
         {
             var recipeId = "You have not yet added a meal for this time";
-            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+            return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
         }
     }
 
-
     /// <summary>
-    /// Removes the meal at the specified planned meal slot.
+    ///     Removes the meal at the specified planned meal slot.
     /// </summary>
     /// <param name="day">The day.</param>
     /// <param name="mealType">Type of the meal.</param>
@@ -1234,7 +1361,7 @@ public class HomeController : Controller
             PlannedMealDal.RemoveThisWeekMeal(Connection.ConnectionString, recipeId, day, mealType, date);
 
             ViewBag.Header = "This weeks meals";
-            return Json(new { RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time" });
+            return Json(new {RecipeId = recipeId, RecipeName = "You Have not yet added a meal for this time"});
         }
         catch (Exception ex)
         {
@@ -1252,11 +1379,11 @@ public class HomeController : Controller
                     }
                 }
 
-                return Json(new { RecipeName = recipeName });
+                return Json(new {RecipeName = recipeName});
             }
             catch (Exception ex2)
             {
-                return Json(new { RecipeName = "You Have not yet added a meal for this time" });
+                return Json(new {RecipeName = "You Have not yet added a meal for this time"});
             }
         }
     }
@@ -1288,19 +1415,21 @@ public class HomeController : Controller
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Breakfast", "This Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
+
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Lunch", "This Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             lunch.Add(recipeName);
         }
+
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Dinner", "This Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             dinner.Add(recipeName);
         }
 
@@ -1317,29 +1446,31 @@ public class HomeController : Controller
         List<Ingredient> list = ShoppingListDAL.getIngredients();
         List<Ingredient> pantry = IngredientDAL.getIngredients();
 
-        foreach (Ingredient ingredient in list)
+        foreach (var ingredient in list)
         {
-            bool found = false;
+            var found = false;
             // check if ingredient is in the pantry
-            foreach (Ingredient pantryIngredient in pantry)
+            foreach (var pantryIngredient in pantry)
             {
                 if (pantryIngredient.id.Equals(ingredient.id))
                 {
                     // ingredient is in pantry, add quantity
-                    int quantity = (int)pantryIngredient.quantity + (int)ingredient.quantity;
+                    var quantity = (int) pantryIngredient.quantity + (int) ingredient.quantity;
                     found = true;
-                    IngredientDAL.updateQuantity((int)pantryIngredient.id, quantity);
+                    IngredientDAL.updateQuantity((int) pantryIngredient.id, quantity);
                     break;
                 }
             }
+
             // ingredient is not in pantry, add to pantry
             if (!found)
             {
-                IngredientDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                IngredientDAL.addIngredient(ingredient.name, (int) ingredient.quantity, ingredient.measurement,
+                    Connection.ConnectionString);
             }
+
             ShoppingListDAL.removeAll(Connection.ConnectionString);
         }
-
 
         try
         {
@@ -1374,19 +1505,21 @@ public class HomeController : Controller
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Breakfast", "This Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
+
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Lunch", "This Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             lunch.Add(recipeName);
         }
+
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Dinner", "This Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             dinner.Add(recipeName);
         }
 
@@ -1396,7 +1529,6 @@ public class HomeController : Controller
         ViewBag.Header = "This weeks meals";
         ViewBag.CurrentWeek = "This Week";
     }
-
 
     /// <summary>
     ///     Goes to next week's planned meal page.
@@ -1424,19 +1556,21 @@ public class HomeController : Controller
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Breakfast", "Next Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             breakfast.Add(recipeName);
         }
+
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Lunch", "Next Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             lunch.Add(recipeName);
         }
+
         foreach (var day in daysOfWeek)
         {
             var json = this.GetRecipeName(day, "Dinner", "Next Week");
-            var recipeName = (string)json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
             dinner.Add(recipeName);
         }
 
@@ -1449,7 +1583,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    ///    Creates the user.
+    ///     Creates the user.
     /// </summary>
     /// <param name="username">The username.</param>
     /// <param name="password">The password.</param>
@@ -1505,7 +1639,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 
     /// <summary>
@@ -1530,28 +1664,44 @@ public class HomeController : Controller
     public IActionResult CookMeal(int recipeID)
     {
         var totalIngredients = IngredientDAL.getIngredients();
-        foreach (RecipeIngredient ingredient in
+        foreach (var ingredient in
                  RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
         {
-            Ingredient existingIngredient = totalIngredients.Find(i =>
+            var existingIngredient = totalIngredients.Find(i =>
                 i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
 
             if (existingIngredient != null)
             {
                 if (existingIngredient.quantity - ingredient.Quantity > 0)
                 {
-                    IngredientDAL.updateQuantity((int)existingIngredient.id, (int)existingIngredient.quantity - (int)ingredient.Quantity);
+                    IngredientDAL.updateQuantity((int) existingIngredient.id,
+                        (int) existingIngredient.quantity - ingredient.Quantity);
                 }
                 else
                 {
-                    IngredientDAL.RemoveIngredient((int)existingIngredient.id, Connection.ConnectionString);
+                    IngredientDAL.RemoveIngredient((int) existingIngredient.id, Connection.ConnectionString);
                 }
-
             }
         }
 
         this.setupIngredientsPage(1);
         return View("IngredientsPage");
+    }
+
+    /// <summary>
+    ///     Opens the share recipe form
+    /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
+    /// <returns> The recipe page</returns>
+    [HttpPost]
+    public IActionResult ShareMeal(int sharedRecipeID)
+    {
+        string username = Request.Form["txtUsername"];
+        RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
+
+        this.setupForRecipePage();
+        return View("RecipePage");
     }
 
     #endregion
