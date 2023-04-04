@@ -410,7 +410,7 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
 
             var query =
-                @"Delete * from recipe where recipeID = @id";
+                @"Delete from recipe where recipeID = @id;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.VarChar).Value = id;
 

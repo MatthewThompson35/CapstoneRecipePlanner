@@ -1,4 +1,5 @@
-﻿using RecipePlannerLibrary;
+﻿using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
 
 namespace RecipePlannerTests;
 
@@ -128,6 +129,129 @@ public class RecipeDALTests
             RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(3, Connection.TestsConnectionString),
                 Connection.TestsConnectionString), "global", "global");
         Assert.AreEqual(RecipeDAL.getSharedRecipes(Connection.TestsConnectionString)[0].Recipe.Name, exp.Recipe.Name);
+    }
+
+    /// <summary>
+    /// Tests the add recipe.
+    /// </summary>
+    [TestMethod]
+    public void TestAddRecipe()
+    {
+        // Arrange
+        var name = "Test Recipe";
+        var description = "This is a test recipe.";
+        RecipeDAL.removeRecipe(RecipeDAL.getRecipeByName(name, Connection.TestsConnectionString).RecipeId, Connection.TestsConnectionString);
+        // Act
+        RecipeDAL.addRecipe(name, description, Connection.TestsConnectionString);
+
+        // Assert
+        using var connection = new MySqlConnection(Connection.TestsConnectionString);
+        connection.Open();
+        var query = @"select count(*) from recipe where name = @name and description = @description";
+        using var command = new MySqlCommand(query, connection);
+        command.Parameters.AddWithValue("@name", name);
+        command.Parameters.AddWithValue("@description", description);
+        var result = command.ExecuteScalar();
+        Assert.AreEqual(1, Convert.ToInt32(result));
+    }
+
+    [TestMethod]
+    public void TestAddRecipeIngredient()
+    {
+        // Arrange
+        var recipeId = RecipeDAL.getRecipeByName("Test Recipe", Connection.TestsConnectionString).RecipeId;
+        var ingredientName = "Test Ingredient";
+        var ingredientId = 1;
+        var quantity = 1;
+        var measurement = "OZ";
+
+        // Act
+        RecipeDAL.addRecipeIngredient(recipeId, ingredientName, ingredientId, quantity, measurement, Connection.TestsConnectionString);
+
+        // Assert
+        using var connection = new MySqlConnection(Connection.TestsConnectionString);
+        connection.Open();
+        var query = @"select count(*) from recipe_ingredient ri join ingredient_info ii on ri.ingredientID = ii.ingredientID where ri.recipeID = @recipeId and ii.ingredientName = @ingredientName and ri.quantity = @quantity and ri.measurement = @measurement";
+        using var command = new MySqlCommand(query, connection);
+        command.Parameters.AddWithValue("@recipeId", recipeId);
+        command.Parameters.AddWithValue("@ingredientName", ingredientName);
+        command.Parameters.AddWithValue("@quantity", quantity);
+        command.Parameters.AddWithValue("@measurement", measurement);
+        var result = command.ExecuteScalar();
+        Assert.AreEqual(1, Convert.ToInt32(result));
+    }
+
+    [TestMethod]
+    public void TestAddRecipeStep()
+    {
+        // Arrange
+        var recipeId = RecipeDAL.getRecipeByName("Test Recipe", Connection.TestsConnectionString).RecipeId;
+        var stepNumber = 1;
+        var stepDescription = "This is a test step.";
+
+        // Act
+        RecipeDAL.addRecipeStep(recipeId, stepNumber, stepDescription, Connection.TestsConnectionString);
+
+        // Assert
+        using var connection = new MySqlConnection(Connection.TestsConnectionString);
+        connection.Open();
+        var query = @"select count(*) from recipe_step where recipeID = @recipeId and stepNumber = @stepNumber and stepDescription = @stepDescription";
+        using var command = new MySqlCommand(query, connection);
+        command.Parameters.AddWithValue("@recipeId", recipeId);
+        command.Parameters.AddWithValue("@stepNumber", stepNumber);
+        command.Parameters.AddWithValue("@stepDescription", stepDescription);
+        var result = command.ExecuteScalar();
+        Assert.AreEqual(1, Convert.ToInt32(result));
+    }
+
+    [TestMethod]
+    public void TestAddRecipeTag()
+    {
+        // Arrange
+        var recipeId = RecipeDAL.getRecipeByName("Test Recipe", Connection.TestsConnectionString).RecipeId;
+        var tagName = "Test Tag";
+
+        // Act
+        RecipeDAL.addRecipeTag(recipeId, tagName, Connection.TestsConnectionString);
+
+        // Assert
+        using var connection = new MySqlConnection(Connection.TestsConnectionString);
+        connection.Open();
+        var query = @"select count(*) from recipe_tag where recipeID = @recipeId and tagName = @tagName";
+        using var command = new MySqlCommand(query, connection);
+        command.Parameters.AddWithValue("@recipeId", recipeId);
+        command.Parameters.AddWithValue("@tagName", tagName);
+        var result = command.ExecuteScalar();
+        RecipeDAL.removeRecipe(recipeId, Connection.TestsConnectionString);
+        Assert.AreEqual(1, Convert.ToInt32(result));
+    }
+
+    [TestMethod]
+    public void TestContainsSharedRecipe()
+    {
+        // Arrange
+        SharedRecipe recipe = new SharedRecipe(RecipeDAL.getRecipeByName("Scrambled Eggs", Connection.ConnectionString), "global", "global");
+
+        // Act
+        List<string> sharedRecipeList = RecipeDAL.ContainsSharedRecipe(recipe);
+
+        // Assert
+        // Check that the shared recipe exists in the shared_recipe table
+        Assert.IsTrue(sharedRecipeList.Count > 0);
+    }
+
+    [TestMethod]
+    public void TestContainsSharedRecipeById()
+    {
+        // Arrange
+        int recipeId = 1;
+
+        // Act
+        SharedRecipe sharedRecipe = RecipeDAL.ContainsSharedRecipe(recipeId);
+
+        // Assert
+        // Check that the shared recipe exists in the shared_recipe table
+        Assert.IsNotNull(sharedRecipe);
     }
 
     #endregion
