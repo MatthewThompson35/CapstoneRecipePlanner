@@ -474,38 +474,6 @@
                 }
             </div>
         }
-        @if (ViewBag.SharedRecipe != null)
-        {
-            <h2>Recently Shared Recipe</h2>
-            <div id="@ViewBag.SharedRecipe.Recipe.RecipeId">
-                <h3 class="recipe-name">@ViewBag.SharedRecipe.Recipe.Name</h3>
-                <p class="recipe-description">@ViewBag.SharedRecipe.Recipe.Description</p>
-                <h4>Steps</h4>
-                <ol class="recipe-steps">
-                    @foreach (var step in ViewBag.SharedRecipe.Recipe.Steps)
-                    {
-                        <li>@step.stepDescription</li>
-                    }
-                </ol>
-                <h4>Ingredients</h4>
-                <ul class="recipe-ingredients">
-                    @foreach (var ingredient in ViewBag.SharedRecipe.Recipe.Ingredients)
-                    {
-                        <li>@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName</li>
-                    }
-                </ul>
-                @if (ViewBag.SharedRecipe.Recipe.Tags != null && ViewBag.SharedRecipe.Recipe.Tags.Count > 0)
-                {
-                    <h4>Tags</h4>
-                    <ul class="recipe-tags">
-                        @foreach (var tag in ViewBag.SharedRecipe.Recipe.Tags)
-                        {
-                            <li>@tag</li>
-                        }
-                    </ul>
-                }
-            </div>
-        }
     </div>
 </div>
 </div>
@@ -520,9 +488,6 @@
         var currentDiv = document.querySelector('#details > div[style*="display: block"]');
         var addPlannedMealForm = document.getElementById('addPlannedMeal');
         var recipeIdInput = addPlannedMealForm.querySelector('input[name="recipeId"]');
-        var sharedMealForm = document.getElementById('shareMeal');
-        var usernameInput = addPlannedMealForm.querySelector('input[name="txtUsername"]');
-        var shareButton = addPlannedMealForm.querySelector('input[name="ShareRecipe"]');
 
         recipeIdInput.value = recipeId;
         recipeID.value = recipeId;
@@ -536,8 +501,6 @@
         addPlannedMealForm.style.display = 'block';
         cookRecipe.style.display = "block";
         shareRecipe.style.display = "block";
-        sharedMeal.style.display = "block";
-        sharedMealForm.style.display = "block";
     }
 
     var tags = [];

@@ -1706,8 +1706,10 @@ public class HomeController : Controller
     {
         string username = Request.Form["txtUsername"].ToString();
         bool isValid = Database.ContainsUser(username).Count != 0;
-        SharedRecipe duplicate = RecipeDAL.ContainsSharedRecipe(sharedRecipeID);
-        if (duplicate != null)
+        SharedRecipe recipe =
+            new SharedRecipe(
+                RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(sharedRecipeID, Connection.ConnectionString), Connection.ConnectionString), ActiveUser.username, username);
+        if (RecipeDAL.ContainsSharedRecipe(recipe).Count > 0)
         {
             ViewBag.ErrorMessage = "You have already shared this recipe with " + username;
             this.setupForRecipePage();
