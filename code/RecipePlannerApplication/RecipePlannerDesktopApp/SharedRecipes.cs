@@ -13,6 +13,10 @@ using RecipePlannerLibrary;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// The class for the shared Recipes
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class SharedRecipes : Form
     {
         private Recipe selectedRecipe;
@@ -21,6 +25,9 @@ namespace RecipePlannerDesktopApplication
         private readonly int totalPages;
         private List<SharedRecipe> pageOneRecipes;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SharedRecipes"/> class.
+        /// </summary>
         public SharedRecipes()
         {
             InitializeComponent();
@@ -50,27 +57,80 @@ namespace RecipePlannerDesktopApplication
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.page = this.totalPages;
+            var recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            List<SharedRecipe> allIngredientsOnPage = recipes
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
 
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList<SharedRecipe>(list);
+
+            this.ingredientsGridView.DataSource = bindingList;
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
+            if (this.page != this.totalPages)
+            {
+                this.page++;
+                var recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+                List<SharedRecipe> allIngredientsOnPage = recipes
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
 
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<SharedRecipe>(list);
+
+                this.ingredientsGridView.DataSource = bindingList;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.page != 1)
+            {
+                this.page--;
+                var recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+                List<SharedRecipe> allIngredientsOnPage = recipes
+                    .Skip((this.page - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
 
+                this.pageLabel.Text = this.page.ToString();
+                var list = allIngredientsOnPage;
+                var bindingList = new BindingList<SharedRecipe>(list);
+
+                this.ingredientsGridView.DataSource = bindingList;
+
+            }
         }
 
         private void beginningButton_Click(object sender, EventArgs e)
         {
+            this.page = 1;
+            var recipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            List<SharedRecipe> allIngredientsOnPage = recipes
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
 
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList<SharedRecipe>(list);
+
+            this.ingredientsGridView.DataSource = bindingList;
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-
+            var page = new LoginPage();
+            this.Hide();
+            page.Show();
         }
 
         private void ingredientsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -82,14 +142,19 @@ namespace RecipePlannerDesktopApplication
                 DataGridViewRow row = this.ingredientsGridView.Rows[rowIndex];
                 string name = row.Cells[0].Value.ToString();
                 this.selectedRecipe = RecipeDAL.getRecipeByName(name, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
             }
 
-            Hide();
-
-            var detailsPage = new RecipeDetailsPage(this);
-            detailsPage.Show();
         }
 
+        /// <summary>
+        /// Gets the recipe.
+        /// </summary>
+        /// <returns>The selected recipe</returns>
         public Recipe getRecipe()
         {
             return this.selectedRecipe;

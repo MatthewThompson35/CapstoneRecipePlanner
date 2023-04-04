@@ -252,6 +252,15 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Adds the recipe ingredient to the database.
+        /// </summary>
+        /// <param name="recipeId">The recipe identifier.</param>
+        /// <param name="ingredientName">Name of the ingredient.</param>
+        /// <param name="ingredientId">The ingredient identifier.</param>
+        /// <param name="quantity">The quantity.</param>
+        /// <param name="measurement">The measurement.</param>
+        /// <param name="connectionString">The connection string.</param>
         public static void addRecipeIngredient(int recipeId,string ingredientName, int ingredientId, int quantity, string measurement, string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -267,6 +276,13 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Adds the recipe step to the database.
+        /// </summary>
+        /// <param name="recipeId">The recipe identifier.</param>
+        /// <param name="stepNumber">The step number.</param>
+        /// <param name="stepDescription">The step description.</param>
+        /// <param name="connectionString">The connection string.</param>
         public static void addRecipeStep(int recipeId, int stepNumber, string stepDescription, string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -281,6 +297,12 @@ namespace RecipePlannerLibrary.Database
             command.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Adds the recipe tag to the database.
+        /// </summary>
+        /// <param name="recipeId">The recipe identifier.</param>
+        /// <param name="tagName">Name of the tag.</param>
+        /// <param name="connectionString">The connection string.</param>
         public static void addRecipeTag(int recipeId, string tagName, string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -333,7 +355,7 @@ namespace RecipePlannerLibrary.Database
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@sender", MySqlDbType.VarChar).Value = sender;
             command.Parameters.Add("@receiver", MySqlDbType.VarChar).Value = receiver;
-            command.Parameters.Add("@sender", MySqlDbType.Int32).Value = id;
+            command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {

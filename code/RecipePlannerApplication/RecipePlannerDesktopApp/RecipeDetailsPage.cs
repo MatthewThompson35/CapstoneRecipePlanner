@@ -31,6 +31,7 @@ namespace RecipePlannerDesktopApplication
 
         private bool isYesButtonClicked = false;
         private bool isNoButtonClicked = false;
+        private int recipeId;
 
         
         /// <summary>
@@ -99,6 +100,7 @@ namespace RecipePlannerDesktopApplication
         {
             string output = null;
 
+            this.recipeId = this.homepage.GetSelectedRecipe().RecipeId;
             string description = this.homepage.GetSelectedRecipe().Name + Environment.NewLine + this.homepage.GetSelectedRecipe().Description + Environment.NewLine + Environment.NewLine;
 
             string steps = "Steps" + Environment.NewLine;
@@ -123,6 +125,7 @@ namespace RecipePlannerDesktopApplication
         {
             string output = null;
 
+            this.recipeId = this.mealsPage.GetRecipeFromTextBox().RecipeId;
             string description = this.mealsPage.GetRecipeFromTextBox().Name + Environment.NewLine + this.mealsPage.GetRecipeFromTextBox().Description + Environment.NewLine + Environment.NewLine;
 
             string steps = "Steps" + Environment.NewLine;
@@ -133,6 +136,7 @@ namespace RecipePlannerDesktopApplication
             }
 
             string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
+
 
             foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
             {
@@ -147,6 +151,7 @@ namespace RecipePlannerDesktopApplication
         {
             string output = null;
 
+            this.recipeId = this.sharedPage.getRecipe().RecipeId;
             string description = this.sharedPage.getRecipe().Name + Environment.NewLine + this.sharedPage.getRecipe().Description + Environment.NewLine + Environment.NewLine;
 
             string steps = "Steps" + Environment.NewLine;
@@ -525,6 +530,22 @@ namespace RecipePlannerDesktopApplication
             this.cookNoButton.Visible = false;
             this.cookButton.Enabled = true;
             this.isCookedLabel.Visible = false;
+        }
+
+        private void shareRecipeButton_Click(object sender, EventArgs e)
+        {
+            var addSharedPage = new AddSharedRecipe(this);
+            this.Hide();
+            addSharedPage.Show();
+        }
+
+        /// <summary>
+        /// Gets the recipe id for the displayed recipe.
+        /// </summary>
+        /// <returns></returns>
+        public int getRecipeId()
+        {
+            return this.recipeId;
         }
     }
 }
