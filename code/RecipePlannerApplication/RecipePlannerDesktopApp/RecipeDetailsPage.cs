@@ -25,6 +25,7 @@ namespace RecipePlannerDesktopApplication
     {
         private Homepage homepage;
         private PlannedMealsPage mealsPage;
+        private SharedRecipes sharedPage;
         private string selectedDay;
         private string selectedMealType;
 
@@ -66,6 +67,18 @@ namespace RecipePlannerDesktopApplication
         {
             this.mealsPage = mealsPage;
             this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromMealPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
+        }
+
+
+        public RecipeDetailsPage(SharedRecipes sharedPage) : this()
+        {
+            this.sharedPage = sharedPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromSharedPage();
 
 
             this.populateDayComboBoxValues();
@@ -122,6 +135,30 @@ namespace RecipePlannerDesktopApplication
             string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
 
             foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients;
+            return output;
+        }
+
+        private string displayRecipeDetailsFromSharedPage()
+        {
+            string output = null;
+
+            string description = this.sharedPage.getRecipe().Name + Environment.NewLine + this.sharedPage.getRecipe().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = "Steps" + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
             {
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
