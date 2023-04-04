@@ -1,5 +1,7 @@
 ﻿<style>
-    #addForm, #addStepForm {
+    #addForm,
+    #addStepForm,
+    #addTagForm {
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
@@ -9,10 +11,16 @@
         padding: 20px;
     }
 
+    #addForm {
+        height: 500px;
+    }
+
     #addForm input[type="text"],
     #addStepForm input[type="text"],
+    #addTagForm input[type="text"],
     #addStepForm select,
-    #addForm select {
+    #addForm select,
+    #addTagForm select {
         border: 1px solid #e6e6e6;
         border-radius: 5px;
         box-sizing: border-box;
@@ -24,8 +32,10 @@
 
     #addForm input[type="submit"],
     #addStepForm input[type="submit"],
+    #addTagForm input[type="submit"],
     #addStepForm input[type="button"],
-    #addForm input[type="button"] {
+    #addForm input[type="button"],
+    #addTagForm input[type="button"] {
         background-color: #33b5e5;
         border: none;
         border-radius: 5px;
@@ -37,14 +47,16 @@
     }
 
     #addForm #cancelButton,
-    #addStepForm #cancelButton {
+    #addStepForm #cancelButton,
+    #addTagForm #cancelButton {
         background-color: #d9534f;
         color: #fff;
         margin-left: 10px;
     }
 
     #addForm label,
-    #addStepForm label {
+    #addStepForm label,
+    #addTagForm label {
         display: block;
         font-size: 18px;
         font-weight: bold;
@@ -52,10 +64,14 @@
     }
 
     #addForm .form-group,
-    #addStepFrom .form-group { margin-bottom: 15px; }
+    #addStepFrom .form-group,
+    #addTagForm .form-group { 
+        margin-bottom: 15px; 
+    }
 
     #addForm .button-group,
-    #addStepForm .button-group {
+    #addStepForm .button-group,
+    #addTagForm .button-group {
         margin-top: 20px;
         text-align: right;
     }
@@ -121,6 +137,7 @@
     <div class="col-md-12">
         <form id="addRecipe">
             <div class="form-group">
+                <span id="recipe-error" style="color: red;"></span>
                 <label for="recipeName">Recipe Name:</label>
                 <input type="text" name="recipeName" id="recipeName"/>
             </div>
@@ -155,6 +172,19 @@
                     </thead>
                     <tbody>
 
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <h1>Tags</h1>
+                <table id="TagsTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     </tbody>
                 </table>
             </div>
@@ -200,9 +230,17 @@
             </div>
             <button onsubmit="addStep()" class="btn btn-primary page-button" id="addStepButton">Add Step</button>
         </form>
+        <h2>Tags</h2>
+        <form id="addTagForm">
+            <div class="form-group">
+                <label for="recipeName">Recipe Tag:</label>
+                <input type="text" name="recipeTag" id="recipeTag"/>
+            </div>
+            <button onsubmit="addTag()" class="btn btn-primary page-button" id="addTagButton">Add Tag</button>
+        </form>
     </div>
     <form id="buttons">
-        <button onclick="addRecipe()" class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
+        <button class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
         <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
     </form>
 </div>
@@ -232,6 +270,16 @@
         document.getElementById('txtIngredientName').value = '';
         document.getElementById('txtQuantity').value = '';
         document.getElementById('measurement').selectedIndex = 0;
+    });
+    
+    document.getElementById('addTagForm').addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+
+        addTag();
+
+        document.getElementById('recipeTag').value = '';
     });
     
  document.getElementById('addStepForm').addEventListener('submit', function(event) {
@@ -266,8 +314,14 @@
   table.appendChild(row);
 
 }
+    const addButton = document.getElementById('addRecipeButton');
+    addButton.addEventListener('click', function (event) {
+        var errorLabel = document.getElementById('recipe-error');
 
-    function addRecipe() {
+        addRecipe(event);
+    });
+
+    function addRecipe(event) {
         const ingredientsTable = document.getElementById('IngredientsTable');
         const ingredientsTbody = ingredientsTable.getElementsByTagName('tbody')[0];
         const ingredientsRows = ingredientsTbody.getElementsByTagName('tr');
@@ -275,16 +329,25 @@
         const stepsTable = document.getElementById('StepsTable');
         const stepsTbody = stepsTable.getElementsByTagName('tbody')[0];
         const stepsRows = stepsTbody.getElementsByTagName('tr');
-        var errorLabel = document.getElementById('quantity-error');
-        var stepsString = ""
-        var ingredientsString = ""
+        const tagsTable = document.getElementById('TagsTable');
+        const tagsTbody = tagsTable.getElementsByTagName('tbody')[0];
+        const tagsRows = tagsTbody.getElementsByTagName('tr');
+
+        var tagsString = "";
+        var errorLabel = document.getElementById('recipe-error');
+        var stepsString = "";
+        var ingredientsString = "";
         errorLabel.textContent = 'clicked';
-        var step = 1;
-        var ingredient = 1;
-        if (ingredientsRows.length > 0 && stepsRows.length > 0) {
+        const recipeNameInput = document.getElementById('recipeName');
+        const recipeDescriptionInput = document.getElementById('description');
+
+        const recipeName = recipeNameInput.value;
+        const recipeDescription = recipeDescriptionInput.value;
+
+        if (ingredientsRows.length > 0 && tagsRows.length > 0 && stepsRows.length > 0 && recipeName != null && recipeDescription != null) {
             for (let i = 0; i < ingredientsRows.length; i++) {
                 const cells = ingredientsRows[i].getElementsByTagName('td');
-                const ingredientString = `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent}`;
+                var ingredientString = `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent}`;
                 if (i > 0) {
                     ingredientsString += `:${ingredientString}`;
                 } else {
@@ -293,30 +356,66 @@
             }
             for (let i = 0; i < stepsRows.length; i++) {
                 const cells = stepsRows[i].getElementsByTagName('td');
-                const stepString = `${i + 1},${cells[0].textContent}`;
+                var stepString = `${i + 1},${cells[0].textContent}`;
                 if (i > 0) {
                     stepsString += `:${stepString}`;
                 } else {
                     stepsString = stepString;
                 }
             }
+            for (let i = 0; i < tagsRows.length; i++) {
+                const cells = tagsRows[i].getElementsByTagName('td');
+                var tagString = `${cells[0].textContent}`;
+                if (i > 0) {
+                    tagsString += `:${tagString}`;
+                } else {
+                    tagsString = tagString;
+                }
+            }
+            console.log(recipeName);
+            console.log(recipeDescription);
+            console.log('here');
             $.ajax({
                 url: "@Url.Action("AddRecipe", "Home")",
                 method: 'POST',
-                data: { steps: stepsString, ingredients: ingredientsString },
+                data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                 success: function (response) {
                     console.log('Recipe added successfully!');
-                    // Display success message or redirect to another page
                 },
                 error: function (xhr, status, error) {
                     console.log('Error adding recipe:', error);
-                    // Display error message or take other action
                 }
             });
         } else {
-            errorLabel.textContent = 'Both tables must have values!';
+            event.preventDefault();
+            errorLabel.textContent = 'ALL TABLES MUST HAVE VALUES!';
+        }
+    }
+
+    function addTag() {
+        var row = document.createElement('tr');
+        var tag = document.getElementById('recipeTag').value;
+        
+        if (tag.trim() === '') {
+            alert('Please enter a tag.');
             return;
         }
+
+        var tagCell = document.createElement('td');
+        tagCell.innerText = tag;
+        row.appendChild(tagCell);
+
+        var actionsCell = document.createElement('td');
+        var deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.onclick = function () {
+            row.remove();
+        };
+        actionsCell.appendChild(deleteButton);
+        row.appendChild(actionsCell);
+
+        var table = document.getElementById('TagsTable').getElementsByTagName('tbody')[0];
+        table.appendChild(row);
     }
 
 

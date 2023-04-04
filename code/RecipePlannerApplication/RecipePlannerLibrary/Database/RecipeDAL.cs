@@ -211,20 +211,19 @@ namespace RecipePlannerLibrary.Database
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@name", MySqlDbType.VarChar).Value = name;
             command.Parameters.Add("@description", MySqlDbType.VarChar).Value = description;
-            command.Parameters.Add("@description", MySqlDbType.VarChar).Value = description;
             command.ExecuteNonQuery();
         }
 
-        public static void addRecipeIngredient(int recipeId, int ingredientId, int quantity, string measurement, string connectionString)
+        public static void addRecipeIngredient(int recipeId,string ingredientName, int ingredientId, int quantity, string measurement, string connectionString)
         {
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            var query = @"insert into recipe_ingredient(recipeId, ingredientId, quantity, measurement) SELECT r.recipeId, i.ingredientId, i.quantity, ii.measurementType FROM recipe r JOIN ingredient i ON r.recipeId = i.recipeId JOIN ingredient_info ii ON i.ingredientId = ii.ingredientId WHERE r.recipeId = @recipeId AND i.ingredientId = @ingredientId;";
+            var query = @"INSERT INTO ingredient_info (ingredientName, measurementType) SELECT @name, @measurement WHERE NOT EXISTS (SELECT 1 FROM ingredient_info WHERE ingredientName = @name); INSERT INTO recipe_ingredient (recipeID, ingredientID, quantity, measurement) SELECT @recipeID, ingredientID, @quantity, @measurement FROM ingredient_info WHERE ingredientName = @name;";
 
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
-            command.Parameters.Add("@ingredientId", MySqlDbType.Int32).Value = ingredientId;
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = ingredientName;
             command.Parameters.Add("@quantity", MySqlDbType.Int32).Value = quantity;
             command.Parameters.Add("@measurement", MySqlDbType.VarChar).Value = measurement;
             command.ExecuteNonQuery();
@@ -235,12 +234,26 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            var query = @"insert into recipe_step(recipeId, stepNumber, stepDescription) SELECT r.recipeId FROM recipe r JOIN recipe_step rs ON r.recipeId = rs.recipeId WHERE r.recipeId = @recipeId;";
+            var query = @"Insert Into recipe_step (recipeID, stepNumber, stepDescription) values (@recipeId, @stepNumber, @stepDescription)";
             using var command = new MySqlCommand(query, connection);
 
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
             command.Parameters.Add("@stepNumber", MySqlDbType.Int32).Value = stepNumber;
             command.Parameters.Add("@stepDescription", MySqlDbType.VarChar).Value = stepDescription;
+            command.ExecuteNonQuery();
+        }
+
+        public static void addRecipeTag(int recipeId, string tagName, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query = @"insert into recipe_tag(recipeID, tagName) values (@recipeId, @tagName)";
+            using var command = new MySqlCommand(query, connection);
+
+            command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
+            command.Parameters.Add("@tagName", MySqlDbType.VarChar).Value = tagName;
+            command.ExecuteNonQuery();
         }
 
         #endregion

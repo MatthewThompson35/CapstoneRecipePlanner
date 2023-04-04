@@ -9,6 +9,7 @@ using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RecipePlannerWebApplication.Controllers;
 
@@ -449,11 +450,87 @@ public class HomeController : Controller
 
         return View("Index");
     }
-
-    public ActionResult AddRecipe(string recipeName, string description, string steps, string ingredients)
+    [HttpPost]
+    public ActionResult AddRecipe(string recipeName, string description, string steps, string ingredients, string tags)
     {
-        this.setupForRecipePageAll(1);
-        return View("RecipePage");
+        Recipe exists = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+        if (exists.Name == null)
+        {
+            RecipeDAL.addRecipe(recipeName, description, Connection.ConnectionString);
+
+            List<RecipeStep> recipeSteps = new List<RecipeStep>();
+            List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+            List<string> recipeTags = new List<string>();
+            List<string> tagsList = new List<string>();
+            string[] tagsSubstrings = tags.Split(':');
+            foreach (string substring in tagsSubstrings)
+            {
+                tagsList.Add(substring);
+            }
+
+            foreach (string tag in tagsList)
+            {
+                string[] tagsStrings = tag.Split(',');
+                for (int i = 0; i < 1; i++)
+                {
+                    string Rtag = tagsStrings[0];
+                    recipeTags.Add(Rtag);
+                }
+            }
+            List<string> stepsList = new List<string>();
+            string[] stepsSubstrings = steps.Split(':');
+            foreach (string substring in stepsSubstrings)
+            {
+                stepsList.Add(substring);
+            }
+
+            foreach (string step in stepsList)
+            {
+                string[] stepsStrings = step.Split(',');
+                for (int i = 0; i < 1; i++)
+                {
+                    RecipeStep Rstep = new RecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, Int32.Parse(stepsStrings[0]), stepsStrings[1]);
+                    recipeSteps.Add(Rstep);
+                }
+            }
+
+            List<string> ingredientsList = new List<string>();
+            string[] ingredientsSubstrings = ingredients.Split(':');
+            foreach (string substring in ingredientsSubstrings)
+            {
+                ingredientsList.Add(substring);
+            }
+
+            foreach (string ing in ingredientsList)
+            {
+                string[] IngStrings = ing.Split(',');
+                for (int i = 0; i < 1; i++)
+                {
+                    var name = IngStrings[0];
+                    var quantity = IngStrings[1];
+                    var measurement = IngStrings[2];
+                    RecipeIngredient Ring = new RecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, IngStrings[0], Int32.Parse(IngStrings[1]), IngStrings[2]);
+                    recipeIngredients.Add(Ring);
+                }
+            }
+
+            foreach (var tag in recipeTags)
+            {
+                RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, tag, Connection.ConnectionString);
+            }
+
+            foreach (var step in recipeSteps)
+            {
+                RecipeDAL.addRecipeStep((int)step.recipeId, step.stepNumber, step.stepDescription, Connection.ConnectionString);
+            }
+
+            foreach (var ing in recipeIngredients)
+            {
+                RecipeDAL.addRecipeIngredient((int)ing.RecipeId, ing.IngredientName, IngredientDAL.getIngredientId(ing.IngredientName),(int)ing.Quantity, ing.Measurement, Connection.ConnectionString);
+            }
+        }
+        this.setupShoppingListPage(1);
+        return View("ShoppingList");
     }
 
     /// <summary>
