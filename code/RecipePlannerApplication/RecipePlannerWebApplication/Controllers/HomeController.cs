@@ -1604,6 +1604,13 @@ public class HomeController : Controller
         return View("IngredientsPage");
     }
 
+    [HttpPost]
+    public IActionResult CookMealConfirmation(int recipeID)
+    {
+        ViewBag.id = recipeID;
+        return View("CookMealConfirmation");
+    }
+
     /// <summary>
     ///     Opens the share recipe form
     /// </summary>
@@ -1626,7 +1633,7 @@ public class HomeController : Controller
         {
             ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
             this.setupForRecipePage();
-            return RedirectToAction("RecipePage");
+            return View("RecipePage");
         }
     }
 

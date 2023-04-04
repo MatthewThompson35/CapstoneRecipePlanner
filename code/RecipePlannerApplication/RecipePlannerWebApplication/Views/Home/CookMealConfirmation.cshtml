@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Confirmation Message</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-yes, .button-no {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-no {
+            background-color: #f44336;
+        }
+
+            .button-yes:hover, .button-no:hover {
+                background-color: #3e8e41;
+            }
+
+            .button-yes:active, .button-no:active {
+                background-color: #3e8e41;
+            }
+    </style>
+</head>
+<body>
+<div class="center">
+    <h1>Are you sure you would like to cook this meal? Ingredients will be removed</h1>
+    <div class="button-container">
+            <form method="post" action="@Url.Action("CookMeal", "Home")" id="CookRecipe">
+            <input type="hidden" id="recipeID" name="recipeID" value="@ViewBag.id">
+            <button type="submit" class="button-yes">Yes</button>
+        </form>
+        <form>
+                <button type="button" class="button-no" onclick="goBack()">No</button>
+        </form>
+    </div>
+</div>
+</body>
+
+<script>
+    var recipeID = document.getElementById('recipeID');
+    recipeID.value = recipeId;
+
+    function goBack() {
+        window.history.back();
+    }
+
+</script>
+</html>
