@@ -399,6 +399,26 @@ namespace RecipePlannerLibrary.Database
             return shared;
         }
 
+        /// <summary>
+        /// Removes the recipe.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="connectionString">The connection string.</param>
+        public static void removeRecipe(int id, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query =
+                @"Delete * from recipe where recipeID = @id";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@id", MySqlDbType.VarChar).Value = id;
+
+            command.ExecuteNonQuery();
+        }
+
+
+
         #endregion
     }
 }

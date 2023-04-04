@@ -22,5 +22,20 @@
             Assert.AreEqual(stepNumber, step.stepNumber);
             Assert.AreEqual(stepDescription, step.stepDescription);
         }
+
+        [TestMethod]
+        public void Constructor_SetsPropertiesCorrectly()
+        {
+            // Arrange
+            int expectedStepNumber = 1;
+            string expectedStepDescription = "Preheat the oven to 350°F.";
+
+            // Act
+            RecipeStep recipeStep = new RecipeStep(expectedStepNumber, expectedStepDescription);
+
+            // Assert
+            Assert.AreEqual(expectedStepNumber, recipeStep.stepNumber);
+            Assert.AreEqual(expectedStepDescription, recipeStep.stepDescription);
+        }
     }
 }
