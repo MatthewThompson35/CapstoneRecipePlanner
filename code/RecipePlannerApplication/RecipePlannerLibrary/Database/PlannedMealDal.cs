@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerLibrary.Database
 {
@@ -24,12 +25,13 @@ namespace RecipePlannerLibrary.Database
         {
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
-            var query = @"Insert into planned_recipe values (@recipeId, @day, @type, @date)";
+            var query = @"Insert into planned_recipe values (@recipeId, @day, @type, @date, @user)";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
             command.Parameters.Add("@day", MySqlDbType.VarChar).Value = day;
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
 
             connection.Close();
