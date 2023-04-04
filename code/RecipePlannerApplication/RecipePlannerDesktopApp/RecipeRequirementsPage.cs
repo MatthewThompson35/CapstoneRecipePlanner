@@ -16,13 +16,10 @@ namespace RecipePlannerDesktopApplication
     {
         private List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
 
-        //public List<RecipeIngredient> recipeIngredientList = new List<RecipeIngredient>();
         public List<RecipeStep> recipeSteps { get; set; }
         public List<string> tags { get; set; }
 
         public RecipePage recipePage { get; }
-
-
 
         /// <summary>
         ///     Initializes the recipe requirements page.
@@ -31,20 +28,45 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
 
-            //recipeIngredients = new List<RecipeIngredient>();
+            recipeIngredients = new List<RecipeIngredient>();
             recipeSteps = new List<RecipeStep>();
             tags = new List<string>();
-
-            recipePage = new RecipePage();
-
-            //this.recipeIngredientList = this.recipeIngredients;
-
-            recipePage.recipeIngredients = this.recipeIngredients;
         }
 
+        /// <summary>
+        ///     Initializes the recipe requirements page based on the recipe page.
+        /// </summary>
+        /// <param name="recipePage">the recipe page.</param>
+        public RecipeRequirementsPage(RecipePage recipePage) :this()
+        {
+            this.recipePage = recipePage;
+        }
+
+        /// <summary>
+        ///     Gets the recipe ingredients
+        /// </summary>
+        /// <returns>the recipe ingredients</returns>
         public List<RecipeIngredient> GetRecipeIngredients()
         {
             return this.recipeIngredients;
+        }
+
+        /// <summary>
+        ///     Gets the recipe steps.
+        /// </summary>
+        /// <returns>the recipe steps</returns>
+        public List<RecipeStep> GetRecipeSteps()
+        {
+            return this.recipeSteps;
+        }
+
+        /// <summary>
+        ///     Gets the tags.
+        /// </summary>
+        /// <returns>the tags</returns>
+        public List<string> GetTags()
+        {
+            return this.tags;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -59,9 +81,19 @@ namespace RecipePlannerDesktopApplication
         private void confirmButton_Click(object sender, EventArgs e)
         {
 
-            foreach (var ingredient in this.recipePage.recipeIngredients)
+            foreach (var ingredient in this.recipeIngredients)
             {
                 recipePage.AddRowToIngredientGridView(ingredient.IngredientName, Convert.ToString(ingredient.Quantity), Convert.ToString(ingredient.Measurement));
+            }
+
+            foreach (var step in this.recipeSteps)
+            {
+                recipePage.AddRowToStepsGridView(Convert.ToString(step.stepNumber), step.stepDescription);
+            }
+
+            foreach (var tag in this.tags)
+            {
+                recipePage.AddRowToTagGridView(tag);
             }
 
             this.Hide();
@@ -106,8 +138,7 @@ namespace RecipePlannerDesktopApplication
 
             RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
 
-            recipePage.recipeIngredients.Add(recipeIngredient);
-            //this.recipeIngredients.Add(recipeIngredient);
+            this.recipeIngredients.Add(recipeIngredient);
 
             this.ingredientSuccessLabel.Visible = true;
 
@@ -156,8 +187,14 @@ namespace RecipePlannerDesktopApplication
                 this.errorStepsFieldLabel.Visible = false;
                 stepDescription = this.stepDescriptionTextBox.Text;
             }
-           
 
+            RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
+
+            recipeSteps.Add(recipeStep);
+
+            this.stepsSuccessLabel.Visible = true;
+
+            this.clearStepsFields();
 
         }
 
@@ -174,6 +211,12 @@ namespace RecipePlannerDesktopApplication
                 this.errorTagFieldLabel.Visible = false;
                 tag = this.tagNameTextBox.Text;
             }
+
+            tags.Add(tag);
+
+            this.tagSuccessLabel.Visible = true;
+
+            this.clearTagNameField();
         }
     }
 }

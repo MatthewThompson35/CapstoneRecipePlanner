@@ -38,5 +38,11 @@ namespace RecipePlannerLibrary.Models
             this.stepNumber = stepNumber;
             this.stepDescription = stepDescription;
         }
+
+        public RecipeStep(int stepNumber, string stepDescription)
+        {
+            this.stepNumber = stepNumber;
+            this.stepDescription = stepDescription;
+        }
     }
 }
