@@ -5,7 +5,6 @@ using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 using RecipePlannerWebApplication.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RecipePlannerWebApplication.Controllers;
 
@@ -501,87 +500,115 @@ public class HomeController : Controller
 
         return View("Index");
     }
+
+    /// <summary>
+    ///     Adds the recipe to the database.
+    /// </summary>
+    /// <param name="recipeName">Name of the recipe.</param>
+    /// <param name="description">The description.</param>
+    /// <param name="steps">The steps.</param>
+    /// <param name="ingredients">The ingredients.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns>The Recipe Page or the login page on database error</returns>
     [HttpPost]
     public ActionResult AddRecipe(string recipeName, string description, string steps, string ingredients, string tags)
     {
-        Recipe exists = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-        if (exists.Name == null)
+        try
         {
-            RecipeDAL.addRecipe(recipeName, description, Connection.ConnectionString);
-
-            List<RecipeStep> recipeSteps = new List<RecipeStep>();
-            List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
-            List<string> recipeTags = new List<string>();
-            List<string> tagsList = new List<string>();
-            string[] tagsSubstrings = tags.Split(':');
-            foreach (string substring in tagsSubstrings)
+            var exists = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+            if (exists.Name == null)
             {
-                tagsList.Add(substring);
-            }
+                RecipeDAL.addRecipe(recipeName, description, Connection.ConnectionString);
 
-            foreach (string tag in tagsList)
-            {
-                string[] tagsStrings = tag.Split(',');
-                for (int i = 0; i < 1; i++)
+                var recipeSteps = new List<RecipeStep>();
+                var recipeIngredients = new List<RecipeIngredient>();
+                var recipeTags = new List<string>();
+                var tagsList = new List<string>();
+                var tagsSubstrings = tags.Split(':');
+                foreach (var substring in tagsSubstrings)
                 {
-                    string Rtag = tagsStrings[0];
-                    recipeTags.Add(Rtag);
+                    tagsList.Add(substring);
+                }
+
+                foreach (var tag in tagsList)
+                {
+                    var tagsStrings = tag.Split(',');
+                    for (var i = 0; i < 1; i++)
+                    {
+                        var Rtag = tagsStrings[0];
+                        recipeTags.Add(Rtag);
+                    }
+                }
+
+                var stepsList = new List<string>();
+                var stepsSubstrings = steps.Split(':');
+                foreach (var substring in stepsSubstrings)
+                {
+                    stepsList.Add(substring);
+                }
+
+                foreach (var step in stepsList)
+                {
+                    var stepsStrings = step.Split(',');
+                    for (var i = 0; i < 1; i++)
+                    {
+                        var Rstep =
+                            new RecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId,
+                                int.Parse(stepsStrings[0]), stepsStrings[1]);
+                        recipeSteps.Add(Rstep);
+                    }
+                }
+
+                var ingredientsList = new List<string>();
+                var ingredientsSubstrings = ingredients.Split(':');
+                foreach (var substring in ingredientsSubstrings)
+                {
+                    ingredientsList.Add(substring);
+                }
+
+                foreach (var ing in ingredientsList)
+                {
+                    var IngStrings = ing.Split(',');
+                    for (var i = 0; i < 1; i++)
+                    {
+                        var name = IngStrings[0];
+                        var quantity = IngStrings[1];
+                        var measurement = IngStrings[2];
+                        var Ring = new RecipeIngredient(
+                            RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, IngStrings[0],
+                            int.Parse(IngStrings[1]), IngStrings[2]);
+                        recipeIngredients.Add(Ring);
+                    }
+                }
+
+                foreach (var tag in recipeTags)
+                {
+                    RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId,
+                        tag, Connection.ConnectionString);
+                }
+
+                foreach (var step in recipeSteps)
+                {
+                    RecipeDAL.addRecipeStep((int) step.recipeId, step.stepNumber, step.stepDescription,
+                        Connection.ConnectionString);
+                }
+
+                foreach (var ing in recipeIngredients)
+                {
+                    RecipeDAL.addRecipeIngredient(ing.RecipeId, ing.IngredientName,
+                        IngredientDAL.getIngredientId(ing.IngredientName), ing.Quantity, ing.Measurement,
+                        Connection.ConnectionString);
                 }
             }
-            List<string> stepsList = new List<string>();
-            string[] stepsSubstrings = steps.Split(':');
-            foreach (string substring in stepsSubstrings)
-            {
-                stepsList.Add(substring);
-            }
 
-            foreach (string step in stepsList)
-            {
-                string[] stepsStrings = step.Split(',');
-                for (int i = 0; i < 1; i++)
-                {
-                    RecipeStep Rstep = new RecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, Int32.Parse(stepsStrings[0]), stepsStrings[1]);
-                    recipeSteps.Add(Rstep);
-                }
-            }
-
-            List<string> ingredientsList = new List<string>();
-            string[] ingredientsSubstrings = ingredients.Split(':');
-            foreach (string substring in ingredientsSubstrings)
-            {
-                ingredientsList.Add(substring);
-            }
-
-            foreach (string ing in ingredientsList)
-            {
-                string[] IngStrings = ing.Split(',');
-                for (int i = 0; i < 1; i++)
-                {
-                    var name = IngStrings[0];
-                    var quantity = IngStrings[1];
-                    var measurement = IngStrings[2];
-                    RecipeIngredient Ring = new RecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, IngStrings[0], Int32.Parse(IngStrings[1]), IngStrings[2]);
-                    recipeIngredients.Add(Ring);
-                }
-            }
-
-            foreach (var tag in recipeTags)
-            {
-                RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, tag, Connection.ConnectionString);
-            }
-
-            foreach (var step in recipeSteps)
-            {
-                RecipeDAL.addRecipeStep((int)step.recipeId, step.stepNumber, step.stepDescription, Connection.ConnectionString);
-            }
-
-            foreach (var ing in recipeIngredients)
-            {
-                RecipeDAL.addRecipeIngredient((int)ing.RecipeId, ing.IngredientName, IngredientDAL.getIngredientId(ing.IngredientName),(int)ing.Quantity, ing.Measurement, Connection.ConnectionString);
-            }
+            return View("Index");
         }
-        this.setupShoppingListPage(1);
-        return View("ShoppingList");
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+
+        return View("Index");
     }
 
     /// <summary>
@@ -660,7 +687,7 @@ public class HomeController : Controller
     /// <summary>
     ///     Increments the quantity of the shopping list ingredient with the given id.
     /// </summary>
-    /// <param name="id">The id of the ingredient to decrement quantity for.</param>
+    /// <param name="id">The id of the ingredient to increment quantity for.</param>
     /// <param name="page"> The current page of the ingredient</param>
     /// <precondition>none</precondition>
     /// <postcondition>Quantity will be incremented in the database</postcondition>
@@ -855,6 +882,10 @@ public class HomeController : Controller
         }
     }
 
+    /// <summary>
+    ///     Goes to add recipes page.
+    /// </summary>
+    /// <returns> The add recipes page or login on connection error</returns>
     public ActionResult goToAddRecipesPage()
     {
         try
@@ -1441,39 +1472,40 @@ public class HomeController : Controller
         return View("PlannedMealsPage");
     }
 
+    /// <summary>
+    ///     Purchases all shopping list and adds it to pantry.
+    /// </summary>
+    /// <returns>Ingredients Page or login on bag connection</returns>
     public ActionResult purchaseAllShoppingList()
     {
-        List<Ingredient> list = ShoppingListDAL.getIngredients();
-        List<Ingredient> pantry = IngredientDAL.getIngredients();
-
-        foreach (var ingredient in list)
-        {
-            var found = false;
-            // check if ingredient is in the pantry
-            foreach (var pantryIngredient in pantry)
-            {
-                if (pantryIngredient.id.Equals(ingredient.id))
-                {
-                    // ingredient is in pantry, add quantity
-                    var quantity = (int) pantryIngredient.quantity + (int) ingredient.quantity;
-                    found = true;
-                    IngredientDAL.updateQuantity((int) pantryIngredient.id, quantity);
-                    break;
-                }
-            }
-
-            // ingredient is not in pantry, add to pantry
-            if (!found)
-            {
-                IngredientDAL.addIngredient(ingredient.name, (int) ingredient.quantity, ingredient.measurement,
-                    Connection.ConnectionString);
-            }
-
-            ShoppingListDAL.removeAll(Connection.ConnectionString);
-        }
-
         try
         {
+            List<Ingredient> list = ShoppingListDAL.getIngredients();
+            List<Ingredient> pantry = IngredientDAL.getIngredients();
+
+            foreach (var ingredient in list)
+            {
+                var found = false;
+                foreach (var pantryIngredient in pantry)
+                {
+                    if (pantryIngredient.id.Equals(ingredient.id))
+                    {
+                        var quantity = (int) pantryIngredient.quantity + (int) ingredient.quantity;
+                        found = true;
+                        IngredientDAL.updateQuantity((int) pantryIngredient.id, quantity);
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    IngredientDAL.addIngredient(ingredient.name, (int) ingredient.quantity, ingredient.measurement,
+                        Connection.ConnectionString);
+                }
+
+                ShoppingListDAL.removeAll(Connection.ConnectionString);
+            }
+
             this.setupIngredientsPage(1);
             return View("IngredientsPage");
         }
@@ -1688,6 +1720,11 @@ public class HomeController : Controller
         return View("IngredientsPage");
     }
 
+    /// <summary>
+    /// Takes you to cook meal confirmation.
+    /// </summary>
+    /// <param name="recipeID">The recipe identifier.</param>
+    /// <returns>Cook meal confirmation page</returns>
     [HttpPost]
     public IActionResult CookMealConfirmation(int recipeID)
     {
@@ -1704,17 +1741,19 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult ShareMeal(int sharedRecipeID)
     {
-        string username = Request.Form["txtUsername"].ToString();
-        bool isValid = Database.ContainsUser(username).Count != 0;
-        SharedRecipe recipe =
+        var username = Request.Form["txtUsername"].ToString();
+        var isValid = Database.ContainsUser(username).Count != 0;
+        var recipe =
             new SharedRecipe(
-                RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(sharedRecipeID, Connection.ConnectionString), Connection.ConnectionString), ActiveUser.username, username);
+                RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(sharedRecipeID, Connection.ConnectionString),
+                    Connection.ConnectionString), ActiveUser.username, username);
         if (RecipeDAL.ContainsSharedRecipe(recipe).Count > 0)
         {
             ViewBag.ErrorMessage = "You have already shared this recipe with " + username;
             this.setupForRecipePage();
             return View("RecipePage");
         }
+
         if (isValid)
         {
             ViewBag.ErrorMessage = "";
@@ -1722,26 +1761,29 @@ public class HomeController : Controller
             TempData["SharedRecipeID"] = sharedRecipeID;
             return RedirectToAction("RecipePage");
         }
-        else
-        {
-            ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
-            this.setupForRecipePage();
-            return View("RecipePage");
-        }
+
+        ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
+        this.setupForRecipePage();
+        return View("RecipePage");
     }
 
+    /// <summary>
+    /// Shows the recipe page with shared recipe.
+    /// </summary>
+    /// <returns>The current recipe page</returns>
     public IActionResult RecipePage()
     {
-        int sharedRecipeID = 0;
+        var sharedRecipeID = 0;
         if (TempData["SharedRecipeID"] != null)
         {
-            sharedRecipeID = (int)TempData["SharedRecipeID"];
+            sharedRecipeID = (int) TempData["SharedRecipeID"];
         }
+
         List<SharedRecipe> allRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
-        SharedRecipe sharedRecipe = allRecipes.FirstOrDefault(r => r.Recipe.RecipeId == sharedRecipeID);
+        var sharedRecipe = allRecipes.FirstOrDefault(r => r.Recipe.RecipeId == sharedRecipeID);
         ViewBag.AllRecipes = allRecipes;
         ViewBag.SharedRecipe = sharedRecipe;
-        
+
         this.setupForRecipePage();
         return View();
     }
