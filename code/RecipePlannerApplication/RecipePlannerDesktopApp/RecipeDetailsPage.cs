@@ -243,7 +243,17 @@ namespace RecipePlannerDesktopApplication
         /// <returns>the current recipe from the homepage selection.</returns>
         public Recipe getCurrentRecipe()
         {
-            return this.homepage.GetSelectedRecipe();
+            if (this.homepage != null)
+            {
+                return this.homepage.GetSelectedRecipe();
+            } else if (this.mealsPage != null)
+            {
+                return this.mealsPage.GetRecipeFromTextBox();
+            }
+            else
+            {
+                return this.sharedPage.getRecipe();
+            }
         }
 
         private void populateDayComboBoxValues()

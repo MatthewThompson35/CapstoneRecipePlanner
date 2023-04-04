@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
+            this.recipeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.senderUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.beginningButton = new System.Windows.Forms.Button();
@@ -37,9 +40,13 @@
             this.pageLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
-            this.recipeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.senderUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewMealPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewShoppingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewSharedRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
+            this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ingredientsGridView
@@ -60,6 +67,22 @@
             this.ingredientsGridView.Size = new System.Drawing.Size(400, 400);
             this.ingredientsGridView.TabIndex = 26;
             this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
+            // 
+            // recipeName
+            // 
+            this.recipeName.DataPropertyName = "recipeName";
+            this.recipeName.HeaderText = "Recipe Name";
+            this.recipeName.MinimumWidth = 6;
+            this.recipeName.Name = "recipeName";
+            this.recipeName.Width = 199;
+            // 
+            // senderUsername
+            // 
+            this.senderUsername.DataPropertyName = "senderUsername";
+            this.senderUsername.HeaderText = "Sender Username";
+            this.senderUsername.MinimumWidth = 6;
+            this.senderUsername.Name = "senderUsername";
+            this.senderUsername.Width = 199;
             // 
             // label1
             // 
@@ -146,27 +169,49 @@
             this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.serverErrorLabel.Visible = false;
             // 
-            // recipeName
+            // plannerContextMenuStrip
             // 
-            this.recipeName.DataPropertyName = "recipeName";
-            this.recipeName.HeaderText = "Recipe Name";
-            this.recipeName.MinimumWidth = 6;
-            this.recipeName.Name = "recipeName";
-            this.recipeName.Width = 199;
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewMealPlanToolStripMenuItem,
+            this.viewShoppingListToolStripMenuItem,
+            this.viewSharedRecipesToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(182, 70);
             // 
-            // senderUsername
+            // viewMealPlanToolStripMenuItem
             // 
-            this.senderUsername.DataPropertyName = "senderUsername";
-            this.senderUsername.HeaderText = "Sender Username";
-            this.senderUsername.MinimumWidth = 6;
-            this.senderUsername.Name = "senderUsername";
-            this.senderUsername.Width = 199;
+            this.viewMealPlanToolStripMenuItem.Name = "viewMealPlanToolStripMenuItem";
+            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.viewMealPlanToolStripMenuItem.Text = "View Meal Plan";
+            // 
+            // viewShoppingListToolStripMenuItem
+            // 
+            this.viewShoppingListToolStripMenuItem.Name = "viewShoppingListToolStripMenuItem";
+            this.viewShoppingListToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.viewShoppingListToolStripMenuItem.Text = "View Shopping List";
+            // 
+            // viewSharedRecipesToolStripMenuItem
+            // 
+            this.viewSharedRecipesToolStripMenuItem.Name = "viewSharedRecipesToolStripMenuItem";
+            this.viewSharedRecipesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.viewSharedRecipesToolStripMenuItem.Text = "View Shared Recipes";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 37;
+            this.button2.Text = "Back";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // SharedRecipes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.serverErrorLabel);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.button3);
@@ -179,6 +224,7 @@
             this.Name = "SharedRecipes";
             this.Text = "SharedRecipes";
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
+            this.plannerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,5 +245,11 @@
         private Label serverErrorLabel;
         private DataGridViewTextBoxColumn recipeName;
         private DataGridViewTextBoxColumn recipe;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem viewMealPlanToolStripMenuItem;
+        private ToolStripMenuItem viewShoppingListToolStripMenuItem;
+        private ToolStripMenuItem viewSharedRecipesToolStripMenuItem;
+        private Button button2;
     }
 }
