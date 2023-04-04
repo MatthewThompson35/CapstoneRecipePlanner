@@ -195,6 +195,7 @@
     <div class="col-md-6">
         <form id="addForm">
             <div class="form-group">
+                <span id="ingredient-error" style="color: red;"></span>
                 <label for="txtIngredientName">Ingredient Name:</label>
                 <input type="text" name="txtIngredientName" id="txtIngredientName"/>
             </div>
@@ -233,6 +234,7 @@
         <h2>Tags</h2>
         <form id="addTagForm">
             <div class="form-group">
+                <span id="tag-error" style="color: red;"></span>
                 <label for="recipeName">Recipe Tag:</label>
                 <input type="text" name="recipeTag" id="recipeTag"/>
             </div>
@@ -240,7 +242,7 @@
         </form>
     </div>
     <form id="buttons">
-        <button class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
+        <button asp-action="goToRecipePage" class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
         <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
     </form>
 </div>
@@ -393,93 +395,117 @@
     }
 
     function addTag() {
-        var row = document.createElement('tr');
-        var tag = document.getElementById('recipeTag').value;
-        
-        if (tag.trim() === '') {
+        var tag = document.getElementById('recipeTag').value.trim();
+        document.getElementById('tag-error').innerText = '';
+        if (tag === '') {
             alert('Please enter a tag.');
             return;
         }
+
+        var table = document.getElementById('TagsTable');
+        var tags = table.querySelectorAll('tbody tr td:first-child');
+
+        for (var i = 0; i < tags.length; i++) {
+            if (tags[i].innerText.toLowerCase() === tag.toLowerCase()) {
+                document.getElementById('tag-error').innerText = 'Tag already exists.';
+                return;
+            }
+        }
+
+        var row = document.createElement('tr');
 
         var tagCell = document.createElement('td');
         tagCell.innerText = tag;
         row.appendChild(tagCell);
 
         var actionsCell = document.createElement('td');
+
         var deleteButton = document.createElement('button');
         deleteButton.innerText = 'Delete';
         deleteButton.onclick = function () {
             row.remove();
         };
+
         actionsCell.appendChild(deleteButton);
         row.appendChild(actionsCell);
 
-        var table = document.getElementById('TagsTable').getElementsByTagName('tbody')[0];
-        table.appendChild(row);
+        table.getElementsByTagName('tbody')[0].appendChild(row);
+
+        document.getElementById('tag-error').innerText = '';
     }
 
 
-function addIngredient() {
-  var name = document.getElementById('txtIngredientName').value;
-  var quantity = document.getElementById('txtQuantity').value;
-  var measurement = document.getElementById('measurement').value;
-  
-  var errorLabel = document.getElementById('quantity-error');
-            if (!errorLabel) {
-              errorLabel = document.createElement('span');
-              errorLabel.id = 'quantity-error';
-              errorLabel.style.color = 'red';
-              var quantityInput = document.getElementById('txtQuantity');
-              quantityInput.parentNode.insertBefore(errorLabel, quantityInput.nextSibling);
-            }
-            errorLabel.textContent = '';
+    function addIngredient() {
+        var name = document.getElementById('txtIngredientName').value;
+        var quantity = document.getElementById('txtQuantity').value;
+        var measurement = document.getElementById('measurement').value;
+
+        var errorLabel = document.getElementById('quantity-error');
+        if (!errorLabel) {
+            errorLabel = document.createElement('span');
+            errorLabel.id = 'quantity-error';
+            errorLabel.style.color = 'red';
+            var quantityInput = document.getElementById('txtQuantity');
+            quantityInput.parentNode.insertBefore(errorLabel, quantityInput.nextSibling);
+        }
+        errorLabel.textContent = '';
         if (isNaN(quantity)) {
             var errorLabel = document.getElementById('quantity-error');
             if (!errorLabel) {
-              errorLabel = document.createElement('span');
-              errorLabel.id = 'quantity-error';
-              errorLabel.style.color = 'red';
-              var quantityInput = document.getElementById('txtQuantity');
-              quantityInput.parentNode.insertBefore(errorLabel, quantityInput.nextSibling);
+                errorLabel = document.createElement('span');
+                errorLabel.id = 'quantity-error';
+                errorLabel.style.color = 'red';
+                var quantityInput = document.getElementById('txtQuantity');
+                quantityInput.parentNode.insertBefore(errorLabel, quantityInput.nextSibling);
             }
             errorLabel.textContent = 'Quantity must be an integer.';
-            return; 
+            return;
+        }
+
+        var table = document.getElementById('IngredientsTable');
+        var rows = table.querySelectorAll('tbody tr');
+        var foundRow = null;
+
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].cells[0].innerText.toLowerCase() === name.toLowerCase()) {
+                foundRow = rows[i];
+                break;
             }
+        }
 
+        if (foundRow) {
+            var existingQuantity = parseInt(foundRow.cells[1].innerText);
+            foundRow.cells[1].innerText = existingQuantity + parseInt(quantity);
+        } else {
+            var row = document.createElement('tr');
 
-  var row = document.createElement('tr');
+            var nameCell = document.createElement('td');
+            nameCell.innerText = name;
+            row.appendChild(nameCell);
 
+            var quantityCell = document.createElement('td');
+            quantityCell.innerText = quantity;
+            row.appendChild(quantityCell);
 
-  var nameCell = document.createElement('td');
-  nameCell.innerText = name;
-  row.appendChild(nameCell);
+            var measurementCell = document.createElement('td');
+            measurementCell.innerText = measurement;
+            row.appendChild(measurementCell);
 
-  var quantityCell = document.createElement('td');
-  quantityCell.innerText = quantity;
-  row.appendChild(quantityCell);
+            var actionsCell = document.createElement('td');
+            var deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.onclick = function () {
+                row.remove();
+            };
+            actionsCell.appendChild(deleteButton);
+            row.appendChild(actionsCell);
 
-  var measurementCell = document.createElement('td');
-  measurementCell.innerText = measurement;
-  row.appendChild(measurementCell);
+            table.getElementsByTagName('tbody')[0].appendChild(row);
+        }
 
-
-  var actionsCell = document.createElement('td');
-  var deleteButton = document.createElement('button');
-  deleteButton.innerText = 'Delete';
-  deleteButton.onclick = function() {
-    row.remove();
-  };
-  actionsCell.appendChild(deleteButton);
-  row.appendChild(actionsCell);
-
-
-  var table = document.getElementById('IngredientsTable').getElementsByTagName('tbody')[0];
-  table.appendChild(row);
-
-  document.getElementById('txtIngredientName').value = '';
-  document.getElementById('txtQuantity').value = '';
-
-}
+        document.getElementById('txtIngredientName').value = '';
+        document.getElementById('txtQuantity').value = '';
+    }
 
 
 
