@@ -25,11 +25,13 @@ namespace RecipePlannerDesktopApplication
     {
         private Homepage homepage;
         private PlannedMealsPage mealsPage;
+        private SharedRecipes sharedPage;
         private string selectedDay;
         private string selectedMealType;
 
         private bool isYesButtonClicked = false;
         private bool isNoButtonClicked = false;
+        private int recipeId;
 
         
         /// <summary>
@@ -73,6 +75,18 @@ namespace RecipePlannerDesktopApplication
             this.populateWeekComboBoxValues();
         }
 
+
+        public RecipeDetailsPage(SharedRecipes sharedPage) : this()
+        {
+            this.sharedPage = sharedPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromSharedPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
+        }
+
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -86,6 +100,7 @@ namespace RecipePlannerDesktopApplication
         {
             string output = null;
 
+            this.recipeId = this.homepage.GetSelectedRecipe().RecipeId;
             string description = this.homepage.GetSelectedRecipe().Name + Environment.NewLine + this.homepage.GetSelectedRecipe().Description + Environment.NewLine + Environment.NewLine;
 
             string steps = "Steps" + Environment.NewLine;
@@ -110,6 +125,7 @@ namespace RecipePlannerDesktopApplication
         {
             string output = null;
 
+            this.recipeId = this.mealsPage.GetRecipeFromTextBox().RecipeId;
             string description = this.mealsPage.GetRecipeFromTextBox().Name + Environment.NewLine + this.mealsPage.GetRecipeFromTextBox().Description + Environment.NewLine + Environment.NewLine;
 
             string steps = "Steps" + Environment.NewLine;
@@ -121,7 +137,33 @@ namespace RecipePlannerDesktopApplication
 
             string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
 
+
             foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients;
+            return output;
+        }
+
+        private string displayRecipeDetailsFromSharedPage()
+        {
+            string output = null;
+
+            this.recipeId = this.sharedPage.getRecipe().RecipeId;
+            string description = this.sharedPage.getRecipe().Name + Environment.NewLine + this.sharedPage.getRecipe().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = "Steps" + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + ". " + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + "Ingredients" + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
             {
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
@@ -201,7 +243,17 @@ namespace RecipePlannerDesktopApplication
         /// <returns>the current recipe from the homepage selection.</returns>
         public Recipe getCurrentRecipe()
         {
-            return this.homepage.GetSelectedRecipe();
+            if (this.homepage != null)
+            {
+                return this.homepage.GetSelectedRecipe();
+            } else if (this.mealsPage != null)
+            {
+                return this.mealsPage.GetRecipeFromTextBox();
+            }
+            else
+            {
+                return this.sharedPage.getRecipe();
+            }
         }
 
         private void populateDayComboBoxValues()
@@ -488,6 +540,22 @@ namespace RecipePlannerDesktopApplication
             this.cookNoButton.Visible = false;
             this.cookButton.Enabled = true;
             this.isCookedLabel.Visible = false;
+        }
+
+        private void shareRecipeButton_Click(object sender, EventArgs e)
+        {
+            var addSharedPage = new AddSharedRecipe(this);
+            this.Hide();
+            addSharedPage.Show();
+        }
+
+        /// <summary>
+        /// Gets the recipe id for the displayed recipe.
+        /// </summary>
+        /// <returns></returns>
+        public int getRecipeId()
+        {
+            return this.recipeId;
         }
     }
 }

@@ -645,4 +645,13 @@ public partial class Homepage : Form
 
         recipePage.Show();
     }
+
+    private void viewSharedRecipesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var sharedPage = new SharedRecipes();
+
+        this.Hide();
+        
+        sharedPage.Show();
+    }
 }

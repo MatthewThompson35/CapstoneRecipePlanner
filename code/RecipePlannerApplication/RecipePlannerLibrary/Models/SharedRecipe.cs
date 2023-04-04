@@ -13,6 +13,14 @@
         public Recipe Recipe { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the recipe.
+        /// </summary>
+        /// <value>
+        /// The name of the recipe.
+        /// </value>
+        public string recipeName { get; set; }
+
+        /// <summary>
         ///     Gets or sets the username of the user sharing the recipe.
         /// </summary>
         public string SenderUsername { get; set; }
@@ -40,6 +48,7 @@
         public SharedRecipe(Recipe recipe, string senderUsername, string receiverUsername)
         {
             this.Recipe = recipe;
+            this.recipeName = recipe.Name;
             this.SenderUsername = senderUsername;
             this.ReceiverUsername = receiverUsername;
         }
