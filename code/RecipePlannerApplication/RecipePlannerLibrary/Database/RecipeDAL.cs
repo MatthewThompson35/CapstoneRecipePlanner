@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using RecipePlannerLibrary.Models;
 using System.Collections.Generic;
+using Org.BouncyCastle.Tls;
 
 namespace RecipePlannerLibrary.Database
 {
@@ -249,6 +250,68 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@receiverUsername", MySqlDbType.VarChar).Value = username;
             command.Parameters.Add("@recipeID", MySqlDbType.Int32).Value = recipeID;
             command.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        ///     Determines whether the database contains the shared recipe.
+        /// </summary>
+        /// <param name="recipe">The recipe being searched for.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>List of Shared Recipes that match the recipe</returns>
+        public static List<string> ContainsSharedRecipe(SharedRecipe recipe)
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var list = new List<string>();
+            var sender = recipe.SenderUsername;
+            var receiver = recipe.ReceiverUsername;
+            var id = recipe.Recipe.RecipeId;
+            var query = @"Select * from shared_recipe where sender_username=@sender and receiver_username=@receiver and recipeID=@id;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@sender", MySqlDbType.VarChar).Value = sender;
+            command.Parameters.Add("@receiver", MySqlDbType.VarChar).Value = receiver;
+            command.Parameters.Add("@sender", MySqlDbType.Int32).Value = id;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        ///     Gets the shared recipe name based on the specified recipe id.
+        /// </summary>
+        /// <param name="recipeId">the recipe id.</param>
+        /// <param name="connectionString">the connection string.</param>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>the recipe name.</returns>
+        public static SharedRecipe ContainsSharedRecipe(int recipeId)
+        {
+            SharedRecipe shared = null;
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var query = @"Select * from shared_recipe sr, recipe r where r.recipeID=sr.recipeID and sr.recipeID=@recipeId;";
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var sender = reader.GetString(0);
+                var receiver = reader.GetString(1);
+                var recipeID = reader.GetInt32(2);
+                var recipeName = reader.GetString(4);
+                var description = reader.GetString(5);
+
+                Recipe recipe = new Recipe(recipeID, recipeName, description);
+                shared = new SharedRecipe(recipe, sender, receiver);
+            }
+
+            connection.Close();
+            return shared;
         }
 
         #endregion
