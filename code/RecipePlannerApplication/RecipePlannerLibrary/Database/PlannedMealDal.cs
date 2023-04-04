@@ -103,8 +103,8 @@ namespace RecipePlannerLibrary.Database
             FROM planned_recipe
             WHERE YEARWEEK(dateUsed) = YEARWEEK(DATE_ADD(NOW(), INTERVAL 1 WEEK)) AND username = @user;";
             using var command = new MySqlCommand(query, connection);
-            using var reader = command.ExecuteReader();
             command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
+            using var reader = command.ExecuteReader();
             while (reader.Read())
             {
                 var recipeId = reader.GetInt32(0);

@@ -295,7 +295,7 @@ public class HomeController : Controller
             var remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
             foreach (var shoppingItem in shoppingList)
             {
@@ -349,7 +349,7 @@ public class HomeController : Controller
                         if (shoppingListItem != null)
                         {
                             allIngredientsPresent = false;
-                            ShoppingListDAL.updateQuantity((int) ingredient.id, quantity);
+                            ShoppingListDAL.updateQuantity((int) ingredient.id, quantity, Connection.ConnectionString);
                         }
                         else
                         {
@@ -398,7 +398,7 @@ public class HomeController : Controller
             var remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingList = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
             foreach (var shoppingItem in shoppingList)
             {
@@ -445,7 +445,7 @@ public class HomeController : Controller
                 if (shoppingListItem != null)
                 {
                     var quantity = (int) shoppingListItem.quantity + (int) ingredient.quantity;
-                    ShoppingListDAL.updateQuantity((int) ingredient.id, quantity);
+                    ShoppingListDAL.updateQuantity((int) ingredient.id, quantity, Connection.ConnectionString);
                 }
                 else
                 {
@@ -483,7 +483,7 @@ public class HomeController : Controller
             quantity = this.getShoppingListItemQuantity(ingredientID);
             if (quantity > 1)
             {
-                ShoppingListDAL.decrementQuantity(ingredientID, quantity);
+                ShoppingListDAL.decrementQuantity(ingredientID, quantity, Connection.ConnectionString);
             }
             else
             {
@@ -642,7 +642,7 @@ public class HomeController : Controller
     /// <returns>The quantity of the ingredient</returns>
     private int getShoppingListItemQuantity(int id)
     {
-        List<Ingredient> shoppingList = ShoppingListDAL.getIngredients();
+        List<Ingredient> shoppingList = ShoppingListDAL.getIngredients(Connection.ConnectionString);
         var quantity = 0;
         foreach (var item in shoppingList)
         {
@@ -701,7 +701,7 @@ public class HomeController : Controller
             var ingredientID = int.Parse(id);
 
             quantity = this.getShoppingListItemQuantity(ingredientID);
-            ShoppingListDAL.incrementQuantity(ingredientID, quantity);
+            ShoppingListDAL.incrementQuantity(ingredientID, quantity, Connection.ConnectionString);
             this.setupShoppingListPage(page);
             return View("ShoppingList");
         }
@@ -849,7 +849,7 @@ public class HomeController : Controller
 
             ShoppingListDAL.addIngredient(txtIngredientName, int.Parse(txtQuantity), measurement,
                 Connection.ConnectionString);
-            var totalPages = (int) Math.Ceiling((double) ShoppingListDAL.getIngredients().Count / 5);
+            var totalPages = (int) Math.Ceiling((double) ShoppingListDAL.getIngredients(Connection.ConnectionString).Count / 5);
             this.setupShoppingListPage(totalPages);
             return View("ShoppingList");
         }
@@ -1480,7 +1480,7 @@ public class HomeController : Controller
     {
         try
         {
-            List<Ingredient> list = ShoppingListDAL.getIngredients();
+            List<Ingredient> list = ShoppingListDAL.getIngredients(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
 
             foreach (var ingredient in list)

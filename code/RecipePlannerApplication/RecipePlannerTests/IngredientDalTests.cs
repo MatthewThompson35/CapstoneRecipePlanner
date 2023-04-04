@@ -98,7 +98,7 @@ namespace RecipePlannerTests
             int quantity = 2;
             string measurement = "G";
 
-            IngredientDAL.RemoveIngredient(29, Connection.TestsConnectionString);
+            IngredientDAL.RemoveIngredient(11, Connection.TestsConnectionString);
             IngredientDAL.addIngredient(name, quantity, measurement, Connection.TestsConnectionString);
 
             using var connection = new MySqlConnection(Connection.TestsConnectionString);

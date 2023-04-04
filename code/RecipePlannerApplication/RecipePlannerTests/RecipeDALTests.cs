@@ -15,7 +15,7 @@ namespace RecipePlannerTests
         [TestMethod]
         public void TestGetRecipes()
         {
-            int expectedCount = 2;
+            int expectedCount = 3;
 
             List<Recipe> recipes = RecipeDAL.getRecipes(Connection.TestsConnectionString);
             
@@ -43,7 +43,7 @@ namespace RecipePlannerTests
         public void GetRecipeNameById_ReturnsCorrectName()
         {
             // Arrange
-            var recipeId = 1; // Set the recipe ID to test
+            var recipeId = 2; // Set the recipe ID to test
             var expectedName = "Bowl of Lucky Charms"; // Set the expected recipe name
 
             // Act
@@ -61,7 +61,7 @@ namespace RecipePlannerTests
         {
             // Arrange
             int recipeId = 1;
-            var expectedTags = new List<string> { "test" };
+            var expectedTags = new List<string> { "breakfast", "simple", "vegetarian" };
 
             // Act
             var actualTags = RecipeDAL.getTagsForRecipe(recipeId, Connection.TestsConnectionString);
@@ -77,12 +77,12 @@ namespace RecipePlannerTests
         public void GetRecipeByName_ReturnsCorrectRecipe()
         {
             // Arrange
-            var name = "Second recipe";
+            var name = "Bowl of Lucky Charms";
             var expectedRecipe = new Recipe
             {
                 RecipeId = 2,
-                Name = "Second recipe",
-                Description = "The second Recipe"
+                Name = "Bowl of Lucky Charms",
+                Description = "A bowl of delicious Lucky Charms and milk"
             };
 
             // Act
@@ -102,7 +102,7 @@ namespace RecipePlannerTests
         public void TestGetStepsForRecipe()
         {
             int recipeId = 1;
-            int expectedCount = 3;
+            int expectedCount = 7;
 
             List<RecipeStep> steps = RecipeDAL.getStepsForRecipe(recipeId, Connection.TestsConnectionString);
 
