@@ -51,8 +51,9 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE YEARWEEK(dateUsed) = YEARWEEK(NOW());";
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(NOW()) AND username = @user;";
             using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -72,8 +73,9 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE dateUsed >= CURDATE() AND dateUsed <= DATE_ADD(LAST_DAY(DATE_ADD(NOW(), INTERVAL 1 WEEK)), INTERVAL 1 DAY);";
+            WHERE dateUsed >= CURDATE() AND dateUsed <= DATE_ADD(LAST_DAY(DATE_ADD(NOW(), INTERVAL 1 WEEK)), INTERVAL 1 DAY) AND username = @user;";
             using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -99,9 +101,10 @@ namespace RecipePlannerLibrary.Database
             connection.Open();
             var query = @"SELECT *
             FROM planned_recipe
-            WHERE YEARWEEK(dateUsed) = YEARWEEK(DATE_ADD(NOW(), INTERVAL 1 WEEK));";
+            WHERE YEARWEEK(dateUsed) = YEARWEEK(DATE_ADD(NOW(), INTERVAL 1 WEEK)) AND username = @user;";
             using var command = new MySqlCommand(query, connection);
             using var reader = command.ExecuteReader();
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             while (reader.Read())
             {
                 var recipeId = reader.GetInt32(0);
@@ -128,12 +131,13 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query =
-                @"DELETE FROM planned_recipe WHERE recipeID = @id and dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
+                @"DELETE FROM planned_recipe WHERE recipeID = @id and dayOfTheWeek = @day and mealType = @type and dateUsed = @date and username = @user;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
             command.Parameters.Add("@day", MySqlDbType.VarChar).Value = day;
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
         }
 
@@ -154,10 +158,11 @@ namespace RecipePlannerLibrary.Database
 
                 var command =
                     new MySqlCommand(
-                        "SELECT COUNT(*) > 0 FROM planned_recipe WHERE dateUsed = @date AND mealType = @type",
+                        "SELECT COUNT(*) > 0 FROM planned_recipe WHERE dateUsed = @date AND mealType = @type and username = @user",
                         connection);
                 command.Parameters.AddWithValue("@date", date);
                 command.Parameters.AddWithValue("@type", type);
+                command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
 
                 var result = (long) command.ExecuteScalar();
                 var exists = result > 0;
@@ -184,12 +189,13 @@ namespace RecipePlannerLibrary.Database
             using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query =
-                @"Update planned_recipe set recipeID = @id WHERE dayOfTheWeek = @day and mealType = @type and dateUsed = @date;";
+                @"Update planned_recipe set recipeID = @id WHERE dayOfTheWeek = @day and mealType = @type and dateUsed = @date and username = @user;";
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@id", MySqlDbType.Int32).Value = recipeId;
             command.Parameters.Add("@day", MySqlDbType.VarChar).Value = day;
             command.Parameters.Add("@type", MySqlDbType.VarChar).Value = type;
             command.Parameters.Add("@date", MySqlDbType.Date).Value = date;
+            command.Parameters.Add("@user", MySqlDbType.VarChar).Value = ActiveUser.username;
             using var reader = command.ExecuteReader();
         }
 
