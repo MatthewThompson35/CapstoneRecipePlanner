@@ -39,6 +39,11 @@ namespace RecipePlannerLibrary.Models
             this.stepDescription = stepDescription;
         }
 
+        /// <summary>
+        ///     Initializes the Recipe Step with the specified step number and step description.
+        /// </summary>
+        /// <param name="stepNumber">the step number</param>
+        /// <param name="stepDescription">the step description</param>
         public RecipeStep(int stepNumber, string stepDescription)
         {
             this.stepNumber = stepNumber;
