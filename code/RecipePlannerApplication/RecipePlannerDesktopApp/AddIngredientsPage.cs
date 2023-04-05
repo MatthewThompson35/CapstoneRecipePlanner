@@ -22,6 +22,8 @@ namespace RecipePlannerDesktopApplication
             InitializeComponent();
 
             this.ingredientsPage = ingredientsPage;
+            this.shoppingListPage = null;
+            this.duplicateIngredientError.Visible = false;
         }
 
         /// <summary>
@@ -33,6 +35,8 @@ namespace RecipePlannerDesktopApplication
             InitializeComponent();
 
             this.shoppingListPage = shoppingListPage;
+            this.ingredientsPage = null;
+            this.duplicateIngredientError.Visible = false;
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -58,12 +62,6 @@ namespace RecipePlannerDesktopApplication
                 {
                     this.errorQuantityTextLabel.Visible = true;
                 }
-                else if (IngredientDAL.getIngredients(name).Count > 0)
-                {
-                    this.errorTextLabel.Text = @"This ingredient " + "'" + name + "'" + @" already exists.";
-                    this.errorTextLabel.Visible = true;
-                    this.errorQuantityTextLabel.Visible = false;
-                }
                 else
                 {
                     int quantity = Convert.ToInt32(quantityString);
@@ -73,17 +71,36 @@ namespace RecipePlannerDesktopApplication
 
                     if (this.ingredientsPage != null)
                     {
-                        this.addIngredient(ingredient);
+                        if(IngredientDAL.getIngredients(name).Count > 0)
+                        {
+                            this.duplicateIngredientError.Text = @"This ingredient " + "'" + name + "'" + @" already exists in pantry. Update quantity instead.";
+                            this.duplicateIngredientError.Visible = true;
+                            this.errorQuantityTextLabel.Visible = false;
+                        }
+                        else
+                        {
+                            this.addIngredient(ingredient);
 
-                        this.Close();
-                        this.ingredientsPage.Show();
+                            this.Close();
+                            this.ingredientsPage.Show();
+                        }
+                        
                     }
-                    else
+                    if (this.shoppingListPage != null)
                     {
-                        this.addIngredientShoppingList(ingredient);
+                        if (ShoppingListDAL.getIngredients(name, Connection.ConnectionString).Count > 0)
+                        {
+                            this.duplicateIngredientError.Text = @"This ingredient " + "'" + name + "'" + @" already exists in shopping list. Update quantity.";
+                            this.duplicateIngredientError.Visible = true;
+                            this.errorQuantityTextLabel.Visible = false;
+                        }
+                        else
+                        {
+                            this.addIngredientShoppingList(ingredient);
 
-                        this.Close();
-                        this.shoppingListPage.Show();
+                            this.Close();
+                            this.shoppingListPage.Show();
+                        }
                     }
                     
                 }
