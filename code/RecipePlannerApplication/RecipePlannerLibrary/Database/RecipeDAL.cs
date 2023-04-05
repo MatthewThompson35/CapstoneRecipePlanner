@@ -236,9 +236,9 @@ namespace RecipePlannerLibrary.Database
         }
 
         /// <summary>
-        ///     Adds a recipe tag for the recipe.
+        ///     Adds a recipe tag for the recipe to the database.
         /// </summary>
-        /// <param name="recipeId">the recipe id.</param>
+        /// <param name="recipeId">the recipe identifier.</param>
         /// <param name="tagName">the tag name</param>
         /// <param name="connectionString">the connection string.</param>
         public static void addRecipeTag(int recipeId, string tagName, string connectionString)
@@ -314,25 +314,6 @@ namespace RecipePlannerLibrary.Database
             command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
             command.Parameters.Add("@stepNumber", MySqlDbType.Int32).Value = stepNumber;
             command.Parameters.Add("@stepDescription", MySqlDbType.VarChar).Value = stepDescription;
-            command.ExecuteNonQuery();
-        }
-
-        /// <summary>
-        /// Adds the recipe tag to the database.
-        /// </summary>
-        /// <param name="recipeId">The recipe identifier.</param>
-        /// <param name="tagName">Name of the tag.</param>
-        /// <param name="connectionString">The connection string.</param>
-        public static void addRecipeTag(int recipeId, string tagName, string connectionString)
-        {
-            using var connection = new MySqlConnection(connectionString);
-            connection.Open();
-
-            var query = @"insert into recipe_tag(recipeID, tagName) values (@recipeId, @tagName)";
-            using var command = new MySqlCommand(query, connection);
-
-            command.Parameters.Add("@recipeId", MySqlDbType.Int32).Value = recipeId;
-            command.Parameters.Add("@tagName", MySqlDbType.VarChar).Value = tagName;
             command.ExecuteNonQuery();
         }
 
