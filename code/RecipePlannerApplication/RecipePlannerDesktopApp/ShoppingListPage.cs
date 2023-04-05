@@ -264,6 +264,11 @@ namespace RecipePlannerDesktopApplication
                     if (columnIndex == 1)
                     {
                         ShoppingListDAL.decrementQuantity(id, quantity, Connection.ConnectionString);
+                        quantity--;
+                        if (quantity == 0)
+                        {
+                            ShoppingListDAL.RemoveIngredient(id, Connection.ConnectionString);
+                        }
                         this.UpdateIngredientsGridView();
                     }
                 }

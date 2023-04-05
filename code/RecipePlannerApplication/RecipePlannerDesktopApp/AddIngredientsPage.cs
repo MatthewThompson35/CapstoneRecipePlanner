@@ -73,7 +73,7 @@ namespace RecipePlannerDesktopApplication
                     {
                         if(IngredientDAL.getIngredients(name).Count > 0)
                         {
-                            this.duplicateIngredientError.Text = @"This ingredient " + "'" + name + "'" + @" already exists in pantry. Update quantity.";
+                            this.duplicateIngredientError.Text = @"This ingredient " + "'" + name + "'" + @" already exists in pantry. Update quantity instead.";
                             this.duplicateIngredientError.Visible = true;
                             this.errorQuantityTextLabel.Visible = false;
                         }
