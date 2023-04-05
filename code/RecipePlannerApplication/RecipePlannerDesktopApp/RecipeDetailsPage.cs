@@ -116,8 +116,15 @@ namespace RecipePlannerDesktopApplication
             {
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
+
+            string tags = Environment.NewLine + "Tags" + Environment.NewLine;
+
+            foreach (var tag in RecipeDAL.getTagsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                tags += tag + Environment.NewLine;
+            }
             
-            output += description + steps + ingredients;
+            output += description + steps + ingredients + tags;
             return output;
         }
 
@@ -143,7 +150,14 @@ namespace RecipePlannerDesktopApplication
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
 
-            output += description + steps + ingredients;
+            string tags = Environment.NewLine + "Tags" + Environment.NewLine;
+
+            foreach (var tag in RecipeDAL.getTagsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                tags += tag + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients + tags;
             return output;
         }
 
@@ -168,7 +182,14 @@ namespace RecipePlannerDesktopApplication
                 ingredients += ingredient.Quantity + " " + ingredient.Measurement + " " + ingredient.IngredientName + Environment.NewLine;
             }
 
-            output += description + steps + ingredients;
+            string tags = Environment.NewLine + "Tags" + Environment.NewLine;
+
+            foreach (var tag in RecipeDAL.getTagsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+            {
+                tags += tag + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients + tags;
             return output;
         }
 
