@@ -46,7 +46,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(54, 83);
+            this.label1.Location = new System.Drawing.Point(78, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(359, 45);
             this.label1.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(42, 239);
+            this.label2.Location = new System.Drawing.Point(68, 218);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(192, 31);
             this.label2.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(42, 292);
+            this.label3.Location = new System.Drawing.Point(68, 271);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 31);
             this.label3.TabIndex = 2;
@@ -74,7 +74,7 @@
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(177, 433);
+            this.submitButton.Location = new System.Drawing.Point(190, 489);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(94, 29);
             this.submitButton.TabIndex = 3;
@@ -84,7 +84,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(177, 525);
+            this.cancelButton.Location = new System.Drawing.Point(190, 581);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(94, 29);
             this.cancelButton.TabIndex = 4;
@@ -94,14 +94,14 @@
             // 
             // ingredientNameTextBox
             // 
-            this.ingredientNameTextBox.Location = new System.Drawing.Point(251, 245);
+            this.ingredientNameTextBox.Location = new System.Drawing.Point(277, 224);
             this.ingredientNameTextBox.Name = "ingredientNameTextBox";
             this.ingredientNameTextBox.Size = new System.Drawing.Size(143, 27);
             this.ingredientNameTextBox.TabIndex = 5;
             // 
             // quantityTextBox
             // 
-            this.quantityTextBox.Location = new System.Drawing.Point(251, 296);
+            this.quantityTextBox.Location = new System.Drawing.Point(277, 275);
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(143, 27);
             this.quantityTextBox.TabIndex = 6;
@@ -111,7 +111,7 @@
             this.errorQuantityTextLabel.AutoSize = true;
             this.errorQuantityTextLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorQuantityTextLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorQuantityTextLabel.Location = new System.Drawing.Point(251, 329);
+            this.errorQuantityTextLabel.Location = new System.Drawing.Point(277, 308);
             this.errorQuantityTextLabel.Name = "errorQuantityTextLabel";
             this.errorQuantityTextLabel.Size = new System.Drawing.Size(206, 20);
             this.errorQuantityTextLabel.TabIndex = 7;
@@ -123,7 +123,7 @@
             this.errorTextLabel.AutoSize = true;
             this.errorTextLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorTextLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorTextLabel.Location = new System.Drawing.Point(129, 360);
+            this.errorTextLabel.Location = new System.Drawing.Point(157, 456);
             this.errorTextLabel.Name = "errorTextLabel";
             this.errorTextLabel.Size = new System.Drawing.Size(165, 20);
             this.errorTextLabel.TabIndex = 8;
@@ -134,7 +134,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(42, 348);
+            this.label4.Location = new System.Drawing.Point(68, 327);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(160, 31);
             this.label4.TabIndex = 9;
@@ -148,7 +148,7 @@
             "COUNT",
             "OZ",
             "G"});
-            this.measurementComboBox.Location = new System.Drawing.Point(251, 351);
+            this.measurementComboBox.Location = new System.Drawing.Point(277, 330);
             this.measurementComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.measurementComboBox.Name = "measurementComboBox";
             this.measurementComboBox.Size = new System.Drawing.Size(143, 28);
@@ -160,7 +160,7 @@
             this.duplicateIngredientError.ForeColor = System.Drawing.Color.Red;
             this.duplicateIngredientError.Location = new System.Drawing.Point(12, 360);
             this.duplicateIngredientError.Name = "duplicateIngredientError";
-            this.duplicateIngredientError.Size = new System.Drawing.Size(0, 15);
+            this.duplicateIngredientError.Size = new System.Drawing.Size(0, 20);
             this.duplicateIngredientError.TabIndex = 11;
             this.duplicateIngredientError.Visible = false;
             // 
@@ -168,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 519);
+            this.ClientSize = new System.Drawing.Size(514, 823);
             this.Controls.Add(this.duplicateIngredientError);
             this.Controls.Add(this.measurementComboBox);
             this.Controls.Add(this.label4);
