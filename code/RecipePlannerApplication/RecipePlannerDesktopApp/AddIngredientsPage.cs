@@ -104,7 +104,8 @@ namespace RecipePlannerDesktopApplication
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            this.ingredientsPage.Show();
+            var ing = new IngredientsPage();
+            ing.Show();
         }
 
         private void addIngredient(Ingredient ingredient)

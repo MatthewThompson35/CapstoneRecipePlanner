@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\SharedRecipes.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model List&lt;RecipePlannerLibrary.Models.Recipe&gt;
+
+@{
+    ViewBag.Title = &quot;SharedRecipes&quot;;
+}
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;/&gt;
+    &lt;title&gt;@ViewBag.Title&lt;/title&gt;
+
+    &lt;style&gt;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 100%;
+        }
+
+        th { 
+            background-color: #f2f2f2; 
+        }
+
+        tr:nth-child(even) { 
+            background-color: #f2f2f2; 
+        }
+
+        tr:hover { 
+            background-color: grey; 
+        }
+
+        #logout {
+            background-color: #d9534f;
+            color: #fff;
+            position: fixed;
+            right: 10px;
+            top: 5px;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            color: #333;
+            font-family: &#39;Open Sans&#39;, sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-weight: bold;
+            margin: 0 0 20px;
+        }
+
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        #recipe-container {
+            display: flex;
+            margin: 50px auto;
+            max-width: 1200px;
+        }
+
+        .pagination { 
+            margin-top: 20px; 
+        }
+
+        #recipe-list {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #recipe-details-box {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex: 1;
+            margin-left: 50px;
+            max-width: 600px;
+            overflow: hidden;
+            overflow-y: auto;
+            padding: 20px;
+            width: 50%;
+        }
+
+        .form-group {
+            align-items: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .form-group select {
+            font-size: 16px;
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        #errorMessage {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type=&quot;submit&quot;] {
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;recipe-container&quot;&gt;
+    &lt;button onclick=&quot;location.href=&#39;@Url.Action(&quot;Index&quot;)&#39;&quot; id=&quot;logout&quot;&gt;Logout&lt;/button&gt;
+    &lt;div id=&quot;recipe-list&quot;&gt;
+        &lt;h2&gt;&lt;center&gt;Shared Recipes&lt;/center&gt;&lt;/h2&gt;
+        &lt;table id=&quot;all-recipes&quot;&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Shared By&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+            @foreach (var recipe in ViewBag.AllSharedRecipesOnPage)
+            {
+                &lt;tr onclick=&quot;showRecipe(&#39;@recipe.Recipe.RecipeId&#39;)&quot;&gt;
+                    &lt;td&gt;@recipe.Recipe.Name&lt;/td&gt;
+                    &lt;td&gt;@recipe.SenderUsername&lt;/td&gt;
+                &lt;/tr&gt;
+            }
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+
+        &lt;div class=&quot;pagination&quot; id=&quot;available-pagination&quot;&gt;
+                @if (ViewBag.currentSharedPage &gt; 1)
+            {
+                    &lt;a href=&quot;@Url.Action(&quot;goToSharedRecipePageAll&quot;, new {page = ViewBag.currentSharedPage - 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Previous Page&lt;/a&gt;
+            }
+            @for (var i = 1; i &lt;= ViewBag.totalPages; i++)
+            {
+                    &lt;a href=&quot;@Url.Action(&quot;goToSharedRecipePageAll&quot;, new {page = i})&quot; class=&quot;btn btn-primary page-button&quot;&gt;@i&lt;/a&gt;
+            }
+                @if (ViewBag.currentSharedPage &lt; ViewBag.totalPages)
+            {
+                    &lt;a href=&quot;@Url.Action(&quot;goToSharedRecipePageAll&quot;, new {page = ViewBag.currentSharedPage + 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Next Page&lt;/a&gt;
+            }
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;recipe-details-box&quot; style=&quot;display: flex; flex-direction: column; height: 1000px; overflow: auto;&quot;&gt;
+        &lt;div id=&quot;addForm&quot;&gt;
+            &lt;form method=&quot;post&quot; id=&quot;addPlannedMeal&quot; style=&quot;display: none;&quot;&gt;
+                &lt;div class=&quot;form-group&quot;&gt;
+                    &lt;input type=&quot;hidden&quot; name=&quot;recipeId&quot; id=&quot;recipeId&quot; value=&quot;&quot;&gt;
+                    &lt;label for=&quot;week&quot;&gt;Week:&lt;/label&gt;
+                    &lt;select name=&quot;week&quot; id=&quot;week&quot;&gt;
+                        @foreach (var week in new[] {&quot;This Week&quot;, &quot;Next Week&quot;})
+                        {
+                            &lt;option value=&quot;@week&quot;&gt;@week&lt;/option&gt;
+                        }
+                    &lt;/select&gt;
+                    &lt;label for=&quot;day&quot;&gt;Day:&lt;/label&gt;
+                    &lt;select name=&quot;day&quot; id=&quot;day&quot;&gt;
+                        @foreach (var day in new[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;})
+                        {
+                            &lt;option value=&quot;@day&quot;&gt;@day&lt;/option&gt;
+                        }
+                    &lt;/select&gt;
+                    &lt;label for=&quot;type&quot;&gt;Meal Type:&lt;/label&gt;
+                    &lt;select name=&quot;type&quot; id=&quot;type&quot;&gt;
+                        @foreach (var type in new[] {&quot;Breakfast&quot;, &quot;Lunch&quot;, &quot;Dinner&quot;})
+                        {
+                            &lt;option value=&quot;@type&quot;&gt;@type&lt;/option&gt;
+                        }
+                    &lt;/select&gt;
+                    &lt;div id=&quot;errorMessage&quot; style=&quot;display: none;&quot;&gt;
+                        Are you sure You want to overwrite your previous meal?
+                    &lt;/div&gt;
+
+                &lt;/div&gt;
+                &lt;div class=&quot;button-group&quot;&gt;
+                    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;addPlannedMeal&quot; value=&quot;Add&quot;/&gt;
+                    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; hidden asp-action=&quot;UpdateThisWeeksMeal&quot; value=&quot;Confirm Update&quot;/&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;details&quot;&gt;
+            &lt;form id=&quot;cookMeal&quot; method=&quot;POST&quot;&gt;
+                &lt;input type=&quot;hidden&quot; id=&quot;recipeID&quot; name=&quot;recipeID&quot; value=&quot;&quot;&gt;
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;CookMeal&quot; value=&quot;Cook Meal&quot; id=&quot;CookRecipe&quot; style=&quot;display: none;&quot;/&gt;
+            &lt;/form&gt;
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                &lt;div id=&quot;@recipe.Recipe.RecipeId&quot; style=&quot;display: none&quot;&gt;
+                    &lt;h3 class=&quot;recipe-name&quot;&gt;@recipe.Recipe.Name&lt;/h3&gt;
+                    &lt;p class=&quot;recipe-description&quot;&gt;@recipe.Recipe.Description&lt;/p&gt;
+                    &lt;h4&gt;Steps&lt;/h4&gt;
+                    &lt;ol class=&quot;recipe-steps&quot;&gt;
+                        @foreach (var step in recipe.Recipe.Steps)
+                        {
+                            &lt;li&gt;@step.stepDescription&lt;/li&gt;
+                        }
+                    &lt;/ol&gt;
+                    &lt;h4&gt;Ingredients&lt;/h4&gt;
+                    &lt;ul class=&quot;recipe-ingredients&quot;&gt;
+                        @foreach (var ingredient in recipe.Recipe.Ingredients)
+                        {
+                            &lt;li&gt;@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName&lt;/li&gt;
+                        }
+                    &lt;/ul&gt;
+                    @if (recipe.Recipe.Tags != null &amp;&amp; recipe.Recipe.Tags.Count &gt; 0)
+                    {
+                        &lt;h4&gt;Tags&lt;/h4&gt;
+                        &lt;ul class=&quot;recipe-tags&quot;&gt;
+                            @foreach (var tag in recipe.Recipe.Tags)
+                            {
+                                &lt;li&gt;@tag&lt;/li&gt;
+                            }
+                        &lt;/ul&gt;
+                    }
+                &lt;/div&gt;
+            }
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script&gt;
+    function showRecipe(recipeId) {
+        var recipeID = document.getElementById(&#39;recipeID&#39;)
+        var cookRecipe = document.getElementById(&#39;CookRecipe&#39;);
+        var recipeDiv = document.getElementById(recipeId);
+        var currentDiv = document.querySelector(&#39;#details &gt; div[style*=&quot;display: block&quot;]&#39;);
+        var addPlannedMealForm = document.getElementById(&#39;addPlannedMeal&#39;);
+        var recipeIdInput = addPlannedMealForm.querySelector(&#39;input[name=&quot;recipeId&quot;]&#39;);
+
+        recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
+
+        if (currentDiv) {
+            currentDiv.style.display = &#39;none&#39;;
+        }
+
+        recipeDiv.style.display = &#39;block&#39;;
+        addPlannedMealForm.style.display = &#39;block&#39;;
+        cookRecipe.style.display = &quot;block&quot;;
+    }
+&lt;/script&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[4,5,4,37,0],[12,13,12,27,0],[147,37,147,58,0],[158,14,158,21,0],[158,23,158,33,0],[158,34,158,36,0],[158,37,158,67,0],[159,13,159,14,0],[160,42,160,66,0],[161,26,161,45,0],[162,26,162,48,0],[164,13,164,14,0],[169,18,169,52,0],[170,13,170,14,0],[171,30,171,113,0],[172,13,172,14,0],[173,19,173,28,0],[173,30,173,53,0],[173,55,173,58,0],[174,13,174,14,0],[175,30,175,85,0],[175,123,175,125,0],[176,13,176,14,0],[177,18,177,69,0],[178,13,178,14,0],[179,30,179,113,0],[180,13,180,14,0],[191,26,191,33,0],[191,35,191,43,0],[191,44,191,46,0],[191,47,191,79,0],[192,25,192,26,0],[193,45,193,50,0],[193,52,193,57,0],[194,25,194,26,0],[198,26,198,33,0],[198,35,198,42,0],[198,43,198,45,0],[198,46,198,130,0],[199,25,199,26,0],[200,45,200,49,0],[200,51,200,55,0],[201,25,201,26,0],[205,26,205,33,0],[205,35,205,43,0],[205,44,205,46,0],[205,47,205,85,0],[206,25,206,26,0],[207,45,207,50,0],[207,52,207,57,0],[208,25,208,26,0],[226,14,226,21,0],[226,23,226,33,0],[226,34,226,36,0],[226,37,226,55,0],[227,13,227,14,0],[228,26,228,50,0],[229,46,229,65,0],[230,52,230,78,0],[233,26,233,33,0],[233,35,233,43,0],[233,44,233,46,0],[233,47,233,66,0],[234,25,234,26,0],[235,34,235,55,0],[236,25,236,26,0],[240,26,240,33,0],[240,35,240,49,0],[240,50,240,52,0],[240,53,240,78,0],[241,25,241,26,0],[242,34,242,54,0],[242,54,242,77,0],[242,78,242,104,0],[243,25,243,26,0],[245,22,245,85,0],[246,21,246,22,0],[249,30,249,37,0],[249,39,249,46,0],[249,47,249,49,0],[249,50,249,68,0],[250,29,250,30,0],[251,38,251,42,0],[252,29,252,30,0],[254,21,254,22,0],[256,13,256,14,0]]);
+    </script>
+  </body>
+</html>

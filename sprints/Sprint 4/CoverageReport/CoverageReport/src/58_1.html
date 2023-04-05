@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeDetailsPage.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerDesktopApplication
+{
+    partial class RecipeDetailsPage
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.label1 = new System.Windows.Forms.Label();
+            this.recipeDetailsTextBox = new System.Windows.Forms.TextBox();
+            this.daysComboBox = new System.Windows.Forms.ComboBox();
+            this.mealTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.dayLabel = new System.Windows.Forms.Label();
+            this.mealTypeLabel = new System.Windows.Forms.Label();
+            this.addToMealPlanButton = new System.Windows.Forms.Button();
+            this.weekComboBox = new System.Windows.Forms.ComboBox();
+            this.weekLabel = new System.Windows.Forms.Label();
+            this.updateSuccessfullyLabel = new System.Windows.Forms.Label();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewMealPlanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.yesButton = new System.Windows.Forms.Button();
+            this.noButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
+            this.cookButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.comboboxesErrorLabel = new System.Windows.Forms.Label();
+            this.isCookedLabel = new System.Windows.Forms.Label();
+            this.cookYesButton = new System.Windows.Forms.Button();
+            this.cookNoButton = new System.Windows.Forms.Button();
+            this.shareRecipeButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(120, 203);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(196, 30);
+            this.label1.TabIndex = 1;
+            this.label1.Text = &quot;Recipe Information&quot;;
+            // 
+            // recipeDetailsTextBox
+            // 
+            this.recipeDetailsTextBox.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.recipeDetailsTextBox.Location = new System.Drawing.Point(52, 241);
+            this.recipeDetailsTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.recipeDetailsTextBox.Multiline = true;
+            this.recipeDetailsTextBox.Name = &quot;recipeDetailsTextBox&quot;;
+            this.recipeDetailsTextBox.ReadOnly = true;
+            this.recipeDetailsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.recipeDetailsTextBox.Size = new System.Drawing.Size(350, 330);
+            this.recipeDetailsTextBox.TabIndex = 2;
+            // 
+            // daysComboBox
+            // 
+            this.daysComboBox.FormattingEnabled = true;
+            this.daysComboBox.Location = new System.Drawing.Point(67, 82);
+            this.daysComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.daysComboBox.Name = &quot;daysComboBox&quot;;
+            this.daysComboBox.Size = new System.Drawing.Size(80, 23);
+            this.daysComboBox.TabIndex = 3;
+            this.daysComboBox.Visible = false;
+            this.daysComboBox.SelectedIndexChanged += new System.EventHandler(this.daysComboBox_SelectedIndexChanged);
+            // 
+            // mealTypeComboBox
+            // 
+            this.mealTypeComboBox.FormattingEnabled = true;
+            this.mealTypeComboBox.Location = new System.Drawing.Point(177, 82);
+            this.mealTypeComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mealTypeComboBox.Name = &quot;mealTypeComboBox&quot;;
+            this.mealTypeComboBox.Size = new System.Drawing.Size(94, 23);
+            this.mealTypeComboBox.TabIndex = 4;
+            this.mealTypeComboBox.Visible = false;
+            this.mealTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mealTypeComboBox_SelectedIndexChanged);
+            // 
+            // dayLabel
+            // 
+            this.dayLabel.AutoSize = true;
+            this.dayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dayLabel.Location = new System.Drawing.Point(88, 58);
+            this.dayLabel.Name = &quot;dayLabel&quot;;
+            this.dayLabel.Size = new System.Drawing.Size(37, 21);
+            this.dayLabel.TabIndex = 5;
+            this.dayLabel.Text = &quot;Day&quot;;
+            this.dayLabel.Visible = false;
+            // 
+            // mealTypeLabel
+            // 
+            this.mealTypeLabel.AutoSize = true;
+            this.mealTypeLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mealTypeLabel.Location = new System.Drawing.Point(177, 58);
+            this.mealTypeLabel.Name = &quot;mealTypeLabel&quot;;
+            this.mealTypeLabel.Size = new System.Drawing.Size(80, 21);
+            this.mealTypeLabel.TabIndex = 6;
+            this.mealTypeLabel.Text = &quot;Meal Type&quot;;
+            this.mealTypeLabel.Visible = false;
+            // 
+            // addToMealPlanButton
+            // 
+            this.addToMealPlanButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.addToMealPlanButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addToMealPlanButton.Location = new System.Drawing.Point(150, 144);
+            this.addToMealPlanButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addToMealPlanButton.Name = &quot;addToMealPlanButton&quot;;
+            this.addToMealPlanButton.Size = new System.Drawing.Size(155, 28);
+            this.addToMealPlanButton.TabIndex = 7;
+            this.addToMealPlanButton.Text = &quot;Add to Meal Plan&quot;;
+            this.addToMealPlanButton.UseVisualStyleBackColor = false;
+            this.addToMealPlanButton.Click += new System.EventHandler(this.addToMealPlanButton_Click);
+            // 
+            // weekComboBox
+            // 
+            this.weekComboBox.FormattingEnabled = true;
+            this.weekComboBox.Location = new System.Drawing.Point(296, 82);
+            this.weekComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.weekComboBox.Name = &quot;weekComboBox&quot;;
+            this.weekComboBox.Size = new System.Drawing.Size(80, 23);
+            this.weekComboBox.TabIndex = 8;
+            this.weekComboBox.Visible = false;
+            this.weekComboBox.SelectedIndexChanged += new System.EventHandler(this.weekComboBox_SelectedIndexChanged);
+            // 
+            // weekLabel
+            // 
+            this.weekLabel.AutoSize = true;
+            this.weekLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.weekLabel.Location = new System.Drawing.Point(310, 58);
+            this.weekLabel.Name = &quot;weekLabel&quot;;
+            this.weekLabel.Size = new System.Drawing.Size(48, 21);
+            this.weekLabel.TabIndex = 9;
+            this.weekLabel.Text = &quot;Week&quot;;
+            this.weekLabel.Visible = false;
+            // 
+            // updateSuccessfullyLabel
+            // 
+            this.updateSuccessfullyLabel.AutoSize = true;
+            this.updateSuccessfullyLabel.ForeColor = System.Drawing.Color.Green;
+            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(103, 118);
+            this.updateSuccessfullyLabel.Name = &quot;updateSuccessfullyLabel&quot;;
+            this.updateSuccessfullyLabel.Size = new System.Drawing.Size(234, 15);
+            this.updateSuccessfullyLabel.TabIndex = 10;
+            this.updateSuccessfullyLabel.Text = &quot;Meal is updated for this day and meal type.&quot;;
+            this.updateSuccessfullyLabel.Visible = false;
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findRecipeToolStripMenuItem,
+            this.viewMealPlanToolStripMenuItem1});
+            this.plannerContextMenuStrip.Name = &quot;plannerContextMenuStrip&quot;;
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(155, 48);
+            // 
+            // findRecipeToolStripMenuItem
+            // 
+            this.findRecipeToolStripMenuItem.Name = &quot;findRecipeToolStripMenuItem&quot;;
+            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.findRecipeToolStripMenuItem.Text = &quot;Find Recipe&quot;;
+            this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
+            // 
+            // viewMealPlanToolStripMenuItem1
+            // 
+            this.viewMealPlanToolStripMenuItem1.Name = &quot;viewMealPlanToolStripMenuItem1&quot;;
+            this.viewMealPlanToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.viewMealPlanToolStripMenuItem1.Text = &quot;View Meal Plan&quot;;
+            this.viewMealPlanToolStripMenuItem1.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem1_Click);
+            // 
+            // yesButton
+            // 
+            this.yesButton.BackColor = System.Drawing.Color.LawnGreen;
+            this.yesButton.Location = new System.Drawing.Point(62, 148);
+            this.yesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.yesButton.Name = &quot;yesButton&quot;;
+            this.yesButton.Size = new System.Drawing.Size(82, 22);
+            this.yesButton.TabIndex = 16;
+            this.yesButton.Text = &quot;Yes&quot;;
+            this.yesButton.UseVisualStyleBackColor = false;
+            this.yesButton.Visible = false;
+            this.yesButton.Click += new System.EventHandler(this.YesButton_Click);
+            // 
+            // noButton
+            // 
+            this.noButton.BackColor = System.Drawing.Color.Red;
+            this.noButton.Location = new System.Drawing.Point(310, 148);
+            this.noButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.noButton.Name = &quot;noButton&quot;;
+            this.noButton.Size = new System.Drawing.Size(82, 22);
+            this.noButton.TabIndex = 17;
+            this.noButton.Text = &quot;No&quot;;
+            this.noButton.UseVisualStyleBackColor = false;
+            this.noButton.Visible = false;
+            this.noButton.Click += new System.EventHandler(this.NoButton_Click);
+            // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(10, 9);
+            this.backButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backButton.Name = &quot;backButton&quot;;
+            this.backButton.Size = new System.Drawing.Size(55, 22);
+            this.backButton.TabIndex = 18;
+            this.backButton.Text = &quot;Back&quot;;
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
+            // cookButton
+            // 
+            this.cookButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.cookButton.Location = new System.Drawing.Point(375, 9);
+            this.cookButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cookButton.Name = &quot;cookButton&quot;;
+            this.cookButton.Size = new System.Drawing.Size(64, 22);
+            this.cookButton.TabIndex = 19;
+            this.cookButton.Text = &quot;Cook&quot;;
+            this.cookButton.UseVisualStyleBackColor = false;
+            this.cookButton.Click += new System.EventHandler(this.cookButton_Click);
+            // 
+            // addButton
+            // 
+            this.addButton.BackColor = System.Drawing.Color.LawnGreen;
+            this.addButton.Location = new System.Drawing.Point(62, 148);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addButton.Name = &quot;addButton&quot;;
+            this.addButton.Size = new System.Drawing.Size(82, 22);
+            this.addButton.TabIndex = 20;
+            this.addButton.Text = &quot;Add&quot;;
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Visible = false;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.BackColor = System.Drawing.Color.Red;
+            this.cancelButton.Location = new System.Drawing.Point(310, 148);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cancelButton.Name = &quot;cancelButton&quot;;
+            this.cancelButton.Size = new System.Drawing.Size(82, 22);
+            this.cancelButton.TabIndex = 21;
+            this.cancelButton.Text = &quot;Cancel&quot;;
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // comboboxesErrorLabel
+            // 
+            this.comboboxesErrorLabel.AutoSize = true;
+            this.comboboxesErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.comboboxesErrorLabel.Location = new System.Drawing.Point(156, 118);
+            this.comboboxesErrorLabel.Name = &quot;comboboxesErrorLabel&quot;;
+            this.comboboxesErrorLabel.Size = new System.Drawing.Size(134, 15);
+            this.comboboxesErrorLabel.TabIndex = 22;
+            this.comboboxesErrorLabel.Text = &quot;Please select all options.&quot;;
+            this.comboboxesErrorLabel.Visible = false;
+            // 
+            // isCookedLabel
+            // 
+            this.isCookedLabel.ForeColor = System.Drawing.Color.Green;
+            this.isCookedLabel.Location = new System.Drawing.Point(140, -2);
+            this.isCookedLabel.Name = &quot;isCookedLabel&quot;;
+            this.isCookedLabel.Size = new System.Drawing.Size(181, 55);
+            this.isCookedLabel.TabIndex = 23;
+            this.isCookedLabel.Text = &quot;This meal has been cooked&quot;;
+            this.isCookedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.isCookedLabel.Visible = false;
+            // 
+            // cookYesButton
+            // 
+            this.cookYesButton.BackColor = System.Drawing.Color.LawnGreen;
+            this.cookYesButton.Location = new System.Drawing.Point(103, 56);
+            this.cookYesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cookYesButton.Name = &quot;cookYesButton&quot;;
+            this.cookYesButton.Size = new System.Drawing.Size(82, 22);
+            this.cookYesButton.TabIndex = 24;
+            this.cookYesButton.Text = &quot;Yes&quot;;
+            this.cookYesButton.UseVisualStyleBackColor = false;
+            this.cookYesButton.Visible = false;
+            this.cookYesButton.Click += new System.EventHandler(this.cookYesButton_Click);
+            // 
+            // cookNoButton
+            // 
+            this.cookNoButton.BackColor = System.Drawing.Color.Red;
+            this.cookNoButton.Location = new System.Drawing.Point(293, 56);
+            this.cookNoButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cookNoButton.Name = &quot;cookNoButton&quot;;
+            this.cookNoButton.Size = new System.Drawing.Size(82, 22);
+            this.cookNoButton.TabIndex = 25;
+            this.cookNoButton.Text = &quot;No&quot;;
+            this.cookNoButton.UseVisualStyleBackColor = false;
+            this.cookNoButton.Visible = false;
+            this.cookNoButton.Click += new System.EventHandler(this.cookNoButton_Click);
+            // 
+            // shareRecipeButton
+            // 
+            this.shareRecipeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.shareRecipeButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.shareRecipeButton.Location = new System.Drawing.Point(150, 176);
+            this.shareRecipeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.shareRecipeButton.Name = &quot;shareRecipeButton&quot;;
+            this.shareRecipeButton.Size = new System.Drawing.Size(155, 28);
+            this.shareRecipeButton.TabIndex = 26;
+            this.shareRecipeButton.Text = &quot;Share Recipe&quot;;
+            this.shareRecipeButton.UseVisualStyleBackColor = false;
+            this.shareRecipeButton.Click += new System.EventHandler(this.shareRecipeButton_Click);
+            // 
+            // RecipeDetailsPage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.shareRecipeButton);
+            this.Controls.Add(this.cookNoButton);
+            this.Controls.Add(this.cookYesButton);
+            this.Controls.Add(this.isCookedLabel);
+            this.Controls.Add(this.comboboxesErrorLabel);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.cookButton);
+            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.noButton);
+            this.Controls.Add(this.yesButton);
+            this.Controls.Add(this.updateSuccessfullyLabel);
+            this.Controls.Add(this.weekLabel);
+            this.Controls.Add(this.weekComboBox);
+            this.Controls.Add(this.addToMealPlanButton);
+            this.Controls.Add(this.mealTypeLabel);
+            this.Controls.Add(this.dayLabel);
+            this.Controls.Add(this.mealTypeComboBox);
+            this.Controls.Add(this.daysComboBox);
+            this.Controls.Add(this.recipeDetailsTextBox);
+            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = &quot;RecipeDetailsPage&quot;;
+            this.Text = &quot;RecipeDetailsPage&quot;;
+            this.plannerContextMenuStrip.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private Label label1;
+        private TextBox recipeDetailsTextBox;
+        private ComboBox daysComboBox;
+        private ComboBox mealTypeComboBox;
+        private Label dayLabel;
+        private Label mealTypeLabel;
+        private Button addToMealPlanButton;
+        private ComboBox weekComboBox;
+        private Label weekLabel;
+        private Label updateSuccessfullyLabel;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem findRecipeToolStripMenuItem;
+        private ToolStripMenuItem viewMealPlanToolStripMenuItem1;
+        private Button yesButton;
+        private Button noButton;
+        private Button backButton;
+        private Button cookButton;
+        private Button addButton;
+        private Button cancelButton;
+        private Label comboboxesErrorLabel;
+        private Label isCookedLabel;
+        private Button cookYesButton;
+        private Button cookNoButton;
+        private Button shareRecipeButton;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,69,0],[32,13,32,60,0],[33,13,33,76,0],[34,13,34,69,0],[35,13,35,73,0],[36,13,36,62,0],[37,13,37,67,0],[38,13,38,74,0],[39,13,39,69,0],[40,13,40,63,0],[41,13,41,77,0],[42,13,42,103,0],[43,13,43,93,0],[44,13,44,96,0],[45,13,45,64,0],[46,13,46,63,0],[47,13,47,65,0],[48,13,48,65,0],[49,13,49,64,0],[50,13,50,67,0],[51,13,51,74,0],[52,13,52,67,0],[53,13,53,68,0],[54,13,54,67,0],[55,13,55,72,0],[56,13,56,58,0],[57,13,57,34,0],[61,13,61,41,0],[62,13,62,144,0],[63,13,63,71,0],[64,13,64,41,0],[65,13,65,65,0],[66,13,66,38,0],[67,13,67,53,0],[71,13,71,158,0],[72,13,72,84,0],[73,13,73,93,0],[74,13,74,56,0],[75,13,75,69,0],[76,13,76,55,0],[77,13,77,93,0],[78,13,78,80,0],[79,13,79,52,0],[83,13,83,56,0],[84,13,84,75,0],[85,13,85,85,0],[86,13,86,53,0],[87,13,87,70,0],[88,13,88,44,0],[89,13,89,47,0],[90,13,90,119,0],[94,13,94,60,0],[95,13,95,80,0],[96,13,96,89,0],[97,13,97,61,0],[98,13,98,74,0],[99,13,99,48,0],[100,13,100,51,0],[101,13,101,127,0],[105,13,105,43,0],[106,13,106,144,0],[107,13,107,71,0],[108,13,108,45,0],[109,13,109,66,0],[110,13,110,40,0],[111,13,111,40,0],[112,13,112,43,0],[116,13,116,48,0],[117,13,117,149,0],[118,13,118,77,0],[119,13,119,55,0],[120,13,120,71,0],[121,13,121,45,0],[122,13,122,51,0],[123,13,123,48,0],[127,13,127,152,0],[128,13,128,157,0],[129,13,129,84,0],[130,13,130,92,0],[131,13,131,67,0],[132,13,132,78,0],[133,13,133,51,0],[134,13,134,64,0],[135,13,135,70,0],[136,13,136,103,0],[140,13,140,56,0],[141,13,141,76,0],[142,13,142,85,0],[143,13,143,53,0],[144,13,144,70,0],[145,13,145,44,0],[146,13,146,47,0],[147,13,147,119,0],[151,13,151,44,0],[152,13,152,145,0],[153,13,153,73,0],[154,13,154,47,0],[155,13,155,67,0],[156,13,156,41,0],[157,13,157,42,0],[158,13,158,44,0],[162,13,162,58,0],[163,13,163,81,0],[164,13,164,88,0],[165,13,165,75,0],[166,13,166,82,0],[167,13,167,56,0],[168,13,168,95,0],[169,13,169,58,0],[173,13,173,93,0],[174,13,176,51,0],[177,13,177,75,0],[178,13,178,82,0],[182,13,182,83,0],[183,13,183,86,0],[184,13,184,67,0],[185,13,185,119,0],[189,13,189,89,0],[190,13,190,89,0],[191,13,191,73,0],[192,13,192,125,0],[196,13,196,71,0],[197,13,197,73,0],[198,13,198,82,0],[199,13,199,47,0],[200,13,200,67,0],[201,13,201,42,0],[202,13,202,41,0],[203,13,203,60,0],[204,13,204,44,0],[205,13,205,83,0],[209,13,209,64,0],[210,13,210,73,0],[211,13,211,81,0],[212,13,212,45,0],[213,13,213,66,0],[214,13,214,41,0],[215,13,215,39,0],[216,13,216,59,0],[217,13,217,43,0],[218,13,218,81,0],[222,13,222,72,0],[223,13,223,83,0],[224,13,224,49,0],[225,13,225,68,0],[226,13,226,43,0],[227,13,227,43,0],[228,13,228,60,0],[229,13,229,85,0],[233,13,233,141,0],[234,13,234,73,0],[235,13,235,83,0],[236,13,236,49,0],[237,13,237,68,0],[238,13,238,43,0],[239,13,239,43,0],[240,13,240,61,0],[241,13,241,85,0],[245,13,245,71,0],[246,13,246,73,0],[247,13,247,82,0],[248,13,248,47,0],[249,13,249,67,0],[250,13,250,42,0],[251,13,251,41,0],[252,13,252,60,0],[253,13,253,44,0],[254,13,254,83,0],[258,13,258,68,0],[259,13,259,77,0],[260,13,260,85,0],[261,13,261,53,0],[262,13,262,70,0],[263,13,263,45,0],[264,13,264,47,0],[265,13,265,63,0],[266,13,266,47,0],[267,13,267,89,0],[271,13,271,55,0],[272,13,272,76,0],[273,13,273,85,0],[274,13,274,69,0],[275,13,275,79,0],[276,13,276,53,0],[277,13,277,75,0],[278,13,278,55,0],[282,13,282,71,0],[283,13,283,77,0],[284,13,284,55,0],[285,13,285,72,0],[286,13,286,46,0],[287,13,287,67,0],[288,13,288,89,0],[289,13,289,48,0],[293,13,293,75,0],[294,13,294,77,0],[295,13,295,86,0],[296,13,296,55,0],[297,13,297,71,0],[298,13,298,46,0],[299,13,299,45,0],[300,13,300,64,0],[301,13,301,48,0],[302,13,302,91,0],[306,13,306,68,0],[307,13,307,76,0],[308,13,308,85,0],[309,13,309,53,0],[310,13,310,70,0],[311,13,311,45,0],[312,13,312,43,0],[313,13,313,63,0],[314,13,314,47,0],[315,13,315,89,0],[319,13,319,150,0],[320,13,320,155,0],[321,13,321,82,0],[322,13,322,90,0],[323,13,323,63,0],[324,13,324,76,0],[325,13,325,50,0],[326,13,326,58,0],[327,13,327,68,0],[328,13,328,99,0],[332,13,332,74,0],[333,13,333,74,0],[334,13,334,36,0],[335,13,335,65,0],[336,13,336,55,0],[337,13,337,50,0],[338,13,338,51,0],[339,13,339,51,0],[340,13,340,58,0],[341,13,341,50,0],[342,13,342,47,0],[343,13,343,48,0],[344,13,344,48,0],[345,13,345,46,0],[346,13,346,47,0],[347,13,347,61,0],[348,13,348,47,0],[349,13,349,50,0],[350,13,350,57,0],[351,13,351,51,0],[352,13,352,46,0],[353,13,353,54,0],[354,13,354,50,0],[355,13,355,58,0],[356,13,356,44,0],[357,13,357,72,0],[358,13,358,45,0],[359,13,359,45,0],[360,13,360,62,0],[361,13,361,38,0],[362,13,362,34,0],[364,9,364,10,0]]);
+    </script>
+  </body>
+</html>

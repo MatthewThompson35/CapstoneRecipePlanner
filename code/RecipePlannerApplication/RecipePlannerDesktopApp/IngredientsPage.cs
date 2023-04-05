@@ -162,8 +162,16 @@ public partial class IngredientsPage : Form
 
                 if (columnIndex == 1)
                 {
-                    IngredientDAL.decrementQuantity(id, quantity);
-                    this.UpdateIngredientsGridView();
+                    if (quantity > 1)
+                    {
+                        IngredientDAL.decrementQuantity(id, quantity);
+                        this.UpdateIngredientsGridView();
+                    }
+                    else
+                    {
+                        IngredientDAL.RemoveIngredient(id, Connection.ConnectionString);
+                        this.UpdateIngredientsGridView();
+                    }
                 }
 
                 if (columnIndex == 3)

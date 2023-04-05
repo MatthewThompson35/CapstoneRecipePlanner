@@ -284,6 +284,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Adds the needed planned meal ingredients to the shopping list.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>shopping list has needed planned meal ingredients</postcondition>
     /// <returns>Shopping List page or login page on connection error</returns>
     public ActionResult addNeededPlannedMealIngredients()
     {
@@ -327,8 +329,8 @@ public class HomeController : Controller
                     else
                     {
                         var id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        var addIngredient = new Ingredient(user, ingredient.IngredientName, id,
-                            ingredient.Quantity,
+                        var addIngredient = new Ingredient(user, ingredient.IngredientName, ingredient.Quantity,
+                            id,
                             ingredient.Measurement);
                         totalIngredients.Add(addIngredient);
                     }
@@ -388,6 +390,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Adds all planned meal ingredients to the shopping list.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>All planned meal ingredients are in shopping list</postcondition>
     /// <returns>Shopping List page or login page on connection error</returns>
     public ActionResult addAllPlannedMealIngredients()
     {
@@ -430,8 +434,8 @@ public class HomeController : Controller
                     else
                     {
                         var id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        var addIngredient = new Ingredient(user, ingredient.IngredientName, id,
-                            ingredient.Quantity,
+                        var addIngredient = new Ingredient(user, ingredient.IngredientName, ingredient.Quantity,
+                            id,
                             ingredient.Measurement);
                         totalIngredients.Add(addIngredient);
                     }
@@ -509,6 +513,8 @@ public class HomeController : Controller
     /// <param name="steps">The steps.</param>
     /// <param name="ingredients">The ingredients.</param>
     /// <param name="tags">The tags.</param>
+    /// <precondition>none</precondition>
+    /// <postcondition>recipe is added to the database</postcondition>
     /// <returns>The Recipe Page or the login page on database error</returns>
     [HttpPost]
     public ActionResult AddRecipe(string recipeName, string description, string steps, string ingredients, string tags)
@@ -599,9 +605,16 @@ public class HomeController : Controller
                         IngredientDAL.getIngredientId(ing.IngredientName), ing.Quantity, ing.Measurement,
                         Connection.ConnectionString);
                 }
+                this.setupForRecipePage();
+                return View("RecipePage");
             }
 
-            return View("Index");
+            ViewBag.test = 1;
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            ViewBag.error = "Recipe with name was already added";
+            ViewBag.page = "pantry";
+            return View("AddRecipesPage", ViewBag.Measurements);
         }
         catch (Exception ex)
         {
@@ -609,6 +622,24 @@ public class HomeController : Controller
         }
 
         return View("Index");
+    }
+
+    /// <summary>
+    /// Checks to see if the recipe exists.
+    /// </summary>
+    /// <param name="recipeName">Name of the recipe.</param>
+    /// <returns>True or false</returns>
+    public ActionResult CheckRecipeExists(string recipeName)
+    {
+
+        bool exists = false;
+        var recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+        if (recipe.Name != null)
+        {
+            exists = true;
+        }
+
+        return Json(new { Exists = exists});
     }
 
     /// <summary>
@@ -834,8 +865,7 @@ public class HomeController : Controller
                 ViewBag.Error = "Please enter values.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
-
-            if (ShoppingListDAL.getIngredients(txtIngredientName).Count() > 0)
+            if (ShoppingListDAL.getIngredients(txtIngredientName, Connection.ConnectionString).Any())
             {
                 ViewBag.Error = "Ingredient is already entered.";
                 return View("AddIngredient", ViewBag.Measurements);
@@ -885,6 +915,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Goes to add recipes page.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>none</postcondition>
     /// <returns> The add recipes page or login on connection error</returns>
     public ActionResult goToAddRecipesPage()
     {
@@ -1475,6 +1507,8 @@ public class HomeController : Controller
     /// <summary>
     ///     Purchases all shopping list and adds it to pantry.
     /// </summary>
+    /// <precondition>none</precondition>
+    /// <postcondition>Pantry is updated with shopping list values</postcondition>
     /// <returns>Ingredients Page or login on bag connection</returns>
     public ActionResult purchaseAllShoppingList()
     {

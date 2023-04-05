@@ -162,20 +162,9 @@ namespace RecipePlannerDesktopApplication
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var homepage = new Homepage();
-
+            var recipe = new Homepage();
             this.Hide();
-
-            homepage.Show();
-        }
-
-        private void backButton_Click(object sender, EventArgs e)
-        {
-            var homepage = new Homepage();
-
-            this.Hide();
-
-            homepage.Show();
+            recipe.Show();
         }
     }
 }

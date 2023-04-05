@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\Register.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary.Database;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    /// Register class.
+    /// &lt;/summary&gt;
+    /// &lt;seealso cref=&quot;System.Windows.Forms.Form&quot; /&gt;
+    public partial class Register : Form
+    {
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;Register&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        public Register()
+        {
+            InitializeComponent();
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            this.passwordErrorLabel.Visible = false;
+            this.registerCheck();
+        }
+
+        private void registerCheck()
+        {
+            try
+            {
+                if (this.IsTextEmpty())
+                {
+                    this.passwordErrorLabel.Text = &quot;Please fill out all fields&quot;;
+                    this.passwordErrorLabel.Visible = true;
+                }
+                else
+                {
+                    var username = this.usernameTextBox.Text;
+                    List&lt;string&gt; list = Database.ContainsUser(username);
+                    if (list.Count() &gt; 0)
+                    {
+                        this.passwordErrorLabel.Text = &quot;Username is a duplicate&quot;;
+                        this.passwordErrorLabel.Visible = true;
+                    }
+                    else if (this.passwordConfirmTextBox.Text.Equals(this.passwordTextBox.Text))
+                    {
+                        this.createNewUser(username, out var password);
+                    }
+                    else
+                    {
+                        this.passwordErrorLabel.Text = &quot;Passwords do not match&quot;;
+                        this.passwordErrorLabel.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.passwordErrorLabel.Text = &quot;The connection to the server could not be made&quot;;
+                this.passwordErrorLabel.Visible = true;
+            }
+            
+        }
+
+        private void createNewUser(string username, out string password)
+        {
+            password = this.passwordTextBox.Text;
+            Database.CreateUser(username, password);
+            this.Hide();
+            Form form = new LoginPage();
+            form.ShowDialog();
+        }
+
+        private bool IsTextEmpty()
+        {
+            return this.usernameTextBox.Text.Equals(&quot;&quot;) || this.passwordTextBox.Text.Equals(&quot;&quot;) || this.passwordConfirmTextBox.Text.Equals(&quot;&quot;);
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form form = new LoginPage();
+            form.ShowDialog();
+        }
+    }
+
+
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,26,0],[15,9,15,10,0],[16,13,16,35,0],[17,9,17,10,0],[20,9,20,10,0],[21,13,21,53,0],[22,13,22,34,0],[23,9,23,10,0],[26,9,26,10,0],[28,13,28,14,0],[29,17,29,40,0],[30,17,30,18,0],[31,21,31,81,0],[32,21,32,60,0],[33,17,33,18,0],[35,17,35,18,0],[36,21,36,62,0],[37,21,37,73,0],[38,21,38,42,0],[39,21,39,22,0],[40,25,40,82,0],[41,25,41,64,0],[42,21,42,22,0],[43,26,43,97,0],[44,21,44,22,0],[45,25,45,72,0],[46,21,46,22,0],[48,21,48,22,0],[49,25,49,81,0],[50,25,50,64,0],[51,21,51,22,0],[52,17,52,18,0],[53,13,53,14,0],[54,13,54,33,0],[55,13,55,14,0],[56,17,56,97,0],[57,17,57,56,0],[58,13,58,14,0],[60,9,60,10,0],[63,9,63,10,0],[64,13,64,50,0],[65,13,65,53,0],[66,13,66,25,0],[67,13,67,41,0],[68,13,68,31,0],[69,9,69,10,0],[72,9,72,10,0],[73,13,73,144,0],[74,9,74,10,0],[77,9,77,10,0],[78,13,78,25,0],[79,13,79,41,0],[80,13,80,31,0],[81,9,81,10,0]]);
+    </script>
+  </body>
+</html>
