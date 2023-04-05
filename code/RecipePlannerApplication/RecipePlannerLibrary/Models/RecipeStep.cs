@@ -12,7 +12,7 @@ namespace RecipePlannerLibrary.Models
         /// <summary>
         /// Gets or sets the Recipe Id for the Recipe Step.
         /// </summary>
-        public int recipeId { get; set; }
+        public int? recipeId { get; set; }
 
         /// <summary>
         /// Gets or sets the Step Number for the Recipe Step.

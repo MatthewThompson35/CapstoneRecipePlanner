@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Net.Sockets;
 
 namespace RecipePlannerLibrary.Database
 {
@@ -110,6 +111,26 @@ namespace RecipePlannerLibrary.Database
             using var command = new MySqlCommand(query, connection);
             command.Parameters.Add("@userName", MySqlDbType.VarChar).Value = username;
             command.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Gets all of the users.
+        /// </summary>
+        /// <returns>The list of users in the database</returns>
+        public static List<string> getUsers()
+        {
+            using var connection = new MySqlConnection(Connection.ConnectionString);
+            connection.Open();
+            var list = new List<string>();
+            var query = @"Select username from login;";
+            using var command = new MySqlCommand(query, connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+
+            return list;
         }
 
         #endregion

@@ -44,6 +44,7 @@ public class PlannedMealDalTests
     public void AddPlannedMeal_ShouldInsertRecord()
     {
         // Arrange
+        ActiveUser.username = "test";
         var recipeId = 1;
         var day = "Monday";
         var type = "Lunch";
@@ -87,6 +88,7 @@ public class PlannedMealDalTests
     [TestMethod]
     public void GetNextWeeksMeals_ShouldReturnCorrectNumberOfMeals()
     {
+        ActiveUser.username = "test";
         // Arrange
         // Arrange
         var recipeId = 1;
@@ -167,6 +169,5 @@ public class PlannedMealDalTests
         Assert.AreEqual(newRecipeId, meals[(day, type)]);
         PlannedMealDal.RemoveThisWeekMeal(this.connectionString, newRecipeId, day, type, date);
     }
-
     #endregion
 }

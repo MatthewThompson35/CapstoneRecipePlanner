@@ -1734,7 +1734,7 @@ namespace RecipePlannerDesktopApplication
             List<Ingredient> totalIngredients = new List<Ingredient>();
             List<int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
             foreach (var shoppingIngredient in shoppingIngredients)
             {
@@ -1780,7 +1780,7 @@ namespace RecipePlannerDesktopApplication
                 {
                     int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
 
-                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
                 }
                 else
                 {
@@ -1796,7 +1796,7 @@ namespace RecipePlannerDesktopApplication
             List<int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
             foreach (Ingredient shoppingItem in shoppingIngredients)
             {
@@ -1851,7 +1851,7 @@ namespace RecipePlannerDesktopApplication
 
                         if (shoppingListItem != null)
                         {
-                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
                         }
                         else
                         {

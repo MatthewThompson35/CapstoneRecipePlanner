@@ -15,9 +15,9 @@ namespace RecipePlannerLibrary.Database
         /// Gets the ingredients for the shopping list.
         /// </summary>
         /// <returns></returns>
-        public static List<Ingredient> getIngredients()
+        public static List<Ingredient> getIngredients(string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var ingredients = new List<Ingredient>();
             var user = ActiveUser.username;
@@ -70,9 +70,9 @@ namespace RecipePlannerLibrary.Database
         /// <param name="quantity">The current quantity of the ingredient.</param>
         /// <precondition>none</precondition>
         /// <postcondition>Quantity for the given ingredient is decreased by 1</postcondition>
-        public static void decrementQuantity(int id, int quantity)
+        public static void decrementQuantity(int id, int quantity, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username";
             using var command = new MySqlCommand(query, connection);
@@ -89,9 +89,9 @@ namespace RecipePlannerLibrary.Database
         /// <param name="quantity">The quantity of the ingredient.</param>
         /// <precondition>none</precondition>
         /// <postcondition>Quantity of the given ingredient is incremented by 1</postcondition>
-        public static void incrementQuantity(int id, int quantity)
+        public static void incrementQuantity(int id, int quantity, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username";
             using var command = new MySqlCommand(query, connection);
@@ -125,9 +125,9 @@ namespace RecipePlannerLibrary.Database
         /// <precondition>none</precondition>
         /// <postcondition>none</postcondition>
         /// <returns>List of ingredients that match ingredient name.</returns>
-        public static List<Ingredient> getIngredients(string ingredientName)
+        public static List<Ingredient> getIngredients(string ingredientName, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var ingredients = new List<Ingredient>();
             var user = ActiveUser.username;
@@ -159,9 +159,9 @@ namespace RecipePlannerLibrary.Database
         /// <postcondition>Quantity of the given ingredient is updated by the given quantity.</postcondition>
         /// <param name="id">The id of the ingredient.</param>
         /// <param name="quantity">The quantity of the ingredient.</param>
-        public static void updateQuantity(int id, int quantity)
+        public static void updateQuantity(int id, int quantity, string connectionString)
         {
-            using var connection = new MySqlConnection(Connection.ConnectionString);
+            using var connection = new MySqlConnection(connectionString);
             connection.Open();
             var query = @"Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username";
             using var command = new MySqlCommand(query, connection);

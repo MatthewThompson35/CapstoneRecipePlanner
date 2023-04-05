@@ -32,7 +32,7 @@ namespace RecipePlannerDesktopApplication
 
             try
             {
-                var ingredients = ShoppingListDAL.getIngredients();
+                var ingredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
                 this.totalPages = (int)Math.Ceiling((double)ingredients.Count / this.pageSize);
                 this.pageOneIngredients = ingredients
                     .Skip((this.page - 1) * this.pageSize)
@@ -71,7 +71,7 @@ namespace RecipePlannerDesktopApplication
         private void beginningButton_Click(object sender, EventArgs e)
         {
             this.page = 1;
-            var ingredients = ShoppingListDAL.getIngredients();
+            var ingredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
             List<Ingredient> allIngredientsOnPage = ingredients
                 .Skip((this.page - 1) * this.pageSize)
                 .Take(this.pageSize)
@@ -90,7 +90,7 @@ namespace RecipePlannerDesktopApplication
             if (this.page != 1)
             {
                 this.page--;
-                var ingredients = ShoppingListDAL.getIngredients();
+                var ingredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
                 List<Ingredient> allIngredientsOnPage = ingredients
                     .Skip((this.page - 1) * this.pageSize)
                     .Take(this.pageSize)
@@ -110,7 +110,7 @@ namespace RecipePlannerDesktopApplication
             if (this.page != this.totalPages)
             {
                 this.page++;
-                var ingredients = ShoppingListDAL.getIngredients();
+                var ingredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
                 List<Ingredient> allIngredientsOnPage = ingredients
                     .Skip((this.page - 1) * this.pageSize)
                     .Take(this.pageSize)
@@ -128,7 +128,7 @@ namespace RecipePlannerDesktopApplication
         private void button3_Click(object sender, EventArgs e)
         {
             this.page = this.totalPages;
-            var ingredients = ShoppingListDAL.getIngredients();
+            var ingredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
             List<Ingredient> allIngredientsOnPage = ingredients
                 .Skip((this.page - 1) * this.pageSize)
                 .Take(this.pageSize)
@@ -161,7 +161,7 @@ namespace RecipePlannerDesktopApplication
                     var id = 0;
                     var name = this.selectedRow.Cells[0].Value;
                     var quantity = (int)this.selectedRow.Cells[2].Value;
-                    var list = ShoppingListDAL.getIngredients();
+                    var list = ShoppingListDAL.getIngredients(Connection.ConnectionString);
                     foreach (var item in list)
                     {
                         if (item.name.Equals(name) && item.quantity == quantity)
@@ -217,7 +217,7 @@ namespace RecipePlannerDesktopApplication
         private void submitShoppingList()
         {
             int updatedQuantity = 0;
-            foreach (var shoppingIngredient in ShoppingListDAL.getIngredients())
+            foreach (var shoppingIngredient in ShoppingListDAL.getIngredients(Connection.ConnectionString))
             {
                 bool shoppingIngredientExists = false;
                 foreach (var ingredient in IngredientDAL.getIngredients())
@@ -246,7 +246,7 @@ namespace RecipePlannerDesktopApplication
                     var id = 0;
                     var name = this.selectedRow.Cells[0].Value;
                     var quantity = (int)this.selectedRow.Cells[2].Value;
-                    var list = ShoppingListDAL.getIngredients();
+                    var list = ShoppingListDAL.getIngredients(Connection.ConnectionString);
                     foreach (var item in list)
                     {
                         if (item.name.Equals(name) && item.quantity == quantity)
@@ -257,13 +257,13 @@ namespace RecipePlannerDesktopApplication
 
                     if (columnIndex == 3)
                     {
-                        ShoppingListDAL.incrementQuantity(id, quantity);
+                        ShoppingListDAL.incrementQuantity(id, quantity, Connection.ConnectionString);
                         this.UpdateIngredientsGridView();
                     }
 
                     if (columnIndex == 1)
                     {
-                        ShoppingListDAL.decrementQuantity(id, quantity);
+                        ShoppingListDAL.decrementQuantity(id, quantity, Connection.ConnectionString);
                         this.UpdateIngredientsGridView();
                     }
                 }
@@ -282,7 +282,7 @@ namespace RecipePlannerDesktopApplication
         {
             try
             {
-                var ingredients = ShoppingListDAL.getIngredients();
+                var ingredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
                 this.pageOneIngredients = ingredients
                     .Skip((this.page - 1) * this.pageSize)
                     .Take(this.pageSize)
@@ -343,7 +343,7 @@ namespace RecipePlannerDesktopApplication
             List<Ingredient> totalIngredients = new List<Ingredient>();
             List<int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
             foreach (var shoppingIngredient in shoppingIngredients)
             {
@@ -389,7 +389,7 @@ namespace RecipePlannerDesktopApplication
                 {
                     int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
 
-                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
                 }
                 else
                 {
@@ -405,7 +405,7 @@ namespace RecipePlannerDesktopApplication
             List<int> remainingMeals =
                 PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
             List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients();
+            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
             foreach (Ingredient shoppingItem in shoppingIngredients)
             {
@@ -460,7 +460,7 @@ namespace RecipePlannerDesktopApplication
 
                         if (shoppingListItem != null)
                         {
-                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity);
+                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
                         }
                         else
                         {
