@@ -327,8 +327,8 @@ public class HomeController : Controller
                     else
                     {
                         var id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        var addIngredient = new Ingredient(user, ingredient.IngredientName, id,
-                            ingredient.Quantity,
+                        var addIngredient = new Ingredient(user, ingredient.IngredientName, ingredient.Quantity,
+                            id,
                             ingredient.Measurement);
                         totalIngredients.Add(addIngredient);
                     }
@@ -430,8 +430,8 @@ public class HomeController : Controller
                     else
                     {
                         var id = IngredientDAL.getIngredientId(ingredient.IngredientName);
-                        var addIngredient = new Ingredient(user, ingredient.IngredientName, id,
-                            ingredient.Quantity,
+                        var addIngredient = new Ingredient(user, ingredient.IngredientName, ingredient.Quantity,
+                            id,
                             ingredient.Measurement);
                         totalIngredients.Add(addIngredient);
                     }
@@ -834,8 +834,7 @@ public class HomeController : Controller
                 ViewBag.Error = "Please enter values.";
                 return View("AddIngredient", ViewBag.Measurements);
             }
-
-            if (ShoppingListDAL.getIngredients(txtIngredientName).Count() > 0)
+            if (ShoppingListDAL.getIngredients(txtIngredientName, Connection.ConnectionString).Any())
             {
                 ViewBag.Error = "Ingredient is already entered.";
                 return View("AddIngredient", ViewBag.Measurements);
