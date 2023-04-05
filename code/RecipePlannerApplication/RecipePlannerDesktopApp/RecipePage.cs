@@ -140,8 +140,17 @@ namespace RecipePlannerDesktopApplication
                 this.errorLabel.Visible = false;
                 recipeDescription = this.recipeDescriptionTextBox.Text;
             }
+
+            Recipe recipe = null;
+            if (this.errorLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+            }
             
-            Recipe recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
 
             if (recipe.Name == null)
             {

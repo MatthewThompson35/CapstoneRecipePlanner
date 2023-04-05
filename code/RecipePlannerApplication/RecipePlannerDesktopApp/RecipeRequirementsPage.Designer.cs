@@ -55,6 +55,8 @@
             this.ingredientSuccessLabel = new System.Windows.Forms.Label();
             this.stepsSuccessLabel = new System.Windows.Forms.Label();
             this.tagSuccessLabel = new System.Windows.Forms.Label();
+            this.errorStepNumberLabel = new System.Windows.Forms.Label();
+            this.errorQuantityLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -170,7 +172,7 @@
             this.measurementTextBox.Location = new System.Drawing.Point(206, 273);
             this.measurementTextBox.Name = "measurementTextBox";
             this.measurementTextBox.Size = new System.Drawing.Size(162, 27);
-            this.measurementTextBox.TabIndex = 11;
+            this.measurementTextBox.TabIndex = 12;
             this.measurementTextBox.Click += new System.EventHandler(this.measurementTextBox_Click);
             // 
             // quantityTextBox
@@ -178,7 +180,7 @@
             this.quantityTextBox.Location = new System.Drawing.Point(206, 211);
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(162, 27);
-            this.quantityTextBox.TabIndex = 12;
+            this.quantityTextBox.TabIndex = 11;
             this.quantityTextBox.Click += new System.EventHandler(this.quantityTextBox_Click);
             // 
             // stepNumberTextBox
@@ -337,11 +339,37 @@
             this.tagSuccessLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.tagSuccessLabel.Visible = false;
             // 
+            // errorStepNumberLabel
+            // 
+            this.errorStepNumberLabel.AutoSize = true;
+            this.errorStepNumberLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorStepNumberLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorStepNumberLabel.Location = new System.Drawing.Point(34, 463);
+            this.errorStepNumberLabel.Name = "errorStepNumberLabel";
+            this.errorStepNumberLabel.Size = new System.Drawing.Size(152, 20);
+            this.errorStepNumberLabel.TabIndex = 40;
+            this.errorStepNumberLabel.Text = "Step number is not a number";
+            this.errorStepNumberLabel.Visible = false;
+            // 
+            // errorQuantityLabel
+            // 
+            this.errorQuantityLabel.AutoSize = true;
+            this.errorQuantityLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorQuantityLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorQuantityLabel.Location = new System.Drawing.Point(28, 241);
+            this.errorQuantityLabel.Name = "errorQuantityLabel";
+            this.errorQuantityLabel.Size = new System.Drawing.Size(184, 20);
+            this.errorQuantityLabel.TabIndex = 41;
+            this.errorQuantityLabel.Text = "Quantity is not a number";
+            this.errorQuantityLabel.Visible = false;
+            // 
             // RecipeRequirementsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.errorQuantityLabel);
+            this.Controls.Add(this.errorStepNumberLabel);
             this.Controls.Add(this.tagSuccessLabel);
             this.Controls.Add(this.stepsSuccessLabel);
             this.Controls.Add(this.ingredientSuccessLabel);
@@ -405,5 +433,7 @@
         private Label ingredientSuccessLabel;
         private Label stepsSuccessLabel;
         private Label tagSuccessLabel;
+        private Label errorStepNumberLabel;
+        private Label errorQuantityLabel;
     }
 }
