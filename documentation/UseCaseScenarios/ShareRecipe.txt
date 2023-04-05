@@ -1,0 +1,19 @@
+Context - User is viewing a recipe's details
+
+Primary Flow
+1 - user selects to share recipe
+2 - user shares to valid user
+3 - system shares recipe
+
+Alternative Flow(s)
+CANCEL
+a2 - user selects to cancel
+return to 1
+
+INVALID USER
+a3 - system notifies user of invalid information
+return to 1
+
+BAD CONNECTION
+a3 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
+

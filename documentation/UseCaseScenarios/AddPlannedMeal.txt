@@ -1,4 +1,4 @@
-Context - User is viewing a recipe's details
+Context - User is viewing recipes
 
 Primary Flow
 1 - user finds recipe they would like to add

@@ -434,14 +434,18 @@
             </div>
             <div class="button-group">
                 <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel"/>
                 <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update"/>
             </div>
         </form>
+
     </div>
     <div id="details">
         @foreach (var recipe in ViewBag.AllRecipes)
         {
             <div class="form-item" id="@recipe.RecipeId" style="display: none">
+                <form id="add">
+                </form>
                 <form id="cookMeal" method="POST">
                     <input type="hidden" id="recipeID" name="recipeID" value="@recipe.RecipeId">
                     <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe-@recipe.RecipeId"/>
@@ -501,6 +505,11 @@
         addPlannedMealForm.style.display = 'block';
         cookRecipe.style.display = "block";
         shareRecipe.style.display = "block";
+    }
+    
+    function cancel() {
+        var addPlannedMealForm = document.getElementById('addPlannedMeal');
+        addPlannedMealForm.style.display = 'none';
     }
 
     var tags = [];
