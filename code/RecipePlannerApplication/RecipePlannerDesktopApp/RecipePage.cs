@@ -47,11 +47,19 @@ namespace RecipePlannerDesktopApplication
         {
             this.addRecipe();
 
-            var homepage = new Homepage();
+            if (this.errorLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                var homepage = new Homepage();
 
-            this.Hide();
+                this.Hide();
 
-            homepage.Show();
+                homepage.Show();
+            }
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -154,15 +162,16 @@ namespace RecipePlannerDesktopApplication
             if (recipe.Name == null)
             {
                 this.errorLabel.Visible = false;
-                RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
+                
 
-                if (this.tagDataGridView.Rows.Count == 0)
+                if (this.tagDataGridView.Rows.Count == 0 || this.stepsDataGridView.Rows.Count == 0 || this.recipeIngredientsDataGridView.Rows.Count == 0)
                 {
                     this.errorLabel.Visible = true;
                 }
                 else
                 {
                     this.errorLabel.Visible = false;
+                    RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
                     foreach (DataGridViewRow row in this.tagDataGridView.Rows)
                     {
                         if (row.Cells["tagColumn"].Value == null)
@@ -181,16 +190,7 @@ namespace RecipePlannerDesktopApplication
                     {
                         RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, tag, Connection.ConnectionString);
                     }
-                }
 
-                
-                if (this.stepsDataGridView.Rows.Count == 0)
-                {
-                    this.errorLabel.Visible = true;
-                }
-                else
-                {
-                    this.errorLabel.Visible = false;
                     foreach (DataGridViewRow row in this.stepsDataGridView.Rows)
                     {
                         if (row.Cells["step"].Value == null && row.Cells["stepDescription"].Value == null)
@@ -212,16 +212,7 @@ namespace RecipePlannerDesktopApplication
                     {
                         RecipeDAL.addRecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, step.stepNumber, step.stepDescription, Connection.ConnectionString);
                     }
-                }
-                
-                if (this.recipeIngredientsDataGridView.Rows.Count == 0)
-                {
-                    this.errorLabel.Visible = true;
-                }
 
-                else
-                {
-                    this.errorLabel.Visible = false;
                     foreach (DataGridViewRow row in this.recipeIngredientsDataGridView.Rows)
                     {
                         if (row.Cells["ingredientName"].Value == null && row.Cells["quantity"].Value == null && row.Cells["measurement"].Value == null)

@@ -273,11 +273,38 @@ namespace RecipePlannerDesktopApplication
                 tag = this.tagNameTextBox.Text;
             }
 
-            tags.Add(tag);
+            if (this.errorTagFieldLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                foreach (var aTag in this.tags)
+                {
+                    if (tag.Equals(aTag))
+                    {
+                        this.errorTagFieldLabel.Text = "This tag already exists";
+                        this.errorTagFieldLabel.Visible = true;
+                    }
+                    else
+                    {
+                        this.errorTagFieldLabel.Visible = false;
+                    }
+                }
+                if (this.errorTagFieldLabel.Visible == true)
+                {
+                    return;
+                }
+                else
+                {
+                    tags.Add(tag);
 
-            this.tagSuccessLabel.Visible = true;
+                    this.tagSuccessLabel.Visible = true;
 
-            this.clearTagNameField();
+                    this.clearTagNameField();
+                }
+            }
+            
         }
 
         private void textBoxesIngredients_Changed(object sender, EventArgs e)

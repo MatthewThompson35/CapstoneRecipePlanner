@@ -45,16 +45,16 @@
             this.stepsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.recipeIngredientsDataGridView = new System.Windows.Forms.DataGridView();
+            this.ingredientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ingredientsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.errorLabel = new System.Windows.Forms.Label();
             this.tagDataGridView = new System.Windows.Forms.DataGridView();
             this.tagColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tagRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.addRecipeRequirementsButton = new System.Windows.Forms.Button();
-            this.ingredientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ingredientsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recipeIngredientsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tagDataGridView)).BeginInit();
@@ -140,6 +140,7 @@
             // 
             // stepsDataGridView
             // 
+            this.stepsDataGridView.AllowUserToAddRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -199,6 +200,7 @@
             // 
             // recipeIngredientsDataGridView
             // 
+            this.recipeIngredientsDataGridView.AllowUserToAddRows = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -222,6 +224,39 @@
             this.recipeIngredientsDataGridView.TabIndex = 10;
             this.recipeIngredientsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recipeIngredientsDataGridView_CellContentClick);
             // 
+            // ingredientName
+            // 
+            this.ingredientName.HeaderText = "Ingredient Name";
+            this.ingredientName.MinimumWidth = 6;
+            this.ingredientName.Name = "ingredientName";
+            this.ingredientName.ReadOnly = true;
+            this.ingredientName.Width = 125;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.MinimumWidth = 6;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 75;
+            // 
+            // measurement
+            // 
+            this.measurement.HeaderText = "Measurement";
+            this.measurement.MinimumWidth = 6;
+            this.measurement.Name = "measurement";
+            this.measurement.ReadOnly = true;
+            this.measurement.Width = 125;
+            // 
+            // ingredientsRemove
+            // 
+            this.ingredientsRemove.HeaderText = "Action";
+            this.ingredientsRemove.MinimumWidth = 6;
+            this.ingredientsRemove.Name = "ingredientsRemove";
+            this.ingredientsRemove.Text = "Remove";
+            this.ingredientsRemove.UseColumnTextForButtonValue = true;
+            this.ingredientsRemove.Width = 127;
+            // 
             // errorLabel
             // 
             this.errorLabel.AutoSize = true;
@@ -236,6 +271,7 @@
             // 
             // tagDataGridView
             // 
+            this.tagDataGridView.AllowUserToAddRows = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -295,39 +331,6 @@
             this.addRecipeRequirementsButton.Text = "Add Recipe Requirements";
             this.addRecipeRequirementsButton.UseVisualStyleBackColor = false;
             this.addRecipeRequirementsButton.Click += new System.EventHandler(this.addRecipeRequirementsButton_Click);
-            // 
-            // ingredientName
-            // 
-            this.ingredientName.HeaderText = "Ingredient Name";
-            this.ingredientName.MinimumWidth = 6;
-            this.ingredientName.Name = "ingredientName";
-            this.ingredientName.ReadOnly = true;
-            this.ingredientName.Width = 125;
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.MinimumWidth = 6;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 75;
-            // 
-            // measurement
-            // 
-            this.measurement.HeaderText = "Measurement";
-            this.measurement.MinimumWidth = 6;
-            this.measurement.Name = "measurement";
-            this.measurement.ReadOnly = true;
-            this.measurement.Width = 125;
-            // 
-            // ingredientsRemove
-            // 
-            this.ingredientsRemove.HeaderText = "Action";
-            this.ingredientsRemove.MinimumWidth = 6;
-            this.ingredientsRemove.Name = "ingredientsRemove";
-            this.ingredientsRemove.Text = "Remove";
-            this.ingredientsRemove.UseColumnTextForButtonValue = true;
-            this.ingredientsRemove.Width = 127;
             // 
             // RecipePage
             // 
