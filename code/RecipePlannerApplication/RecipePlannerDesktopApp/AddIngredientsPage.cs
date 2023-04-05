@@ -23,6 +23,7 @@ namespace RecipePlannerDesktopApplication
 
             this.ingredientsPage = ingredientsPage;
             this.shoppingListPage = null;
+            this.duplicateIngredientError.Visible = false;
         }
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace RecipePlannerDesktopApplication
 
             this.shoppingListPage = shoppingListPage;
             this.ingredientsPage = null;
+            this.duplicateIngredientError.Visible = false;
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -71,8 +73,8 @@ namespace RecipePlannerDesktopApplication
                     {
                         if(IngredientDAL.getIngredients(name).Count > 0)
                         {
-                            this.errorTextLabel.Text = @"This ingredient " + "'" + name + "'" + @" already exists in pantry. Update quantity instead.";
-                            this.errorTextLabel.Visible = true;
+                            this.duplicateIngredientError.Text = @"This ingredient " + "'" + name + "'" + @" already exists in pantry. Update quantity.";
+                            this.duplicateIngredientError.Visible = true;
                             this.errorQuantityTextLabel.Visible = false;
                         }
                         else
@@ -88,8 +90,8 @@ namespace RecipePlannerDesktopApplication
                     {
                         if (ShoppingListDAL.getIngredients(name, Connection.ConnectionString).Count > 0)
                         {
-                            this.errorTextLabel.Text = @"This ingredient " + "'" + name + "'" + @" already exists in shopping list. Update quantity instead.";
-                            this.errorTextLabel.Visible = true;
+                            this.duplicateIngredientError.Text = @"This ingredient " + "'" + name + "'" + @" already exists in shopping list. Update quantity.";
+                            this.duplicateIngredientError.Visible = true;
                             this.errorQuantityTextLabel.Visible = false;
                         }
                         else
