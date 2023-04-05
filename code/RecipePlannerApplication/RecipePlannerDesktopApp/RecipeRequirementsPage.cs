@@ -106,6 +106,8 @@ namespace RecipePlannerDesktopApplication
             string quantity = null;
             string measurement = null;
 
+            int number;
+
             if (String.IsNullOrEmpty(this.ingredientNameTextBox.Text))
             {
                 this.errorIngredientsFieldsLabel.Visible = true;
@@ -124,6 +126,17 @@ namespace RecipePlannerDesktopApplication
             {
                 this.errorIngredientsFieldsLabel.Visible = false;
                 quantity = this.quantityTextBox.Text;
+
+                bool isNumeric = int.TryParse(quantity, out number);
+
+                if (!isNumeric)
+                {
+                    this.errorQuantityLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorQuantityLabel.Visible = false;
+                }
             }
 
             if (String.IsNullOrEmpty(this.measurementTextBox.Text))
@@ -136,7 +149,7 @@ namespace RecipePlannerDesktopApplication
                 measurement = this.measurementTextBox.Text;
             }
 
-            if (this.errorIngredientsFieldsLabel.Visible == true)
+            if (this.errorIngredientsFieldsLabel.Visible == true || this.errorQuantityLabel.Visible == true)
             {
                 return;
             }
@@ -144,11 +157,28 @@ namespace RecipePlannerDesktopApplication
             {
                 RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
 
-                this.recipeIngredients.Add(recipeIngredient);
+                foreach (var ingredient in this.recipeIngredients)
+                {
+                    if (recipeIngredient.IngredientName.Equals(ingredient.IngredientName) && recipeIngredient.Quantity == ingredient.Quantity && recipeIngredient.Measurement.Equals(ingredient.Measurement))
+                    {
+                        this.errorIngredientsFieldsLabel.Text = "Ingredient already exists.";
+                        this.errorIngredientsFieldsLabel.Visible = true;
+                    }
+                }
+                if (this.errorIngredientsFieldsLabel.Visible == true)
+                {
+                    return;
+                }
+                else
+                {
+                    this.recipeIngredients.Add(recipeIngredient);
 
-                this.ingredientSuccessLabel.Visible = true;
+                    this.ingredientSuccessLabel.Visible = true;
 
-                this.clearIngredientsFields();
+                    this.clearIngredientsFields();
+                }
+
+                
             }
 
             
@@ -176,6 +206,7 @@ namespace RecipePlannerDesktopApplication
         {
             string stepNumber = null;
             string stepDescription = null;
+            int number;
 
             if (String.IsNullOrEmpty(this.stepNumberTextBox.Text))
             {
@@ -185,6 +216,17 @@ namespace RecipePlannerDesktopApplication
             {
                 this.errorStepsFieldLabel.Visible = false;
                 stepNumber = this.stepNumberTextBox.Text;
+
+                bool isNumeric = int.TryParse(stepNumber, out number);
+
+                if (!isNumeric)
+                {
+                    this.errorStepNumberLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorStepNumberLabel.Visible = false;
+                }
             }
             
             if (String.IsNullOrEmpty(this.stepDescriptionTextBox.Text))
@@ -197,13 +239,40 @@ namespace RecipePlannerDesktopApplication
                 stepDescription = this.stepDescriptionTextBox.Text;
             }
 
-            RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
+            if (this.errorStepsFieldLabel.Visible == true || this.errorStepNumberLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
 
-            recipeSteps.Add(recipeStep);
+                foreach (var step in this.GetRecipeSteps())
+                {
+                    if (recipeStep.stepNumber.Equals(step.stepNumber))
+                    {
+                        this.errorStepNumberLabel.Text = "This number already exists";
+                        this.errorStepNumberLabel.Visible = true;
+                    }
+                    else
+                    {
+                        this.errorStepNumberLabel.Visible = false;
+                    }
+                }
 
-            this.stepsSuccessLabel.Visible = true;
+                if (this.errorStepNumberLabel.Visible == true)
+                {
+                    return;
+                }
+                else
+                {
+                    recipeSteps.Add(recipeStep);
 
-            this.clearStepsFields();
+                    this.stepsSuccessLabel.Visible = true;
+                    this.clearStepsFields();
+                }
+                
+            }
 
         }
 
@@ -221,11 +290,38 @@ namespace RecipePlannerDesktopApplication
                 tag = this.tagNameTextBox.Text;
             }
 
-            tags.Add(tag);
+            if (this.errorTagFieldLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                foreach (var aTag in this.tags)
+                {
+                    if (tag.Equals(aTag))
+                    {
+                        this.errorTagFieldLabel.Text = "This tag already exists";
+                        this.errorTagFieldLabel.Visible = true;
+                    }
+                    else
+                    {
+                        this.errorTagFieldLabel.Visible = false;
+                    }
+                }
+                if (this.errorTagFieldLabel.Visible == true)
+                {
+                    return;
+                }
+                else
+                {
+                    tags.Add(tag);
 
-            this.tagSuccessLabel.Visible = true;
+                    this.tagSuccessLabel.Visible = true;
 
-            this.clearTagNameField();
+                    this.clearTagNameField();
+                }
+            }
+            
         }
 
         private void textBoxesIngredients_Changed(object sender, EventArgs e)

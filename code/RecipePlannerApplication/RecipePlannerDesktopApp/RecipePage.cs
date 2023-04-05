@@ -47,11 +47,19 @@ namespace RecipePlannerDesktopApplication
         {
             this.addRecipe();
 
-            var homepage = new Homepage();
+            if (this.errorLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                var homepage = new Homepage();
 
-            this.Hide();
+                this.Hide();
 
-            homepage.Show();
+                homepage.Show();
+            }
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -140,77 +148,95 @@ namespace RecipePlannerDesktopApplication
                 this.errorLabel.Visible = false;
                 recipeDescription = this.recipeDescriptionTextBox.Text;
             }
-            
-            Recipe recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+            Recipe recipe = null;
+            if (this.errorLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+            }
 
             if (recipe.Name == null)
             {
                 this.errorLabel.Visible = false;
-                RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
+                
 
-                foreach (DataGridViewRow row in this.tagDataGridView.Rows)
+                if (this.tagDataGridView.Rows.Count == 0 || this.stepsDataGridView.Rows.Count == 0 || this.recipeIngredientsDataGridView.Rows.Count == 0)
                 {
-                    if (row.Cells["tagColumn"].Value == null)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        string tag = row.Cells["tagColumn"].Value.ToString();
-                        this.requirementsPage.GetTags().Add(tag);
-                    }
-
+                    this.errorLabel.Visible = true;
                 }
-
-                foreach (string tag in this.requirementsPage.GetTags())
+                else
                 {
-                    RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, tag, Connection.ConnectionString);
-                }
-
-                foreach (DataGridViewRow row in this.stepsDataGridView.Rows)
-                {
-                    if (row.Cells["step"].Value == null && row.Cells["stepDescription"].Value == null)
+                    this.errorLabel.Visible = false;
+                    RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
+                    foreach (DataGridViewRow row in this.tagDataGridView.Rows)
                     {
-                        break;
-                    }
-                    else
-                    {
-                        string stepNumber = row.Cells["step"].Value.ToString();
-                        string stepDescription = row.Cells["stepDescription"].Value.ToString();
+                        if (row.Cells["tagColumn"].Value == null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            string tag = row.Cells["tagColumn"].Value.ToString();
+                            this.requirementsPage.GetTags().Add(tag);
+                        }
 
-                        RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
-                        this.requirementsPage.GetRecipeSteps().Add(recipeStep);
                     }
 
-                }
-
-                foreach (var step in this.requirementsPage.GetRecipeSteps())
-                {
-                    RecipeDAL.addRecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, step.stepNumber, step.stepDescription, Connection.ConnectionString);
-                }
-
-                foreach (DataGridViewRow row in this.recipeIngredientsDataGridView.Rows)
-                {
-                    if (row.Cells["ingredientName"].Value == null && row.Cells["quantity"].Value == null && row.Cells["measurement"].Value == null)
+                    foreach (string tag in this.requirementsPage.GetTags())
                     {
-                        break;
+                        RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, tag, Connection.ConnectionString);
                     }
-                    else
+
+                    foreach (DataGridViewRow row in this.stepsDataGridView.Rows)
                     {
-                        string ingredientName = row.Cells["ingredientName"].Value.ToString();
-                        string quantity = row.Cells["quantity"].Value.ToString();
-                        string measurement = row.Cells["measurement"].Value.ToString();
+                        if (row.Cells["step"].Value == null && row.Cells["stepDescription"].Value == null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            string stepNumber = row.Cells["step"].Value.ToString();
+                            string stepDescription = row.Cells["stepDescription"].Value.ToString();
 
-                        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
+                            RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
+                            this.requirementsPage.GetRecipeSteps().Add(recipeStep);
+                        }
 
-                        this.requirementsPage.GetRecipeIngredients().Add(recipeIngredient);
+                    }
+
+                    foreach (var step in this.requirementsPage.GetRecipeSteps())
+                    {
+                        RecipeDAL.addRecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, step.stepNumber, step.stepDescription, Connection.ConnectionString);
+                    }
+
+                    foreach (DataGridViewRow row in this.recipeIngredientsDataGridView.Rows)
+                    {
+                        if (row.Cells["ingredientName"].Value == null && row.Cells["quantity"].Value == null && row.Cells["measurement"].Value == null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            string ingredientName = row.Cells["ingredientName"].Value.ToString();
+                            string quantity = row.Cells["quantity"].Value.ToString();
+                            string measurement = row.Cells["measurement"].Value.ToString();
+
+                            RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
+
+                            this.requirementsPage.GetRecipeIngredients().Add(recipeIngredient);
+                        }
+                    }
+
+                    foreach (var ingredient in this.requirementsPage.GetRecipeIngredients())
+                    {
+                        RecipeDAL.addRecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, ingredient.IngredientName, IngredientDAL.getIngredientId(ingredient.IngredientName), ingredient.Quantity, ingredient.Measurement, Connection.ConnectionString);
                     }
                 }
-
-                foreach (var ingredient in this.requirementsPage.GetRecipeIngredients())
-                {
-                    RecipeDAL.addRecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, ingredient.IngredientName, IngredientDAL.getIngredientId(ingredient.IngredientName), ingredient.Quantity, ingredient.Measurement, Connection.ConnectionString);
-                }
+                
             }
             else
             {
