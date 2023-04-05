@@ -125,7 +125,7 @@
             // 
             this.errorTextLabel.AutoSize = true;
             this.errorTextLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorTextLabel.Location = new System.Drawing.Point(155, 360);
+            this.errorTextLabel.Location = new System.Drawing.Point(129, 360);
             this.errorTextLabel.Name = "errorTextLabel";
             this.errorTextLabel.Size = new System.Drawing.Size(123, 15);
             this.errorTextLabel.TabIndex = 8;
@@ -155,7 +155,7 @@
             this.measurementComboBox.Size = new System.Drawing.Size(126, 23);
             this.measurementComboBox.TabIndex = 10;
             // 
-            // AddIngredientsPopup
+            // AddIngredientsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,7 +172,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AddIngredientsPopup";
+            this.Name = "AddIngredientsPage";
             this.Text = "AddIngredientsPopup";
             this.ResumeLayout(false);
             this.PerformLayout();
