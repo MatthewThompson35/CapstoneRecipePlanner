@@ -159,5 +159,23 @@ namespace RecipePlannerDesktopApplication
         {
             return this.selectedRecipe;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var homepage = new Homepage();
+
+            this.Hide();
+
+            homepage.Show();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            var homepage = new Homepage();
+
+            this.Hide();
+
+            homepage.Show();
+        }
     }
 }
