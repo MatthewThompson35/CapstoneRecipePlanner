@@ -1,0 +1,21 @@
+Context - User is on recipe page
+
+Primary Flow
+1 - user selects to add recipe
+2 - system shows add recipe page
+3 - user enters valid information
+4 - user selects to add
+5 - system adds recipe
+
+Alternative Flow(s)
+CANCEL
+a2-5 - user selects to cancel
+return to 1
+
+INVALID INFO
+a4 - system notifies user that info is invalid
+return to 2
+
+BAD CONNECTION
+a2-5 - system can not connect to the server and notifies user to try again. And is sent back to the login page.
+

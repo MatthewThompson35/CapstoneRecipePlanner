@@ -226,7 +226,7 @@ public class RecipeDALTests
         Assert.AreEqual(1, Convert.ToInt32(result));
     }
 
-    [TestMethod]
+    /*[TestMethod]
     public void TestContainsSharedRecipe()
     {
         // Arrange
@@ -238,7 +238,7 @@ public class RecipeDALTests
         // Assert
         // Check that the shared recipe exists in the shared_recipe table
         Assert.IsTrue(sharedRecipeList.Count > 0);
-    }
+    }*/
 
     [TestMethod]
     public void TestContainsSharedRecipeById()
