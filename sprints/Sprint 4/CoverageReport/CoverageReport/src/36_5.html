@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\CookMealConfirmation.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;Confirmation Message&lt;/title&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.6.0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-yes, .button-no {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-no {
+            background-color: #f44336;
+        }
+
+            .button-yes:hover, .button-no:hover {
+                background-color: #3e8e41;
+            }
+
+            .button-yes:active, .button-no:active {
+                background-color: #3e8e41;
+            }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;center&quot;&gt;
+    &lt;h1&gt;Are you sure you would like to cook this meal? Ingredients will be removed&lt;/h1&gt;
+    &lt;div class=&quot;button-container&quot;&gt;
+            &lt;form method=&quot;post&quot; action=&quot;@Url.Action(&quot;CookMeal&quot;, &quot;Home&quot;)&quot; id=&quot;CookRecipe&quot;&gt;
+            &lt;input type=&quot;hidden&quot; id=&quot;recipeID&quot; name=&quot;recipeID&quot; value=&quot;@ViewBag.id&quot;&gt;
+            &lt;button type=&quot;submit&quot; class=&quot;button-yes&quot;&gt;Yes&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;form&gt;
+                &lt;button type=&quot;button&quot; class=&quot;button-no&quot; onclick=&quot;goBack()&quot;&gt;No&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script&gt;
+    var recipeID = document.getElementById(&#39;recipeID&#39;);
+    recipeID.value = recipeId;
+
+    function goBack() {
+        window.history.back();
+    }
+
+&lt;/script&gt;
+&lt;/html&gt;
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[57,41,57,73,0],[58,71,58,83,0]]);
+    </script>
+  </body>
+</html>

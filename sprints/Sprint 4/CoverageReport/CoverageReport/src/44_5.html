@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\ShoppingList.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using RecipePlannerLibrary.Models
+&lt;style&gt;
+    #logout {
+        background-color: #d9534f;
+        color: #fff;
+        position: fixed;
+        right: 10px;
+        top: 5px;
+    }
+
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    #mainform {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        margin: 30px auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    #addForm {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        display: none;
+        margin: 30px auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    .table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .table th,
+    .table td {
+        border: none;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td { font-size: 18px; }
+
+    #ingredientID { font-weight: bold; }
+
+
+    input[type=&quot;submit&quot;], input[type=&quot;button&quot;] {
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    #addIngredient {
+        background-color: #33b5e5;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    .page-button {
+        background-color: #33b5e5;
+        color: #fff;
+        flex: 1;
+        margin: 5px;
+        margin: 5px;
+    }
+
+    #cancelButton {
+        background-color: #d9534f;
+        color: #fff;
+        margin-left: 10px;
+    }
+
+    input[type=&quot;text&quot;] {
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .pagination {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pagination button.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    .pagination button.active {
+        background-color: #33b5e5;
+        color: #fff;
+    }
+
+    .button {
+        background-color: #33b5e5; 
+        border: none;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        padding: 15px 32px;
+        padding-top: 100px;
+        text-align: center;
+        text-decoration: none;
+    }
+&lt;/style&gt;
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;form id=&quot;mainform&quot;&gt;
+        &lt;h1&gt;Shopping List:&lt;/h1&gt;
+        &lt;table class=&quot;table&quot;&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Ingredient Name&lt;/th&gt;
+                &lt;th&gt;Quantity&lt;/th&gt;
+                &lt;th&gt;Actions&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+            @foreach (Ingredient ingredient in ViewBag.ingredientsOnPage)
+            {
+                &lt;tr id=&quot;ingredient-@ingredient.id&quot;&gt;
+                    &lt;td&gt;@ingredient.name&lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;input type=&quot;hidden&quot; name=&quot;page&quot; value=&quot;@ViewBag.currentPage&quot;/&gt;
+                        &lt;div class=&quot;quantity-container&quot;&gt;
+                            &lt;input type=&quot;submit&quot; asp-action=&quot;decrementShoppingListQuantity&quot; asp-route-id=&quot;@ingredient.id&quot; value=&quot;-&quot; id=&quot;@ingredient.id&quot;/&gt;
+                            &lt;span id=&quot;ingredient-quantity-@ingredient.id&quot;&gt;@ingredient.quantity @ingredient.measurement&lt;/span&gt;
+                            &lt;input type=&quot;submit&quot; asp-action=&quot;IncrementShoppingListQuantity&quot; asp-route-id=&quot;@ingredient.id&quot; value=&quot;+&quot; id=&quot;@ingredient.id&quot;/&gt;
+                        &lt;/div&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;input type=&quot;submit&quot; asp-action=&quot;RemoveShoppingListIngredient&quot; asp-route-id=&quot;@ingredient.id&quot; value=&quot;Remove&quot; id=&quot;@ingredient.id&quot;/&gt;
+                    &lt;/td&gt;
+
+                &lt;/tr&gt;
+            }
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;div class=&quot;pagination&quot;&gt;
+            @if (ViewBag.currentPage &gt; 1)
+            {
+                &lt;a href=&quot;@Url.Action(&quot;goToShoppingListPage&quot;, new {page = ViewBag.currentPage - 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Previous Page&lt;/a&gt;
+            }
+            @for (var i = 1; i &lt;= ViewBag.totalPages; i++)
+            {
+                &lt;a href=&quot;@Url.Action(&quot;goToShoppingListPage&quot;, new {page = i})&quot; class=&quot;btn btn-primary page-button&quot;&gt;@i&lt;/a&gt;
+            }
+            @if (ViewBag.currentPage &lt; ViewBag.totalPages)
+            {
+                &lt;a href=&quot;@Url.Action(&quot;goToShoppingListPage&quot;, new {page = ViewBag.currentPage + 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Next Page&lt;/a&gt;
+            }
+
+        &lt;/div&gt;
+        &lt;div class=&quot;button-container&quot;&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;Index&quot; value=&quot;Logout&quot; id=&quot;logout&quot; class=&quot;button button-red&quot;/&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;goToAddShoppingListIngredientsPage&quot; value=&quot;Add Ingredient&quot; id=&quot;addIngredient&quot; class=&quot;button button-green&quot;/&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;purchaseAllShoppingList&quot; value=&quot;Purchase Entire Shopping List&quot; id=&quot;clearShoppingList&quot; class=&quot;button button-green&quot; disabled=&quot;@(ViewBag.ingredientsOnPage.Count == 0 ? &quot;disabled&quot; : null)&quot;/&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;addNeededPlannedMealIngredients&quot; value=&quot;Add needed planned meal ingredients&quot; id=&quot;addNeededIngredient&quot; class=&quot;button button-green&quot;/&gt;
+            &lt;input type=&quot;submit&quot; asp-action=&quot;addAllPlannedMealIngredients&quot; value=&quot;Add all planned meal ingredients&quot; id=&quot;addAllIngredient&quot; class=&quot;button button-green&quot;/&gt;
+        &lt;/div&gt;
+       
+    &lt;/form&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+
+    var allIngredientsCheckbox = document.getElementById(&quot;AllIngredients&quot;);
+    var addIngredientsForm = document.getElementById(&quot;addIngredientsForm&quot;);
+
+    allIngredientsCheckbox.addEventListener(&quot;change&quot;, function () {
+        if (allIngredientsCheckbox.checked) {
+            addIngredientsForm.action = &quot;@Url.Action(&quot;addAllPlannedMealIngredients&quot;, &quot;Home&quot;)&quot;;
+        } else {
+            addIngredientsForm.action = &quot;@Url.Action(&quot;addNeededPlannedMealIngredients&quot;, &quot;Home&quot;)&quot;;
+        }
+    });
+
+    function openForm() {
+        document.getElementById(&quot;addForm&quot;).style.display = &quot;block&quot;;
+        document.getElementById(&quot;mainform&quot;).style.display = &quot;none&quot;;
+    }
+    function closeForm() {
+        document.getElementById(&quot;addForm&quot;).style.display = &quot;none&quot;;
+        document.getElementById(&quot;mainform&quot;).style.display = &quot;block&quot;;
+    }
+
+&lt;/script&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[152,14,152,21,0],[152,23,152,44,0],[152,45,152,47,0],[152,48,152,73,0],[153,13,153,14,0],[154,36,154,51,0],[155,26,155,42,0],[157,65,157,86,0],[159,108,159,122,0],[159,137,159,152,0],[160,59,160,74,0],[160,76,160,96,0],[160,97,160,120,0],[161,108,161,122,0],[161,137,161,152,0],[165,103,165,117,0],[165,137,165,152,0],[169,13,169,14,0],[173,14,173,42,0],[174,13,174,14,0],[175,26,175,100,0],[176,13,176,14,0],[177,19,177,28,0],[177,30,177,53,0],[177,55,177,58,0],[178,13,178,14,0],[179,26,179,78,0],[179,116,179,118,0],[180,13,180,14,0],[181,14,181,59,0],[182,13,182,14,0],[183,26,183,100,0],[184,13,184,14,0],[190,170,190,230,0],[206,43,206,94,0],[208,43,208,97,0]]);
+    </script>
+  </body>
+</html>

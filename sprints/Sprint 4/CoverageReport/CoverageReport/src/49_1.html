@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\LoginPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    /// Login Page partial class.
+    /// &lt;/summary&gt;
+    /// &lt;seealso cref=&quot;System.Windows.Forms.Form&quot; /&gt;
+    public partial class LoginPage : Form
+    {
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;LoginPage&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        public LoginPage()
+        {
+            InitializeComponent();
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            this.emptyFieldErrorLabel.Visible = false;
+            this.loginCheck();
+        }
+
+        private void loginCheck()
+        {
+            try
+            {
+                if (this.usernameTextBox.Text.Equals(&quot;&quot;) || this.passwordTextBox.Text.Equals(&quot;&quot;))
+                {
+                    this.emptyFieldErrorLabel.Text = &quot;Please fill out all fields&quot;;
+                    this.emptyFieldErrorLabel.Visible = true;
+                }
+                else
+                {
+                    Login attempt = new Login();
+                    attempt.Username = this.usernameTextBox.Text;
+                    attempt.Password = this.passwordTextBox.Text;
+                    int result = Database.LoginCheck(attempt);
+
+                    if (result == 1)
+                    {
+                        ActiveUser.username = this.usernameTextBox.Text;
+                        this.Hide();
+
+                        Homepage homepage = new Homepage();
+                        homepage.Show();
+                    }
+                    else
+                    {
+                        this.errorLoginLabel.Visible = true;
+                        this.emptyFieldErrorLabel.Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.emptyFieldErrorLabel.Text = &quot;The connection to the server could not be made&quot;;
+                this.emptyFieldErrorLabel.Visible = true;
+            }
+            
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form form = new Register();
+            form.ShowDialog();
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,9,16,27,0],[17,9,17,10,0],[18,13,18,35,0],[19,9,19,10,0],[22,9,22,10,0],[23,13,23,55,0],[24,13,24,31,0],[25,9,25,10,0],[28,9,28,10,0],[30,13,30,14,0],[31,17,31,98,0],[32,17,32,18,0],[33,21,33,83,0],[34,21,34,62,0],[35,17,35,18,0],[37,17,37,18,0],[38,21,38,49,0],[39,21,39,66,0],[40,21,40,66,0],[41,21,41,63,0],[43,21,43,37,0],[44,21,44,22,0],[45,25,45,73,0],[46,25,46,37,0],[48,25,48,60,0],[49,25,49,41,0],[50,21,50,22,0],[52,21,52,22,0],[53,25,53,61,0],[54,25,54,67,0],[55,21,55,22,0],[56,17,56,18,0],[57,13,57,14,0],[58,13,58,33,0],[59,13,59,14,0],[60,17,60,99,0],[61,17,61,58,0],[62,13,62,14,0],[64,9,64,10,0],[67,9,67,10,0],[68,13,68,25,0],[69,13,69,40,0],[70,13,70,31,0],[71,9,71,10,0]]);
+    </script>
+  </body>
+</html>

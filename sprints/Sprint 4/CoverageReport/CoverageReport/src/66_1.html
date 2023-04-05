@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\ShoppingListPage.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerDesktopApplication
+{
+    partial class ShoppingListPage
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
+            this.ingredientsGridView = new System.Windows.Forms.DataGridView();
+            this.ingredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.decrementColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.incrementCOlumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.measurmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.serverErrorLabel = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.nextButton = new System.Windows.Forms.Button();
+            this.pageLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.beginningButton = new System.Windows.Forms.Button();
+            this.removeIngredientButton = new System.Windows.Forms.Button();
+            this.addIngredientButton = new System.Windows.Forms.Button();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseShoppingListButton = new System.Windows.Forms.Button();
+            this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
+            this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).BeginInit();
+            this.plannerContextMenuStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // ingredientsGridView
+            // 
+            this.ingredientsGridView.AllowUserToAddRows = false;
+            this.ingredientsGridView.AllowUserToDeleteRows = false;
+            this.ingredientsGridView.AllowUserToResizeColumns = false;
+            this.ingredientsGridView.AutoGenerateColumns = false;
+            this.ingredientsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ingredientColumn,
+            this.decrementColumn,
+            this.quantityColumn,
+            this.incrementCOlumn,
+            this.measurmentColumn});
+            this.ingredientsGridView.DataSource = this.ingredientBindingSource;
+            this.ingredientsGridView.Location = new System.Drawing.Point(25, 128);
+            this.ingredientsGridView.Name = &quot;ingredientsGridView&quot;;
+            this.ingredientsGridView.RowHeadersVisible = false;
+            this.ingredientsGridView.RowHeadersWidth = 51;
+            this.ingredientsGridView.RowTemplate.Height = 25;
+            this.ingredientsGridView.Size = new System.Drawing.Size(400, 239);
+            this.ingredientsGridView.TabIndex = 25;
+            this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
+            this.ingredientsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellContentClick);
+            // 
+            // ingredientColumn
+            // 
+            this.ingredientColumn.DataPropertyName = &quot;name&quot;;
+            this.ingredientColumn.HeaderText = &quot;Ingredient&quot;;
+            this.ingredientColumn.MinimumWidth = 6;
+            this.ingredientColumn.Name = &quot;ingredientColumn&quot;;
+            this.ingredientColumn.Width = 135;
+            // 
+            // decrementColumn
+            // 
+            this.decrementColumn.HeaderText = &quot;&quot;;
+            this.decrementColumn.MinimumWidth = 6;
+            this.decrementColumn.Name = &quot;decrementColumn&quot;;
+            this.decrementColumn.Text = &quot;-&quot;;
+            this.decrementColumn.UseColumnTextForButtonValue = true;
+            this.decrementColumn.Width = 30;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.DataPropertyName = &quot;quantity&quot;;
+            this.quantityColumn.HeaderText = &quot;Quantity&quot;;
+            this.quantityColumn.MinimumWidth = 6;
+            this.quantityColumn.Name = &quot;quantityColumn&quot;;
+            this.quantityColumn.Width = 125;
+            // 
+            // incrementCOlumn
+            // 
+            this.incrementCOlumn.HeaderText = &quot;&quot;;
+            this.incrementCOlumn.MinimumWidth = 6;
+            this.incrementCOlumn.Name = &quot;incrementCOlumn&quot;;
+            this.incrementCOlumn.Text = &quot;+&quot;;
+            this.incrementCOlumn.UseColumnTextForButtonValue = true;
+            this.incrementCOlumn.Width = 30;
+            // 
+            // measurmentColumn
+            // 
+            this.measurmentColumn.DataPropertyName = &quot;measurement&quot;;
+            this.measurmentColumn.HeaderText = &quot;Measurement&quot;;
+            this.measurmentColumn.MinimumWidth = 6;
+            this.measurmentColumn.Name = &quot;measurmentColumn&quot;;
+            this.measurmentColumn.Width = 103;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(156, 74);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(138, 30);
+            this.label1.TabIndex = 7;
+            this.label1.Text = &quot;Shopping List&quot;;
+            // 
+            // logoutButton
+            // 
+            this.logoutButton.Location = new System.Drawing.Point(350, 21);
+            this.logoutButton.Name = &quot;logoutButton&quot;;
+            this.logoutButton.Size = new System.Drawing.Size(75, 23);
+            this.logoutButton.TabIndex = 9;
+            this.logoutButton.Text = &quot;Logout&quot;;
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            // 
+            // serverErrorLabel
+            // 
+            this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.serverErrorLabel.Location = new System.Drawing.Point(139, 14);
+            this.serverErrorLabel.Name = &quot;serverErrorLabel&quot;;
+            this.serverErrorLabel.Size = new System.Drawing.Size(182, 38);
+            this.serverErrorLabel.TabIndex = 10;
+            this.serverErrorLabel.Text = &quot;The connection to the server could not be made&quot;;
+            this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.serverErrorLabel.Visible = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(370, 388);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Name = &quot;button3&quot;;
+            this.button3.Size = new System.Drawing.Size(55, 33);
+            this.button3.TabIndex = 22;
+            this.button3.Text = &quot;&gt;|&quot;;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // nextButton
+            // 
+            this.nextButton.Location = new System.Drawing.Point(309, 388);
+            this.nextButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nextButton.Name = &quot;nextButton&quot;;
+            this.nextButton.Size = new System.Drawing.Size(55, 33);
+            this.nextButton.TabIndex = 21;
+            this.nextButton.Text = &quot;&gt;&quot;;
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            // 
+            // pageLabel
+            // 
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.pageLabel.Location = new System.Drawing.Point(216, 399);
+            this.pageLabel.Name = &quot;pageLabel&quot;;
+            this.pageLabel.Size = new System.Drawing.Size(19, 21);
+            this.pageLabel.TabIndex = 20;
+            this.pageLabel.Text = &quot;1&quot;;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(85, 387);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = &quot;button1&quot;;
+            this.button1.Size = new System.Drawing.Size(53, 34);
+            this.button1.TabIndex = 19;
+            this.button1.Text = &quot;&lt;&quot;;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // beginningButton
+            // 
+            this.beginningButton.Location = new System.Drawing.Point(25, 387);
+            this.beginningButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.beginningButton.Name = &quot;beginningButton&quot;;
+            this.beginningButton.Size = new System.Drawing.Size(54, 34);
+            this.beginningButton.TabIndex = 18;
+            this.beginningButton.Text = &quot;&lt;|&quot;;
+            this.beginningButton.UseVisualStyleBackColor = true;
+            this.beginningButton.Click += new System.EventHandler(this.beginningButton_Click);
+            // 
+            // removeIngredientButton
+            // 
+            this.removeIngredientButton.Location = new System.Drawing.Point(262, 460);
+            this.removeIngredientButton.Name = &quot;removeIngredientButton&quot;;
+            this.removeIngredientButton.Size = new System.Drawing.Size(144, 44);
+            this.removeIngredientButton.TabIndex = 17;
+            this.removeIngredientButton.Text = &quot;Remove Ingredient&quot;;
+            this.removeIngredientButton.UseVisualStyleBackColor = true;
+            this.removeIngredientButton.Click += new System.EventHandler(this.removeIngredientButton_Click);
+            // 
+            // addIngredientButton
+            // 
+            this.addIngredientButton.Location = new System.Drawing.Point(45, 461);
+            this.addIngredientButton.Name = &quot;addIngredientButton&quot;;
+            this.addIngredientButton.Size = new System.Drawing.Size(144, 41);
+            this.addIngredientButton.TabIndex = 16;
+            this.addIngredientButton.Text = &quot;Add Ingredient&quot;;
+            this.addIngredientButton.UseVisualStyleBackColor = true;
+            this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
+            // 
+            // plannerMenuButton
+            // 
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject(&quot;plannerMenuButton.BackgroundImage&quot;)));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(12, 14);
+            this.plannerMenuButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.plannerMenuButton.Name = &quot;plannerMenuButton&quot;;
+            this.plannerMenuButton.Size = new System.Drawing.Size(38, 29);
+            this.plannerMenuButton.TabIndex = 23;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showRecipesToolStripMenuItem,
+            this.showPantryToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = &quot;plannerContextMenuStrip&quot;;
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(143, 48);
+            // 
+            // showRecipesToolStripMenuItem
+            // 
+            this.showRecipesToolStripMenuItem.Name = &quot;showRecipesToolStripMenuItem&quot;;
+            this.showRecipesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showRecipesToolStripMenuItem.Text = &quot;View Recipes&quot;;
+            this.showRecipesToolStripMenuItem.Click += new System.EventHandler(this.showRecipesToolStripMenuItem_Click);
+            // 
+            // showPantryToolStripMenuItem
+            // 
+            this.showPantryToolStripMenuItem.Name = &quot;showPantryToolStripMenuItem&quot;;
+            this.showPantryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showPantryToolStripMenuItem.Text = &quot;View Pantry&quot;;
+            this.showPantryToolStripMenuItem.Click += new System.EventHandler(this.showPantryToolStripMenuItem_Click);
+            // 
+            // purchaseShoppingListButton
+            // 
+            this.purchaseShoppingListButton.Location = new System.Drawing.Point(262, 532);
+            this.purchaseShoppingListButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.purchaseShoppingListButton.Name = &quot;purchaseShoppingListButton&quot;;
+            this.purchaseShoppingListButton.Size = new System.Drawing.Size(144, 44);
+            this.purchaseShoppingListButton.TabIndex = 24;
+            this.purchaseShoppingListButton.Text = &quot;Purchase Shopping List&quot;;
+            this.purchaseShoppingListButton.UseVisualStyleBackColor = true;
+            this.purchaseShoppingListButton.Click += new System.EventHandler(this.purchaseShoppingListButton_Click);
+            // 
+            // addIngredientsForRemainingMealsButton
+            // 
+            this.addIngredientsForRemainingMealsButton.Location = new System.Drawing.Point(45, 532);
+            this.addIngredientsForRemainingMealsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addIngredientsForRemainingMealsButton.Name = &quot;addIngredientsForRemainingMealsButton&quot;;
+            this.addIngredientsForRemainingMealsButton.Size = new System.Drawing.Size(144, 44);
+            this.addIngredientsForRemainingMealsButton.TabIndex = 26;
+            this.addIngredientsForRemainingMealsButton.Text = &quot;Add Ingredients for Remaining Meals&quot;;
+            this.addIngredientsForRemainingMealsButton.UseVisualStyleBackColor = true;
+            this.addIngredientsForRemainingMealsButton.Click += new System.EventHandler(this.addIngredientsForRemainingMealsButton_Click);
+            // 
+            // addAllIngredientsCheckbox
+            // 
+            this.addAllIngredientsCheckbox.AutoSize = true;
+            this.addAllIngredientsCheckbox.Location = new System.Drawing.Point(51, 589);
+            this.addAllIngredientsCheckbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addAllIngredientsCheckbox.Name = &quot;addAllIngredientsCheckbox&quot;;
+            this.addAllIngredientsCheckbox.Size = new System.Drawing.Size(127, 19);
+            this.addAllIngredientsCheckbox.TabIndex = 27;
+            this.addAllIngredientsCheckbox.Text = &quot;Add All Ingredients&quot;;
+            this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // ShoppingListPage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.addAllIngredientsCheckbox);
+            this.Controls.Add(this.addIngredientsForRemainingMealsButton);
+            this.Controls.Add(this.ingredientsGridView);
+            this.Controls.Add(this.purchaseShoppingListButton);
+            this.Controls.Add(this.plannerMenuButton);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.nextButton);
+            this.Controls.Add(this.pageLabel);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.beginningButton);
+            this.Controls.Add(this.removeIngredientButton);
+            this.Controls.Add(this.addIngredientButton);
+            this.Controls.Add(this.serverErrorLabel);
+            this.Controls.Add(this.logoutButton);
+            this.Controls.Add(this.label1);
+            this.Name = &quot;ShoppingListPage&quot;;
+            this.Text = &quot;ShoppingListPage&quot;;
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).EndInit();
+            this.plannerContextMenuStrip.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private Label label1;
+        private Button logoutButton;
+        private Label serverErrorLabel;
+        private Button button3;
+        private Button nextButton;
+        private Label pageLabel;
+        private Button button1;
+        private Button beginningButton;
+        private Button removeIngredientButton;
+        private Button addIngredientButton;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem showRecipesToolStripMenuItem;
+        private ToolStripMenuItem showPantryToolStripMenuItem;
+        private Button purchaseShoppingListButton;
+        private DataGridView ingredientsGridView;
+        private BindingSource ingredientBindingSource;
+        private DataGridViewTextBoxColumn ingredientColumn;
+        private DataGridViewButtonColumn decrementColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewButtonColumn incrementCOlumn;
+        private DataGridViewTextBoxColumn measurmentColumn;
+        private DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn measurementDataGridViewTextBoxColumn;
+        private Button addIngredientsForRemainingMealsButton;
+        private CheckBox addAllIngredientsCheckbox;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,69,0],[32,13,32,149,0],[33,13,33,80,0],[34,13,34,90,0],[35,13,35,88,0],[36,13,36,88,0],[37,13,37,88,0],[38,13,38,90,0],[39,13,39,100,0],[40,13,40,60,0],[41,13,41,67,0],[42,13,42,70,0],[43,13,43,62,0],[44,13,44,65,0],[45,13,45,63,0],[46,13,46,62,0],[47,13,47,70,0],[48,13,48,77,0],[49,13,49,74,0],[50,13,50,72,0],[51,13,51,103,0],[52,13,52,94,0],[53,13,53,93,0],[54,13,54,81,0],[55,13,55,92,0],[56,13,56,82,0],[57,13,57,96,0],[58,13,58,100,0],[59,13,59,58,0],[60,13,60,34,0],[64,13,64,65,0],[65,13,65,68,0],[66,13,66,71,0],[67,13,67,66,0],[68,13,68,138,0],[69,13,74,37,0],[75,13,75,80,0],[76,13,76,83,0],[77,13,77,67,0],[78,13,78,64,0],[79,13,79,59,0],[80,13,80,62,0],[81,13,81,79,0],[82,13,82,52,0],[83,13,83,141,0],[84,13,84,155,0],[88,13,88,61,0],[89,13,89,61,0],[90,13,90,52,0],[91,13,91,61,0],[92,13,92,47,0],[96,13,96,50,0],[97,13,97,51,0],[98,13,98,59,0],[99,13,99,45,0],[100,13,100,69,0],[101,13,101,45,0],[105,13,105,63,0],[106,13,106,57,0],[107,13,107,50,0],[108,13,108,57,0],[109,13,109,45,0],[113,13,113,50,0],[114,13,114,51,0],[115,13,115,59,0],[116,13,116,45,0],[117,13,117,69,0],[118,13,118,45,0],[122,13,122,68,0],[123,13,123,62,0],[124,13,124,52,0],[125,13,125,61,0],[126,13,126,47,0],[130,13,130,41,0],[131,13,131,145,0],[132,13,132,70,0],[133,13,133,41,0],[134,13,134,65,0],[135,13,135,38,0],[136,13,136,48,0],[140,13,140,76,0],[141,13,141,53,0],[142,13,142,70,0],[143,13,143,44,0],[144,13,144,47,0],[145,13,145,62,0],[146,13,146,89,0],[150,13,150,72,0],[151,13,151,80,0],[152,13,152,61,0],[153,13,153,75,0],[154,13,154,49,0],[155,13,155,91,0],[156,13,156,92,0],[157,13,157,51,0],[161,13,161,72,0],[162,13,162,80,0],[163,13,163,43,0],[164,13,164,65,0],[165,13,165,40,0],[166,13,166,38,0],[167,13,167,57,0],[168,13,168,79,0],[172,13,172,75,0],[173,13,173,83,0],[174,13,174,49,0],[175,13,175,68,0],[176,13,176,43,0],[177,13,177,40,0],[178,13,178,60,0],[179,13,179,85,0],[183,13,183,44,0],[184,13,184,142,0],[185,13,185,74,0],[186,13,186,47,0],[187,13,187,67,0],[188,13,188,42,0],[189,13,189,39,0],[193,13,193,71,0],[194,13,194,80,0],[195,13,195,43,0],[196,13,196,65,0],[197,13,197,40,0],[198,13,198,37,0],[199,13,199,57,0],[200,13,200,79,0],[204,13,204,79,0],[205,13,205,88,0],[206,13,206,59,0],[207,13,207,73,0],[208,13,208,48,0],[209,13,209,46,0],[210,13,210,65,0],[211,13,211,95,0],[215,13,215,87,0],[216,13,216,73,0],[217,13,217,81,0],[218,13,218,55,0],[219,13,219,68,0],[220,13,220,72,0],[221,13,221,109,0],[225,13,225,83,0],[226,13,226,67,0],[227,13,227,78,0],[228,13,228,52,0],[229,13,229,62,0],[230,13,230,69,0],[231,13,231,103,0],[235,13,235,79,0],[236,13,236,137,0],[237,13,237,101,0],[238,13,238,80,0],[239,13,239,90,0],[240,13,240,63,0],[241,13,241,75,0],[242,13,242,50,0],[243,13,243,68,0],[244,13,244,99,0],[248,13,248,93,0],[249,13,251,48,0],[252,13,252,75,0],[253,13,253,82,0],[257,13,257,85,0],[258,13,258,87,0],[259,13,259,69,0],[260,13,260,121,0],[264,13,264,83,0],[265,13,265,86,0],[266,13,266,67,0],[267,13,267,119,0],[271,13,271,91,0],[272,13,272,99,0],[273,13,273,81,0],[274,13,274,85,0],[275,13,275,59,0],[276,13,276,77,0],[277,13,277,76,0],[278,13,278,117,0],[282,13,282,101,0],[283,13,283,110,0],[284,13,284,103,0],[285,13,285,96,0],[286,13,286,70,0],[287,13,287,101,0],[288,13,288,87,0],[289,13,289,139,0],[293,13,293,60,0],[294,13,294,89,0],[295,13,295,98,0],[296,13,296,79,0],[297,13,297,84,0],[298,13,298,58,0],[299,13,299,73,0],[300,13,300,75,0],[304,13,304,74,0],[305,13,305,74,0],[306,13,306,65,0],[307,13,307,63,0],[308,13,308,75,0],[309,13,309,57,0],[310,13,310,64,0],[311,13,311,55,0],[312,13,312,45,0],[313,13,313,48,0],[314,13,314,47,0],[315,13,315,45,0],[316,13,316,53,0],[317,13,317,60,0],[318,13,318,57,0],[319,13,319,54,0],[320,13,320,50,0],[321,13,321,44,0],[322,13,322,44,0],[323,13,323,44,0],[324,13,324,94,0],[325,13,325,98,0],[326,13,326,62,0],[327,13,327,38,0],[328,13,328,34,0],[330,9,330,10,0]]);
+    </script>
+  </body>
+</html>

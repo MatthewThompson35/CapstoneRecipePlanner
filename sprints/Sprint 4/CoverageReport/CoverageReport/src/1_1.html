@@ -1,22 +1,32 @@
-﻿using MySql.Data.MySqlClient;
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\AddIngredientsPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerDesktopApplication
 {
-    /// <summary>
+    /// &lt;summary&gt;
     /// Add ingredients page partial class.
-    /// </summary>
+    /// &lt;/summary&gt;
     public partial class AddIngredientsPage : Form
     {
         private IngredientsPage ingredientsPage;
         private ShoppingListPage shoppingListPage;
 
-        /// <summary>
+        /// &lt;summary&gt;
         /// Initializes the AddIngreedients page with the corresponding ingredients page.
-        /// </summary>
-        /// <param name="ingredientsPage"></param>
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientsPage&quot;&gt;&lt;/param&gt;
         public AddIngredientsPage(IngredientsPage ingredientsPage)
         {
             InitializeComponent();
@@ -24,10 +34,10 @@ namespace RecipePlannerDesktopApplication
             this.ingredientsPage = ingredientsPage;
         }
 
-        /// <summary>
+        /// &lt;summary&gt;
         /// Initializes the AddIngreedients page with the corresponding ingredients page.
-        /// </summary>
-        /// <param name="ingredientsPage"></param>
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientsPage&quot;&gt;&lt;/param&gt;
         public AddIngredientsPage(ShoppingListPage shoppingListPage)
         {
             InitializeComponent();
@@ -58,9 +68,9 @@ namespace RecipePlannerDesktopApplication
                 {
                     this.errorQuantityTextLabel.Visible = true;
                 }
-                else if (IngredientDAL.getIngredients(name).Count > 0)
+                else if (IngredientDAL.getIngredients(name).Count &gt; 0)
                 {
-                    this.errorTextLabel.Text = @"This ingredient " + "'" + name + "'" + @" already exists.";
+                    this.errorTextLabel.Text = @&quot;This ingredient &quot; + &quot;&#39;&quot; + name + &quot;&#39;&quot; + @&quot; already exists.&quot;;
                     this.errorTextLabel.Visible = true;
                     this.errorQuantityTextLabel.Visible = false;
                 }
@@ -90,7 +100,7 @@ namespace RecipePlannerDesktopApplication
             }
             catch (Exception ex)
             {
-                this.errorTextLabel.Text = "The connection to the server could not be made";
+                this.errorTextLabel.Text = &quot;The connection to the server could not be made&quot;;
                 this.errorTextLabel.Visible = true;
             }
             
@@ -98,14 +108,13 @@ namespace RecipePlannerDesktopApplication
 
         private static bool isTextEmpty(string name, string quantityString, string measure)
         {
-            return name == null || name.Equals("") || quantityString == null || quantityString.Equals("") || measure.Equals("");
+            return name == null || name.Equals(&quot;&quot;) || quantityString == null || quantityString.Equals(&quot;&quot;) || measure.Equals(&quot;&quot;);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            var ing = new IngredientsPage();
-            ing.Show();
+            this.ingredientsPage.Show();
         }
 
         private void addIngredient(Ingredient ingredient)
@@ -123,3 +132,10 @@ namespace RecipePlannerDesktopApplication
         }
     }
 }
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,9,20,67,0],[21,9,21,10,0],[22,13,22,35,0],[24,13,24,52,0],[25,9,25,10,0],[31,9,31,69,0],[32,9,32,10,0],[33,13,33,35,0],[35,13,35,54,0],[36,9,36,10,0],[39,9,39,10,0],[40,13,40,59,0],[41,13,41,63,0],[42,13,42,60,0],[43,13,43,28,0],[45,13,45,69,0],[47,9,47,10,0],[50,9,50,10,0],[52,13,52,14,0],[53,17,53,64,0],[54,17,54,18,0],[55,21,55,56,0],[56,17,56,18,0],[57,22,57,68,0],[58,17,58,18,0],[59,21,59,64,0],[60,17,60,18,0],[61,22,61,71,0],[62,17,62,18,0],[63,21,63,109,0],[64,21,64,56,0],[65,21,65,65,0],[66,17,66,18,0],[68,17,68,18,0],[69,21,69,68,0],[71,21,71,109,0],[74,21,74,54,0],[75,21,75,22,0],[76,25,76,56,0],[78,25,78,38,0],[79,25,79,53,0],[80,21,80,22,0],[82,21,82,22,0],[83,25,83,68,0],[85,25,85,38,0],[86,25,86,54,0],[87,21,87,22,0],[89,17,89,18,0],[90,13,90,14,0],[91,13,91,33,0],[92,13,92,14,0],[93,17,93,93,0],[94,17,94,52,0],[95,13,95,14,0],[97,9,97,10,0],[100,9,100,10,0],[101,13,101,129,0],[102,9,102,10,0],[105,9,105,10,0],[106,13,106,26,0],[107,13,107,41,0],[108,9,108,10,0],[111,9,111,10,0],[112,13,112,137,0],[114,13,114,62,0],[115,9,115,10,0],[118,9,118,10,0],[119,13,119,139,0],[121,13,121,63,0],[122,9,122,10,0]]);
+    </script>
+  </body>
+</html>

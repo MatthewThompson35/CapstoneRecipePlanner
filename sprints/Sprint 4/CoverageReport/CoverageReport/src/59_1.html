@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipePage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Org.BouncyCastle.Crypto.Tls;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace RecipePlannerDesktopApplication
+{
+    public partial class RecipePage : Form
+    {
+        private RecipeRequirementsPage requirementsPage;
+        /// &lt;summary&gt;
+        ///     Initializes a new Recipe Page.
+        /// &lt;/summary&gt;
+        public RecipePage()
+        {
+            InitializeComponent();
+
+            this.errorLabel.Visible = false;
+            this.requirementsPage = new RecipeRequirementsPage();
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes a Recipe Page based on the specified recipe requirements page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;page&quot;&gt;the recipe requirements page&lt;/param&gt;
+        public RecipePage(RecipeRequirementsPage page) :this()
+        {
+            requirementsPage = page;
+
+            this.recipeIngredientsDataGridView.DataSource = requirementsPage.GetRecipeIngredients();
+            this.stepsDataGridView.DataSource = requirementsPage.GetRecipeSteps();
+            this.tagDataGridView.DataSource = requirementsPage.GetTags();
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.addRecipe();
+
+            var homepage = new Homepage();
+
+            this.Hide();
+
+            homepage.Show();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            var homepage = new Homepage();
+
+            this.Hide();
+
+            homepage.Show();
+        }
+
+        private void tagDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == tagDataGridView.Columns[&quot;tagRemove&quot;].Index &amp;&amp; e.RowIndex &gt;= 0)
+            {
+                tagDataGridView.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        private void stepsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == stepsDataGridView.Columns[&quot;stepsRemove&quot;].Index &amp;&amp; e.RowIndex &gt;= 0)
+            {
+                stepsDataGridView.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        private void recipeIngredientsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == recipeIngredientsDataGridView.Columns[&quot;ingredientsRemove&quot;].Index &amp;&amp; e.RowIndex &gt;= 0)
+            {
+                recipeIngredientsDataGridView.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        /// &lt;summary&gt;
+        ///     Adds a row to the ingredients grid view based on the ingredient name, quantity, measurement.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientName&quot;&gt;the ingredient name&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;the quantity&lt;/param&gt;
+        /// &lt;param name=&quot;measurement&quot;&gt;the measurement&lt;/param&gt;
+        public void AddRowToIngredientGridView(string ingredientName, string quantity, string measurement)
+        {
+            this.recipeIngredientsDataGridView.Rows.Add(ingredientName, quantity, measurement);
+        }
+
+        /// &lt;summary&gt;
+        ///     Adds a row to the tag grid view based on the tag name.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;tagName&quot;&gt;the tag name&lt;/param&gt;
+        public void AddRowToTagGridView(string tagName)
+        {
+            this.tagDataGridView.Rows.Add(tagName);
+        }
+
+        /// &lt;summary&gt;
+        ///     Adds a row to the steps grid view based on the step number and step description.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;stepNumber&quot;&gt;the step number&lt;/param&gt;
+        /// &lt;param name=&quot;stepDescription&quot;&gt;the step description&lt;/param&gt;
+        public void AddRowToStepsGridView(string stepNumber, string stepDescription)
+        {
+            this.stepsDataGridView.Rows.Add(stepNumber, stepDescription);
+        }
+
+        private void addRecipe()
+        {
+            string recipeName = null;
+            string recipeDescription = null;
+            if (String.IsNullOrEmpty(this.recipeNameTextBox.Text))
+            {
+                this.errorLabel.Visible = true;
+            }
+            else
+            {
+                this.errorLabel.Visible = false;
+                recipeName = this.recipeNameTextBox.Text;
+            }
+            
+            if (String.IsNullOrEmpty(this.recipeDescriptionTextBox.Text))
+            {
+                this.errorLabel.Visible = true;
+            }
+            else
+            {
+                this.errorLabel.Visible = false;
+                recipeDescription = this.recipeDescriptionTextBox.Text;
+            }
+            
+            Recipe recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+            if (recipe.Name == null)
+            {
+                this.errorLabel.Visible = false;
+                RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
+
+                foreach (DataGridViewRow row in this.tagDataGridView.Rows)
+                {
+                    if (row.Cells[&quot;tagColumn&quot;].Value == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        string tag = row.Cells[&quot;tagColumn&quot;].Value.ToString();
+                        this.requirementsPage.GetTags().Add(tag);
+                    }
+
+                }
+
+                foreach (string tag in this.requirementsPage.GetTags())
+                {
+                    RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, tag, Connection.ConnectionString);
+                }
+
+                foreach (DataGridViewRow row in this.stepsDataGridView.Rows)
+                {
+                    if (row.Cells[&quot;step&quot;].Value == null &amp;&amp; row.Cells[&quot;stepDescription&quot;].Value == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        string stepNumber = row.Cells[&quot;step&quot;].Value.ToString();
+                        string stepDescription = row.Cells[&quot;stepDescription&quot;].Value.ToString();
+
+                        RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
+                        this.requirementsPage.GetRecipeSteps().Add(recipeStep);
+                    }
+
+                }
+
+                foreach (var step in this.requirementsPage.GetRecipeSteps())
+                {
+                    RecipeDAL.addRecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, step.stepNumber, step.stepDescription, Connection.ConnectionString);
+                }
+
+                foreach (DataGridViewRow row in this.recipeIngredientsDataGridView.Rows)
+                {
+                    if (row.Cells[&quot;ingredientName&quot;].Value == null &amp;&amp; row.Cells[&quot;quantity&quot;].Value == null &amp;&amp; row.Cells[&quot;measurement&quot;].Value == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        string ingredientName = row.Cells[&quot;ingredientName&quot;].Value.ToString();
+                        string quantity = row.Cells[&quot;quantity&quot;].Value.ToString();
+                        string measurement = row.Cells[&quot;measurement&quot;].Value.ToString();
+
+                        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
+
+                        this.requirementsPage.GetRecipeIngredients().Add(recipeIngredient);
+                    }
+                }
+
+                foreach (var ingredient in this.requirementsPage.GetRecipeIngredients())
+                {
+                    RecipeDAL.addRecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, ingredient.IngredientName, IngredientDAL.getIngredientId(ingredient.IngredientName), ingredient.Quantity, ingredient.Measurement, Connection.ConnectionString);
+                }
+            }
+            else
+            {
+                this.errorLabel.Text = &quot;This recipe already exists.&quot;;
+                this.errorLabel.Visible = true;
+            }
+        }
+
+        private void addRecipeRequirementsButton_Click(object sender, EventArgs e)
+        {
+            var recipeRequirement = new RecipeRequirementsPage(this);
+
+            this.Hide();
+
+            recipeRequirement.Show();
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[15,9,15,28,0],[16,9,16,10,0],[17,13,17,35,0],[18,9,18,10,0],[21,9,21,10,0],[23,9,23,10,0],[26,9,26,10,0],[27,13,27,43,0],[29,13,29,25,0],[31,13,31,29,0],[32,9,32,10,0]]);
+    </script>
+  </body>
+</html>
