@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\ShoppingListDALTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary;
+
+namespace RecipePlannerTests;
+
+/// &lt;summary&gt;
+///     The shopping lists dal class
+/// &lt;/summary&gt;
+[TestClass]
+public class ShoppingListDALTests
+{
+    #region Methods
+
+    /// &lt;summary&gt;
+    ///     Gets the ingredients should return list of ingredients.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void getIngredients_ShouldReturnListOfIngredients()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var expectedIngredients = new List&lt;Ingredient&gt;
+        {
+            new(&quot;test&quot;, &quot;milk&quot;, 2, 4, &quot;OZ&quot;)
+        };
+
+        ShoppingListDAL.addIngredient(&quot;milk&quot;, 2, &quot;OZ&quot;, Connection.TestsConnectionString);
+        // Act
+        var actualIngredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+
+        // Assert
+        Assert.AreEqual(expectedIngredients[0].quantity, actualIngredients[0].quantity);
+        Assert.AreEqual(expectedIngredients[0].id, actualIngredients[0].id);
+        Assert.AreEqual(expectedIngredients[0].name, actualIngredients[0].name);
+
+        ShoppingListDAL.RemoveIngredient(4, Connection.TestsConnectionString);
+    }
+
+    /// &lt;summary&gt;
+    ///     Adds the ingredient should add ingredient to database.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void addIngredient_ShouldAddIngredientToDatabase()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var name = &quot;milk&quot;;
+        var quantity = 2;
+        var measurement = &quot;OZ&quot;;
+        var connectionString = Connection.TestsConnectionString;
+
+        // Act
+        ShoppingListDAL.RemoveIngredient(4, Connection.TestsConnectionString);
+        ShoppingListDAL.addIngredient(name, quantity, measurement, connectionString);
+
+        // Assert
+        var ingredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+        Assert.IsTrue(ingredients.Exists(i =&gt;
+            i.name == name &amp;&amp; i.quantity == quantity &amp;&amp; i.measurement == measurement));
+    }
+
+    /// &lt;summary&gt;
+    ///     Decrements the quantity should decrease ingredient quantity.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void decrementQuantity_ShouldDecreaseIngredientQuantity()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var id = 4;
+        var quantity = 2;
+
+        // Act
+        ShoppingListDAL.decrementQuantity(id, quantity, Connection.TestsConnectionString);
+
+        // Assert
+        var ingredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+        var ingredient = ingredients.Find(i =&gt; i.id == id);
+        Assert.AreEqual(quantity - 1, ingredient.quantity);
+    }
+
+    /// &lt;summary&gt;
+    ///     Increments the quantity should increase ingredient quantity.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void incrementQuantity_ShouldIncreaseIngredientQuantity()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var id = 4;
+        var quantity = 2;
+
+        // Act
+        ShoppingListDAL.incrementQuantity(id, quantity, Connection.TestsConnectionString);
+
+        // Assert
+        var ingredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+        var ingredient = ingredients.Find(i =&gt; i.id == id);
+        Assert.AreEqual(quantity + 1, ingredient.quantity);
+    }
+
+    /// &lt;summary&gt;
+    ///     Removes the ingredient should remove ingredient from database.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void RemoveIngredient_ShouldRemoveIngredientFromDatabase()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var id = 1;
+        var connectionString = Connection.TestsConnectionString;
+
+        // Act
+        ShoppingListDAL.RemoveIngredient(id, connectionString);
+
+        // Assert
+        var ingredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+        Assert.IsFalse(ingredients.Exists(i =&gt; i.id == id));
+    }
+
+    //&lt;summary&gt;
+    //     Update quantity should update given ingredient quantity.
+    //&lt;/summary&gt;
+    [TestMethod]
+    public void updateQuantity_ShouldUpdateIngredientQuantity()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var id = 4;
+        var quantity = 2;
+
+        // Act
+        ShoppingListDAL.updateQuantity(id, 5, Connection.TestsConnectionString);
+
+        // Assert
+        var ingredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+        var ingredient = ingredients.Find(i =&gt; i.id == id);
+        Assert.AreEqual(5, ingredient.quantity);
+
+        ShoppingListDAL.updateQuantity(id, 3, Connection.TestsConnectionString);
+    }
+
+    /// &lt;summary&gt;
+    ///     Removes all for a given user from the database.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void removeAll_ShouldRemoveAllIngredientsForUserFromDatabase()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var connectionString = Connection.TestsConnectionString;
+        var expectedIngredients = new List&lt;Ingredient&gt;();
+        ShoppingListDAL.removeAll(Connection.TestsConnectionString);
+
+        // add some ingredients first
+        ShoppingListDAL.addIngredient(&quot;milk&quot;, 2, &quot;OZ&quot;, Connection.TestsConnectionString);
+        ShoppingListDAL.addIngredient(&quot;sugar&quot;, 1, &quot;TSP&quot;, Connection.TestsConnectionString);
+        ShoppingListDAL.addIngredient(&quot;flour&quot;, 3, &quot;CUP&quot;, Connection.TestsConnectionString);
+
+        // remove all ingredients for the user
+        ShoppingListDAL.removeAll(Connection.TestsConnectionString);
+
+        // Act
+        var actualIngredients = ShoppingListDAL.getIngredients(Connection.TestsConnectionString);
+
+        // Assert
+        CollectionAssert.AreEqual(expectedIngredients, actualIngredients);
+    }
+
+    /// &lt;summary&gt;
+    ///     Gets an ingredient based off of the name.
+    /// &lt;/summary&gt;
+    [TestMethod]
+    public void getIngredient_ShouldReturnListOfIngredients()
+    {
+        ActiveUser.username = &quot;test&quot;;
+        // Arrange
+        var expectedIngredients = new List&lt;Ingredient&gt;
+        {
+            new(&quot;test&quot;, &quot;milk&quot;, 2, 4, &quot;OZ&quot;)
+        };
+
+        ShoppingListDAL.addIngredient(&quot;milk&quot;, 2, &quot;OZ&quot;, Connection.TestsConnectionString);
+        // Act
+        var actualIngredients = ShoppingListDAL.getIngredients(&quot;milk&quot;, Connection.TestsConnectionString);
+
+        // Assert
+        Assert.AreEqual(expectedIngredients[0].quantity, actualIngredients[0].quantity);
+        Assert.AreEqual(expectedIngredients[0].id, actualIngredients[0].id);
+        Assert.AreEqual(expectedIngredients[0].name, actualIngredients[0].name);
+
+        ShoppingListDAL.RemoveIngredient(4, Connection.TestsConnectionString);
+    }
+
+    #endregion
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[18,5,18,6,1],[19,9,19,38,1],[21,9,24,11,1],[26,9,26,90,1],[28,9,28,98,1],[31,9,31,89,1],[32,9,32,77,1],[33,9,33,81,1],[35,9,35,79,1],[36,5,36,6,1],[43,5,43,6,1],[44,9,44,38,1],[46,9,46,27,1],[47,9,47,26,1],[48,9,48,32,1],[49,9,49,65,1],[52,9,52,79,1],[53,9,53,86,1],[56,9,56,92,1],[57,9,58,13,1],[58,13,58,85,1],[58,85,58,88,1],[59,5,59,6,1],[66,5,66,6,1],[67,9,67,38,1],[69,9,69,20,1],[70,9,70,26,1],[73,9,73,91,1],[76,9,76,92,1],[77,9,77,48,1],[77,48,77,58,1],[77,58,77,60,1],[78,9,78,60,1],[79,5,79,6,1],[86,5,86,6,1],[87,9,87,38,1],[89,9,89,20,1],[90,9,90,26,1],[93,9,93,91,1],[96,9,96,92,1],[97,9,97,48,1],[97,48,97,58,1],[97,58,97,60,1],[98,9,98,60,1],[99,5,99,6,1],[106,5,106,6,1],[107,9,107,38,1],[109,9,109,20,1],[110,9,110,65,1],[113,9,113,64,1],[116,9,116,92,1],[117,9,117,48,1],[117,48,117,58,1],[117,58,117,61,1],[118,5,118,6,1],[125,5,125,6,1],[126,9,126,38,1],[128,9,128,20,1],[129,9,129,26,1],[132,9,132,81,1],[135,9,135,92,1],[136,9,136,48,1],[136,48,136,58,1],[136,58,136,60,1],[137,9,137,49,1],[139,9,139,81,1],[140,5,140,6,1],[147,5,147,6,1],[148,9,148,38,1],[150,9,150,65,1],[151,9,151,58,1],[152,9,152,69,1],[155,9,155,90,1],[156,9,156,92,1],[157,9,157,92,1],[160,9,160,69,1],[163,9,163,98,1],[166,9,166,75,1],[167,5,167,6,1],[174,5,174,6,1],[175,9,175,38,1],[177,9,180,11,1],[182,9,182,90,1],[184,9,184,106,1],[187,9,187,89,1],[188,9,188,77,1],[189,9,189,81,1],[191,9,191,79,1],[192,5,192,6,1]]);
+    </script>
+  </body>
+</html>

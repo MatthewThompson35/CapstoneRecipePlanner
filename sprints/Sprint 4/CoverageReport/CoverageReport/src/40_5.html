@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\PlannedMealsPage.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@{
+    ViewBag.Title = &quot;Meal Plan&quot;;
+    var mealTypes = new List&lt;string&gt; { &quot;Breakfast&quot;, &quot;Lunch&quot;, &quot;Dinner&quot; };
+}
+&lt;div&gt;
+    &lt;h2&gt;@ViewBag.Header&lt;/h2&gt;
+    &lt;form method=&quot;post&quot; action=&quot;@Url.Action(&quot;ToggleWeek&quot;, &quot;Home&quot;, new { currentWeek = ViewBag.CurrentWeek })&quot;&gt;
+        &lt;button&gt;Switch Weeks&lt;/button&gt;
+    &lt;/form&gt;
+    
+    &lt;form id=&quot;addForm&quot; method=&quot;post&quot; action=&quot;@Url.Action(&quot;addNeededPlannedMealIngredients&quot;, &quot;Home&quot;)&quot;&gt;
+
+        &lt;button id=&quot;submitButton&quot;&gt;Add Ingredients For Remaining Meals&lt;/button&gt;
+        &lt;label for=&quot;AllIngredients&quot;&gt;Add all Ingredients&lt;/label&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;AllIngredients&quot; name=&quot;ingredientType&quot; value=&quot;All&quot;&gt;
+        @if (ViewBag.error != null)
+        {
+            &lt;div class=&quot;alert alert-danger&quot;&gt;@ViewBag.error&lt;/div&gt;
+        }
+    &lt;/form&gt;
+
+&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;
+    
+    &lt;div class=&quot;col-md-6&quot; id=&quot;meal-table&quot;&gt;
+        &lt;table&gt;
+            @{ string[] days = {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;}; }
+
+            @for (int i = 0; i &lt; days.Length; i++)
+            {
+                &lt;tr class=&quot;day-row&quot; data-day=&quot;@days[i]&quot;&gt;
+                    &lt;td style=&quot;background-color: #33b5e5;;&quot; colspan=&quot;4&quot;&gt;@days[i]&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr class=&quot;details-row hidden&quot; data-day=&quot;@days[i]&quot;&gt;
+                    &lt;td&gt;Breakfast&lt;/td&gt;
+                    &lt;td id=&quot;@($&quot;{days[i]}BreakfastDetails&quot;)&quot;&gt;@ViewBag.DefaultValues[i]&lt;/td&gt;
+                    &lt;td&gt;&lt;button id=&quot;@($&quot;{days[i]}BreakfastButton&quot;)&quot; onclick=&quot;showRecipeDetails(&#39;@days[i]&#39;, &#39;Breakfast&#39;)&quot;&gt;View Recipe&lt;/button&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;button onclick=&quot;removeColumn(&#39;@days[i]&#39;, &#39;Breakfast&#39;)&quot;&gt;Remove&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr class=&quot;details-row hidden&quot; data-day=&quot;@days[i]&quot;&gt;
+                    &lt;td&gt;Lunch&lt;/td&gt;
+                    &lt;td id=&quot;@($&quot;{days[i]}LunchDetails&quot;)&quot;&gt;@ViewBag.Lunch[i]&lt;/td&gt;
+                    &lt;td&gt;&lt;button id=&quot;@($&quot;{days[i]}LunchButton&quot;)&quot; onclick=&quot;showRecipeDetails(&#39;@days[i]&#39;, &#39;Lunch&#39;)&quot;&gt;View Recipe&lt;/button&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;button onclick=&quot;removeColumn(&#39;@days[i]&#39;, &#39;Lunch&#39;)&quot;&gt;Remove&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr class=&quot;details-row hidden&quot; data-day=&quot;@days[i]&quot;&gt;
+                    &lt;td&gt;Dinner&lt;/td&gt;
+                    &lt;td id=&quot;@($&quot;{days[i]}DinnerDetails&quot;)&quot;&gt;@ViewBag.Dinner[i]&lt;/td&gt;
+                    &lt;td&gt;&lt;button id=&quot;@($&quot;{days[i]}DinnerButton&quot;)&quot; onclick=&quot;showRecipeDetails(&#39;@days[i]&#39;, &#39;Dinner&#39;)&quot;&gt;View Recipe&lt;/button&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;button onclick=&quot;removeColumn(&#39;@days[i]&#39;,&#39;Dinner&#39;)&quot;&gt;Remove&lt;/button&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            }
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;col-md-6&quot; id=&quot;recipe-details&quot;&gt;
+        &lt;div id=&quot;recipe-details-box&quot; style=&quot;overflow: auto;&quot;&gt;
+            &lt;form id=&quot;cookMeal&quot; method=&quot;POST&quot; style=&quot;display: none&quot;&gt;
+                &lt;input type=&quot;hidden&quot; id=&quot;recipeID&quot; name=&quot;recipeID&quot; value=&quot;&quot;&gt;
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;CookMealConfirmation&quot; value=&quot;Cook Recipe&quot; id=&quot;CookRecipe&quot;/&gt;
+            &lt;/form&gt;
+            &lt;form id=&quot;shareMeal&quot; method=&quot;POST&quot; style=&quot;display: none&quot;&gt;
+                &lt;input type=&quot;hidden&quot; id=&quot;sharedRecipeID&quot; name=&quot;sharedRecipeID&quot; value=&quot;&quot;&gt;
+                &lt;label for=&quot;txtUsername&quot;&gt;Share to:&lt;/label&gt;
+                &lt;input type=&quot;text&quot; name=&quot;txtUsername&quot; id=&quot;txtUsername&quot;/&gt;
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    &lt;label class=&quot;error&quot; style=&quot;color: red&quot;&gt;@ViewBag.ErrorMessage&lt;/label&gt;
+                }
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;ShareMeal&quot; value=&quot;Share Recipe&quot; id=&quot;ShareRecipe&quot;/&gt;
+            &lt;/form&gt;
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                &lt;div id=&quot;@recipe.RecipeId&quot; style=&quot;display: none&quot;&gt;
+                    &lt;h3 class=&quot;recipe-name&quot;&gt;@recipe.Name&lt;/h3&gt;
+                    &lt;p class=&quot;recipe-description&quot;&gt;@recipe.Description&lt;/p&gt;
+                    &lt;h4&gt;Steps&lt;/h4&gt;
+                    &lt;ol class=&quot;recipe-steps&quot;&gt;
+                        @foreach (var step in recipe.Steps)
+                        {
+                            &lt;li&gt;@step.stepDescription&lt;/li&gt;
+                        }
+                    &lt;/ol&gt;
+                    &lt;h4&gt;Ingredients&lt;/h4&gt;
+                    &lt;ul class=&quot;recipe-ingredients&quot;&gt;
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            &lt;li&gt;@ingredient.Quantity @ingredient.Measurement @ingredient.IngredientName&lt;/li&gt;
+                        }
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            }
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .alert {
+        height: 30px;
+        width: 600px;
+        text-align: center; 
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    .alert-danger {
+        height: 30px;
+        width: 600px;
+    }
+    #recipe-details {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        margin-left: 50px;
+    }
+
+    #recipe-details-box {
+        border: 1px solid black;
+        height: 900px;
+        padding: 10px;
+        padding-top: 20px;
+        top: 160px;
+        position: fixed;
+        width: 38%;
+    }
+
+    #recipe-details-box h3 {
+        margin-top: 0;
+    }
+
+    #recipe-details-box p {
+        margin: 0;
+    }
+
+    h2 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        max-width: 800px;
+        padding-bottom: 10px;
+        table-layout: fixed;
+        top: 200px;
+        width: 100%;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        width: 125px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    select {
+        border: none;
+        border-radius: 4px;
+        box-sizing: border-box;
+        padding: 8px;
+        width: 100%;
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    td[id$=&quot;Details&quot;] {
+        border: 1px solid #ddd;
+        border-top: none;
+        padding: 16px;
+    }
+
+    .hidden {
+        display: none;
+    }
+&lt;/style&gt;
+&lt;script&gt;
+    window.onload = function () {
+        doDefaultMeals();
+    };
+
+    var allIngredientsCheckbox = document.getElementById(&quot;AllIngredients&quot;);
+    var addForm = document.getElementById(&quot;addForm&quot;);
+
+    allIngredientsCheckbox.addEventListener(&quot;change&quot;, function () {
+        if (allIngredientsCheckbox.checked) {
+            addForm.action = &quot;@Url.Action(&quot;addAllPlannedMealIngredients&quot;, &quot;Home&quot;)&quot;;
+        } else {
+            addForm.action = &quot;@Url.Action(&quot;addNeededPlannedMealIngredients&quot;, &quot;Home&quot;)&quot;;
+        }
+    });
+    
+    
+    const dayRows = document.querySelectorAll(&#39;.day-row&#39;);
+
+    // Add click event listener to each day row
+    dayRows.forEach(dayRow =&gt; {
+        dayRow.addEventListener(&#39;click&#39;, () =&gt; {
+            // Get the day for the clicked row
+            const day = dayRow.dataset.day;
+
+            // Get all details rows for the clicked day
+            const detailsRows = document.querySelectorAll(`.details-row[data-day=&quot;${day}&quot;]`);
+
+            // Toggle the &quot;hidden&quot; class for each details row
+            detailsRows.forEach(detailsRow =&gt; {
+                detailsRow.classList.toggle(&#39;hidden&#39;);
+            });
+        });
+    });
+    
+    function toggleWeek() {
+        if (&quot;@ViewBag.CurrentWeek&quot; === &quot;Next Week&quot;) {
+            var url = &quot;@Url.Action(&quot;goToPlannedMealsPageNextWeek&quot;, &quot;Home&quot;)&quot;;
+        } else {
+            var url = &quot;@Url.Action(&quot;goToPlannedMealsPage&quot;, &quot;Home&quot;)&quot;;
+        }
+        $.ajax({
+          url: url,
+          method: &quot;POST&quot;,
+          success: function(response) {
+
+          }
+        });
+    }
+    
+    function removeColumn(day, mealType){
+        var dayDetails = day + mealType + &quot;Details&quot;;
+        var detailsElement = document.getElementById(dayDetails);
+        var week = &quot;@ViewBag.CurrentWeek&quot;
+
+        $.ajax({
+            type: &quot;GET&quot;,
+            url: &quot;@Url.Action(&quot;RemoveThisWeeksMeal&quot;, &quot;Home&quot;)&quot;,
+            data: { day: day, mealType: mealType, week: week },
+            success: function (response) {
+                console.log(response);
+                var recipeName = response.recipeName;
+                detailsElement.innerHTML = recipeName;
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+        }
+
+    function showRecipeDetails(day, mealType) {
+        var week = &quot;@ViewBag.CurrentWeek&quot;
+
+        $.ajax({
+            type: &quot;GET&quot;,
+            url: &quot;@Url.Action(&quot;GetRecipeName&quot;, &quot;Home&quot;)&quot;,
+            data: { day: day, mealType: mealType, week: week },
+            success: function (response) {
+                console.log(response);
+                var recipeId = response.recipeId;
+                showRecipe(recipeId);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    
+    }
+
+
+    function showRecipe(recipeId) {
+        var recipeDetails = document.getElementById(&quot;recipe-details-box&quot;);
+        var allRecipes = recipeDetails.children;
+        for (var i = 0; i &lt; allRecipes.length; i++) {
+            allRecipes[i].style.display = &quot;none&quot;;
+        }
+        var cookRecipe = document.getElementById(&#39;cookMeal&#39;);
+        var shareRecipe = document.getElementById(&#39;shareMeal&#39;);
+        var recipeID = document.getElementById(&#39;recipeID&#39;);
+        var sharedRecipeID = document.getElementById(&#39;sharedRecipeID&#39;);
+
+        cookRecipe.style.display = &quot;block&quot;;
+        shareRecipe.style.display = &quot;block&quot;;
+        recipeID.value = recipeId;
+        sharedRecipeID.value = recipeId;
+
+
+        // Show the recipe details for the specified recipe ID
+        var recipe = document.getElementById(recipeId);
+        recipe.style.display = &quot;block&quot;;
+
+        // Set the meal type in the corresponding details cell
+        var detailsCell = document.getElementById(mealType + &quot;Details&quot;);
+        detailsCell.innerHTML = &quot;Recipe &quot; + recipeId;
+        
+        var cookRecipe = document.getElementById(&#39;cookMeal&#39;);
+        var shareRecipe = document.getElementById(&#39;shareMeal&#39;);
+        var recipeID = document.getElementById(&#39;recipeID&#39;);
+
+        cookRecipe.style.display = &quot;block&quot;;
+        shareRecipe.style.display = &quot;block&quot;;
+        recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
+
+    }
+
+
+&lt;/script&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[2,5,2,33,0],[3,5,3,73,0],[6,10,6,25,0],[7,33,7,110,0],[11,46,11,101,0],[16,10,16,36,0],[17,9,17,10,0],[18,46,18,60,0],[19,9,19,10,0],[27,16,27,111,0],[29,19,29,28,0],[29,30,29,45,0],[29,47,29,50,0],[30,13,30,14,0],[31,48,31,56,0],[32,74,32,82,0],[34,59,34,67,0],[36,29,36,61,0],[36,63,36,88,0],[37,37,37,68,0],[37,97,37,106,0],[38,56,38,65,0],[40,59,40,67,0],[42,29,42,57,0],[42,59,42,76,0],[43,37,43,64,0],[43,93,43,102,0],[44,56,44,65,0],[46,59,46,67,0],[48,29,48,58,0],[48,60,48,78,0],[49,37,49,65,0],[49,94,49,103,0],[50,56,50,65,0],[52,13,52,14,0],[66,18,66,51,0],[67,17,67,18,0],[68,62,68,83,0],[69,17,69,18,0],[72,14,72,21,0],[72,23,72,33,0],[72,34,72,36,0],[72,37,72,55,0],[73,13,73,14,0],[74,26,74,43,0],[75,46,75,58,0],[76,52,76,71,0],[79,26,79,33,0],[79,35,79,43,0],[79,44,79,46,0],[79,47,79,59,0],[80,25,80,26,0],[81,34,81,55,0],[82,25,82,26,0],[86,26,86,33,0],[86,35,86,49,0],[86,50,86,52,0],[86,53,86,71,0],[87,25,87,26,0],[88,34,88,54,0],[88,55,88,78,0],[88,79,88,105,0],[89,25,89,26,0],[92,13,92,14,0],[210,32,210,83,0],[212,32,212,86,0],[236,15,236,35,0],[237,25,237,76,0],[239,25,239,68,0],[253,22,253,42,0],[257,20,257,62,0],[271,22,271,42,0],[275,20,275,56,0]]);
+    </script>
+  </body>
+</html>

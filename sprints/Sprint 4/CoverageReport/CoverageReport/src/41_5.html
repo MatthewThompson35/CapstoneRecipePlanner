@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\RecipePage.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model List&lt;RecipePlannerLibrary.Models.Recipe&gt;
+
+@{
+    ViewBag.Title = &quot;Recipes&quot;;
+}
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;/&gt;
+    &lt;title&gt;@ViewBag.Title&lt;/title&gt;
+
+    &lt;style&gt;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th { background-color: #f2f2f2; }
+
+        tr:nth-child(even) { background-color: #f2f2f2; }
+
+        tr:hover { background-color: grey; }
+
+        #logout {
+            background-color: #d9534f;
+            color: #fff;
+            position: fixed;
+            right: 10px;
+            top: 5px;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            color: #333;
+            font-family: &#39;Open Sans&#39;, sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-weight: bold;
+            margin: 0 0 20px;
+        }
+
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        #recipe-container {
+            display: flex;
+            margin: 50px auto;
+            max-width: 1200px;
+        }
+
+        .pagination { margin-top: 20px; }
+
+        #recipe-list {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #recipe-details-box {
+            display: flex;
+            flex-direction: column;
+            height: 500px; 
+            margin-left: 20px; 
+            overflow: auto;
+        }
+
+        .recipe-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .recipe-description {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .form-item {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #addForm {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #details {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #details &gt; div { display: none; }
+
+        .recipe-name {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .recipe-description {
+            font-size: 18px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .form-item {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #details &gt; div { display: none; }
+
+        .recipe-name {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .recipe-description {
+            font-size: 18px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .recipe-steps,
+        .recipe-ingredients,
+        .recipe-tags {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .recipe-steps li,
+        .recipe-ingredients li,
+        .recipe-tags li {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .recipe-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .page-button { margin-right: 10px; }
+
+        #search-container {
+            align-items: center;
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #search-container label { margin-right: 10px; }
+
+        #search-container input[type=&quot;text&quot;] {
+            flex: 1;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+
+        .form-group {
+            align-items: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .form-group select {
+            font-size: 16px;
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        #errorMessage {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type=&quot;submit&quot;] {
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        #txtUsername {
+            font-size: 12px;
+            height: 30px;
+            width: 15px;
+        }
+
+        #ShareRecipe {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #CookRecipe {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #shareMeal div {
+            align-items: center;
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        #shareMeal label {
+            width: 500px;
+        }
+
+        #shareMeal input[type=&quot;text&quot;] {
+            flex: 1;
+            width: 50%;
+        }
+
+        #shareMeal input[type=&quot;submit&quot;] {
+            margin-left: 10px;
+        }
+
+        #search-container button:hover { background-color: #3e8e41; }
+
+        #search-container button:active { background-color: #4CAF50; }
+    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;available-checkbox&quot; onchange=&quot;togglePagination()&quot;
+       @if (ViewBag.CurrentSelectedRadio == &quot;available&quot;)
+       {
+           &lt;text&gt;checked&lt;/text&gt;
+       }/&gt;
+&lt;label for=&quot;available-checkbox&quot;&gt;Show Available Recipes&lt;/label&gt;
+&lt;button onclick=&quot;showAllRecipes()&quot; class=&quot;btn btn-primary page-button&quot; style=&quot;margin-left: 20px;&quot;&gt;Clear Filters&lt;/button&gt;
+&lt;div id=&quot;recipe-container&quot;&gt;
+&lt;button onclick=&quot;location.href=&#39;@Url.Action(&quot;Index&quot;)&#39;&quot; id=&quot;logout&quot;&gt;Logout&lt;/button&gt;
+&lt;div id=&quot;recipe-list&quot; height: 1000px; width: 800px;&gt;
+    &lt;div id=&quot;search-container&quot;&gt;
+        &lt;label for=&quot;search-bar&quot;&gt;Search Tags:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;search-bar&quot; name=&quot;tag&quot; placeholder=&quot;Enter tags...&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;Filter&quot; class=&quot;btn btn-primary page-button&quot; id=&quot;search-button&quot;&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;filter-tags&quot;&gt;Filter by Tags: &lt;/div&gt;
+    &lt;br&gt;
+    &lt;h2&gt;Recipes&lt;/h2&gt;
+    &lt;form method=&quot;post&quot; asp-action=&quot;goToAddRecipesPage&quot;&gt;
+        &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; value=&quot;Add Recipe&quot; id=&quot;addButton&quot;/&gt;
+    &lt;/form&gt;
+
+    &lt;table id=&quot;available-recipes&quot; style=&quot;@(ViewBag.CurrentSelectedRadio == &quot;available&quot; ? &quot;display: block;&quot; : &quot;display: none;&quot;)&quot;&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        @if (ViewBag.AvailableRecipes.Count == 0)
+        {
+            &lt;tr&gt;
+                &lt;td colspan=&quot;1&quot; style=&quot;text-align: center;&quot;&gt;Sorry, there are no available recipes that can be made with your current ingredients.&lt;/td&gt;
+            &lt;/tr&gt;
+        }
+        @foreach (var recipe in ViewBag.availableRecipesOnPage)
+        {
+            &lt;tr onclick=&quot;showRecipe(&#39;@recipe.RecipeId&#39;)&quot;&gt;
+                &lt;td&gt;@recipe.Name&lt;/td&gt;
+            &lt;/tr&gt;
+        }
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;div class=&quot;pagination&quot; id=&quot;available-pagination&quot; style=&quot;@(ViewBag.CurrentSelectedRadio == &quot;available&quot; ? &quot;display: block;&quot; : &quot;display: none;&quot;)&quot;&gt;
+
+        @if (ViewBag.currentPage &gt; 1)
+        {
+            &lt;a href=&quot;@Url.Action(&quot;goToRecipePage&quot;, new {page = ViewBag.currentPage - 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Previous Page&lt;/a&gt;
+        }
+        @for (var i = 1; i &lt;= ViewBag.totalAvailablePages; i++)
+        {
+            &lt;a href=&quot;@Url.Action(&quot;goToRecipePage&quot;, new {page = i})&quot; class=&quot;btn btn-primary page-button&quot;&gt;@i&lt;/a&gt;
+        }
+        @if (ViewBag.currentPage &lt; ViewBag.totalAvailablePages)
+        {
+            &lt;a href=&quot;@Url.Action(&quot;goToRecipePage&quot;, new {page = ViewBag.currentPage + 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Next Page&lt;/a&gt;
+        }
+    &lt;/div&gt;
+    &lt;table id=&quot;all-recipes&quot; style=&quot;@(ViewBag.CurrentSelectedRadio == &quot;all&quot; ? &quot;display: block;&quot; : &quot;display: none;&quot;)&quot;&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        @foreach (var recipe in ViewBag.allRecipesOnPage)
+        {
+            &lt;tr onclick=&quot;showRecipe(&#39;@recipe.RecipeId&#39;)&quot;&gt;
+                &lt;td&gt;@recipe.Name&lt;/td&gt;
+            &lt;/tr&gt;
+        }
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;div class=&quot;pagination&quot; id=&quot;all-pagination&quot; style=&quot;@(ViewBag.CurrentSelectedRadio == &quot;all&quot; ? &quot;display: block;&quot; : &quot;display: none;&quot;)&quot;&gt;
+        @if (ViewBag.currentAllPage &gt; 1)
+        {
+            &lt;a href=&quot;@Url.Action(&quot;goToRecipePageAll&quot;, new {page = ViewBag.currentAllPage - 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Previous Page&lt;/a&gt;
+        }
+        @for (var i = 1; i &lt;= ViewBag.totalPages; i++)
+        {
+            &lt;a href=&quot;@Url.Action(&quot;goToRecipePageAll&quot;, new {page = i})&quot; class=&quot;btn btn-primary page-button&quot;&gt;@i&lt;/a&gt;
+        }
+        @if (ViewBag.currentAllPage &lt; ViewBag.totalPages)
+        {
+            &lt;a href=&quot;@Url.Action(&quot;goToRecipePageAll&quot;, new {page = ViewBag.currentAllPage + 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Next Page&lt;/a&gt;
+        }
+
+    &lt;/div&gt;
+    &lt;table id=&quot;filtered-recipes&quot;&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            @if (ViewBag.filterRecipes != null)
+            {
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Tags&lt;/th&gt;
+            }
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;div id=&quot;filter-pagination&quot; style=&quot;display: none&quot;&gt;
+        &lt;p&gt;This is being displayed&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&quot;recipe-details-box&quot; style=&quot;display: flex; flex-direction: column; height: 1000px; overflow: auto; width: 1000px;&quot;&gt;
+    &lt;form id=&quot;shareMeal&quot; method=&quot;POST&quot;&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;sharedRecipeID&quot; name=&quot;sharedRecipeID&quot; value=&quot;&quot;&gt;
+
+        &lt;label for=&quot;txtUsername&quot;&gt;Share to:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;txtUsername&quot; id=&quot;txtUsername&quot;/&gt;
+        &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;ShareMeal&quot; value=&quot;Share Recipe&quot; id=&quot;ShareRecipe&quot; class=&quot;btn btn-primary page-button&quot;/&gt;
+        &lt;br&gt;
+        @if (ViewBag.ErrorMessage != null)
+        {
+            &lt;label class=&quot;error&quot; style=&quot;color: red&quot;&gt;@ViewBag.ErrorMessage&lt;/label&gt;
+        }
+
+    &lt;/form&gt;
+
+    &lt;div id=&quot;addForm&quot; class=&quot;form-item&quot;&gt;
+        &lt;form method=&quot;post&quot; id=&quot;addPlannedMeal&quot; style=&quot;display: none;&quot;&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;input type=&quot;hidden&quot; name=&quot;recipeId&quot; id=&quot;recipeId&quot; value=&quot;&quot;&gt;
+                &lt;label for=&quot;week&quot;&gt;Week:&lt;/label&gt;
+                &lt;select name=&quot;week&quot; id=&quot;week&quot;&gt;
+                    @foreach (var week in new[] {&quot;This Week&quot;, &quot;Next Week&quot;})
+                    {
+                        &lt;option value=&quot;@week&quot;&gt;@week&lt;/option&gt;
+                    }
+                &lt;/select&gt;
+                &lt;label for=&quot;day&quot;&gt;Day:&lt;/label&gt;
+                &lt;select name=&quot;day&quot; id=&quot;day&quot;&gt;
+                    @foreach (var day in new[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;})
+                    {
+                        &lt;option value=&quot;@day&quot;&gt;@day&lt;/option&gt;
+                    }
+                &lt;/select&gt;
+                &lt;label for=&quot;type&quot;&gt;Meal Type:&lt;/label&gt;
+                &lt;select name=&quot;type&quot; id=&quot;type&quot;&gt;
+                    @foreach (var type in new[] {&quot;Breakfast&quot;, &quot;Lunch&quot;, &quot;Dinner&quot;})
+                    {
+                        &lt;option value=&quot;@type&quot;&gt;@type&lt;/option&gt;
+                    }
+                &lt;/select&gt;
+                &lt;div id=&quot;errorMessage&quot; style=&quot;display: none;&quot;&gt;
+                    Are you sure You want to overwrite your previous meal?
+                &lt;/div&gt;
+
+            &lt;/div&gt;
+            &lt;div class=&quot;button-group&quot;&gt;
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;addPlannedMeal&quot; value=&quot;Add&quot;/&gt;
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;goToRecipePage&quot; value=&quot;Cancel&quot;/&gt;
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; hidden asp-action=&quot;UpdateThisWeeksMeal&quot; value=&quot;Confirm Update&quot;/&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+
+    &lt;/div&gt;
+    &lt;div id=&quot;details&quot;&gt;
+        @foreach (var recipe in ViewBag.AllRecipes)
+        {
+            &lt;div class=&quot;form-item&quot; id=&quot;@recipe.RecipeId&quot; style=&quot;display: none&quot;&gt;
+                &lt;form id=&quot;add&quot;&gt;
+                &lt;/form&gt;
+                &lt;form id=&quot;cookMeal&quot; method=&quot;POST&quot;&gt;
+                    &lt;input type=&quot;hidden&quot; id=&quot;recipeID&quot; name=&quot;recipeID&quot; value=&quot;@recipe.RecipeId&quot;&gt;
+                    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;CookMealConfirmation&quot; value=&quot;Cook Recipe&quot; id=&quot;CookRecipe-@recipe.RecipeId&quot;/&gt;
+                &lt;/form&gt;
+                &lt;h3 class=&quot;recipe-name&quot;&gt;@recipe.Name&lt;/h3&gt;
+                &lt;p class=&quot;recipe-description&quot;&gt;@recipe.Description&lt;/p&gt;
+                &lt;h4&gt;Steps&lt;/h4&gt;
+                &lt;ol class=&quot;recipe-steps&quot;&gt;
+                    @foreach (var step in recipe.Steps)
+                    {
+                        &lt;li&gt;@step.stepDescription&lt;/li&gt;
+                    }
+                &lt;/ol&gt;
+                &lt;h4&gt;Ingredients&lt;/h4&gt;
+                &lt;ul class=&quot;recipe-ingredients&quot;&gt;
+                    @foreach (var ingredient in recipe.Ingredients)
+                    {
+                        &lt;li&gt;@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName&lt;/li&gt;
+                    }
+                &lt;/ul&gt;
+                @if (recipe.Tags != null &amp;&amp; recipe.Tags.Count &gt; 0)
+                {
+                    &lt;h4&gt;Tags&lt;/h4&gt;
+                    &lt;ul class=&quot;recipe-tags&quot;&gt;
+                        @foreach (var tag in recipe.Tags)
+                        {
+                            &lt;li&gt;@tag&lt;/li&gt;
+                        }
+                    &lt;/ul&gt;
+                }
+            &lt;/div&gt;
+        }
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+    function showRecipe(recipeId) {
+        var recipeID = document.getElementById(&#39;recipeID&#39;);
+        var sharedRecipeID = document.getElementById(&#39;sharedRecipeID&#39;);
+        var cookRecipe = document.getElementById(&#39;CookRecipe&#39;);
+        var shareRecipe = document.getElementById(&#39;ShareRecipe&#39;);
+        var recipeDiv = document.getElementById(recipeId);
+        var currentDiv = document.querySelector(&#39;#details &gt; div[style*=&quot;display: block&quot;]&#39;);
+        var addPlannedMealForm = document.getElementById(&#39;addPlannedMeal&#39;);
+        var recipeIdInput = addPlannedMealForm.querySelector(&#39;input[name=&quot;recipeId&quot;]&#39;);
+
+        recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
+        sharedRecipeID.value = recipeId;
+
+        if (currentDiv) {
+            currentDiv.style.display = &#39;none&#39;;
+        }
+
+        recipeDiv.style.display = &#39;block&#39;;
+        addPlannedMealForm.style.display = &#39;block&#39;;
+        cookRecipe.style.display = &quot;block&quot;;
+        shareRecipe.style.display = &quot;block&quot;;
+    }
+    
+    function cancel() {
+        var addPlannedMealForm = document.getElementById(&#39;addPlannedMeal&#39;);
+        addPlannedMealForm.style.display = &#39;none&#39;;
+    }
+
+    var tags = [];
+    var availableCheckbox = document.getElementById(&quot;available-checkbox&quot;);
+
+    document.getElementById(&quot;search-button&quot;).addEventListener(&quot;click&quot;, function () {
+        var tag = document.getElementById(&quot;search-bar&quot;).value;
+        
+        if(tag != &quot;&quot;) {
+            tags.push(tag);
+            document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;none&#39;;
+            filterRecipes();
+            document.getElementById(&quot;search-bar&quot;).value = &quot;&quot;;
+
+            document.getElementById(&quot;available-pagination&quot;).style.display = &#39;none&#39;;
+            document.getElementById(&quot;all-pagination&quot;).style.display = &#39;none&#39;;
+            
+        } else {
+            document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;none&#39;;
+            filterRecipes()
+            document.getElementById(&quot;available-pagination&quot;).style.display = &#39;none&#39;;
+            document.getElementById(&quot;all-pagination&quot;).style.display = &#39;none&#39;;
+            
+        }
+        
+
+    });
+
+    function filterRecipes() {
+        var recipes = @Html.Raw(Json.Serialize(ViewBag.AllRecipes));
+
+        if (document.getElementById(&#39;available-checkbox&#39;).checked) {
+            recipes = @Html.Raw(Json.Serialize(ViewBag.AvailableRecipes));
+            document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;none&#39;;
+        }
+        document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;none&#39;;
+
+        var filtered = [];
+
+        for (var i = 0; i &lt; recipes.length; i++) {
+            var matchCount = 0;
+            if (recipes[i].tags != null) {
+                for (var j = 0; j &lt; tags.length; j++) {
+                    var lowercaseTag = tags[j].toLowerCase();
+                    for (var k = 0; k &lt; recipes[i].tags.length; k++) {
+                        var lowercaseRecipeTag = recipes[i].tags[k].toLowerCase();
+                        if (lowercaseRecipeTag === lowercaseTag) {
+                            matchCount++;
+                            break;
+                        }
+                    }
+                }
+                if (matchCount === tags.length) {
+                    filtered.push(recipes[i]);
+                }
+            }
+        }
+
+        showFilteredRecipes(filtered);
+        updateFilterTags();
+    }
+
+    function showFilteredRecipes(recipes) {
+        var table = document.getElementById(&quot;filtered-recipes&quot;).getElementsByTagName(&quot;tbody&quot;)[0];
+        table.innerHTML = &quot;&quot;;
+
+        if (recipes.length == 0) {
+            var row = table.insertRow();
+            var cell = row.insertCell();
+            cell.colSpan = &quot;2&quot;;
+            cell.style.textAlign = &quot;center&quot;;
+            cell.innerHTML = &quot;No recipes found with the entered tags.&quot;;
+        }
+
+        const itemsPerPage = 10;
+        const totalItems = recipes.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        document.getElementById(&#39;all-recipes&#39;).style.display = &#39;none&#39;;
+        document.getElementById(&#39;filtered-recipes&#39;).style.display = &#39;block&#39;;
+        document.getElementById(&#39;available-recipes&#39;).style.display = &#39;none&#39;;
+        displayPage(recipes, 1);
+    }
+    
+    
+    
+    function displayPage(recipes, pageNumber) {
+        const startIndex = (pageNumber - 1) * 10;
+        const endIndex = startIndex + 10;
+        const itemsToShow = recipes.slice(startIndex, endIndex);
+        var table = document.getElementById(&quot;filtered-recipes&quot;).getElementsByTagName(&quot;tbody&quot;)[0];
+        table.innerHTML = &quot;&quot;;
+        
+         if (recipes.length == 0) {
+            var row = table.insertRow();
+            var cell = row.insertCell();
+            cell.colSpan = &quot;2&quot;;
+            cell.style.textAlign = &quot;center&quot;;
+            cell.innerHTML = &quot;No recipes found with the entered tags.&quot;;
+        }
+        
+        for (var i = 0; i &lt; itemsToShow.length; i++) {
+            var row = table.insertRow();
+            var nameCell = row.insertCell();
+            nameCell.innerHTML = itemsToShow[i].name;
+            var tagsCell = row.insertCell();
+            tagsCell.innerHTML = itemsToShow[i].tags.join(&quot;, &quot;);
+            row.setAttribute(&quot;onclick&quot;, &quot;showRecipe(&#39;&quot; + itemsToShow[i].recipeId + &quot;&#39;)&quot;);
+            row.style.cursor = &quot;pointer&quot;;
+        }
+        updatePaginationButtons(recipes, pageNumber);
+    }
+
+    function updatePaginationButtons(recipeList, currentPage) {
+        const paginationContainer = document.querySelector(&#39;#filter-pagination&#39;);
+        paginationContainer.innerHTML = &quot;&quot;;
+        document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;block&#39;;
+        
+        const previousButton = document.createElement(&#39;button&#39;);
+        previousButton.textContent = &#39;Previous&#39;;
+        previousButton.disabled = currentPage === 1;
+        previousButton.addEventListener(&#39;click&#39;, () =&gt; displayPage(recipeList, currentPage - 1));
+        previousButton.classList.add(&#39;btn&#39;, &#39;btn-primary&#39;, &#39;page-button&#39;);
+        previousButton.style.margin = &#39;5px&#39;;
+        paginationContainer.appendChild(previousButton);
+
+        const totalPages = Math.ceil(recipeList.length / 10);
+        for (let i = 1; i &lt;= totalPages; i++) {
+            const pageNumberButton = document.createElement(&#39;button&#39;);
+            pageNumberButton.textContent = i;
+            pageNumberButton.disabled = i === currentPage;
+            pageNumberButton.addEventListener(&#39;click&#39;, () =&gt; displayPage(recipeList, i));
+            pageNumberButton.classList.add(&#39;btn&#39;, &#39;btn-primary&#39;, &#39;page-button&#39;);
+            pageNumberButton.style.margin = &#39;5px&#39;;
+            paginationContainer.appendChild(pageNumberButton);
+        }
+
+        const nextButton = document.createElement(&#39;button&#39;);
+        nextButton.textContent = &#39;Next&#39;;
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener(&#39;click&#39;, () =&gt; displayPage(recipeList, currentPage + 1));
+        nextButton.classList.add(&#39;btn&#39;, &#39;btn-primary&#39;, &#39;page-button&#39;);
+        nextButton.style.margin = &#39;5px&#39;;
+        paginationContainer.appendChild(nextButton);
+    }
+
+
+    function updateFilterTags() {
+        var filterTags = document.getElementById(&quot;filter-tags&quot;);
+        filterTags.innerHTML = &quot;Filter by Tags: &quot;;
+        for (var i = 0; i &lt; tags.length; i++) {
+            var tag = tags[i];
+            var span = document.createElement(&quot;span&quot;);
+            span.innerHTML = tag + &quot; &lt;a href=&#39;#&#39; onclick=&#39;removeFilterTag(\&quot;&quot; + tag + &quot;\&quot;)&#39;&gt;x&lt;/a&gt;&quot; + &quot;   &quot;;
+            filterTags.appendChild(span);
+        }
+    }
+
+    function removeFilterTag(tag) {
+        var index = tags.indexOf(tag);
+        if (index &gt; -1) {
+            tags.splice(index, 1);
+            if (tags.length === 0) {
+                var filterTags = document.getElementById(&quot;filter-tags&quot;);
+                filterTags.innerHTML = &quot;Filter by Tags: &quot;;
+                showAvailableRecipes();
+            } else {
+                filterRecipes();
+            }
+            
+            document.getElementById(&quot;available-pagination&quot;).style.display = &#39;none&#39;;
+            document.getElementById(&quot;all-pagination&quot;).style.display = &#39;none&#39;;
+        }
+    }
+    
+    function showAvailableRecipes() {
+        document.getElementById(&#39;all-recipes&#39;).style.display = &#39;none&#39;;
+        document.getElementById(&#39;filtered-recipes&#39;).style.display = &#39;none&#39;;
+        document.getElementById(&#39;available-recipes&#39;).style.display = &#39;block&#39;;
+        
+        tags = [];
+        filterRecipes();
+    }
+
+    function showAllRecipes() {
+        document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;none&#39;;
+        document.getElementById(&#39;available-checkbox&#39;).checked = false;
+        document.getElementById(&#39;search-bar&#39;).value = &#39;&#39;;
+        tags = [];
+
+        document.getElementById(&#39;all-recipes&#39;).style.display = &#39;table&#39;;
+        document.getElementById(&#39;filtered-recipes&#39;).style.display = &#39;none&#39;;
+        document.getElementById(&#39;available-recipes&#39;).style.display = &#39;none&#39;;
+
+        var filterTags = document.getElementById(&quot;filter-tags&quot;);
+        filterTags.innerHTML = &quot;Filter by Tags: &quot;;
+        
+        if (document.getElementById(&quot;available-checkbox&quot;).checked == false) {
+            document.getElementById(&quot;available-pagination&quot;).style.display = &#39;none&#39;;
+            document.getElementById(&quot;all-pagination&quot;).style.display = &#39;block&#39;;
+        } else {
+            document.getElementById(&quot;available-pagination&quot;).style.display = &#39;block&#39;;
+            document.getElementById(&quot;all-pagination&quot;).style.display = &#39;none&#39;;
+        }
+    }
+    
+    function togglePagination() {
+        var availablePagination = document.getElementById(&quot;available-pagination&quot;);
+        var allPagination = document.getElementById(&quot;all-pagination&quot;);
+        var checkbox = document.getElementById(&quot;available-checkbox&quot;);
+        document.getElementById(&#39;filter-pagination&#39;).style.display = &#39;none&#39;;
+        
+        var allRecipes = @Html.Raw(Json.Serialize(ViewBag.CurrentSelectedRadio));
+
+        if (checkbox.checked == false) {
+            availablePagination.style.display = &quot;none&quot;;
+            allPagination.style.display = &quot;block&quot;;
+            document.getElementById(&#39;all-recipes&#39;).style.display = &#39;table&#39;;
+            document.getElementById(&#39;filtered-recipes&#39;).style.display = &#39;none&#39;;
+            document.getElementById(&#39;available-recipes&#39;).style.display = &#39;none&#39;;
+        } else {
+            availablePagination.style.display = &quot;block&quot;;
+            allPagination.style.display = &quot;none&quot;;
+            document.getElementById(&#39;all-recipes&#39;).style.display = &#39;none&#39;;
+            document.getElementById(&#39;filtered-recipes&#39;).style.display = &#39;none&#39;;
+            document.getElementById(&#39;available-recipes&#39;).style.display = &#39;table&#39;;
+        }
+
+    }
+
+    window.onload = togglePagination;
+    document.getElementById(&quot;available-checkbox&quot;).addEventListener(&quot;change&quot;, togglePagination);
+
+
+&lt;/script&gt;
+&lt;/html&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[4,5,4,31,0],[12,13,12,27,0],[285,9,285,57,0],[286,8,286,9,0],[288,8,288,9,0],[292,33,292,54,0],[306,42,306,128,0],[313,10,313,50,0],[314,9,314,10,0],[318,9,318,10,0],[319,10,319,17,0],[319,19,319,29,0],[319,30,319,32,0],[319,33,319,63,0],[320,9,320,10,0],[321,38,321,55,0],[322,22,322,34,0],[324,9,324,10,0],[327,62,327,148,0],[329,10,329,38,0],[330,9,330,10,0],[331,22,331,90,0],[332,9,332,10,0],[333,15,333,24,0],[333,26,333,58,0],[333,60,333,63,0],[334,9,334,10,0],[335,22,335,68,0],[335,106,335,108,0],[336,9,336,10,0],[337,10,337,64,0],[338,9,338,10,0],[339,22,339,90,0],[340,9,340,10,0],[342,36,342,116,0],[349,10,349,17,0],[349,19,349,29,0],[349,30,349,32,0],[349,33,349,57,0],[350,9,350,10,0],[351,38,351,55,0],[352,22,352,34,0],[354,9,354,10,0],[358,56,358,136,0],[359,10,359,41,0],[360,9,360,10,0],[361,22,361,96,0],[362,9,362,10,0],[363,15,363,24,0],[363,26,363,49,0],[363,51,363,54,0],[364,9,364,10,0],[365,22,365,71,0],[365,109,365,111,0],[366,9,366,10,0],[367,10,367,58,0],[368,9,368,10,0],[369,22,369,96,0],[370,9,370,10,0],[376,14,376,48,0],[377,13,377,14,0],[380,13,380,14,0],[398,10,398,43,0],[399,9,399,10,0],[400,54,400,75,0],[401,9,401,10,0],[411,22,411,29,0],[411,31,411,39,0],[411,40,411,42,0],[411,43,411,75,0],[412,21,412,22,0],[413,41,413,46,0],[413,48,413,53,0],[414,21,414,22,0],[418,22,418,29,0],[418,31,418,38,0],[418,39,418,41,0],[418,42,418,126,0],[419,21,419,22,0],[420,41,420,45,0],[420,47,420,51,0],[421,21,421,22,0],[425,22,425,29,0],[425,31,425,39,0],[425,40,425,42,0],[425,43,425,81,0],[426,21,426,22,0],[427,41,427,46,0],[427,48,427,53,0],[428,21,428,22,0],[444,10,444,17,0],[444,19,444,29,0],[444,30,444,32,0],[444,33,444,51,0],[445,9,445,10,0],[446,40,446,57,0],[450,79,450,96,0],[451,147,451,164,0],[453,42,453,54,0],[454,48,454,67,0],[457,22,457,29,0],[457,31,457,39,0],[457,40,457,42,0],[457,43,457,55,0],[458,21,458,22,0],[459,30,459,51,0],[460,21,460,22,0],[464,22,464,29,0],[464,31,464,45,0],[464,46,464,48,0],[464,49,464,67,0],[465,21,465,22,0],[466,30,466,50,0],[466,50,466,73,0],[466,74,466,100,0],[467,21,467,22,0],[469,18,469,67,0],[470,17,470,18,0],[473,26,473,33,0],[473,35,473,42,0],[473,43,473,45,0],[473,46,473,57,0],[474,25,474,26,0],[475,34,475,38,0],[476,25,476,26,0],[478,17,478,18,0],[480,9,480,10,0],[542,24,542,69,0],[545,24,545,75,0],[725,27,725,82,0]]);
+    </script>
+  </body>
+</html>

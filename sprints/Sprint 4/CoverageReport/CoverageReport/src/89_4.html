@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\ActiveUserTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    [TestClass]
+    public class ActiveUserTests
+    {
+        /// &lt;summary&gt;
+        /// Tests the set username method
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void SetUsername()
+        {
+
+            string expectedUsername = &quot;test&quot;;
+
+
+            ActiveUser.username = expectedUsername;
+            string actualUsername = ActiveUser.username;
+
+
+            Assert.AreEqual(expectedUsername, actualUsername, &quot;The username was not set correctly&quot;);
+        }
+        /// &lt;summary&gt;
+        /// Tests the method to get the username
+        /// &lt;/summary&gt;
+        [TestMethod]
+        
+        public void GetUsername()
+        {
+            string expectedUsername = &quot;test&quot;;
+
+            ActiveUser.username = expectedUsername;
+
+            string actualUsername = ActiveUser.username;
+
+            Assert.AreEqual(expectedUsername, actualUsername, &quot;The username was not returned correctly&quot;);
+        }
+    }
+
+
+
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[11,9,11,10,1],[13,13,13,46,1],[16,13,16,52,1],[17,13,17,57,1],[20,13,20,101,1],[21,9,21,10,1],[28,9,28,10,1],[29,13,29,46,1],[31,13,31,52,1],[33,13,33,57,1],[35,13,35,106,1],[36,9,36,10,1]]);
+    </script>
+  </body>
+</html>

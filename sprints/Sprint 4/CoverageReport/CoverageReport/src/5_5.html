@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Controllers\IngredientController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Microsoft.AspNetCore.Mvc;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+
+namespace RecipePlannerWebApplication.Controllers
+{
+    public class IngredientsController : Controller
+    {
+        /// &lt;summary&gt;
+        /// Shows the ingredients page
+        /// &lt;/summary&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;The ingredients page&lt;/returns&gt;
+        public IActionResult Index()
+        {
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+
+        /// &lt;summary&gt;
+        /// Adds the ingredient to the database and displays it to the user.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;txtIngredientName&quot;&gt;Name of the text ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;txtQuantity&quot;&gt;The text quantity.&lt;/param&gt;
+        /// &lt;param name=&quot;measurement&quot;&gt;The measurement.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;Ingredient is added to the database&lt;/postcondition&gt;
+        /// &lt;returns&gt;The ingredients page&lt;/returns&gt;
+        public ActionResult AddIngredient(string txtIngredientName, string txtQuantity, string measurement)
+        {
+            IngredientDAL.addIngredient(txtIngredientName, Int32.Parse(txtQuantity), measurement, Connection.ConnectionString);
+            ViewBag.ingredients = IngredientDAL.getIngredients();
+            return View(&quot;IngredientsPage&quot;, ViewBag.ingredients);
+        }
+
+
+        /// &lt;summary&gt;
+        /// Logs out of this instance.
+        /// &lt;/summary&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;The login page&lt;/returns&gt;
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            return View(&quot;..//Home//Index&quot;);
+        }
+    }
+}
+
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,9,16,10,0],[17,13,17,66,0],[18,13,18,65,0],[19,9,19,10,0],[32,9,32,10,0],[33,13,33,128,0],[34,13,34,66,0],[35,13,35,65,0],[36,9,36,10,0],[47,9,47,10,0],[48,13,48,44,0],[49,9,49,10,0]]);
+    </script>
+  </body>
+</html>
