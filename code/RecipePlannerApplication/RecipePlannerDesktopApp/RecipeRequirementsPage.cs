@@ -157,11 +157,28 @@ namespace RecipePlannerDesktopApplication
             {
                 RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
 
-                this.recipeIngredients.Add(recipeIngredient);
+                foreach (var ingredient in this.recipeIngredients)
+                {
+                    if (recipeIngredient.IngredientName.Equals(ingredient.IngredientName) && recipeIngredient.Quantity == ingredient.Quantity && recipeIngredient.Measurement.Equals(ingredient.Measurement))
+                    {
+                        this.errorIngredientsFieldsLabel.Text = "Ingredient already exists.";
+                        this.errorIngredientsFieldsLabel.Visible = true;
+                    }
+                }
+                if (this.errorIngredientsFieldsLabel.Visible == true)
+                {
+                    return;
+                }
+                else
+                {
+                    this.recipeIngredients.Add(recipeIngredient);
 
-                this.ingredientSuccessLabel.Visible = true;
+                    this.ingredientSuccessLabel.Visible = true;
 
-                this.clearIngredientsFields();
+                    this.clearIngredientsFields();
+                }
+
+                
             }
 
             
@@ -230,7 +247,7 @@ namespace RecipePlannerDesktopApplication
             {
                 RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
 
-                foreach (var step in recipeSteps)
+                foreach (var step in this.GetRecipeSteps())
                 {
                     if (recipeStep.stepNumber.Equals(step.stepNumber))
                     {

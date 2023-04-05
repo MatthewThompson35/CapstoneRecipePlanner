@@ -160,11 +160,13 @@ namespace RecipePlannerDesktopApplication
             return this.selectedRecipe;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            var recipe = new Homepage();
+            var homepage = new Homepage();
+
             this.Hide();
-            recipe.Show();
+
+            homepage.Show();
         }
     }
 }
