@@ -605,9 +605,16 @@ public class HomeController : Controller
                         IngredientDAL.getIngredientId(ing.IngredientName), ing.Quantity, ing.Measurement,
                         Connection.ConnectionString);
                 }
+                this.setupForRecipePage();
+                return View("RecipePage");
             }
 
-            return View("Index");
+            ViewBag.test = 1;
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            ViewBag.error = "Recipe with name was already added";
+            ViewBag.page = "pantry";
+            return View("AddRecipesPage", ViewBag.Measurements);
         }
         catch (Exception ex)
         {
@@ -615,6 +622,24 @@ public class HomeController : Controller
         }
 
         return View("Index");
+    }
+
+    /// <summary>
+    /// Checks to see if the recipe exists.
+    /// </summary>
+    /// <param name="recipeName">Name of the recipe.</param>
+    /// <returns>True or false</returns>
+    public ActionResult CheckRecipeExists(string recipeName)
+    {
+
+        bool exists = false;
+        var recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+        if (recipe.Name != null)
+        {
+            exists = true;
+        }
+
+        return Json(new { Exists = exists});
     }
 
     /// <summary>

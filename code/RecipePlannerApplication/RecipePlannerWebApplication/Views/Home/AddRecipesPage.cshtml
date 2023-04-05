@@ -136,6 +136,10 @@
 <div class="row">
     <div class="col-md-12">
         <form id="addRecipe">
+            @if (ViewBag.Error != null)
+            {
+                <label class="error" style="color: red">@ViewBag.Error</label>
+            }
             <div class="form-group">
                 <span id="recipe-error" style="color: red;"></span>
                 <label for="recipeName">Recipe Name:</label>
@@ -179,10 +183,10 @@
                 <h1>Tags</h1>
                 <table id="TagsTable" class="table">
                     <thead>
-                        <tr>
-                            <th>Tag</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
                     </tbody>
@@ -212,10 +216,7 @@
                         <option value="@measurement">@measurement</option>
                     }
                 </select>
-                @if (ViewBag.Error != null)
-                {
-                    <label class="error" style="color: red">@ViewBag.Error</label>
-                }
+                
             </div>
             <div class="button-group">
                 <button onsubmit="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton">Add Ingredient</button>
@@ -344,9 +345,25 @@
         const recipeDescriptionInput = document.getElementById('description');
 
         const recipeName = recipeNameInput.value;
+        
+        var exists = false;
+        $.ajax({
+            url: "@Url.Action("CheckRecipeExists", "Home")",
+            method: 'POST',
+            data: { recipeName: recipeName },
+            success: function (response) {
+                exists = response.Exists;
+                console.log('Recipe exists:', exists);
+            },
+            error: function (xhr, status, error) {
+                console.log('Error checking recipe:', error);
+            }
+        });
+
         const recipeDescription = recipeDescriptionInput.value;
 
         if (ingredientsRows.length > 0 && tagsRows.length > 0 && stepsRows.length > 0 && recipeName != null && recipeDescription != null) {
+            if(!exists) {
             for (let i = 0; i < ingredientsRows.length; i++) {
                 const cells = ingredientsRows[i].getElementsByTagName('td');
                 var ingredientString = `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent}`;
@@ -388,6 +405,11 @@
                     console.log('Error adding recipe:', error);
                 }
             });
+            }
+            else {
+                event.preventDefault();
+                errorLabel.textContent = 'Recipe with this name already exists';
+                }
         } else {
             event.preventDefault();
             errorLabel.textContent = 'ALL TABLES MUST HAVE VALUES!';
