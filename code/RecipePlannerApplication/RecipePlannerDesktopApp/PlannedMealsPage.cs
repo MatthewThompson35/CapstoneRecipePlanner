@@ -1765,7 +1765,7 @@ namespace RecipePlannerDesktopApplication
                     else
                     {
                         int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
-                        Ingredient newIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, ingredientId, recipeIngredient.Quantity, recipeIngredient.Measurement);
+                        Ingredient newIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, recipeIngredient.Quantity, ingredientId, recipeIngredient.Measurement);
 
                         totalIngredients.Add(newIngredient);
                     }
@@ -1829,8 +1829,9 @@ namespace RecipePlannerDesktopApplication
                     else
                     {
                         int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
-                        Ingredient newIngredient = new Ingredient(user, recipeIngredient.IngredientName, ingredientId,
+                        Ingredient newIngredient = new Ingredient(user, recipeIngredient.IngredientName,
                             recipeIngredient.Quantity,
+                            ingredientId,
                             recipeIngredient.Measurement);
                         totalIngredients.Add(newIngredient);
                     }
