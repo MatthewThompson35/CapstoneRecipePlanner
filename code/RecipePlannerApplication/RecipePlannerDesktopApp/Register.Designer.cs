@@ -108,33 +108,38 @@
             // 
             // RegisterButton
             // 
+            this.RegisterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.RegisterButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RegisterButton.Location = new System.Drawing.Point(71, 495);
             this.RegisterButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(151, 31);
             this.RegisterButton.TabIndex = 7;
             this.RegisterButton.Text = "Register";
-            this.RegisterButton.UseVisualStyleBackColor = true;
+            this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // CancelButton
             // 
+            this.CancelButton.BackColor = System.Drawing.Color.Red;
+            this.CancelButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelButton.Location = new System.Drawing.Point(71, 559);
             this.CancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(151, 31);
             this.CancelButton.TabIndex = 8;
             this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.UseVisualStyleBackColor = false;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // passwordErrorLabel
             // 
             this.passwordErrorLabel.AutoSize = true;
+            this.passwordErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.passwordErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.passwordErrorLabel.Location = new System.Drawing.Point(71, 471);
             this.passwordErrorLabel.Name = "passwordErrorLabel";
-            this.passwordErrorLabel.Size = new System.Drawing.Size(169, 20);
+            this.passwordErrorLabel.Size = new System.Drawing.Size(181, 20);
             this.passwordErrorLabel.TabIndex = 9;
             this.passwordErrorLabel.Text = "Passwords do not match";
             this.passwordErrorLabel.Visible = false;

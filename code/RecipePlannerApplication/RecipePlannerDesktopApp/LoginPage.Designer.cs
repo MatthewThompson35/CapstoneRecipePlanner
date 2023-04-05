@@ -37,16 +37,17 @@
             this.RegisterButton = new System.Windows.Forms.Button();
             this.emptyFieldErrorLabel = new System.Windows.Forms.Label();
             this.errorLoginLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(175, 64);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(186, 100);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 46);
+            this.label1.Size = new System.Drawing.Size(90, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "Login";
             // 
@@ -92,6 +93,7 @@
             // loginButton
             // 
             this.loginButton.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.loginButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.loginButton.Location = new System.Drawing.Point(175, 475);
             this.loginButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.loginButton.Name = "loginButton";
@@ -104,6 +106,7 @@
             // RegisterButton
             // 
             this.RegisterButton.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.RegisterButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RegisterButton.Location = new System.Drawing.Point(175, 563);
             this.RegisterButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.RegisterButton.Name = "RegisterButton";
@@ -116,10 +119,11 @@
             // emptyFieldErrorLabel
             // 
             this.emptyFieldErrorLabel.AutoSize = true;
+            this.emptyFieldErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.emptyFieldErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.emptyFieldErrorLabel.Location = new System.Drawing.Point(63, 391);
             this.emptyFieldErrorLabel.Name = "emptyFieldErrorLabel";
-            this.emptyFieldErrorLabel.Size = new System.Drawing.Size(158, 20);
+            this.emptyFieldErrorLabel.Size = new System.Drawing.Size(165, 20);
             this.emptyFieldErrorLabel.TabIndex = 7;
             this.emptyFieldErrorLabel.Text = "Please fill out all fields";
             this.emptyFieldErrorLabel.Visible = false;
@@ -127,19 +131,31 @@
             // errorLoginLabel
             // 
             this.errorLoginLabel.AutoSize = true;
+            this.errorLoginLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorLoginLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLoginLabel.Location = new System.Drawing.Point(175, 515);
             this.errorLoginLabel.Name = "errorLoginLabel";
-            this.errorLoginLabel.Size = new System.Drawing.Size(89, 20);
+            this.errorLoginLabel.Size = new System.Drawing.Size(93, 20);
             this.errorLoginLabel.TabIndex = 8;
             this.errorLoginLabel.Text = "Failed Login";
             this.errorLoginLabel.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(56, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(357, 38);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Welcome to Recipe Planner";
             // 
             // LoginPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 692);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.errorLoginLabel);
             this.Controls.Add(this.emptyFieldErrorLabel);
             this.Controls.Add(this.RegisterButton);
@@ -168,6 +184,7 @@
         private System.Windows.Forms.Button RegisterButton;
         private Label emptyFieldErrorLabel;
         private Label errorLoginLabel;
+        private Label label4;
     }
 }
 

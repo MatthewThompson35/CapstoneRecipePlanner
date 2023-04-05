@@ -158,6 +158,7 @@
             // 
             // serverErrorLabel
             // 
+            this.serverErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.serverErrorLabel.Location = new System.Drawing.Point(147, 37);
             this.serverErrorLabel.Name = "serverErrorLabel";

@@ -73,12 +73,13 @@
             this.incrementCOlumn,
             this.measurmentColumn});
             this.ingredientsGridView.DataSource = this.ingredientBindingSource;
-            this.ingredientsGridView.Location = new System.Drawing.Point(25, 128);
+            this.ingredientsGridView.Location = new System.Drawing.Point(29, 171);
+            this.ingredientsGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ingredientsGridView.Name = "ingredientsGridView";
             this.ingredientsGridView.RowHeadersVisible = false;
             this.ingredientsGridView.RowHeadersWidth = 51;
             this.ingredientsGridView.RowTemplate.Height = 25;
-            this.ingredientsGridView.Size = new System.Drawing.Size(400, 239);
+            this.ingredientsGridView.Size = new System.Drawing.Size(457, 319);
             this.ingredientsGridView.TabIndex = 25;
             this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
             this.ingredientsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellContentClick);
@@ -129,17 +130,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(156, 74);
+            this.label1.Location = new System.Drawing.Point(178, 99);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 30);
+            this.label1.Size = new System.Drawing.Size(179, 37);
             this.label1.TabIndex = 7;
             this.label1.Text = "Shopping List";
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(350, 21);
+            this.logoutButton.Location = new System.Drawing.Point(400, 28);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(75, 23);
+            this.logoutButton.Size = new System.Drawing.Size(86, 31);
             this.logoutButton.TabIndex = 9;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -147,10 +149,11 @@
             // 
             // serverErrorLabel
             // 
+            this.serverErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.serverErrorLabel.Location = new System.Drawing.Point(139, 14);
+            this.serverErrorLabel.Location = new System.Drawing.Point(159, 19);
             this.serverErrorLabel.Name = "serverErrorLabel";
-            this.serverErrorLabel.Size = new System.Drawing.Size(182, 38);
+            this.serverErrorLabel.Size = new System.Drawing.Size(208, 51);
             this.serverErrorLabel.TabIndex = 10;
             this.serverErrorLabel.Text = "The connection to the server could not be made";
             this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -158,10 +161,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(370, 388);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Location = new System.Drawing.Point(423, 517);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 33);
+            this.button3.Size = new System.Drawing.Size(63, 44);
             this.button3.TabIndex = 22;
             this.button3.Text = ">|";
             this.button3.UseVisualStyleBackColor = true;
@@ -169,10 +171,9 @@
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(309, 388);
-            this.nextButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nextButton.Location = new System.Drawing.Point(353, 517);
             this.nextButton.Name = "nextButton";
-            this.nextButton.Size = new System.Drawing.Size(55, 33);
+            this.nextButton.Size = new System.Drawing.Size(63, 44);
             this.nextButton.TabIndex = 21;
             this.nextButton.Text = ">";
             this.nextButton.UseVisualStyleBackColor = true;
@@ -182,18 +183,17 @@
             // 
             this.pageLabel.AutoSize = true;
             this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.pageLabel.Location = new System.Drawing.Point(216, 399);
+            this.pageLabel.Location = new System.Drawing.Point(247, 532);
             this.pageLabel.Name = "pageLabel";
-            this.pageLabel.Size = new System.Drawing.Size(19, 21);
+            this.pageLabel.Size = new System.Drawing.Size(24, 28);
             this.pageLabel.TabIndex = 20;
             this.pageLabel.Text = "1";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(85, 387);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(97, 516);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 34);
+            this.button1.Size = new System.Drawing.Size(61, 45);
             this.button1.TabIndex = 19;
             this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = true;
@@ -201,10 +201,9 @@
             // 
             // beginningButton
             // 
-            this.beginningButton.Location = new System.Drawing.Point(25, 387);
-            this.beginningButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.beginningButton.Location = new System.Drawing.Point(29, 516);
             this.beginningButton.Name = "beginningButton";
-            this.beginningButton.Size = new System.Drawing.Size(54, 34);
+            this.beginningButton.Size = new System.Drawing.Size(62, 45);
             this.beginningButton.TabIndex = 18;
             this.beginningButton.Text = "<|";
             this.beginningButton.UseVisualStyleBackColor = true;
@@ -212,9 +211,10 @@
             // 
             // removeIngredientButton
             // 
-            this.removeIngredientButton.Location = new System.Drawing.Point(262, 460);
+            this.removeIngredientButton.Location = new System.Drawing.Point(299, 613);
+            this.removeIngredientButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.removeIngredientButton.Name = "removeIngredientButton";
-            this.removeIngredientButton.Size = new System.Drawing.Size(144, 44);
+            this.removeIngredientButton.Size = new System.Drawing.Size(165, 59);
             this.removeIngredientButton.TabIndex = 17;
             this.removeIngredientButton.Text = "Remove Ingredient";
             this.removeIngredientButton.UseVisualStyleBackColor = true;
@@ -222,9 +222,10 @@
             // 
             // addIngredientButton
             // 
-            this.addIngredientButton.Location = new System.Drawing.Point(45, 461);
+            this.addIngredientButton.Location = new System.Drawing.Point(51, 615);
+            this.addIngredientButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addIngredientButton.Name = "addIngredientButton";
-            this.addIngredientButton.Size = new System.Drawing.Size(144, 41);
+            this.addIngredientButton.Size = new System.Drawing.Size(165, 55);
             this.addIngredientButton.TabIndex = 16;
             this.addIngredientButton.Text = "Add Ingredient";
             this.addIngredientButton.UseVisualStyleBackColor = true;
@@ -235,10 +236,9 @@
             this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
             this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plannerMenuButton.BackgroundImage")));
             this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.plannerMenuButton.Location = new System.Drawing.Point(12, 14);
-            this.plannerMenuButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.plannerMenuButton.Location = new System.Drawing.Point(14, 19);
             this.plannerMenuButton.Name = "plannerMenuButton";
-            this.plannerMenuButton.Size = new System.Drawing.Size(38, 29);
+            this.plannerMenuButton.Size = new System.Drawing.Size(43, 39);
             this.plannerMenuButton.TabIndex = 23;
             this.plannerMenuButton.UseVisualStyleBackColor = false;
             this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
@@ -250,28 +250,27 @@
             this.showRecipesToolStripMenuItem,
             this.showPantryToolStripMenuItem});
             this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
-            this.plannerContextMenuStrip.Size = new System.Drawing.Size(143, 48);
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(166, 52);
             // 
             // showRecipesToolStripMenuItem
             // 
             this.showRecipesToolStripMenuItem.Name = "showRecipesToolStripMenuItem";
-            this.showRecipesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showRecipesToolStripMenuItem.Size = new System.Drawing.Size(165, 24);
             this.showRecipesToolStripMenuItem.Text = "View Recipes";
             this.showRecipesToolStripMenuItem.Click += new System.EventHandler(this.showRecipesToolStripMenuItem_Click);
             // 
             // showPantryToolStripMenuItem
             // 
             this.showPantryToolStripMenuItem.Name = "showPantryToolStripMenuItem";
-            this.showPantryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showPantryToolStripMenuItem.Size = new System.Drawing.Size(165, 24);
             this.showPantryToolStripMenuItem.Text = "View Pantry";
             this.showPantryToolStripMenuItem.Click += new System.EventHandler(this.showPantryToolStripMenuItem_Click);
             // 
             // purchaseShoppingListButton
             // 
-            this.purchaseShoppingListButton.Location = new System.Drawing.Point(262, 532);
-            this.purchaseShoppingListButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.purchaseShoppingListButton.Location = new System.Drawing.Point(299, 709);
             this.purchaseShoppingListButton.Name = "purchaseShoppingListButton";
-            this.purchaseShoppingListButton.Size = new System.Drawing.Size(144, 44);
+            this.purchaseShoppingListButton.Size = new System.Drawing.Size(165, 59);
             this.purchaseShoppingListButton.TabIndex = 24;
             this.purchaseShoppingListButton.Text = "Purchase Shopping List";
             this.purchaseShoppingListButton.UseVisualStyleBackColor = true;
@@ -279,10 +278,9 @@
             // 
             // addIngredientsForRemainingMealsButton
             // 
-            this.addIngredientsForRemainingMealsButton.Location = new System.Drawing.Point(45, 532);
-            this.addIngredientsForRemainingMealsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addIngredientsForRemainingMealsButton.Location = new System.Drawing.Point(51, 709);
             this.addIngredientsForRemainingMealsButton.Name = "addIngredientsForRemainingMealsButton";
-            this.addIngredientsForRemainingMealsButton.Size = new System.Drawing.Size(144, 44);
+            this.addIngredientsForRemainingMealsButton.Size = new System.Drawing.Size(165, 59);
             this.addIngredientsForRemainingMealsButton.TabIndex = 26;
             this.addIngredientsForRemainingMealsButton.Text = "Add Ingredients for Remaining Meals";
             this.addIngredientsForRemainingMealsButton.UseVisualStyleBackColor = true;
@@ -291,19 +289,18 @@
             // addAllIngredientsCheckbox
             // 
             this.addAllIngredientsCheckbox.AutoSize = true;
-            this.addAllIngredientsCheckbox.Location = new System.Drawing.Point(51, 589);
-            this.addAllIngredientsCheckbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addAllIngredientsCheckbox.Location = new System.Drawing.Point(58, 785);
             this.addAllIngredientsCheckbox.Name = "addAllIngredientsCheckbox";
-            this.addAllIngredientsCheckbox.Size = new System.Drawing.Size(127, 19);
+            this.addAllIngredientsCheckbox.Size = new System.Drawing.Size(159, 24);
             this.addAllIngredientsCheckbox.TabIndex = 27;
             this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
             this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
             // 
             // ShoppingListPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 617);
+            this.ClientSize = new System.Drawing.Size(514, 823);
             this.Controls.Add(this.addAllIngredientsCheckbox);
             this.Controls.Add(this.addIngredientsForRemainingMealsButton);
             this.Controls.Add(this.ingredientsGridView);
@@ -319,6 +316,7 @@
             this.Controls.Add(this.serverErrorLabel);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ShoppingListPage";
             this.Text = "ShoppingListPage";
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
