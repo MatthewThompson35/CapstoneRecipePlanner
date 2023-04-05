@@ -39,6 +39,7 @@
             this.errorTextLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.measurementComboBox = new System.Windows.Forms.ComboBox();
+            this.duplicateIngredientError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -125,7 +126,7 @@
             // 
             this.errorTextLabel.AutoSize = true;
             this.errorTextLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorTextLabel.Location = new System.Drawing.Point(155, 360);
+            this.errorTextLabel.Location = new System.Drawing.Point(129, 360);
             this.errorTextLabel.Name = "errorTextLabel";
             this.errorTextLabel.Size = new System.Drawing.Size(123, 15);
             this.errorTextLabel.TabIndex = 8;
@@ -155,11 +156,22 @@
             this.measurementComboBox.Size = new System.Drawing.Size(126, 23);
             this.measurementComboBox.TabIndex = 10;
             // 
-            // AddIngredientsPopup
+            // duplicateIngredientError
+            // 
+            this.duplicateIngredientError.AutoSize = true;
+            this.duplicateIngredientError.ForeColor = System.Drawing.Color.Red;
+            this.duplicateIngredientError.Location = new System.Drawing.Point(12, 360);
+            this.duplicateIngredientError.Name = "duplicateIngredientError";
+            this.duplicateIngredientError.Size = new System.Drawing.Size(0, 15);
+            this.duplicateIngredientError.TabIndex = 11;
+            this.duplicateIngredientError.Visible = false;
+            // 
+            // AddIngredientsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 519);
+            this.Controls.Add(this.duplicateIngredientError);
             this.Controls.Add(this.measurementComboBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.errorTextLabel);
@@ -172,7 +184,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AddIngredientsPopup";
+            this.Name = "AddIngredientsPage";
             this.Text = "AddIngredientsPopup";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -193,5 +205,6 @@
         private Label label4;
         private ComboBox comboBox1;
         private ComboBox measurementComboBox;
+        private Label duplicateIngredientError;
     }
 }

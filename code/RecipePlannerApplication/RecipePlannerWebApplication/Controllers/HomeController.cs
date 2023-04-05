@@ -1790,6 +1790,13 @@ public class HomeController : Controller
 
         if (isValid)
         {
+            if (sharedRecipeID == 0)
+            {
+                ViewBag.ErrorMessage = "Please select a recipe and try again.";
+                this.setupForRecipePage();
+                return View("RecipePage");
+            }
+
             ViewBag.ErrorMessage = "";
             RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
             TempData["SharedRecipeID"] = sharedRecipeID;
