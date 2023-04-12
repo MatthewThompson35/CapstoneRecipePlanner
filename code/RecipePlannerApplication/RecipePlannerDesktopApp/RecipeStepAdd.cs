@@ -62,7 +62,7 @@ namespace RecipePlannerFinalDemoAdditions
             {
                 RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
 
-                foreach (var step in this.GetRecipeSteps())
+                foreach (var step in this.recipeSteps)
                 {
                     if (recipeStep.stepNumber.Equals(step.stepNumber))
                     {

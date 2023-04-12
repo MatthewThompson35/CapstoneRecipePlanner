@@ -6,6 +6,8 @@ namespace RecipePlannerFinalDemoAdditions
         private RecipeStepAdd stepAddPage;
         private RecipeTagAdd tagAddPage;
 
+        private List<string> tags = new List<string>();
+
         public RecipeSummary()
         {
             InitializeComponent();
@@ -23,6 +25,16 @@ namespace RecipePlannerFinalDemoAdditions
 
             this.addIngredientsToListView();
 
+        }
+
+        public void SetData(List<string> tagData)
+        {
+            tags = tagData;
+        }
+
+        public List<string> GetData()
+        {
+            return this.tags;
         }
 
         private void addIngredientsToListView()
@@ -53,7 +65,7 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addTagButton_Click(object sender, EventArgs e)
         {
-            var tagAddPage = new RecipeTagAdd();
+            var tagAddPage = new RecipeTagAdd(this.tags);
 
             this.Hide();
 

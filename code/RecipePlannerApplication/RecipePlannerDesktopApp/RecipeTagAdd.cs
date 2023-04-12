@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RecipePlannerFinalDemoAdditions
 {
@@ -18,6 +19,11 @@ namespace RecipePlannerFinalDemoAdditions
         {
             InitializeComponent();
             tags = new List<string>();
+        }
+
+        public RecipeTagAdd(List<string> tagDatas) :this()
+        {
+            tags = tagDatas;
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -40,25 +46,30 @@ namespace RecipePlannerFinalDemoAdditions
             }
             else
             {
-                foreach (var aTag in this.tags)
+                bool isDuplicate = false;
+                if (this.tags != null)
                 {
-                    if (tag.Equals(aTag))
+                    foreach (DataGridViewRow row in tagsDataGridView.Rows)
                     {
-                        this.errorTagFieldLabel.Text = "This tag already exists";
-                        this.errorTagFieldLabel.Visible = true;
-                    }
-                    else
-                    {
-                        this.errorTagFieldLabel.Visible = false;
+                        string existingTag = row.Cells["tagNameColumn"].Value.ToString();
+
+                        if (tag.Equals(existingTag))
+                        {
+                            this.errorTagFieldLabel.Text = "This tag already exists";
+                            this.errorTagFieldLabel.Visible = true;
+                            isDuplicate = true;
+                            break;
+                        }
                     }
                 }
-                if (this.errorTagFieldLabel.Visible == true)
+
+                if (isDuplicate == true)
                 {
                     return;
                 }
                 else
                 {
-                    tags.Add(tag);
+                    this.errorTagFieldLabel.Visible = false;
 
                     this.AddRowToTagGridView(tag);
                     this.tagSuccessLabel.Visible = true;
@@ -75,7 +86,20 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow row in tagsDataGridView.Rows)
+            {
+                string tagData;
+                tagData = row.Cells["tagNameColumn"].Value.ToString();
+
+                if (!tags.Contains(tagData))
+                {
+                    tags.Add(tagData);
+                }
+            }
+
             var recipeSummary = new RecipeSummary();
+
+            recipeSummary.SetData(tags);
 
             this.Hide();
 
@@ -103,6 +127,36 @@ namespace RecipePlannerFinalDemoAdditions
         private void tagNameTextBox_Click(object sender, EventArgs e)
         {
             this.tagSuccessLabel.Visible = false;
+        }
+
+        private void RecipeTagAdd_Load(object sender, EventArgs e)
+        {
+            //var recipeSummary = new RecipeSummary();
+
+            //tags = recipeSummary.GetData();
+            if (tags != null)
+            {
+                foreach (string tagData in tags)
+                {
+                    int rowIndex = this.tagsDataGridView.Rows.Add();
+                    tagsDataGridView.Rows[rowIndex].Cells["tagNameColumn"].Value = tagData;
+                }
+            }
+        }
+
+        private void tagsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == tagsDataGridView.Columns["removeColumn"].Index && e.RowIndex >= 0)
+            {
+                DataGridViewRow row = tagsDataGridView.Rows[e.RowIndex];
+
+                string tagData = row.Cells["tagNameColumn"].Value.ToString();
+
+                tags.Remove(tagData);
+
+                tagsDataGridView.Rows.RemoveAt(e.RowIndex);
+            }
+
         }
     }
 }

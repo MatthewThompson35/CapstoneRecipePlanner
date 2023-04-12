@@ -102,6 +102,7 @@
             this.tagsDataGridView.RowTemplate.Height = 29;
             this.tagsDataGridView.Size = new System.Drawing.Size(265, 234);
             this.tagsDataGridView.TabIndex = 4;
+            this.tagsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellContentClick);
             // 
             // tagNameColumn
             // 
@@ -179,6 +180,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RecipeTagAdd";
             this.Text = "RecipeTagAdd";
+            this.Load += new System.EventHandler(this.RecipeTagAdd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
