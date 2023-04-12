@@ -27,12 +27,12 @@ namespace RecipePlannerFinalDemoAdditions
 
         }
 
-        public void SetData(List<string> tagData)
+        public void SetTagData(List<string> tagData)
         {
             tags = tagData;
         }
 
-        public List<string> GetData()
+        public List<string> GetTagData()
         {
             return this.tags;
         }

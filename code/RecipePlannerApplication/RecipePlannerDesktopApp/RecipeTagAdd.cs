@@ -99,7 +99,7 @@ namespace RecipePlannerFinalDemoAdditions
 
             var recipeSummary = new RecipeSummary();
 
-            recipeSummary.SetData(tags);
+            recipeSummary.SetTagData(tags);
 
             this.Hide();
 
@@ -133,7 +133,7 @@ namespace RecipePlannerFinalDemoAdditions
         {
             //var recipeSummary = new RecipeSummary();
 
-            //tags = recipeSummary.GetData();
+            //tags = recipeSummary.GetTagData();
             if (tags != null)
             {
                 foreach (string tagData in tags)
