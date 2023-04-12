@@ -274,6 +274,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RecipeIngredientAdd";
             this.Text = "RecipeIngredientAdd";
+            this.Load += new System.EventHandler(this.RecipeIngredientAdd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ingredientDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

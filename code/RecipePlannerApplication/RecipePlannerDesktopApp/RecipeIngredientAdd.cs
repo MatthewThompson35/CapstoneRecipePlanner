@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,17 @@ namespace RecipePlannerFinalDemoAdditions
 {
     public partial class RecipeIngredientAdd : Form
     {
-        private List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+        private List<RecipeIngredient> recipeIngredients;
         public RecipeIngredientAdd()
         {
             InitializeComponent();
             recipeIngredients = new List<RecipeIngredient>();
         }
 
+        public RecipeIngredientAdd(List<RecipeIngredient> ingredientDatas) :this()
+        {
+            recipeIngredients = ingredientDatas;
+        }
         /// <summary>
         ///     Gets the recipe ingredients
         /// </summary>
@@ -39,7 +44,7 @@ namespace RecipePlannerFinalDemoAdditions
 
             int number;
 
-            if (String.IsNullOrEmpty(this.ingredientNameTextBox.Text) || this.measurementComboBox.SelectedItem == null)
+            if (String.IsNullOrEmpty(this.ingredientNameTextBox.Text) || String.IsNullOrEmpty(this.quantityTextBox.Text) || this.measurementComboBox.SelectedItem == null)
             {
                 this.errorIngredientsFieldsLabel.Visible = true;
             }
@@ -48,15 +53,6 @@ namespace RecipePlannerFinalDemoAdditions
                 this.errorIngredientsFieldsLabel.Visible = false;
                 ingredientName = this.ingredientNameTextBox.Text;
                 measurement = this.measurementComboBox.Text;
-            }
-
-            if (String.IsNullOrEmpty(this.quantityTextBox.Text))
-            {
-                this.errorIngredientsFieldsLabel.Visible = true;
-            }
-            else
-            {
-                this.errorIngredientsFieldsLabel.Visible = false;
                 quantity = this.quantityTextBox.Text;
 
                 bool isNumeric = int.TryParse(quantity, out number);
@@ -71,6 +67,7 @@ namespace RecipePlannerFinalDemoAdditions
                 }
             }
 
+
             if (this.errorIngredientsFieldsLabel.Visible == true || this.errorQuantityLabel.Visible == true)
             {
                 return;
@@ -78,31 +75,37 @@ namespace RecipePlannerFinalDemoAdditions
             else
             {
                 RecipeIngredient recipeIngredient = new RecipeIngredient(ingredientName, Convert.ToInt32(quantity), measurement);
-
-                foreach (var ingredient in this.recipeIngredients)
+                bool isDuplicate = false;
+                if (this.recipeIngredients != null)
                 {
-                    if (recipeIngredient.IngredientName.Equals(ingredient.IngredientName) && recipeIngredient.Quantity == ingredient.Quantity && recipeIngredient.Measurement.Equals(ingredient.Measurement))
+                    foreach (DataGridViewRow row in this.ingredientDataGridView.Rows)
                     {
-                        this.errorIngredientsFieldsLabel.Text = "Ingredient already exists.";
-                        this.errorIngredientsFieldsLabel.Visible = true;
+                        string existingIngredient = row.Cells["ingredientNameColumn"].Value.ToString();
+                        
+                        if (recipeIngredient.IngredientName.Equals(existingIngredient))
+                        {
+                            this.errorIngredientsFieldsLabel.Text = "Ingredient already exists.";
+                            this.errorIngredientsFieldsLabel.Visible = true;
+                            isDuplicate = true;
+                            break;
+                        }
                     }
                 }
-                if (this.errorIngredientsFieldsLabel.Visible == true)
+                
+                if (isDuplicate == true)
                 {
                     return;
                 }
                 else
                 {
-                    this.recipeIngredients.Add(recipeIngredient);
-
-                    this.ingredientSuccessLabel.Visible = true;
+                    this.errorIngredientsFieldsLabel.Visible = false;
+                    
 
                     this.AddRowToIngredientGridView(recipeIngredient.IngredientName, recipeIngredient.Quantity.ToString(), recipeIngredient.Measurement);
+                    this.ingredientSuccessLabel.Visible = true;
 
                     this.clearIngredientsFields();
                 }
-
-
             }
         }
 
@@ -115,8 +118,27 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow row in this.ingredientDataGridView.Rows)
+            {
+                //this.recipeIngredients.Add(recipeIngredient);
+                string nameData;
+                string quantityData;
+                string measurementData;
+
+                nameData = row.Cells["ingredientNameColumn"].Value.ToString();
+                quantityData = row.Cells["quantityColumn"].Value.ToString();
+                measurementData = row.Cells["measurementColumn"].Value.ToString();
+
+                RecipeIngredient recipeIngredient = new RecipeIngredient(nameData, Convert.ToInt32(quantityData), measurementData);
+                
+                if (!recipeIngredients.Contains(recipeIngredient))
+                {
+                    recipeIngredients.Add(recipeIngredient);
+                }
+            }
             var recipeSummary = new RecipeSummary();
 
+            recipeSummary.SetIngredientData(recipeIngredients);
             this.Hide();
 
             recipeSummary.Show();
@@ -146,6 +168,20 @@ namespace RecipePlannerFinalDemoAdditions
         {
             if (e.ColumnIndex == ingredientDataGridView.Columns["removeColumn"].Index && e.RowIndex >= 0)
             {
+                DataGridViewRow row = ingredientDataGridView.Rows[e.RowIndex];
+
+                string nameData;
+                string quantityData;
+                string measurementData;
+
+                nameData = row.Cells["ingredientNameColumn"].Value.ToString();
+                quantityData = row.Cells["quantityColumn"].Value.ToString();
+                measurementData = row.Cells["measurementColumn"].Value.ToString();
+
+                RecipeIngredient recipeIngredient = new RecipeIngredient(nameData, Convert.ToInt32(quantityData), measurementData);
+
+                recipeIngredients.Remove(recipeIngredient);
+
                 ingredientDataGridView.Rows.RemoveAt(e.RowIndex);
             }
         }
@@ -163,6 +199,20 @@ namespace RecipePlannerFinalDemoAdditions
         private void measurementComboBox_Click(object sender, EventArgs e)
         {
             this.ingredientSuccessLabel.Visible = false;
+        }
+
+        private void RecipeIngredientAdd_Load(object sender, EventArgs e)
+        {
+            if (recipeIngredients != null)
+            {
+                foreach (var recipeIngredient in this.recipeIngredients)
+                {
+                    int rowIndex = this.ingredientDataGridView.Rows.Add();
+                    ingredientDataGridView.Rows[rowIndex].Cells["ingredientNameColumn"].Value = recipeIngredient.IngredientName;
+                    ingredientDataGridView.Rows[rowIndex].Cells["quantityColumn"].Value = recipeIngredient.Quantity;
+                    ingredientDataGridView.Rows[rowIndex].Cells["measurementColumn"].Value = recipeIngredient.Measurement;
+                }
+            }
         }
     }
 }

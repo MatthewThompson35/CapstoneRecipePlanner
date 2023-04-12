@@ -1,3 +1,5 @@
+using RecipePlannerLibrary.Models;
+
 namespace RecipePlannerFinalDemoAdditions
 {
     public partial class RecipeSummary : Form
@@ -7,6 +9,9 @@ namespace RecipePlannerFinalDemoAdditions
         private RecipeTagAdd tagAddPage;
 
         private List<string> tags = new List<string>();
+        private List<RecipeStep> recipeSteps = new List<RecipeStep>();
+        private List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+
 
         public RecipeSummary()
         {
@@ -37,6 +42,26 @@ namespace RecipePlannerFinalDemoAdditions
             return this.tags;
         }
 
+        public void SetStepData(List<RecipeStep> stepData)
+        {
+            recipeSteps = stepData;
+        }
+
+        public List<RecipeStep> GetStepData()
+        {
+            return this.recipeSteps;
+        }
+
+        public void SetIngredientData(List<RecipeIngredient> ingredientData)
+        {
+            recipeIngredients = ingredientData;
+        }
+
+        public List<RecipeIngredient> GetIngredientData()
+        {
+            return this.recipeIngredients;
+        }
+
         private void addIngredientsToListView()
         {
             foreach (var ingredient in this.ingredientAddPage.GetRecipeIngredients())
@@ -47,7 +72,7 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            var ingredientAddPage = new RecipeIngredientAdd();
+            var ingredientAddPage = new RecipeIngredientAdd(this.recipeIngredients);
 
             this.Hide();
 
