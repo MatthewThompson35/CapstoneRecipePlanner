@@ -52,13 +52,9 @@
             }
         </table>
     </div>
-
+    
     <div class="col-md-6" id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
-            <form id="cookMeal" method="POST" style="display: none">
-                <input type="hidden" id="recipeID" name="recipeID" value="">
-                <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe"/>
-            </form>
             <form id="shareMeal" method="POST" style="display: none">
                 <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
                 <label for="txtUsername">Recommend to:</label>
@@ -68,6 +64,10 @@
                     <label class="error" style="color: red">@ViewBag.ErrorMessage</label>
                 }
                 <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" />
+            </form>
+            <form id="cookMeal" method="POST" style="display: none">
+                <input type="hidden" id="recipeID" name="recipeID" value="">
+                <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe"/>
             </form>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
@@ -121,7 +121,7 @@
         padding-top: 20px;
         top: 160px;
         position: fixed;
-        width: 38%;
+        width: 45%;
     }
 
     #recipe-details-box h3 {
@@ -176,7 +176,7 @@
         color: white;
         cursor: pointer;
         display: inline-block;
-        font-size: 16px;
+        font-size: 14px;
         padding: 8px;
         text-align: center;
         text-decoration: none;
