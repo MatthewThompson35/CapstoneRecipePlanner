@@ -172,6 +172,7 @@ namespace RecipePlannerDesktopApplication
 
                     ShoppingListDAL.RemoveIngredient(id, Connection.ConnectionString);
                     this.UpdateIngredientsGridView();
+                    this.selectedRow = null;
                 }
             }
             catch (Exception ex)
