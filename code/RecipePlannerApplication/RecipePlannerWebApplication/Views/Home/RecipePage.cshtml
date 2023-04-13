@@ -389,9 +389,9 @@
     <form id="shareMeal" method="POST">
         <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
 
-        <label for="txtUsername">Share to:</label>
+                <label for="txtUsername">Recommend to:</label>
         <input type="text" name="txtUsername" id="txtUsername"/>
-        <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Recipe" id="ShareRecipe" class="btn btn-primary page-button"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" class="btn btn-primary page-button" />
         <br>
         @if (ViewBag.ErrorMessage != null)
         {

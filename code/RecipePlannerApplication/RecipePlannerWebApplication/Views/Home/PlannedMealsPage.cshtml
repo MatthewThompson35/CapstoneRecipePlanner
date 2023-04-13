@@ -61,13 +61,13 @@
             </form>
             <form id="shareMeal" method="POST" style="display: none">
                 <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
-                <label for="txtUsername">Share to:</label>
+                <label for="txtUsername">Recommend to:</label>
                 <input type="text" name="txtUsername" id="txtUsername"/>
                 @if (ViewBag.ErrorMessage != null)
                 {
                     <label class="error" style="color: red">@ViewBag.ErrorMessage</label>
                 }
-                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Recipe" id="ShareRecipe"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" />
             </form>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
