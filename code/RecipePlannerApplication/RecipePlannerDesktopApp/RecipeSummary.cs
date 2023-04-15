@@ -81,7 +81,7 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addStepButton_Click(object sender, EventArgs e)
         {
-            var stepAddPage = new RecipeStepAdd();
+            var stepAddPage = new RecipeStepAdd(this.recipeSteps);
 
             this.Hide();
 

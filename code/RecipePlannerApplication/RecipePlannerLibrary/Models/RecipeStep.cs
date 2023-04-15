@@ -49,5 +49,25 @@ namespace RecipePlannerLibrary.Models
             this.stepNumber = stepNumber;
             this.stepDescription = stepDescription;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            RecipeStep other = (RecipeStep)obj;
+            return stepNumber == other.stepNumber && stepDescription == other.stepDescription;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + stepNumber.GetHashCode();
+                hash = hash * 23 + (stepDescription != null ? stepDescription.GetHashCode() : 0);
+                return hash;
+            }
+        }
     }
 }
