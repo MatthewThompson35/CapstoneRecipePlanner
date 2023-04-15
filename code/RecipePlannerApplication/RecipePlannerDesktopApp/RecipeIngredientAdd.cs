@@ -120,7 +120,6 @@ namespace RecipePlannerFinalDemoAdditions
         {
             foreach (DataGridViewRow row in this.ingredientDataGridView.Rows)
             {
-                //this.recipeIngredients.Add(recipeIngredient);
                 string nameData;
                 string quantityData;
                 string measurementData;
@@ -128,10 +127,15 @@ namespace RecipePlannerFinalDemoAdditions
                 nameData = row.Cells["ingredientNameColumn"].Value.ToString();
                 quantityData = row.Cells["quantityColumn"].Value.ToString();
                 measurementData = row.Cells["measurementColumn"].Value.ToString();
-
+                
+                // Remember to do checks for if the table is modified, check if quantity is an int. If no, throw label error
                 RecipeIngredient recipeIngredient = new RecipeIngredient(nameData, Convert.ToInt32(quantityData), measurementData);
                 
-                if (!recipeIngredients.Contains(recipeIngredient))
+                if (recipeIngredients.Any(ri => ri.Equals(recipeIngredient)))
+                {
+                    continue;
+                }
+                else
                 {
                     recipeIngredients.Add(recipeIngredient);
                 }
