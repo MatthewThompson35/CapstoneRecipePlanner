@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox = new System.Windows.Forms.ComboBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.error = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.userTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label2
@@ -45,15 +45,6 @@
             this.label2.Size = new System.Drawing.Size(85, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "Send to: ";
-            // 
-            // comboBox
-            // 
-            this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox.FormattingEnabled = true;
-            this.comboBox.Location = new System.Drawing.Point(184, 252);
-            this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(164, 23);
-            this.comboBox.TabIndex = 7;
             // 
             // cancelButton
             // 
@@ -95,21 +86,28 @@
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLabel.Location = new System.Drawing.Point(121, 232);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(205, 15);
+            this.errorLabel.Size = new System.Drawing.Size(222, 15);
             this.errorLabel.TabIndex = 12;
-            this.errorLabel.Text = "Recipe is already shared with this user";
+            this.errorLabel.Text = "Recipe is already recommended this user";
             this.errorLabel.Visible = false;
+            // 
+            // userTextBox
+            // 
+            this.userTextBox.Location = new System.Drawing.Point(172, 249);
+            this.userTextBox.Name = "userTextBox";
+            this.userTextBox.Size = new System.Drawing.Size(171, 23);
+            this.userTextBox.TabIndex = 13;
             // 
             // AddSharedRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(450, 617);
+            this.Controls.Add(this.userTextBox);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.error);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitButton);
-            this.Controls.Add(this.comboBox);
             this.Controls.Add(this.label2);
             this.Name = "AddSharedRecipe";
             this.Text = "AddSharedRecipe";
@@ -121,10 +119,10 @@
         #endregion
 
         private Label label2;
-        private ComboBox comboBox;
         private Button cancelButton;
         private Button submitButton;
         private Label error;
         private Label errorLabel;
+        private TextBox userTextBox;
     }
 }

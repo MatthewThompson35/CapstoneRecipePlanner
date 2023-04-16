@@ -21,6 +21,7 @@ namespace RecipePlannerDesktopApplication
     public partial class AddSharedRecipe : Form
     {
         private RecipeDetailsPage detailsPage;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AddSharedRecipe"/> class.
         /// </summary>
@@ -29,7 +30,6 @@ namespace RecipePlannerDesktopApplication
         {
             InitializeComponent();
             this.detailsPage = page;
-            this.comboBox.DataSource = Database.getUsers();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -40,23 +40,30 @@ namespace RecipePlannerDesktopApplication
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if (this.comboBox.SelectedValue != null && !string.IsNullOrEmpty(this.comboBox.SelectedValue.ToString()))
+            this.errorLabel.Visible = false;
+            var username = this.userTextBox.Text;
+            var isValid = Database.ContainsUser(username).Count != 0;
+            var recipe =
+                new SharedRecipe(
+                    RecipeDAL.getRecipeByName(
+                        RecipeDAL.getRecipeNameById(this.detailsPage.getRecipeId(), Connection.ConnectionString),
+                        Connection.ConnectionString), ActiveUser.username, username);
+            if (RecipeDAL.ContainsSharedRecipe(recipe).Count > 0)
             {
-                SharedRecipe recipe =
-                    new SharedRecipe(
-                        RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(this.detailsPage.getRecipeId(), Connection.ConnectionString), Connection.ConnectionString), ActiveUser.username, this.comboBox.SelectedValue.ToString());
-                if (RecipeDAL.ContainsSharedRecipe(recipe).Count > 0)
-                {
-                    this.errorLabel.Visible = true;
-                }
-                else
-                {
-                    this.errorLabel.Visible = false;
-                    string selectedValue = this.comboBox.SelectedValue.ToString();
-                    RecipeDAL.shareRecipe(selectedValue, this.detailsPage.getRecipeId(), Connection.ConnectionString);
-                    this.Hide();
-                    this.detailsPage.Show();
-                }
+                this.errorLabel.Text = "You have already shared this recipe with " + username;
+                this.errorLabel.Visible = true;
+            }
+
+            if (isValid && RecipeDAL.ContainsSharedRecipe(recipe).Count == 0)
+            {
+                RecipeDAL.shareRecipe(username, this.detailsPage.getRecipeId(), Connection.ConnectionString);
+                this.detailsPage.Show();
+            }
+
+            if(!isValid)
+            {
+                this.errorLabel.Text = "Username " + username + " does not exist";
+                this.errorLabel.Visible = true;
             }
         }
     }

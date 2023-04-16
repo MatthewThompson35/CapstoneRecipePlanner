@@ -58,14 +58,13 @@
             this.ingredientsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.recipeName,
             this.senderUsername});
-            this.ingredientsGridView.Location = new System.Drawing.Point(30, 159);
-            this.ingredientsGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ingredientsGridView.Location = new System.Drawing.Point(26, 119);
             this.ingredientsGridView.Name = "ingredientsGridView";
             this.ingredientsGridView.RowHeadersVisible = false;
             this.ingredientsGridView.RowHeadersWidth = 51;
             this.ingredientsGridView.RowTemplate.Height = 25;
             this.ingredientsGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ingredientsGridView.Size = new System.Drawing.Size(457, 533);
+            this.ingredientsGridView.Size = new System.Drawing.Size(400, 400);
             this.ingredientsGridView.TabIndex = 26;
             this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
             // 
@@ -89,17 +88,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(30, 123);
+            this.label1.Location = new System.Drawing.Point(26, 92);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 29);
+            this.label1.Size = new System.Drawing.Size(216, 24);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Shared Recipes";
+            this.label1.Text = "Recommended Recipes";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(98, 717);
+            this.button1.Location = new System.Drawing.Point(86, 538);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 45);
+            this.button1.Size = new System.Drawing.Size(53, 34);
             this.button1.TabIndex = 29;
             this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = true;
@@ -107,9 +107,10 @@
             // 
             // beginningButton
             // 
-            this.beginningButton.Location = new System.Drawing.Point(30, 717);
+            this.beginningButton.Location = new System.Drawing.Point(26, 538);
+            this.beginningButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.beginningButton.Name = "beginningButton";
-            this.beginningButton.Size = new System.Drawing.Size(62, 45);
+            this.beginningButton.Size = new System.Drawing.Size(54, 34);
             this.beginningButton.TabIndex = 28;
             this.beginningButton.Text = "<|";
             this.beginningButton.UseVisualStyleBackColor = true;
@@ -117,9 +118,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(418, 716);
+            this.button3.Location = new System.Drawing.Point(366, 537);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(63, 44);
+            this.button3.Size = new System.Drawing.Size(55, 33);
             this.button3.TabIndex = 32;
             this.button3.Text = ">|";
             this.button3.UseVisualStyleBackColor = true;
@@ -127,9 +129,10 @@
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(349, 717);
+            this.nextButton.Location = new System.Drawing.Point(305, 538);
+            this.nextButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nextButton.Name = "nextButton";
-            this.nextButton.Size = new System.Drawing.Size(63, 44);
+            this.nextButton.Size = new System.Drawing.Size(55, 33);
             this.nextButton.TabIndex = 31;
             this.nextButton.Text = ">";
             this.nextButton.UseVisualStyleBackColor = true;
@@ -139,18 +142,17 @@
             // 
             this.pageLabel.AutoSize = true;
             this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.pageLabel.Location = new System.Drawing.Point(242, 732);
+            this.pageLabel.Location = new System.Drawing.Point(212, 549);
             this.pageLabel.Name = "pageLabel";
-            this.pageLabel.Size = new System.Drawing.Size(24, 28);
+            this.pageLabel.Size = new System.Drawing.Size(19, 21);
             this.pageLabel.TabIndex = 30;
             this.pageLabel.Text = "1";
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(401, 16);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.logoutButton.Location = new System.Drawing.Point(351, 12);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(86, 31);
+            this.logoutButton.Size = new System.Drawing.Size(75, 23);
             this.logoutButton.TabIndex = 33;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -160,9 +162,9 @@
             // 
             this.serverErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.serverErrorLabel.Location = new System.Drawing.Point(147, 37);
+            this.serverErrorLabel.Location = new System.Drawing.Point(129, 28);
             this.serverErrorLabel.Name = "serverErrorLabel";
-            this.serverErrorLabel.Size = new System.Drawing.Size(208, 51);
+            this.serverErrorLabel.Size = new System.Drawing.Size(182, 38);
             this.serverErrorLabel.TabIndex = 34;
             this.serverErrorLabel.Text = "The connection to the server could not be made";
             this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -176,31 +178,32 @@
             this.viewShoppingListToolStripMenuItem,
             this.viewSharedRecipesToolStripMenuItem});
             this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
-            this.plannerContextMenuStrip.Size = new System.Drawing.Size(216, 76);
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(182, 70);
             // 
             // viewMealPlanToolStripMenuItem
             // 
             this.viewMealPlanToolStripMenuItem.Name = "viewMealPlanToolStripMenuItem";
-            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.viewMealPlanToolStripMenuItem.Text = "View Meal Plan";
             // 
             // viewShoppingListToolStripMenuItem
             // 
             this.viewShoppingListToolStripMenuItem.Name = "viewShoppingListToolStripMenuItem";
-            this.viewShoppingListToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.viewShoppingListToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.viewShoppingListToolStripMenuItem.Text = "View Shopping List";
             // 
             // viewSharedRecipesToolStripMenuItem
             // 
             this.viewSharedRecipesToolStripMenuItem.Name = "viewSharedRecipesToolStripMenuItem";
-            this.viewSharedRecipesToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.viewSharedRecipesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.viewSharedRecipesToolStripMenuItem.Text = "View Shared Recipes";
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(30, 18);
+            this.backButton.Location = new System.Drawing.Point(26, 14);
+            this.backButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(94, 29);
+            this.backButton.Size = new System.Drawing.Size(82, 22);
             this.backButton.TabIndex = 36;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
@@ -208,9 +211,9 @@
             // 
             // SharedRecipes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.ClientSize = new System.Drawing.Size(450, 617);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.serverErrorLabel);
             this.Controls.Add(this.logoutButton);
@@ -221,7 +224,6 @@
             this.Controls.Add(this.beginningButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ingredientsGridView);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SharedRecipes";
             this.Text = "SharedRecipes";
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).EndInit();
