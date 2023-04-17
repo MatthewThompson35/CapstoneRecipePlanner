@@ -103,6 +103,7 @@
             this.tagsDataGridView.Size = new System.Drawing.Size(265, 234);
             this.tagsDataGridView.TabIndex = 4;
             this.tagsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellContentClick);
+            this.tagsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellValueChanged);
             // 
             // tagNameColumn
             // 

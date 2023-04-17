@@ -44,6 +44,7 @@
             this.addTagButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.errorFieldsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -125,6 +126,7 @@
             this.ingredientsListView.Size = new System.Drawing.Size(383, 139);
             this.ingredientsListView.TabIndex = 8;
             this.ingredientsListView.UseCompatibleStateImageBehavior = false;
+            this.ingredientsListView.View = System.Windows.Forms.View.List;
             // 
             // stepsListView
             // 
@@ -133,6 +135,7 @@
             this.stepsListView.Size = new System.Drawing.Size(383, 139);
             this.stepsListView.TabIndex = 9;
             this.stepsListView.UseCompatibleStateImageBehavior = false;
+            this.stepsListView.View = System.Windows.Forms.View.List;
             // 
             // tagsListView
             // 
@@ -141,6 +144,7 @@
             this.tagsListView.Size = new System.Drawing.Size(383, 139);
             this.tagsListView.TabIndex = 10;
             this.tagsListView.UseCompatibleStateImageBehavior = false;
+            this.tagsListView.View = System.Windows.Forms.View.List;
             // 
             // addIngredientButton
             // 
@@ -190,11 +194,24 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
+            // errorFieldsLabel
+            // 
+            this.errorFieldsLabel.AutoSize = true;
+            this.errorFieldsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorFieldsLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorFieldsLabel.Location = new System.Drawing.Point(105, 727);
+            this.errorFieldsLabel.Name = "errorFieldsLabel";
+            this.errorFieldsLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorFieldsLabel.TabIndex = 16;
+            this.errorFieldsLabel.Text = "Please fill out all fields.";
+            this.errorFieldsLabel.Visible = false;
+            // 
             // RecipeSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.errorFieldsLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.addTagButton);
@@ -236,5 +253,6 @@
         private Button addTagButton;
         private Button addButton;
         private Button cancelButton;
+        private Label errorFieldsLabel;
     }
 }

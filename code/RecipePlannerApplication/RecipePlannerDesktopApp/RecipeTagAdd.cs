@@ -131,9 +131,6 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void RecipeTagAdd_Load(object sender, EventArgs e)
         {
-            //var recipeSummary = new RecipeSummary();
-
-            //tags = recipeSummary.GetTagData();
             if (tags != null)
             {
                 foreach (string tagData in tags)
@@ -157,6 +154,24 @@ namespace RecipePlannerFinalDemoAdditions
                 tagsDataGridView.Rows.RemoveAt(e.RowIndex);
             }
 
+        }
+
+        private void tagsDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < tags.Count)
+            {
+                string updatedValue = tagsDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                // Find the corresponding oldTag in the list based on the row index
+                string oldTag = tags[e.RowIndex];
+
+                // Check if the updated value is different from the oldTag
+                if (updatedValue != oldTag)
+                {
+                    // Update the value in the tags list
+                    tags[e.RowIndex] = updatedValue;
+                }
+            }
         }
     }
 }

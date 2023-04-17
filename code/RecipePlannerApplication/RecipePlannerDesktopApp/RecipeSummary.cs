@@ -35,6 +35,12 @@ namespace RecipePlannerFinalDemoAdditions
         public void SetTagData(List<string> tagData)
         {
             tags = tagData;
+
+            foreach (var tag in tagData)
+            {
+                ListViewItem item = new ListViewItem(tag);
+                tagsListView.Items.Add(item);
+            }
         }
 
         public List<string> GetTagData()
@@ -55,6 +61,7 @@ namespace RecipePlannerFinalDemoAdditions
         public void SetIngredientData(List<RecipeIngredient> ingredientData)
         {
             recipeIngredients = ingredientData;
+
         }
 
         public List<RecipeIngredient> GetIngredientData()
