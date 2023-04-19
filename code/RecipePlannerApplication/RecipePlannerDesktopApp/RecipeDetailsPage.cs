@@ -546,9 +546,11 @@ namespace RecipePlannerDesktopApplication
         {
             this.removeCookedRecipeIngredients();
 
-            this.isCookedLabel.Visible = true;
-            this.isCookedLabel.Text = "This meal has been cooked";
-            this.isCookedLabel.ForeColor = Color.Green;
+            var pantry = new IngredientsPage();
+            this.Hide();
+            pantry.Show();
+
+
             this.cookButton.Enabled = false;
 
             this.cookYesButton.Visible = false;
