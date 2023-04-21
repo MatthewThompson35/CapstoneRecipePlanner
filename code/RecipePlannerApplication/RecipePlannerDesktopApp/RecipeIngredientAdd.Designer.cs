@@ -143,6 +143,7 @@
             this.ingredientDataGridView.Size = new System.Drawing.Size(454, 234);
             this.ingredientDataGridView.TabIndex = 7;
             this.ingredientDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientDataGridView_CellContentClick);
+            this.ingredientDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientDataGridView_CellValueChanged);
             // 
             // ingredientNameColumn
             // 

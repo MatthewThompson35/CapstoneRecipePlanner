@@ -115,6 +115,7 @@
             this.stepsDataGridView.Size = new System.Drawing.Size(454, 234);
             this.stepsDataGridView.TabIndex = 5;
             this.stepsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellContentClick);
+            this.stepsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellValueChanged);
             // 
             // stepNumberColumn
             // 

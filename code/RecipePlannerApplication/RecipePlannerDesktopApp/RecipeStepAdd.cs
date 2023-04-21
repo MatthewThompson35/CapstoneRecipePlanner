@@ -197,5 +197,34 @@ namespace RecipePlannerFinalDemoAdditions
                 }
             }
         }
+
+        private void stepsDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < this.recipeSteps.Count)
+            {
+                string updatedValue = this.stepsDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                if (e.ColumnIndex == 0)
+                {
+                    int stepNumber;
+
+                    if (int.TryParse(updatedValue, out stepNumber))
+                    {
+                        this.recipeSteps[e.RowIndex].stepNumber = stepNumber;
+                    }
+                }
+
+                else if (e.ColumnIndex == 1)
+                {
+                    string oldValue = this.recipeSteps[e.RowIndex].stepDescription;
+
+                    if (updatedValue != oldValue)
+                    {
+                        this.recipeSteps[e.RowIndex].stepDescription = updatedValue;
+                    }
+                }
+
+            }
+        }
     }
 }

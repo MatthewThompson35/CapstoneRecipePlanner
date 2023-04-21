@@ -218,5 +218,43 @@ namespace RecipePlannerFinalDemoAdditions
                 }
             }
         }
+
+        private void ingredientDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < this.recipeIngredients.Count)
+            {
+                string updatedValue = this.ingredientDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                if (e.ColumnIndex == 0)
+                {
+                    string oldIngName = this.recipeIngredients[e.RowIndex].IngredientName;
+
+                    if (updatedValue != oldIngName)
+                    {
+                        this.recipeIngredients[e.RowIndex].IngredientName = updatedValue;
+                    }
+                }
+
+                else if (e.ColumnIndex == 1)
+                {
+                    int quantity;
+
+                    if (int.TryParse(updatedValue, out quantity))
+                    {
+                        this.recipeIngredients[e.RowIndex].Quantity = quantity;
+                    }
+                }
+
+                else if (e.ColumnIndex == 2)
+                {
+                    string oldMeasurement = this.recipeIngredients[e.RowIndex].Measurement;
+
+                    if (updatedValue != oldMeasurement)
+                    {
+                        this.recipeIngredients[e.RowIndex].Measurement = updatedValue;
+                    }
+                }
+            }
+        }
     }
 }

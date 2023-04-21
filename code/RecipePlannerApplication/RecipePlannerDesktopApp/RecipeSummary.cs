@@ -1,3 +1,4 @@
+using RecipePlannerDesktopApplication;
 using RecipePlannerLibrary.Models;
 
 namespace RecipePlannerFinalDemoAdditions
@@ -17,7 +18,7 @@ namespace RecipePlannerFinalDemoAdditions
         {
             InitializeComponent();
 
-            this.ingredientAddPage= new RecipeIngredientAdd();
+            this.ingredientAddPage = new RecipeIngredientAdd();
             this.stepAddPage = new RecipeStepAdd();
             this.tagAddPage = new RecipeTagAdd();
         }
@@ -28,18 +29,23 @@ namespace RecipePlannerFinalDemoAdditions
             this.stepAddPage = stepAddPage;
             this.tagAddPage = tagAddPage;
 
-            this.addIngredientsToListView();
-
         }
 
         public void SetTagData(List<string> tagData)
         {
-            tags = tagData;
+            //tags = tagData;
 
             foreach (var tag in tagData)
             {
-                ListViewItem item = new ListViewItem(tag);
-                tagsListView.Items.Add(item);
+                if (!tags.Contains(tag))
+                {
+                    // If the tag is not already in the list, add it to the tags list
+                    tags.Add(tag);
+
+                    // Add a new ListViewItem to the tagsListView control
+                    ListViewItem item = new ListViewItem(tag);
+                    tagsListView.Items.Add(item);
+                }
             }
         }
 
@@ -51,6 +57,13 @@ namespace RecipePlannerFinalDemoAdditions
         public void SetStepData(List<RecipeStep> stepData)
         {
             recipeSteps = stepData;
+
+            foreach (var step in stepData)
+            {
+                ListViewItem item = new ListViewItem(step.stepNumber.ToString());
+                item.SubItems.Add(step.stepDescription.ToString());
+                stepsListView.Items.Add(item);
+            }
         }
 
         public List<RecipeStep> GetStepData()
@@ -61,6 +74,16 @@ namespace RecipePlannerFinalDemoAdditions
         public void SetIngredientData(List<RecipeIngredient> ingredientData)
         {
             recipeIngredients = ingredientData;
+
+            foreach (var ing in ingredientData)
+            {
+                ListViewItem item = new ListViewItem(ing.IngredientName);
+
+                item.SubItems.Add(ing.Quantity.ToString());
+                item.SubItems.Add(ing.Measurement);
+
+                ingredientsListView.Items.Add(item);
+            }
 
         }
 
@@ -102,6 +125,20 @@ namespace RecipePlannerFinalDemoAdditions
             this.Hide();
 
             tagAddPage.Show();
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            var homepage = new Homepage();
+
+            this.Hide();
+
+            homepage.Show();
         }
     }
 }

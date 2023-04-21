@@ -37,8 +37,14 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.ingredientsListView = new System.Windows.Forms.ListView();
+            this.ingredientNameColumn = new System.Windows.Forms.ColumnHeader();
+            this.quantityColumn = new System.Windows.Forms.ColumnHeader();
+            this.measurementColumn = new System.Windows.Forms.ColumnHeader();
             this.stepsListView = new System.Windows.Forms.ListView();
+            this.stepNumColumn = new System.Windows.Forms.ColumnHeader();
+            this.stepDescriptionColumn = new System.Windows.Forms.ColumnHeader();
             this.tagsListView = new System.Windows.Forms.ListView();
+            this.tagNameColumn = new System.Windows.Forms.ColumnHeader();
             this.addIngredientButton = new System.Windows.Forms.Button();
             this.addStepButton = new System.Windows.Forms.Button();
             this.addTagButton = new System.Windows.Forms.Button();
@@ -121,30 +127,72 @@
             // 
             // ingredientsListView
             // 
+            this.ingredientsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ingredientNameColumn,
+            this.quantityColumn,
+            this.measurementColumn});
             this.ingredientsListView.Location = new System.Drawing.Point(65, 198);
             this.ingredientsListView.Name = "ingredientsListView";
             this.ingredientsListView.Size = new System.Drawing.Size(383, 139);
             this.ingredientsListView.TabIndex = 8;
             this.ingredientsListView.UseCompatibleStateImageBehavior = false;
-            this.ingredientsListView.View = System.Windows.Forms.View.List;
+            this.ingredientsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // ingredientNameColumn
+            // 
+            this.ingredientNameColumn.Text = "Ingredient Name";
+            this.ingredientNameColumn.Width = 125;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.Text = "Quantity";
+            this.quantityColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.quantityColumn.Width = 75;
+            // 
+            // measurementColumn
+            // 
+            this.measurementColumn.Text = "Measurement";
+            this.measurementColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.measurementColumn.Width = 125;
             // 
             // stepsListView
             // 
+            this.stepsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.stepNumColumn,
+            this.stepDescriptionColumn});
             this.stepsListView.Location = new System.Drawing.Point(65, 384);
             this.stepsListView.Name = "stepsListView";
             this.stepsListView.Size = new System.Drawing.Size(383, 139);
             this.stepsListView.TabIndex = 9;
             this.stepsListView.UseCompatibleStateImageBehavior = false;
-            this.stepsListView.View = System.Windows.Forms.View.List;
+            this.stepsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // stepNumColumn
+            // 
+            this.stepNumColumn.Text = "Step Number";
+            this.stepNumColumn.Width = 125;
+            // 
+            // stepDescriptionColumn
+            // 
+            this.stepDescriptionColumn.Text = "Step Description";
+            this.stepDescriptionColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.stepDescriptionColumn.Width = 125;
             // 
             // tagsListView
             // 
+            this.tagsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.tagNameColumn});
             this.tagsListView.Location = new System.Drawing.Point(65, 574);
             this.tagsListView.Name = "tagsListView";
             this.tagsListView.Size = new System.Drawing.Size(383, 139);
             this.tagsListView.TabIndex = 10;
             this.tagsListView.UseCompatibleStateImageBehavior = false;
-            this.tagsListView.View = System.Windows.Forms.View.List;
+            this.tagsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // tagNameColumn
+            // 
+            this.tagNameColumn.Text = "Tag Name";
+            this.tagNameColumn.Width = 100;
             // 
             // addIngredientButton
             // 
@@ -184,6 +232,7 @@
             this.addButton.TabIndex = 14;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // cancelButton
             // 
@@ -193,6 +242,7 @@
             this.cancelButton.TabIndex = 15;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // errorFieldsLabel
             // 
@@ -254,5 +304,11 @@
         private Button addButton;
         private Button cancelButton;
         private Label errorFieldsLabel;
+        private ColumnHeader stepNumColumn;
+        private ColumnHeader stepDescriptionColumn;
+        private ColumnHeader tagNameColumn;
+        private ColumnHeader ingredientNameColumn;
+        private ColumnHeader quantityColumn;
+        private ColumnHeader measurementColumn;
     }
 }
