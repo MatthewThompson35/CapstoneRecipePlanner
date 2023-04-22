@@ -564,6 +564,7 @@ namespace RecipePlannerDesktopApplication
             catch (Exception ex)
             {
                 this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
             }
             
         }
@@ -597,6 +598,7 @@ namespace RecipePlannerDesktopApplication
             catch (Exception ex)
             {
                 this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
             }
             
         }
