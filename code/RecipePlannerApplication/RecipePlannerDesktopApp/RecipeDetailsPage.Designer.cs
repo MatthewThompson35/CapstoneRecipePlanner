@@ -53,6 +53,7 @@
             this.cookYesButton = new System.Windows.Forms.Button();
             this.cookNoButton = new System.Windows.Forms.Button();
             this.shareRecipeButton = new System.Windows.Forms.Button();
+            this.serverErrorLabel = new System.Windows.Forms.Label();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -223,11 +224,11 @@
             // 
             // cookButton
             // 
-            this.cookButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.cookButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cookButton.Location = new System.Drawing.Point(429, 12);
+            this.cookButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.cookButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cookButton.Location = new System.Drawing.Point(414, 12);
             this.cookButton.Name = "cookButton";
-            this.cookButton.Size = new System.Drawing.Size(73, 29);
+            this.cookButton.Size = new System.Drawing.Size(88, 29);
             this.cookButton.TabIndex = 19;
             this.cookButton.Text = "Cook";
             this.cookButton.UseVisualStyleBackColor = false;
@@ -321,12 +322,25 @@
             this.shareRecipeButton.UseVisualStyleBackColor = false;
             this.shareRecipeButton.Click += new System.EventHandler(this.shareRecipeButton_Click);
             // 
+            // serverErrorLabel
+            // 
+            this.serverErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.serverErrorLabel.Location = new System.Drawing.Point(160, 12);
+            this.serverErrorLabel.Name = "serverErrorLabel";
+            this.serverErrorLabel.Size = new System.Drawing.Size(206, 47);
+            this.serverErrorLabel.TabIndex = 27;
+            this.serverErrorLabel.Text = "The connection to the server cannot be made";
+            this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.serverErrorLabel.Visible = false;
+            // 
             // RecipeDetailsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.serverErrorLabel);
             this.Controls.Add(this.shareRecipeButton);
             this.Controls.Add(this.cookNoButton);
             this.Controls.Add(this.cookYesButton);
@@ -381,5 +395,6 @@
         private Button cookYesButton;
         private Button cookNoButton;
         private Button shareRecipeButton;
+        private Label serverErrorLabel;
     }
 }
