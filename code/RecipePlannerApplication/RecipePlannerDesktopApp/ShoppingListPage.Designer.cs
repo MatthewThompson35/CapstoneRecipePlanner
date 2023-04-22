@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListPage));
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
-            this.ingredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.decrementColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.incrementCOlumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.measurmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
@@ -54,6 +49,12 @@
             this.purchaseShoppingListButton = new System.Windows.Forms.Button();
             this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
             this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
+            this.ingredientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.decrementColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.incrementCOlumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.measurmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientBindingSource)).BeginInit();
             this.plannerContextMenuStrip.SuspendLayout();
@@ -71,7 +72,8 @@
             this.decrementColumn,
             this.quantityColumn,
             this.incrementCOlumn,
-            this.measurmentColumn});
+            this.measurmentColumn,
+            this.removeColumn});
             this.ingredientsGridView.DataSource = this.ingredientBindingSource;
             this.ingredientsGridView.Location = new System.Drawing.Point(29, 171);
             this.ingredientsGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -83,48 +85,6 @@
             this.ingredientsGridView.TabIndex = 25;
             this.ingredientsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellClick);
             this.ingredientsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientsGridView_CellContentClick);
-            // 
-            // ingredientColumn
-            // 
-            this.ingredientColumn.DataPropertyName = "name";
-            this.ingredientColumn.HeaderText = "Ingredient";
-            this.ingredientColumn.MinimumWidth = 6;
-            this.ingredientColumn.Name = "ingredientColumn";
-            this.ingredientColumn.Width = 135;
-            // 
-            // decrementColumn
-            // 
-            this.decrementColumn.HeaderText = "";
-            this.decrementColumn.MinimumWidth = 6;
-            this.decrementColumn.Name = "decrementColumn";
-            this.decrementColumn.Text = "-";
-            this.decrementColumn.UseColumnTextForButtonValue = true;
-            this.decrementColumn.Width = 30;
-            // 
-            // quantityColumn
-            // 
-            this.quantityColumn.DataPropertyName = "quantity";
-            this.quantityColumn.HeaderText = "Quantity";
-            this.quantityColumn.MinimumWidth = 6;
-            this.quantityColumn.Name = "quantityColumn";
-            this.quantityColumn.Width = 125;
-            // 
-            // incrementCOlumn
-            // 
-            this.incrementCOlumn.HeaderText = "";
-            this.incrementCOlumn.MinimumWidth = 6;
-            this.incrementCOlumn.Name = "incrementCOlumn";
-            this.incrementCOlumn.Text = "+";
-            this.incrementCOlumn.UseColumnTextForButtonValue = true;
-            this.incrementCOlumn.Width = 30;
-            // 
-            // measurmentColumn
-            // 
-            this.measurmentColumn.DataPropertyName = "measurement";
-            this.measurmentColumn.HeaderText = "Measurement";
-            this.measurmentColumn.MinimumWidth = 6;
-            this.measurmentColumn.Name = "measurmentColumn";
-            this.measurmentColumn.Width = 103;
             // 
             // label1
             // 
@@ -296,6 +256,57 @@
             this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
             this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
             // 
+            // ingredientColumn
+            // 
+            this.ingredientColumn.DataPropertyName = "name";
+            this.ingredientColumn.HeaderText = "Ingredient";
+            this.ingredientColumn.MinimumWidth = 6;
+            this.ingredientColumn.Name = "ingredientColumn";
+            this.ingredientColumn.Width = 135;
+            // 
+            // decrementColumn
+            // 
+            this.decrementColumn.HeaderText = "";
+            this.decrementColumn.MinimumWidth = 6;
+            this.decrementColumn.Name = "decrementColumn";
+            this.decrementColumn.Text = "-";
+            this.decrementColumn.UseColumnTextForButtonValue = true;
+            this.decrementColumn.Width = 30;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.DataPropertyName = "quantity";
+            this.quantityColumn.HeaderText = "Quantity";
+            this.quantityColumn.MinimumWidth = 6;
+            this.quantityColumn.Name = "quantityColumn";
+            this.quantityColumn.Width = 125;
+            // 
+            // incrementCOlumn
+            // 
+            this.incrementCOlumn.HeaderText = "";
+            this.incrementCOlumn.MinimumWidth = 6;
+            this.incrementCOlumn.Name = "incrementCOlumn";
+            this.incrementCOlumn.Text = "+";
+            this.incrementCOlumn.UseColumnTextForButtonValue = true;
+            this.incrementCOlumn.Width = 30;
+            // 
+            // measurmentColumn
+            // 
+            this.measurmentColumn.DataPropertyName = "measurement";
+            this.measurmentColumn.HeaderText = "Measurement";
+            this.measurmentColumn.MinimumWidth = 6;
+            this.measurmentColumn.Name = "measurmentColumn";
+            this.measurmentColumn.Width = 103;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 75;
+            // 
             // ShoppingListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -345,11 +356,6 @@
         private Button purchaseShoppingListButton;
         private DataGridView ingredientsGridView;
         private BindingSource ingredientBindingSource;
-        private DataGridViewTextBoxColumn ingredientColumn;
-        private DataGridViewButtonColumn decrementColumn;
-        private DataGridViewTextBoxColumn quantityColumn;
-        private DataGridViewButtonColumn incrementCOlumn;
-        private DataGridViewTextBoxColumn measurmentColumn;
         private DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
@@ -357,5 +363,11 @@
         private DataGridViewTextBoxColumn measurementDataGridViewTextBoxColumn;
         private Button addIngredientsForRemainingMealsButton;
         private CheckBox addAllIngredientsCheckbox;
+        private DataGridViewTextBoxColumn ingredientColumn;
+        private DataGridViewButtonColumn decrementColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewButtonColumn incrementCOlumn;
+        private DataGridViewTextBoxColumn measurmentColumn;
+        private DataGridViewButtonColumn removeColumn;
     }
 }

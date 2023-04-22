@@ -271,6 +271,12 @@ namespace RecipePlannerDesktopApplication
                         }
                         this.UpdateIngredientsGridView();
                     }
+
+                    if (columnIndex == 5)
+                    {
+                        ShoppingListDAL.RemoveIngredient(id, Connection.ConnectionString);
+                        this.UpdateIngredientsGridView();
+                    }
                 }
             }
             catch (Exception ex)
