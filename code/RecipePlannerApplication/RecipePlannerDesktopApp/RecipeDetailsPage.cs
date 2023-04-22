@@ -195,6 +195,7 @@ namespace RecipePlannerDesktopApplication
 
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
+            this.addToMealPlanButton.Visible = false;
             this.displayDayMealTypeWeekElements();
             this.displayAddCancelButtons();
         }
@@ -509,6 +510,7 @@ namespace RecipePlannerDesktopApplication
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.addToMealPlanButton.Visible = true;
+            this.comboboxesErrorLabel.Visible = false;
 
             this.mealTypeComboBox.SelectedIndex = -1;
             this.daysComboBox.SelectedIndex = -1;

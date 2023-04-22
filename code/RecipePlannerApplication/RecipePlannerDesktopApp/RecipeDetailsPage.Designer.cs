@@ -49,11 +49,11 @@
             this.addButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.comboboxesErrorLabel = new System.Windows.Forms.Label();
-            this.isCookedLabel = new System.Windows.Forms.Label();
             this.cookYesButton = new System.Windows.Forms.Button();
             this.cookNoButton = new System.Windows.Forms.Button();
             this.shareRecipeButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
+            this.isCookedLabel = new System.Windows.Forms.Label();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +61,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(137, 271);
+            this.label1.Location = new System.Drawing.Point(141, 302);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(251, 38);
             this.label1.TabIndex = 1;
@@ -70,7 +70,7 @@
             // recipeDetailsTextBox
             // 
             this.recipeDetailsTextBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.recipeDetailsTextBox.Location = new System.Drawing.Point(59, 321);
+            this.recipeDetailsTextBox.Location = new System.Drawing.Point(71, 353);
             this.recipeDetailsTextBox.Multiline = true;
             this.recipeDetailsTextBox.Name = "recipeDetailsTextBox";
             this.recipeDetailsTextBox.ReadOnly = true;
@@ -124,7 +124,7 @@
             // 
             this.addToMealPlanButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.addToMealPlanButton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addToMealPlanButton.Location = new System.Drawing.Point(171, 192);
+            this.addToMealPlanButton.Location = new System.Drawing.Point(171, 108);
             this.addToMealPlanButton.Name = "addToMealPlanButton";
             this.addToMealPlanButton.Size = new System.Drawing.Size(177, 37);
             this.addToMealPlanButton.TabIndex = 7;
@@ -225,10 +225,10 @@
             // cookButton
             // 
             this.cookButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.cookButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cookButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cookButton.Location = new System.Drawing.Point(414, 12);
             this.cookButton.Name = "cookButton";
-            this.cookButton.Size = new System.Drawing.Size(88, 29);
+            this.cookButton.Size = new System.Drawing.Size(88, 35);
             this.cookButton.TabIndex = 19;
             this.cookButton.Text = "Cook";
             this.cookButton.UseVisualStyleBackColor = false;
@@ -272,18 +272,6 @@
             this.comboboxesErrorLabel.Text = "Please select all options.";
             this.comboboxesErrorLabel.Visible = false;
             // 
-            // isCookedLabel
-            // 
-            this.isCookedLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.isCookedLabel.ForeColor = System.Drawing.Color.Green;
-            this.isCookedLabel.Location = new System.Drawing.Point(160, -3);
-            this.isCookedLabel.Name = "isCookedLabel";
-            this.isCookedLabel.Size = new System.Drawing.Size(207, 73);
-            this.isCookedLabel.TabIndex = 23;
-            this.isCookedLabel.Text = "This meal has been cooked";
-            this.isCookedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.isCookedLabel.Visible = false;
-            // 
             // cookYesButton
             // 
             this.cookYesButton.BackColor = System.Drawing.Color.LawnGreen;
@@ -326,13 +314,25 @@
             // 
             this.serverErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.serverErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.serverErrorLabel.Location = new System.Drawing.Point(160, 12);
+            this.serverErrorLabel.Location = new System.Drawing.Point(150, 12);
             this.serverErrorLabel.Name = "serverErrorLabel";
             this.serverErrorLabel.Size = new System.Drawing.Size(206, 47);
             this.serverErrorLabel.TabIndex = 27;
             this.serverErrorLabel.Text = "The connection to the server cannot be made";
             this.serverErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.serverErrorLabel.Visible = false;
+            // 
+            // isCookedLabel
+            // 
+            this.isCookedLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.isCookedLabel.ForeColor = System.Drawing.Color.Green;
+            this.isCookedLabel.Location = new System.Drawing.Point(160, -3);
+            this.isCookedLabel.Name = "isCookedLabel";
+            this.isCookedLabel.Size = new System.Drawing.Size(207, 73);
+            this.isCookedLabel.TabIndex = 23;
+            this.isCookedLabel.Text = "This meal has been cooked";
+            this.isCookedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.isCookedLabel.Visible = false;
             // 
             // RecipeDetailsPage
             // 
@@ -391,10 +391,10 @@
         private Button addButton;
         private Button cancelButton;
         private Label comboboxesErrorLabel;
-        private Label isCookedLabel;
         private Button cookYesButton;
         private Button cookNoButton;
         private Button shareRecipeButton;
         private Label serverErrorLabel;
+        private Label isCookedLabel;
     }
 }
