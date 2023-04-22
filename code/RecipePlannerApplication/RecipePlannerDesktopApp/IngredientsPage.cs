@@ -74,39 +74,6 @@ public partial class IngredientsPage : Form
         ingredientsPopup.Show();
     }
 
-    private void removeIngredientButton_Click(object sender, EventArgs e)
-    {
-        this.removeSelectedIngredient();
-    }
-
-    private void removeSelectedIngredient()
-    {
-        try
-        {
-            if (this.selectedRow != null)
-            {
-                var id = 0;
-                var name = this.selectedRow.Cells[0].Value;
-                var quantity = (int) this.selectedRow.Cells[2].Value;
-                var list = IngredientDAL.getIngredients();
-                foreach (var item in list)
-                {
-                    if (item.name.Equals(name) && item.quantity == quantity)
-                    {
-                        id = (int) item.id;
-                    }
-                }
-
-                IngredientDAL.RemoveIngredient(id, Connection.ConnectionString);
-                this.UpdateIngredientsGridView();
-            }
-        }
-        catch (Exception ex)
-        {
-            this.serverErrorLabel.Visible = true;
-        }
-    }
-
     /// <summary>
     ///     Updates the ingredients view with the page one ingredients.
     /// </summary>
@@ -177,6 +144,12 @@ public partial class IngredientsPage : Form
                 if (columnIndex == 3)
                 {
                     IngredientDAL.incrementQuantity(id, quantity);
+                    this.UpdateIngredientsGridView();
+                }
+
+                if (columnIndex == 5)
+                {
+                    IngredientDAL.RemoveIngredient(id, Connection.ConnectionString);
                     this.UpdateIngredientsGridView();
                 }
             }
