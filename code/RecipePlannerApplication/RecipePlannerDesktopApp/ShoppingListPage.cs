@@ -152,34 +152,6 @@ namespace RecipePlannerDesktopApplication
 
         }
 
-        private void removeIngredientButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.selectedRow != null)
-                {
-                    var id = 0;
-                    var name = this.selectedRow.Cells[0].Value;
-                    var quantity = (int)this.selectedRow.Cells[2].Value;
-                    var list = ShoppingListDAL.getIngredients(Connection.ConnectionString);
-                    foreach (var item in list)
-                    {
-                        if (item.name.Equals(name) && item.quantity == quantity)
-                        {
-                            id = (int)item.id;
-                        }
-                    }
-
-                    ShoppingListDAL.RemoveIngredient(id, Connection.ConnectionString);
-                    this.UpdateIngredientsGridView();
-                }
-            }
-            catch (Exception ex)
-            {
-                this.serverErrorLabel.Visible = true;
-            }
-        }
-
         private void plannerMenuButton_Click(object sender, EventArgs e)
         {
             this.plannerContextMenuStrip.Show(this.plannerMenuButton, 0, this.plannerMenuButton.Height);
@@ -351,139 +323,155 @@ namespace RecipePlannerDesktopApplication
 
         private void addAllIngredients()
         {
-            List<Ingredient> totalIngredients = new List<Ingredient>();
-            List<int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
-            List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
-
-            foreach (var shoppingIngredient in shoppingIngredients)
+            try
             {
-                Ingredient pantryItem = pantry.Find(i => i.name == shoppingIngredient.name);
+                List<Ingredient> totalIngredients = new List<Ingredient>();
+                List<int> remainingMeals = PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+                List<Ingredient> pantry = IngredientDAL.getIngredients();
+                List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
-                if (pantryItem != null)
+                foreach (var shoppingIngredient in shoppingIngredients)
                 {
-                    pantryItem.quantity += shoppingIngredient.quantity;
-                }
-                else
-                {
-                    pantry.Add(shoppingIngredient);
-                }
-            }
+                    Ingredient pantryItem = pantry.Find(i => i.name == shoppingIngredient.name);
 
-            foreach (var recipeId in remainingMeals)
-            {
-                var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
-
-                foreach (var recipeIngredient in recipeIngredients)
-                {
-                    Ingredient existingIngredient = totalIngredients.Find(i => i.name == recipeIngredient.IngredientName && i.measurement == recipeIngredient.Measurement);
-
-                    if (existingIngredient != null)
+                    if (pantryItem != null)
                     {
-                        existingIngredient.quantity += (int)recipeIngredient.Quantity;
+                        pantryItem.quantity += shoppingIngredient.quantity;
                     }
                     else
                     {
-                        int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
-                        Ingredient newIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, recipeIngredient.Quantity, ingredientId, recipeIngredient.Measurement);
+                        pantry.Add(shoppingIngredient);
+                    }
+                }
 
-                        totalIngredients.Add(newIngredient);
+                foreach (var recipeId in remainingMeals)
+                {
+                    var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
+
+                    foreach (var recipeIngredient in recipeIngredients)
+                    {
+                        Ingredient existingIngredient = totalIngredients.Find(i => i.name == recipeIngredient.IngredientName && i.measurement == recipeIngredient.Measurement);
+
+                        if (existingIngredient != null)
+                        {
+                            existingIngredient.quantity += (int)recipeIngredient.Quantity;
+                        }
+                        else
+                        {
+                            int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
+                            Ingredient newIngredient = new Ingredient(ActiveUser.username, recipeIngredient.IngredientName, recipeIngredient.Quantity, ingredientId, recipeIngredient.Measurement);
+
+                            totalIngredients.Add(newIngredient);
+                        }
+                    }
+                }
+
+                foreach (var ingredient in totalIngredients)
+                {
+                    Ingredient shoppingListItem = shoppingIngredients.Find(i => i.name == ingredient.name);
+
+                    if (shoppingListItem != null)
+                    {
+                        int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
+
+                        ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
+                    }
+                    else
+                    {
+                        ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
                     }
                 }
             }
-
-            foreach (var ingredient in totalIngredients)
+            catch (Exception ex)
             {
-                Ingredient shoppingListItem = shoppingIngredients.Find(i => i.name == ingredient.name);
-
-                if (shoppingListItem != null)
-                {
-                    int quantity = (int)shoppingListItem.quantity + (int)ingredient.quantity;
-
-                    ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
-                }
-                else
-                {
-                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
-                }
+                this.serverErrorLabel.Visible = true;
             }
+            
         }
 
         private void addNeededIngredients()
         {
-            string user = ActiveUser.username;
-            List<Ingredient> totalIngredients = new List<Ingredient>();
-            List<int> remainingMeals =
-                PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
-            List<Ingredient> pantry = IngredientDAL.getIngredients();
-            List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
-
-            foreach (Ingredient shoppingItem in shoppingIngredients)
+            try
             {
-                Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
+                string user = ActiveUser.username;
+                List<Ingredient> totalIngredients = new List<Ingredient>();
+                List<int> remainingMeals =
+                    PlannedMealDal.getRemainingMeals(Connection.ConnectionString);
+                List<Ingredient> pantry = IngredientDAL.getIngredients();
+                List<Ingredient> shoppingIngredients = ShoppingListDAL.getIngredients(Connection.ConnectionString);
 
-                if (pantryItem != null)
+                foreach (Ingredient shoppingItem in shoppingIngredients)
                 {
-                    pantryItem.quantity += shoppingItem.quantity;
-                }
-                else
-                {
-                    pantry.Add(shoppingItem);
-                }
-            }
+                    Ingredient pantryItem = pantry.Find(i => i.name == shoppingItem.name);
 
-            foreach (var recipeId in remainingMeals)
-            {
-                var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
-
-                foreach (RecipeIngredient recipeIngredient in recipeIngredients)
-                {
-                    Ingredient existingIngredient = totalIngredients.Find(i =>
-                        i.name == recipeIngredient.IngredientName && i.measurement == recipeIngredient.Measurement);
-
-                    if (existingIngredient != null)
+                    if (pantryItem != null)
                     {
-                        existingIngredient.quantity += (int)recipeIngredient.Quantity;
-
+                        pantryItem.quantity += shoppingItem.quantity;
                     }
                     else
                     {
-                        int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
-                        Ingredient newIngredient = new Ingredient(user, recipeIngredient.IngredientName, recipeIngredient.Quantity, ingredientId,
-                            recipeIngredient.Measurement);
-                        totalIngredients.Add(newIngredient);
+                        pantry.Add(shoppingItem);
                     }
                 }
-            }
 
-
-            foreach (var ingredient in totalIngredients)
-            {
-                Ingredient pantryItem = pantry.Find(i => i.name == ingredient.name);
-
-                if (pantryItem != null)
+                foreach (var recipeId in remainingMeals)
                 {
-                    if (ingredient.quantity > pantryItem.quantity)
-                    {
-                        int quantity = (int)ingredient.quantity - (int)pantryItem.quantity;
-                        Ingredient shoppingListItem = shoppingIngredients.Find(i => i.name == ingredient.name);
+                    var recipeIngredients = RecipeDAL.getIngredientsForRecipe(recipeId, Connection.ConnectionString);
 
-                        if (shoppingListItem != null)
+                    foreach (RecipeIngredient recipeIngredient in recipeIngredients)
+                    {
+                        Ingredient existingIngredient = totalIngredients.Find(i =>
+                            i.name == recipeIngredient.IngredientName && i.measurement == recipeIngredient.Measurement);
+
+                        if (existingIngredient != null)
                         {
-                            ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
+                            existingIngredient.quantity += (int)recipeIngredient.Quantity;
+
                         }
                         else
                         {
-                            ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement, Connection.ConnectionString);
+                            int ingredientId = IngredientDAL.getIngredientId(recipeIngredient.IngredientName);
+                            Ingredient newIngredient = new Ingredient(user, recipeIngredient.IngredientName, recipeIngredient.Quantity, ingredientId,
+                                recipeIngredient.Measurement);
+                            totalIngredients.Add(newIngredient);
                         }
-
                     }
                 }
-                else
+
+
+                foreach (var ingredient in totalIngredients)
                 {
-                    ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                    Ingredient pantryItem = pantry.Find(i => i.name == ingredient.name);
+
+                    if (pantryItem != null)
+                    {
+                        if (ingredient.quantity > pantryItem.quantity)
+                        {
+                            int quantity = (int)ingredient.quantity - (int)pantryItem.quantity;
+                            Ingredient shoppingListItem = shoppingIngredients.Find(i => i.name == ingredient.name);
+
+                            if (shoppingListItem != null)
+                            {
+                                ShoppingListDAL.updateQuantity((int)ingredient.id, quantity, Connection.ConnectionString);
+                            }
+                            else
+                            {
+                                ShoppingListDAL.addIngredient(ingredient.name, quantity, ingredient.measurement, Connection.ConnectionString);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+            }
+            
         }
     }
 }
