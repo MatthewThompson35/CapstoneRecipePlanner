@@ -60,29 +60,31 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(137, 271);
+            this.label1.Location = new System.Drawing.Point(120, 203);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(251, 38);
+            this.label1.Size = new System.Drawing.Size(196, 30);
             this.label1.TabIndex = 1;
             this.label1.Text = "Recipe Information";
             // 
             // recipeDetailsTextBox
             // 
             this.recipeDetailsTextBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.recipeDetailsTextBox.Location = new System.Drawing.Point(59, 321);
+            this.recipeDetailsTextBox.Location = new System.Drawing.Point(52, 241);
+            this.recipeDetailsTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.recipeDetailsTextBox.Multiline = true;
             this.recipeDetailsTextBox.Name = "recipeDetailsTextBox";
             this.recipeDetailsTextBox.ReadOnly = true;
             this.recipeDetailsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.recipeDetailsTextBox.Size = new System.Drawing.Size(399, 439);
+            this.recipeDetailsTextBox.Size = new System.Drawing.Size(350, 330);
             this.recipeDetailsTextBox.TabIndex = 2;
             // 
             // daysComboBox
             // 
             this.daysComboBox.FormattingEnabled = true;
-            this.daysComboBox.Location = new System.Drawing.Point(77, 109);
+            this.daysComboBox.Location = new System.Drawing.Point(67, 82);
+            this.daysComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.daysComboBox.Name = "daysComboBox";
-            this.daysComboBox.Size = new System.Drawing.Size(91, 28);
+            this.daysComboBox.Size = new System.Drawing.Size(80, 23);
             this.daysComboBox.TabIndex = 3;
             this.daysComboBox.Visible = false;
             this.daysComboBox.SelectedIndexChanged += new System.EventHandler(this.daysComboBox_SelectedIndexChanged);
@@ -90,9 +92,10 @@
             // mealTypeComboBox
             // 
             this.mealTypeComboBox.FormattingEnabled = true;
-            this.mealTypeComboBox.Location = new System.Drawing.Point(202, 109);
+            this.mealTypeComboBox.Location = new System.Drawing.Point(177, 82);
+            this.mealTypeComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mealTypeComboBox.Name = "mealTypeComboBox";
-            this.mealTypeComboBox.Size = new System.Drawing.Size(107, 28);
+            this.mealTypeComboBox.Size = new System.Drawing.Size(94, 23);
             this.mealTypeComboBox.TabIndex = 4;
             this.mealTypeComboBox.Visible = false;
             this.mealTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mealTypeComboBox_SelectedIndexChanged);
@@ -101,9 +104,9 @@
             // 
             this.dayLabel.AutoSize = true;
             this.dayLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dayLabel.Location = new System.Drawing.Point(101, 77);
+            this.dayLabel.Location = new System.Drawing.Point(88, 58);
             this.dayLabel.Name = "dayLabel";
-            this.dayLabel.Size = new System.Drawing.Size(46, 28);
+            this.dayLabel.Size = new System.Drawing.Size(37, 21);
             this.dayLabel.TabIndex = 5;
             this.dayLabel.Text = "Day";
             this.dayLabel.Visible = false;
@@ -112,9 +115,9 @@
             // 
             this.mealTypeLabel.AutoSize = true;
             this.mealTypeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mealTypeLabel.Location = new System.Drawing.Point(202, 77);
+            this.mealTypeLabel.Location = new System.Drawing.Point(177, 58);
             this.mealTypeLabel.Name = "mealTypeLabel";
-            this.mealTypeLabel.Size = new System.Drawing.Size(101, 28);
+            this.mealTypeLabel.Size = new System.Drawing.Size(80, 21);
             this.mealTypeLabel.TabIndex = 6;
             this.mealTypeLabel.Text = "Meal Type";
             this.mealTypeLabel.Visible = false;
@@ -123,9 +126,10 @@
             // 
             this.addToMealPlanButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.addToMealPlanButton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addToMealPlanButton.Location = new System.Drawing.Point(171, 192);
+            this.addToMealPlanButton.Location = new System.Drawing.Point(150, 144);
+            this.addToMealPlanButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addToMealPlanButton.Name = "addToMealPlanButton";
-            this.addToMealPlanButton.Size = new System.Drawing.Size(177, 37);
+            this.addToMealPlanButton.Size = new System.Drawing.Size(155, 28);
             this.addToMealPlanButton.TabIndex = 7;
             this.addToMealPlanButton.Text = "Add to Meal Plan";
             this.addToMealPlanButton.UseVisualStyleBackColor = false;
@@ -134,9 +138,10 @@
             // weekComboBox
             // 
             this.weekComboBox.FormattingEnabled = true;
-            this.weekComboBox.Location = new System.Drawing.Point(338, 109);
+            this.weekComboBox.Location = new System.Drawing.Point(296, 82);
+            this.weekComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weekComboBox.Name = "weekComboBox";
-            this.weekComboBox.Size = new System.Drawing.Size(91, 28);
+            this.weekComboBox.Size = new System.Drawing.Size(80, 23);
             this.weekComboBox.TabIndex = 8;
             this.weekComboBox.Visible = false;
             this.weekComboBox.SelectedIndexChanged += new System.EventHandler(this.weekComboBox_SelectedIndexChanged);
@@ -145,9 +150,9 @@
             // 
             this.weekLabel.AutoSize = true;
             this.weekLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.weekLabel.Location = new System.Drawing.Point(354, 77);
+            this.weekLabel.Location = new System.Drawing.Point(310, 58);
             this.weekLabel.Name = "weekLabel";
-            this.weekLabel.Size = new System.Drawing.Size(60, 28);
+            this.weekLabel.Size = new System.Drawing.Size(48, 21);
             this.weekLabel.TabIndex = 9;
             this.weekLabel.Text = "Week";
             this.weekLabel.Visible = false;
@@ -157,9 +162,9 @@
             this.updateSuccessfullyLabel.AutoSize = true;
             this.updateSuccessfullyLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.updateSuccessfullyLabel.ForeColor = System.Drawing.Color.Green;
-            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(118, 157);
+            this.updateSuccessfullyLabel.Location = new System.Drawing.Point(103, 118);
             this.updateSuccessfullyLabel.Name = "updateSuccessfullyLabel";
-            this.updateSuccessfullyLabel.Size = new System.Drawing.Size(311, 20);
+            this.updateSuccessfullyLabel.Size = new System.Drawing.Size(243, 15);
             this.updateSuccessfullyLabel.TabIndex = 10;
             this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
             this.updateSuccessfullyLabel.Visible = false;
@@ -171,28 +176,29 @@
             this.findRecipeToolStripMenuItem,
             this.viewMealPlanToolStripMenuItem1});
             this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
-            this.plannerContextMenuStrip.Size = new System.Drawing.Size(180, 52);
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(155, 48);
             // 
             // findRecipeToolStripMenuItem
             // 
             this.findRecipeToolStripMenuItem.Name = "findRecipeToolStripMenuItem";
-            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.findRecipeToolStripMenuItem.Text = "Find Recipe";
             this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
             // 
             // viewMealPlanToolStripMenuItem1
             // 
             this.viewMealPlanToolStripMenuItem1.Name = "viewMealPlanToolStripMenuItem1";
-            this.viewMealPlanToolStripMenuItem1.Size = new System.Drawing.Size(179, 24);
+            this.viewMealPlanToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.viewMealPlanToolStripMenuItem1.Text = "View Meal Plan";
             this.viewMealPlanToolStripMenuItem1.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem1_Click);
             // 
             // yesButton
             // 
             this.yesButton.BackColor = System.Drawing.Color.LawnGreen;
-            this.yesButton.Location = new System.Drawing.Point(71, 197);
+            this.yesButton.Location = new System.Drawing.Point(62, 148);
+            this.yesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.yesButton.Name = "yesButton";
-            this.yesButton.Size = new System.Drawing.Size(94, 29);
+            this.yesButton.Size = new System.Drawing.Size(82, 22);
             this.yesButton.TabIndex = 16;
             this.yesButton.Text = "Yes";
             this.yesButton.UseVisualStyleBackColor = false;
@@ -202,9 +208,10 @@
             // noButton
             // 
             this.noButton.BackColor = System.Drawing.Color.Red;
-            this.noButton.Location = new System.Drawing.Point(354, 197);
+            this.noButton.Location = new System.Drawing.Point(310, 148);
+            this.noButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.noButton.Name = "noButton";
-            this.noButton.Size = new System.Drawing.Size(94, 29);
+            this.noButton.Size = new System.Drawing.Size(82, 22);
             this.noButton.TabIndex = 17;
             this.noButton.Text = "No";
             this.noButton.UseVisualStyleBackColor = false;
@@ -213,9 +220,10 @@
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(11, 12);
+            this.backButton.Location = new System.Drawing.Point(10, 9);
+            this.backButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(63, 29);
+            this.backButton.Size = new System.Drawing.Size(55, 22);
             this.backButton.TabIndex = 18;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
@@ -225,9 +233,10 @@
             // 
             this.cookButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cookButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cookButton.Location = new System.Drawing.Point(429, 12);
+            this.cookButton.Location = new System.Drawing.Point(375, 9);
+            this.cookButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cookButton.Name = "cookButton";
-            this.cookButton.Size = new System.Drawing.Size(73, 29);
+            this.cookButton.Size = new System.Drawing.Size(64, 22);
             this.cookButton.TabIndex = 19;
             this.cookButton.Text = "Cook";
             this.cookButton.UseVisualStyleBackColor = false;
@@ -237,9 +246,10 @@
             // 
             this.addButton.BackColor = System.Drawing.Color.LawnGreen;
             this.addButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.addButton.Location = new System.Drawing.Point(71, 197);
+            this.addButton.Location = new System.Drawing.Point(62, 148);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(94, 29);
+            this.addButton.Size = new System.Drawing.Size(82, 22);
             this.addButton.TabIndex = 20;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = false;
@@ -250,9 +260,10 @@
             // 
             this.cancelButton.BackColor = System.Drawing.Color.Red;
             this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cancelButton.Location = new System.Drawing.Point(354, 197);
+            this.cancelButton.Location = new System.Drawing.Point(310, 148);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(94, 29);
+            this.cancelButton.Size = new System.Drawing.Size(82, 22);
             this.cancelButton.TabIndex = 21;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = false;
@@ -264,9 +275,9 @@
             this.comboboxesErrorLabel.AutoSize = true;
             this.comboboxesErrorLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.comboboxesErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.comboboxesErrorLabel.Location = new System.Drawing.Point(178, 157);
+            this.comboboxesErrorLabel.Location = new System.Drawing.Point(156, 118);
             this.comboboxesErrorLabel.Name = "comboboxesErrorLabel";
-            this.comboboxesErrorLabel.Size = new System.Drawing.Size(178, 20);
+            this.comboboxesErrorLabel.Size = new System.Drawing.Size(140, 15);
             this.comboboxesErrorLabel.TabIndex = 22;
             this.comboboxesErrorLabel.Text = "Please select all options.";
             this.comboboxesErrorLabel.Visible = false;
@@ -275,9 +286,9 @@
             // 
             this.isCookedLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.isCookedLabel.ForeColor = System.Drawing.Color.Green;
-            this.isCookedLabel.Location = new System.Drawing.Point(160, -3);
+            this.isCookedLabel.Location = new System.Drawing.Point(140, -2);
             this.isCookedLabel.Name = "isCookedLabel";
-            this.isCookedLabel.Size = new System.Drawing.Size(207, 73);
+            this.isCookedLabel.Size = new System.Drawing.Size(181, 55);
             this.isCookedLabel.TabIndex = 23;
             this.isCookedLabel.Text = "This meal has been cooked";
             this.isCookedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -287,9 +298,10 @@
             // 
             this.cookYesButton.BackColor = System.Drawing.Color.LawnGreen;
             this.cookYesButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cookYesButton.Location = new System.Drawing.Point(118, 75);
+            this.cookYesButton.Location = new System.Drawing.Point(103, 56);
+            this.cookYesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cookYesButton.Name = "cookYesButton";
-            this.cookYesButton.Size = new System.Drawing.Size(94, 29);
+            this.cookYesButton.Size = new System.Drawing.Size(82, 22);
             this.cookYesButton.TabIndex = 24;
             this.cookYesButton.Text = "Yes";
             this.cookYesButton.UseVisualStyleBackColor = false;
@@ -300,9 +312,10 @@
             // 
             this.cookNoButton.BackColor = System.Drawing.Color.Red;
             this.cookNoButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cookNoButton.Location = new System.Drawing.Point(335, 75);
+            this.cookNoButton.Location = new System.Drawing.Point(293, 56);
+            this.cookNoButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cookNoButton.Name = "cookNoButton";
-            this.cookNoButton.Size = new System.Drawing.Size(94, 29);
+            this.cookNoButton.Size = new System.Drawing.Size(82, 22);
             this.cookNoButton.TabIndex = 25;
             this.cookNoButton.Text = "No";
             this.cookNoButton.UseVisualStyleBackColor = false;
@@ -313,20 +326,21 @@
             // 
             this.shareRecipeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.shareRecipeButton.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.shareRecipeButton.Location = new System.Drawing.Point(171, 235);
+            this.shareRecipeButton.Location = new System.Drawing.Point(150, 176);
+            this.shareRecipeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.shareRecipeButton.Name = "shareRecipeButton";
-            this.shareRecipeButton.Size = new System.Drawing.Size(177, 37);
+            this.shareRecipeButton.Size = new System.Drawing.Size(155, 28);
             this.shareRecipeButton.TabIndex = 26;
-            this.shareRecipeButton.Text = "Share Recipe";
+            this.shareRecipeButton.Text = "Recommend Recipe";
             this.shareRecipeButton.UseVisualStyleBackColor = false;
             this.shareRecipeButton.Click += new System.EventHandler(this.shareRecipeButton_Click);
             // 
             // RecipeDetailsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.ClientSize = new System.Drawing.Size(450, 617);
             this.Controls.Add(this.shareRecipeButton);
             this.Controls.Add(this.cookNoButton);
             this.Controls.Add(this.cookYesButton);
@@ -348,6 +362,7 @@
             this.Controls.Add(this.daysComboBox);
             this.Controls.Add(this.recipeDetailsTextBox);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RecipeDetailsPage";
             this.Text = "RecipeDetailsPage";
             this.plannerContextMenuStrip.ResumeLayout(false);

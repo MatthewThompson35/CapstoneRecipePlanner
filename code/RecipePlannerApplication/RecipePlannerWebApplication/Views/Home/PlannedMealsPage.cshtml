@@ -4,11 +4,11 @@
 }
 <div>
     <h2>@ViewBag.Header</h2>
-    <form method="post" action="@Url.Action("ToggleWeek", "Home", new { currentWeek = ViewBag.CurrentWeek })">
+    <form style="margin-bottom: 10px" method="post" action="@Url.Action("ToggleWeek", "Home", new { currentWeek = ViewBag.CurrentWeek })">
         <button>Switch Weeks</button>
     </form>
     
-    <form id="addForm" method="post" action="@Url.Action("addNeededPlannedMealIngredients", "Home")">
+    <form style="margin-bottom: 10px" id="addForm" method="post" action="@Url.Action("addNeededPlannedMealIngredients", "Home")">
 
         <button id="submitButton">Add Ingredients For Remaining Meals</button>
         <label for="AllIngredients">Add all Ingredients</label>
@@ -115,13 +115,13 @@
     }
 
     #recipe-details-box {
-        border: 1px solid black;
-        height: 900px;
+        position: absolute;
+        top: 160px;
+        width: 45%;
+        max-height: 900px;
         padding: 10px;
         padding-top: 20px;
-        top: 160px;
-        position: fixed;
-        width: 45%;
+        border: 1px solid black;
     }
 
     #recipe-details-box h3 {
