@@ -3,6 +3,7 @@ using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary;
 using RecipePlannerLibrary.Models;
 using System.Net.NetworkInformation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RecipePlannerFinalDemoAdditions
 {
@@ -240,6 +241,24 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            this.addRecipe();
+
+            if (this.errorFieldsLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                var homepage = new Homepage();
+
+                this.Hide();
+
+                homepage.Show();
+            }
+        }
+
+        private void addRecipe()
+        {
             string recipeName = null;
             string recipeDescription = null;
 
@@ -263,14 +282,49 @@ namespace RecipePlannerFinalDemoAdditions
                 recipeDescription = this.descriptionTextBox.Text;
             }
 
-            Recipe recipe = null;
+
+            Recipe existingRecipe = null;
             if (this.errorFieldsLabel.Visible == true)
             {
                 return;
             }
             else
             {
-                recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+                existingRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+            }
+
+            if (existingRecipe.Name == null)
+            {
+                this.errorFieldsLabel.Visible = false;
+
+                if (tagsListView.Items.Count == 0 || ingredientsListView.Items.Count == 0 || stepsListView.Items.Count == 0)
+                {
+                    this.errorFieldsLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorFieldsLabel.Visible = false;
+                    RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
+                    foreach (var recipeIng in this.NewRecipe.Ingredients)
+                    {
+                        RecipeDAL.addRecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, recipeIng.IngredientName, IngredientDAL.getIngredientId(recipeIng.IngredientName), recipeIng.Quantity, recipeIng.Measurement, Connection.ConnectionString);
+                    }
+                    foreach (var aTag in this.NewRecipe.Tags)
+                    {
+                        RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, aTag, Connection.ConnectionString);
+                    }
+
+
+                    foreach (var aStep in this.NewRecipe.Steps)
+                    {
+                        RecipeDAL.addRecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, aStep.stepNumber, aStep.stepDescription, Connection.ConnectionString);
+                    }
+                }
+            }
+            else
+            {
+                this.errorFieldsLabel.Text = "This recipe already exists.";
+                this.errorFieldsLabel.Visible = true;
             }
         }
 
