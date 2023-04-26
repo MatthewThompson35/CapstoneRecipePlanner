@@ -37,10 +37,6 @@
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.measurementComboBox = new System.Windows.Forms.ComboBox();
             this.ingredientDataGridView = new System.Windows.Forms.DataGridView();
-            this.ingredientNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.measurementColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.addButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -48,6 +44,10 @@
             this.errorQuantityLabel = new System.Windows.Forms.Label();
             this.ingredientSuccessLabel = new System.Windows.Forms.Label();
             this.errorMeasurementSelectionLabel = new System.Windows.Forms.Label();
+            this.ingredientNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.measurementColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ingredientDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -145,36 +145,6 @@
             this.ingredientDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientDataGridView_CellContentClick);
             this.ingredientDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientDataGridView_CellValueChanged);
             // 
-            // ingredientNameColumn
-            // 
-            this.ingredientNameColumn.HeaderText = "Ingredient Name";
-            this.ingredientNameColumn.MinimumWidth = 6;
-            this.ingredientNameColumn.Name = "ingredientNameColumn";
-            this.ingredientNameColumn.Width = 125;
-            // 
-            // quantityColumn
-            // 
-            this.quantityColumn.HeaderText = "Quantity";
-            this.quantityColumn.MinimumWidth = 6;
-            this.quantityColumn.Name = "quantityColumn";
-            this.quantityColumn.Width = 75;
-            // 
-            // measurementColumn
-            // 
-            this.measurementColumn.HeaderText = "Measurement";
-            this.measurementColumn.MinimumWidth = 6;
-            this.measurementColumn.Name = "measurementColumn";
-            this.measurementColumn.Width = 125;
-            // 
-            // removeColumn
-            // 
-            this.removeColumn.HeaderText = "Action";
-            this.removeColumn.MinimumWidth = 6;
-            this.removeColumn.Name = "removeColumn";
-            this.removeColumn.Text = "Remove";
-            this.removeColumn.UseColumnTextForButtonValue = true;
-            this.removeColumn.Width = 125;
-            // 
             // addButton
             // 
             this.addButton.Location = new System.Drawing.Point(205, 267);
@@ -253,6 +223,36 @@
             this.errorMeasurementSelectionLabel.Text = "Select measuremet";
             this.errorMeasurementSelectionLabel.Visible = false;
             // 
+            // ingredientNameColumn
+            // 
+            this.ingredientNameColumn.HeaderText = "Ingredient Name";
+            this.ingredientNameColumn.MinimumWidth = 6;
+            this.ingredientNameColumn.Name = "ingredientNameColumn";
+            this.ingredientNameColumn.Width = 125;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.HeaderText = "Quantity";
+            this.quantityColumn.MinimumWidth = 6;
+            this.quantityColumn.Name = "quantityColumn";
+            this.quantityColumn.Width = 75;
+            // 
+            // measurementColumn
+            // 
+            this.measurementColumn.HeaderText = "Measurement";
+            this.measurementColumn.MinimumWidth = 6;
+            this.measurementColumn.Name = "measurementColumn";
+            this.measurementColumn.Width = 105;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 90;
+            // 
             // RecipeIngredientAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -292,10 +292,6 @@
         private TextBox quantityTextBox;
         private ComboBox measurementComboBox;
         private DataGridView ingredientDataGridView;
-        private DataGridViewTextBoxColumn ingredientNameColumn;
-        private DataGridViewTextBoxColumn quantityColumn;
-        private DataGridViewTextBoxColumn measurementColumn;
-        private DataGridViewButtonColumn removeColumn;
         private Button addButton;
         private Button confirmButton;
         private Button cancelButton;
@@ -303,5 +299,9 @@
         private Label errorQuantityLabel;
         private Label ingredientSuccessLabel;
         private Label errorMeasurementSelectionLabel;
+        private DataGridViewTextBoxColumn ingredientNameColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewTextBoxColumn measurementColumn;
+        private DataGridViewButtonColumn removeColumn;
     }
 }
