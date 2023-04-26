@@ -15,15 +15,18 @@ namespace RecipePlannerFinalDemoAdditions
     public partial class RecipeStepAdd : Form
     {
         private List<RecipeStep> recipeSteps;
+        private Recipe recipe;
+
         public RecipeStepAdd()
         {
             InitializeComponent();
             recipeSteps = new List<RecipeStep>();
         }
 
-        public RecipeStepAdd(List<RecipeStep> stepDatas) :this()
+        public RecipeStepAdd(List<RecipeStep> stepDatas, Recipe recipe) : this()
         {
             recipeSteps = stepDatas;
+            this.recipe = recipe;
         }
 
         public List<RecipeStep> GetRecipeSteps()
@@ -137,7 +140,8 @@ namespace RecipePlannerFinalDemoAdditions
                     recipeSteps.Add(recipeStep);
                 }
             }
-            var recipeSummary = new RecipeSummary();
+            //this.recipe.Steps = recipeSteps;
+            var recipeSummary = new RecipeSummary(this.recipe);
 
             recipeSummary.SetStepData(recipeSteps);
             this.Hide();

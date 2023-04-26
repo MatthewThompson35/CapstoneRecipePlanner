@@ -1,4 +1,5 @@
 ﻿using RecipePlannerDesktopApplication;
+using RecipePlannerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,15 +16,17 @@ namespace RecipePlannerFinalDemoAdditions
     public partial class RecipeTagAdd : Form
     {
         private List<string> tags;
+        private Recipe recipe;
         public RecipeTagAdd()
         {
             InitializeComponent();
             tags = new List<string>();
         }
 
-        public RecipeTagAdd(List<string> tagDatas) :this()
+        public RecipeTagAdd(List<string> tagDatas, Recipe recipe) :this()
         {
             tags = tagDatas;
+            this.recipe = recipe;
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -97,7 +100,7 @@ namespace RecipePlannerFinalDemoAdditions
                 }
             }
 
-            var recipeSummary = new RecipeSummary();
+            var recipeSummary = new RecipeSummary(this.recipe);
 
             recipeSummary.SetTagData(tags);
 

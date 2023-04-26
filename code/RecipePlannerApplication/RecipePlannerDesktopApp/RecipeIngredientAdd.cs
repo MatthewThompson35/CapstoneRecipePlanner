@@ -17,15 +17,17 @@ namespace RecipePlannerFinalDemoAdditions
     public partial class RecipeIngredientAdd : Form
     {
         private List<RecipeIngredient> recipeIngredients;
+        private Recipe recipe;
         public RecipeIngredientAdd()
         {
             InitializeComponent();
             recipeIngredients = new List<RecipeIngredient>();
         }
 
-        public RecipeIngredientAdd(List<RecipeIngredient> ingredientDatas) :this()
+        public RecipeIngredientAdd(List<RecipeIngredient> ingredientDatas, Recipe recipe) : this()
         {
             recipeIngredients = ingredientDatas;
+            this.recipe = recipe;
         }
         /// <summary>
         ///     Gets the recipe ingredients
@@ -140,7 +142,7 @@ namespace RecipePlannerFinalDemoAdditions
                     recipeIngredients.Add(recipeIngredient);
                 }
             }
-            var recipeSummary = new RecipeSummary();
+            var recipeSummary = new RecipeSummary(this.recipe);
 
             recipeSummary.SetIngredientData(recipeIngredients);
             this.Hide();

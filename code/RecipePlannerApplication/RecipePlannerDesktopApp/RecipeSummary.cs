@@ -1,5 +1,8 @@
 using RecipePlannerDesktopApplication;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary;
 using RecipePlannerLibrary.Models;
+using System.Net.NetworkInformation;
 
 namespace RecipePlannerFinalDemoAdditions
 {
@@ -9,10 +12,16 @@ namespace RecipePlannerFinalDemoAdditions
         private RecipeStepAdd stepAddPage;
         private RecipeTagAdd tagAddPage;
 
-        private List<string> tags = new List<string>();
-        private List<RecipeStep> recipeSteps = new List<RecipeStep>();
-        private List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+        public List<string> tags = new List<string>();
+        public List<string> tempTags = new List<string>();
 
+        public List<RecipeStep> recipeSteps = new List<RecipeStep>();
+        public List<RecipeStep> tempSteps = new List<RecipeStep>();
+
+        public List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+        public List<RecipeIngredient> tempIngredients = new List<RecipeIngredient>();
+
+        public Recipe NewRecipe { get; set; }
 
         public RecipeSummary()
         {
@@ -21,30 +30,44 @@ namespace RecipePlannerFinalDemoAdditions
             this.ingredientAddPage = new RecipeIngredientAdd();
             this.stepAddPage = new RecipeStepAdd();
             this.tagAddPage = new RecipeTagAdd();
+
+            this.NewRecipe = new Recipe();
         }
 
-        public RecipeSummary(RecipeIngredientAdd ingredientAdd, RecipeStepAdd stepAddPage, RecipeTagAdd tagAddPage)
+        public RecipeSummary(RecipeIngredientAdd ingredientAdd, RecipeStepAdd stepAddPage, RecipeTagAdd tagAddPage) :this()
         {
             this.ingredientAddPage = ingredientAdd;
             this.stepAddPage = stepAddPage;
             this.tagAddPage = tagAddPage;
+        }
+
+        public RecipeSummary(Recipe recipe) : this ()
+        {
+            this.NewRecipe = recipe;
 
         }
 
         public void SetTagData(List<string> tagData)
         {
-            //tags = tagData;
+            tags = tagData;
+
+            this.NewRecipe.Tags = tags;
+            this.tempTags = this.NewRecipe.Tags;
+
+            this.tempSteps = this.NewRecipe.Steps;
+            this.tempIngredients = this.NewRecipe.Ingredients;
+
+            tagsListView.Items.Clear();
 
             foreach (var tag in tagData)
             {
                 if (!tags.Contains(tag))
                 {
-                    // If the tag is not already in the list, add it to the tags list
                     tags.Add(tag);
 
-                    // Add a new ListViewItem to the tagsListView control
                     ListViewItem item = new ListViewItem(tag);
                     tagsListView.Items.Add(item);
+
                 }
             }
         }
@@ -58,10 +81,17 @@ namespace RecipePlannerFinalDemoAdditions
         {
             recipeSteps = stepData;
 
-            foreach (var step in stepData)
+            this.NewRecipe.Steps = recipeSteps;
+            this.tempSteps = this.NewRecipe.Steps;
+
+            this.tempTags = this.NewRecipe.Tags;
+            this.tempIngredients = this.NewRecipe.Ingredients;
+
+            stepsListView.Items.Clear();
+            foreach (var step in this.NewRecipe.Steps)
             {
                 ListViewItem item = new ListViewItem(step.stepNumber.ToString());
-                item.SubItems.Add(step.stepDescription.ToString());
+                item.SubItems.Add(step.stepDescription);
                 stepsListView.Items.Add(item);
             }
         }
@@ -75,7 +105,14 @@ namespace RecipePlannerFinalDemoAdditions
         {
             recipeIngredients = ingredientData;
 
-            foreach (var ing in ingredientData)
+            this.NewRecipe.Ingredients = recipeIngredients;
+            this.tempIngredients = this.NewRecipe.Ingredients;
+
+            this.tempSteps = this.NewRecipe.Steps;
+            this.tempTags = this.NewRecipe.Tags;
+
+            ingredientsListView.Items.Clear();
+            foreach (var ing in this.NewRecipe.Ingredients)
             {
                 ListViewItem item = new ListViewItem(ing.IngredientName);
 
@@ -102,16 +139,66 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addIngredientButton_Click(object sender, EventArgs e)
         {
-            var ingredientAddPage = new RecipeIngredientAdd(this.recipeIngredients);
+            this.NewRecipe.Name = this.nameTextBox.Text;
+            this.NewRecipe.Description = this.descriptionTextBox.Text;
+
+            this.NewRecipe.Steps = this.recipeSteps;
+
+            if (this.NewRecipe.Steps.Count == 0)
+            {
+                this.NewRecipe.Steps = this.tempSteps;
+            }
+
+            this.NewRecipe.Tags = this.tags;
+
+            if (this.NewRecipe.Tags.Count == 0)
+            {
+                this.NewRecipe.Tags = this.tempTags;
+            }
+
+            this.NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                this.NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+
+            var ingredientAddPage = new RecipeIngredientAdd(this.NewRecipe.Ingredients, this.NewRecipe);
 
             this.Hide();
 
             ingredientAddPage.Show();
+            
         }
 
         private void addStepButton_Click(object sender, EventArgs e)
         {
-            var stepAddPage = new RecipeStepAdd(this.recipeSteps);
+            this.NewRecipe.Name = this.nameTextBox.Text;
+            this.NewRecipe.Description = this.descriptionTextBox.Text;
+
+            this.NewRecipe.Steps = this.recipeSteps;
+
+            if (this.NewRecipe.Steps.Count == 0)
+            {
+                this.NewRecipe.Steps = this.tempSteps;
+            }
+            
+            this.NewRecipe.Tags = this.tags;
+
+            if (this.NewRecipe.Tags.Count == 0)
+            {
+                this.NewRecipe.Tags = this.tempTags;
+            }
+
+            this.NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                this.NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+            var stepAddPage = new RecipeStepAdd(this.NewRecipe.Steps, this.NewRecipe);
 
             this.Hide();
 
@@ -120,7 +207,31 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addTagButton_Click(object sender, EventArgs e)
         {
-            var tagAddPage = new RecipeTagAdd(this.tags);
+            this.NewRecipe.Name = this.nameTextBox.Text;
+            this.NewRecipe.Description = this.descriptionTextBox.Text;
+
+            this.NewRecipe.Steps = this.recipeSteps;
+
+            if (this.NewRecipe.Steps.Count == 0)
+            {
+                this.NewRecipe.Steps = this.tempSteps;
+            }
+
+            this.NewRecipe.Tags = this.tags;
+            this.NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (this.NewRecipe.Tags.Count == 0)
+            {
+                this.NewRecipe.Tags = this.tempTags;
+            }
+
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                this.NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+            var tagAddPage = new RecipeTagAdd(this.NewRecipe.Tags, this.NewRecipe);
 
             this.Hide();
 
@@ -129,7 +240,38 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            string recipeName = null;
+            string recipeDescription = null;
 
+            if (String.IsNullOrEmpty(this.nameTextBox.Text))
+            {
+                this.errorFieldsLabel.Visible = true;
+            }
+            else
+            {
+                this.errorFieldsLabel.Visible = false;
+                recipeName = this.nameTextBox.Text;
+            }
+
+            if (String.IsNullOrEmpty(this.descriptionTextBox.Text))
+            {
+                this.errorFieldsLabel.Visible = true;
+            }
+            else
+            {
+                this.errorFieldsLabel.Visible = false;
+                recipeDescription = this.descriptionTextBox.Text;
+            }
+
+            Recipe recipe = null;
+            if (this.errorFieldsLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                recipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -139,6 +281,65 @@ namespace RecipePlannerFinalDemoAdditions
             this.Hide();
 
             homepage.Show();
+        }
+
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            stepsListView.Items.Clear();
+
+            tagsListView.Items.Clear();
+
+            ingredientsListView.Items.Clear();
+
+            NewRecipe.Steps = this.recipeSteps;
+
+            if (NewRecipe.Steps.Count == 0)
+            {
+                NewRecipe.Steps = this.tempSteps;
+            }
+
+            foreach (var step in this.NewRecipe.Steps)
+            {
+                ListViewItem item = new ListViewItem(step.stepNumber.ToString());
+                item.SubItems.Add(step.stepDescription);
+                stepsListView.Items.Add(item);
+            }
+
+            this.nameTextBox.Text = NewRecipe.Name;
+            this.descriptionTextBox.Text = NewRecipe.Description;
+
+            NewRecipe.Tags = this.tags;
+
+            if (NewRecipe.Tags.Count == 0)
+            {
+                NewRecipe.Tags = this.tempTags;
+            }
+
+            foreach (var tag in this.NewRecipe.Tags)
+            {
+                ListViewItem item = new ListViewItem(tag);
+                tagsListView.Items.Add(item);
+            }
+
+            NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+            foreach (var ingredient in NewRecipe.Ingredients)
+            {
+                ListViewItem item = new ListViewItem(ingredient.IngredientName);
+
+                item.SubItems.Add(ingredient.Quantity.ToString());
+                item.SubItems.Add(ingredient.Measurement);
+
+                ingredientsListView.Items.Add(item);
+            }
         }
     }
 }
