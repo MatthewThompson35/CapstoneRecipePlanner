@@ -152,11 +152,12 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            var homepage = new Homepage();
+            var recipeSummary = new RecipeSummary(this.recipe);
 
+            recipeSummary.SetIngredientData(recipeIngredients);
             this.Hide();
 
-            homepage.Show();
+            recipeSummary.Show();
         }
 
         /// <summary>

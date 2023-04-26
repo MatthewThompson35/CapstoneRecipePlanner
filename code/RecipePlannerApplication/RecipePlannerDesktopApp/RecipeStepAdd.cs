@@ -151,11 +151,12 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            var homepage = new Homepage();
 
+            var recipeSummary = new RecipeSummary(this.recipe);
+            recipeSummary.SetStepData(recipeSteps);
+            
             this.Hide();
-
-            homepage.Show();
+            recipeSummary.Show();
         }
 
         private void stepsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
