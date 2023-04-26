@@ -63,7 +63,7 @@
                 {
                     <label class="error" style="color: red">@ViewBag.ErrorMessage</label>
                 }
-                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" />
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" margin-left: 10px; />
             </form>
             <form id="cookMeal" method="POST" style="display: none">
                 <input type="hidden" id="recipeID" name="recipeID" value="">
@@ -107,20 +107,12 @@
         height: 30px;
         width: 600px;
     }
-    #recipe-details {
-        align-items: center;
-        display: flex;
-        flex: 1;
-        margin-left: 50px;
-    }
 
     #recipe-details-box {
-        position: absolute;
-        top: 160px;
-        width: 45%;
+        min-width: 100%;
+        width: 125%;
         max-height: 900px;
         padding: 10px;
-        padding-top: 20px;
         border: 1px solid black;
     }
 
@@ -195,6 +187,14 @@
 
     .hidden {
         display: none;
+    }
+
+    #shareMeal,
+    #cookMeal {
+        display: inline-block;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 25px;
     }
 </style>
 <script>
@@ -306,7 +306,7 @@
 
         // Show the recipe details for the specified recipe ID
         var recipe = document.getElementById(recipeId);
-        recipe.style.display = "block";
+        recipe.style.display = 'inline-block';
 
         // Set the meal type in the corresponding details cell
         var detailsCell = document.getElementById(mealType + "Details");

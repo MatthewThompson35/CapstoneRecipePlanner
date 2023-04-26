@@ -272,6 +272,19 @@
             margin-left: 10px;
         }
 
+        .right-align {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .recipe-tags li {
+            display: inline-block;
+            margin-right: 10px;
+            background-color: #F2F2F2;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
         #search-container button:hover { background-color: #3e8e41; }
 
         #search-container button:active { background-color: #4CAF50; }
@@ -444,7 +457,7 @@
             <div class="form-item" id="@recipe.RecipeId" style="display: none">
                 <form id="add">
                 </form>
-                <form id="cookMeal" method="POST">
+                <form id="cookMeal" method="POST" class="right-align">
                     <input type="hidden" id="recipeID" name="recipeID" value="@recipe.RecipeId">
                     <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe-@recipe.RecipeId"/>
                 </form>
