@@ -281,29 +281,28 @@
 }
 
 <script>
-var cancelAddIngredient = document.getElementById('cancelAddIngredient');
-var addForm = document.getElementById('addForm');
-var showIngredientsForm = document.getElementById('showIngredientsForm');
+    var cancelAddIngredient = document.getElementById('cancelAddIngredient');
+    var addForm = document.getElementById('addForm');
+    var showIngredientsForm = document.getElementById('showIngredientsForm');
 
-cancelAddIngredient.addEventListener("click", () => {
-    addForm.style.display = "none";
-    showIngredientsForm.style.display = "block";
-});
+    cancelAddIngredient.addEventListener("click", () => {
+        addForm.style.display = "none";
+        showIngredientsForm.style.display = "block";
+    });
 
-var cancelAddTag = document.getElementById('cancelAddTag');
-var showTagsForm = document.getElementById('showTagsForm');
-var tagForm = document.getElementById('addTagForm');
+    var cancelAddTag = document.getElementById('cancelAddTag');
+    var showTagsForm = document.getElementById('showTagsForm');
+    var tagForm = document.getElementById('addTagForm');
 
-cancelAddTag.addEventListener("click", () => {
-    tagForm.style.display = "none";
-    showTagsForm.style.display = "block";
-});
+    cancelAddTag.addEventListener("click", () => {
+        tagForm.style.display = "none";
+        showTagsForm.style.display = "block";
+    });
 
-showTagsForm.addEventListener("click", () => {
-    tagForm.style.display = "block";
-    showTagsForm.style.display = "none";
-});
-
+    showTagsForm.addEventListener("click", () => {
+        tagForm.style.display = "block";
+        showTagsForm.style.display = "none";
+    });
 
     var cancelAddStep = document.getElementById('cancelAddStep');
     var showStepForm = document.getElementById('showStepForm');
@@ -318,35 +317,35 @@ showTagsForm.addEventListener("click", () => {
         stepForm.style.display = "block";
         showStepForm.style.display = "none";
     });
+
     var addForm = document.getElementById("addForm");
     addForm.style.display = "none";
     var stepForm = document.getElementById("addStepForm");
     stepForm.style.display = "none";
-        var tagForm = document.getElementById("addTagForm");
-       tagForm.style.display = "none";
- var showIngredientsForm = document.getElementById('showIngredientsForm');
+    var tagForm = document.getElementById("addTagForm");
+    tagForm.style.display = "none";
+    var showIngredientsForm = document.getElementById('showIngredientsForm');
     showIngredientsForm.addEventListener("click", () => {
         addForm.style.display = "block";
         showIngredientsForm.style.display = "none";
     });
-        var showTagForm = document.getElementById('showTagsForm');
-        showTagForm.addEventListener("click", () => {
-            tagForm.style.display = "block";
-        showTagForm.style.display = "none";
-        });
+    var showTagsForm = document.getElementById('showTagsForm');
+    showTagsForm.addEventListener("click", () => {
+        tagForm.style.display = "block";
+        showTagsForm.style.display = "none";
+    });
     var showStepForm = document.getElementById('showStepForm');
     showStepForm.addEventListener("click", () => {
         stepForm.style.display = "block";
         showStepForm.style.display = "none";
     });
- var addIngredientButton = document.getElementById('addIngredientButton');
- var addStepButton = document.getElementById("addStepButton");
- 
- 
- document.getElementById('addForm').addEventListener('submit', function(event) {
+
+    var addIngredientButton = document.getElementById('addIngredientButton');
+    var addStepButton = document.getElementById("addStepButton");
+
+    document.getElementById('addForm').addEventListener('submit', function (event) {
 
         event.preventDefault();
-
 
         addIngredient();
 
@@ -354,21 +353,19 @@ showTagsForm.addEventListener("click", () => {
         document.getElementById('txtQuantity').value = '';
         document.getElementById('measurement').selectedIndex = 0;
     });
-    
+
     document.getElementById('addTagForm').addEventListener('submit', function (event) {
 
         event.preventDefault();
-
 
         addTag();
 
         document.getElementById('recipeTag').value = '';
     });
-    
- document.getElementById('addStepForm').addEventListener('submit', function(event) {
+
+    document.getElementById('addStepForm').addEventListener('submit', function (event) {
 
         event.preventDefault();
-
 
         addStep();
 
@@ -402,7 +399,6 @@ showTagsForm.addEventListener("click", () => {
 
       var table = document.getElementById('StepsTable').getElementsByTagName('tbody')[0];
   table.appendChild(row);
-        stepForm.style.display = "none";
 }
     const addButton = document.getElementById('addRecipeButton');
     addButton.addEventListener('click', function (event) {
@@ -548,7 +544,8 @@ showTagsForm.addEventListener("click", () => {
         table.getElementsByTagName('tbody')[0].appendChild(row);
         showTagForm.style.display = "block";
         document.getElementById('tag-error').innerText = '';
-            tagForm.style.display = "none";
+        var tagForm = document.getElementById("addTagForm");
+        tagForm.style.display = "none";
         
     }
 
@@ -635,7 +632,8 @@ showTagsForm.addEventListener("click", () => {
         document.getElementById('txtIngredientName').value = '';
         showAddForm.style.display = "block";
         document.getElementById('txtQuantity').value = '';
-            addForm.style.display = "none";
+        var addForm = document.getElementById("addForm");
+        addForm.style.display = "none";
     }
 
 
