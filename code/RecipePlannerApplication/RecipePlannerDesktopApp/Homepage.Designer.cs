@@ -44,6 +44,7 @@
             this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewMealPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewShoppingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewSharedRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterButton = new System.Windows.Forms.Button();
             this.activeTagsLbl = new System.Windows.Forms.Label();
             this.filterTagTxt = new System.Windows.Forms.TextBox();
@@ -54,7 +55,6 @@
             this.allRecipesButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addRecipeButton = new System.Windows.Forms.Button();
-            this.viewSharedRecipesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plannerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -184,21 +184,28 @@
             this.viewShoppingListToolStripMenuItem,
             this.viewSharedRecipesToolStripMenuItem});
             this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
-            this.plannerContextMenuStrip.Size = new System.Drawing.Size(182, 92);
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(227, 92);
             // 
             // viewMealPlanToolStripMenuItem
             // 
             this.viewMealPlanToolStripMenuItem.Name = "viewMealPlanToolStripMenuItem";
-            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.viewMealPlanToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.viewMealPlanToolStripMenuItem.Text = "View Meal Plan";
             this.viewMealPlanToolStripMenuItem.Click += new System.EventHandler(this.viewMealPlanToolStripMenuItem_Click);
             // 
             // viewShoppingListToolStripMenuItem
             // 
             this.viewShoppingListToolStripMenuItem.Name = "viewShoppingListToolStripMenuItem";
-            this.viewShoppingListToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.viewShoppingListToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.viewShoppingListToolStripMenuItem.Text = "View Shopping List";
             this.viewShoppingListToolStripMenuItem.Click += new System.EventHandler(this.viewShoppingListToolStripMenuItem_Click_1);
+            // 
+            // viewSharedRecipesToolStripMenuItem
+            // 
+            this.viewSharedRecipesToolStripMenuItem.Name = "viewSharedRecipesToolStripMenuItem";
+            this.viewSharedRecipesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.viewSharedRecipesToolStripMenuItem.Text = "View Recommended Recipes";
+            this.viewSharedRecipesToolStripMenuItem.Click += new System.EventHandler(this.viewSharedRecipesToolStripMenuItem_Click);
             // 
             // filterButton
             // 
@@ -292,13 +299,6 @@
             this.addRecipeButton.Text = "Add Recipe";
             this.addRecipeButton.UseVisualStyleBackColor = true;
             this.addRecipeButton.Click += new System.EventHandler(this.addRecipeButton_Click);
-            // 
-            // viewSharedRecipesToolStripMenuItem
-            // 
-            this.viewSharedRecipesToolStripMenuItem.Name = "viewSharedRecipesToolStripMenuItem";
-            this.viewSharedRecipesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.viewSharedRecipesToolStripMenuItem.Text = "View Shared Recipes";
-            this.viewSharedRecipesToolStripMenuItem.Click += new System.EventHandler(this.viewSharedRecipesToolStripMenuItem_Click);
             // 
             // Homepage
             // 
