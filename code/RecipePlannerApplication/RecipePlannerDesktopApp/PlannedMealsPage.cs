@@ -1298,18 +1298,6 @@ namespace RecipePlannerDesktopApplication
             }
         }
 
-        private void sundayButton_Click(object sender, EventArgs e)
-        {
-            if (sundayPanel.Height == 181)
-            {
-                sundayPanel.Height = 45;
-            }
-            else
-            {
-                sundayPanel.Height = 181;
-            }
-        }
-
         private void addIngredientsForRemainingMealsButton_Click(object sender, EventArgs e)
         {
             if (this.addAllIngredientsCheckbox.Checked == true)
@@ -1843,6 +1831,7 @@ namespace RecipePlannerDesktopApplication
                 var detailsPage = new RecipeDetailsPage(this);
                 detailsPage.Show();
             }
+
         }
 
         private void sundayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1863,6 +1852,7 @@ namespace RecipePlannerDesktopApplication
                 var detailsPage = new RecipeDetailsPage(this);
                 detailsPage.Show();
             }
+
         }
 
         private void sundayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1882,6 +1872,57 @@ namespace RecipePlannerDesktopApplication
 
                 var detailsPage = new RecipeDetailsPage(this);
                 detailsPage.Show();
+            }
+
+        }
+
+        private void removeSundayBreakfastButton_Click_1(object sender, EventArgs e)
+        {
+            if (this.isNextWeekDisplayed)
+            {
+                this.removeNextWeekMeal(this.sundayBreakfastLinkLabel, this.sundayLabel.Text);
+            }
+            else
+            {
+                this.removeThisWeekMeal(this.sundayBreakfastLinkLabel, this.sundayLabel.Text);
+            }
+
+        }
+
+        private void removeSundayLunchButton_Click_1(object sender, EventArgs e)
+        {
+            if (this.isNextWeekDisplayed)
+            {
+                this.removeNextWeekMeal(this.sundayLunchLinkLabel, this.sundayLabel.Text);
+            }
+            else
+            {
+                this.removeThisWeekMeal(this.sundayLunchLinkLabel, this.sundayLabel.Text);
+            }
+
+        }
+
+        private void removeSundayDinnerButton_Click_1(object sender, EventArgs e)
+        {
+            if (this.isNextWeekDisplayed)
+            {
+                this.removeNextWeekMeal(this.sundayDinnerLinkLabel, this.sundayLabel.Text);
+            }
+            else
+            {
+                this.removeThisWeekMeal(this.sundayDinnerLinkLabel, this.sundayLabel.Text);
+            }
+        }
+
+        private void sundayButton_Click(object sender, EventArgs e)
+        {
+            if (sundayPanel.Height == 181)
+            {
+                sundayPanel.Height = 45;
+            }
+            else
+            {
+                sundayPanel.Height = 181;
             }
         }
     }

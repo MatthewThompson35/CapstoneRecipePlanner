@@ -198,6 +198,8 @@ namespace RecipePlannerDesktopApplication
             this.addToMealPlanButton.Visible = false;
             this.displayDayMealTypeWeekElements();
             this.displayAddCancelButtons();
+
+            this.updateSuccessfullyLabel.Visible = false;
         }
 
         private void NoButton_Click(object? sender, EventArgs e)
