@@ -76,9 +76,7 @@
         #recipe-details-box {
             display: flex;
             flex-direction: column;
-            height: 500px; 
             margin-left: 20px; 
-            overflow: auto;
         }
 
         .recipe-name {
@@ -274,6 +272,19 @@
             margin-left: 10px;
         }
 
+        .right-align {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .recipe-tags li {
+            display: inline-block;
+            margin-right: 10px;
+            background-color: #F2F2F2;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
         #search-container button:hover { background-color: #3e8e41; }
 
         #search-container button:active { background-color: #4CAF50; }
@@ -387,13 +398,13 @@
         <p>This is being displayed</p>
     </div>
 </div>
-<div id="recipe-details-box" style="display: flex; flex-direction: column; height: 1000px; overflow: auto; width: 1000px;">
+<div id="recipe-details-box" style="display: flex; flex-direction: column; width: 1000px;">
     <form id="shareMeal" method="POST">
         <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
 
-        <label for="txtUsername">Share to:</label>
+                <label for="txtUsername">Recommend to:</label>
         <input type="text" name="txtUsername" id="txtUsername"/>
-        <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Recipe" id="ShareRecipe" class="btn btn-primary page-button"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" class="btn btn-primary page-button" />
         <br>
         @if (ViewBag.ErrorMessage != null)
         {
@@ -446,7 +457,7 @@
             <div class="form-item" id="@recipe.RecipeId" style="display: none">
                 <form id="add">
                 </form>
-                <form id="cookMeal" method="POST">
+                <form id="cookMeal" method="POST" class="right-align">
                     <input type="hidden" id="recipeID" name="recipeID" value="@recipe.RecipeId">
                     <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe-@recipe.RecipeId"/>
                 </form>

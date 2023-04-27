@@ -1,4 +1,5 @@
 ﻿<style>
+
     #addForm,
     #addStepForm,
     #addTagForm {
@@ -11,9 +12,7 @@
         padding: 20px;
     }
 
-    #addForm {
-        height: 500px;
-    }
+    #addForm { height: 500px; }
 
     #addForm input[type="text"],
     #addStepForm input[type="text"],
@@ -36,7 +35,7 @@
     #addStepForm input[type="button"],
     #addForm input[type="button"],
     #addTagForm input[type="button"] {
-        background-color: #33b5e5;
+        background-color: #007bff;
         border: none;
         border-radius: 5px;
         color: #fff;
@@ -64,10 +63,8 @@
     }
 
     #addForm .form-group,
-    #addStepFrom .form-group,
-    #addTagForm .form-group { 
-        margin-bottom: 15px; 
-    }
+    #addStepForm .form-group,
+    #addTagForm .form-group { margin-bottom: 15px; }
 
     #addForm .button-group,
     #addStepForm .button-group,
@@ -88,18 +85,19 @@
 
     #addRecipe input[type="text"],
     #addRecipe select {
-        border: 1px solid #e6e6e6;
+        background-color: #007bff;
+        border: none;
         border-radius: 5px;
-        box-sizing: border-box;
-        font-size: 18px;
-        margin-bottom: 10px;
-        padding: 10px;
-        width: 100%;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 10px;
+        padding: 5px 10px;
     }
 
     #addRecipe input[type="submit"],
     #addRecipe input[type="button"] {
-        background-color: #33b5e5;
+            background-color: #007bff;
         border: none;
         border-radius: 5px;
         color: #fff;
@@ -131,121 +129,145 @@
 
     .form-container label.error { font-size: 14px; }
 
+    #recipeName,
+    #description {
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    #showIngredientsForm,
+    #showStepForm,
+    #showTagsForm,
+    #cancelAddIngredient,
+    #cancelAddStep,
+    #cancelAddTag {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 10px;
+        padding: 5px 10px;
+    }
 </style>
 
 <div class="row">
     <div class="col-md-12">
-        <form id="addRecipe">
-            @if (ViewBag.Error != null)
-            {
-                <label class="error" style="color: red">@ViewBag.Error</label>
-            }
-            <div class="form-group">
-                <span id="recipe-error" style="color: red;"></span>
-                <label for="recipeName">Recipe Name:</label>
-                <input type="text" name="recipeName" id="recipeName"/>
-            </div>
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" name="description" id="description"/>
-            </div>
-            <div class="form-group">
-                <h1>Ingredients</h1>
-                <table id="IngredientsTable" class="table">
-                    <thead>
-                    <tr>
-                        <th>Ingredient Name</th>
-                        <th>Quantity</th>
-                        <th>Measurement</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="form-group">
-                <h1>Steps</h1>
-                <table id="StepsTable" class="table">
-                    <thead>
-                    <tr>
-                        <th>Step</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="form-group">
-                <h1>Tags</h1>
-                <table id="TagsTable" class="table">
-                    <thead>
-                    <tr>
-                        <th>Tag</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </form>
-        <h4>Please add all ingredients and steps in order</h4>
-    </div>
-    <h2>Ingredients</h2>
-    <div class="col-md-6">
-        <form id="addForm">
-            <div class="form-group">
+        @if (ViewBag.Error != null)
+        {
+            <label class="error" style="color: red">@ViewBag.Error</label>
+        }
+        <span id="recipe-error" style="color: red;"></span>
+        <div class="form-group">
+            <label for="recipeName">Recipe Name:</label>
+            <input type="text" name="recipeName" id="recipeName"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description"/>
+        </div>
+        <div class="form-group">
+            <h1>Ingredients</h1>
+            <button id="showIngredientsForm">Add Ingredient</button>
+            <form id="addForm" style="display: none;">
                 <span id="ingredient-error" style="color: red;"></span>
-                <label for="txtIngredientName">Ingredient Name:</label>
-                <input type="text" name="txtIngredientName" id="txtIngredientName"/>
-            </div>
-            <div class="form-group">
-                <label for="txtQuantity">Quantity:</label>
-                <span id="quantity-error" style="color: red;"></span>
-                <input type="text" name="txtQuantity" id="txtQuantity"/>
-            </div>
-            <div class="form-group">
-                <label for="measurement">Measurement:</label>
-                <select name="Measurement" id="measurement">
-                    @foreach (var measurement in ViewBag.measurements)
-                    {
-                        <option value="@measurement">@measurement</option>
-                    }
-                </select>
-                
-            </div>
-            <div class="button-group">
-                <button onsubmit="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton">Add Ingredient</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <h2>Steps</h2>
-        <form id="addStepForm">
-            <div class="form-group">
-                <label for="recipeName">Recipe Step:</label>
-                <input type="text" name="recipeStep" id="recipeStep"/>
-            </div>
-            <button onsubmit="addStep()" class="btn btn-primary page-button" id="addStepButton">Add Step</button>
-        </form>
-        <h2>Tags</h2>
-        <form id="addTagForm">
-            <div class="form-group">
+                <div class="form-group">
+                    <label for="txtIngredientName">Ingredient Name:</label>
+                    <input type="text" name="txtIngredientName" id="txtIngredientName"/>
+                </div>
+                <div class="form-group">
+                    <label for="txtQuantity">Quantity:</label>
+                    <span id="quantity-error" style="color: red;"></span>
+                    <input type="text" name="txtQuantity" id="txtQuantity"/>
+                </div>
+                <div class="form-group">
+                    <label for="measurement">Measurement:</label>
+                    <select name="Measurement" id="measurement">
+                        @foreach (var measurement in ViewBag.measurements)
+                        {
+                            <option value="@measurement">@measurement</option>
+                        }
+                    </select>
+
+                </div>
+                <div class="button-group">
+                    <button onsubmit="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton">Add Ingredient</button>
+                    <input type="button" value="Cancel" id="cancelAddIngredient"/>
+                </div>
+            </form>
+            <table id="IngredientsTable" class="table">
+                <thead>
+                <tr>
+                    <th>Ingredient Name</th>
+                    <th>Quantity</th>
+                    <th>Measurement</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <h1>Steps</h1>
+
+            <button id="showStepForm">Add Step</button>
+            <form id="addStepForm">
+                <span id="step-error" style="color: red;"></span>
+                <div class="form-group">
+                    <label for="recipeName">Recipe Step:</label>
+                    <input type="text" name="recipeStep" id="recipeStep"/>
+                </div>
+                <button onsubmit="addStep()" class="btn btn-primary page-button" id="addStepButton">Add Step</button>
+                <input type="button" value="Cancel" id="cancelAddStep"/>
+            </form>
+            <table id="StepsTable" class="table">
+                <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <h1>Tags</h1>
+            <button id="showTagsForm">Add Tag</button>
+            <form id="addTagForm">
                 <span id="tag-error" style="color: red;"></span>
-                <label for="recipeName">Recipe Tag:</label>
-                <input type="text" name="recipeTag" id="recipeTag"/>
-            </div>
-            <button onsubmit="addTag()" class="btn btn-primary page-button" id="addTagButton">Add Tag</button>
+                <div class="form-group">
+                    <label for="recipeName">Recipe Tag:</label>
+                    <input type="text" name="recipeTag" id="recipeTag"/>
+                </div>
+                <button onsubmit="addTag()" class="btn btn-primary page-button" id="addTagButton">Add Tag</button>
+                <input type="button" value="Cancel" id="cancelAddTag"/>
+            </form>
+            <table id="TagsTable" class="table">
+                <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <form id="buttons">
+            <button asp-action="goToRecipePage" class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
+            <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
         </form>
     </div>
-    <form id="buttons">
-        <button asp-action="goToRecipePage" class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
-        <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
-    </form>
 </div>
 
 
@@ -259,6 +281,64 @@
 }
 
 <script>
+var cancelAddIngredient = document.getElementById('cancelAddIngredient');
+var addForm = document.getElementById('addForm');
+var showIngredientsForm = document.getElementById('showIngredientsForm');
+
+cancelAddIngredient.addEventListener("click", () => {
+    addForm.style.display = "none";
+    showIngredientsForm.style.display = "block";
+});
+
+var cancelAddTag = document.getElementById('cancelAddTag');
+var showTagsForm = document.getElementById('showTagsForm');
+var tagForm = document.getElementById('addTagForm');
+
+cancelAddTag.addEventListener("click", () => {
+    tagForm.style.display = "none";
+    showTagsForm.style.display = "block";
+});
+
+showTagsForm.addEventListener("click", () => {
+    tagForm.style.display = "block";
+    showTagsForm.style.display = "none";
+});
+
+
+    var cancelAddStep = document.getElementById('cancelAddStep');
+    var showStepForm = document.getElementById('showStepForm');
+    var stepForm = document.getElementById('addStepForm');
+
+    cancelAddStep.addEventListener("click", () => {
+        stepForm.style.display = "none";
+        showStepForm.style.display = "block";
+    });
+
+    showStepForm.addEventListener("click", () => {
+        stepForm.style.display = "block";
+        showStepForm.style.display = "none";
+    });
+    var addForm = document.getElementById("addForm");
+    addForm.style.display = "none";
+    var stepForm = document.getElementById("addStepForm");
+    stepForm.style.display = "none";
+        var tagForm = document.getElementById("addTagForm");
+       tagForm.style.display = "none";
+ var showIngredientsForm = document.getElementById('showIngredientsForm');
+    showIngredientsForm.addEventListener("click", () => {
+        addForm.style.display = "block";
+        showIngredientsForm.style.display = "none";
+    });
+        var showTagForm = document.getElementById('showTagsForm');
+        showTagForm.addEventListener("click", () => {
+            tagForm.style.display = "block";
+        showTagForm.style.display = "none";
+        });
+    var showStepForm = document.getElementById('showStepForm');
+    showStepForm.addEventListener("click", () => {
+        stepForm.style.display = "block";
+        showStepForm.style.display = "none";
+    });
  var addIngredientButton = document.getElementById('addIngredientButton');
  var addStepButton = document.getElementById("addStepButton");
  
@@ -299,6 +379,11 @@
 
       var row = document.createElement('tr');
       var stepValue = document.getElementById("recipeStep").value;
+        var errorLabel = document.getElementById('step-error');
+      if (stepValue === ''){
+           errorLabel.textContent = "Please enter a step";
+            return;
+          }
 
       var nameCell = document.createElement('td');
       nameCell.innerText = stepValue;
@@ -307,15 +392,17 @@
       var actionsCell = document.createElement('td');
       var deleteButton = document.createElement('button');
       deleteButton.innerText = 'Delete';
+      deleteButton.classList.add("btn", "btn-primary", "page-button");
       deleteButton.onclick = function() {
         row.remove();
       };
       actionsCell.appendChild(deleteButton);
       row.appendChild(actionsCell);
+        showStepForm.style.display = "block";
 
       var table = document.getElementById('StepsTable').getElementsByTagName('tbody')[0];
   table.appendChild(row);
-
+        stepForm.style.display = "none";
 }
     const addButton = document.getElementById('addRecipeButton');
     addButton.addEventListener('click', function (event) {
@@ -345,6 +432,12 @@
         const recipeDescriptionInput = document.getElementById('description');
 
         const recipeName = recipeNameInput.value;
+        if(recipeName === ''){
+            errorLabel.textContent = 'Please enter a Recipe Name';
+            }
+        if(recipeDescriptionInput === ''){
+            errorLabel.textContent = 'Please enter a Description';
+            }
         
         var exists = false;
         $.ajax({
@@ -412,15 +505,15 @@
                 }
         } else {
             event.preventDefault();
-            errorLabel.textContent = 'ALL TABLES MUST HAVE VALUES!';
+            errorLabel.textContent = 'ALL FIELDS MUST HAVE VALUES!';
         }
     }
 
     function addTag() {
         var tag = document.getElementById('recipeTag').value.trim();
-        document.getElementById('tag-error').innerText = '';
+        var errorLabel = document.getElementById('tag-error');
         if (tag === '') {
-            alert('Please enter a tag.');
+            errorLabel.textContent = "Please enter a tag";
             return;
         }
 
@@ -444,6 +537,7 @@
 
         var deleteButton = document.createElement('button');
         deleteButton.innerText = 'Delete';
+        deleteButton.classList.add("btn", "btn-primary", "page-button");
         deleteButton.onclick = function () {
             row.remove();
         };
@@ -452,8 +546,10 @@
         row.appendChild(actionsCell);
 
         table.getElementsByTagName('tbody')[0].appendChild(row);
-
+        showTagForm.style.display = "block";
         document.getElementById('tag-error').innerText = '';
+            tagForm.style.display = "none";
+        
     }
 
 
@@ -461,8 +557,16 @@
         var name = document.getElementById('txtIngredientName').value;
         var quantity = document.getElementById('txtQuantity').value;
         var measurement = document.getElementById('measurement').value;
-
-        var errorLabel = document.getElementById('quantity-error');
+        var nameError = document.getElementById('ingredient-error');
+        var errorLabel = document.getElementById('ingredient-error');
+        if (name === '') {
+            errorLabel.textContent = 'Please enter a Name';
+            return;
+        }
+        if (quantity === '') {
+            errorLabel.textContent = 'Please enter a Quantity';
+            return;
+        }
         if (!errorLabel) {
             errorLabel = document.createElement('span');
             errorLabel.id = 'quantity-error';
@@ -472,6 +576,8 @@
         }
         errorLabel.textContent = '';
         if (isNaN(quantity)) {
+            errorLabel.textContent = 'Quantity must be an integer';
+            return;
             var errorLabel = document.getElementById('quantity-error');
             if (!errorLabel) {
                 errorLabel = document.createElement('span');
@@ -515,6 +621,7 @@
 
             var actionsCell = document.createElement('td');
             var deleteButton = document.createElement('button');
+            deleteButton.classList.add("btn", "btn-primary", "page-button");
             deleteButton.innerText = 'Delete';
             deleteButton.onclick = function () {
                 row.remove();
@@ -526,8 +633,13 @@
         }
 
         document.getElementById('txtIngredientName').value = '';
+        showAddForm.style.display = "block";
         document.getElementById('txtQuantity').value = '';
+            addForm.style.display = "none";
     }
+
+
+
 
 
 

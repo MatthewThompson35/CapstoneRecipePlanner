@@ -4,11 +4,11 @@
 }
 <div>
     <h2>@ViewBag.Header</h2>
-    <form method="post" action="@Url.Action("ToggleWeek", "Home", new { currentWeek = ViewBag.CurrentWeek })">
+    <form style="margin-bottom: 10px" method="post" action="@Url.Action("ToggleWeek", "Home", new { currentWeek = ViewBag.CurrentWeek })">
         <button>Switch Weeks</button>
     </form>
     
-    <form id="addForm" method="post" action="@Url.Action("addNeededPlannedMealIngredients", "Home")">
+    <form style="margin-bottom: 10px" id="addForm" method="post" action="@Url.Action("addNeededPlannedMealIngredients", "Home")">
 
         <button id="submitButton">Add Ingredients For Remaining Meals</button>
         <label for="AllIngredients">Add all Ingredients</label>
@@ -52,22 +52,22 @@
             }
         </table>
     </div>
-
+    
     <div class="col-md-6" id="recipe-details">
         <div id="recipe-details-box" style="overflow: auto;">
-            <form id="cookMeal" method="POST" style="display: none">
-                <input type="hidden" id="recipeID" name="recipeID" value="">
-                <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe"/>
-            </form>
             <form id="shareMeal" method="POST" style="display: none">
                 <input type="hidden" id="sharedRecipeID" name="sharedRecipeID" value="">
-                <label for="txtUsername">Share to:</label>
+                <label for="txtUsername">Recommend to:</label>
                 <input type="text" name="txtUsername" id="txtUsername"/>
                 @if (ViewBag.ErrorMessage != null)
                 {
                     <label class="error" style="color: red">@ViewBag.ErrorMessage</label>
                 }
-                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Share Recipe" id="ShareRecipe"/>
+                <input type="submit" class="btn btn-primary page-button" asp-action="ShareMeal" value="Recommend Recipe" id="ShareRecipe" margin-left: 10px; />
+            </form>
+            <form id="cookMeal" method="POST" style="display: none">
+                <input type="hidden" id="recipeID" name="recipeID" value="">
+                <input type="submit" class="btn btn-primary page-button" asp-action="CookMealConfirmation" value="Cook Recipe" id="CookRecipe"/>
             </form>
             @foreach (var recipe in ViewBag.AllRecipes)
             {
@@ -107,21 +107,13 @@
         height: 30px;
         width: 600px;
     }
-    #recipe-details {
-        align-items: center;
-        display: flex;
-        flex: 1;
-        margin-left: 50px;
-    }
 
     #recipe-details-box {
-        border: 1px solid black;
-        height: 900px;
+        min-width: 100%;
+        width: 125%;
+        max-height: 900px;
         padding: 10px;
-        padding-top: 20px;
-        top: 160px;
-        position: fixed;
-        width: 38%;
+        border: 1px solid black;
     }
 
     #recipe-details-box h3 {
@@ -176,7 +168,7 @@
         color: white;
         cursor: pointer;
         display: inline-block;
-        font-size: 16px;
+        font-size: 14px;
         padding: 8px;
         text-align: center;
         text-decoration: none;
@@ -195,6 +187,14 @@
 
     .hidden {
         display: none;
+    }
+
+    #shareMeal,
+    #cookMeal {
+        display: inline-block;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 25px;
     }
 </style>
 <script>
@@ -306,7 +306,7 @@
 
         // Show the recipe details for the specified recipe ID
         var recipe = document.getElementById(recipeId);
-        recipe.style.display = "block";
+        recipe.style.display = 'inline-block';
 
         // Set the meal type in the corresponding details cell
         var detailsCell = document.getElementById(mealType + "Details");

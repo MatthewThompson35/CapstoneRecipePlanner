@@ -82,19 +82,36 @@
         }
 
         #recipe-details-box {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+        }
+
+        .form-item {
             background-color: #fff;
             border: 1px solid black;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #addForm {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #details {
             display: flex;
             flex: 1;
-            margin-left: 50px;
-            max-width: 600px;
-            overflow: hidden;
-            overflow-y: auto;
-            padding: 20px;
-            width: 50%;
+            flex-direction: column;
+            margin-top: 20px;
         }
+
+        #details > div { display: none; }
 
         .form-group {
             align-items: left;
@@ -139,6 +156,11 @@
             text-align: center;
             text-decoration: none;
         }
+
+        .right-align {
+            display: flex;
+            justify-content: flex-end;
+        }
     </style>
 
 </head>
@@ -146,7 +168,7 @@
 <div id="recipe-container">
     <button onclick="location.href='@Url.Action("Index")'" id="logout">Logout</button>
     <div id="recipe-list">
-        <h2><center>Shared Recipes</center></h2>
+            <h2><center>Recommended Recipes</center></h2>
         <table id="all-recipes">
             <thead>
             <tr>
@@ -181,8 +203,8 @@
 
         </div>
     </div>
-    <div id="recipe-details-box" style="display: flex; flex-direction: column; height: 1000px; overflow: auto;">
-        <div id="addForm">
+    <div id="recipe-details-box" style="display: none; flex-direction: column; height: 1000px; overflow: auto;">
+        <div id="addForm" class="form-item">
             <form method="post" id="addPlannedMeal" style="display: none;">
                 <div class="form-group">
                     <input type="hidden" name="recipeId" id="recipeId" value="">
@@ -218,8 +240,8 @@
                 </div>
             </form>
         </div>
-        <div id="details">
-            <form id="cookMeal" method="POST">
+            <div id="details" class="form-item">
+            <form id="cookMeal" method="POST" class="right-align">
                 <input type="hidden" id="recipeID" name="recipeID" value="">
                 <input type="submit" class="btn btn-primary page-button" asp-action="CookMeal" value="Cook Meal" id="CookRecipe" style="display: none;"/>
             </form>
@@ -263,6 +285,7 @@
     function showRecipe(recipeId) {
         var recipeID = document.getElementById('recipeID')
         var cookRecipe = document.getElementById('CookRecipe');
+        var recipeDetails = document.getElementById('recipe-details-box');
         var recipeDiv = document.getElementById(recipeId);
         var currentDiv = document.querySelector('#details > div[style*="display: block"]');
         var addPlannedMealForm = document.getElementById('addPlannedMeal');
@@ -278,5 +301,6 @@
         recipeDiv.style.display = 'block';
         addPlannedMealForm.style.display = 'block';
         cookRecipe.style.display = "block";
+        recipeDetails.style.display = "flex";
     }
 </script>
