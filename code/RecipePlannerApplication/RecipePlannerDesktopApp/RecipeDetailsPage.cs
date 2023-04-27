@@ -218,7 +218,7 @@ namespace RecipePlannerDesktopApplication
 
             if (this.weekComboBox.SelectedItem.Equals("This Week"))
             {
-                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"), this.homepage.GetSelectedRecipe().RecipeId);
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "this"), this.getCurrentRecipe().RecipeId);
                 this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
                 this.updateSuccessfullyLabel.Visible = true;
@@ -227,7 +227,7 @@ namespace RecipePlannerDesktopApplication
             }
             else
             {
-                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"), this.homepage.GetSelectedRecipe().RecipeId);
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, "next"), this.getCurrentRecipe().RecipeId);
                 this.updateSuccessfullyLabel.Visible = true;
                 this.updateSuccessfullyLabel.Text = "Meal is updated for this day and meal type.";
                 this.updateSuccessfullyLabel.ForeColor = Color.Green;
