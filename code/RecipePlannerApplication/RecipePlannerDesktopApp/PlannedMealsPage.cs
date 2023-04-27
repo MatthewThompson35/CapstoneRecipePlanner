@@ -1925,5 +1925,14 @@ namespace RecipePlannerDesktopApplication
                 sundayPanel.Height = 181;
             }
         }
+
+        private void viewPantryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var pantry = new IngredientsPage();
+
+            pantry.Show();
+        }
     }
 }

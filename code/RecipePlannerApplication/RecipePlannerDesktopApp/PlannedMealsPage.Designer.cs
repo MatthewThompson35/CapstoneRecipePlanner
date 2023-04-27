@@ -124,6 +124,7 @@
             this.removeSundayDinnerButton = new System.Windows.Forms.Button();
             this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
             this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
+            this.viewPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plannerContextMenuStrip.SuspendLayout();
             this.mondayPanel.SuspendLayout();
             this.tuesdayPanel.SuspendLayout();
@@ -628,10 +629,11 @@
             this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.findRecipeToolStripMenuItem,
+            this.viewPantryToolStripMenuItem,
             this.viewCurrentWeekPlanToolStripMenuItem,
             this.viewNextWeekPlanToolStripMenuItem});
             this.plannerContextMenuStrip.Name = "plannerContextMenuStrip";
-            this.plannerContextMenuStrip.Size = new System.Drawing.Size(235, 76);
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(235, 128);
             // 
             // findRecipeToolStripMenuItem
             // 
@@ -1231,6 +1233,13 @@
             this.addAllIngredientsCheckbox.Text = "Add All Ingredients";
             this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
             // 
+            // viewPantryToolStripMenuItem
+            // 
+            this.viewPantryToolStripMenuItem.Name = "viewPantryToolStripMenuItem";
+            this.viewPantryToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.viewPantryToolStripMenuItem.Text = "View Pantry";
+            this.viewPantryToolStripMenuItem.Click += new System.EventHandler(this.viewPantryToolStripMenuItem_Click);
+            // 
             // PlannedMealsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1368,5 +1377,6 @@
         private Button removeSundayBreakfastButton;
         private Button removeSundayLunchButton;
         private Button removeSundayDinnerButton;
+        private ToolStripMenuItem viewPantryToolStripMenuItem;
     }
 }
