@@ -33,7 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addIngredientButton = new System.Windows.Forms.Button();
-            this.removeIngredientButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.ingredientsGridView = new System.Windows.Forms.DataGridView();
@@ -42,6 +41,7 @@
             this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.increaseQuantityColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Measurement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ingredientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.backButton = new System.Windows.Forms.Button();
             this.serverErrorLabel = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             // 
             // addIngredientButton
             // 
-            this.addIngredientButton.Location = new System.Drawing.Point(94, 615);
+            this.addIngredientButton.Location = new System.Drawing.Point(94, 657);
             this.addIngredientButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addIngredientButton.Name = "addIngredientButton";
             this.addIngredientButton.Size = new System.Drawing.Size(319, 55);
@@ -65,17 +65,6 @@
             this.addIngredientButton.Text = "Add Ingredient";
             this.addIngredientButton.UseVisualStyleBackColor = true;
             this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
-            // 
-            // removeIngredientButton
-            // 
-            this.removeIngredientButton.Location = new System.Drawing.Point(94, 696);
-            this.removeIngredientButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.removeIngredientButton.Name = "removeIngredientButton";
-            this.removeIngredientButton.Size = new System.Drawing.Size(319, 59);
-            this.removeIngredientButton.TabIndex = 2;
-            this.removeIngredientButton.Text = "Remove Ingredient";
-            this.removeIngredientButton.UseVisualStyleBackColor = true;
-            this.removeIngredientButton.Click += new System.EventHandler(this.removeIngredientButton_Click);
             // 
             // label1
             // 
@@ -115,7 +104,8 @@
             this.decreaseQuantityColumn,
             this.quantityColumn,
             this.increaseQuantityColumn,
-            this.Measurement});
+            this.Measurement,
+            this.removeColumn});
             this.ingredientsGridView.DataSource = this.ingredientBindingSource;
             this.ingredientsGridView.Location = new System.Drawing.Point(25, 181);
             this.ingredientsGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -136,7 +126,7 @@
             this.IngredientColumn.MinimumWidth = 6;
             this.IngredientColumn.Name = "IngredientColumn";
             this.IngredientColumn.ReadOnly = true;
-            this.IngredientColumn.Width = 130;
+            this.IngredientColumn.Width = 105;
             // 
             // decreaseQuantityColumn
             // 
@@ -173,7 +163,16 @@
             this.Measurement.HeaderText = "Measurement";
             this.Measurement.MinimumWidth = 6;
             this.Measurement.Name = "Measurement";
-            this.Measurement.Width = 125;
+            this.Measurement.Width = 85;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 75;
             // 
             // backButton
             // 
@@ -273,7 +272,6 @@
             this.Controls.Add(this.ingredientsGridView);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.removeIngredientButton);
             this.Controls.Add(this.addIngredientButton);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "IngredientsPage";
@@ -287,7 +285,6 @@
 
         #endregion
         private Button addIngredientButton;
-        private Button removeIngredientButton;
         private Label label1;
         private Button logoutButton;
         private DataGridView ingredientsGridView;
@@ -295,11 +292,6 @@
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn IngredientColumn;
-        private DataGridViewButtonColumn decreaseQuantityColumn;
-        private DataGridViewTextBoxColumn quantityColumn;
-        private DataGridViewButtonColumn increaseQuantityColumn;
-        private DataGridViewTextBoxColumn Measurement;
         private Button backButton;
         private Label serverErrorLabel;
         private Button beginningButton;
@@ -310,5 +302,11 @@
         private Button nextButton;
         private Button button3;
         private Label label2;
+        private DataGridViewTextBoxColumn IngredientColumn;
+        private DataGridViewButtonColumn decreaseQuantityColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewButtonColumn increaseQuantityColumn;
+        private DataGridViewTextBoxColumn Measurement;
+        private DataGridViewButtonColumn removeColumn;
     }
 }

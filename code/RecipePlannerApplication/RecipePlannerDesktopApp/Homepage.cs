@@ -1,4 +1,5 @@
-﻿using RecipePlannerLibrary;
+﻿using RecipePlannerFinalDemoAdditions;
+using RecipePlannerLibrary;
 using RecipePlannerLibrary.Database;
 using RecipePlannerLibrary.Models;
 
@@ -639,11 +640,9 @@ public partial class Homepage : Form
 
     private void addRecipeButton_Click(object sender, EventArgs e)
     {
-        var recipePage = new RecipePage();
-
+        var recipeSummary = new RecipeSummary();
         this.Hide();
-
-        recipePage.Show();
+        recipeSummary.Show();
     }
 
     private void viewSharedRecipesToolStripMenuItem_Click(object sender, EventArgs e)
