@@ -57,6 +57,7 @@ namespace RecipePlannerDesktopApplication
             if (isValid && RecipeDAL.ContainsSharedRecipe(recipe).Count == 0)
             {
                 RecipeDAL.shareRecipe(username, this.detailsPage.getRecipeId(), Connection.ConnectionString);
+                this.Hide();
                 this.detailsPage.Show();
             }
 
