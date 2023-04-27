@@ -204,10 +204,12 @@ namespace RecipePlannerDesktopApplication
 
         private void NoButton_Click(object? sender, EventArgs e)
         {
-            var page = new Homepage();
+            this.yesButton.Visible = false;
+            this.noButton.Visible = false;
+            this.addToMealPlanButton.Visible = true;
+            this.updateSuccessfullyLabel.Visible = false;
 
-            this.Hide();
-            page.Show();
+            this.hideDayMealTypeWeekElements();
         }
 
         private void YesButton_Click(object? sender, EventArgs e)
