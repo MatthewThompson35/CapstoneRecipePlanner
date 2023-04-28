@@ -310,14 +310,12 @@
     <div id="filter-tags">Filter by Tags: </div>
     <br>
     <h2>Recipes</h2>
-    <form method="post" asp-action="goToAddRecipesPage">
-        <input type="submit" class="btn btn-primary page-button" value="Add Recipe" id="addButton"/>
-    </form>
 
     <table id="available-recipes" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
         <thead>
         <tr>
             <th>Name</th>
+            <th>Tags</th>
         </tr>
         </thead>
         <tbody>
@@ -331,6 +329,10 @@
         {
             <tr onclick="showRecipe('@recipe.RecipeId')">
                 <td>@recipe.Name</td>
+                <td>@foreach (var tag in recipe.Tags)
+                    {
+                        <span>@tag</span>
+                    }</td>
             </tr>
         }
         </tbody>
@@ -361,6 +363,10 @@
         {
             <tr onclick="showRecipe('@recipe.RecipeId')">
                 <td>@recipe.Name</td>
+                <td>@foreach (var tag in recipe.Tags)
+                    {
+                        <span>@tag</span>
+                    }</td>
             </tr>
         }
         </tbody>
@@ -412,45 +418,6 @@
         }
 
     </form>
-
-    <div id="addForm" class="form-item">
-        <form method="post" id="addPlannedMeal" style="display: none;">
-            <div class="form-group">
-                <input type="hidden" name="recipeId" id="recipeId" value="">
-                <label for="week">Week:</label>
-                <select name="week" id="week">
-                    @foreach (var week in new[] {"This Week", "Next Week"})
-                    {
-                        <option value="@week">@week</option>
-                    }
-                </select>
-                <label for="day">Day:</label>
-                <select name="day" id="day">
-                    @foreach (var day in new[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"})
-                    {
-                        <option value="@day">@day</option>
-                    }
-                </select>
-                <label for="type">Meal Type:</label>
-                <select name="type" id="type">
-                    @foreach (var type in new[] {"Breakfast", "Lunch", "Dinner"})
-                    {
-                        <option value="@type">@type</option>
-                    }
-                </select>
-                <div id="errorMessage" style="display: none;">
-                    Are you sure You want to overwrite your previous meal?
-                </div>
-
-            </div>
-            <div class="button-group">
-                <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add"/>
-                <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel"/>
-                <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update"/>
-            </div>
-        </form>
-
-    </div>
     <div id="details">
         @foreach (var recipe in ViewBag.AllRecipes)
         {
@@ -490,11 +457,49 @@
             </div>
         }
     </div>
+            <div id="addForm" class="form-item" style="margin-top: 20px; display: none;">
+                <form method="post" id="addPlannedMeal" style="display: none;">
+                    <div class="form-group">
+                        <input type="hidden" name="recipeId" id="recipeId" value="">
+                        <label for="week">Week:</label>
+                        <select name="week" id="week">
+                            @foreach (var week in new[] { "This Week", "Next Week" })
+                            {
+                                <option value="@week">@week</option>
+                            }
+                        </select>
+                        <label for="day">Day:</label>
+                        <select name="day" id="day">
+                            @foreach (var day in new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" })
+                            {
+                                <option value="@day">@day</option>
+                            }
+                        </select>
+                        <label for="type">Meal Type:</label>
+                        <select name="type" id="type">
+                            @foreach (var type in new[] { "Breakfast", "Lunch", "Dinner" })
+                            {
+                                <option value="@type">@type</option>
+                            }
+                        </select>
+                        <div id="errorMessage" style="display: none;">
+                            Are you sure You want to overwrite your previous meal?
+                        </div>
+
+                    </div>
+                    <div class="button-group">
+                        <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMeal" value="Add Planned Meal" />
+                        <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
+                    </div>
+                </form>
+
+            </div>
 </div>
 </div>
 </body>
 <script>
     function showRecipe(recipeId) {
+        var addForm = document.getElementById('addForm');
         var recipeID = document.getElementById('recipeID');
         var sharedRecipeID = document.getElementById('sharedRecipeID');
         var cookRecipe = document.getElementById('CookRecipe');
@@ -512,6 +517,7 @@
             currentDiv.style.display = 'none';
         }
 
+        addForm.style.display = 'block';
         recipeDiv.style.display = 'block';
         addPlannedMealForm.style.display = 'block';
         cookRecipe.style.display = "block";
