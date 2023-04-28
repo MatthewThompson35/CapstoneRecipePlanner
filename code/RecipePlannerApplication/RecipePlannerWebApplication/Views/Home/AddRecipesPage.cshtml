@@ -97,7 +97,7 @@
 
     #addRecipe input[type="submit"],
     #addRecipe input[type="button"] {
-            background-color: #007bff;
+        background-color: #007bff;
         border: none;
         border-radius: 5px;
         color: #fff;
@@ -155,6 +155,10 @@
         margin-right: 10px;
         padding: 5px 10px;
     }
+    .move-button {
+        margin-left: 5px;
+    }
+
 </style>
 
 <div class="row">
@@ -374,31 +378,55 @@
 
  function addStep() {
 
-      var row = document.createElement('tr');
-      var stepValue = document.getElementById("recipeStep").value;
+        var row = document.createElement('tr');
+        var stepValue = document.getElementById("recipeStep").value;
         var errorLabel = document.getElementById('step-error');
-      if (stepValue === ''){
-           errorLabel.textContent = "Please enter a step";
+        errorLabel.textContent = "";
+        if (stepValue === '') {
+            errorLabel.textContent = "Please enter a step";
             return;
-          }
+        }
 
-      var nameCell = document.createElement('td');
-      nameCell.innerText = stepValue;
-      row.appendChild(nameCell);
+        var nameCell = document.createElement('td');
+        nameCell.innerText = stepValue;
+        row.appendChild(nameCell);
 
-      var actionsCell = document.createElement('td');
-      var deleteButton = document.createElement('button');
-      deleteButton.innerText = 'Delete';
-      deleteButton.classList.add("btn", "btn-primary", "page-button");
-      deleteButton.onclick = function() {
-        row.remove();
-      };
-      actionsCell.appendChild(deleteButton);
-      row.appendChild(actionsCell);
-        showStepForm.style.display = "block";
+        var actionsCell = document.createElement('td');
 
-      var table = document.getElementById('StepsTable').getElementsByTagName('tbody')[0];
-  table.appendChild(row);
+        var moveUpButton = document.createElement('button');
+        moveUpButton.innerText = '\u2191';
+        moveUpButton.classList.add("btn", "btn-primary", "page-button", "move-button");
+        moveUpButton.onclick = function () {
+            var previousRow = row.previousElementSibling;
+            if (previousRow) {
+                row.parentNode.insertBefore(row, previousRow);
+            }
+        };
+        actionsCell.appendChild(moveUpButton);
+
+        var moveDownButton = document.createElement('button');
+        moveDownButton.innerText = '\u2193';
+        moveDownButton.classList.add("btn", "btn-primary", "page-button", "move-button");
+        moveDownButton.style.marginRight = "200px";
+        moveDownButton.onclick = function () {
+            var nextRow = row.nextElementSibling;
+            if (nextRow) {
+                row.parentNode.insertBefore(row, nextRow.nextSibling);
+            }
+        };
+        actionsCell.appendChild(moveDownButton);
+        var deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.classList.add("btn", "btn-primary", "page-button");
+        deleteButton.onclick = function () {
+            row.remove();
+        };
+        actionsCell.appendChild(deleteButton);
+
+        row.appendChild(actionsCell);
+
+        var table = document.getElementById('StepsTable').getElementsByTagName('tbody')[0];
+        table.appendChild(row);
 }
     const addButton = document.getElementById('addRecipeButton');
     addButton.addEventListener('click', function (event) {
@@ -508,6 +536,9 @@
     function addTag() {
         var tag = document.getElementById('recipeTag').value.trim();
         var errorLabel = document.getElementById('tag-error');
+        var recipeTagInput = document.getElementById("recipeTag");
+        recipeTagInput.value = "";
+        errorLabel.textContent = "";
         if (tag === '') {
             errorLabel.textContent = "Please enter a tag";
             return;
