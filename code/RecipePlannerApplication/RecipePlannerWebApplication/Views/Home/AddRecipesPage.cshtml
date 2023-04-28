@@ -376,7 +376,8 @@
 
       var row = document.createElement('tr');
       var stepValue = document.getElementById("recipeStep").value;
-        var errorLabel = document.getElementById('step-error');
+      var errorLabel = document.getElementById('step-error');
+      errorLabel.textContent = "";
       if (stepValue === ''){
            errorLabel.textContent = "Please enter a step";
             return;
@@ -508,6 +509,9 @@
     function addTag() {
         var tag = document.getElementById('recipeTag').value.trim();
         var errorLabel = document.getElementById('tag-error');
+        var recipeTagInput = document.getElementById("recipeTag");
+        recipeTagInput.value = "";
+        errorLabel.textContent = "";
         if (tag === '') {
             errorLabel.textContent = "Please enter a tag";
             return;
