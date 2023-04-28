@@ -1672,7 +1672,31 @@ public class HomeController : Controller
                 return View("Register");
             }
 
-            if (password.Equals(repeatPassword))
+            if (username == null)
+            {
+                ViewBag.Error = "Please enter a username";
+                return View("Register");
+            }
+
+            if (password == null)
+            {
+                ViewBag.Error = "Please enter a password";
+                return View("Register");
+            }
+
+            if (repeatPassword == null)
+            {
+                ViewBag.Error = "Please re-enter your password";
+                return View("Register");
+            }
+
+            if (!password.Equals(repeatPassword))
+            {
+                ViewBag.Error = "The passwords do not match";
+                return View("Register");
+            }
+
+            if (password != null && repeatPassword != null && password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
                 return View("Index");
@@ -1684,6 +1708,7 @@ public class HomeController : Controller
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
+            return View("Register");
         }
 
         return View("Register");
