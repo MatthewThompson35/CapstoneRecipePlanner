@@ -1672,7 +1672,31 @@ public class HomeController : Controller
                 return View("Register");
             }
 
-            if (password.Equals(repeatPassword))
+            if (username == null)
+            {
+                ViewBag.Error = "Please enter a username";
+                return View("Register");
+            }
+
+            if (password == null)
+            {
+                ViewBag.Error = "Please enter a password";
+                return View("Register");
+            }
+
+            if (repeatPassword == null)
+            {
+                ViewBag.Error = "Please re-enter your password";
+                return View("Register");
+            }
+
+            if (!password.Equals(repeatPassword))
+            {
+                ViewBag.Error = "The passwords do not match";
+                return View("Register");
+            }
+
+            if (password != null && repeatPassword != null && password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
                 return View("Index");
@@ -1684,6 +1708,7 @@ public class HomeController : Controller
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
+            return View("Register");
         }
 
         return View("Register");
@@ -1766,7 +1791,27 @@ public class HomeController : Controller
     public IActionResult CookMealConfirmation(int recipeID)
     {
         ViewBag.id = recipeID;
-        return View("CookMealConfirmation");
+        bool hasAllIngredients = true;
+
+        var totalIngredients = IngredientDAL.getIngredients();
+        foreach (var ingredient in
+                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        {
+            var existingIngredient = totalIngredients.Find(i =>
+                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+            if (existingIngredient == null || existingIngredient.quantity - ingredient.Quantity < 0)
+            {
+                hasAllIngredients = false;
+            }
+        }
+
+        if (hasAllIngredients)
+        {
+            return View("CookMealConfirmation");
+        }
+
+        return View("MissingIngredientsConfirmation");
     }
 
     /// <summary>
