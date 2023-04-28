@@ -1791,7 +1791,27 @@ public class HomeController : Controller
     public IActionResult CookMealConfirmation(int recipeID)
     {
         ViewBag.id = recipeID;
-        return View("CookMealConfirmation");
+        bool hasAllIngredients = true;
+
+        var totalIngredients = IngredientDAL.getIngredients();
+        foreach (var ingredient in
+                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        {
+            var existingIngredient = totalIngredients.Find(i =>
+                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+            if (existingIngredient == null || existingIngredient.quantity - ingredient.Quantity < 0)
+            {
+                hasAllIngredients = false;
+            }
+        }
+
+        if (hasAllIngredients)
+        {
+            return View("CookMealConfirmation");
+        }
+
+        return View("MissingIngredientsConfirmation");
     }
 
     /// <summary>
