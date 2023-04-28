@@ -377,7 +377,8 @@
       var row = document.createElement('tr');
       var stepValue = document.getElementById("recipeStep").value;
         var errorLabel = document.getElementById('step-error');
-      if (stepValue === ''){
+        errorLabel.textContent = "";
+        if (stepValue === ''){
            errorLabel.textContent = "Please enter a step";
             return;
           }
@@ -395,7 +396,6 @@
       };
       actionsCell.appendChild(deleteButton);
       row.appendChild(actionsCell);
-        showStepForm.style.display = "block";
 
       var table = document.getElementById('StepsTable').getElementsByTagName('tbody')[0];
   table.appendChild(row);
@@ -508,6 +508,7 @@
     function addTag() {
         var tag = document.getElementById('recipeTag').value.trim();
         var errorLabel = document.getElementById('tag-error');
+        errorLabel.textContent = "";
         if (tag === '') {
             errorLabel.textContent = "Please enter a tag";
             return;
