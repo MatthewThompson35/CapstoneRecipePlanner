@@ -195,8 +195,11 @@ namespace RecipePlannerDesktopApplication
 
         private void addToMealPlanButton_Click(object sender, EventArgs e)
         {
+            this.addToMealPlanButton.Visible = false;
             this.displayDayMealTypeWeekElements();
             this.displayAddCancelButtons();
+
+            this.updateSuccessfullyLabel.Visible = false;
         }
 
         private void NoButton_Click(object? sender, EventArgs e)
@@ -451,13 +454,54 @@ namespace RecipePlannerDesktopApplication
 
         private void cookButton_Click(object sender, EventArgs e)
         {
+            List<Ingredient> pantry = IngredientDAL.getIngredients();
+            List<RecipeIngredient> recipeIngredients = RecipeDAL.getIngredientsForRecipe(this.getCurrentRecipe().RecipeId, Connection.ConnectionString);
+            
+            int matchedIngredients = 0;
+
+            foreach (var recipeIng in recipeIngredients)
+            {
+                foreach (var ing in pantry)
+                {
+                    if (recipeIng.IngredientName.Equals(ing.name))
+                    {
+                        if (ing.quantity >= recipeIng.Quantity && ing.measurement.Equals(recipeIng.Measurement))
+                        {
+                            matchedIngredients++;
+                        }
+                    }
+                }
+            }
+
+            if (matchedIngredients != recipeIngredients.Count)
+            {
+                this.displayNotEnoughIngredients();
+            }
+            else
+            {
+                this.displayIngredientsFoundElements();
+            }
+
+        }
+
+        private void displayNotEnoughIngredients()
+        {
+            this.isCookedLabel.Text = "There are not enough ingredients to cook using this recipe!";
+            this.isCookedLabel.Visible = true;
+            this.isCookedLabel.ForeColor = Color.Red;
+
+            this.cookYesButton.Visible = false;
+            this.cookNoButton.Visible = false;
+        }
+
+        private void displayIngredientsFoundElements()
+        {
             this.isCookedLabel.Text = "Are you sure you want to cook using this recipe? This will remove ingredients.";
             this.isCookedLabel.Visible = true;
-            this.isCookedLabel.ForeColor= Color.Red;
+            this.isCookedLabel.ForeColor = Color.Red;
 
             this.cookYesButton.Visible = true;
             this.cookNoButton.Visible = true;
-
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -468,6 +512,7 @@ namespace RecipePlannerDesktopApplication
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.addToMealPlanButton.Visible = true;
+            this.comboboxesErrorLabel.Visible = false;
 
             this.mealTypeComboBox.SelectedIndex = -1;
             this.daysComboBox.SelectedIndex = -1;
@@ -495,64 +540,93 @@ namespace RecipePlannerDesktopApplication
 
         private void handleHomepageRecipeRemoveIngredients(int updatedQuantity)
         {
-            foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            this.serverErrorLabel.Visible = false;
+            try
             {
-                foreach (var ingredient in IngredientDAL.getIngredients())
+                foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
                 {
-                    if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                    foreach (var ingredient in IngredientDAL.getIngredients())
                     {
-                        if (ingredient.quantity >= recipeIngredient.Quantity)
+                        if (recipeIngredient.IngredientName.Equals(ingredient.name))
                         {
-                            updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
-                            IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
-                            ingredient.quantity = updatedQuantity;
-
-                            if (ingredient.quantity == 0)
+                            if (ingredient.quantity >= recipeIngredient.Quantity)
                             {
-                                IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
-                            }
-                        }
+                                updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
 
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                        }
                     }
                 }
+            } 
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
             }
+            
         }
         private void handleMealPlanRecipeRemoveIngredients(int updatedQuantity)
         {
-            foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            this.serverErrorLabel.Visible = false;
+            try
             {
-                foreach (var ingredient in IngredientDAL.getIngredients())
+                foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
                 {
-                    if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                    foreach (var ingredient in IngredientDAL.getIngredients())
                     {
-                        if (ingredient.quantity >= recipeIngredient.Quantity)
+                        if (recipeIngredient.IngredientName.Equals(ingredient.name))
                         {
-                            updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
-                            IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
-                            ingredient.quantity = updatedQuantity;
-
-                            if (ingredient.quantity == 0)
+                            if (ingredient.quantity >= recipeIngredient.Quantity)
                             {
-                                IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
-                            }
-                        }
+                                updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
 
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
+            }
+            
         }
 
         private void cookYesButton_Click(object sender, EventArgs e)
         {
             this.removeCookedRecipeIngredients();
 
-            this.isCookedLabel.Visible = true;
-            this.isCookedLabel.Text = "This meal has been cooked";
-            this.isCookedLabel.ForeColor = Color.Green;
-            this.cookButton.Enabled = false;
+            if (this.serverErrorLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                var pantry = new IngredientsPage();
+                this.Hide();
+                pantry.Show();
 
-            this.cookYesButton.Visible = false;
-            this.cookNoButton.Visible = false;
+
+                this.cookButton.Enabled = false;
+
+                this.cookYesButton.Visible = false;
+                this.cookNoButton.Visible = false;
+            }
         }
 
         private void cookNoButton_Click(object sender, EventArgs e)

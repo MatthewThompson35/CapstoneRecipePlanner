@@ -814,18 +814,21 @@ public class HomeController : Controller
             if (txtIngredientName == null || txtQuantity == null || txtIngredientName == "" || txtQuantity == "")
             {
                 ViewBag.Error = "Please enter values.";
+                ViewBag.page = "pantry";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
             if (IngredientDAL.getIngredients(txtIngredientName).Count() > 0)
             {
                 ViewBag.Error = "Ingredient is already entered.";
+                ViewBag.page = "pantry";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 
             if (!regex.Match(txtQuantity).Success)
             {
                 ViewBag.Error = "Quantity must be an integer.";
+                ViewBag.page = "pantry";
                 return View("AddIngredient", ViewBag.Measurements);
             }
 

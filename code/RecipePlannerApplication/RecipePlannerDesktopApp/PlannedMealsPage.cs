@@ -22,6 +22,7 @@ namespace RecipePlannerDesktopApplication
         private RecipeDetailsPage detailsPage;
         private List<Label> daysLabels;
         private List<Label> mealTypeDaysLabels;
+        private List<LinkLabel> mealTypeDaysLinkLabels;
         private List<TextBox> mealDayTypeTextBoxes;
         private bool isNextWeekDisplayed;
 
@@ -55,7 +56,8 @@ namespace RecipePlannerDesktopApplication
             this.detailsPage = new RecipeDetailsPage();
 
             this.daysLabels = new List<Label>() { mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel, sundayLabel};
-            this.mealTypeDaysLabels = new List<Label>() { mondayBreakfastLabel, mondayLunchLabel, mondayDinnerLabel, tuesdayBreakfastLabel, tuesdayLunchLabel, tuesdayDinnerLabel, wednesdayBreakfastLabel, wednesdayLunchLabel, wednesdayDinnerLabel, thursdayBreakfastLabel, thursdayLunchLabel, thursdayDinnerLabel, fridayBreakfastLabel, fridayLunchLabel, fridayDinnerLabel, saturdayBreakfastLabel, saturdayLunchLabel, saturdayDinnerLabel, sundayBreakfastLabel, sundayLunchLabel, sundayDinnerLabel};
+            
+            this.mealTypeDaysLinkLabels = new List<LinkLabel> { mondayBreakfastLinkLabel, mondayLunchLinkLabel, mondayDinnerLinkLabel, tuesdayBreakfastLinkLabel, tuesdayLunchLinkLabel, tuesdayDinnerLinkLabel, wednesdayBreakfastLinkLabel, wednesdayLunchLinkLabel, wednesdayDinnerLinkLabel, thursdayBreakfastLinkLabel, thursdayLunchLinkLabel, thursdayDinnerLinkLabel, fridayBreakfastLinkLabel, fridayLunchLinkLabel, fridayDinnerLinkLabel, saturdayBreakfastLinkLabel, saturdayLunchLinkLabel, saturdayDinnerLinkLabel, sundayBreakfastLinkLabel, sundayLunchLinkLabel, sundayDinnerLinkLabel };
             this.mealDayTypeTextBoxes = new List<TextBox> { mondayBreakfastTextBox, mondayLunchTextBox, mondayDinnerTextBox, tuesdayBreakfastTextBox, tuesdayLunchTextBox, tuesdayDinnerTextBox, wednesdayBreakfastTextBox, wednesdayLunchTextBox, wednesdayDinnerTextBox, thursdayBreakfastTextBox, thursdayLunchTextBox, thursdayDinnerTextBox, fridayBreakfastTextBox, fridayLunchTextBox, fridayDinnerTextBox, saturdayBreakfastTextBox, saturdayLunchTextBox, saturdayDinnerTextBox, sundayBreakfastTextBox, sundayLunchTextBox, sundayDinnerTextBox };
 
             this.displayThisWeekMeals();
@@ -80,75 +82,75 @@ namespace RecipePlannerDesktopApplication
                 {
                     if (currentDayLabel.Text.Equals(meal.Key.Item1))
                     {
-                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        foreach (var currentMealDayLinkLabel in this.mealTypeDaysLinkLabels)
                         {
-                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            if (currentMealDayLinkLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
                             {
-                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
-                                    switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                currentMealDayLinkLabel.Text = currentMealDayLinkLabel.Text.Replace(":", "");
+                                    switch (currentDayLabel.Name + currentMealDayLinkLabel.Name)
                                     {
-                                        case "mondayLabel" + "mondayBreakfastLabel":
+                                        case "mondayLabel" + "mondayBreakfastLinkLabel":
                                         this.mondayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "mondayLabel" + "mondayLunchLabel":
+                                        case "mondayLabel" + "mondayLunchLinkLabel":
                                             this.mondayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                        case "mondayLabel" + "mondayDinnerLabel":
+                                        case "mondayLabel" + "mondayDinnerLinkLabel":
                                             this.mondayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                        case "tuesdayLabel" + "tuesdayBreakfastLabel":
+                                        case "tuesdayLabel" + "tuesdayBreakfastLinkLabel":
                                             this.tuesdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                        case "tuesdayLabel" + "tuesdayLunchLabel":
+                                        case "tuesdayLabel" + "tuesdayLunchLinkLabel":
                                             this.tuesdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                        case "tuesdayLabel" + "tuesdayDinnerLabel":
+                                        case "tuesdayLabel" + "tuesdayDinnerLinkLabel":
                                             this.tuesdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                        case "wednesdayLabel" + "wednesdayBreakfastLabel":
+                                        case "wednesdayLabel" + "wednesdayBreakfastLinkLabel":
                                             this.wednesdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                        case "wednesdayLabel" + "wednesdayLunchLabel":
+                                        case "wednesdayLabel" + "wednesdayLunchLinkLabel":
                                             this.wednesdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "wednesdayLabel" + "wednesdayDinnerLabel":
+                                        case "wednesdayLabel" + "wednesdayDinnerLinkLabel":
                                             this.wednesdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "thursdayLabel" + "thursdayBreakfastLabel":
+                                        case "thursdayLabel" + "thursdayBreakfastLinkLabel":
                                             this.thursdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "thursdayLabel" + "thursdayLunchLabel":
+                                        case "thursdayLabel" + "thursdayLunchLinkLabel":
                                             this.thursdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "thursdayLabel" + "thursdayDinnerLabel":
+                                        case "thursdayLabel" + "thursdayDinnerLinkLabel":
                                             this.thursdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "fridayLabel" + "fridayBreakfastLabel":
+                                        case "fridayLabel" + "fridayBreakfastLinkLabel":
                                             this.fridayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "fridayLabel" + "fridayLunchLabel":
+                                        case "fridayLabel" + "fridayLunchLinkLabel":
                                             this.fridayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "fridayLabel" + "fridayDinnerLabel":
+                                        case "fridayLabel" + "fridayDinnerLinkLabel":
                                             this.fridayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "saturdayLabel" + "saturdayBreakfastLabel":
+                                        case "saturdayLabel" + "saturdayBreakfastLinkLabel":
                                             this.saturdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "saturdayLabel" + "saturdayLunchLabel":
+                                        case "saturdayLabel" + "saturdayLunchLinkLabel":
                                             this.saturdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "saturdayLabel" + "saturdayDinnerLabel":
+                                        case "saturdayLabel" + "saturdayDinnerLinkLabel":
                                             this.saturdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
 
-                                        case "sundayLabel" + "sundayBreakfastLabel":
+                                        case "sundayLabel" + "sundayBreakfastLinkLabel":
                                             this.sundayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "sundayLabel" + "sundayLunchLabel":
+                                        case "sundayLabel" + "sundayLunchLinkLabel":
                                             this.sundayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
-                                        case "sundayLabel" + "sundayDinnerLabel":
+                                        case "sundayLabel" + "sundayDinnerLinkLabel":
                                             this.sundayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                             break;
 
@@ -185,75 +187,75 @@ namespace RecipePlannerDesktopApplication
                 {
                     if (currentDayLabel.Text.Equals(meal.Key.Item1))
                     {
-                        foreach (var currentMealDayLabel in this.mealTypeDaysLabels)
+                        foreach (var currentMealDayLinkLabel in this.mealTypeDaysLinkLabels)
                         {
-                            if (currentMealDayLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                            if (currentMealDayLinkLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
                             {
-                                currentMealDayLabel.Text = currentMealDayLabel.Text.Replace(":", "");
-                                switch (currentDayLabel.Name + currentMealDayLabel.Name)
+                                currentMealDayLinkLabel.Text = currentMealDayLinkLabel.Text.Replace(":", "");
+                                switch (currentDayLabel.Name + currentMealDayLinkLabel.Name)
                                 {
-                                    case "mondayLabel" + "mondayBreakfastLabel":
+                                    case "mondayLabel" + "mondayBreakfastLinkLabel":
                                         this.mondayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "mondayLabel" + "mondayLunchLabel":
+                                    case "mondayLabel" + "mondayLunchLinkLabel":
                                         this.mondayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "mondayLabel" + "mondayDinnerLabel":
+                                    case "mondayLabel" + "mondayDinnerLinkLabel":
                                         this.mondayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "tuesdayLabel" + "tuesdayBreakfastLabel":
+                                    case "tuesdayLabel" + "tuesdayBreakfastLinkLabel":
                                         this.tuesdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "tuesdayLabel" + "tuesdayLunchLabel":
+                                    case "tuesdayLabel" + "tuesdayLunchLinkLabel":
                                         this.tuesdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "tuesdayLabel" + "tuesdayDinnerLabel":
+                                    case "tuesdayLabel" + "tuesdayDinnerLinkLabel":
                                         this.tuesdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "wednesdayLabel" + "wednesdayBreakfastLabel":
+                                    case "wednesdayLabel" + "wednesdayBreakfastLinkLabel":
                                         this.wednesdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "wednesdayLabel" + "wednesdayLunchLabel":
+                                    case "wednesdayLabel" + "wednesdayLunchLinkLabel":
                                         this.wednesdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "wednesdayLabel" + "wednesdayDinnerLabel":
+                                    case "wednesdayLabel" + "wednesdayDinnerLinkLabel":
                                         this.wednesdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "thursdayLabel" + "thursdayBreakfastLabel":
+                                    case "thursdayLabel" + "thursdayBreakfastLinkLabel":
                                         this.thursdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "thursdayLabel" + "thursdayLunchLabel":
+                                    case "thursdayLabel" + "thursdayLunchLinkLabel":
                                         this.thursdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "thursdayLabel" + "thursdayDinnerLabel":
+                                    case "thursdayLabel" + "thursdayDinnerLinkLabel":
                                         this.thursdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "fridayLabel" + "fridayBreakfastLabel":
+                                    case "fridayLabel" + "fridayBreakfastLinkLabel":
                                         this.fridayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "fridayLabel" + "fridayLunchLabel":
+                                    case "fridayLabel" + "fridayLunchLinkLabel":
                                         this.fridayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "fridayLabel" + "fridayDinnerLabel":
+                                    case "fridayLabel" + "fridayDinnerLinkLabel":
                                         this.fridayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "saturdayLabel" + "saturdayBreakfastLabel":
+                                    case "saturdayLabel" + "saturdayBreakfastLinkLabel":
                                         this.saturdayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "saturdayLabel" + "saturdayLunchLabel":
+                                    case "saturdayLabel" + "saturdayLunchLinkLabel":
                                         this.saturdayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "saturdayLabel" + "saturdayDinnerLabel":
+                                    case "saturdayLabel" + "saturdayDinnerLinkLabel":
                                         this.saturdayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
 
-                                    case "sundayLabel" + "sundayBreakfastLabel":
+                                    case "sundayLabel" + "sundayBreakfastLinkLabel":
                                         this.sundayBreakfastTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "sundayLabel" + "sundayLunchLabel":
+                                    case "sundayLabel" + "sundayLunchLinkLabel":
                                         this.sundayLunchTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
-                                    case "sundayLabel" + "sundayDinnerLabel":
+                                    case "sundayLabel" + "sundayDinnerLinkLabel":
                                         this.sundayDinnerTextBox.Text = RecipeDAL.getRecipeNameById(meal.Value, Connection.ConnectionString);
                                         break;
 
@@ -289,11 +291,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.mondayBreakfastLabel, this.mondayLabel.Text);
+                this.removeNextWeekMeal(this.mondayBreakfastLinkLabel, this.mondayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.mondayBreakfastLabel, this.mondayLabel.Text);
+                this.removeThisWeekMeal(this.mondayBreakfastLinkLabel, this.mondayLabel.Text);
             }
             
 
@@ -303,11 +305,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.mondayLunchLabel, this.mondayLabel.Text);
+                this.removeNextWeekMeal(this.mondayLunchLinkLabel, this.mondayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.mondayLunchLabel, this.mondayLabel.Text);
+                this.removeThisWeekMeal(this.mondayLunchLinkLabel, this.mondayLabel.Text);
                 
 
             }
@@ -317,11 +319,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.mondayDinnerLabel, this.mondayLabel.Text);
+                this.removeNextWeekMeal(this.mondayDinnerLinkLabel, this.mondayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.mondayDinnerLabel, this.mondayLabel.Text);
+                this.removeThisWeekMeal(this.mondayDinnerLinkLabel, this.mondayLabel.Text);
                 
             }
             
@@ -332,11 +334,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.tuesdayBreakfastLabel, this.tuesdayLabel.Text);
+                this.removeNextWeekMeal(this.tuesdayBreakfastLinkLabel, this.tuesdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.tuesdayBreakfastLabel, this.tuesdayLabel.Text);
+                this.removeThisWeekMeal(this.tuesdayBreakfastLinkLabel, this.tuesdayLabel.Text);
             }
             
             
@@ -346,11 +348,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.tuesdayLunchLabel, this.tuesdayLabel.Text);
+                this.removeNextWeekMeal(this.tuesdayLunchLinkLabel, this.tuesdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.tuesdayLunchLabel, this.tuesdayLabel.Text);
+                this.removeThisWeekMeal(this.tuesdayLunchLinkLabel, this.tuesdayLabel.Text);
             }
             
             
@@ -360,12 +362,12 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.tuesdayDinnerLabel, this.tuesdayLabel.Text);
+                this.removeNextWeekMeal(this.tuesdayDinnerLinkLabel, this.tuesdayLabel.Text);
                 
             }
             else
             {
-                this.removeThisWeekMeal(this.tuesdayDinnerLabel, this.tuesdayLabel.Text);
+                this.removeThisWeekMeal(this.tuesdayDinnerLinkLabel, this.tuesdayLabel.Text);
             }
             
             
@@ -375,11 +377,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.wednesdayBreakfastLabel, this.wednesdayLabel.Text);
+                this.removeNextWeekMeal(this.wednesdayBreakfastLinkLabel, this.wednesdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.wednesdayBreakfastLabel, this.wednesdayLabel.Text);
+                this.removeThisWeekMeal(this.wednesdayBreakfastLinkLabel, this.wednesdayLabel.Text);
             }
             
             
@@ -389,11 +391,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.wednesdayLunchLabel, this.wednesdayLabel.Text);
+                this.removeNextWeekMeal(this.wednesdayLunchLinkLabel, this.wednesdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.wednesdayLunchLabel, this.wednesdayLabel.Text);
+                this.removeThisWeekMeal(this.wednesdayLunchLinkLabel, this.wednesdayLabel.Text);
             }
             
             
@@ -403,11 +405,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.wednesdayDinnerLabel, this.wednesdayLabel.Text);
+                this.removeNextWeekMeal(this.wednesdayDinnerLinkLabel, this.wednesdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.wednesdayDinnerLabel, this.wednesdayLabel.Text);
+                this.removeThisWeekMeal(this.wednesdayDinnerLinkLabel, this.wednesdayLabel.Text);
             }
             
             
@@ -417,11 +419,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.thursdayBreakfastLabel, this.thursdayLabel.Text);
+                this.removeNextWeekMeal(this.thursdayBreakfastLinkLabel, this.thursdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.thursdayBreakfastLabel, this.thursdayLabel.Text);
+                this.removeThisWeekMeal(this.thursdayBreakfastLinkLabel, this.thursdayLabel.Text);
             }
             
             
@@ -431,11 +433,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.thursdayLunchLabel, this.thursdayLabel.Text);
+                this.removeNextWeekMeal(this.thursdayLunchLinkLabel, this.thursdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.thursdayLunchLabel, this.thursdayLabel.Text);
+                this.removeThisWeekMeal(this.thursdayLunchLinkLabel, this.thursdayLabel.Text);
             }
             
             
@@ -445,11 +447,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.thursdayDinnerLabel, this.thursdayLabel.Text);
+                this.removeNextWeekMeal(this.thursdayDinnerLinkLabel, this.thursdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.thursdayDinnerLabel, this.thursdayLabel.Text);
+                this.removeThisWeekMeal(this.thursdayDinnerLinkLabel, this.thursdayLabel.Text);
             }
             
             
@@ -459,11 +461,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.fridayBreakfastLabel, this.fridayLabel.Text);
+                this.removeNextWeekMeal(this.fridayBreakfastLinkLabel, this.fridayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.fridayBreakfastLabel, this.fridayLabel.Text);
+                this.removeThisWeekMeal(this.fridayBreakfastLinkLabel, this.fridayLabel.Text);
             }
             
             
@@ -473,11 +475,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.fridayLunchLabel, this.fridayLabel.Text);
+                this.removeNextWeekMeal(this.fridayLunchLinkLabel, this.fridayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.fridayLunchLabel, this.fridayLabel.Text);
+                this.removeThisWeekMeal(this.fridayLunchLinkLabel, this.fridayLabel.Text);
             }
             
             
@@ -487,11 +489,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.fridayDinnerLabel, this.fridayLabel.Text);
+                this.removeNextWeekMeal(this.fridayDinnerLinkLabel, this.fridayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.fridayDinnerLabel, this.fridayLabel.Text);
+                this.removeThisWeekMeal(this.fridayDinnerLinkLabel, this.fridayLabel.Text);
             }
             
             
@@ -501,11 +503,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.saturdayBreakfastLabel, this.saturdayLabel.Text);
+                this.removeNextWeekMeal(this.saturdayBreakfastLinkLabel, this.saturdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.saturdayBreakfastLabel, this.saturdayLabel.Text);
+                this.removeThisWeekMeal(this.saturdayBreakfastLinkLabel, this.saturdayLabel.Text);
             }
             
             
@@ -515,11 +517,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.saturdayLunchLabel, this.saturdayLabel.Text);
+                this.removeNextWeekMeal(this.saturdayLunchLinkLabel, this.saturdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.saturdayLunchLabel, this.saturdayLabel.Text);
+                this.removeThisWeekMeal(this.saturdayLunchLinkLabel, this.saturdayLabel.Text);
             }
             
             
@@ -529,11 +531,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.saturdayDinnerLabel, this.saturdayLabel.Text);
+                this.removeNextWeekMeal(this.saturdayDinnerLinkLabel, this.saturdayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.saturdayDinnerLabel, this.saturdayLabel.Text);
+                this.removeThisWeekMeal(this.saturdayDinnerLinkLabel, this.saturdayLabel.Text);
             }
             
             
@@ -543,11 +545,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.sundayBreakfastLabel, this.sundayLabel.Text);
+                this.removeNextWeekMeal(this.sundayBreakfastLinkLabel, this.sundayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.sundayBreakfastLabel, this.sundayLabel.Text);
+                this.removeThisWeekMeal(this.sundayBreakfastLinkLabel, this.sundayLabel.Text);
             }
             
             
@@ -557,11 +559,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.sundayLunchLabel, this.sundayLabel.Text);
+                this.removeNextWeekMeal(this.sundayLunchLinkLabel, this.sundayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.sundayLunchLabel, this.sundayLabel.Text);
+                this.removeThisWeekMeal(this.sundayLunchLinkLabel, this.sundayLabel.Text);
             }
             
             
@@ -571,11 +573,11 @@ namespace RecipePlannerDesktopApplication
         {
             if (this.isNextWeekDisplayed)
             {
-                this.removeNextWeekMeal(this.sundayDinnerLabel, this.sundayLabel.Text);
+                this.removeNextWeekMeal(this.sundayDinnerLinkLabel, this.sundayLabel.Text);
             }
             else
             {
-                this.removeThisWeekMeal(this.sundayDinnerLabel, this.sundayLabel.Text);
+                this.removeThisWeekMeal(this.sundayDinnerLinkLabel, this.sundayLabel.Text);
             }
         }
 
@@ -620,19 +622,20 @@ namespace RecipePlannerDesktopApplication
 
         }
 
-        private void removeNextWeekMeal(Label mealTypeLabel, string dayOfWeek)
+        private void removeNextWeekMeal(LinkLabel mealTypeLinkLabel, string dayOfWeek)
         {
             foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getNextWeeksMeals(Connection.ConnectionString))
             {
-                if (meal.Key.Item1.Equals(dayOfWeek) && mealTypeLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                if (meal.Key.Item1.Equals(dayOfWeek) && mealTypeLinkLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
                 {
-                    mealTypeLabel.Text = mealTypeLabel.Text.Replace(":", "");
+                    mealTypeLinkLabel.Text = mealTypeLinkLabel.Text.Replace(":", "");
 
-                    switch (dayOfWeek + mealTypeLabel.Text)
+                    switch (dayOfWeek + mealTypeLinkLabel.Text)
                     {
                         case "Monday" + "Breakfast":
                             if (this.mondayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeMondayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -645,6 +648,7 @@ namespace RecipePlannerDesktopApplication
                         case "Monday" + "Lunch":
                             if (this.mondayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeMondayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -658,6 +662,7 @@ namespace RecipePlannerDesktopApplication
 
                             if (this.mondayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeMondayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -670,6 +675,7 @@ namespace RecipePlannerDesktopApplication
                         case "Tuesday" + "Breakfast":
                             if (this.tuesdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeTuesdayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -683,6 +689,7 @@ namespace RecipePlannerDesktopApplication
                         case "Tuesday" + "Lunch":
                             if (this.tuesdayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeTuesdayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -696,6 +703,7 @@ namespace RecipePlannerDesktopApplication
                         case "Tuesday" + "Dinner":
                             if (this.tuesdayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeTuesdayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -708,6 +716,7 @@ namespace RecipePlannerDesktopApplication
                         case "Wednesday" + "Breakfast":
                             if (this.wednesdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeWednesdayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -721,6 +730,7 @@ namespace RecipePlannerDesktopApplication
                         case "Wednesday" + "Lunch":
                             if (this.wednesdayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeWednesdayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -733,6 +743,7 @@ namespace RecipePlannerDesktopApplication
                         case "Wednesday" + "Dinner":
                             if (this.wednesdayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeWednesdayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -746,6 +757,7 @@ namespace RecipePlannerDesktopApplication
                         case "Thursday" + "Breakfast":
                             if (this.thursdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeThursdayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -759,6 +771,7 @@ namespace RecipePlannerDesktopApplication
                         case "Thursday" + "Lunch":
                             if (this.thursdayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeThursdayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -772,6 +785,7 @@ namespace RecipePlannerDesktopApplication
                         case "Thursday" + "Dinner":
                             if (this.thursdayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeThursdayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -784,6 +798,7 @@ namespace RecipePlannerDesktopApplication
                         case "Friday" + "Breakfast":
                             if (this.fridayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeFridayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -796,6 +811,7 @@ namespace RecipePlannerDesktopApplication
                         case "Friday" + "Lunch":
                             if (this.fridayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeFridayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -808,6 +824,7 @@ namespace RecipePlannerDesktopApplication
                         case "Friday" + "Dinner":
                             if (this.fridayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeFridayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -821,6 +838,7 @@ namespace RecipePlannerDesktopApplication
                         case "Saturday" + "Breakfast":
                             if (this.saturdayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeSaturdayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -834,6 +852,7 @@ namespace RecipePlannerDesktopApplication
                         case "Saturday" + "Lunch":
                             if (this.saturdayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeSaturdayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -847,6 +866,7 @@ namespace RecipePlannerDesktopApplication
                         case "Saturday" + "Dinner":
                             if (this.saturdayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeSatudayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -859,6 +879,7 @@ namespace RecipePlannerDesktopApplication
                         case "Sunday" + "Breakfast":
                             if (this.sundayBreakfastTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeSundayBreakfastButton.Enabled = false;
                                 return;
                             }
                             else
@@ -872,6 +893,7 @@ namespace RecipePlannerDesktopApplication
                         case "Sunday" + "Lunch":
                             if (this.sundayLunchTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeSundayLunchButton.Enabled = false;
                                 return;
                             }
                             else
@@ -884,6 +906,7 @@ namespace RecipePlannerDesktopApplication
                         case "Sunday" + "Dinner":
                             if (this.sundayDinnerTextBox.Text == "Meal has not been added to this time yet")
                             {
+                                this.removeSundayDinnerButton.Enabled = false;
                                 return;
                             }
                             else
@@ -901,15 +924,15 @@ namespace RecipePlannerDesktopApplication
             }
         }
 
-        private void removeThisWeekMeal(Label mealTypeLabel, string dayOfWeek)
+        private void removeThisWeekMeal(LinkLabel mealTypeLinkLabel, string dayOfWeek)
         {
             foreach (KeyValuePair<(string, string), int> meal in PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString))
             {
-                if (meal.Key.Item1.Equals(dayOfWeek) && mealTypeLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
+                if (meal.Key.Item1.Equals(dayOfWeek) && mealTypeLinkLabel.Text.Replace(":", "").Equals(meal.Key.Item2))
                 {
-                    mealTypeLabel.Text = mealTypeLabel.Text.Replace(":", "");
+                    mealTypeLinkLabel.Text = mealTypeLinkLabel.Text.Replace(":", "");
 
-                    switch (dayOfWeek + mealTypeLabel.Text)
+                    switch (dayOfWeek + mealTypeLinkLabel.Text)
                     {
                         case "Monday" + "Breakfast":
                             if (this.mondayBreakfastTextBox.Text == "Meal has not been added to this time yet")
@@ -1191,432 +1214,6 @@ namespace RecipePlannerDesktopApplication
             return this.readInRecipe;
         }
 
-
-
-        private void mondayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            //this.navigateToDetailsPage(this.mondayBreakfastTextBox.Text);
-            var recipeName = this.mondayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-
-
-        }
-
-        private void mondayLunchLabel_Click(object sender, EventArgs e)
-        {
-
-            var recipeName = this.mondayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void mondayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.mondayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void tuesdayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.tuesdayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void tuesdayLunchLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.tuesdayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void tuesdayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.tuesdayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void wednesdayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.wednesdayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void wednesdayLunchLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.wednesdayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void wednesdayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.wednesdayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void thursdayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.thursdayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void thursdayLunchLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.thursdayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void thursdayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.thursdayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void fridayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.fridayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void fridayLunchLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.fridayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void fridayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.fridayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void saturdayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.saturdayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void saturdayLunchLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.saturdayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void saturdayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.saturdayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void sundayBreakfastLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.sundayBreakfastTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void sundayLunchLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.sundayLunchTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
-        private void sundayDinnerLabel_Click(object sender, EventArgs e)
-        {
-            var recipeName = this.sundayDinnerTextBox.Text;
-
-            if (recipeName == "Meal has not been added to this time yet")
-            {
-                return;
-            }
-
-            else
-            {
-                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
-
-                Hide();
-
-                var detailsPage = new RecipeDetailsPage(this);
-                detailsPage.Show();
-            }
-        }
-
         private void mondayButton_Click(object sender, EventArgs e)
         {
             if (mondayPanel.Size.Height == 181)
@@ -1698,18 +1295,6 @@ namespace RecipePlannerDesktopApplication
             else
             {
                 saturdayPanel.Height = 181;
-            }
-        }
-
-        private void sundayButton_Click(object sender, EventArgs e)
-        {
-            if (sundayPanel.Height == 181)
-            {
-                sundayPanel.Height = 45;
-            }
-            else
-            {
-                sundayPanel.Height = 181;
             }
         }
 
@@ -1865,6 +1450,479 @@ namespace RecipePlannerDesktopApplication
                 {
                     ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
                 }
+            }
+        }
+
+        private void mondayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.mondayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void mondayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.mondayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void mondayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.mondayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void tuesdayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.tuesdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void tuesdayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.tuesdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void tuesdayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.tuesdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void wednesdayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.wednesdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void wednesdayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.wednesdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void wednesdayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.wednesdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void thursdayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.thursdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void thursdayLunchLinkLabel10_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.thursdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void thursdayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.thursdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void fridayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.fridayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void fridayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.fridayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void fridayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.fridayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void saturdayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.saturdayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void saturdayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.saturdayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void saturdayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.saturdayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+        }
+
+        private void sundayBreakfastLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.sundayBreakfastTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+
+        }
+
+        private void sundayLunchLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.sundayLunchTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+
+        }
+
+        private void sundayDinnerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var recipeName = this.sundayDinnerTextBox.Text;
+
+            if (recipeName == "Meal has not been added to this time yet")
+            {
+                return;
+            }
+
+            else
+            {
+                this.readInRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+
+                Hide();
+
+                var detailsPage = new RecipeDetailsPage(this);
+                detailsPage.Show();
+            }
+
+        }
+
+        private void removeSundayBreakfastButton_Click_1(object sender, EventArgs e)
+        {
+            if (this.isNextWeekDisplayed)
+            {
+                this.removeNextWeekMeal(this.sundayBreakfastLinkLabel, this.sundayLabel.Text);
+            }
+            else
+            {
+                this.removeThisWeekMeal(this.sundayBreakfastLinkLabel, this.sundayLabel.Text);
+            }
+
+        }
+
+        private void removeSundayLunchButton_Click_1(object sender, EventArgs e)
+        {
+            if (this.isNextWeekDisplayed)
+            {
+                this.removeNextWeekMeal(this.sundayLunchLinkLabel, this.sundayLabel.Text);
+            }
+            else
+            {
+                this.removeThisWeekMeal(this.sundayLunchLinkLabel, this.sundayLabel.Text);
+            }
+
+        }
+
+        private void removeSundayDinnerButton_Click_1(object sender, EventArgs e)
+        {
+            if (this.isNextWeekDisplayed)
+            {
+                this.removeNextWeekMeal(this.sundayDinnerLinkLabel, this.sundayLabel.Text);
+            }
+            else
+            {
+                this.removeThisWeekMeal(this.sundayDinnerLinkLabel, this.sundayLabel.Text);
+            }
+        }
+
+        private void sundayButton_Click(object sender, EventArgs e)
+        {
+            if (sundayPanel.Height == 181)
+            {
+                sundayPanel.Height = 45;
+            }
+            else
+            {
+                sundayPanel.Height = 181;
             }
         }
     }
