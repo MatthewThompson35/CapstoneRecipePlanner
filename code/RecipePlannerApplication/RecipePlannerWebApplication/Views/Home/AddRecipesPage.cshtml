@@ -201,7 +201,7 @@
 
                 </div>
                 <div class="button-group">
-                    <button onsubmit="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton">Add Ingredient</button>
+                    <input type="button" onclick="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton" value="Add Ingredient" />
                     <input type="button" value="Cancel" id="cancelAddIngredient"/>
                 </div>
             </form>
@@ -268,7 +268,7 @@
             </table>
         </div>
         <form id="buttons">
-            <button asp-action="goToRecipePage" class="btn btn-primary page-button" id="addRecipeButton">Add Recipe</button>
+            <input type="submit" asp-action="goToRecipePage" class="btn btn-primary page-button" id="addRecipeButton" value="Add Recipe" />
             <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
         </form>
     </div>
@@ -349,7 +349,7 @@
 
     document.getElementById('addForm').addEventListener('submit', function (event) {
 
-        event.preventDefault();
+        //event.preventDefault();
 
         addIngredient();
 
