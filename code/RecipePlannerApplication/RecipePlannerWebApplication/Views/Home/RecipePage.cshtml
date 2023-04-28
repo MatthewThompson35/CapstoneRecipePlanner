@@ -310,7 +310,9 @@
     <div id="filter-tags">Filter by Tags: </div>
     <br>
     <h2>Recipes</h2>
-
+            <form method="post" asp-action="goToAddRecipesPage">
+                <input type="submit" class="btn btn-primary page-button" value="Add Recipe" id="addButton" />
+            </form>
     <table id="available-recipes" style="@(ViewBag.CurrentSelectedRadio == "available" ? "display: block;" : "display: none;")">
         <thead>
         <tr>
