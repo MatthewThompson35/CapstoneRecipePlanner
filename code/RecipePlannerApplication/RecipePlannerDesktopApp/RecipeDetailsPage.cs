@@ -488,12 +488,12 @@ namespace RecipePlannerDesktopApplication
 
         private void displayNotEnoughIngredients()
         {
-            this.isCookedLabel.Text = "There are not enough ingredients to cook using this recipe!";
+            this.isCookedLabel.Text = "Warning: There are not enough ingredients to cook using this recipe. Do you still want to cook? ";
             this.isCookedLabel.Visible = true;
             this.isCookedLabel.ForeColor = Color.Red;
 
-            this.cookYesButton.Visible = false;
-            this.cookNoButton.Visible = false;
+            this.cookYesButton.Visible = true;
+            this.cookNoButton.Visible = true;
         }
 
         private void displayIngredientsFoundElements()
@@ -538,10 +538,56 @@ namespace RecipePlannerDesktopApplication
             {
                 this.handleMealPlanRecipeRemoveIngredients(updatedQuantity);
             }
+
+            if (this.sharedPage != null)
+            {
+                this.handleSharedPlanRecipeRemoveIngredients(updatedQuantity);
+            }
         }
 
-        private void handleHomepageRecipeRemoveIngredients(int updatedQuantity)
+        private void handleSharedPlanRecipeRemoveIngredients(int updatedQuantity)
         {
+            this.serverErrorLabel.Visible = false;
+            try
+            {
+                foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+                {
+                    foreach (var ingredient in IngredientDAL.getIngredients())
+                    {
+                        if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                        {
+                            if (ingredient.quantity >= recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                            else if (ingredient.quantity < recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
+            }
+        }
+
+            private void handleHomepageRecipeRemoveIngredients(int updatedQuantity)
+            {
             this.serverErrorLabel.Visible = false;
             try
             {
@@ -554,6 +600,18 @@ namespace RecipePlannerDesktopApplication
                             if (ingredient.quantity >= recipeIngredient.Quantity)
                             {
                                 updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                            else if (ingredient.quantity < recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(recipeIngredient.Quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
 
@@ -595,6 +653,13 @@ namespace RecipePlannerDesktopApplication
                                 {
                                     IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
                                 }
+                            }
+
+                            else if (ingredient.quantity < recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
                             }
 
                         }
