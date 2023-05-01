@@ -4,6 +4,7 @@ using RecipePlannerLibrary;
 using RecipePlannerLibrary.Models;
 using System.Net.NetworkInformation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections;
 
 namespace RecipePlannerFinalDemoAdditions
 {
@@ -94,6 +95,19 @@ namespace RecipePlannerFinalDemoAdditions
                 ListViewItem item = new ListViewItem(step.stepNumber.ToString());
                 item.SubItems.Add(step.stepDescription);
                 stepsListView.Items.Add(item);
+
+                stepsListView.ListViewItemSorter = new StepNumberComparer();
+                stepsListView.Sort();
+            }
+        }
+
+        public class StepNumberComparer : IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                int xStepNumber = int.Parse(((ListViewItem)x).Text);
+                int yStepNumber = int.Parse(((ListViewItem)y).Text);
+                return xStepNumber.CompareTo(yStepNumber);
             }
         }
 
