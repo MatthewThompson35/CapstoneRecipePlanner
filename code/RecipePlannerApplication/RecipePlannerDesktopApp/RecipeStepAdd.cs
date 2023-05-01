@@ -118,56 +118,7 @@ namespace RecipePlannerFinalDemoAdditions
         public void AddRowToStepsGridView(string stepNumber, string stepDescription)
         {
             this.stepsDataGridView.Rows.Add(stepNumber, stepDescription);
-
-            //this.stepsDataGridView.Sort(this.stepsDataGridView.Columns["stepNumberColumn"], ListSortDirection.Ascending);
             
-        }
-
-        private class StepNumberComparer : IComparer
-        {
-            public int Compare(object x, object y)
-            {
-                int a, b;
-                if (int.TryParse(x.ToString(), out a) && int.TryParse(y.ToString(), out b))
-                {
-                    if (a < 10 && b < 10)
-                    {
-                        // Both numbers are less than 10, compare them normally
-                        return a.CompareTo(b);
-                    }
-                    else if (a >= 10 && b >= 10)
-                    {
-                        // Both numbers are greater than or equal to 10, compare them normally
-                        return a.CompareTo(b);
-                    }
-                    else if (a < 10 && b >= 10)
-                    {
-                        // a is less than 10, so it comes before any number greater than or equal to 10
-                        return -1;
-                    }
-                    else
-                    {
-                        // b is less than 10, so it comes before any number greater than or equal to 10
-                        return 1;
-                    }
-                }
-                return String.Compare(x.ToString(), y.ToString());
-            }
-        }
-
-        private void SortByStepNumberAscending()
-        {
-            // Retrieve the data source and cast it to the appropriate type
-            var dataSource = (List<RecipeStep>)stepsDataGridView.DataSource;
-
-            // Sort the data source by the StepNumber property in ascending order
-            dataSource = dataSource.OrderBy(x => x.stepNumber).ToList();
-
-            // Set the sorted data source as the new data source for the DataGridView
-            stepsDataGridView.DataSource = dataSource;
-
-            // Refresh the DataGridView to display the sorted data
-            stepsDataGridView.Refresh();
         }
 
         private void clearStepsFields()
@@ -248,7 +199,6 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void RecipeStepAdd_Load(object sender, EventArgs e)
         {
-            //stepsDataGridView.Columns["stepNumberColumn"].ValueType = typeof(int);
             if (recipeSteps != null)
             {
                 foreach (var recipeStep in this.recipeSteps)
