@@ -35,15 +35,15 @@
             this.stepNumberTextBox = new System.Windows.Forms.TextBox();
             this.stepDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.stepsDataGridView = new System.Windows.Forms.DataGridView();
+            this.stepNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stepDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.addButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorStepsFieldLabel = new System.Windows.Forms.Label();
             this.errorStepNumberLabel = new System.Windows.Forms.Label();
             this.stepsSuccessLabel = new System.Windows.Forms.Label();
-            this.stepNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stepDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,6 +117,29 @@
             this.stepsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellContentClick);
             this.stepsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellValueChanged);
             // 
+            // stepNumberColumn
+            // 
+            this.stepNumberColumn.HeaderText = "Step Number";
+            this.stepNumberColumn.MinimumWidth = 6;
+            this.stepNumberColumn.Name = "stepNumberColumn";
+            this.stepNumberColumn.Width = 75;
+            // 
+            // stepDescriptionColumn
+            // 
+            this.stepDescriptionColumn.HeaderText = "Step Description";
+            this.stepDescriptionColumn.MinimumWidth = 6;
+            this.stepDescriptionColumn.Name = "stepDescriptionColumn";
+            this.stepDescriptionColumn.Width = 200;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 125;
+            // 
             // addButton
             // 
             this.addButton.Location = new System.Drawing.Point(200, 256);
@@ -182,29 +205,6 @@
             this.stepsSuccessLabel.TabIndex = 11;
             this.stepsSuccessLabel.Text = "Step Added Successfully";
             this.stepsSuccessLabel.Visible = false;
-            // 
-            // stepNumberColumn
-            // 
-            this.stepNumberColumn.HeaderText = "Step Number";
-            this.stepNumberColumn.MinimumWidth = 6;
-            this.stepNumberColumn.Name = "stepNumberColumn";
-            this.stepNumberColumn.Width = 75;
-            // 
-            // stepDescriptionColumn
-            // 
-            this.stepDescriptionColumn.HeaderText = "Step Description";
-            this.stepDescriptionColumn.MinimumWidth = 6;
-            this.stepDescriptionColumn.Name = "stepDescriptionColumn";
-            this.stepDescriptionColumn.Width = 200;
-            // 
-            // removeColumn
-            // 
-            this.removeColumn.HeaderText = "Action";
-            this.removeColumn.MinimumWidth = 6;
-            this.removeColumn.Name = "removeColumn";
-            this.removeColumn.Text = "Remove";
-            this.removeColumn.UseColumnTextForButtonValue = true;
-            this.removeColumn.Width = 125;
             // 
             // RecipeStepAdd
             // 

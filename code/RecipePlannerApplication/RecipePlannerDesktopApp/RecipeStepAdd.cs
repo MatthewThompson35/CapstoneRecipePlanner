@@ -1,6 +1,7 @@
 ﻿using RecipePlannerDesktopApplication;
 using RecipePlannerLibrary.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace RecipePlannerFinalDemoAdditions
 {
@@ -54,6 +56,12 @@ namespace RecipePlannerFinalDemoAdditions
 
                 if (!isNumeric)
                 {
+                    this.errorStepNumberLabel.Text = "Step number is not a number";
+                    this.errorStepNumberLabel.Visible = true;
+                }
+                else if (isNumeric && number <= 0)
+                {
+                    this.errorStepNumberLabel.Text = "Step number must be greater than 0";
                     this.errorStepNumberLabel.Visible = true;
                 }
                 else
@@ -110,8 +118,8 @@ namespace RecipePlannerFinalDemoAdditions
         public void AddRowToStepsGridView(string stepNumber, string stepDescription)
         {
             this.stepsDataGridView.Rows.Add(stepNumber, stepDescription);
+            
         }
-
 
         private void clearStepsFields()
         {
@@ -140,7 +148,7 @@ namespace RecipePlannerFinalDemoAdditions
                     recipeSteps.Add(recipeStep);
                 }
             }
-            //this.recipe.Steps = recipeSteps;
+            
             var recipeSummary = new RecipeSummary(this.recipe);
 
             recipeSummary.SetStepData(recipeSteps);
