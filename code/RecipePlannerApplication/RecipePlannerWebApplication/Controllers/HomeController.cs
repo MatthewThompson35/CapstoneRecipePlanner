@@ -1227,6 +1227,59 @@ public class HomeController : Controller
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
+    public ActionResult addPlannedMealPlannedMealsPage(int recipeId, string week, string day, string type)
+    {
+        var recipeID = recipeId;
+        var Week = week;
+        var Day = day;
+        var Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals("This Week"))
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
+        }
+        else
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
+        }
+
+        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+        {
+            ViewBag.day = day;
+            ViewBag.type = type;
+            ViewBag.date = date;
+            ViewBag.recipeId = recipeId;
+            return View("OverwriteConformation");
+        }
+
+        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+        this.setupForRecipePage();
+        if (ViewBag.day == null)
+        {
+            ViewBag.day = "Monday";
+        }
+
+        if (ViewBag.type == null)
+        {
+            ViewBag.type = "Breakfast";
+        }
+
+        if (ViewBag.week == null)
+        {
+            ViewBag.week = "This Week";
+        }
+
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+        this.setupPlannedMeals();
+        return View("PlannedMealsPage");
+    }
+
     /// <summary>
     ///     Overwrites the recipe for the specified day and meal type.
     /// </summary>

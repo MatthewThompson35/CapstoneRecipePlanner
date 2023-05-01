@@ -12,8 +12,6 @@
         padding: 20px;
     }
 
-    #addForm { height: 500px; }
-
     #addForm input[type="text"],
     #addStepForm input[type="text"],
     #addTagForm input[type="text"],
@@ -268,8 +266,11 @@
             </table>
         </div>
         <form id="buttons">
-            <input type="submit" asp-action="goToRecipePage" class="btn btn-primary page-button" id="addRecipeButton" value="Add Recipe" />
+            <input type="submit"  class="btn btn-primary page-button" id="addRecipeButton" value="Add Recipe" />
             <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
+        </form>
+        <form id="goToRecipePage" asp-action="goToRecipePageAll">
+            <input type="submit" asp-action="goToRecipePage" class="btn btn-primary page-button" id="goRecipePage" hidden value="Add Recipe" />
         </form>
     </div>
 </div>
@@ -285,6 +286,7 @@
 }
 
 <script>
+    const form = document.getElementById('buttons');
     var cancelAddIngredient = document.getElementById('cancelAddIngredient');
     var addForm = document.getElementById('addForm');
     var showIngredientsForm = document.getElementById('showIngredientsForm');
@@ -431,7 +433,6 @@
     const addButton = document.getElementById('addRecipeButton');
     addButton.addEventListener('click', function (event) {
         var errorLabel = document.getElementById('recipe-error');
-
         addRecipe(event);
     });
 
@@ -516,11 +517,11 @@
                 method: 'POST',
                 data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                 success: function (response) {
-                    console.log('Recipe added successfully!');
-                },
+                        $("#goRecipePage").trigger("click"); // triggers the click event on the button with id="goRecipePage"
+                    },
                 error: function (xhr, status, error) {
                     console.log('Error adding recipe:', error);
-                }
+                    }
             });
             }
             else {
@@ -666,6 +667,7 @@
         var addForm = document.getElementById("addForm");
         addForm.style.display = "none";
     }
+
 
 
 
