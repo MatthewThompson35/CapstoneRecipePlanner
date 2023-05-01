@@ -584,6 +584,11 @@ namespace RecipePlannerDesktopApplication
                                 updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
                             }
 
                         }
@@ -622,7 +627,7 @@ namespace RecipePlannerDesktopApplication
 
                             else if (ingredient.quantity < recipeIngredient.Quantity)
                             {
-                                updatedQuantity = (int)(recipeIngredient.Quantity - ingredient.quantity);
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
 
@@ -671,6 +676,11 @@ namespace RecipePlannerDesktopApplication
                                 updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
                             }
 
                         }
