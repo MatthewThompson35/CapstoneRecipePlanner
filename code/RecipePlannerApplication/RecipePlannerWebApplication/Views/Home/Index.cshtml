@@ -83,41 +83,48 @@
 </head>
 
 <body>
-    <h1>Welcome to Recipe Planner</h1>
-    <div class="container" id="login">
-        <form class="form-horizontal" asp-action="Index">
-            <div class="form-group">
-                <label class="control-label">Username:</label>
-                <input asp-for="Username" class="form-control" type="text" id="username" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Password:</label>
-                <input asp-for="Password" class="form-control" type="password" id="password" />
-            </div>
-            @if (Model != null && !string.IsNullOrEmpty(Model.ErrorMessage))
-            {
-                <div class="form-group">
-                    <div class="text-danger">@Model.ErrorMessage</div>
-                </div>
-            }
-            <div class="button">
-                <input type="submit" value="Login" id="submit" onclick="setRequired();" />
-            </div>
-            <div class="button">
-                <input type="submit" asp-action="OpenRegister" value="Register" id="register" onclick="removeRequired();" />
-            </div>
-        </form>
-    </div>
+<h1>Welcome to Recipe Planner</h1>
+<div class="container" id="login">
+    <form class="form-horizontal" asp-action="Index" onsubmit="return validateLoginForm()">
+        <div class="form-group">
+            <label class="control-label">Username:</label>
+            <input asp-for="Username" class="form-control" type="text" id="username" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Password:</label>
+            <input asp-for="Password" class="form-control" type="password" id="password" />
+        </div>
+        <div class="form-group">
+            <div class="text-danger" id="error-message"></div>
+        </div>
+        <div class="button">
+            <input type="submit" value="Login" id="submit" />
+        </div>
+        <div class="button">
+            <input type="submit" asp-action="OpenRegister" value="Register" id="register" />
+        </div>
+    </form>
+</div>
 <script>
-    function setRequired() {
-      document.getElementById("username").required = true;
-      document.getElementById("password").required = true;
-    }
-    function removeRequired() {
-      document.getElementById("username").required = false;
-      document.getElementById("password").required = false;
-    }
-  </script>
+        function validateLoginForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (username.trim() === "" || password.trim() === "") {
+                document.getElementById("error-message").innerHTML = "Please enter both username and password";
+                return false;
+            }
+            else {
+                document.getElementById("error-message").innerHTML = "";
+                return true;
+            }
+        }
+</script>
+@if (Model != null && !string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <script>
+            document.getElementById("error-message").innerHTML = "@Model.ErrorMessage";
+        </script>
+}
 </body>
 
 

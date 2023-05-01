@@ -1227,6 +1227,59 @@ public class HomeController : Controller
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
+    public ActionResult addPlannedMealPlannedMealsPage(int recipeId, string week, string day, string type)
+    {
+        var recipeID = recipeId;
+        var Week = week;
+        var Day = day;
+        var Type = type;
+        DayOfWeek dayOfWeek;
+        Enum.TryParse(day, out dayOfWeek);
+        DateTime date;
+        if (week.Equals("This Week"))
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
+        }
+        else
+        {
+            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
+        }
+
+        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+        {
+            ViewBag.day = day;
+            ViewBag.type = type;
+            ViewBag.date = date;
+            ViewBag.recipeId = recipeId;
+            return View("OverwriteConformation");
+        }
+
+        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+        this.setupForRecipePage();
+        if (ViewBag.day == null)
+        {
+            ViewBag.day = "Monday";
+        }
+
+        if (ViewBag.type == null)
+        {
+            ViewBag.type = "Breakfast";
+        }
+
+        if (ViewBag.week == null)
+        {
+            ViewBag.week = "This Week";
+        }
+
+        if (ViewBag.AvailableRecipes == null)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+            return View("Index");
+        }
+        this.setupPlannedMeals();
+        return View("PlannedMealsPage");
+    }
+
     /// <summary>
     ///     Overwrites the recipe for the specified day and meal type.
     /// </summary>
@@ -1672,7 +1725,31 @@ public class HomeController : Controller
                 return View("Register");
             }
 
-            if (password.Equals(repeatPassword))
+            if (username == null)
+            {
+                ViewBag.Error = "Please enter a username";
+                return View("Register");
+            }
+
+            if (password == null)
+            {
+                ViewBag.Error = "Please enter a password";
+                return View("Register");
+            }
+
+            if (repeatPassword == null)
+            {
+                ViewBag.Error = "Please re-enter your password";
+                return View("Register");
+            }
+
+            if (!password.Equals(repeatPassword))
+            {
+                ViewBag.Error = "The passwords do not match";
+                return View("Register");
+            }
+
+            if (password != null && repeatPassword != null && password.Equals(repeatPassword))
             {
                 Database.CreateUser(username, password);
                 return View("Index");
@@ -1684,6 +1761,7 @@ public class HomeController : Controller
         catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
+            return View("Register");
         }
 
         return View("Register");
@@ -1766,7 +1844,27 @@ public class HomeController : Controller
     public IActionResult CookMealConfirmation(int recipeID)
     {
         ViewBag.id = recipeID;
-        return View("CookMealConfirmation");
+        bool hasAllIngredients = true;
+
+        var totalIngredients = IngredientDAL.getIngredients();
+        foreach (var ingredient in
+                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        {
+            var existingIngredient = totalIngredients.Find(i =>
+                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+            if (existingIngredient == null || existingIngredient.quantity - ingredient.Quantity < 0)
+            {
+                hasAllIngredients = false;
+            }
+        }
+
+        if (hasAllIngredients)
+        {
+            return View("CookMealConfirmation");
+        }
+
+        return View("MissingIngredientsConfirmation");
     }
 
     /// <summary>

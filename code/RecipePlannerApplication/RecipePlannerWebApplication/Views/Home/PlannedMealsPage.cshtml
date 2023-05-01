@@ -90,6 +90,40 @@
                     </ul>
                 </div>
             }
+            <form method="post" id="addPlannedMeal" style="display: none;">
+                <div class="form-group">
+                    <input type="hidden" name="recipeId" id="recipeId" value="">
+                    <label for="week">Week:</label>
+                    <select name="week" id="week">
+                        @foreach (var week in new[] { "This Week", "Next Week" })
+                        {
+                            <option value="@week">@week</option>
+                        }
+                    </select>
+                    <label for="day">Day:</label>
+                    <select name="day" id="day">
+                        @foreach (var day in new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" })
+                        {
+                            <option value="@day">@day</option>
+                        }
+                    </select>
+                    <label for="type">Meal Type:</label>
+                    <select name="type" id="type">
+                        @foreach (var type in new[] { "Breakfast", "Lunch", "Dinner" })
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <div id="errorMessage" style="display: none;">
+                        Are you sure You want to overwrite your previous meal?
+                    </div>
+
+                </div>
+                <div class="button-group">
+                    <input type="submit" class="btn btn-primary page-button" asp-action="addPlannedMealPlannedMealsPage" value="Add Planned Meal" style="margin-top: 10px" />
+                    <input type="submit" class="btn btn-primary page-button" hidden asp-action="UpdateThisWeeksMeal" value="Confirm Update" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -196,11 +230,52 @@
         margin-right: 10px;
         margin-bottom: 25px;
     }
+
+    #addPlannedMeal {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    select {
+        background-color: #f2f2f2;
+        border: none;
+        color: black;
+        padding: 8px 16px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    select:focus {
+        outline: none;
+        box-shadow: none;
+        border: 2px solid #00BFFF;
+    }
 </style>
 <script>
     window.onload = function () {
         doDefaultMeals();
     };
+    
+    
+    const detailsRows = document.querySelectorAll('.details-row');
+
+    // Loop through all details rows
+    detailsRows.forEach((row) => {
+        // Find the details cell in the row
+        const detailsCell = row.querySelector('td:nth-child(2)');
+
+        // Find the corresponding View Recipe button in the row
+        const viewRecipeButton = row.querySelector('td:nth-child(3) button');
+
+        // Check if the details cell contains the "You Have not yet added a meal for this time" text
+        if (detailsCell.textContent.trim() === "You Have not yet added a meal for this time") {
+            // If the details cell contains the text, disable the View Recipe button
+            viewRecipeButton.disabled = true;
+        }
+    });
+    const recipeIdInput = document.getElementById('recipeId');
+    const addPlannedMealForm = document.getElementById('addPlannedMeal');
 
     var allIngredientsCheckbox = document.getElementById("AllIngredients");
     var addForm = document.getElementById("addForm");
@@ -277,6 +352,8 @@
             success: function (response) {
                 console.log(response);
                 var recipeId = response.recipeId;
+                document.getElementById("recipeId").value = "";
+                document.getElementById("recipeId").value = recipeId;
                 showRecipe(recipeId);
             },
             error: function (xhr, status, error) {
@@ -302,7 +379,7 @@
         shareRecipe.style.display = "block";
         recipeID.value = recipeId;
         sharedRecipeID.value = recipeId;
-
+        document.getElementById("addPlannedMeal").style.display = "block";
 
         // Show the recipe details for the specified recipe ID
         var recipe = document.getElementById(recipeId);
@@ -315,6 +392,9 @@
         var cookRecipe = document.getElementById('cookMeal');
         var shareRecipe = document.getElementById('shareMeal');
         var recipeID = document.getElementById('recipeID');
+        if (recipeIdInput.value == "") {
+            addPlannedMealForm.style.display = 'none';
+        }
 
         cookRecipe.style.display = "block";
         shareRecipe.style.display = "block";
