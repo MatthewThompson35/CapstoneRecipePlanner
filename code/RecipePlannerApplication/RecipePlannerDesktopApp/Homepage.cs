@@ -653,4 +653,13 @@ public partial class Homepage : Form
         
         sharedPage.Show();
     }
+
+    private void viewPantryToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var pantry = new IngredientsPage();
+
+        this.Hide();
+
+        pantry.Show();
+    }
 }

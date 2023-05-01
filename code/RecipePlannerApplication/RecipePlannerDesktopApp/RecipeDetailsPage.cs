@@ -89,10 +89,21 @@ namespace RecipePlannerDesktopApplication
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            Homepage homepage = new Homepage();
-            homepage.Show();
+            if (this.homepage != null)
+            {
+                this.Hide();
+                this.homepage.Show();
+            }
+            else if (this.mealsPage != null)
+            {
+                this.Hide();
+                this.mealsPage.Show();
+            }
+            else
+            {
+                this.Hide();
+                this.sharedPage.Show();
+            }
 
         }
 
