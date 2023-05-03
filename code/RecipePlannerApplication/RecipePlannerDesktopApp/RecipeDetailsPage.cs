@@ -75,7 +75,10 @@ namespace RecipePlannerDesktopApplication
             this.populateWeekComboBoxValues();
         }
 
-
+        /// <summary>
+        ///     Initializes the recipe details page based on the specified shared page.
+        /// </summary>
+        /// <param name="sharedPage">the shared page</param>
         public RecipeDetailsPage(SharedRecipes sharedPage) : this()
         {
             this.sharedPage = sharedPage;
@@ -273,11 +276,11 @@ namespace RecipePlannerDesktopApplication
         }
 
         /// <summary>
-        ///     Gets the current recipe from the homepage selection.
+        ///     Gets the current recipe based on the homepage selection, meal plan page or the shared page selection.
         /// </summary>
         /// <precondition>none</precondition>
         /// <postcondition>none</postcondition>
-        /// <returns>the current recipe from the homepage selection.</returns>
+        /// <returns>the current recipe from the homepage selection, meal plan page or the shared page selection.</returns>
         public Recipe getCurrentRecipe()
         {
             if (this.homepage != null)

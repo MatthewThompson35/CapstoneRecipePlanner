@@ -40,9 +40,9 @@
             this.stepsSuccessLabel = new System.Windows.Forms.Label();
             this.stepNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stepDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.upColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.downColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,9 +88,9 @@
             this.stepsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.stepNumberColumn,
             this.stepDescriptionColumn,
-            this.removeColumn,
             this.upColumn,
-            this.downColumn});
+            this.downColumn,
+            this.removeColumn});
             this.stepsDataGridView.Location = new System.Drawing.Point(30, 335);
             this.stepsDataGridView.Name = "stepsDataGridView";
             this.stepsDataGridView.RowHeadersVisible = false;
@@ -136,11 +136,11 @@
             this.errorStepsFieldLabel.AutoSize = true;
             this.errorStepsFieldLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorStepsFieldLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorStepsFieldLabel.Location = new System.Drawing.Point(175, 223);
+            this.errorStepsFieldLabel.Location = new System.Drawing.Point(152, 223);
             this.errorStepsFieldLabel.Name = "errorStepsFieldLabel";
-            this.errorStepsFieldLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorStepsFieldLabel.Size = new System.Drawing.Size(219, 20);
             this.errorStepsFieldLabel.TabIndex = 9;
-            this.errorStepsFieldLabel.Text = "Please fill out all fields.";
+            this.errorStepsFieldLabel.Text = "Please fill out step description";
             this.errorStepsFieldLabel.Visible = false;
             // 
             // stepsSuccessLabel
@@ -167,15 +167,7 @@
             this.stepDescriptionColumn.HeaderText = "Step Description";
             this.stepDescriptionColumn.MinimumWidth = 6;
             this.stepDescriptionColumn.Name = "stepDescriptionColumn";
-            this.stepDescriptionColumn.Width = 150;
-            // 
-            // removeColumn
-            // 
-            this.removeColumn.HeaderText = "Action";
-            this.removeColumn.MinimumWidth = 6;
-            this.removeColumn.Name = "removeColumn";
-            this.removeColumn.Text = "Remove";
-            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.stepDescriptionColumn.Width = 115;
             // 
             // upColumn
             // 
@@ -184,7 +176,7 @@
             this.upColumn.Name = "upColumn";
             this.upColumn.Text = "↑";
             this.upColumn.UseColumnTextForButtonValue = true;
-            this.upColumn.Width = 50;
+            this.upColumn.Width = 45;
             // 
             // downColumn
             // 
@@ -193,7 +185,16 @@
             this.downColumn.Name = "downColumn";
             this.downColumn.Text = "↓";
             this.downColumn.UseColumnTextForButtonValue = true;
-            this.downColumn.Width = 50;
+            this.downColumn.Width = 45;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 115;
             // 
             // RecipeStepAdd
             // 
@@ -231,8 +232,8 @@
         private Label stepsSuccessLabel;
         private DataGridViewTextBoxColumn stepNumberColumn;
         private DataGridViewTextBoxColumn stepDescriptionColumn;
-        private DataGridViewButtonColumn removeColumn;
         private DataGridViewButtonColumn upColumn;
         private DataGridViewButtonColumn downColumn;
+        private DataGridViewButtonColumn removeColumn;
     }
 }

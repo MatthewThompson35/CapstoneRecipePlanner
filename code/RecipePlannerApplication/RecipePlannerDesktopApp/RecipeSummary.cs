@@ -14,17 +14,45 @@ namespace RecipePlannerFinalDemoAdditions
         private RecipeStepAdd stepAddPage;
         private RecipeTagAdd tagAddPage;
 
+        /// <summary>
+        ///     Initializes a new tags list object for the recipe summary.
+        /// </summary>
         public List<string> tags = new List<string>();
+
+        /// <summary>
+        ///     Initializes a new temporary tags list object for the recipe summary.
+        /// </summary>
         public List<string> tempTags = new List<string>();
 
+        /// <summary>
+        ///     Initializes a new recipeSteps list object for the recipe summary.
+        /// </summary>
         public List<RecipeStep> recipeSteps = new List<RecipeStep>();
+
+        /// <summary>
+        ///     Initializes a new temporary steps list object for the recipe summary.
+        /// </summary>
         public List<RecipeStep> tempSteps = new List<RecipeStep>();
 
+        /// <summary>
+        ///     Initializes a new recipeIngredients list object for the recipe summary.
+        /// </summary>
         public List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+
+        /// <summary>
+        ///     Initializes a new temporary ingredients list object for the recipe summary.
+        /// </summary>
         public List<RecipeIngredient> tempIngredients = new List<RecipeIngredient>();
 
+        /// <summary>
+        ///     Gets or sets the new recipe.
+        /// </summary>
         public Recipe NewRecipe { get; set; }
 
+        /// <summary>
+        ///     Initializes the RecipeSummary object page that sets each of the pages for adding into the summary: the ingredients add page,
+        ///     the steps add page, and the tags add page.
+        /// </summary>
         public RecipeSummary()
         {
             InitializeComponent();
@@ -36,6 +64,13 @@ namespace RecipePlannerFinalDemoAdditions
             this.NewRecipe = new Recipe();
         }
 
+        /// <summary>
+        ///     Initializes the recipe summary object with the specified recipe ingredient add page, the recipe step add page and
+        ///     the recipe tag add page.
+        /// </summary>
+        /// <param name="ingredientAdd">the ingredient add page</param>
+        /// <param name="stepAddPage">the step add page</param>
+        /// <param name="tagAddPage">the tag add page</param>
         public RecipeSummary(RecipeIngredientAdd ingredientAdd, RecipeStepAdd stepAddPage, RecipeTagAdd tagAddPage) :this()
         {
             this.ingredientAddPage = ingredientAdd;
@@ -43,12 +78,19 @@ namespace RecipePlannerFinalDemoAdditions
             this.tagAddPage = tagAddPage;
         }
 
+        /// <summary>
+        ///     Initializes the recipe summary object based on the specified recipe.
+        /// </summary>
+        /// <param name="recipe">the recipe</param>
         public RecipeSummary(Recipe recipe) : this ()
         {
             this.NewRecipe = recipe;
-
         }
 
+        /// <summary>
+        ///     Sets the tag information for the summary list view.
+        /// </summary>
+        /// <param name="tagData">the tag data to set</param>
         public void SetTagData(List<string> tagData)
         {
             tags = tagData;
@@ -74,11 +116,19 @@ namespace RecipePlannerFinalDemoAdditions
             }
         }
 
+        /// <summary>
+        ///     Gets the tags information
+        /// </summary>
+        /// <returns>the tags</returns>
         public List<string> GetTagData()
         {
             return this.tags;
         }
 
+        /// <summary>
+        ///     Sets the step data information for the summary list view.
+        /// </summary>
+        /// <param name="stepData">the step data information</param>
         public void SetStepData(List<RecipeStep> stepData)
         {
             recipeSteps = stepData;
@@ -101,8 +151,17 @@ namespace RecipePlannerFinalDemoAdditions
             }
         }
 
+        /// <summary>
+        ///     The StepNumberComparer class in order to compare the step numbers and sort.
+        /// </summary>
         public class StepNumberComparer : IComparer
         {
+            /// <summary>
+            ///     Compares the objects
+            /// </summary>
+            /// <param name="x">the x object to compare</param>
+            /// <param name="y">the y object to compare</param>
+            /// <returns> the comparison between object x and object y</returns>
             public int Compare(object x, object y)
             {
                 int xStepNumber = int.Parse(((ListViewItem)x).Text);
@@ -111,11 +170,19 @@ namespace RecipePlannerFinalDemoAdditions
             }
         }
 
+        /// <summary>
+        ///     Gets the steps information
+        /// </summary>
+        /// <returns>the steps information</returns>
         public List<RecipeStep> GetStepData()
         {
             return this.recipeSteps;
         }
 
+        /// <summary>
+        ///     Sets the ingredient information for the summary list view.
+        /// </summary>
+        /// <param name="ingredientData">the ingredient data information.</param>
         public void SetIngredientData(List<RecipeIngredient> ingredientData)
         {
             recipeIngredients = ingredientData;
@@ -139,6 +206,10 @@ namespace RecipePlannerFinalDemoAdditions
 
         }
 
+        /// <summary>
+        ///     Gets the ingredients information.
+        /// </summary>
+        /// <returns>the ingreients information</returns>
         public List<RecipeIngredient> GetIngredientData()
         {
             return this.recipeIngredients;

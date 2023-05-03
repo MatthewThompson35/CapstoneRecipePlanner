@@ -13,16 +13,34 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RecipePlannerFinalDemoAdditions
 {
+    /// <summary>
+    ///     The RecipeTagAdd partial class
+    /// </summary>
     public partial class RecipeTagAdd : Form
     {
         private List<string> tags;
         private Recipe recipe;
+
+        /// <summary>
+        ///     Initializes the RecipeTagAdd page that sets the tags.
+        ///
+        ///     Precondition: none
+        ///     Postcondition: getTags().Count() == 0
+        /// </summary>
         public RecipeTagAdd()
         {
             InitializeComponent();
             tags = new List<string>();
         }
 
+        /// <summary>
+        ///     Initializes the RecipeTagAdd page with the specified tagDatas list and the recipe.
+        ///
+        ///     Precondition: tagDatas != null && recipe != null
+        ///     Postcondition: getTags() == tagDatas && getRecipe() == recipe
+        /// </summary>
+        /// <param name="tagDatas">the tagDatas list</param>
+        /// <param name="recipe">the recipe</param>
         public RecipeTagAdd(List<string> tagDatas, Recipe recipe) :this()
         {
             tags = tagDatas;
@@ -122,6 +140,9 @@ namespace RecipePlannerFinalDemoAdditions
 
         /// <summary>
         ///     Adds a row to the tag grid view based on the tag name.
+        ///
+        ///     Precondition: tagName != null
+        ///     Postcondition: tagsDataGridView.Rows.Count = @prev tagsDataGridView.Rows.Count + 1
         /// </summary>
         /// <param name="tagName">the tag name</param>
         public void AddRowToTagGridView(string tagName)
@@ -167,13 +188,10 @@ namespace RecipePlannerFinalDemoAdditions
             {
                 string updatedValue = tagsDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-                // Find the corresponding oldTag in the list based on the row index
                 string oldTag = tags[e.RowIndex];
 
-                // Check if the updated value is different from the oldTag
                 if (updatedValue != oldTag)
                 {
-                    // Update the value in the tags list
                     tags[e.RowIndex] = updatedValue;
                 }
             }

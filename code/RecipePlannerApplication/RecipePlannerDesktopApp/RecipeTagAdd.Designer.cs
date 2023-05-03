@@ -34,12 +34,12 @@
             this.tagNameTextBox = new System.Windows.Forms.TextBox();
             this.addButton = new System.Windows.Forms.Button();
             this.tagsDataGridView = new System.Windows.Forms.DataGridView();
-            this.tagNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorTagFieldLabel = new System.Windows.Forms.Label();
             this.tagSuccessLabel = new System.Windows.Forms.Label();
+            this.tagNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,22 +105,6 @@
             this.tagsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellContentClick);
             this.tagsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellValueChanged);
             // 
-            // tagNameColumn
-            // 
-            this.tagNameColumn.HeaderText = "Tag Name";
-            this.tagNameColumn.MinimumWidth = 6;
-            this.tagNameColumn.Name = "tagNameColumn";
-            this.tagNameColumn.Width = 125;
-            // 
-            // removeColumn
-            // 
-            this.removeColumn.HeaderText = "Action";
-            this.removeColumn.MinimumWidth = 6;
-            this.removeColumn.Name = "removeColumn";
-            this.removeColumn.Text = "Remove";
-            this.removeColumn.UseColumnTextForButtonValue = true;
-            this.removeColumn.Width = 125;
-            // 
             // confirmButton
             // 
             this.confirmButton.Location = new System.Drawing.Point(140, 625);
@@ -165,6 +149,22 @@
             this.tagSuccessLabel.Text = "Tag Added Successfully";
             this.tagSuccessLabel.Visible = false;
             // 
+            // tagNameColumn
+            // 
+            this.tagNameColumn.HeaderText = "Tag Name";
+            this.tagNameColumn.MinimumWidth = 6;
+            this.tagNameColumn.Name = "tagNameColumn";
+            this.tagNameColumn.Width = 110;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 120;
+            // 
             // RecipeTagAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -195,11 +195,11 @@
         private TextBox tagNameTextBox;
         private Button addButton;
         private DataGridView tagsDataGridView;
-        private DataGridViewTextBoxColumn tagNameColumn;
-        private DataGridViewButtonColumn removeColumn;
         private Button confirmButton;
         private Button cancelButton;
         private Label errorTagFieldLabel;
         private Label tagSuccessLabel;
+        private DataGridViewTextBoxColumn tagNameColumn;
+        private DataGridViewButtonColumn removeColumn;
     }
 }
