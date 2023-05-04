@@ -30,20 +30,19 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.stepNumberTextBox = new System.Windows.Forms.TextBox();
             this.stepDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.stepsDataGridView = new System.Windows.Forms.DataGridView();
-            this.stepNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stepDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.addButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorStepsFieldLabel = new System.Windows.Forms.Label();
-            this.errorStepNumberLabel = new System.Windows.Forms.Label();
             this.stepsSuccessLabel = new System.Windows.Forms.Label();
+            this.stepNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stepDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.upColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.downColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,37 +56,20 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Add Recipe Steps";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(116, 115);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Step Number:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(277, 115);
+            this.label3.Location = new System.Drawing.Point(166, 100);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 20);
+            this.label3.Size = new System.Drawing.Size(171, 20);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Step Description:";
-            // 
-            // stepNumberTextBox
-            // 
-            this.stepNumberTextBox.Location = new System.Drawing.Point(131, 148);
-            this.stepNumberTextBox.Name = "stepNumberTextBox";
-            this.stepNumberTextBox.Size = new System.Drawing.Size(61, 27);
-            this.stepNumberTextBox.TabIndex = 3;
-            this.stepNumberTextBox.Click += new System.EventHandler(this.stepNumberTextBox_Click);
+            this.label3.Text = "Recipe Step Description:";
             // 
             // stepDescriptionTextBox
             // 
-            this.stepDescriptionTextBox.Location = new System.Drawing.Point(277, 148);
+            this.stepDescriptionTextBox.Location = new System.Drawing.Point(166, 138);
             this.stepDescriptionTextBox.Name = "stepDescriptionTextBox";
-            this.stepDescriptionTextBox.Size = new System.Drawing.Size(125, 27);
+            this.stepDescriptionTextBox.Size = new System.Drawing.Size(171, 27);
             this.stepDescriptionTextBox.TabIndex = 4;
             this.stepDescriptionTextBox.Click += new System.EventHandler(this.stepDescriptionTextBox_Click);
             // 
@@ -106,6 +88,8 @@
             this.stepsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.stepNumberColumn,
             this.stepDescriptionColumn,
+            this.upColumn,
+            this.downColumn,
             this.removeColumn});
             this.stepsDataGridView.Location = new System.Drawing.Point(30, 335);
             this.stepsDataGridView.Name = "stepsDataGridView";
@@ -116,29 +100,6 @@
             this.stepsDataGridView.TabIndex = 5;
             this.stepsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellContentClick);
             this.stepsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellValueChanged);
-            // 
-            // stepNumberColumn
-            // 
-            this.stepNumberColumn.HeaderText = "Step Number";
-            this.stepNumberColumn.MinimumWidth = 6;
-            this.stepNumberColumn.Name = "stepNumberColumn";
-            this.stepNumberColumn.Width = 75;
-            // 
-            // stepDescriptionColumn
-            // 
-            this.stepDescriptionColumn.HeaderText = "Step Description";
-            this.stepDescriptionColumn.MinimumWidth = 6;
-            this.stepDescriptionColumn.Name = "stepDescriptionColumn";
-            this.stepDescriptionColumn.Width = 200;
-            // 
-            // removeColumn
-            // 
-            this.removeColumn.HeaderText = "Action";
-            this.removeColumn.MinimumWidth = 6;
-            this.removeColumn.Name = "removeColumn";
-            this.removeColumn.Text = "Remove";
-            this.removeColumn.UseColumnTextForButtonValue = true;
-            this.removeColumn.Width = 125;
             // 
             // addButton
             // 
@@ -175,24 +136,12 @@
             this.errorStepsFieldLabel.AutoSize = true;
             this.errorStepsFieldLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorStepsFieldLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorStepsFieldLabel.Location = new System.Drawing.Point(175, 223);
+            this.errorStepsFieldLabel.Location = new System.Drawing.Point(152, 223);
             this.errorStepsFieldLabel.Name = "errorStepsFieldLabel";
-            this.errorStepsFieldLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorStepsFieldLabel.Size = new System.Drawing.Size(219, 20);
             this.errorStepsFieldLabel.TabIndex = 9;
-            this.errorStepsFieldLabel.Text = "Please fill out all fields.";
+            this.errorStepsFieldLabel.Text = "Please fill out step description";
             this.errorStepsFieldLabel.Visible = false;
-            // 
-            // errorStepNumberLabel
-            // 
-            this.errorStepNumberLabel.AutoSize = true;
-            this.errorStepNumberLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.errorStepNumberLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorStepNumberLabel.Location = new System.Drawing.Point(55, 178);
-            this.errorStepNumberLabel.Name = "errorStepNumberLabel";
-            this.errorStepNumberLabel.Size = new System.Drawing.Size(198, 20);
-            this.errorStepNumberLabel.TabIndex = 10;
-            this.errorStepNumberLabel.Text = "Step number not a number";
-            this.errorStepNumberLabel.Visible = false;
             // 
             // stepsSuccessLabel
             // 
@@ -206,22 +155,60 @@
             this.stepsSuccessLabel.Text = "Step Added Successfully";
             this.stepsSuccessLabel.Visible = false;
             // 
+            // stepNumberColumn
+            // 
+            this.stepNumberColumn.HeaderText = "Step Number";
+            this.stepNumberColumn.MinimumWidth = 6;
+            this.stepNumberColumn.Name = "stepNumberColumn";
+            this.stepNumberColumn.Width = 75;
+            // 
+            // stepDescriptionColumn
+            // 
+            this.stepDescriptionColumn.HeaderText = "Step Description";
+            this.stepDescriptionColumn.MinimumWidth = 6;
+            this.stepDescriptionColumn.Name = "stepDescriptionColumn";
+            this.stepDescriptionColumn.Width = 115;
+            // 
+            // upColumn
+            // 
+            this.upColumn.HeaderText = "";
+            this.upColumn.MinimumWidth = 6;
+            this.upColumn.Name = "upColumn";
+            this.upColumn.Text = "↑";
+            this.upColumn.UseColumnTextForButtonValue = true;
+            this.upColumn.Width = 45;
+            // 
+            // downColumn
+            // 
+            this.downColumn.HeaderText = "";
+            this.downColumn.MinimumWidth = 6;
+            this.downColumn.Name = "downColumn";
+            this.downColumn.Text = "↓";
+            this.downColumn.UseColumnTextForButtonValue = true;
+            this.downColumn.Width = 45;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = "Action";
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = "removeColumn";
+            this.removeColumn.Text = "Remove";
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 115;
+            // 
             // RecipeStepAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 823);
             this.Controls.Add(this.stepsSuccessLabel);
-            this.Controls.Add(this.errorStepNumberLabel);
             this.Controls.Add(this.errorStepsFieldLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.stepsDataGridView);
             this.Controls.Add(this.stepDescriptionTextBox);
-            this.Controls.Add(this.stepNumberTextBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "RecipeStepAdd";
             this.Text = "RecipeStepAdd";
@@ -235,19 +222,18 @@
         #endregion
 
         private Label label1;
-        private Label label2;
         private Label label3;
-        private TextBox stepNumberTextBox;
         private TextBox stepDescriptionTextBox;
         private DataGridView stepsDataGridView;
         private Button addButton;
         private Button confirmButton;
         private Button cancelButton;
         private Label errorStepsFieldLabel;
-        private Label errorStepNumberLabel;
         private Label stepsSuccessLabel;
         private DataGridViewTextBoxColumn stepNumberColumn;
         private DataGridViewTextBoxColumn stepDescriptionColumn;
+        private DataGridViewButtonColumn upColumn;
+        private DataGridViewButtonColumn downColumn;
         private DataGridViewButtonColumn removeColumn;
     }
 }

@@ -14,23 +14,44 @@ using System.Xml.Linq;
 
 namespace RecipePlannerFinalDemoAdditions
 {
+    /// <summary>
+    ///     The RecipeStepAdd partial class.
+    /// </summary>
     public partial class RecipeStepAdd : Form
     {
         private List<RecipeStep> recipeSteps;
         private Recipe recipe;
 
+        /// <summary>
+        ///     Initializes the RecipeStepAdd page that sets the recipeSteps list
+        ///
+        ///     Precondition: none
+        ///     Postcondition: getRecipeSteps().Count() == 0
+        /// </summary>
         public RecipeStepAdd()
         {
             InitializeComponent();
             recipeSteps = new List<RecipeStep>();
         }
 
+        /// <summary>
+        ///     Initializes the RecipeStepAdd page with the specified stepDatas and the recipe
+        ///
+        ///     Precondition: stepDatas != null && recipe != null
+        ///     Postcondition: getRecipeSteps() == stepDatas && getRecipe() == recipe
+        /// </summary>
+        /// <param name="stepDatas"></param>
+        /// <param name="recipe"></param>
         public RecipeStepAdd(List<RecipeStep> stepDatas, Recipe recipe) : this()
         {
             recipeSteps = stepDatas;
             this.recipe = recipe;
         }
 
+        /// <summary>
+        ///     Gets the recipe steps
+        /// </summary>
+        /// <returns>the recipe steps</returns>
         public List<RecipeStep> GetRecipeSteps()
         {
             return this.recipeSteps;
@@ -38,57 +59,48 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            string stepNumber = null;
-            string stepDescription = null;
-            int number;
+            int rowCount = this.stepsDataGridView.Rows.Count;
+            int nextStepNumber = rowCount + 1;
 
-            if (String.IsNullOrEmpty(this.stepNumberTextBox.Text) || String.IsNullOrEmpty(this.stepDescriptionTextBox.Text))
+            string stepDescription = null;
+
+            if (String.IsNullOrEmpty(this.stepDescriptionTextBox.Text))
             {
                 this.errorStepsFieldLabel.Visible = true;
+                this.stepsSuccessLabel.Visible = false;
             }
             else
             {
                 this.errorStepsFieldLabel.Visible = false;
-                stepNumber = this.stepNumberTextBox.Text;
+                
                 stepDescription = this.stepDescriptionTextBox.Text;
 
-                bool isNumeric = int.TryParse(stepNumber, out number);
-
-                if (!isNumeric)
-                {
-                    this.errorStepNumberLabel.Text = "Step number is not a number";
-                    this.errorStepNumberLabel.Visible = true;
-                }
-                else if (isNumeric && number <= 0)
-                {
-                    this.errorStepNumberLabel.Text = "Step number must be greater than 0";
-                    this.errorStepNumberLabel.Visible = true;
-                }
-                else
-                {
-                    this.errorStepNumberLabel.Visible = false;
-                }
             }
 
-            if (this.errorStepsFieldLabel.Visible == true || this.errorStepNumberLabel.Visible == true)
+            if (this.errorStepsFieldLabel.Visible == true)
             {
                 return;
             }
             else
             {
-                RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumber), stepDescription);
+                RecipeStep recipeStep = new RecipeStep(nextStepNumber, stepDescription);
                 bool isDuplicate = false;
+                int rowIndex = -1;
                 if (this.recipeSteps != null)
                 {
                     foreach (DataGridViewRow row in this.stepsDataGridView.Rows)
                     {
                         string existingStepNumber = row.Cells["stepNumberColumn"].Value.ToString();
-                        
+
                         if (recipeStep.stepNumber.Equals(Convert.ToInt32(existingStepNumber)))
                         {
-                            this.errorStepsFieldLabel.Text = "This step already exists.";
-                            this.errorStepsFieldLabel.Visible = true;
                             isDuplicate = true;
+                            rowIndex = row.Index;
+                            break;
+                        }
+                        else if (recipeStep.stepNumber < Convert.ToInt32(existingStepNumber))
+                        {
+                            rowIndex = row.Index;
                             break;
                         }
                     }
@@ -96,13 +108,23 @@ namespace RecipePlannerFinalDemoAdditions
 
                 if (isDuplicate == true)
                 {
+                    this.errorStepsFieldLabel.Text = "This step already exists.";
+                    this.errorStepsFieldLabel.Visible = true;
                     return;
                 }
                 else
                 {
                     this.errorStepsFieldLabel.Visible = false;
-                    
-                    this.AddRowToStepsGridView(recipeStep.stepNumber.ToString(), recipeStep.stepDescription);
+
+                    if (rowIndex == -1 || rowIndex == rowCount)
+                    {
+                        this.AddRowToStepsGridView(recipeStep.stepNumber.ToString(), recipeStep.stepDescription);
+                    }
+                    else
+                    {
+                        this.stepsDataGridView.Rows.Insert(rowIndex, recipeStep.stepNumber.ToString(), recipeStep.stepDescription);
+                    }
+
                     this.stepsSuccessLabel.Visible = true;
                     this.clearStepsFields();
                 }
@@ -118,12 +140,10 @@ namespace RecipePlannerFinalDemoAdditions
         public void AddRowToStepsGridView(string stepNumber, string stepDescription)
         {
             this.stepsDataGridView.Rows.Add(stepNumber, stepDescription);
-            
         }
 
         private void clearStepsFields()
         {
-            this.stepNumberTextBox.Clear();
             this.stepDescriptionTextBox.Clear();
         }
 
@@ -159,7 +179,6 @@ namespace RecipePlannerFinalDemoAdditions
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-
             var recipeSummary = new RecipeSummary(this.recipe);
             recipeSummary.SetStepData(recipeSteps);
             
@@ -171,19 +190,78 @@ namespace RecipePlannerFinalDemoAdditions
         {
             if (e.ColumnIndex == stepsDataGridView.Columns["removeColumn"].Index && e.RowIndex >= 0)
             {
-                DataGridViewRow row = stepsDataGridView.Rows[e.RowIndex];
+                this.handleRemoveCurrentRowAndUpdateExistingRows(e);
+            }
+            if (e.ColumnIndex == stepsDataGridView.Columns["upColumn"].Index && e.RowIndex > 0)
+            {
+                this.handleUpReorderingStep(e);
+            }
+            if (e.ColumnIndex == stepsDataGridView.Columns["downColumn"].Index && e.RowIndex < stepsDataGridView.Rows.Count - 1)
+            {
+                this.handleDownReorderingStep(e);
+            }
+        }
 
-                string stepNumberData;
-                string stepDescriptionData;
+        private void handleDownReorderingStep(DataGridViewCellEventArgs e)
+        {
+            int currentIndex = e.RowIndex;
+            int newIndex = e.RowIndex + 1;
 
-                stepNumberData = row.Cells["stepNumberColumn"].Value.ToString();
-                stepDescriptionData = row.Cells["stepDescriptionColumn"].Value.ToString();
+            DataGridViewRow currentRow = stepsDataGridView.Rows[currentIndex];
+            DataGridViewRow newRow = stepsDataGridView.Rows[newIndex];
 
-                RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumberData), stepDescriptionData);
+            string currentStepDescription = currentRow.Cells["stepDescriptionColumn"].Value.ToString();
+            string newStepDescription = newRow.Cells["stepDescriptionColumn"].Value.ToString();
 
-                recipeSteps.Remove(recipeStep);
+            currentRow.Cells["stepDescriptionColumn"].Value = newStepDescription;
+            newRow.Cells["stepDescriptionColumn"].Value = currentStepDescription;
 
-                stepsDataGridView.Rows.RemoveAt(e.RowIndex);
+            stepsDataGridView.CurrentCell = newRow.Cells[0];
+        }
+
+        private void handleUpReorderingStep(DataGridViewCellEventArgs e)
+        {
+            int currentIndex = e.RowIndex;
+            int newIndex = e.RowIndex - 1;
+
+            DataGridViewRow currentRow = stepsDataGridView.Rows[currentIndex];
+            DataGridViewRow newRow = stepsDataGridView.Rows[newIndex];
+
+            string currentStepDescription = currentRow.Cells["stepDescriptionColumn"].Value.ToString();
+            string newStepDescription = newRow.Cells["stepDescriptionColumn"].Value.ToString();
+
+            currentRow.Cells["stepDescriptionColumn"].Value = newStepDescription;
+            newRow.Cells["stepDescriptionColumn"].Value = currentStepDescription;
+
+            stepsDataGridView.CurrentCell = newRow.Cells[0];
+        }
+
+        private void handleRemoveCurrentRowAndUpdateExistingRows(DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = stepsDataGridView.Rows[e.RowIndex];
+
+            string stepNumberData;
+            string stepDescriptionData;
+
+            stepNumberData = row.Cells["stepNumberColumn"].Value.ToString();
+            stepDescriptionData = row.Cells["stepDescriptionColumn"].Value.ToString();
+
+            RecipeStep recipeStep = new RecipeStep(Convert.ToInt32(stepNumberData), stepDescriptionData);
+
+            recipeSteps.Remove(recipeStep);
+
+            stepsDataGridView.Rows.RemoveAt(e.RowIndex);
+
+            for (int i = e.RowIndex; i < stepsDataGridView.Rows.Count; i++)
+            {
+                DataGridViewRow updatedRow = stepsDataGridView.Rows[i];
+                int updatedStepNumber = Convert.ToInt32(updatedRow.Cells["stepNumberColumn"].Value);
+
+                if (updatedStepNumber > Convert.ToInt32(stepNumberData))
+                {
+                    updatedStepNumber--;
+                    updatedRow.Cells["stepNumberColumn"].Value = updatedStepNumber.ToString();
+                }
             }
         }
 

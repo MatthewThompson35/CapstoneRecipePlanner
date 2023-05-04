@@ -14,21 +14,40 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RecipePlannerFinalDemoAdditions
 {
+    /// <summary>
+    ///     The RecipeIngredientAdd partial class.
+    /// </summary>
     public partial class RecipeIngredientAdd : Form
     {
         private List<RecipeIngredient> recipeIngredients;
         private Recipe recipe;
+
+        /// <summary>
+        ///     Initializes the RecipeIngredientAdd page and setting the recipeIngredients list.
+        ///
+        ///     Precondition: none
+        ///     Postcondition: getRecipeIngredients().Count() == 0
+        /// </summary>
         public RecipeIngredientAdd()
         {
             InitializeComponent();
             recipeIngredients = new List<RecipeIngredient>();
         }
 
+        /// <summary>
+        ///     Initializes the RecipeIngredientAdd page with the specified ingredientData list and the recipe.
+        ///
+        ///     Precondition: ingredientDatas != null
+        ///     Postcondition: getIngredientDatas() == ingredientData && getRecipe() == recipe
+        /// </summary>
+        /// <param name="ingredientDatas">the ingredient datas list</param>
+        /// <param name="recipe">the recipe</param>
         public RecipeIngredientAdd(List<RecipeIngredient> ingredientDatas, Recipe recipe) : this()
         {
             recipeIngredients = ingredientDatas;
             this.recipe = recipe;
         }
+
         /// <summary>
         ///     Gets the recipe ingredients
         /// </summary>
@@ -130,7 +149,6 @@ namespace RecipePlannerFinalDemoAdditions
                 quantityData = row.Cells["quantityColumn"].Value.ToString();
                 measurementData = row.Cells["measurementColumn"].Value.ToString();
                 
-                // Remember to do checks for if the table is modified, check if quantity is an int. If no, throw label error
                 RecipeIngredient recipeIngredient = new RecipeIngredient(nameData, Convert.ToInt32(quantityData), measurementData);
                 
                 if (recipeIngredients.Any(ri => ri.Equals(recipeIngredient)))
@@ -175,22 +193,27 @@ namespace RecipePlannerFinalDemoAdditions
         {
             if (e.ColumnIndex == ingredientDataGridView.Columns["removeColumn"].Index && e.RowIndex >= 0)
             {
-                DataGridViewRow row = ingredientDataGridView.Rows[e.RowIndex];
-
-                string nameData;
-                string quantityData;
-                string measurementData;
-
-                nameData = row.Cells["ingredientNameColumn"].Value.ToString();
-                quantityData = row.Cells["quantityColumn"].Value.ToString();
-                measurementData = row.Cells["measurementColumn"].Value.ToString();
-
-                RecipeIngredient recipeIngredient = new RecipeIngredient(nameData, Convert.ToInt32(quantityData), measurementData);
-
-                recipeIngredients.Remove(recipeIngredient);
-
-                ingredientDataGridView.Rows.RemoveAt(e.RowIndex);
+                this.handleRemoveIngredientRow(e);
             }
+        }
+
+        private void handleRemoveIngredientRow(DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = ingredientDataGridView.Rows[e.RowIndex];
+
+            string nameData;
+            string quantityData;
+            string measurementData;
+
+            nameData = row.Cells["ingredientNameColumn"].Value.ToString();
+            quantityData = row.Cells["quantityColumn"].Value.ToString();
+            measurementData = row.Cells["measurementColumn"].Value.ToString();
+
+            RecipeIngredient recipeIngredient = new RecipeIngredient(nameData, Convert.ToInt32(quantityData), measurementData);
+
+            recipeIngredients.Remove(recipeIngredient);
+
+            ingredientDataGridView.Rows.RemoveAt(e.RowIndex);
         }
 
         private void ingredientNameTextBox_Click(object sender, EventArgs e)

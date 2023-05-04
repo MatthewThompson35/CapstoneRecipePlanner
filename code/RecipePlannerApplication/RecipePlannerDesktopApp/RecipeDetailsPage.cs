@@ -75,7 +75,10 @@ namespace RecipePlannerDesktopApplication
             this.populateWeekComboBoxValues();
         }
 
-
+        /// <summary>
+        ///     Initializes the recipe details page based on the specified shared page.
+        /// </summary>
+        /// <param name="sharedPage">the shared page</param>
         public RecipeDetailsPage(SharedRecipes sharedPage) : this()
         {
             this.sharedPage = sharedPage;
@@ -89,10 +92,21 @@ namespace RecipePlannerDesktopApplication
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            Homepage homepage = new Homepage();
-            homepage.Show();
+            if (this.homepage != null)
+            {
+                this.Hide();
+                this.homepage.Show();
+            }
+            else if (this.mealsPage != null)
+            {
+                this.Hide();
+                this.mealsPage.Show();
+            }
+            else
+            {
+                this.Hide();
+                this.sharedPage.Show();
+            }
 
         }
 
@@ -262,11 +276,11 @@ namespace RecipePlannerDesktopApplication
         }
 
         /// <summary>
-        ///     Gets the current recipe from the homepage selection.
+        ///     Gets the current recipe based on the homepage selection, meal plan page or the shared page selection.
         /// </summary>
         /// <precondition>none</precondition>
         /// <postcondition>none</postcondition>
-        /// <returns>the current recipe from the homepage selection.</returns>
+        /// <returns>the current recipe from the homepage selection, meal plan page or the shared page selection.</returns>
         public Recipe getCurrentRecipe()
         {
             if (this.homepage != null)
@@ -573,6 +587,11 @@ namespace RecipePlannerDesktopApplication
                                 updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
                             }
 
                         }
@@ -611,7 +630,7 @@ namespace RecipePlannerDesktopApplication
 
                             else if (ingredient.quantity < recipeIngredient.Quantity)
                             {
-                                updatedQuantity = (int)(recipeIngredient.Quantity - ingredient.quantity);
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
 
@@ -660,6 +679,11 @@ namespace RecipePlannerDesktopApplication
                                 updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
                                 IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
                                 ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
                             }
 
                         }
