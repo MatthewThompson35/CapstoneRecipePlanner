@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeSummary.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerDesktopApplication;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Models;
+using System.Net.NetworkInformation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections;
+
+namespace RecipePlannerFinalDemoAdditions
+{
+    public partial class RecipeSummary : Form
+    {
+        private RecipeIngredientAdd ingredientAddPage;
+        private RecipeStepAdd stepAddPage;
+        private RecipeTagAdd tagAddPage;
+
+        /// &lt;summary&gt;
+        ///     Initializes a new tags list object for the recipe summary.
+        /// &lt;/summary&gt;
+        public List&lt;string&gt; tags = new List&lt;string&gt;();
+
+        /// &lt;summary&gt;
+        ///     Initializes a new temporary tags list object for the recipe summary.
+        /// &lt;/summary&gt;
+        public List&lt;string&gt; tempTags = new List&lt;string&gt;();
+
+        /// &lt;summary&gt;
+        ///     Initializes a new recipeSteps list object for the recipe summary.
+        /// &lt;/summary&gt;
+        public List&lt;RecipeStep&gt; recipeSteps = new List&lt;RecipeStep&gt;();
+
+        /// &lt;summary&gt;
+        ///     Initializes a new temporary steps list object for the recipe summary.
+        /// &lt;/summary&gt;
+        public List&lt;RecipeStep&gt; tempSteps = new List&lt;RecipeStep&gt;();
+
+        /// &lt;summary&gt;
+        ///     Initializes a new recipeIngredients list object for the recipe summary.
+        /// &lt;/summary&gt;
+        public List&lt;RecipeIngredient&gt; recipeIngredients = new List&lt;RecipeIngredient&gt;();
+
+        /// &lt;summary&gt;
+        ///     Initializes a new temporary ingredients list object for the recipe summary.
+        /// &lt;/summary&gt;
+        public List&lt;RecipeIngredient&gt; tempIngredients = new List&lt;RecipeIngredient&gt;();
+
+        /// &lt;summary&gt;
+        ///     Gets or sets the new recipe.
+        /// &lt;/summary&gt;
+        public Recipe NewRecipe { get; set; }
+
+        /// &lt;summary&gt;
+        ///     Initializes the RecipeSummary object page that sets each of the pages for adding into the summary: the ingredients add page,
+        ///     the steps add page, and the tags add page.
+        /// &lt;/summary&gt;
+        public RecipeSummary()
+        {
+            InitializeComponent();
+
+            this.ingredientAddPage = new RecipeIngredientAdd();
+            this.stepAddPage = new RecipeStepAdd();
+            this.tagAddPage = new RecipeTagAdd();
+
+            this.NewRecipe = new Recipe();
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the recipe summary object with the specified recipe ingredient add page, the recipe step add page and
+        ///     the recipe tag add page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientAdd&quot;&gt;the ingredient add page&lt;/param&gt;
+        /// &lt;param name=&quot;stepAddPage&quot;&gt;the step add page&lt;/param&gt;
+        /// &lt;param name=&quot;tagAddPage&quot;&gt;the tag add page&lt;/param&gt;
+        public RecipeSummary(RecipeIngredientAdd ingredientAdd, RecipeStepAdd stepAddPage, RecipeTagAdd tagAddPage) :this()
+        {
+            this.ingredientAddPage = ingredientAdd;
+            this.stepAddPage = stepAddPage;
+            this.tagAddPage = tagAddPage;
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the recipe summary object based on the specified recipe.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipe&quot;&gt;the recipe&lt;/param&gt;
+        public RecipeSummary(Recipe recipe) : this ()
+        {
+            this.NewRecipe = recipe;
+        }
+
+        /// &lt;summary&gt;
+        ///     Sets the tag information for the summary list view.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;tagData&quot;&gt;the tag data to set&lt;/param&gt;
+        public void SetTagData(List&lt;string&gt; tagData)
+        {
+            tags = tagData;
+
+            this.NewRecipe.Tags = tags;
+            this.tempTags = this.NewRecipe.Tags;
+
+            this.tempSteps = this.NewRecipe.Steps;
+            this.tempIngredients = this.NewRecipe.Ingredients;
+
+            tagsListView.Items.Clear();
+
+            foreach (var tag in tagData)
+            {
+                if (!tags.Contains(tag))
+                {
+                    tags.Add(tag);
+
+                    ListViewItem item = new ListViewItem(tag);
+                    tagsListView.Items.Add(item);
+
+                }
+            }
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the tags information
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;the tags&lt;/returns&gt;
+        public List&lt;string&gt; GetTagData()
+        {
+            return this.tags;
+        }
+
+        /// &lt;summary&gt;
+        ///     Sets the step data information for the summary list view.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;stepData&quot;&gt;the step data information&lt;/param&gt;
+        public void SetStepData(List&lt;RecipeStep&gt; stepData)
+        {
+            recipeSteps = stepData;
+
+            this.NewRecipe.Steps = recipeSteps;
+            this.tempSteps = this.NewRecipe.Steps;
+
+            this.tempTags = this.NewRecipe.Tags;
+            this.tempIngredients = this.NewRecipe.Ingredients;
+
+            stepsListView.Items.Clear();
+            foreach (var step in this.NewRecipe.Steps)
+            {
+                ListViewItem item = new ListViewItem(step.stepNumber.ToString());
+                item.SubItems.Add(step.stepDescription);
+                stepsListView.Items.Add(item);
+
+                stepsListView.ListViewItemSorter = new StepNumberComparer();
+                stepsListView.Sort();
+            }
+        }
+
+        /// &lt;summary&gt;
+        ///     The StepNumberComparer class in order to compare the step numbers and sort.
+        /// &lt;/summary&gt;
+        public class StepNumberComparer : IComparer
+        {
+            /// &lt;summary&gt;
+            ///     Compares the objects
+            /// &lt;/summary&gt;
+            /// &lt;param name=&quot;x&quot;&gt;the x object to compare&lt;/param&gt;
+            /// &lt;param name=&quot;y&quot;&gt;the y object to compare&lt;/param&gt;
+            /// &lt;returns&gt; the comparison between object x and object y&lt;/returns&gt;
+            public int Compare(object x, object y)
+            {
+                int xStepNumber = int.Parse(((ListViewItem)x).Text);
+                int yStepNumber = int.Parse(((ListViewItem)y).Text);
+                return xStepNumber.CompareTo(yStepNumber);
+            }
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the steps information
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;the steps information&lt;/returns&gt;
+        public List&lt;RecipeStep&gt; GetStepData()
+        {
+            return this.recipeSteps;
+        }
+
+        /// &lt;summary&gt;
+        ///     Sets the ingredient information for the summary list view.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientData&quot;&gt;the ingredient data information.&lt;/param&gt;
+        public void SetIngredientData(List&lt;RecipeIngredient&gt; ingredientData)
+        {
+            recipeIngredients = ingredientData;
+
+            this.NewRecipe.Ingredients = recipeIngredients;
+            this.tempIngredients = this.NewRecipe.Ingredients;
+
+            this.tempSteps = this.NewRecipe.Steps;
+            this.tempTags = this.NewRecipe.Tags;
+
+            ingredientsListView.Items.Clear();
+            foreach (var ing in this.NewRecipe.Ingredients)
+            {
+                ListViewItem item = new ListViewItem(ing.IngredientName);
+
+                item.SubItems.Add(ing.Quantity.ToString());
+                item.SubItems.Add(ing.Measurement);
+
+                ingredientsListView.Items.Add(item);
+            }
+
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the ingredients information.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;the ingredients information&lt;/returns&gt;
+        public List&lt;RecipeIngredient&gt; GetIngredientData()
+        {
+            return this.recipeIngredients;
+        }
+
+        private void addIngredientsToListView()
+        {
+            foreach (var ingredient in this.ingredientAddPage.GetRecipeIngredients())
+            {
+                this.ingredientsListView.Items.Add(ingredient.IngredientName + &quot; &quot; + ingredient.Quantity + &quot; &quot; + ingredient.Measurement);
+            }
+        }
+
+        private void addIngredientButton_Click(object sender, EventArgs e)
+        {
+            this.NewRecipe.Name = this.nameTextBox.Text;
+            this.NewRecipe.Description = this.descriptionTextBox.Text;
+
+            this.NewRecipe.Steps = this.recipeSteps;
+
+            if (this.NewRecipe.Steps.Count == 0)
+            {
+                this.NewRecipe.Steps = this.tempSteps;
+            }
+
+            this.NewRecipe.Tags = this.tags;
+
+            if (this.NewRecipe.Tags.Count == 0)
+            {
+                this.NewRecipe.Tags = this.tempTags;
+            }
+
+            this.NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                this.NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+
+            var ingredientAddPage = new RecipeIngredientAdd(this.NewRecipe.Ingredients, this.NewRecipe);
+
+            this.Hide();
+
+            ingredientAddPage.Show();
+            
+        }
+
+        private void addStepButton_Click(object sender, EventArgs e)
+        {
+            this.NewRecipe.Name = this.nameTextBox.Text;
+            this.NewRecipe.Description = this.descriptionTextBox.Text;
+
+            this.NewRecipe.Steps = this.recipeSteps;
+
+            if (this.NewRecipe.Steps.Count == 0)
+            {
+                this.NewRecipe.Steps = this.tempSteps;
+            }
+            
+            this.NewRecipe.Tags = this.tags;
+
+            if (this.NewRecipe.Tags.Count == 0)
+            {
+                this.NewRecipe.Tags = this.tempTags;
+            }
+
+            this.NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                this.NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+            var stepAddPage = new RecipeStepAdd(this.NewRecipe.Steps, this.NewRecipe);
+
+            this.Hide();
+
+            stepAddPage.Show();
+        }
+
+        private void addTagButton_Click(object sender, EventArgs e)
+        {
+            this.NewRecipe.Name = this.nameTextBox.Text;
+            this.NewRecipe.Description = this.descriptionTextBox.Text;
+
+            this.NewRecipe.Steps = this.recipeSteps;
+
+            if (this.NewRecipe.Steps.Count == 0)
+            {
+                this.NewRecipe.Steps = this.tempSteps;
+            }
+
+            this.NewRecipe.Tags = this.tags;
+            this.NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (this.NewRecipe.Tags.Count == 0)
+            {
+                this.NewRecipe.Tags = this.tempTags;
+            }
+
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                this.NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+            var tagAddPage = new RecipeTagAdd(this.NewRecipe.Tags, this.NewRecipe);
+
+            this.Hide();
+
+            tagAddPage.Show();
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.addRecipe();
+
+            if (this.errorFieldsLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                var homepage = new Homepage();
+
+                this.Hide();
+
+                homepage.Show();
+            }
+        }
+
+        private void addRecipe()
+        {
+            string recipeName = null;
+            string recipeDescription = null;
+
+            if (String.IsNullOrEmpty(this.nameTextBox.Text))
+            {
+                this.errorFieldsLabel.Visible = true;
+            }
+            else
+            {
+                this.errorFieldsLabel.Visible = false;
+                recipeName = this.nameTextBox.Text;
+            }
+
+            if (String.IsNullOrEmpty(this.descriptionTextBox.Text))
+            {
+                this.errorFieldsLabel.Visible = true;
+            }
+            else
+            {
+                this.errorFieldsLabel.Visible = false;
+                recipeDescription = this.descriptionTextBox.Text;
+            }
+
+
+            Recipe existingRecipe = null;
+            if (this.errorFieldsLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                existingRecipe = RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString);
+            }
+
+            if (existingRecipe.Name == null)
+            {
+                this.errorFieldsLabel.Visible = false;
+
+                if (tagsListView.Items.Count == 0 || ingredientsListView.Items.Count == 0 || stepsListView.Items.Count == 0)
+                {
+                    this.errorFieldsLabel.Visible = true;
+                }
+                else
+                {
+                    this.errorFieldsLabel.Visible = false;
+                    RecipeDAL.addRecipe(recipeName, recipeDescription, Connection.ConnectionString);
+                    foreach (var recipeIng in this.NewRecipe.Ingredients)
+                    {
+                        RecipeDAL.addRecipeIngredient(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, recipeIng.IngredientName, IngredientDAL.getIngredientId(recipeIng.IngredientName), recipeIng.Quantity, recipeIng.Measurement, Connection.ConnectionString);
+                    }
+                    foreach (var aTag in this.NewRecipe.Tags)
+                    {
+                        RecipeDAL.addRecipeTag(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, aTag, Connection.ConnectionString);
+                    }
+
+
+                    foreach (var aStep in this.NewRecipe.Steps)
+                    {
+                        RecipeDAL.addRecipeStep(RecipeDAL.getRecipeByName(recipeName, Connection.ConnectionString).RecipeId, aStep.stepNumber, aStep.stepDescription, Connection.ConnectionString);
+                    }
+                }
+            }
+            else
+            {
+                this.errorFieldsLabel.Text = &quot;This recipe already exists.&quot;;
+                this.errorFieldsLabel.Visible = true;
+            }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            var homepage = new Homepage();
+
+            this.Hide();
+
+            homepage.Show();
+        }
+
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            stepsListView.Items.Clear();
+
+            tagsListView.Items.Clear();
+
+            ingredientsListView.Items.Clear();
+
+            NewRecipe.Steps = this.recipeSteps;
+
+            if (NewRecipe.Steps.Count == 0)
+            {
+                NewRecipe.Steps = this.tempSteps;
+            }
+
+            foreach (var step in this.NewRecipe.Steps)
+            {
+                ListViewItem item = new ListViewItem(step.stepNumber.ToString());
+                item.SubItems.Add(step.stepDescription);
+                stepsListView.Items.Add(item);
+            }
+
+            this.nameTextBox.Text = NewRecipe.Name;
+            this.descriptionTextBox.Text = NewRecipe.Description;
+
+            NewRecipe.Tags = this.tags;
+
+            if (NewRecipe.Tags.Count == 0)
+            {
+                NewRecipe.Tags = this.tempTags;
+            }
+
+            foreach (var tag in this.NewRecipe.Tags)
+            {
+                ListViewItem item = new ListViewItem(tag);
+                tagsListView.Items.Add(item);
+            }
+
+            NewRecipe.Ingredients = this.recipeIngredients;
+
+            if (NewRecipe.Ingredients.Count == 0)
+            {
+                NewRecipe.Ingredients = this.tempIngredients;
+            }
+
+            foreach (var ingredient in NewRecipe.Ingredients)
+            {
+                ListViewItem item = new ListViewItem(ingredient.IngredientName);
+
+                item.SubItems.Add(ingredient.Quantity.ToString());
+                item.SubItems.Add(ingredient.Measurement);
+
+                ingredientsListView.Items.Add(item);
+            }
+        }
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,9,20,55,0],[25,9,25,59,0],[30,9,30,70,0],[35,9,35,68,0],[40,9,40,88,0],[45,9,45,86,0],[50,35,50,39,0],[50,40,50,44,0],[56,9,56,31,0],[57,9,57,10,0],[58,13,58,35,0],[60,13,60,64,0],[61,13,61,52,0],[62,13,62,50,0],[64,13,64,43,0],[65,9,65,10,0],[74,118,74,124,0],[75,9,75,10,0],[76,13,76,52,0],[77,13,77,44,0],[78,13,78,42,0],[79,9,79,10,0],[85,47,85,54,0],[86,9,86,10,0],[87,13,87,37,0],[88,9,88,10,0],[95,9,95,10,0],[96,13,96,28,0],[98,13,98,40,0],[99,13,99,49,0],[101,13,101,51,0],[102,13,102,63,0],[104,13,104,40,0],[106,13,106,20,0],[106,22,106,29,0],[106,30,106,32,0],[106,33,106,40,0],[107,13,107,14,0],[108,17,108,41,0],[109,17,109,18,0],[110,21,110,35,0],[112,21,112,63,0],[113,21,113,50,0],[115,17,115,18,0],[116,13,116,14,0],[117,9,117,10,0],[124,9,124,10,0],[125,13,125,30,0],[126,9,126,10,0],[133,9,133,10,0],[134,13,134,36,0],[136,13,136,48,0],[137,13,137,51,0],[139,13,139,49,0],[140,13,140,63,0],[142,13,142,41,0],[143,13,143,20,0],[143,22,143,30,0],[143,31,143,33,0],[143,34,143,54,0],[144,13,144,14,0],[145,17,145,82,0],[146,17,146,57,0],[147,17,147,47,0],[149,17,149,77,0],[150,17,150,38,0],[151,13,151,14,0],[152,9,152,10,0],[166,13,166,14,0],[167,17,167,69,0],[168,17,168,69,0],[169,17,169,59,0],[170,13,170,14,0],[178,9,178,10,0],[179,13,179,37,0],[180,9,180,10,0],[187,9,187,10,0],[188,13,188,48,0],[190,13,190,60,0],[191,13,191,63,0],[193,13,193,51,0],[194,13,194,49,0],[196,13,196,47,0],[197,13,197,20,0],[197,22,197,29,0],[197,30,197,32,0],[197,33,197,59,0],[198,13,198,14,0],[199,17,199,74,0],[201,17,201,60,0],[202,17,202,52,0],[204,17,204,53,0],[205,13,205,14,0],[207,9,207,10,0],[214,9,214,10,0],[215,13,215,43,0],[216,9,216,10,0],[219,9,219,10,0],[220,13,220,20,0],[220,22,220,36,0],[220,37,220,39,0],[220,40,220,85,0],[221,13,221,14,0],[222,17,222,138,0],[223,13,223,14,0],[224,9,224,10,0],[227,9,227,10,0],[228,13,228,57,0],[229,13,229,71,0],[231,13,231,53,0],[233,13,233,49,0],[234,13,234,14,0],[235,17,235,55,0],[236,13,236,14,0],[238,13,238,45,0],[240,13,240,48,0],[241,13,241,14,0],[242,17,242,53,0],[243,13,243,14,0],[245,13,245,65,0],[247,13,247,50,0],[248,13,248,14,0],[249,17,249,67,0],[250,13,250,14,0],[253,13,253,105,0],[255,13,255,25,0],[257,13,257,38,0],[259,9,259,10,0],[262,9,262,10,0],[263,13,263,57,0],[264,13,264,71,0],[266,13,266,53,0],[268,13,268,49,0],[269,13,269,14,0],[270,17,270,55,0],[271,13,271,14,0],[273,13,273,45,0],[275,13,275,48,0],[276,13,276,14,0],[277,17,277,53,0],[278,13,278,14,0],[280,13,280,65,0],[282,13,282,50,0],[283,13,283,14,0],[284,17,284,67,0],[285,13,285,14,0],[287,13,287,87,0],[289,13,289,25,0],[291,13,291,32,0],[292,9,292,10,0],[295,9,295,10,0],[296,13,296,57,0],[297,13,297,71,0],[299,13,299,53,0],[301,13,301,49,0],[302,13,302,14,0],[303,17,303,55,0],[304,13,304,14,0],[306,13,306,45,0],[307,13,307,65,0],[309,13,309,48,0],[310,13,310,14,0],[311,17,311,53,0],[312,13,312,14,0],[315,13,315,50,0],[316,13,316,14,0],[317,17,317,67,0],[318,13,318,14,0],[320,13,320,84,0],[322,13,322,25,0],[324,13,324,31,0],[325,9,325,10,0],[328,9,328,10,0],[329,13,329,30,0],[331,13,331,55,0],[332,13,332,14,0],[333,17,333,24,0],[336,13,336,14,0],[337,17,337,47,0],[339,17,339,29,0],[341,17,341,33,0],[342,13,342,14,0],[343,9,343,10,0],[346,9,346,10,0],[347,13,347,38,0],[348,13,348,45,0],[350,13,350,61,0],[351,13,351,14,0],[352,17,352,54,0],[353,13,353,14,0],[355,13,355,14,0],[356,17,356,55,0],[357,17,357,52,0],[358,13,358,14,0],[360,13,360,68,0],[361,13,361,14,0],[362,17,362,54,0],[363,13,363,14,0],[365,13,365,14,0],[366,17,366,55,0],[367,17,367,66,0],[368,13,368,14,0],[371,13,371,42,0],[372,13,372,55,0],[373,13,373,14,0],[374,17,374,24,0],[377,13,377,14,0],[378,17,378,101,0],[379,13,379,14,0],[381,13,381,45,0],[382,13,382,14,0],[383,17,383,55,0],[385,17,385,125,0],[386,17,386,18,0],[387,21,387,58,0],[388,17,388,18,0],[390,17,390,18,0],[391,21,391,59,0],[392,21,392,101,0],[393,21,393,28,0],[393,30,393,43,0],[393,44,393,46,0],[393,47,393,73,0],[394,21,394,22,0],[395,25,395,287,0],[396,21,396,22,0],[397,21,397,28,0],[397,30,397,38,0],[397,39,397,41,0],[397,42,397,61,0],[398,21,398,22,0],[399,25,399,160,0],[400,21,400,22,0],[403,21,403,28,0],[403,30,403,39,0],[403,40,403,42,0],[403,43,403,63,0],[404,21,404,22,0],[405,25,405,196,0],[406,21,406,22,0],[407,17,407,18,0],[408,13,408,14,0],[410,13,410,14,0],[411,17,411,76,0],[412,17,412,54,0],[413,13,413,14,0],[414,9,414,10,0],[417,9,417,10,0],[418,13,418,43,0],[420,13,420,25,0],[422,13,422,29,0],[423,9,423,10,0],[427,9,427,10,0],[428,13,428,28,0],[430,13,430,41,0],[432,13,432,40,0],[434,13,434,47,0],[436,13,436,48,0],[438,13,438,44,0],[439,13,439,14,0],[440,17,440,50,0],[441,13,441,14,0],[443,13,443,20,0],[443,22,443,30,0],[443,31,443,33,0],[443,34,443,54,0],[444,13,444,14,0],[445,17,445,82,0],[446,17,446,57,0],[447,17,447,47,0],[448,13,448,14,0],[450,13,450,52,0],[451,13,451,66,0],[453,13,453,40,0],[455,13,455,43,0],[456,13,456,14,0],[457,17,457,48,0],[458,13,458,14,0],[460,13,460,20,0],[460,22,460,29,0],[460,30,460,32,0],[460,33,460,52,0],[461,13,461,14,0],[462,17,462,59,0],[463,17,463,46,0],[464,13,464,14,0],[466,13,466,60,0],[468,13,468,50,0],[469,13,469,14,0],[470,17,470,62,0],[471,13,471,14,0],[473,13,473,20,0],[473,22,473,36,0],[473,37,473,39,0],[473,40,473,61,0],[474,13,474,14,0],[475,17,475,81,0],[477,17,477,67,0],[478,17,478,59,0],[480,17,480,53,0],[481,13,481,14,0],[482,9,482,10,0]]);
+    </script>
+  </body>
+</html>

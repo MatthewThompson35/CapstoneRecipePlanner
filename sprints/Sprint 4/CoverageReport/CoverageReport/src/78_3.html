@@ -2,32 +2,34 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\ActiveUser.cs</title>
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Connection.cs</title>
     <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
   </head>
   <body>
     <pre id="content" class="source-code">
-namespace RecipePlannerLibrary.Models
+namespace RecipePlannerLibrary
 {
     /// &lt;summary&gt;
-    /// Active User class
+    /// Connection class
     /// &lt;/summary&gt;
-    public static class ActiveUser
+    public class Connection
     {
         /// &lt;summary&gt;
-        /// Gets or sets the username for the ActiveUser.
+        /// The connection string for the connection to the database.
         /// &lt;/summary&gt;
-        /// &lt;value&gt;
-        /// The username of the ActiveUser.
-        /// &lt;/value&gt;
-        public static string? username { get; set; }
+        public static readonly string ConnectionString = &quot;Server=localhost;Database=capstone;uid=root;pwd=passwordpassword123&quot;;
+
+        /// &lt;summary&gt;
+        /// The connection string for the connection to the database.
+        /// &lt;/summary&gt;
+        public static readonly string TestsConnectionString = &quot;Server=localhost;Database=capstone_tests;uid=root;pwd=passwordpassword123&quot;;
     }
 }
 
     </pre>
     <script type="text/javascript">
-      highlightRanges([[14,42,14,46,1],[14,47,14,51,1]]);
+      highlightRanges([[11,9,11,128,1],[16,9,16,139,1]]);
     </script>
   </body>
 </html>

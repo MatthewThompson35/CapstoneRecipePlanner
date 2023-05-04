@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeDetailsPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerLibrary.Database;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.AxHost;
+using System.Reflection;
+using System.Diagnostics;
+using Org.BouncyCastle.Asn1.BC;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    ///     Recipe Detail Page class.
+    /// &lt;/summary&gt;
+    public partial class RecipeDetailsPage : Form
+    {
+        private Homepage homepage;
+        private PlannedMealsPage mealsPage;
+        private SharedRecipes sharedPage;
+        private string selectedDay;
+        private string selectedMealType;
+
+        private bool isYesButtonClicked = false;
+        private bool isNoButtonClicked = false;
+        private int recipeId;
+
+        
+        /// &lt;summary&gt;
+        ///     Initializes the recipe details page for the recipes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;page&quot;&gt;The homepage.&lt;/param&gt;
+        public RecipeDetailsPage()
+        {
+            InitializeComponent();
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the recipe details based on the specified homepage.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;page&quot;&gt;the homepage.&lt;/param&gt;
+        public RecipeDetailsPage(Homepage page) :this(){
+            this.homepage = page;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetails();
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
+
+            this.selectedDay = &quot;&quot;;
+            this.selectedMealType = &quot;&quot;;
+
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the recipe details page based on the specified planned meals page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;mealsPage&quot;&gt;the planned meals page.&lt;/param&gt;
+        public RecipeDetailsPage(PlannedMealsPage mealsPage) :this()
+        {
+            this.mealsPage = mealsPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromMealPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the recipe details page based on the specified shared page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;sharedPage&quot;&gt;the shared page&lt;/param&gt;
+        public RecipeDetailsPage(SharedRecipes sharedPage) : this()
+        {
+            this.sharedPage = sharedPage;
+            this.recipeDetailsTextBox.Text = this.displayRecipeDetailsFromSharedPage();
+
+
+            this.populateDayComboBoxValues();
+            this.populateMealTypeComboBoxValues();
+            this.populateWeekComboBoxValues();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            if (this.homepage != null)
+            {
+                this.Hide();
+                this.homepage.Show();
+            }
+            else if (this.mealsPage != null)
+            {
+                this.Hide();
+                this.mealsPage.Show();
+            }
+            else
+            {
+                this.Hide();
+                this.sharedPage.Show();
+            }
+
+        }
+
+        private string displayRecipeDetails()
+        {
+            string output = null;
+
+            this.recipeId = this.homepage.GetSelectedRecipe().RecipeId;
+            string description = this.homepage.GetSelectedRecipe().Name + Environment.NewLine + this.homepage.GetSelectedRecipe().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = &quot;Steps&quot; + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + &quot;. &quot; + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + &quot;Ingredients&quot; + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + &quot; &quot; + ingredient.Measurement + &quot; &quot; + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            string tags = Environment.NewLine + &quot;Tags&quot; + Environment.NewLine;
+
+            foreach (var tag in RecipeDAL.getTagsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+            {
+                tags += tag + Environment.NewLine;
+            }
+            
+            output += description + steps + ingredients + tags;
+            return output;
+        }
+
+        private string displayRecipeDetailsFromMealPage()
+        {
+            string output = null;
+
+            this.recipeId = this.mealsPage.GetRecipeFromTextBox().RecipeId;
+            string description = this.mealsPage.GetRecipeFromTextBox().Name + Environment.NewLine + this.mealsPage.GetRecipeFromTextBox().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = &quot;Steps&quot; + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + &quot;. &quot; + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + &quot;Ingredients&quot; + Environment.NewLine;
+
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + &quot; &quot; + ingredient.Measurement + &quot; &quot; + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            string tags = Environment.NewLine + &quot;Tags&quot; + Environment.NewLine;
+
+            foreach (var tag in RecipeDAL.getTagsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+            {
+                tags += tag + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients + tags;
+            return output;
+        }
+
+        private string displayRecipeDetailsFromSharedPage()
+        {
+            string output = null;
+
+            this.recipeId = this.sharedPage.getRecipe().RecipeId;
+            string description = this.sharedPage.getRecipe().Name + Environment.NewLine + this.sharedPage.getRecipe().Description + Environment.NewLine + Environment.NewLine;
+
+            string steps = &quot;Steps&quot; + Environment.NewLine;
+
+            foreach (var step in RecipeDAL.getStepsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+            {
+                steps += step.stepNumber + &quot;. &quot; + step.stepDescription + Environment.NewLine;
+            }
+
+            string ingredients = Environment.NewLine + &quot;Ingredients&quot; + Environment.NewLine;
+
+            foreach (var ingredient in RecipeDAL.getIngredientsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+            {
+                ingredients += ingredient.Quantity + &quot; &quot; + ingredient.Measurement + &quot; &quot; + ingredient.IngredientName + Environment.NewLine;
+            }
+
+            string tags = Environment.NewLine + &quot;Tags&quot; + Environment.NewLine;
+
+            foreach (var tag in RecipeDAL.getTagsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+            {
+                tags += tag + Environment.NewLine;
+            }
+
+            output += description + steps + ingredients + tags;
+            return output;
+        }
+
+        private void addToMealPlanButton_Click(object sender, EventArgs e)
+        {
+            this.addToMealPlanButton.Visible = false;
+            this.displayDayMealTypeWeekElements();
+            this.displayAddCancelButtons();
+
+            this.updateSuccessfullyLabel.Visible = false;
+        }
+
+        private void NoButton_Click(object? sender, EventArgs e)
+        {
+            this.yesButton.Visible = false;
+            this.noButton.Visible = false;
+            this.addToMealPlanButton.Visible = true;
+            this.updateSuccessfullyLabel.Visible = false;
+
+            this.hideDayMealTypeWeekElements();
+        }
+
+        private void YesButton_Click(object? sender, EventArgs e)
+        {
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
+
+            if (this.weekComboBox.SelectedItem.Equals(&quot;This Week&quot;))
+            {
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, &quot;this&quot;), this.getCurrentRecipe().RecipeId);
+                this.updateSuccessfullyLabel.Text = &quot;Meal is updated for this day and meal type.&quot;;
+                this.updateSuccessfullyLabel.ForeColor = Color.Green;
+                this.updateSuccessfullyLabel.Visible = true;
+
+                this.hideDayMealTypeWeekElements();
+            }
+            else
+            {
+                PlannedMealDal.UpdateThisWeeksMeal(Connection.ConnectionString, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, &quot;next&quot;), this.getCurrentRecipe().RecipeId);
+                this.updateSuccessfullyLabel.Visible = true;
+                this.updateSuccessfullyLabel.Text = &quot;Meal is updated for this day and meal type.&quot;;
+                this.updateSuccessfullyLabel.ForeColor = Color.Green;
+                this.updateSuccessfullyLabel.Visible = true;
+
+                this.hideDayMealTypeWeekElements();
+            }
+
+            this.yesButton.Visible = false;
+            this.noButton.Visible = false;
+            this.addToMealPlanButton.Visible = true;
+        }
+
+
+        /// &lt;summary&gt;
+        ///     Gets the planned meal week based on the specified meal week for the combobox of meal type.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;mealWeek&quot;&gt;the meal week.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;a string representation of a meal week.&lt;/returns&gt;
+        public string GetPlannedMealWeek(PlannedMealWeeks mealWeek)
+        {
+            switch (mealWeek)
+            {
+                case PlannedMealWeeks.ThisWeek:
+                    return &quot;This Week&quot;;
+                case PlannedMealWeeks.NextWeek:
+                    return &quot;Next Week&quot;;
+            }
+            return &quot;&quot;;
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the current recipe based on the homepage selection, meal plan page or the shared page selection.
+        /// &lt;/summary&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;the current recipe from the homepage selection, meal plan page or the shared page selection.&lt;/returns&gt;
+        public Recipe getCurrentRecipe()
+        {
+            if (this.homepage != null)
+            {
+                return this.homepage.GetSelectedRecipe();
+            } else if (this.mealsPage != null)
+            {
+                return this.mealsPage.GetRecipeFromTextBox();
+            }
+            else
+            {
+                return this.sharedPage.getRecipe();
+            }
+        }
+
+        private void populateDayComboBoxValues()
+        {
+            foreach (var currentDay in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                this.daysComboBox.Items.Add(currentDay.ToString());
+            }
+        }
+
+        private void populateMealTypeComboBoxValues()
+        {
+            foreach (var mealType in Enum.GetValues(typeof(MealTypes)))
+            {
+                this.mealTypeComboBox.Items.Add(mealType.ToString());
+            }
+        }
+
+        private void populateWeekComboBoxValues()
+        {
+            foreach (var week in Enum.GetValues(typeof(PlannedMealWeeks)))
+            {
+                this.weekComboBox.Items.Add(this.GetPlannedMealWeek((PlannedMealWeeks)week));
+            }
+        }
+
+
+        private void daysComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.daysComboBox.SelectedItem != null)
+            {
+                this.selectedDay = this.daysComboBox.SelectedItem.ToString();
+            }
+            else
+            {
+                this.daysComboBox.SelectedIndex = -1;
+            }
+        }
+
+        private void mealTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.mealTypeComboBox.SelectedItem != null)
+            {
+                this.selectedMealType = this.mealTypeComboBox.SelectedItem.ToString();
+            }
+            else
+            {
+                this.mealTypeComboBox.SelectedIndex = -1;
+            }
+        }
+
+        private void findRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var homepage = new Homepage();
+            homepage.Show();
+        }
+
+        private void viewMealPlanToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            var mealPlanPage = new PlannedMealsPage();
+
+            mealPlanPage.Show();
+        }
+
+        private void displayDayMealTypeWeekElements()
+        {
+            this.dayLabel.Visible = true;
+            this.mealTypeLabel.Visible = true;
+            this.weekLabel.Visible = true;
+
+            this.daysComboBox.Visible = true;
+            this.mealTypeComboBox.Visible = true;
+            this.weekComboBox.Visible = true;
+        }
+
+        private void hideDayMealTypeWeekElements()
+        {
+            this.dayLabel.Visible = false;
+            this.mealTypeLabel.Visible = false;
+            this.weekLabel.Visible = false;
+
+            this.daysComboBox.Visible = false;
+            this.mealTypeComboBox.Visible = false;
+            this.weekComboBox.Visible = false;
+        }
+
+        private void displayAddCancelButtons()
+        {
+            this.addButton.Visible = true;
+            this.cancelButton.Visible = true;
+        }
+
+        private void hideAddCancelButtons()
+        {
+            this.addButton.Visible = false;
+            this.cancelButton.Visible = false;
+        }
+
+        private void CheckIfReadyToSubmit()
+        {
+            if (!string.IsNullOrEmpty(selectedDay) &amp;&amp; !string.IsNullOrEmpty(selectedMealType) &amp;&amp; this.weekComboBox.SelectedItem != null)
+            {
+                this.comboboxesErrorLabel.Visible = false;
+                submitMeal();
+            }
+            else
+            {
+                this.comboboxesErrorLabel.Visible = true;
+            }
+        }
+
+        private void submitMeal()
+        {
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), this.selectedDay);
+            if (this.weekComboBox.SelectedItem.Equals(&quot;This Week&quot;))
+            {
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, &quot;this&quot;)))
+                {
+                    this.updateSuccessfullyLabel.Text = &quot;Are you sure you want to overwrite the existing meal?&quot;;
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+                    this.hideAddCancelButtons();
+
+                }
+                else
+                {
+                    this.updateSuccessfullyLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, &quot;this&quot;));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+
+            }
+            else
+            {
+                if (PlannedMealDal.exists(Connection.ConnectionString, this.selectedMealType, Util.GetDateOfWeekDay(day, &quot;next&quot;)))
+                {
+                    this.updateSuccessfullyLabel.Text = &quot;Are you sure you want to overwrite the existing meal?&quot;;
+                    this.updateSuccessfullyLabel.ForeColor = Color.Red;
+
+                    this.yesButton.Visible = true;
+                    this.noButton.Visible = true;
+                    this.updateSuccessfullyLabel.Visible = true;
+                    this.addToMealPlanButton.Visible = false;
+                    this.hideAddCancelButtons();
+
+                }
+                else
+                {
+                    this.updateSuccessfullyLabel.Visible = false;
+                    PlannedMealDal.addPlannedMeal(Connection.ConnectionString, this.getCurrentRecipe().RecipeId, this.selectedDay, this.selectedMealType, Util.GetDateOfWeekDay(day, &quot;next&quot;));
+
+                    var mealsPage = new PlannedMealsPage();
+                    this.Hide();
+                    mealsPage.Show();
+                }
+
+            }
+        }
+
+        private void weekComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cookButton_Click(object sender, EventArgs e)
+        {
+            List&lt;Ingredient&gt; pantry = IngredientDAL.getIngredients();
+            List&lt;RecipeIngredient&gt; recipeIngredients = RecipeDAL.getIngredientsForRecipe(this.getCurrentRecipe().RecipeId, Connection.ConnectionString);
+            
+            int matchedIngredients = 0;
+
+            foreach (var recipeIng in recipeIngredients)
+            {
+                foreach (var ing in pantry)
+                {
+                    if (recipeIng.IngredientName.Equals(ing.name))
+                    {
+                        if (ing.quantity &gt;= recipeIng.Quantity &amp;&amp; ing.measurement.Equals(recipeIng.Measurement))
+                        {
+                            matchedIngredients++;
+                        }
+                    }
+                }
+            }
+
+            if (matchedIngredients != recipeIngredients.Count)
+            {
+                this.displayNotEnoughIngredients();
+            }
+            else
+            {
+                this.displayIngredientsFoundElements();
+            }
+
+        }
+
+        private void displayNotEnoughIngredients()
+        {
+            this.isCookedLabel.Text = &quot;Warning: There are not enough ingredients to cook using this recipe. Do you still want to cook? &quot;;
+            this.isCookedLabel.Visible = true;
+            this.isCookedLabel.ForeColor = Color.Red;
+
+            this.cookYesButton.Visible = true;
+            this.cookNoButton.Visible = true;
+        }
+
+        private void displayIngredientsFoundElements()
+        {
+            this.isCookedLabel.Text = &quot;Are you sure you want to cook using this recipe? This will remove ingredients.&quot;;
+            this.isCookedLabel.Visible = true;
+            this.isCookedLabel.ForeColor = Color.Red;
+
+            this.cookYesButton.Visible = true;
+            this.cookNoButton.Visible = true;
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.CheckIfReadyToSubmit();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.addToMealPlanButton.Visible = true;
+            this.comboboxesErrorLabel.Visible = false;
+
+            this.mealTypeComboBox.SelectedIndex = -1;
+            this.daysComboBox.SelectedIndex = -1;
+            this.weekComboBox.SelectedIndex = -1;
+
+            this.hideDayMealTypeWeekElements();
+            this.hideAddCancelButtons();
+            
+        }
+
+        private void removeCookedRecipeIngredients()
+        {
+            int updatedQuantity = 0;
+
+            if (this.homepage != null)
+            {
+                this.handleHomepageRecipeRemoveIngredients(updatedQuantity);
+            }
+
+            if (this.mealsPage != null)
+            {
+                this.handleMealPlanRecipeRemoveIngredients(updatedQuantity);
+            }
+
+            if (this.sharedPage != null)
+            {
+                this.handleSharedPlanRecipeRemoveIngredients(updatedQuantity);
+            }
+        }
+
+        private void handleSharedPlanRecipeRemoveIngredients(int updatedQuantity)
+        {
+            this.serverErrorLabel.Visible = false;
+            try
+            {
+                foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.sharedPage.getRecipe().RecipeId, Connection.ConnectionString))
+                {
+                    foreach (var ingredient in IngredientDAL.getIngredients())
+                    {
+                        if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                        {
+                            if (ingredient.quantity &gt;= recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                            else if (ingredient.quantity &lt; recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
+            }
+        }
+
+            private void handleHomepageRecipeRemoveIngredients(int updatedQuantity)
+            {
+            this.serverErrorLabel.Visible = false;
+            try
+            {
+                foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.homepage.GetSelectedRecipe().RecipeId, Connection.ConnectionString))
+                {
+                    foreach (var ingredient in IngredientDAL.getIngredients())
+                    {
+                        if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                        {
+                            if (ingredient.quantity &gt;= recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                            else if (ingredient.quantity &lt; recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            } 
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
+            }
+            
+        }
+        private void handleMealPlanRecipeRemoveIngredients(int updatedQuantity)
+        {
+            this.serverErrorLabel.Visible = false;
+            try
+            {
+                foreach (var recipeIngredient in RecipeDAL.getIngredientsForRecipe(this.mealsPage.GetRecipeFromTextBox().RecipeId, Connection.ConnectionString))
+                {
+                    foreach (var ingredient in IngredientDAL.getIngredients())
+                    {
+                        if (recipeIngredient.IngredientName.Equals(ingredient.name))
+                        {
+                            if (ingredient.quantity &gt;= recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - recipeIngredient.Quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                            else if (ingredient.quantity &lt; recipeIngredient.Quantity)
+                            {
+                                updatedQuantity = (int)(ingredient.quantity - ingredient.quantity);
+                                IngredientDAL.updateQuantity((int)ingredient.id, updatedQuantity);
+                                ingredient.quantity = updatedQuantity;
+
+                                if (ingredient.quantity == 0)
+                                {
+                                    IngredientDAL.RemoveIngredient((int)ingredient.id, Connection.ConnectionString);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.serverErrorLabel.Visible = true;
+                this.isCookedLabel.Visible = false;
+            }
+            
+        }
+
+        private void cookYesButton_Click(object sender, EventArgs e)
+        {
+            this.removeCookedRecipeIngredients();
+
+            if (this.serverErrorLabel.Visible == true)
+            {
+                return;
+            }
+            else
+            {
+                var pantry = new IngredientsPage();
+                this.Hide();
+                pantry.Show();
+
+
+                this.cookButton.Enabled = false;
+
+                this.cookYesButton.Visible = false;
+                this.cookNoButton.Visible = false;
+            }
+        }
+
+        private void cookNoButton_Click(object sender, EventArgs e)
+        {
+            this.cookYesButton.Visible = false;
+            this.cookNoButton.Visible = false;
+            this.cookButton.Enabled = true;
+            this.isCookedLabel.Visible = false;
+        }
+
+        private void shareRecipeButton_Click(object sender, EventArgs e)
+        {
+            var addSharedPage = new AddSharedRecipe(this);
+            this.Hide();
+            addSharedPage.Show();
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the recipe id for the displayed recipe.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        public int getRecipeId()
+        {
+            return this.recipeId;
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[32,9,32,49,0],[33,9,33,48,0],[41,9,41,35,0],[42,9,42,10,0],[43,13,43,35,0],[44,9,44,10,0],[50,50,50,56,0],[50,56,50,57,0],[51,13,51,34,0],[52,13,52,74,0],[54,13,54,46,0],[55,13,55,51,0],[56,13,56,47,0],[58,13,58,35,0],[59,13,59,40,0],[61,9,61,10,0],[67,63,67,69,0],[68,9,68,10,0],[69,13,69,40,0],[70,13,70,86,0],[73,13,73,46,0],[74,13,74,51,0],[75,13,75,47,0],[76,9,76,10,0],[82,62,82,68,0],[83,9,83,10,0],[84,13,84,42,0],[85,13,85,88,0],[88,13,88,46,0],[89,13,89,51,0],[90,13,90,47,0],[91,9,91,10,0],[94,9,94,10,0],[95,13,95,39,0],[96,13,96,14,0],[97,17,97,29,0],[98,17,98,38,0],[99,13,99,14,0],[100,18,100,45,0],[101,13,101,14,0],[102,17,102,29,0],[103,17,103,39,0],[104,13,104,14,0],[106,13,106,14,0],[107,17,107,29,0],[108,17,108,40,0],[109,13,109,14,0],[111,9,111,10,0],[114,9,114,10,0],[115,13,115,34,0],[117,13,117,72,0],[118,13,118,187,0],[120,13,120,58,0],[122,13,122,20,0],[122,22,122,30,0],[122,31,122,33,0],[122,34,122,134,0],[123,13,123,14,0],[124,17,124,94,0],[125,13,125,14,0],[127,13,127,92,0],[129,13,129,20,0],[129,22,129,36,0],[129,37,129,39,0],[129,40,129,146,0],[130,13,130,14,0],[131,17,131,139,0],[132,13,132,14,0],[134,13,134,78,0],[136,13,136,20,0],[136,22,136,29,0],[136,30,136,32,0],[136,33,136,132,0],[137,13,137,14,0],[138,17,138,51,0],[139,13,139,14,0],[141,13,141,64,0],[142,13,142,27,0],[143,9,143,10,0],[146,9,146,10,0],[147,13,147,34,0],[149,13,149,76,0],[150,13,150,195,0],[152,13,152,58,0],[154,13,154,20,0],[154,22,154,30,0],[154,31,154,33,0],[154,34,154,138,0],[155,13,155,14,0],[156,17,156,94,0],[157,13,157,14,0],[159,13,159,92,0],[162,13,162,20,0],[162,22,162,36,0],[162,37,162,39,0],[162,40,162,150,0],[163,13,163,14,0],[164,17,164,139,0],[165,13,165,14,0],[167,13,167,78,0],[169,13,169,20,0],[169,22,169,29,0],[169,30,169,32,0],[169,33,169,136,0],[170,13,170,14,0],[171,17,171,51,0],[172,13,172,14,0],[174,13,174,64,0],[175,13,175,27,0],[176,9,176,10,0],[179,9,179,10,0],[180,13,180,34,0],[182,13,182,66,0],[183,13,183,175,0],[185,13,185,58,0],[187,13,187,20,0],[187,22,187,30,0],[187,31,187,33,0],[187,34,187,128,0],[188,13,188,14,0],[189,17,189,94,0],[190,13,190,14,0],[192,13,192,92,0],[194,13,194,20,0],[194,22,194,36,0],[194,37,194,39,0],[194,40,194,140,0],[195,13,195,14,0],[196,17,196,139,0],[197,13,197,14,0],[199,13,199,78,0],[201,13,201,20,0],[201,22,201,29,0],[201,30,201,32,0],[201,33,201,126,0],[202,13,202,14,0],[203,17,203,51,0],[204,13,204,14,0],[206,13,206,64,0],[207,13,207,27,0],[208,9,208,10,0],[211,9,211,10,0],[212,13,212,54,0],[213,13,213,51,0],[214,13,214,44,0],[216,13,216,58,0],[217,9,217,10,0],[220,9,220,10,0],[221,13,221,44,0],[222,13,222,43,0],[223,13,223,53,0],[224,13,224,58,0],[226,13,226,48,0],[227,9,227,10,0],[230,9,230,10,0],[231,13,231,88,0],[233,13,233,68,0],[234,13,234,14,0],[235,17,235,192,0],[236,17,236,99,0],[237,17,237,70,0],[238,17,238,61,0],[240,17,240,52,0],[241,13,241,14,0],[243,13,243,14,0],[244,17,244,192,0],[245,17,245,61,0],[246,17,246,99,0],[247,17,247,70,0],[248,17,248,61,0],[250,17,250,52,0],[251,13,251,14,0],[253,13,253,44,0],[254,13,254,43,0],[255,13,255,53,0],[256,9,256,10,0],[267,9,267,10,0],[268,13,268,30,0],[271,21,271,40,0],[273,21,273,40,0],[275,13,275,23,0],[276,9,276,10,0],[285,9,285,10,0],[286,13,286,39,0],[287,13,287,14,0],[288,17,288,58,0],[289,20,289,47,0],[290,13,290,14,0],[291,17,291,62,0],[294,13,294,14,0],[295,17,295,52,0],[297,9,297,10,0],[300,9,300,10,0],[301,13,301,20,0],[301,22,301,36,0],[301,37,301,39,0],[301,40,301,73,0],[302,13,302,14,0],[303,17,303,68,0],[304,13,304,14,0],[305,9,305,10,0],[308,9,308,10,0],[309,13,309,20,0],[309,22,309,34,0],[309,35,309,37,0],[309,38,309,71,0],[310,13,310,14,0],[311,17,311,70,0],[312,13,312,14,0],[313,9,313,10,0],[316,9,316,10,0],[317,13,317,20,0],[317,22,317,30,0],[317,31,317,33,0],[317,34,317,74,0],[318,13,318,14,0],[319,17,319,94,0],[320,13,320,14,0],[321,9,321,10,0],[325,9,325,10,0],[326,13,326,56,0],[327,13,327,14,0],[328,17,328,78,0],[329,13,329,14,0],[331,13,331,14,0],[332,17,332,54,0],[333,13,333,14,0],[334,9,334,10,0],[337,9,337,10,0],[338,13,338,60,0],[339,13,339,14,0],[340,17,340,87,0],[341,13,341,14,0],[343,13,343,14,0],[344,17,344,58,0],[345,13,345,14,0],[346,9,346,10,0],[349,9,349,10,0],[350,13,350,25,0],[352,13,352,43,0],[353,13,353,29,0],[354,9,354,10,0],[357,9,357,10,0],[358,13,358,25,0],[360,13,360,55,0],[362,13,362,33,0],[363,9,363,10,0],[366,9,366,10,0],[367,13,367,42,0],[368,13,368,47,0],[369,13,369,43,0],[371,13,371,46,0],[372,13,372,50,0],[373,13,373,46,0],[374,9,374,10,0],[377,9,377,10,0],[378,13,378,43,0],[379,13,379,48,0],[380,13,380,44,0],[382,13,382,47,0],[383,13,383,51,0],[384,13,384,47,0],[385,9,385,10,0],[388,9,388,10,0],[389,13,389,43,0],[390,13,390,46,0],[391,9,391,10,0],[394,9,394,10,0],[395,13,395,44,0],[396,13,396,47,0],[397,9,397,10,0],[400,9,400,10,0],[401,13,401,137,0],[402,13,402,14,0],[403,17,403,59,0],[404,17,404,30,0],[405,13,405,14,0],[407,13,407,14,0],[408,17,408,58,0],[409,13,409,14,0],[410,9,410,10,0],[413,9,413,10,0],[414,13,414,88,0],[415,13,415,68,0],[416,13,416,14,0],[417,17,417,131,0],[418,17,418,18,0],[419,21,419,113,0],[420,21,420,72,0],[422,21,422,51,0],[423,21,423,50,0],[424,21,424,65,0],[425,21,425,62,0],[426,21,426,49,0],[428,17,428,18,0],[430,17,430,18,0],[431,21,431,66,0],[432,21,432,191,0],[434,21,434,60,0],[435,21,435,33,0],[436,21,436,38,0],[437,17,437,18,0],[439,13,439,14,0],[441,13,441,14,0],[442,17,442,131,0],[443,17,443,18,0],[444,21,444,113,0],[445,21,445,72,0],[447,21,447,51,0],[448,21,448,50,0],[449,21,449,65,0],[450,21,450,62,0],[451,21,451,49,0],[453,17,453,18,0],[455,17,455,18,0],[456,21,456,66,0],[457,21,457,191,0],[459,21,459,60,0],[460,21,460,33,0],[461,21,461,38,0],[462,17,462,18,0],[464,13,464,14,0],[465,9,465,10,0],[468,9,468,10,0],[469,9,469,10,0],[472,9,472,10,0],[473,13,473,70,0],[474,13,474,153,0],[476,13,476,40,0],[478,13,478,20,0],[478,22,478,35,0],[478,36,478,38,0],[478,39,478,56,0],[479,13,479,14,0],[480,17,480,24,0],[480,26,480,33,0],[480,34,480,36,0],[480,37,480,43,0],[481,17,481,18,0],[482,21,482,67,0],[483,21,483,22,0],[484,25,484,113,0],[485,25,485,26,0],[486,29,486,50,0],[487,25,487,26,0],[488,21,488,22,0],[489,17,489,18,0],[490,13,490,14,0],[492,13,492,63,0],[493,13,493,14,0],[494,17,494,52,0],[495,13,495,14,0],[497,13,497,14,0],[498,17,498,56,0],[499,13,499,14,0],[501,9,501,10,0],[504,9,504,10,0],[505,13,505,138,0],[506,13,506,47,0],[507,13,507,54,0],[509,13,509,47,0],[510,13,510,46,0],[511,9,511,10,0],[514,9,514,10,0],[515,13,515,120,0],[516,13,516,47,0],[517,13,517,54,0],[519,13,519,47,0],[520,13,520,46,0],[521,9,521,10,0],[524,9,524,10,0],[525,13,525,41,0],[526,9,526,10,0],[529,9,529,10,0],[530,13,530,53,0],[531,13,531,55,0],[533,13,533,54,0],[534,13,534,50,0],[535,13,535,50,0],[537,13,537,48,0],[538,13,538,41,0],[540,9,540,10,0],[543,9,543,10,0],[544,13,544,37,0],[546,13,546,39,0],[547,13,547,14,0],[548,17,548,77,0],[549,13,549,14,0],[551,13,551,40,0],[552,13,552,14,0],[553,17,553,77,0],[554,13,554,14,0],[556,13,556,41,0],[557,13,557,14,0],[558,17,558,79,0],[559,13,559,14,0],[560,9,560,10,0],[563,9,563,10,0],[564,13,564,51,0],[566,13,566,14,0],[567,17,567,24,0],[567,26,567,46,0],[567,47,567,49,0],[567,50,567,150,0],[568,17,568,18,0],[569,21,569,28,0],[569,30,569,44,0],[569,45,569,47,0],[569,48,569,78,0],[570,21,570,22,0],[571,25,571,85,0],[572,25,572,26,0],[573,29,573,82,0],[574,29,574,30,0],[575,33,575,106,0],[576,33,576,99,0],[577,33,577,71,0],[579,33,579,62,0],[580,33,580,34,0],[581,37,581,117,0],[582,33,582,34,0],[583,29,583,30,0],[585,34,585,86,0],[586,29,586,30,0],[587,33,587,100,0],[588,33,588,99,0],[589,33,589,71,0],[591,33,591,62,0],[592,33,592,34,0],[593,37,593,117,0],[594,33,594,34,0],[595,29,595,30,0],[597,25,597,26,0],[598,21,598,22,0],[599,17,599,18,0],[600,13,600,14,0],[601,13,601,33,0],[602,13,602,14,0],[603,17,603,54,0],[604,17,604,52,0],[605,13,605,14,0],[606,9,606,10,0],[609,13,609,14,0],[610,13,610,51,0],[612,13,612,14,0],[613,17,613,24,0],[613,26,613,46,0],[613,47,613,49,0],[613,50,613,156,0],[614,17,614,18,0],[615,21,615,28,0],[615,30,615,44,0],[615,45,615,47,0],[615,48,615,78,0],[616,21,616,22,0],[617,25,617,85,0],[618,25,618,26,0],[619,29,619,82,0],[620,29,620,30,0],[621,33,621,106,0],[622,33,622,99,0],[623,33,623,71,0],[625,33,625,62,0],[626,33,626,34,0],[627,37,627,117,0],[628,33,628,34,0],[629,29,629,30,0],[631,34,631,86,0],[632,29,632,30,0],[633,33,633,100,0],[634,33,634,99,0],[635,33,635,71,0],[637,33,637,62,0],[638,33,638,34,0],[639,37,639,117,0],[640,33,640,34,0],[641,29,641,30,0],[643,25,643,26,0],[644,21,644,22,0],[645,17,645,18,0],[646,13,646,14,0],[647,13,647,33,0],[648,13,648,14,0],[649,17,649,54,0],[650,17,650,52,0],[651,13,651,14,0],[653,9,653,10,0],[655,9,655,10,0],[656,13,656,51,0],[658,13,658,14,0],[659,17,659,24,0],[659,26,659,46,0],[659,47,659,49,0],[659,50,659,160,0],[660,17,660,18,0],[661,21,661,28,0],[661,30,661,44,0],[661,45,661,47,0],[661,48,661,78,0],[662,21,662,22,0],[663,25,663,85,0],[664,25,664,26,0],[665,29,665,82,0],[666,29,666,30,0],[667,33,667,106,0],[668,33,668,99,0],[669,33,669,71,0],[671,33,671,62,0],[672,33,672,34,0],[673,37,673,117,0],[674,33,674,34,0],[675,29,675,30,0],[677,34,677,86,0],[678,29,678,30,0],[679,33,679,100,0],[680,33,680,99,0],[681,33,681,71,0],[683,33,683,62,0],[684,33,684,34,0],[685,37,685,117,0],[686,33,686,34,0],[687,29,687,30,0],[689,25,689,26,0],[690,21,690,22,0],[691,17,691,18,0],[692,13,692,14,0],[693,13,693,33,0],[694,13,694,14,0],[695,17,695,54,0],[696,17,696,52,0],[697,13,697,14,0],[699,9,699,10,0],[702,9,702,10,0],[703,13,703,50,0],[705,13,705,55,0],[706,13,706,14,0],[707,17,707,24,0],[710,13,710,14,0],[711,17,711,52,0],[712,17,712,29,0],[713,17,713,31,0],[716,17,716,49,0],[718,17,718,52,0],[719,17,719,51,0],[720,13,720,14,0],[721,9,721,10,0],[724,9,724,10,0],[725,13,725,48,0],[726,13,726,47,0],[727,13,727,44,0],[728,13,728,48,0],[729,9,729,10,0],[732,9,732,10,0],[733,13,733,59,0],[734,13,734,25,0],[735,13,735,34,0],[736,9,736,10,0],[743,9,743,10,0],[744,13,744,34,0],[745,9,745,10,0]]);
+    </script>
+  </body>
+</html>

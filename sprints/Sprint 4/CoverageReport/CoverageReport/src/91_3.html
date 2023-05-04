@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\Recipe.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace RecipePlannerLibrary.Models
+{
+    /// &lt;summary&gt;
+    ///     The Recipe class.
+    /// &lt;/summary&gt;
+    public class Recipe
+    {
+        /// &lt;summary&gt;
+        /// Gets or sets the Recipe Id for the Recipe.
+        /// &lt;/summary&gt;
+        public int RecipeId { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Name of the Recipe.
+        /// &lt;/summary&gt;
+        public string Name { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Description for the Recipe.
+        /// &lt;/summary&gt;
+        public string Description { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Steps for the Recipe.
+        /// &lt;/summary&gt;
+        public List&lt;RecipeStep&gt; Steps { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Ingredients for the Recipe.
+        /// &lt;/summary&gt;
+        public List&lt;RecipeIngredient&gt; Ingredients { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Tags for the Recipe.
+        /// &lt;/summary&gt;
+        public List&lt;string&gt; Tags { get; set; }
+
+        /// &lt;summary&gt;
+        ///     Initializes the Recipe with the specified recipe id, the recipe name, and the description.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;The recipe id of the recipe.&lt;/param&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name of the recipe.&lt;/param&gt;
+        /// &lt;param name=&quot;description&quot;&gt;The description of the recipe.&lt;/param&gt;
+        /// &lt;precondition&gt; none &lt;/precondition&gt;
+        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.Name = name &amp;&amp; this.Description = description&lt;/postcondition&gt;
+        public Recipe(int recipeId, string name, string description)
+        {
+            this.RecipeId = recipeId;
+            this.Name = name;
+            this.Description = description;
+            this.Steps = new List&lt;RecipeStep&gt;();
+            this.Ingredients = new List&lt;RecipeIngredient&gt;();
+            this.Tags = new List&lt;string&gt;();
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the Recipe with the specified recipe id, and recipe name.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;The recipe id of the recipe.&lt;/param&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name of the recipe.&lt;/param&gt;
+        /// &lt;precondition&gt; none &lt;/precondition&gt;
+        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.Name = name &lt;/postcondition&gt;
+        public Recipe(int recipeId, string name) 
+        {
+            this.RecipeId = recipeId;
+            this.Name = name;
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes a default recipe object.
+        /// &lt;/summary&gt;
+        public Recipe()
+        {
+
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[15,31,15,35,1],[15,36,15,40,1],[20,30,20,34,1],[20,35,20,39,1],[25,37,25,41,1],[25,42,25,46,1],[30,41,30,45,1],[30,46,30,50,1],[35,53,35,57,1],[35,58,35,62,1],[40,36,40,40,1],[40,41,40,45,1],[50,9,50,69,1],[51,9,51,10,1],[52,13,52,38,1],[53,13,53,30,1],[54,13,54,44,1],[55,13,55,49,1],[56,13,56,61,1],[57,13,57,44,1],[58,9,58,10,1],[67,9,67,49,1],[68,9,68,10,1],[69,13,69,38,1],[70,13,70,30,1],[71,9,71,10,1],[76,9,76,24,1],[77,9,77,10,1],[79,9,79,10,1]]);
+    </script>
+  </body>
+</html>

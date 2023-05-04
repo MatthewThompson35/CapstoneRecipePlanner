@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\PlannedMealsPage.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerDesktopApplication
+{
+    partial class PlannedMealsPage
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedMealsPage));
+            this.weekMealLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.thursdayLabel = new System.Windows.Forms.Label();
+            this.wednesdayLabel = new System.Windows.Forms.Label();
+            this.tuesdayLabel = new System.Windows.Forms.Label();
+            this.mondayLabel = new System.Windows.Forms.Label();
+            this.tuesdayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.tuesdayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.mondayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.mondayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.mondayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.thursdayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.thursdayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.thursdayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.wednesdayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.wednesdayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.wednesdayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.tuesdayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.removeMondayDinnerButton = new System.Windows.Forms.Button();
+            this.removeMondayLunchButton = new System.Windows.Forms.Button();
+            this.removeMondayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeTuesdayDinnerButton = new System.Windows.Forms.Button();
+            this.removeTuesdayLunchButton = new System.Windows.Forms.Button();
+            this.removeTuesdayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeThursdayDinnerButton = new System.Windows.Forms.Button();
+            this.removeWednesdayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeWednesdayDinnerButton = new System.Windows.Forms.Button();
+            this.removeThursdayLunchButton = new System.Windows.Forms.Button();
+            this.removeWednesdayLunchButton = new System.Windows.Forms.Button();
+            this.removeThursdayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeFridayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeFridayLunchButton = new System.Windows.Forms.Button();
+            this.removeFridayDinnerButton = new System.Windows.Forms.Button();
+            this.fridayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.fridayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.fridayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.fridayLabel = new System.Windows.Forms.Label();
+            this.removeSaturdayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeSaturdayLunchButton = new System.Windows.Forms.Button();
+            this.removeSatudayDinnerButton = new System.Windows.Forms.Button();
+            this.saturdayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.saturdayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.saturdayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.saturdayLabel = new System.Windows.Forms.Label();
+            this.plannerMenuButton = new System.Windows.Forms.Button();
+            this.plannerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.findRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewCurrentWeekPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewNextWeekPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mondayPanel = new System.Windows.Forms.Panel();
+            this.mondayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.mondayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.mondayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.mondayButton = new System.Windows.Forms.Button();
+            this.tuesdayPanel = new System.Windows.Forms.Panel();
+            this.tuesdayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.tuesdayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.tuesdayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.tuesdayButton = new System.Windows.Forms.Button();
+            this.wednesdayPanel = new System.Windows.Forms.Panel();
+            this.wednesdayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.wednesdayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.wednesdayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.wednesdayButton = new System.Windows.Forms.Button();
+            this.thursdayPanel = new System.Windows.Forms.Panel();
+            this.thursdayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.thursdayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.thursdayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.thursdayButton = new System.Windows.Forms.Button();
+            this.fridayPanel = new System.Windows.Forms.Panel();
+            this.fridayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.fridayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.fridayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.fridayButton = new System.Windows.Forms.Button();
+            this.saturdayPanel = new System.Windows.Forms.Panel();
+            this.saturdayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.saturdayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.saturdayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.saturdayButton = new System.Windows.Forms.Button();
+            this.mealPlanFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.sundayPanel = new System.Windows.Forms.Panel();
+            this.sundayDinnerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.sundayLunchLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.sundayBreakfastLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.sundayButton = new System.Windows.Forms.Button();
+            this.sundayLabel = new System.Windows.Forms.Label();
+            this.sundayBreakfastTextBox = new System.Windows.Forms.TextBox();
+            this.sundayLunchTextBox = new System.Windows.Forms.TextBox();
+            this.sundayDinnerTextBox = new System.Windows.Forms.TextBox();
+            this.removeSundayBreakfastButton = new System.Windows.Forms.Button();
+            this.removeSundayLunchButton = new System.Windows.Forms.Button();
+            this.removeSundayDinnerButton = new System.Windows.Forms.Button();
+            this.addIngredientsForRemainingMealsButton = new System.Windows.Forms.Button();
+            this.addAllIngredientsCheckbox = new System.Windows.Forms.CheckBox();
+            this.viewPantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plannerContextMenuStrip.SuspendLayout();
+            this.mondayPanel.SuspendLayout();
+            this.tuesdayPanel.SuspendLayout();
+            this.wednesdayPanel.SuspendLayout();
+            this.thursdayPanel.SuspendLayout();
+            this.fridayPanel.SuspendLayout();
+            this.saturdayPanel.SuspendLayout();
+            this.mealPlanFlowLayoutPanel.SuspendLayout();
+            this.sundayPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // weekMealLabel
+            // 
+            this.weekMealLabel.AutoSize = true;
+            this.weekMealLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.weekMealLabel.Location = new System.Drawing.Point(166, 37);
+            this.weekMealLabel.Name = &quot;weekMealLabel&quot;;
+            this.weekMealLabel.Size = new System.Drawing.Size(185, 28);
+            this.weekMealLabel.TabIndex = 0;
+            this.weekMealLabel.Text = &quot;This Week\&#39;s Meals&quot;;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(203, -4);
+            this.label2.Name = &quot;label2&quot;;
+            this.label2.Size = new System.Drawing.Size(120, 31);
+            this.label2.TabIndex = 1;
+            this.label2.Text = &quot;Meal Plan&quot;;
+            // 
+            // thursdayLabel
+            // 
+            this.thursdayLabel.AutoSize = true;
+            this.thursdayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.thursdayLabel.Location = new System.Drawing.Point(3, 71);
+            this.thursdayLabel.Name = &quot;thursdayLabel&quot;;
+            this.thursdayLabel.Size = new System.Drawing.Size(79, 23);
+            this.thursdayLabel.TabIndex = 3;
+            this.thursdayLabel.Text = &quot;Thursday&quot;;
+            // 
+            // wednesdayLabel
+            // 
+            this.wednesdayLabel.AutoSize = true;
+            this.wednesdayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.wednesdayLabel.Location = new System.Drawing.Point(3, 71);
+            this.wednesdayLabel.Name = &quot;wednesdayLabel&quot;;
+            this.wednesdayLabel.Size = new System.Drawing.Size(97, 23);
+            this.wednesdayLabel.TabIndex = 4;
+            this.wednesdayLabel.Text = &quot;Wednesday&quot;;
+            // 
+            // tuesdayLabel
+            // 
+            this.tuesdayLabel.AutoSize = true;
+            this.tuesdayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tuesdayLabel.Location = new System.Drawing.Point(3, 71);
+            this.tuesdayLabel.Name = &quot;tuesdayLabel&quot;;
+            this.tuesdayLabel.Size = new System.Drawing.Size(72, 23);
+            this.tuesdayLabel.TabIndex = 5;
+            this.tuesdayLabel.Text = &quot;Tuesday&quot;;
+            // 
+            // mondayLabel
+            // 
+            this.mondayLabel.AutoSize = true;
+            this.mondayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mondayLabel.Location = new System.Drawing.Point(3, 71);
+            this.mondayLabel.Name = &quot;mondayLabel&quot;;
+            this.mondayLabel.Size = new System.Drawing.Size(72, 23);
+            this.mondayLabel.TabIndex = 6;
+            this.mondayLabel.Text = &quot;Monday&quot;;
+            // 
+            // tuesdayLunchTextBox
+            // 
+            this.tuesdayLunchTextBox.Enabled = false;
+            this.tuesdayLunchTextBox.Location = new System.Drawing.Point(90, 137);
+            this.tuesdayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tuesdayLunchTextBox.Name = &quot;tuesdayLunchTextBox&quot;;
+            this.tuesdayLunchTextBox.Size = new System.Drawing.Size(317, 27);
+            this.tuesdayLunchTextBox.TabIndex = 23;
+            // 
+            // tuesdayBreakfastTextBox
+            // 
+            this.tuesdayBreakfastTextBox.Enabled = false;
+            this.tuesdayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.tuesdayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tuesdayBreakfastTextBox.Name = &quot;tuesdayBreakfastTextBox&quot;;
+            this.tuesdayBreakfastTextBox.Size = new System.Drawing.Size(317, 27);
+            this.tuesdayBreakfastTextBox.TabIndex = 24;
+            // 
+            // mondayDinnerTextBox
+            // 
+            this.mondayDinnerTextBox.Enabled = false;
+            this.mondayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.mondayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.mondayDinnerTextBox.Name = &quot;mondayDinnerTextBox&quot;;
+            this.mondayDinnerTextBox.Size = new System.Drawing.Size(322, 27);
+            this.mondayDinnerTextBox.TabIndex = 25;
+            // 
+            // mondayLunchTextBox
+            // 
+            this.mondayLunchTextBox.Enabled = false;
+            this.mondayLunchTextBox.Location = new System.Drawing.Point(90, 137);
+            this.mondayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.mondayLunchTextBox.Name = &quot;mondayLunchTextBox&quot;;
+            this.mondayLunchTextBox.Size = new System.Drawing.Size(322, 27);
+            this.mondayLunchTextBox.TabIndex = 26;
+            // 
+            // mondayBreakfastTextBox
+            // 
+            this.mondayBreakfastTextBox.Enabled = false;
+            this.mondayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.mondayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.mondayBreakfastTextBox.Name = &quot;mondayBreakfastTextBox&quot;;
+            this.mondayBreakfastTextBox.Size = new System.Drawing.Size(322, 27);
+            this.mondayBreakfastTextBox.TabIndex = 27;
+            // 
+            // thursdayDinnerTextBox
+            // 
+            this.thursdayDinnerTextBox.Enabled = false;
+            this.thursdayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.thursdayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.thursdayDinnerTextBox.Name = &quot;thursdayDinnerTextBox&quot;;
+            this.thursdayDinnerTextBox.Size = new System.Drawing.Size(322, 27);
+            this.thursdayDinnerTextBox.TabIndex = 30;
+            // 
+            // thursdayLunchTextBox
+            // 
+            this.thursdayLunchTextBox.Enabled = false;
+            this.thursdayLunchTextBox.Location = new System.Drawing.Point(90, 140);
+            this.thursdayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.thursdayLunchTextBox.Name = &quot;thursdayLunchTextBox&quot;;
+            this.thursdayLunchTextBox.Size = new System.Drawing.Size(322, 27);
+            this.thursdayLunchTextBox.TabIndex = 31;
+            // 
+            // thursdayBreakfastTextBox
+            // 
+            this.thursdayBreakfastTextBox.Enabled = false;
+            this.thursdayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.thursdayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.thursdayBreakfastTextBox.Name = &quot;thursdayBreakfastTextBox&quot;;
+            this.thursdayBreakfastTextBox.Size = new System.Drawing.Size(322, 27);
+            this.thursdayBreakfastTextBox.TabIndex = 32;
+            // 
+            // wednesdayDinnerTextBox
+            // 
+            this.wednesdayDinnerTextBox.Enabled = false;
+            this.wednesdayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.wednesdayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.wednesdayDinnerTextBox.Name = &quot;wednesdayDinnerTextBox&quot;;
+            this.wednesdayDinnerTextBox.Size = new System.Drawing.Size(322, 27);
+            this.wednesdayDinnerTextBox.TabIndex = 33;
+            // 
+            // wednesdayLunchTextBox
+            // 
+            this.wednesdayLunchTextBox.Enabled = false;
+            this.wednesdayLunchTextBox.Location = new System.Drawing.Point(90, 140);
+            this.wednesdayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.wednesdayLunchTextBox.Name = &quot;wednesdayLunchTextBox&quot;;
+            this.wednesdayLunchTextBox.Size = new System.Drawing.Size(322, 27);
+            this.wednesdayLunchTextBox.TabIndex = 34;
+            // 
+            // wednesdayBreakfastTextBox
+            // 
+            this.wednesdayBreakfastTextBox.Enabled = false;
+            this.wednesdayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.wednesdayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.wednesdayBreakfastTextBox.Name = &quot;wednesdayBreakfastTextBox&quot;;
+            this.wednesdayBreakfastTextBox.Size = new System.Drawing.Size(322, 27);
+            this.wednesdayBreakfastTextBox.TabIndex = 35;
+            // 
+            // tuesdayDinnerTextBox
+            // 
+            this.tuesdayDinnerTextBox.Enabled = false;
+            this.tuesdayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.tuesdayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tuesdayDinnerTextBox.Name = &quot;tuesdayDinnerTextBox&quot;;
+            this.tuesdayDinnerTextBox.Size = new System.Drawing.Size(317, 27);
+            this.tuesdayDinnerTextBox.TabIndex = 36;
+            // 
+            // removeMondayDinnerButton
+            // 
+            this.removeMondayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeMondayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeMondayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeMondayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeMondayDinnerButton.Name = &quot;removeMondayDinnerButton&quot;;
+            this.removeMondayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeMondayDinnerButton.TabIndex = 40;
+            this.removeMondayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeMondayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeMondayDinnerButton.Click += new System.EventHandler(this.removeMondayDinnerButton_Click);
+            // 
+            // removeMondayLunchButton
+            // 
+            this.removeMondayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeMondayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeMondayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeMondayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeMondayLunchButton.Name = &quot;removeMondayLunchButton&quot;;
+            this.removeMondayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeMondayLunchButton.TabIndex = 41;
+            this.removeMondayLunchButton.Text = &quot;Remove&quot;;
+            this.removeMondayLunchButton.UseVisualStyleBackColor = false;
+            this.removeMondayLunchButton.Click += new System.EventHandler(this.removeMondayLunchButton_Click);
+            // 
+            // removeMondayBreakfastButton
+            // 
+            this.removeMondayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeMondayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeMondayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeMondayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeMondayBreakfastButton.Name = &quot;removeMondayBreakfastButton&quot;;
+            this.removeMondayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeMondayBreakfastButton.TabIndex = 42;
+            this.removeMondayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeMondayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeMondayBreakfastButton.Click += new System.EventHandler(this.removeMondayBreakfastButton_Click);
+            // 
+            // removeTuesdayDinnerButton
+            // 
+            this.removeTuesdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeTuesdayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeTuesdayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeTuesdayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeTuesdayDinnerButton.Name = &quot;removeTuesdayDinnerButton&quot;;
+            this.removeTuesdayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeTuesdayDinnerButton.TabIndex = 43;
+            this.removeTuesdayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeTuesdayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeTuesdayDinnerButton.Click += new System.EventHandler(this.removeTuesdayDinnerButton_Click);
+            // 
+            // removeTuesdayLunchButton
+            // 
+            this.removeTuesdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeTuesdayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeTuesdayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeTuesdayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeTuesdayLunchButton.Name = &quot;removeTuesdayLunchButton&quot;;
+            this.removeTuesdayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeTuesdayLunchButton.TabIndex = 44;
+            this.removeTuesdayLunchButton.Text = &quot;Remove&quot;;
+            this.removeTuesdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeTuesdayLunchButton.Click += new System.EventHandler(this.removeTuesdayLunchButton_Click);
+            // 
+            // removeTuesdayBreakfastButton
+            // 
+            this.removeTuesdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeTuesdayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeTuesdayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeTuesdayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeTuesdayBreakfastButton.Name = &quot;removeTuesdayBreakfastButton&quot;;
+            this.removeTuesdayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeTuesdayBreakfastButton.TabIndex = 45;
+            this.removeTuesdayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeTuesdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeTuesdayBreakfastButton.Click += new System.EventHandler(this.removeTuesdayBreakfastButton_Click);
+            // 
+            // removeThursdayDinnerButton
+            // 
+            this.removeThursdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeThursdayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeThursdayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeThursdayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeThursdayDinnerButton.Name = &quot;removeThursdayDinnerButton&quot;;
+            this.removeThursdayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeThursdayDinnerButton.TabIndex = 46;
+            this.removeThursdayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeThursdayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeThursdayDinnerButton.Click += new System.EventHandler(this.removeThursdayDinnerButton_Click);
+            // 
+            // removeWednesdayBreakfastButton
+            // 
+            this.removeWednesdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeWednesdayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeWednesdayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeWednesdayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeWednesdayBreakfastButton.Name = &quot;removeWednesdayBreakfastButton&quot;;
+            this.removeWednesdayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeWednesdayBreakfastButton.TabIndex = 47;
+            this.removeWednesdayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeWednesdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeWednesdayBreakfastButton.Click += new System.EventHandler(this.removeWednesdayBreakfastButton_Click);
+            // 
+            // removeWednesdayDinnerButton
+            // 
+            this.removeWednesdayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeWednesdayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeWednesdayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeWednesdayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeWednesdayDinnerButton.Name = &quot;removeWednesdayDinnerButton&quot;;
+            this.removeWednesdayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeWednesdayDinnerButton.TabIndex = 48;
+            this.removeWednesdayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeWednesdayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeWednesdayDinnerButton.Click += new System.EventHandler(this.removeWednesdayDinnerButton_Click);
+            // 
+            // removeThursdayLunchButton
+            // 
+            this.removeThursdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeThursdayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeThursdayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeThursdayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeThursdayLunchButton.Name = &quot;removeThursdayLunchButton&quot;;
+            this.removeThursdayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeThursdayLunchButton.TabIndex = 49;
+            this.removeThursdayLunchButton.Text = &quot;Remove&quot;;
+            this.removeThursdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeThursdayLunchButton.Click += new System.EventHandler(this.removeThursdayLunchButton_Click);
+            // 
+            // removeWednesdayLunchButton
+            // 
+            this.removeWednesdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeWednesdayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeWednesdayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeWednesdayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeWednesdayLunchButton.Name = &quot;removeWednesdayLunchButton&quot;;
+            this.removeWednesdayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeWednesdayLunchButton.TabIndex = 50;
+            this.removeWednesdayLunchButton.Text = &quot;Remove&quot;;
+            this.removeWednesdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeWednesdayLunchButton.Click += new System.EventHandler(this.removeWednesdayLunchButton_Click);
+            // 
+            // removeThursdayBreakfastButton
+            // 
+            this.removeThursdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeThursdayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeThursdayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeThursdayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeThursdayBreakfastButton.Name = &quot;removeThursdayBreakfastButton&quot;;
+            this.removeThursdayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeThursdayBreakfastButton.TabIndex = 51;
+            this.removeThursdayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeThursdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeThursdayBreakfastButton.Click += new System.EventHandler(this.removeThursdayBreakfastButton_Click);
+            // 
+            // removeFridayBreakfastButton
+            // 
+            this.removeFridayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeFridayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeFridayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeFridayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeFridayBreakfastButton.Name = &quot;removeFridayBreakfastButton&quot;;
+            this.removeFridayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeFridayBreakfastButton.TabIndex = 61;
+            this.removeFridayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeFridayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeFridayBreakfastButton.Click += new System.EventHandler(this.removeFridayBreakfastButton_Click);
+            // 
+            // removeFridayLunchButton
+            // 
+            this.removeFridayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeFridayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeFridayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeFridayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeFridayLunchButton.Name = &quot;removeFridayLunchButton&quot;;
+            this.removeFridayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeFridayLunchButton.TabIndex = 60;
+            this.removeFridayLunchButton.Text = &quot;Remove&quot;;
+            this.removeFridayLunchButton.UseVisualStyleBackColor = false;
+            this.removeFridayLunchButton.Click += new System.EventHandler(this.removeFridayLunchButton_Click);
+            // 
+            // removeFridayDinnerButton
+            // 
+            this.removeFridayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeFridayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeFridayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeFridayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeFridayDinnerButton.Name = &quot;removeFridayDinnerButton&quot;;
+            this.removeFridayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeFridayDinnerButton.TabIndex = 59;
+            this.removeFridayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeFridayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeFridayDinnerButton.Click += new System.EventHandler(this.removeFridayDinnerButton_Click);
+            // 
+            // fridayBreakfastTextBox
+            // 
+            this.fridayBreakfastTextBox.Enabled = false;
+            this.fridayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.fridayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fridayBreakfastTextBox.Name = &quot;fridayBreakfastTextBox&quot;;
+            this.fridayBreakfastTextBox.Size = new System.Drawing.Size(322, 27);
+            this.fridayBreakfastTextBox.TabIndex = 58;
+            // 
+            // fridayLunchTextBox
+            // 
+            this.fridayLunchTextBox.Enabled = false;
+            this.fridayLunchTextBox.Location = new System.Drawing.Point(90, 140);
+            this.fridayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fridayLunchTextBox.Name = &quot;fridayLunchTextBox&quot;;
+            this.fridayLunchTextBox.Size = new System.Drawing.Size(322, 27);
+            this.fridayLunchTextBox.TabIndex = 57;
+            // 
+            // fridayDinnerTextBox
+            // 
+            this.fridayDinnerTextBox.Enabled = false;
+            this.fridayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.fridayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fridayDinnerTextBox.Name = &quot;fridayDinnerTextBox&quot;;
+            this.fridayDinnerTextBox.Size = new System.Drawing.Size(322, 27);
+            this.fridayDinnerTextBox.TabIndex = 56;
+            // 
+            // fridayLabel
+            // 
+            this.fridayLabel.AutoSize = true;
+            this.fridayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.fridayLabel.Location = new System.Drawing.Point(3, 71);
+            this.fridayLabel.Name = &quot;fridayLabel&quot;;
+            this.fridayLabel.Size = new System.Drawing.Size(55, 23);
+            this.fridayLabel.TabIndex = 52;
+            this.fridayLabel.Text = &quot;Friday&quot;;
+            // 
+            // removeSaturdayBreakfastButton
+            // 
+            this.removeSaturdayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeSaturdayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeSaturdayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeSaturdayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeSaturdayBreakfastButton.Name = &quot;removeSaturdayBreakfastButton&quot;;
+            this.removeSaturdayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeSaturdayBreakfastButton.TabIndex = 71;
+            this.removeSaturdayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeSaturdayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeSaturdayBreakfastButton.Click += new System.EventHandler(this.removeSaturdayBreakfastButton_Click);
+            // 
+            // removeSaturdayLunchButton
+            // 
+            this.removeSaturdayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeSaturdayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeSaturdayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeSaturdayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeSaturdayLunchButton.Name = &quot;removeSaturdayLunchButton&quot;;
+            this.removeSaturdayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeSaturdayLunchButton.TabIndex = 70;
+            this.removeSaturdayLunchButton.Text = &quot;Remove&quot;;
+            this.removeSaturdayLunchButton.UseVisualStyleBackColor = false;
+            this.removeSaturdayLunchButton.Click += new System.EventHandler(this.removeSaturdayLunchButton_Click);
+            // 
+            // removeSatudayDinnerButton
+            // 
+            this.removeSatudayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeSatudayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeSatudayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeSatudayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeSatudayDinnerButton.Name = &quot;removeSatudayDinnerButton&quot;;
+            this.removeSatudayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeSatudayDinnerButton.TabIndex = 69;
+            this.removeSatudayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeSatudayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeSatudayDinnerButton.Click += new System.EventHandler(this.removeSatudayDinnerButton_Click);
+            // 
+            // saturdayBreakfastTextBox
+            // 
+            this.saturdayBreakfastTextBox.Enabled = false;
+            this.saturdayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.saturdayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saturdayBreakfastTextBox.Name = &quot;saturdayBreakfastTextBox&quot;;
+            this.saturdayBreakfastTextBox.Size = new System.Drawing.Size(322, 27);
+            this.saturdayBreakfastTextBox.TabIndex = 68;
+            // 
+            // saturdayLunchTextBox
+            // 
+            this.saturdayLunchTextBox.Enabled = false;
+            this.saturdayLunchTextBox.Location = new System.Drawing.Point(90, 137);
+            this.saturdayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saturdayLunchTextBox.Name = &quot;saturdayLunchTextBox&quot;;
+            this.saturdayLunchTextBox.Size = new System.Drawing.Size(322, 27);
+            this.saturdayLunchTextBox.TabIndex = 67;
+            // 
+            // saturdayDinnerTextBox
+            // 
+            this.saturdayDinnerTextBox.Enabled = false;
+            this.saturdayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.saturdayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saturdayDinnerTextBox.Name = &quot;saturdayDinnerTextBox&quot;;
+            this.saturdayDinnerTextBox.Size = new System.Drawing.Size(322, 27);
+            this.saturdayDinnerTextBox.TabIndex = 66;
+            // 
+            // saturdayLabel
+            // 
+            this.saturdayLabel.AutoSize = true;
+            this.saturdayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.saturdayLabel.Location = new System.Drawing.Point(3, 71);
+            this.saturdayLabel.Name = &quot;saturdayLabel&quot;;
+            this.saturdayLabel.Size = new System.Drawing.Size(77, 23);
+            this.saturdayLabel.TabIndex = 62;
+            this.saturdayLabel.Text = &quot;Saturday&quot;;
+            // 
+            // plannerMenuButton
+            // 
+            this.plannerMenuButton.BackColor = System.Drawing.Color.LightCyan;
+            this.plannerMenuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject(&quot;plannerMenuButton.BackgroundImage&quot;)));
+            this.plannerMenuButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plannerMenuButton.Location = new System.Drawing.Point(11, 9);
+            this.plannerMenuButton.Name = &quot;plannerMenuButton&quot;;
+            this.plannerMenuButton.Size = new System.Drawing.Size(62, 56);
+            this.plannerMenuButton.TabIndex = 72;
+            this.plannerMenuButton.UseVisualStyleBackColor = false;
+            this.plannerMenuButton.Click += new System.EventHandler(this.plannerMenuButton_Click);
+            // 
+            // plannerContextMenuStrip
+            // 
+            this.plannerContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.plannerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findRecipeToolStripMenuItem,
+            this.viewPantryToolStripMenuItem,
+            this.viewCurrentWeekPlanToolStripMenuItem,
+            this.viewNextWeekPlanToolStripMenuItem});
+            this.plannerContextMenuStrip.Name = &quot;plannerContextMenuStrip&quot;;
+            this.plannerContextMenuStrip.Size = new System.Drawing.Size(235, 128);
+            // 
+            // findRecipeToolStripMenuItem
+            // 
+            this.findRecipeToolStripMenuItem.Name = &quot;findRecipeToolStripMenuItem&quot;;
+            this.findRecipeToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.findRecipeToolStripMenuItem.Text = &quot;Find Recipe&quot;;
+            this.findRecipeToolStripMenuItem.Click += new System.EventHandler(this.findRecipeToolStripMenuItem_Click);
+            // 
+            // viewCurrentWeekPlanToolStripMenuItem
+            // 
+            this.viewCurrentWeekPlanToolStripMenuItem.Name = &quot;viewCurrentWeekPlanToolStripMenuItem&quot;;
+            this.viewCurrentWeekPlanToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.viewCurrentWeekPlanToolStripMenuItem.Text = &quot;View Current Week Plan&quot;;
+            this.viewCurrentWeekPlanToolStripMenuItem.Click += new System.EventHandler(this.viewCurrentWeekPlanToolStripMenuItem_Click);
+            // 
+            // viewNextWeekPlanToolStripMenuItem
+            // 
+            this.viewNextWeekPlanToolStripMenuItem.Name = &quot;viewNextWeekPlanToolStripMenuItem&quot;;
+            this.viewNextWeekPlanToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.viewNextWeekPlanToolStripMenuItem.Text = &quot;View Next Week Plan&quot;;
+            this.viewNextWeekPlanToolStripMenuItem.Click += new System.EventHandler(this.viewNextWeekPlanToolStripMenuItem_Click);
+            // 
+            // mondayPanel
+            // 
+            this.mondayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mondayPanel.Controls.Add(this.mondayDinnerLinkLabel);
+            this.mondayPanel.Controls.Add(this.mondayLunchLinkLabel);
+            this.mondayPanel.Controls.Add(this.mondayBreakfastLinkLabel);
+            this.mondayPanel.Controls.Add(this.mondayButton);
+            this.mondayPanel.Controls.Add(this.mondayLabel);
+            this.mondayPanel.Controls.Add(this.mondayBreakfastTextBox);
+            this.mondayPanel.Controls.Add(this.mondayLunchTextBox);
+            this.mondayPanel.Controls.Add(this.mondayDinnerTextBox);
+            this.mondayPanel.Controls.Add(this.removeMondayBreakfastButton);
+            this.mondayPanel.Controls.Add(this.removeMondayLunchButton);
+            this.mondayPanel.Controls.Add(this.removeMondayDinnerButton);
+            this.mondayPanel.Location = new System.Drawing.Point(3, 4);
+            this.mondayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.mondayPanel.Name = &quot;mondayPanel&quot;;
+            this.mondayPanel.Size = new System.Drawing.Size(515, 245);
+            this.mondayPanel.TabIndex = 73;
+            // 
+            // mondayDinnerLinkLabel
+            // 
+            this.mondayDinnerLinkLabel.AutoSize = true;
+            this.mondayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.mondayDinnerLinkLabel.Name = &quot;mondayDinnerLinkLabel&quot;;
+            this.mondayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.mondayDinnerLinkLabel.TabIndex = 45;
+            this.mondayDinnerLinkLabel.TabStop = true;
+            this.mondayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.mondayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.mondayDinnerLinkLabel_LinkClicked);
+            // 
+            // mondayLunchLinkLabel
+            // 
+            this.mondayLunchLinkLabel.AutoSize = true;
+            this.mondayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.mondayLunchLinkLabel.Name = &quot;mondayLunchLinkLabel&quot;;
+            this.mondayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.mondayLunchLinkLabel.TabIndex = 44;
+            this.mondayLunchLinkLabel.TabStop = true;
+            this.mondayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.mondayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.mondayLunchLinkLabel_LinkClicked);
+            // 
+            // mondayBreakfastLinkLabel
+            // 
+            this.mondayBreakfastLinkLabel.AutoSize = true;
+            this.mondayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.mondayBreakfastLinkLabel.Name = &quot;mondayBreakfastLinkLabel&quot;;
+            this.mondayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.mondayBreakfastLinkLabel.TabIndex = 43;
+            this.mondayBreakfastLinkLabel.TabStop = true;
+            this.mondayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.mondayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.mondayBreakfastLinkLabel_LinkClicked);
+            // 
+            // mondayButton
+            // 
+            this.mondayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mondayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.mondayButton.Location = new System.Drawing.Point(0, 0);
+            this.mondayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.mondayButton.Name = &quot;mondayButton&quot;;
+            this.mondayButton.Size = new System.Drawing.Size(513, 67);
+            this.mondayButton.TabIndex = 0;
+            this.mondayButton.Text = &quot;Monday&quot;;
+            this.mondayButton.UseVisualStyleBackColor = true;
+            this.mondayButton.Click += new System.EventHandler(this.mondayButton_Click);
+            // 
+            // tuesdayPanel
+            // 
+            this.tuesdayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tuesdayPanel.Controls.Add(this.tuesdayDinnerLinkLabel);
+            this.tuesdayPanel.Controls.Add(this.tuesdayLunchLinkLabel);
+            this.tuesdayPanel.Controls.Add(this.tuesdayBreakfastLinkLabel);
+            this.tuesdayPanel.Controls.Add(this.tuesdayButton);
+            this.tuesdayPanel.Controls.Add(this.tuesdayLabel);
+            this.tuesdayPanel.Controls.Add(this.tuesdayBreakfastTextBox);
+            this.tuesdayPanel.Controls.Add(this.tuesdayLunchTextBox);
+            this.tuesdayPanel.Controls.Add(this.tuesdayDinnerTextBox);
+            this.tuesdayPanel.Controls.Add(this.removeTuesdayBreakfastButton);
+            this.tuesdayPanel.Controls.Add(this.removeTuesdayLunchButton);
+            this.tuesdayPanel.Controls.Add(this.removeTuesdayDinnerButton);
+            this.tuesdayPanel.Location = new System.Drawing.Point(3, 257);
+            this.tuesdayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tuesdayPanel.Name = &quot;tuesdayPanel&quot;;
+            this.tuesdayPanel.Size = new System.Drawing.Size(515, 275);
+            this.tuesdayPanel.TabIndex = 74;
+            // 
+            // tuesdayDinnerLinkLabel
+            // 
+            this.tuesdayDinnerLinkLabel.AutoSize = true;
+            this.tuesdayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.tuesdayDinnerLinkLabel.Name = &quot;tuesdayDinnerLinkLabel&quot;;
+            this.tuesdayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.tuesdayDinnerLinkLabel.TabIndex = 48;
+            this.tuesdayDinnerLinkLabel.TabStop = true;
+            this.tuesdayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.tuesdayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.tuesdayDinnerLinkLabel_LinkClicked);
+            // 
+            // tuesdayLunchLinkLabel
+            // 
+            this.tuesdayLunchLinkLabel.AutoSize = true;
+            this.tuesdayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.tuesdayLunchLinkLabel.Name = &quot;tuesdayLunchLinkLabel&quot;;
+            this.tuesdayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.tuesdayLunchLinkLabel.TabIndex = 47;
+            this.tuesdayLunchLinkLabel.TabStop = true;
+            this.tuesdayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.tuesdayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.tuesdayLunchLinkLabel_LinkClicked);
+            // 
+            // tuesdayBreakfastLinkLabel
+            // 
+            this.tuesdayBreakfastLinkLabel.AutoSize = true;
+            this.tuesdayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.tuesdayBreakfastLinkLabel.Name = &quot;tuesdayBreakfastLinkLabel&quot;;
+            this.tuesdayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.tuesdayBreakfastLinkLabel.TabIndex = 46;
+            this.tuesdayBreakfastLinkLabel.TabStop = true;
+            this.tuesdayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.tuesdayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.tuesdayBreakfastLinkLabel_LinkClicked);
+            // 
+            // tuesdayButton
+            // 
+            this.tuesdayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tuesdayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tuesdayButton.Location = new System.Drawing.Point(0, 0);
+            this.tuesdayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tuesdayButton.Name = &quot;tuesdayButton&quot;;
+            this.tuesdayButton.Size = new System.Drawing.Size(513, 67);
+            this.tuesdayButton.TabIndex = 0;
+            this.tuesdayButton.Text = &quot;Tuesday&quot;;
+            this.tuesdayButton.UseVisualStyleBackColor = true;
+            this.tuesdayButton.Click += new System.EventHandler(this.tuesdayButton_Click);
+            // 
+            // wednesdayPanel
+            // 
+            this.wednesdayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.wednesdayPanel.Controls.Add(this.wednesdayDinnerLinkLabel);
+            this.wednesdayPanel.Controls.Add(this.wednesdayLunchLinkLabel);
+            this.wednesdayPanel.Controls.Add(this.wednesdayBreakfastLinkLabel);
+            this.wednesdayPanel.Controls.Add(this.wednesdayButton);
+            this.wednesdayPanel.Controls.Add(this.wednesdayLabel);
+            this.wednesdayPanel.Controls.Add(this.wednesdayBreakfastTextBox);
+            this.wednesdayPanel.Controls.Add(this.wednesdayLunchTextBox);
+            this.wednesdayPanel.Controls.Add(this.wednesdayDinnerTextBox);
+            this.wednesdayPanel.Controls.Add(this.removeWednesdayBreakfastButton);
+            this.wednesdayPanel.Controls.Add(this.removeWednesdayLunchButton);
+            this.wednesdayPanel.Controls.Add(this.removeWednesdayDinnerButton);
+            this.wednesdayPanel.Location = new System.Drawing.Point(3, 540);
+            this.wednesdayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.wednesdayPanel.Name = &quot;wednesdayPanel&quot;;
+            this.wednesdayPanel.Size = new System.Drawing.Size(515, 265);
+            this.wednesdayPanel.TabIndex = 75;
+            // 
+            // wednesdayDinnerLinkLabel
+            // 
+            this.wednesdayDinnerLinkLabel.AutoSize = true;
+            this.wednesdayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.wednesdayDinnerLinkLabel.Name = &quot;wednesdayDinnerLinkLabel&quot;;
+            this.wednesdayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.wednesdayDinnerLinkLabel.TabIndex = 80;
+            this.wednesdayDinnerLinkLabel.TabStop = true;
+            this.wednesdayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.wednesdayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.wednesdayDinnerLinkLabel_LinkClicked);
+            // 
+            // wednesdayLunchLinkLabel
+            // 
+            this.wednesdayLunchLinkLabel.AutoSize = true;
+            this.wednesdayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.wednesdayLunchLinkLabel.Name = &quot;wednesdayLunchLinkLabel&quot;;
+            this.wednesdayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.wednesdayLunchLinkLabel.TabIndex = 79;
+            this.wednesdayLunchLinkLabel.TabStop = true;
+            this.wednesdayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.wednesdayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.wednesdayLunchLinkLabel_LinkClicked);
+            // 
+            // wednesdayBreakfastLinkLabel
+            // 
+            this.wednesdayBreakfastLinkLabel.AutoSize = true;
+            this.wednesdayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.wednesdayBreakfastLinkLabel.Name = &quot;wednesdayBreakfastLinkLabel&quot;;
+            this.wednesdayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.wednesdayBreakfastLinkLabel.TabIndex = 78;
+            this.wednesdayBreakfastLinkLabel.TabStop = true;
+            this.wednesdayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.wednesdayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.wednesdayBreakfastLinkLabel_LinkClicked);
+            // 
+            // wednesdayButton
+            // 
+            this.wednesdayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.wednesdayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.wednesdayButton.Location = new System.Drawing.Point(0, 0);
+            this.wednesdayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.wednesdayButton.Name = &quot;wednesdayButton&quot;;
+            this.wednesdayButton.Size = new System.Drawing.Size(513, 67);
+            this.wednesdayButton.TabIndex = 77;
+            this.wednesdayButton.Text = &quot;Wednesday&quot;;
+            this.wednesdayButton.UseVisualStyleBackColor = true;
+            this.wednesdayButton.Click += new System.EventHandler(this.wednesdayButton_Click);
+            // 
+            // thursdayPanel
+            // 
+            this.thursdayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.thursdayPanel.Controls.Add(this.thursdayDinnerLinkLabel);
+            this.thursdayPanel.Controls.Add(this.thursdayLunchLinkLabel);
+            this.thursdayPanel.Controls.Add(this.thursdayBreakfastLinkLabel);
+            this.thursdayPanel.Controls.Add(this.thursdayButton);
+            this.thursdayPanel.Controls.Add(this.thursdayLabel);
+            this.thursdayPanel.Controls.Add(this.thursdayBreakfastTextBox);
+            this.thursdayPanel.Controls.Add(this.thursdayLunchTextBox);
+            this.thursdayPanel.Controls.Add(this.thursdayDinnerTextBox);
+            this.thursdayPanel.Controls.Add(this.removeThursdayBreakfastButton);
+            this.thursdayPanel.Controls.Add(this.removeThursdayLunchButton);
+            this.thursdayPanel.Controls.Add(this.removeThursdayDinnerButton);
+            this.thursdayPanel.Location = new System.Drawing.Point(3, 813);
+            this.thursdayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.thursdayPanel.Name = &quot;thursdayPanel&quot;;
+            this.thursdayPanel.Size = new System.Drawing.Size(515, 240);
+            this.thursdayPanel.TabIndex = 76;
+            // 
+            // thursdayDinnerLinkLabel
+            // 
+            this.thursdayDinnerLinkLabel.AutoSize = true;
+            this.thursdayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.thursdayDinnerLinkLabel.Name = &quot;thursdayDinnerLinkLabel&quot;;
+            this.thursdayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.thursdayDinnerLinkLabel.TabIndex = 54;
+            this.thursdayDinnerLinkLabel.TabStop = true;
+            this.thursdayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.thursdayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.thursdayDinnerLinkLabel_LinkClicked);
+            // 
+            // thursdayLunchLinkLabel
+            // 
+            this.thursdayLunchLinkLabel.AutoSize = true;
+            this.thursdayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.thursdayLunchLinkLabel.Name = &quot;thursdayLunchLinkLabel&quot;;
+            this.thursdayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.thursdayLunchLinkLabel.TabIndex = 53;
+            this.thursdayLunchLinkLabel.TabStop = true;
+            this.thursdayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.thursdayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.thursdayLunchLinkLabel10_LinkClicked);
+            // 
+            // thursdayBreakfastLinkLabel
+            // 
+            this.thursdayBreakfastLinkLabel.AutoSize = true;
+            this.thursdayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.thursdayBreakfastLinkLabel.Name = &quot;thursdayBreakfastLinkLabel&quot;;
+            this.thursdayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.thursdayBreakfastLinkLabel.TabIndex = 52;
+            this.thursdayBreakfastLinkLabel.TabStop = true;
+            this.thursdayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.thursdayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.thursdayBreakfastLinkLabel_LinkClicked);
+            // 
+            // thursdayButton
+            // 
+            this.thursdayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.thursdayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.thursdayButton.Location = new System.Drawing.Point(0, 0);
+            this.thursdayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.thursdayButton.Name = &quot;thursdayButton&quot;;
+            this.thursdayButton.Size = new System.Drawing.Size(513, 67);
+            this.thursdayButton.TabIndex = 0;
+            this.thursdayButton.Text = &quot;Thursday&quot;;
+            this.thursdayButton.UseVisualStyleBackColor = true;
+            this.thursdayButton.Click += new System.EventHandler(this.thursdayButton_Click);
+            // 
+            // fridayPanel
+            // 
+            this.fridayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.fridayPanel.Controls.Add(this.fridayDinnerLinkLabel);
+            this.fridayPanel.Controls.Add(this.fridayLunchLinkLabel);
+            this.fridayPanel.Controls.Add(this.fridayBreakfastLinkLabel);
+            this.fridayPanel.Controls.Add(this.fridayButton);
+            this.fridayPanel.Controls.Add(this.fridayLabel);
+            this.fridayPanel.Controls.Add(this.fridayBreakfastTextBox);
+            this.fridayPanel.Controls.Add(this.fridayLunchTextBox);
+            this.fridayPanel.Controls.Add(this.fridayDinnerTextBox);
+            this.fridayPanel.Controls.Add(this.removeFridayBreakfastButton);
+            this.fridayPanel.Controls.Add(this.removeFridayLunchButton);
+            this.fridayPanel.Controls.Add(this.removeFridayDinnerButton);
+            this.fridayPanel.Location = new System.Drawing.Point(3, 1061);
+            this.fridayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fridayPanel.Name = &quot;fridayPanel&quot;;
+            this.fridayPanel.Size = new System.Drawing.Size(515, 257);
+            this.fridayPanel.TabIndex = 77;
+            // 
+            // fridayDinnerLinkLabel
+            // 
+            this.fridayDinnerLinkLabel.AutoSize = true;
+            this.fridayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.fridayDinnerLinkLabel.Name = &quot;fridayDinnerLinkLabel&quot;;
+            this.fridayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.fridayDinnerLinkLabel.TabIndex = 64;
+            this.fridayDinnerLinkLabel.TabStop = true;
+            this.fridayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.fridayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.fridayDinnerLinkLabel_LinkClicked);
+            // 
+            // fridayLunchLinkLabel
+            // 
+            this.fridayLunchLinkLabel.AutoSize = true;
+            this.fridayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.fridayLunchLinkLabel.Name = &quot;fridayLunchLinkLabel&quot;;
+            this.fridayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.fridayLunchLinkLabel.TabIndex = 63;
+            this.fridayLunchLinkLabel.TabStop = true;
+            this.fridayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.fridayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.fridayLunchLinkLabel_LinkClicked);
+            // 
+            // fridayBreakfastLinkLabel
+            // 
+            this.fridayBreakfastLinkLabel.AutoSize = true;
+            this.fridayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.fridayBreakfastLinkLabel.Name = &quot;fridayBreakfastLinkLabel&quot;;
+            this.fridayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.fridayBreakfastLinkLabel.TabIndex = 62;
+            this.fridayBreakfastLinkLabel.TabStop = true;
+            this.fridayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.fridayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.fridayBreakfastLinkLabel_LinkClicked);
+            // 
+            // fridayButton
+            // 
+            this.fridayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fridayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.fridayButton.Location = new System.Drawing.Point(0, 0);
+            this.fridayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.fridayButton.Name = &quot;fridayButton&quot;;
+            this.fridayButton.Size = new System.Drawing.Size(513, 67);
+            this.fridayButton.TabIndex = 0;
+            this.fridayButton.Text = &quot;Friday&quot;;
+            this.fridayButton.UseVisualStyleBackColor = true;
+            this.fridayButton.Click += new System.EventHandler(this.fridayButton_Click);
+            // 
+            // saturdayPanel
+            // 
+            this.saturdayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.saturdayPanel.Controls.Add(this.saturdayDinnerLinkLabel);
+            this.saturdayPanel.Controls.Add(this.saturdayLunchLinkLabel);
+            this.saturdayPanel.Controls.Add(this.saturdayBreakfastLinkLabel);
+            this.saturdayPanel.Controls.Add(this.saturdayButton);
+            this.saturdayPanel.Controls.Add(this.saturdayLabel);
+            this.saturdayPanel.Controls.Add(this.saturdayBreakfastTextBox);
+            this.saturdayPanel.Controls.Add(this.saturdayLunchTextBox);
+            this.saturdayPanel.Controls.Add(this.saturdayDinnerTextBox);
+            this.saturdayPanel.Controls.Add(this.removeSaturdayBreakfastButton);
+            this.saturdayPanel.Controls.Add(this.removeSaturdayLunchButton);
+            this.saturdayPanel.Controls.Add(this.removeSatudayDinnerButton);
+            this.saturdayPanel.Location = new System.Drawing.Point(3, 1326);
+            this.saturdayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saturdayPanel.Name = &quot;saturdayPanel&quot;;
+            this.saturdayPanel.Size = new System.Drawing.Size(515, 284);
+            this.saturdayPanel.TabIndex = 78;
+            // 
+            // saturdayDinnerLinkLabel
+            // 
+            this.saturdayDinnerLinkLabel.AutoSize = true;
+            this.saturdayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.saturdayDinnerLinkLabel.Name = &quot;saturdayDinnerLinkLabel&quot;;
+            this.saturdayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.saturdayDinnerLinkLabel.TabIndex = 74;
+            this.saturdayDinnerLinkLabel.TabStop = true;
+            this.saturdayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.saturdayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.saturdayDinnerLinkLabel_LinkClicked);
+            // 
+            // saturdayLunchLinkLabel
+            // 
+            this.saturdayLunchLinkLabel.AutoSize = true;
+            this.saturdayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.saturdayLunchLinkLabel.Name = &quot;saturdayLunchLinkLabel&quot;;
+            this.saturdayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.saturdayLunchLinkLabel.TabIndex = 73;
+            this.saturdayLunchLinkLabel.TabStop = true;
+            this.saturdayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.saturdayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.saturdayLunchLinkLabel_LinkClicked);
+            // 
+            // saturdayBreakfastLinkLabel
+            // 
+            this.saturdayBreakfastLinkLabel.AutoSize = true;
+            this.saturdayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.saturdayBreakfastLinkLabel.Name = &quot;saturdayBreakfastLinkLabel&quot;;
+            this.saturdayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.saturdayBreakfastLinkLabel.TabIndex = 72;
+            this.saturdayBreakfastLinkLabel.TabStop = true;
+            this.saturdayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.saturdayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.saturdayBreakfastLinkLabel_LinkClicked);
+            // 
+            // saturdayButton
+            // 
+            this.saturdayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.saturdayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.saturdayButton.Location = new System.Drawing.Point(0, 0);
+            this.saturdayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saturdayButton.Name = &quot;saturdayButton&quot;;
+            this.saturdayButton.Size = new System.Drawing.Size(513, 67);
+            this.saturdayButton.TabIndex = 0;
+            this.saturdayButton.Text = &quot;Saturday&quot;;
+            this.saturdayButton.UseVisualStyleBackColor = true;
+            this.saturdayButton.Click += new System.EventHandler(this.saturdayButton_Click);
+            // 
+            // mealPlanFlowLayoutPanel
+            // 
+            this.mealPlanFlowLayoutPanel.AutoScroll = true;
+            this.mealPlanFlowLayoutPanel.AutoScrollMinSize = new System.Drawing.Size(0, 1600);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.mondayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.tuesdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.wednesdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.thursdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.fridayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.saturdayPanel);
+            this.mealPlanFlowLayoutPanel.Controls.Add(this.sundayPanel);
+            this.mealPlanFlowLayoutPanel.Location = new System.Drawing.Point(2, 72);
+            this.mealPlanFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.mealPlanFlowLayoutPanel.Name = &quot;mealPlanFlowLayoutPanel&quot;;
+            this.mealPlanFlowLayoutPanel.Size = new System.Drawing.Size(515, 1048);
+            this.mealPlanFlowLayoutPanel.TabIndex = 80;
+            // 
+            // sundayPanel
+            // 
+            this.sundayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.sundayPanel.Controls.Add(this.sundayDinnerLinkLabel);
+            this.sundayPanel.Controls.Add(this.sundayLunchLinkLabel);
+            this.sundayPanel.Controls.Add(this.sundayBreakfastLinkLabel);
+            this.sundayPanel.Controls.Add(this.sundayButton);
+            this.sundayPanel.Controls.Add(this.sundayLabel);
+            this.sundayPanel.Controls.Add(this.sundayBreakfastTextBox);
+            this.sundayPanel.Controls.Add(this.sundayLunchTextBox);
+            this.sundayPanel.Controls.Add(this.sundayDinnerTextBox);
+            this.sundayPanel.Controls.Add(this.removeSundayBreakfastButton);
+            this.sundayPanel.Controls.Add(this.removeSundayLunchButton);
+            this.sundayPanel.Controls.Add(this.removeSundayDinnerButton);
+            this.sundayPanel.Location = new System.Drawing.Point(3, 1618);
+            this.sundayPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.sundayPanel.Name = &quot;sundayPanel&quot;;
+            this.sundayPanel.Size = new System.Drawing.Size(515, 284);
+            this.sundayPanel.TabIndex = 79;
+            // 
+            // sundayDinnerLinkLabel
+            // 
+            this.sundayDinnerLinkLabel.AutoSize = true;
+            this.sundayDinnerLinkLabel.Location = new System.Drawing.Point(10, 181);
+            this.sundayDinnerLinkLabel.Name = &quot;sundayDinnerLinkLabel&quot;;
+            this.sundayDinnerLinkLabel.Size = new System.Drawing.Size(56, 20);
+            this.sundayDinnerLinkLabel.TabIndex = 74;
+            this.sundayDinnerLinkLabel.TabStop = true;
+            this.sundayDinnerLinkLabel.Text = &quot;Dinner:&quot;;
+            this.sundayDinnerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.sundayDinnerLinkLabel_LinkClicked);
+            // 
+            // sundayLunchLinkLabel
+            // 
+            this.sundayLunchLinkLabel.AutoSize = true;
+            this.sundayLunchLinkLabel.Location = new System.Drawing.Point(10, 140);
+            this.sundayLunchLinkLabel.Name = &quot;sundayLunchLinkLabel&quot;;
+            this.sundayLunchLinkLabel.Size = new System.Drawing.Size(50, 20);
+            this.sundayLunchLinkLabel.TabIndex = 73;
+            this.sundayLunchLinkLabel.TabStop = true;
+            this.sundayLunchLinkLabel.Text = &quot;Lunch:&quot;;
+            this.sundayLunchLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.sundayLunchLinkLabel_LinkClicked);
+            // 
+            // sundayBreakfastLinkLabel
+            // 
+            this.sundayBreakfastLinkLabel.AutoSize = true;
+            this.sundayBreakfastLinkLabel.Location = new System.Drawing.Point(3, 107);
+            this.sundayBreakfastLinkLabel.Name = &quot;sundayBreakfastLinkLabel&quot;;
+            this.sundayBreakfastLinkLabel.Size = new System.Drawing.Size(73, 20);
+            this.sundayBreakfastLinkLabel.TabIndex = 72;
+            this.sundayBreakfastLinkLabel.TabStop = true;
+            this.sundayBreakfastLinkLabel.Text = &quot;Breakfast:&quot;;
+            this.sundayBreakfastLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.sundayBreakfastLinkLabel_LinkClicked);
+            // 
+            // sundayButton
+            // 
+            this.sundayButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.sundayButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.sundayButton.Location = new System.Drawing.Point(0, 0);
+            this.sundayButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.sundayButton.Name = &quot;sundayButton&quot;;
+            this.sundayButton.Size = new System.Drawing.Size(513, 67);
+            this.sundayButton.TabIndex = 0;
+            this.sundayButton.Text = &quot;Sunday&quot;;
+            this.sundayButton.UseVisualStyleBackColor = true;
+            this.sundayButton.Click += new System.EventHandler(this.sundayButton_Click);
+            // 
+            // sundayLabel
+            // 
+            this.sundayLabel.AutoSize = true;
+            this.sundayLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.sundayLabel.Location = new System.Drawing.Point(3, 71);
+            this.sundayLabel.Name = &quot;sundayLabel&quot;;
+            this.sundayLabel.Size = new System.Drawing.Size(66, 23);
+            this.sundayLabel.TabIndex = 62;
+            this.sundayLabel.Text = &quot;Sunday&quot;;
+            // 
+            // sundayBreakfastTextBox
+            // 
+            this.sundayBreakfastTextBox.Enabled = false;
+            this.sundayBreakfastTextBox.Location = new System.Drawing.Point(90, 97);
+            this.sundayBreakfastTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.sundayBreakfastTextBox.Name = &quot;sundayBreakfastTextBox&quot;;
+            this.sundayBreakfastTextBox.Size = new System.Drawing.Size(322, 27);
+            this.sundayBreakfastTextBox.TabIndex = 68;
+            // 
+            // sundayLunchTextBox
+            // 
+            this.sundayLunchTextBox.Enabled = false;
+            this.sundayLunchTextBox.Location = new System.Drawing.Point(90, 137);
+            this.sundayLunchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.sundayLunchTextBox.Name = &quot;sundayLunchTextBox&quot;;
+            this.sundayLunchTextBox.Size = new System.Drawing.Size(322, 27);
+            this.sundayLunchTextBox.TabIndex = 67;
+            // 
+            // sundayDinnerTextBox
+            // 
+            this.sundayDinnerTextBox.Enabled = false;
+            this.sundayDinnerTextBox.Location = new System.Drawing.Point(90, 181);
+            this.sundayDinnerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.sundayDinnerTextBox.Name = &quot;sundayDinnerTextBox&quot;;
+            this.sundayDinnerTextBox.Size = new System.Drawing.Size(322, 27);
+            this.sundayDinnerTextBox.TabIndex = 66;
+            // 
+            // removeSundayBreakfastButton
+            // 
+            this.removeSundayBreakfastButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeSundayBreakfastButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeSundayBreakfastButton.Location = new System.Drawing.Point(418, 93);
+            this.removeSundayBreakfastButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeSundayBreakfastButton.Name = &quot;removeSundayBreakfastButton&quot;;
+            this.removeSundayBreakfastButton.Size = new System.Drawing.Size(81, 33);
+            this.removeSundayBreakfastButton.TabIndex = 71;
+            this.removeSundayBreakfastButton.Text = &quot;Remove&quot;;
+            this.removeSundayBreakfastButton.UseVisualStyleBackColor = false;
+            this.removeSundayBreakfastButton.Click += new System.EventHandler(this.removeSundayBreakfastButton_Click_1);
+            // 
+            // removeSundayLunchButton
+            // 
+            this.removeSundayLunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeSundayLunchButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeSundayLunchButton.Location = new System.Drawing.Point(418, 133);
+            this.removeSundayLunchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeSundayLunchButton.Name = &quot;removeSundayLunchButton&quot;;
+            this.removeSundayLunchButton.Size = new System.Drawing.Size(81, 33);
+            this.removeSundayLunchButton.TabIndex = 70;
+            this.removeSundayLunchButton.Text = &quot;Remove&quot;;
+            this.removeSundayLunchButton.UseVisualStyleBackColor = false;
+            this.removeSundayLunchButton.Click += new System.EventHandler(this.removeSundayLunchButton_Click_1);
+            // 
+            // removeSundayDinnerButton
+            // 
+            this.removeSundayDinnerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.removeSundayDinnerButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.removeSundayDinnerButton.Location = new System.Drawing.Point(418, 177);
+            this.removeSundayDinnerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.removeSundayDinnerButton.Name = &quot;removeSundayDinnerButton&quot;;
+            this.removeSundayDinnerButton.Size = new System.Drawing.Size(81, 33);
+            this.removeSundayDinnerButton.TabIndex = 69;
+            this.removeSundayDinnerButton.Text = &quot;Remove&quot;;
+            this.removeSundayDinnerButton.UseVisualStyleBackColor = false;
+            this.removeSundayDinnerButton.Click += new System.EventHandler(this.removeSundayDinnerButton_Click_1);
+            // 
+            // addIngredientsForRemainingMealsButton
+            // 
+            this.addIngredientsForRemainingMealsButton.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addIngredientsForRemainingMealsButton.Location = new System.Drawing.Point(357, -4);
+            this.addIngredientsForRemainingMealsButton.Name = &quot;addIngredientsForRemainingMealsButton&quot;;
+            this.addIngredientsForRemainingMealsButton.Size = new System.Drawing.Size(141, 51);
+            this.addIngredientsForRemainingMealsButton.TabIndex = 81;
+            this.addIngredientsForRemainingMealsButton.Text = &quot;Add Ingredients for Remaining Meals&quot;;
+            this.addIngredientsForRemainingMealsButton.UseVisualStyleBackColor = true;
+            this.addIngredientsForRemainingMealsButton.Click += new System.EventHandler(this.addIngredientsForRemainingMealsButton_Click);
+            // 
+            // addAllIngredientsCheckbox
+            // 
+            this.addAllIngredientsCheckbox.AutoSize = true;
+            this.addAllIngredientsCheckbox.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addAllIngredientsCheckbox.Location = new System.Drawing.Point(357, 49);
+            this.addAllIngredientsCheckbox.Name = &quot;addAllIngredientsCheckbox&quot;;
+            this.addAllIngredientsCheckbox.Size = new System.Drawing.Size(141, 21);
+            this.addAllIngredientsCheckbox.TabIndex = 82;
+            this.addAllIngredientsCheckbox.Text = &quot;Add All Ingredients&quot;;
+            this.addAllIngredientsCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // viewPantryToolStripMenuItem
+            // 
+            this.viewPantryToolStripMenuItem.Name = &quot;viewPantryToolStripMenuItem&quot;;
+            this.viewPantryToolStripMenuItem.Size = new System.Drawing.Size(234, 24);
+            this.viewPantryToolStripMenuItem.Text = &quot;View Pantry&quot;;
+            this.viewPantryToolStripMenuItem.Click += new System.EventHandler(this.viewPantryToolStripMenuItem_Click);
+            // 
+            // PlannedMealsPage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.addAllIngredientsCheckbox);
+            this.Controls.Add(this.addIngredientsForRemainingMealsButton);
+            this.Controls.Add(this.mealPlanFlowLayoutPanel);
+            this.Controls.Add(this.plannerMenuButton);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.weekMealLabel);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = &quot;PlannedMealsPage&quot;;
+            this.Text = &quot;PlannedMealsPage&quot;;
+            this.Load += new System.EventHandler(this.PlannedMealsPage_Load);
+            this.plannerContextMenuStrip.ResumeLayout(false);
+            this.mondayPanel.ResumeLayout(false);
+            this.mondayPanel.PerformLayout();
+            this.tuesdayPanel.ResumeLayout(false);
+            this.tuesdayPanel.PerformLayout();
+            this.wednesdayPanel.ResumeLayout(false);
+            this.wednesdayPanel.PerformLayout();
+            this.thursdayPanel.ResumeLayout(false);
+            this.thursdayPanel.PerformLayout();
+            this.fridayPanel.ResumeLayout(false);
+            this.fridayPanel.PerformLayout();
+            this.saturdayPanel.ResumeLayout(false);
+            this.saturdayPanel.PerformLayout();
+            this.mealPlanFlowLayoutPanel.ResumeLayout(false);
+            this.sundayPanel.ResumeLayout(false);
+            this.sundayPanel.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private Label weekMealLabel;
+        private Label label2;
+        
+        private Label thursdayLabel;
+        private Label wednesdayLabel;
+        private Label tuesdayLabel;
+        private Label mondayLabel;
+        
+        private TextBox tuesdayLunchTextBox;
+        private TextBox tuesdayBreakfastTextBox;
+        private TextBox mondayDinnerTextBox;
+        private TextBox mondayLunchTextBox;
+        private TextBox mondayBreakfastTextBox;
+        
+        private TextBox thursdayDinnerTextBox;
+        private TextBox thursdayLunchTextBox;
+        private TextBox thursdayBreakfastTextBox;
+        private TextBox wednesdayDinnerTextBox;
+        private TextBox wednesdayLunchTextBox;
+        private TextBox wednesdayBreakfastTextBox;
+        private TextBox tuesdayDinnerTextBox;
+        
+        private Button removeMondayDinnerButton;
+        private Button removeMondayLunchButton;
+        private Button removeMondayBreakfastButton;
+        private Button removeTuesdayDinnerButton;
+        private Button removeTuesdayLunchButton;
+        private Button removeTuesdayBreakfastButton;
+        private Button removeThursdayDinnerButton;
+        private Button removeWednesdayBreakfastButton;
+        private Button removeWednesdayDinnerButton;
+        private Button removeThursdayLunchButton;
+        private Button removeWednesdayLunchButton;
+        private Button removeThursdayBreakfastButton;
+        private Button removeFridayBreakfastButton;
+        private Button removeFridayLunchButton;
+        private Button removeFridayDinnerButton;
+        private TextBox fridayBreakfastTextBox;
+        private TextBox fridayLunchTextBox;
+        private TextBox fridayDinnerTextBox;
+        private Label fridayLabel;
+        private Button removeSaturdayBreakfastButton;
+        private Button removeSaturdayLunchButton;
+        private Button removeSatudayDinnerButton;
+        private TextBox saturdayBreakfastTextBox;
+        private TextBox saturdayLunchTextBox;
+        private TextBox saturdayDinnerTextBox;
+        private Label saturdayLabel;
+        private Button plannerMenuButton;
+        private ContextMenuStrip plannerContextMenuStrip;
+        private ToolStripMenuItem findRecipeToolStripMenuItem;
+        private ToolStripMenuItem viewCurrentWeekPlanToolStripMenuItem;
+        private ToolStripMenuItem viewNextWeekPlanToolStripMenuItem;
+        private Panel mondayPanel;
+        private Button mondayButton;
+        private Panel tuesdayPanel;
+        private Button tuesdayButton;
+        private Panel wednesdayPanel;
+        private Button wednesdayButton;
+        private Panel thursdayPanel;
+        private Button thursdayButton;
+        private Panel fridayPanel;
+        private Button fridayButton;
+        private Panel saturdayPanel;
+        private Button saturdayButton;
+        
+        private FlowLayoutPanel mealPlanFlowLayoutPanel;
+        private Button addIngredientsForRemainingMealsButton;
+        private CheckBox addAllIngredientsCheckbox;
+        private LinkLabel mondayBreakfastLinkLabel;
+        private LinkLabel mondayDinnerLinkLabel;
+        private LinkLabel mondayLunchLinkLabel;
+        private LinkLabel tuesdayBreakfastLinkLabel;
+        private LinkLabel wednesdayBreakfastLinkLabel;
+        private LinkLabel thursdayBreakfastLinkLabel;
+        private LinkLabel fridayBreakfastLinkLabel;
+        private LinkLabel saturdayBreakfastLinkLabel;
+        private LinkLabel tuesdayDinnerLinkLabel;
+        private LinkLabel tuesdayLunchLinkLabel;
+        private LinkLabel wednesdayDinnerLinkLabel;
+        private LinkLabel wednesdayLunchLinkLabel;
+        private LinkLabel thursdayDinnerLinkLabel;
+        private LinkLabel thursdayLunchLinkLabel;
+        private LinkLabel fridayDinnerLinkLabel;
+        private LinkLabel fridayLunchLinkLabel;
+        private LinkLabel saturdayDinnerLinkLabel;
+        private LinkLabel saturdayLunchLinkLabel;
+        private Panel sundayPanel;
+        private LinkLabel sundayDinnerLinkLabel;
+        private LinkLabel sundayLunchLinkLabel;
+        private LinkLabel sundayBreakfastLinkLabel;
+        private Button sundayButton;
+        private Label sundayLabel;
+        private TextBox sundayBreakfastTextBox;
+        private TextBox sundayLunchTextBox;
+        private TextBox sundayDinnerTextBox;
+        private Button removeSundayBreakfastButton;
+        private Button removeSundayLunchButton;
+        private Button removeSundayDinnerButton;
+        private ToolStripMenuItem viewPantryToolStripMenuItem;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,69,0],[32,13,32,149,0],[33,13,33,67,0],[34,13,34,60,0],[35,13,35,67,0],[36,13,36,68,0],[37,13,37,66,0],[38,13,38,65,0],[39,13,39,75,0],[40,13,40,79,0],[41,13,41,75,0],[42,13,42,74,0],[43,13,43,78,0],[44,13,44,77,0],[45,13,45,76,0],[46,13,46,80,0],[47,13,47,78,0],[48,13,48,77,0],[49,13,49,81,0],[50,13,50,76,0],[51,13,51,79,0],[52,13,52,78,0],[53,13,53,82,0],[54,13,54,80,0],[55,13,55,79,0],[56,13,56,83,0],[57,13,57,81,0],[58,13,58,85,0],[59,13,59,82,0],[60,13,60,80,0],[61,13,61,81,0],[62,13,62,84,0],[63,13,63,82,0],[64,13,64,78,0],[65,13,65,79,0],[66,13,66,78,0],[67,13,67,74,0],[68,13,68,75,0],[69,13,69,65,0],[70,13,70,84,0],[71,13,71,80,0],[72,13,72,80,0],[73,13,73,80,0],[74,13,74,76,0],[75,13,75,77,0],[76,13,76,67,0],[77,13,77,72,0],[78,13,78,103,0],[79,13,79,93,0],[80,13,80,102,0],[81,13,81,99,0],[82,13,82,65,0],[83,13,83,79,0],[84,13,84,78,0],[85,13,85,82,0],[86,13,86,67,0],[87,13,87,66,0],[88,13,88,80,0],[89,13,89,79,0],[90,13,90,83,0],[91,13,91,68,0],[92,13,92,68,0],[93,13,93,82,0],[94,13,94,81,0],[95,13,95,85,0],[96,13,96,70,0],[97,13,97,67,0],[98,13,98,81,0],[99,13,99,80,0],[100,13,100,84,0],[101,13,101,69,0],[102,13,102,65,0],[103,13,103,79,0],[104,13,104,78,0],[105,13,105,82,0],[106,13,106,67,0],[107,13,107,67,0],[108,13,108,81,0],[109,13,109,80,0],[110,13,110,84,0],[111,13,111,69,0],[112,13,112,87,0],[113,13,113,65,0],[114,13,114,79,0],[115,13,115,78,0],[116,13,116,82,0],[117,13,117,67,0],[118,13,118,65,0],[119,13,119,78,0],[120,13,120,74,0],[121,13,121,75,0],[122,13,122,82,0],[123,13,123,78,0],[124,13,124,79,0],[125,13,125,92,0],[126,13,126,82,0],[127,13,127,93,0],[128,13,128,58,0],[129,13,129,46,0],[130,13,130,47,0],[131,13,131,49,0],[132,13,132,48,0],[133,13,133,46,0],[134,13,134,48,0],[135,13,135,58,0],[136,13,136,46,0],[137,13,137,34,0],[141,13,141,48,0],[142,13,142,146,0],[143,13,143,77,0],[144,13,144,55,0],[145,13,145,72,0],[146,13,146,45,0],[147,13,147,60,0],[151,13,151,41,0],[152,13,152,141,0],[153,13,153,70,0],[154,13,154,41,0],[155,13,155,65,0],[156,13,156,38,0],[157,13,157,44,0],[161,13,161,48,0],[162,13,162,151,0],[163,13,163,75,0],[164,13,164,55,0],[165,13,165,71,0],[166,13,166,45,0],[167,13,167,50,0],[171,13,171,49,0],[172,13,172,152,0],[173,13,173,76,0],[174,13,174,57,0],[175,13,175,72,0],[176,13,176,46,0],[177,13,177,52,0],[181,13,181,47,0],[182,13,182,150,0],[183,13,183,74,0],[184,13,184,53,0],[185,13,185,70,0],[186,13,186,44,0],[187,13,187,48,0],[191,13,191,46,0],[192,13,192,149,0],[193,13,193,73,0],[194,13,194,51,0],[195,13,195,69,0],[196,13,196,43,0],[197,13,197,46,0],[201,13,201,54,0],[202,13,202,83,0],[203,13,203,92,0],[204,13,204,67,0],[205,13,205,78,0],[206,13,206,52,0],[210,13,210,58,0],[211,13,211,86,0],[212,13,212,96,0],[213,13,213,75,0],[214,13,214,82,0],[215,13,215,56,0],[219,13,219,54,0],[220,13,220,83,0],[221,13,221,92,0],[222,13,222,67,0],[223,13,223,78,0],[224,13,224,52,0],[228,13,228,53,0],[229,13,229,82,0],[230,13,230,91,0],[231,13,231,65,0],[232,13,232,77,0],[233,13,233,51,0],[237,13,237,57,0],[238,13,238,85,0],[239,13,239,95,0],[240,13,240,73,0],[241,13,241,81,0],[242,13,242,55,0],[246,13,246,56,0],[247,13,247,85,0],[248,13,248,94,0],[249,13,249,71,0],[250,13,250,80,0],[251,13,251,54,0],[255,13,255,55,0],[256,13,256,84,0],[257,13,257,93,0],[258,13,258,69,0],[259,13,259,79,0],[260,13,260,53,0],[264,13,264,59,0],[265,13,265,87,0],[266,13,266,97,0],[267,13,267,77,0],[268,13,268,83,0],[269,13,269,57,0],[273,13,273,57,0],[274,13,274,86,0],[275,13,275,95,0],[276,13,276,73,0],[277,13,277,81,0],[278,13,278,55,0],[282,13,282,56,0],[283,13,283,85,0],[284,13,284,94,0],[285,13,285,71,0],[286,13,286,80,0],[287,13,287,54,0],[291,13,291,60,0],[292,13,292,88,0],[293,13,293,98,0],[294,13,294,79,0],[295,13,295,84,0],[296,13,296,58,0],[300,13,300,55,0],[301,13,301,84,0],[302,13,302,93,0],[303,13,303,69,0],[304,13,304,79,0],[305,13,305,53,0],[309,13,309,157,0],[310,13,310,162,0],[311,13,311,89,0],[312,13,312,97,0],[313,13,313,77,0],[314,13,314,82,0],[315,13,315,57,0],[316,13,316,59,0],[317,13,317,75,0],[318,13,318,113,0],[322,13,322,156,0],[323,13,323,161,0],[324,13,324,88,0],[325,13,325,96,0],[326,13,326,75,0],[327,13,327,81,0],[328,13,328,56,0],[329,13,329,58,0],[330,13,330,74,0],[331,13,331,111,0],[335,13,335,160,0],[336,13,336,165,0],[337,13,337,91,0],[338,13,338,100,0],[339,13,339,83,0],[340,13,340,85,0],[341,13,341,60,0],[342,13,342,62,0],[343,13,343,78,0],[344,13,344,119,0],[348,13,348,158,0],[349,13,349,163,0],[350,13,350,90,0],[351,13,351,98,0],[352,13,352,79,0],[353,13,353,83,0],[354,13,354,58,0],[355,13,355,60,0],[356,13,356,76,0],[357,13,357,115,0],[361,13,361,157,0],[362,13,362,162,0],[363,13,363,89,0],[364,13,364,97,0],[365,13,365,77,0],[366,13,366,82,0],[367,13,367,57,0],[368,13,368,59,0],[369,13,369,75,0],[370,13,370,113,0],[374,13,374,161,0],[375,13,375,166,0],[376,13,376,92,0],[377,13,377,101,0],[378,13,378,85,0],[379,13,379,86,0],[380,13,380,61,0],[381,13,381,63,0],[382,13,382,79,0],[383,13,383,121,0],[387,13,387,159,0],[388,13,388,164,0],[389,13,389,91,0],[390,13,390,99,0],[391,13,391,81,0],[392,13,392,84,0],[393,13,393,59,0],[394,13,394,61,0],[395,13,395,77,0],[396,13,396,117,0],[400,13,400,163,0],[401,13,401,168,0],[402,13,402,94,0],[403,13,403,103,0],[404,13,404,89,0],[405,13,405,88,0],[406,13,406,63,0],[407,13,407,65,0],[408,13,408,81,0],[409,13,409,125,0],[413,13,413,160,0],[414,13,414,165,0],[415,13,415,92,0],[416,13,416,100,0],[417,13,417,83,0],[418,13,418,85,0],[419,13,419,60,0],[420,13,420,62,0],[421,13,421,78,0],[422,13,422,119,0],[426,13,426,158,0],[427,13,427,163,0],[428,13,428,90,0],[429,13,429,98,0],[430,13,430,79,0],[431,13,431,83,0],[432,13,432,58,0],[433,13,433,60,0],[434,13,434,76,0],[435,13,435,115,0],[439,13,439,159,0],[440,13,440,164,0],[441,13,441,91,0],[442,13,442,99,0],[443,13,443,81,0],[444,13,444,84,0],[445,13,445,59,0],[446,13,446,61,0],[447,13,447,77,0],[448,13,448,117,0],[452,13,452,162,0],[453,13,453,167,0],[454,13,454,93,0],[455,13,455,102,0],[456,13,456,87,0],[457,13,457,87,0],[458,13,458,62,0],[459,13,459,64,0],[460,13,460,80,0],[461,13,461,123,0],[465,13,465,160,0],[466,13,466,165,0],[467,13,467,91,0],[468,13,468,100,0],[469,13,469,83,0],[470,13,470,85,0],[471,13,471,60,0],[472,13,472,62,0],[473,13,473,78,0],[474,13,474,119,0],[478,13,478,156,0],[479,13,479,161,0],[480,13,480,88,0],[481,13,481,96,0],[482,13,482,75,0],[483,13,483,81,0],[484,13,484,56,0],[485,13,485,58,0],[486,13,486,74,0],[487,13,487,111,0],[491,13,491,157,0],[492,13,492,162,0],[493,13,493,89,0],[494,13,494,97,0],[495,13,495,77,0],[496,13,496,82,0],[497,13,497,57,0],[498,13,498,59,0],[499,13,499,75,0],[500,13,500,113,0],[504,13,504,57,0],[505,13,505,85,0],[506,13,506,95,0],[507,13,507,73,0],[508,13,508,81,0],[509,13,509,55,0],[513,13,513,53,0],[514,13,514,82,0],[515,13,515,91,0],[516,13,516,65,0],[517,13,517,77,0],[518,13,518,51,0],[522,13,522,54,0],[523,13,523,83,0],[524,13,524,92,0],[525,13,525,67,0],[526,13,526,78,0],[527,13,527,52,0],[531,13,531,46,0],[532,13,532,149,0],[533,13,533,73,0],[534,13,534,51,0],[535,13,535,69,0],[536,13,536,44,0],[537,13,537,46,0],[541,13,541,162,0],[542,13,542,167,0],[543,13,543,93,0],[544,13,544,102,0],[545,13,545,87,0],[546,13,546,87,0],[547,13,547,62,0],[548,13,548,64,0],[549,13,549,80,0],[550,13,550,123,0],[554,13,554,158,0],[555,13,555,163,0],[556,13,556,90,0],[557,13,557,98,0],[558,13,558,79,0],[559,13,559,83,0],[560,13,560,58,0],[561,13,561,60,0],[562,13,562,76,0],[563,13,563,115,0],[567,13,567,158,0],[568,13,568,163,0],[569,13,569,90,0],[570,13,570,98,0],[571,13,571,79,0],[572,13,572,83,0],[573,13,573,58,0],[574,13,574,60,0],[575,13,575,76,0],[576,13,576,115,0],[580,13,580,59,0],[581,13,581,87,0],[582,13,582,97,0],[583,13,583,77,0],[584,13,584,83,0],[585,13,585,57,0],[589,13,589,55,0],[590,13,590,84,0],[591,13,591,93,0],[592,13,592,69,0],[593,13,593,79,0],[594,13,594,53,0],[598,13,598,56,0],[599,13,599,85,0],[600,13,600,94,0],[601,13,601,71,0],[602,13,602,80,0],[603,13,603,54,0],[607,13,607,48,0],[608,13,608,151,0],[609,13,609,75,0],[610,13,610,55,0],[611,13,611,71,0],[612,13,612,46,0],[613,13,613,50,0],[617,13,617,79,0],[618,13,618,137,0],[619,13,619,101,0],[620,13,620,79,0],[621,13,621,63,0],[622,13,622,75,0],[623,13,623,50,0],[624,13,624,68,0],[625,13,625,99,0],[629,13,629,93,0],[630,13,634,54,0],[635,13,635,75,0],[636,13,636,83,0],[640,13,640,83,0],[641,13,641,86,0],[642,13,642,67,0],[643,13,643,119,0],[647,13,647,101,0],[648,13,648,95,0],[649,13,649,87,0],[650,13,650,137,0],[654,13,654,95,0],[655,13,655,92,0],[656,13,656,81,0],[657,13,657,131,0],[661,13,661,89,0],[662,13,662,71,0],[663,13,663,70,0],[664,13,664,74,0],[665,13,665,62,0],[666,13,666,61,0],[667,13,667,72,0],[668,13,668,68,0],[669,13,669,69,0],[670,13,670,77,0],[671,13,671,73,0],[672,13,672,74,0],[673,13,673,72,0],[674,13,674,84,0],[675,13,675,51,0],[676,13,676,71,0],[677,13,677,44,0],[681,13,681,56,0],[682,13,682,85,0],[683,13,683,71,0],[684,13,684,79,0],[685,13,685,54,0],[686,13,686,55,0],[687,13,687,57,0],[688,13,688,153,0],[692,13,692,55,0],[693,13,693,84,0],[694,13,694,69,0],[695,13,695,78,0],[696,13,696,53,0],[697,13,697,54,0],[698,13,698,55,0],[699,13,699,151,0],[703,13,703,59,0],[704,13,704,87,0],[705,13,705,77,0],[706,13,706,82,0],[707,13,707,57,0],[708,13,708,58,0],[709,13,709,63,0],[710,13,710,159,0],[714,13,714,73,0],[715,13,715,145,0],[716,13,716,73,0],[717,13,717,85,0],[718,13,718,53,0],[719,13,719,71,0],[720,13,720,44,0],[721,13,721,47,0],[722,13,722,62,0],[723,13,723,89,0],[727,13,727,90,0],[728,13,728,73,0],[729,13,729,72,0],[730,13,730,76,0],[731,13,731,64,0],[732,13,732,63,0],[733,13,733,74,0],[734,13,734,70,0],[735,13,735,71,0],[736,13,736,79,0],[737,13,737,75,0],[738,13,738,76,0],[739,13,739,75,0],[740,13,740,85,0],[741,13,741,53,0],[742,13,742,72,0],[743,13,743,45,0],[747,13,747,57,0],[748,13,748,86,0],[749,13,749,73,0],[750,13,750,80,0],[751,13,751,55,0],[752,13,752,56,0],[753,13,753,58,0],[754,13,754,155,0],[758,13,758,56,0],[759,13,759,85,0],[760,13,760,71,0],[761,13,761,79,0],[762,13,762,54,0],[763,13,763,55,0],[764,13,764,56,0],[765,13,765,153,0],[769,13,769,60,0],[770,13,770,88,0],[771,13,771,79,0],[772,13,772,83,0],[773,13,773,58,0],[774,13,774,59,0],[775,13,775,64,0],[776,13,776,161,0],[780,13,780,74,0],[781,13,781,146,0],[782,13,782,74,0],[783,13,783,86,0],[784,13,784,55,0],[785,13,785,72,0],[786,13,786,45,0],[787,13,787,49,0],[788,13,788,63,0],[789,13,789,91,0],[793,13,793,92,0],[794,13,794,77,0],[795,13,795,76,0],[796,13,796,80,0],[797,13,797,68,0],[798,13,798,67,0],[799,13,799,78,0],[800,13,800,74,0],[801,13,801,75,0],[802,13,802,83,0],[803,13,803,79,0],[804,13,804,80,0],[805,13,805,77,0],[806,13,806,87,0],[807,13,807,57,0],[808,13,808,74,0],[809,13,809,47,0],[813,13,813,59,0],[814,13,814,88,0],[815,13,815,77,0],[816,13,816,82,0],[817,13,817,57,0],[818,13,818,58,0],[819,13,819,60,0],[820,13,820,159,0],[824,13,824,58,0],[825,13,825,87,0],[826,13,826,75,0],[827,13,827,81,0],[828,13,828,56,0],[829,13,829,57,0],[830,13,830,58,0],[831,13,831,157,0],[835,13,835,62,0],[836,13,836,90,0],[837,13,837,83,0],[838,13,838,85,0],[839,13,839,60,0],[840,13,840,61,0],[841,13,841,66,0],[842,13,842,165,0],[846,13,846,76,0],[847,13,847,148,0],[848,13,848,76,0],[849,13,849,88,0],[850,13,850,59,0],[851,13,851,74,0],[852,13,852,48,0],[853,13,853,53,0],[854,13,854,65,0],[855,13,855,95,0],[859,13,859,91,0],[860,13,860,75,0],[861,13,861,74,0],[862,13,862,78,0],[863,13,863,66,0],[864,13,864,65,0],[865,13,865,76,0],[866,13,866,72,0],[867,13,867,73,0],[868,13,868,81,0],[869,13,869,77,0],[870,13,870,78,0],[871,13,871,76,0],[872,13,872,86,0],[873,13,873,55,0],[874,13,874,73,0],[875,13,875,46,0],[879,13,879,58,0],[880,13,880,87,0],[881,13,881,75,0],[882,13,882,81,0],[883,13,883,56,0],[884,13,884,57,0],[885,13,885,59,0],[886,13,886,157,0],[890,13,890,57,0],[891,13,891,86,0],[892,13,892,73,0],[893,13,893,80,0],[894,13,894,55,0],[895,13,895,56,0],[896,13,896,57,0],[897,13,897,157,0],[901,13,901,61,0],[902,13,902,89,0],[903,13,903,81,0],[904,13,904,84,0],[905,13,905,59,0],[906,13,906,60,0],[907,13,907,65,0],[908,13,908,163,0],[912,13,912,75,0],[913,13,913,147,0],[914,13,914,75,0],[915,13,915,87,0],[916,13,916,57,0],[917,13,917,73,0],[918,13,918,46,0],[919,13,919,51,0],[920,13,920,64,0],[921,13,921,93,0],[925,13,925,89,0],[926,13,926,71,0],[927,13,927,70,0],[928,13,928,74,0],[929,13,929,62,0],[930,13,930,61,0],[931,13,931,72,0],[932,13,932,68,0],[933,13,933,69,0],[934,13,934,77,0],[935,13,935,73,0],[936,13,936,74,0],[937,13,937,75,0],[938,13,938,84,0],[939,13,939,51,0],[940,13,940,71,0],[941,13,941,44,0],[945,13,945,56,0],[946,13,946,85,0],[947,13,947,71,0],[948,13,948,79,0],[949,13,949,54,0],[950,13,950,55,0],[951,13,951,57,0],[952,13,952,153,0],[956,13,956,55,0],[957,13,957,84,0],[958,13,958,69,0],[959,13,959,78,0],[960,13,960,53,0],[961,13,961,54,0],[962,13,962,55,0],[963,13,963,151,0],[967,13,967,59,0],[968,13,968,87,0],[969,13,969,77,0],[970,13,970,82,0],[971,13,971,57,0],[972,13,972,58,0],[973,13,973,63,0],[974,13,974,159,0],[978,13,978,73,0],[979,13,979,145,0],[980,13,980,73,0],[981,13,981,85,0],[982,13,982,53,0],[983,13,983,71,0],[984,13,984,44,0],[985,13,985,47,0],[986,13,986,62,0],[987,13,987,89,0],[991,13,991,91,0],[992,13,992,75,0],[993,13,993,74,0],[994,13,994,78,0],[995,13,995,66,0],[996,13,996,65,0],[997,13,997,76,0],[998,13,998,72,0],[999,13,999,73,0],[1000,13,1000,81,0],[1001,13,1001,77,0],[1002,13,1002,77,0],[1003,13,1003,77,0],[1004,13,1004,86,0],[1005,13,1005,55,0],[1006,13,1006,73,0],[1007,13,1007,46,0],[1011,13,1011,58,0],[1012,13,1012,87,0],[1013,13,1013,75,0],[1014,13,1014,81,0],[1015,13,1015,56,0],[1016,13,1016,57,0],[1017,13,1017,59,0],[1018,13,1018,157,0],[1022,13,1022,57,0],[1023,13,1023,86,0],[1024,13,1024,73,0],[1025,13,1025,80,0],[1026,13,1026,55,0],[1027,13,1027,56,0],[1028,13,1028,57,0],[1029,13,1029,155,0],[1033,13,1033,61,0],[1034,13,1034,89,0],[1035,13,1035,81,0],[1036,13,1036,84,0],[1037,13,1037,59,0],[1038,13,1038,60,0],[1039,13,1039,65,0],[1040,13,1040,163,0],[1044,13,1044,75,0],[1045,13,1045,147,0],[1046,13,1046,75,0],[1047,13,1047,87,0],[1048,13,1048,57,0],[1049,13,1049,73,0],[1050,13,1050,46,0],[1051,13,1051,51,0],[1052,13,1052,64,0],[1053,13,1053,93,0],[1057,13,1057,60,0],[1058,13,1058,95,0],[1059,13,1059,73,0],[1060,13,1060,74,0],[1061,13,1061,76,0],[1062,13,1062,75,0],[1063,13,1063,73,0],[1064,13,1064,75,0],[1065,13,1065,73,0],[1066,13,1066,85,0],[1067,13,1067,96,0],[1068,13,1068,75,0],[1069,13,1069,84,0],[1070,13,1070,56,0],[1074,13,1074,89,0],[1075,13,1075,71,0],[1076,13,1076,70,0],[1077,13,1077,74,0],[1078,13,1078,62,0],[1079,13,1079,61,0],[1080,13,1080,72,0],[1081,13,1081,68,0],[1082,13,1082,69,0],[1083,13,1083,77,0],[1084,13,1084,73,0],[1085,13,1085,74,0],[1086,13,1086,75,0],[1087,13,1087,84,0],[1088,13,1088,51,0],[1089,13,1089,71,0],[1090,13,1090,44,0],[1094,13,1094,56,0],[1095,13,1095,85,0],[1096,13,1096,71,0],[1097,13,1097,79,0],[1098,13,1098,54,0],[1099,13,1099,55,0],[1100,13,1100,57,0],[1101,13,1101,153,0],[1105,13,1105,55,0],[1106,13,1106,84,0],[1107,13,1107,69,0],[1108,13,1108,78,0],[1109,13,1109,53,0],[1110,13,1110,54,0],[1111,13,1111,55,0],[1112,13,1112,151,0],[1116,13,1116,59,0],[1117,13,1117,87,0],[1118,13,1118,77,0],[1119,13,1119,82,0],[1120,13,1120,57,0],[1121,13,1121,58,0],[1122,13,1122,63,0],[1123,13,1123,159,0],[1127,13,1127,73,0],[1128,13,1128,145,0],[1129,13,1129,73,0],[1130,13,1130,85,0],[1131,13,1131,53,0],[1132,13,1132,71,0],[1133,13,1133,44,0],[1134,13,1134,47,0],[1135,13,1135,62,0],[1136,13,1136,89,0],[1140,13,1140,46,0],[1141,13,1141,149,0],[1142,13,1142,73,0],[1143,13,1143,51,0],[1144,13,1144,69,0],[1145,13,1145,44,0],[1146,13,1146,46,0],[1150,13,1150,57,0],[1151,13,1151,85,0],[1152,13,1152,95,0],[1153,13,1153,73,0],[1154,13,1154,81,0],[1155,13,1155,55,0],[1159,13,1159,53,0],[1160,13,1160,82,0],[1161,13,1161,91,0],[1162,13,1162,65,0],[1163,13,1163,77,0],[1164,13,1164,51,0],[1168,13,1168,54,0],[1169,13,1169,83,0],[1170,13,1170,92,0],[1171,13,1171,67,0],[1172,13,1172,78,0],[1173,13,1173,52,0],[1177,13,1177,160,0],[1178,13,1178,165,0],[1179,13,1179,91,0],[1180,13,1180,100,0],[1181,13,1181,83,0],[1182,13,1182,85,0],[1183,13,1183,60,0],[1184,13,1184,62,0],[1185,13,1185,78,0],[1186,13,1186,121,0],[1190,13,1190,156,0],[1191,13,1191,161,0],[1192,13,1192,88,0],[1193,13,1193,96,0],[1194,13,1194,75,0],[1195,13,1195,81,0],[1196,13,1196,56,0],[1197,13,1197,58,0],[1198,13,1198,74,0],[1199,13,1199,113,0],[1203,13,1203,157,0],[1204,13,1204,162,0],[1205,13,1205,89,0],[1206,13,1206,97,0],[1207,13,1207,77,0],[1208,13,1208,82,0],[1209,13,1209,57,0],[1210,13,1210,59,0],[1211,13,1211,75,0],[1212,13,1212,115,0],[1216,13,1216,174,0],[1217,13,1217,101,0],[1218,13,1218,103,0],[1219,13,1219,96,0],[1220,13,1220,70,0],[1221,13,1221,101,0],[1222,13,1222,87,0],[1223,13,1223,139,0],[1227,13,1227,60,0],[1228,13,1228,162,0],[1229,13,1229,89,0],[1230,13,1230,79,0],[1231,13,1231,84,0],[1232,13,1232,58,0],[1233,13,1233,73,0],[1234,13,1234,75,0],[1238,13,1238,83,0],[1239,13,1239,86,0],[1240,13,1240,67,0],[1241,13,1241,119,0],[1245,13,1245,74,0],[1246,13,1246,74,0],[1247,13,1247,65,0],[1248,13,1248,63,0],[1249,13,1249,75,0],[1250,13,1250,61,0],[1251,13,1251,55,0],[1252,13,1252,44,0],[1253,13,1253,51,0],[1254,13,1254,72,0],[1255,13,1255,44,0],[1256,13,1256,44,0],[1257,13,1257,78,0],[1258,13,1258,62,0],[1259,13,1259,50,0],[1260,13,1260,46,0],[1261,13,1261,51,0],[1262,13,1262,47,0],[1263,13,1263,53,0],[1264,13,1264,49,0],[1265,13,1265,52,0],[1266,13,1266,48,0],[1267,13,1267,50,0],[1268,13,1268,46,0],[1269,13,1269,52,0],[1270,13,1270,48,0],[1271,13,1271,62,0],[1272,13,1272,50,0],[1273,13,1273,46,0],[1274,13,1274,38,0],[1275,13,1275,34,0],[1277,9,1277,10,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\AddIngredientsPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    /// Add ingredients page partial class.
+    /// &lt;/summary&gt;
+    public partial class AddIngredientsPage : Form
+    {
+        private IngredientsPage ingredientsPage;
+        private ShoppingListPage shoppingListPage;
+
+        /// &lt;summary&gt;
+        /// Initializes the AddIngreedients page with the corresponding ingredients page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientsPage&quot;&gt;&lt;/param&gt;
+        public AddIngredientsPage(IngredientsPage ingredientsPage)
+        {
+            InitializeComponent();
+
+            this.ingredientsPage = ingredientsPage;
+            this.shoppingListPage = null;
+            this.duplicateIngredientError.Visible = false;
+        }
+
+        /// &lt;summary&gt;
+        /// Initializes the AddIngreedients page with the corresponding ingredients page.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientsPage&quot;&gt;&lt;/param&gt;
+        public AddIngredientsPage(ShoppingListPage shoppingListPage)
+        {
+            InitializeComponent();
+
+            this.shoppingListPage = shoppingListPage;
+            this.ingredientsPage = null;
+            this.duplicateIngredientError.Visible = false;
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            string name = this.ingredientNameTextBox.Text;
+            string quantityString = this.quantityTextBox.Text;
+            string measure = this.measurementComboBox.Text;
+            int number = 0;
+
+            this.submitCheck(name, quantityString, measure, number);
+
+        }
+
+        private void submitCheck(string name, string quantityString, string measure, int number)
+        {
+            try
+            {
+                if (isTextEmpty(name, quantityString, measure))
+                {
+                    this.errorTextLabel.Visible = true;
+                }
+                else if (!int.TryParse(quantityString, out number))
+                {
+                    this.errorQuantityTextLabel.Visible = true;
+                }
+                else
+                {
+                    int quantity = Convert.ToInt32(quantityString);
+
+                    Ingredient ingredient = new Ingredient(ActiveUser.username, name, quantity, 0, measure);
+
+
+                    if (this.ingredientsPage != null)
+                    {
+                        if(IngredientDAL.getIngredients(name).Count &gt; 0)
+                        {
+                            this.duplicateIngredientError.Text = @&quot;This ingredient &quot; + &quot;&#39;&quot; + name + &quot;&#39;&quot; + @&quot; already exists in pantry. Update quantity instead.&quot;;
+                            this.duplicateIngredientError.Visible = true;
+                            this.errorQuantityTextLabel.Visible = false;
+                        }
+                        else
+                        {
+                            this.addIngredient(ingredient);
+
+                            this.Close();
+                            this.ingredientsPage.Show();
+                        }
+                        
+                    }
+                    if (this.shoppingListPage != null)
+                    {
+                        if (ShoppingListDAL.getIngredients(name, Connection.ConnectionString).Count &gt; 0)
+                        {
+                            this.duplicateIngredientError.Text = @&quot;This ingredient &quot; + &quot;&#39;&quot; + name + &quot;&#39;&quot; + @&quot; already exists in shopping list. Update quantity.&quot;;
+                            this.duplicateIngredientError.Visible = true;
+                            this.errorQuantityTextLabel.Visible = false;
+                        }
+                        else
+                        {
+                            this.addIngredientShoppingList(ingredient);
+
+                            this.Close();
+                            this.shoppingListPage.Show();
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                this.errorTextLabel.Text = &quot;The connection to the server could not be made&quot;;
+                this.errorTextLabel.Visible = true;
+            }
+            
+        }
+
+        private static bool isTextEmpty(string name, string quantityString, string measure)
+        {
+            return name == null || name.Equals(&quot;&quot;) || quantityString == null || quantityString.Equals(&quot;&quot;) || measure.Equals(&quot;&quot;);
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            var ing = new IngredientsPage();
+            ing.Show();
+        }
+
+        private void addIngredient(Ingredient ingredient)
+        {
+            IngredientDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+
+            this.ingredientsPage.UpdateIngredientsGridView();
+        }
+
+        private void addIngredientShoppingList(Ingredient ingredient)
+        {
+            ShoppingListDAL.addIngredient(ingredient.name, (int)ingredient.quantity, ingredient.measurement, Connection.ConnectionString);
+
+            this.shoppingListPage.UpdateIngredientsGridView();
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,9,20,67,0],[21,9,21,10,0],[22,13,22,35,0],[24,13,24,52,0],[25,13,25,42,0],[26,13,26,59,0],[27,9,27,10,0],[33,9,33,69,0],[34,9,34,10,0],[35,13,35,35,0],[37,13,37,54,0],[38,13,38,41,0],[39,13,39,59,0],[40,9,40,10,0],[43,9,43,10,0],[44,13,44,59,0],[45,13,45,63,0],[46,13,46,60,0],[47,13,47,28,0],[49,13,49,69,0],[51,9,51,10,0],[54,9,54,10,0],[56,13,56,14,0],[57,17,57,64,0],[58,17,58,18,0],[59,21,59,56,0],[60,17,60,18,0],[61,22,61,68,0],[62,17,62,18,0],[63,21,63,64,0],[64,17,64,18,0],[66,17,66,18,0],[67,21,67,68,0],[69,21,69,109,0],[72,21,72,54,0],[73,21,73,22,0],[74,25,74,73,0],[75,25,75,26,0],[76,29,76,162,0],[77,29,77,74,0],[78,29,78,73,0],[79,25,79,26,0],[81,25,81,26,0],[82,29,82,60,0],[84,29,84,42,0],[85,29,85,57,0],[86,25,86,26,0],[88,21,88,22,0],[89,21,89,55,0],[90,21,90,22,0],[91,25,91,105,0],[92,25,92,26,0],[93,29,93,161,0],[94,29,94,74,0],[95,29,95,73,0],[96,25,96,26,0],[98,25,98,26,0],[99,29,99,72,0],[101,29,101,42,0],[102,29,102,58,0],[103,25,103,26,0],[104,21,104,22,0],[106,17,106,18,0],[107,13,107,14,0],[108,13,108,33,0],[109,13,109,14,0],[110,17,110,93,0],[111,17,111,52,0],[112,13,112,14,0],[114,9,114,10,0],[117,9,117,10,0],[118,13,118,129,0],[119,9,119,10,0],[122,9,122,10,0],[123,13,123,26,0],[124,13,124,45,0],[125,13,125,24,0],[126,9,126,10,0],[129,9,129,10,0],[130,13,130,137,0],[132,13,132,62,0],[133,9,133,10,0],[136,9,136,10,0],[137,13,137,139,0],[139,13,139,63,0],[140,9,140,10,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\Homepage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using RecipePlannerFinalDemoAdditions;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+
+namespace RecipePlannerDesktopApplication;
+
+/// &lt;summary&gt;
+///     The Homepage partial class.
+/// &lt;/summary&gt;
+public partial class Homepage : Form
+{
+    #region Data members
+
+    private Recipe selectedRecipe;
+    private int allPage = 1;
+    private int availablePage = 1;
+    private int filterPage = 1;
+    private bool filtered;
+    private int maxFilterPage;
+    private readonly int maxAllPage;
+    private readonly int maxAvailablePage;
+    private readonly int pageSize = 10;
+    private readonly List&lt;Recipe&gt; allPageOne;
+    private readonly List&lt;Recipe&gt; availablePageOne;
+    private List&lt;Recipe&gt; filteredRecipes;
+
+    private readonly List&lt;string&gt; searchTags;
+
+    #endregion
+
+    #region Properties
+
+    /// &lt;summary&gt;
+    ///     Gets or sets the list of Recipes for the Homepage.
+    /// &lt;/summary&gt;
+    public List&lt;Recipe&gt; Recipes { get; set; }
+
+    #endregion
+
+    #region Constructors
+
+    /// &lt;summary&gt;
+    ///     Initializes a Homepage for the recipes.
+    /// &lt;/summary&gt;
+    public Homepage()
+    {
+        this.InitializeComponent();
+        this.Recipes = new List&lt;Recipe&gt;();
+        this.searchTags = new List&lt;string&gt;();
+        var recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        var availableRecipes = this.getAvailableRecipes();
+        this.maxAllPage = (int) Math.Ceiling((double) recipes.Count / this.pageSize);
+        this.maxAvailablePage = (int) Math.Ceiling((double) availableRecipes.Count / this.pageSize);
+        var all = RecipeDAL.getRecipes(Connection.ConnectionString);
+        all.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+        this.allPageOne = all
+            .Skip((this.allPage - 1) * this.pageSize)
+            .Take(this.pageSize)
+            .ToList();
+        var available = this.getAvailableRecipes();
+        available.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+        this.availablePageOne = available
+            .Skip((this.allPage - 1) * this.pageSize)
+            .Take(this.pageSize)
+            .ToList();
+        this.availableCheckbox.Checked = true;
+        this.filteredRecipes = new List&lt;Recipe&gt;();
+    }
+
+    #endregion
+
+    #region Methods
+
+    /// &lt;summary&gt;
+    ///     Gets a selected recipe from the recipes list view in the homepage.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;a selected recipe.&lt;/returns&gt;
+    public Recipe GetSelectedRecipe()
+    {
+        return this.selectedRecipe;
+    }
+
+    /// &lt;summary&gt;
+    ///     Compares the name of the recipes so that it can be sorted alphabetically.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;recipe1&quot;&gt;The recipe1.&lt;/param&gt;
+    /// &lt;param name=&quot;recipe2&quot;&gt;The recipe2.&lt;/param&gt;
+    /// &lt;returns&gt; 0 or 1 based on which recipe name comes first&lt;/returns&gt;
+    private int CompareRecipesByName(Recipe recipe1, Recipe recipe2)
+    {
+        return recipe1.Name.CompareTo(recipe2.Name);
+    }
+
+    private void logoutButton_Click(object sender, EventArgs e)
+    {
+        Hide();
+        var login = new LoginPage();
+        login.Show();
+    }
+
+    private void viewPantryButton_Click(object sender, EventArgs e)
+    {
+        Hide();
+
+        var ingredientsPage = new IngredientsPage();
+
+        ingredientsPage.Show();
+    }
+
+    private void viewAllRecipes()
+    {
+        try
+        {
+            foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        catch (Exception ex)
+        {
+            this.noRecipesLabel.Text = &quot;The connection to the server could not be made&quot;;
+            this.noRecipesLabel.Visible = true;
+        }
+    }
+
+    private void showAvailableRecipes()
+    {
+        try
+        {
+            var availableRecipes = this.getAvailableRecipes();
+
+            if (availableRecipes.Count &gt; 0)
+            {
+                this.noRecipesLabel.Visible = false;
+                foreach (var availableRecipe in availableRecipes)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem
+                        {Text = availableRecipe.Name, Tag = availableRecipe});
+                }
+            }
+            else
+            {
+                this.noRecipesLabel.Visible = true;
+            }
+
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        catch (Exception ex)
+        {
+            this.noRecipesLabel.Text = &quot;The connection to the server could not be made&quot;;
+            this.noRecipesLabel.Visible = true;
+        }
+    }
+
+    private List&lt;Recipe&gt; getAvailableRecipes()
+    {
+        var availableRecipes = new List&lt;Recipe&gt;();
+        foreach (var recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+        {
+            var add = true;
+            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                {
+                    var ing = IngredientDAL.getIngredients(ingredient.IngredientName);
+                    if (ing != null &amp;&amp; ing.Count &gt; 0)
+                    {
+                        if (ing[0].quantity &lt; ingredient.Quantity)
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                    }
+                }
+            }
+
+            if (add)
+            {
+                availableRecipes.Add(recipe);
+            }
+        }
+
+        return availableRecipes;
+    }
+
+    private void recipeListView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (this.recipeListView.SelectedItems.Count &gt; 0)
+        {
+            this.selectedRecipe = (Recipe) this.recipeListView.SelectedItems[0].Tag;
+
+            Hide();
+
+            var detailsPage = new RecipeDetailsPage(this);
+            detailsPage.Show();
+        }
+    }
+
+    private void showAllRecipesButton_Click(object sender, EventArgs e)
+    {
+        this.availableCheckbox.Checked = false;
+    }
+
+    private void showAvailableRecipesCheck_Changed(object sender, EventArgs e)
+    {
+        if (this.availableCheckbox.Checked)
+        {
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in this.availablePageOne)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.availablePage = 1;
+            this.pageCountLabel.Text = this.availablePage.ToString();
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        else if (!this.availableCheckbox.Checked)
+        {
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in this.allPageOne)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.allPage = 1;
+            this.pageCountLabel.Text = this.allPage.ToString();
+            this.noRecipesLabel.Visible = false;
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        else
+        {
+            this.recipeListView.Clear();
+        }
+    }
+
+    /// &lt;summary&gt;
+    ///     Handles the Click event of the nextButton control.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;sender&quot;&gt;The source of the event.&lt;/param&gt;
+    /// &lt;param name=&quot;e&quot;&gt;The &lt;see cref=&quot;System.EventArgs&quot; /&gt; instance containing the event data.&lt;/param&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    private void nextButton_Click(object sender, EventArgs e)
+    {
+        if (this.filtered)
+        {
+            if (this.filterPage != this.maxFilterPage)
+            {
+                this.filterPage++;
+
+                this.filteredRecipes.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+                var filteredRecipesOnPage = this.filteredRecipes
+                    .Skip((this.filterPage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in filteredRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+                }
+
+                this.pageCountLabel.Text = this.filterPage.ToString();
+            }
+        }
+        else if (!this.availableCheckbox.Checked)
+        {
+            if (this.allPage != this.maxAllPage)
+            {
+                this.allPage++;
+                var all = RecipeDAL.getRecipes(Connection.ConnectionString);
+                all.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+                List&lt;Recipe&gt; AllRecipesOnPage = all
+                    .Skip((this.allPage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in AllRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+                }
+
+                this.pageCountLabel.Text = this.allPage.ToString();
+            }
+        }
+        else
+        {
+            if (this.availablePage != this.maxAvailablePage)
+            {
+                this.availablePage++;
+                var available = this.getAvailableRecipes();
+                available.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+                var AvailableRecipesOnPage = available
+                    .Skip((this.availablePage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in AvailableRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+                }
+
+                this.pageCountLabel.Text = this.availablePage.ToString();
+            }
+        }
+    }
+
+    private void lastPageButton_Click(object sender, EventArgs e)
+    {
+        if (this.filtered)
+        {
+            this.filterPage = this.maxFilterPage;
+
+            this.filteredRecipes.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+            var filteredRecipesOnPage = this.filteredRecipes
+                .Skip((this.filterPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in filteredRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.pageCountLabel.Text = this.filterPage.ToString();
+        }
+        else if (!this.availableCheckbox.Checked)
+        {
+            this.allPage = this.maxAllPage;
+            var all = RecipeDAL.getRecipes(Connection.ConnectionString);
+            all.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+            List&lt;Recipe&gt; AllRecipesOnPage = all
+                .Skip((this.allPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in AllRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.pageCountLabel.Text = this.allPage.ToString();
+        }
+        else
+        {
+            this.availablePage = this.maxAvailablePage;
+            var available = this.getAvailableRecipes();
+            available.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+            var AvailableRecipesOnPage = available
+                .Skip((this.availablePage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in AvailableRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.pageCountLabel.Text = this.availablePage.ToString();
+        }
+    }
+
+    private void previousButton_Click(object sender, EventArgs e)
+    {
+        if (this.filtered)
+        {
+            if (this.filterPage != 1)
+            {
+                this.filterPage--;
+
+                this.filteredRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+                var filteredRecipesOnPage = this.filteredRecipes
+                    .Skip((this.filterPage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in filteredRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+                }
+
+                this.pageCountLabel.Text = this.filterPage.ToString();
+            }
+        }
+        else if (!this.availableCheckbox.Checked)
+        {
+            if (this.allPage != 1)
+            {
+                this.allPage--;
+                var all = RecipeDAL.getRecipes(Connection.ConnectionString);
+                all.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+                List&lt;Recipe&gt; AllRecipesOnPage = all
+                    .Skip((this.allPage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in AllRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+                }
+
+                this.pageCountLabel.Text = this.allPage.ToString();
+            }
+        }
+        else
+        {
+            if (this.availablePage != 1)
+            {
+                this.availablePage--;
+                var available = this.getAvailableRecipes();
+                available.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+                var AvailableRecipesOnPage = available
+                    .Skip((this.availablePage - 1) * this.pageSize)
+                    .Take(this.pageSize)
+                    .ToList();
+                this.recipeListView.Items.Clear();
+                foreach (var recipe in AvailableRecipesOnPage)
+                {
+                    this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+                }
+
+                this.pageCountLabel.Text = this.availablePage.ToString();
+            }
+        }
+    }
+
+    private void beginningButton_Click(object sender, EventArgs e)
+    {
+        if (this.filtered)
+        {
+            this.filterPage = 1;
+
+            this.filteredRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+            var filteredRecipesOnPage = this.filteredRecipes
+                .Skip((this.filterPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in filteredRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem { Text = recipe.Name, Tag = recipe });
+            }
+
+            this.pageCountLabel.Text = this.filterPage.ToString();
+        }
+        else if (!this.availableCheckbox.Checked)
+        {
+            this.allPage = 1;
+            var all = RecipeDAL.getRecipes(Connection.ConnectionString);
+            all.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+            List&lt;Recipe&gt; AllRecipesOnPage = all
+                .Skip((this.allPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in AllRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.pageCountLabel.Text = this.allPage.ToString();
+        }
+        else
+        {
+            this.availablePage = 1;
+            var available = this.getAvailableRecipes();
+            available.Sort((Comparison&lt;Recipe&gt;) this.CompareRecipesByName);
+            var AvailableRecipesOnPage = available
+                .Skip((this.availablePage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            this.recipeListView.Items.Clear();
+            foreach (var recipe in AvailableRecipesOnPage)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.pageCountLabel.Text = this.availablePage.ToString();
+        }
+    }
+
+    private void plannerMenuButton_Click(object sender, EventArgs e)
+    {
+        this.plannerContextMenuStrip.Show(this.plannerMenuButton, 0, this.plannerMenuButton.Height);
+    }
+
+    private void viewMealPlanToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        Hide();
+
+        var mealPlanPage = new PlannedMealsPage();
+
+        mealPlanPage.Show();
+    }
+
+    private void filterButton_Click(object sender, EventArgs e)
+    {
+        var tag = this.filterTagTxt.Text;
+
+        if (!string.IsNullOrEmpty(tag) &amp;&amp; !this.searchTags.Contains(tag))
+        {
+            this.filterTagTxt.Text = &quot;&quot;;
+            this.searchTags.Add(tag);
+            this.tagsCmb.Items.Add(tag);
+            this.tagsCmb.SelectedIndex = this.tagsCmb.Items.Count - 1;
+            this.filterPage = 1;
+            this.filtered = true;
+            this.getFilteredRecipes(this.searchTags);
+        }
+    }
+
+    private void getFilteredRecipes(List&lt;string&gt; tagFilters)
+    {
+        var recipes = new List&lt;Recipe&gt;();
+        var filteredRecipes = new List&lt;Recipe&gt;();
+        this.pageCountLabel.Text = this.filterPage.ToString();
+        if (!this.availableCheckbox.Checked)
+        {
+            recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+        }
+        else
+        {
+            recipes = this.getAvailableRecipes();
+        }
+
+        try
+        {
+            foreach (var recipe in recipes)
+            {
+                var matchesAllTags = true;
+                foreach (var tagFilter in tagFilters)
+                {
+                    var matchesTag = false;
+                    foreach (var tag in recipe.Tags)
+                    {
+                        if (tagFilter.ToLower() == tag.ToLower())
+                        {
+                            matchesTag = true;
+                        }
+                    }
+
+                    if (matchesTag == false)
+                    {
+                        matchesAllTags = false;
+                        break;
+                    }
+                }
+
+                if (matchesAllTags)
+                {
+                    filteredRecipes.Add(recipe);
+                }
+            }
+
+            this.recipeListView.Clear();
+
+            if (filteredRecipes.Count == 0)
+            {
+                this.noRecipesLabel.Visible = true;
+            }
+            else
+            {
+                this.noRecipesLabel.Visible = false;
+            }
+
+            this.filteredRecipes = filteredRecipes;
+            this.filteredRecipes.Sort((Comparison&lt;Recipe&gt;)this.CompareRecipesByName);
+            this.maxFilterPage = (int) Math.Ceiling((double) this.filteredRecipes.Count / this.pageSize);
+            var filterPageOne = this.filteredRecipes
+                .Skip((this.filterPage - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            foreach (var recipe in filterPageOne)
+            {
+                this.recipeListView.Items.Add(new ListViewItem {Text = recipe.Name, Tag = recipe});
+            }
+
+            this.recipeListView.View = View.List;
+            this.recipeListView.Sorting = SortOrder.Ascending;
+        }
+        catch (Exception ex)
+        {
+            this.noRecipesLabel.Text = &quot;The connection to the server could not be made&quot;;
+            this.noRecipesLabel.Visible = true;
+        }
+    }
+
+    private void deleteFilterBtn_Click(object sender, EventArgs e)
+    {
+        if (this.tagsCmb.SelectedIndex != -1)
+        {
+            this.searchTags.RemoveAt(this.tagsCmb.SelectedIndex);
+            this.tagsCmb.Items.RemoveAt(this.tagsCmb.SelectedIndex);
+            this.tagsCmb.Text = &quot;&quot;;
+
+            if (this.searchTags.Count == 0)
+            {
+                this.showAvailableRecipesCheck_Changed(sender, e);
+            }
+            else
+            {
+                this.getFilteredRecipes(this.searchTags);
+            }
+        }
+    }
+
+    private void clearFiltersBtn_Click(object sender, EventArgs e)
+    {
+        this.filterTagTxt.Text = &quot;&quot;;
+        this.filtered = false;
+        this.tagsCmb.Items.Clear();
+        this.tagsCmb.Text = &quot;&quot;;
+
+        this.searchTags.Clear();
+
+        this.getFilteredRecipes(this.searchTags);
+
+        this.showAvailableRecipesCheck_Changed(sender, e);
+    }
+
+    #endregion
+
+    private void viewShoppingListToolStripMenuItem_Click_1(object sender, EventArgs e)
+    {
+        Hide();
+
+        var shoppingListPage = new ShoppingListPage();
+
+        shoppingListPage.Show();
+    }
+
+    private void addRecipeButton_Click(object sender, EventArgs e)
+    {
+        var recipeSummary = new RecipeSummary();
+        this.Hide();
+        recipeSummary.Show();
+    }
+
+    private void viewSharedRecipesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var sharedPage = new SharedRecipes();
+
+        this.Hide();
+        
+        sharedPage.Show();
+    }
+
+    private void viewPantryToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var pantry = new IngredientsPage();
+
+        this.Hide();
+
+        pantry.Show();
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,5,16,29,0],[17,5,17,35,0],[18,5,18,32,0],[23,5,23,40,0],[37,35,37,39,0],[37,40,37,44,0],[46,5,46,22,0],[47,5,47,6,0],[48,9,48,36,0],[49,9,49,43,0],[50,9,50,46,0],[51,9,51,73,0],[52,9,52,59,0],[53,9,53,86,0],[54,9,54,101,0],[55,9,55,69,0],[56,9,56,66,0],[57,9,60,23,0],[61,9,61,52,0],[62,9,62,72,0],[63,9,66,23,0],[67,9,67,47,0],[68,9,68,51,0],[69,5,69,6,0],[80,5,80,6,0],[81,9,81,36,0],[82,5,82,6,0],[91,5,91,6,0],[92,9,92,53,0],[93,5,93,6,0],[96,5,96,6,0],[97,9,97,16,0],[98,9,98,37,0],[99,9,99,22,0],[100,5,100,6,0],[103,5,103,6,0],[104,9,104,16,0],[106,9,106,53,0],[108,9,108,32,0],[109,5,109,6,0],[112,5,112,6,0],[114,9,114,10,0],[115,13,115,20,0],[115,22,115,32,0],[115,33,115,35,0],[115,36,115,85,0],[116,13,116,14,0],[117,17,117,100,0],[118,13,118,14,0],[120,13,120,50,0],[121,13,121,63,0],[122,9,122,10,0],[123,9,123,29,0],[124,9,124,10,0],[125,13,125,89,0],[126,13,126,48,0],[127,9,127,10,0],[128,5,128,6,0],[131,5,131,6,0],[133,9,133,10,0],[134,13,134,63,0],[136,13,136,44,0],[137,13,137,14,0],[138,17,138,53,0],[139,17,139,24,0],[139,26,139,45,0],[139,46,139,48,0],[139,49,139,65,0],[140,17,140,18,0],[141,21,142,79,0],[143,17,143,18,0],[144,13,144,14,0],[146,13,146,14,0],[147,17,147,52,0],[148,13,148,14,0],[150,13,150,50,0],[151,13,151,63,0],[152,9,152,10,0],[153,9,153,29,0],[154,9,154,10,0],[155,13,155,89,0],[156,13,156,48,0],[157,9,157,10,0],[158,5,158,6,0],[161,5,161,6,0],[162,9,162,51,0],[163,9,163,16,0],[163,18,163,28,0],[163,29,163,31,0],[163,32,163,81,0],[164,9,164,10,0],[165,13,165,28,0],[166,13,166,114,0],[167,13,167,20,0],[167,22,167,36,0],[167,37,167,39,0],[167,40,167,58,0],[168,13,168,14,0],[169,17,169,18,0],[170,21,170,87,0],[171,21,171,54,0],[172,21,172,22,0],[173,25,173,67,0],[174,25,174,26,0],[175,29,175,41,0],[176,25,176,26,0],[177,21,177,22,0],[179,21,179,22,0],[180,25,180,37,0],[181,21,181,22,0],[182,17,182,18,0],[183,13,183,14,0],[185,13,185,21,0],[186,13,186,14,0],[187,17,187,46,0],[188,13,188,14,0],[189,9,189,10,0],[191,9,191,33,0],[192,5,192,6,0],[195,5,195,6,0],[196,9,196,57,0],[197,9,197,10,0],[198,13,198,85,0],[200,13,200,20,0],[202,13,202,59,0],[203,13,203,32,0],[204,9,204,10,0],[205,5,205,6,0],[208,5,208,6,0],[209,9,209,48,0],[210,5,210,6,0],[213,5,213,6,0],[214,9,214,44,0],[215,9,215,10,0],[216,13,216,47,0],[217,13,217,20,0],[217,22,217,32,0],[217,33,217,35,0],[217,36,217,57,0],[218,13,218,14,0],[219,17,219,100,0],[220,13,220,14,0],[222,13,222,36,0],[223,13,223,70,0],[224,13,224,50,0],[225,13,225,63,0],[226,9,226,10,0],[227,14,227,50,0],[228,9,228,10,0],[229,13,229,47,0],[230,13,230,20,0],[230,22,230,32,0],[230,33,230,35,0],[230,36,230,51,0],[231,13,231,14,0],[232,17,232,100,0],[233,13,233,14,0],[235,13,235,30,0],[236,13,236,64,0],[237,13,237,49,0],[238,13,238,50,0],[239,13,239,63,0],[240,9,240,10,0],[242,9,242,10,0],[243,13,243,41,0],[244,9,244,10,0],[245,5,245,6,0],[254,5,254,6,0],[255,9,255,27,0],[256,9,256,10,0],[257,13,257,55,0],[258,13,258,14,0],[259,17,259,35,0],[261,17,261,91,0],[262,17,265,31,0],[266,17,266,51,0],[267,17,267,24,0],[267,26,267,36,0],[267,37,267,39,0],[267,40,267,61,0],[268,17,268,18,0],[269,21,269,104,0],[270,17,270,18,0],[272,17,272,71,0],[273,13,273,14,0],[274,9,274,10,0],[275,14,275,50,0],[276,9,276,10,0],[277,13,277,49,0],[278,13,278,14,0],[279,17,279,32,0],[280,17,280,77,0],[281,17,281,74,0],[282,17,285,31,0],[286,17,286,51,0],[287,17,287,24,0],[287,26,287,36,0],[287,37,287,39,0],[287,40,287,56,0],[288,17,288,18,0],[289,21,289,104,0],[290,17,290,18,0],[292,17,292,68,0],[293,13,293,14,0],[294,9,294,10,0],[296,9,296,10,0],[297,13,297,61,0],[298,13,298,14,0],[299,17,299,38,0],[300,17,300,60,0],[301,17,301,80,0],[302,17,305,31,0],[306,17,306,51,0],[307,17,307,24,0],[307,26,307,36,0],[307,37,307,39,0],[307,40,307,62,0],[308,17,308,18,0],[309,21,309,104,0],[310,17,310,18,0],[312,17,312,74,0],[313,13,313,14,0],[314,9,314,10,0],[315,5,315,6,0],[318,5,318,6,0],[319,9,319,27,0],[320,9,320,10,0],[321,13,321,50,0],[323,13,323,87,0],[324,13,327,27,0],[328,13,328,47,0],[329,13,329,20,0],[329,22,329,32,0],[329,33,329,35,0],[329,36,329,57,0],[330,13,330,14,0],[331,17,331,100,0],[332,13,332,14,0],[334,13,334,67,0],[335,9,335,10,0],[336,14,336,50,0],[337,9,337,10,0],[338,13,338,44,0],[339,13,339,73,0],[340,13,340,70,0],[341,13,344,27,0],[345,13,345,47,0],[346,13,346,20,0],[346,22,346,32,0],[346,33,346,35,0],[346,36,346,52,0],[347,13,347,14,0],[348,17,348,100,0],[349,13,349,14,0],[351,13,351,64,0],[352,9,352,10,0],[354,9,354,10,0],[355,13,355,56,0],[356,13,356,56,0],[357,13,357,76,0],[358,13,361,27,0],[362,13,362,47,0],[363,13,363,20,0],[363,22,363,32,0],[363,33,363,35,0],[363,36,363,58,0],[364,13,364,14,0],[365,17,365,100,0],[366,13,366,14,0],[368,13,368,70,0],[369,9,369,10,0],[370,5,370,6,0],[373,5,373,6,0],[374,9,374,27,0],[375,9,375,10,0],[376,13,376,38,0],[377,13,377,14,0],[378,17,378,35,0],[380,17,380,90,0],[381,17,384,31,0],[385,17,385,51,0],[386,17,386,24,0],[386,26,386,36,0],[386,37,386,39,0],[386,40,386,61,0],[387,17,387,18,0],[388,21,388,106,0],[389,17,389,18,0],[391,17,391,71,0],[392,13,392,14,0],[393,9,393,10,0],[394,14,394,50,0],[395,9,395,10,0],[396,13,396,35,0],[397,13,397,14,0],[398,17,398,32,0],[399,17,399,77,0],[400,17,400,74,0],[401,17,404,31,0],[405,17,405,51,0],[406,17,406,24,0],[406,26,406,36,0],[406,37,406,39,0],[406,40,406,56,0],[407,17,407,18,0],[408,21,408,104,0],[409,17,409,18,0],[411,17,411,68,0],[412,13,412,14,0],[413,9,413,10,0],[415,9,415,10,0],[416,13,416,41,0],[417,13,417,14,0],[418,17,418,38,0],[419,17,419,60,0],[420,17,420,80,0],[421,17,424,31,0],[425,17,425,51,0],[426,17,426,24,0],[426,26,426,36,0],[426,37,426,39,0],[426,40,426,62,0],[427,17,427,18,0],[428,21,428,104,0],[429,17,429,18,0],[431,17,431,74,0],[432,13,432,14,0],[433,9,433,10,0],[434,5,434,6,0],[437,5,437,6,0],[438,9,438,27,0],[439,9,439,10,0],[440,13,440,33,0],[442,13,442,86,0],[443,13,446,27,0],[447,13,447,47,0],[448,13,448,20,0],[448,22,448,32,0],[448,33,448,35,0],[448,36,448,57,0],[449,13,449,14,0],[450,17,450,102,0],[451,13,451,14,0],[453,13,453,67,0],[454,9,454,10,0],[455,14,455,50,0],[456,9,456,10,0],[457,13,457,30,0],[458,13,458,73,0],[459,13,459,70,0],[460,13,463,27,0],[464,13,464,47,0],[465,13,465,20,0],[465,22,465,32,0],[465,33,465,35,0],[465,36,465,52,0],[466,13,466,14,0],[467,17,467,100,0],[468,13,468,14,0],[470,13,470,64,0],[471,9,471,10,0],[473,9,473,10,0],[474,13,474,36,0],[475,13,475,56,0],[476,13,476,76,0],[477,13,480,27,0],[481,13,481,47,0],[482,13,482,20,0],[482,22,482,32,0],[482,33,482,35,0],[482,36,482,58,0],[483,13,483,14,0],[484,17,484,100,0],[485,13,485,14,0],[487,13,487,70,0],[488,9,488,10,0],[489,5,489,6,0],[492,5,492,6,0],[493,9,493,101,0],[494,5,494,6,0],[497,5,497,6,0],[498,9,498,16,0],[500,9,500,51,0],[502,9,502,29,0],[503,5,503,6,0],[506,5,506,6,0],[507,9,507,42,0],[509,9,509,74,0],[510,9,510,10,0],[511,13,511,41,0],[512,13,512,38,0],[513,13,513,41,0],[514,13,514,71,0],[515,13,515,33,0],[516,13,516,34,0],[517,13,517,54,0],[518,9,518,10,0],[519,5,519,6,0],[522,5,522,6,0],[523,9,523,42,0],[524,9,524,50,0],[525,9,525,63,0],[526,9,526,45,0],[527,9,527,10,0],[528,13,528,73,0],[529,9,529,10,0],[531,9,531,10,0],[532,13,532,50,0],[533,9,533,10,0],[536,9,536,10,0],[537,13,537,20,0],[537,22,537,32,0],[537,33,537,35,0],[537,36,537,43,0],[538,13,538,14,0],[539,17,539,43,0],[540,17,540,24,0],[540,26,540,39,0],[540,40,540,42,0],[540,43,540,53,0],[541,17,541,18,0],[542,21,542,44,0],[543,21,543,28,0],[543,30,543,37,0],[543,38,543,40,0],[543,41,543,52,0],[544,21,544,22,0],[545,25,545,66,0],[546,25,546,26,0],[547,29,547,47,0],[548,25,548,26,0],[549,21,549,22,0],[551,21,551,45,0],[552,21,552,22,0],[553,25,553,48,0],[554,25,554,31,0],[556,17,556,18,0],[558,17,558,36,0],[559,17,559,18,0],[560,21,560,49,0],[561,17,561,18,0],[562,13,562,14,0],[564,13,564,41,0],[566,13,566,44,0],[567,13,567,14,0],[568,17,568,52,0],[569,13,569,14,0],[571,13,571,14,0],[572,17,572,53,0],[573,13,573,14,0],[575,13,575,52,0],[576,13,576,86,0],[577,13,577,106,0],[578,13,581,27,0],[582,13,582,20,0],[582,22,582,32,0],[582,33,582,35,0],[582,36,582,49,0],[583,13,583,14,0],[584,17,584,100,0],[585,13,585,14,0],[587,13,587,50,0],[588,13,588,63,0],[589,9,589,10,0],[590,9,590,29,0],[591,9,591,10,0],[592,13,592,89,0],[593,13,593,48,0],[594,9,594,10,0],[595,5,595,6,0],[598,5,598,6,0],[599,9,599,46,0],[600,9,600,10,0],[601,13,601,66,0],[602,13,602,69,0],[603,13,603,36,0],[605,13,605,44,0],[606,13,606,14,0],[607,17,607,67,0],[608,13,608,14,0],[610,13,610,14,0],[611,17,611,58,0],[612,13,612,14,0],[613,9,613,10,0],[614,5,614,6,0],[617,5,617,6,0],[618,9,618,37,0],[619,9,619,31,0],[620,9,620,36,0],[621,9,621,32,0],[623,9,623,33,0],[625,9,625,50,0],[627,9,627,59,0],[628,5,628,6,0],[633,5,633,6,0],[634,9,634,16,0],[636,9,636,55,0],[638,9,638,33,0],[639,5,639,6,0],[642,5,642,6,0],[643,9,643,49,0],[644,9,644,21,0],[645,9,645,30,0],[646,5,646,6,0],[649,5,649,6,0],[650,9,650,46,0],[652,9,652,21,0],[654,9,654,27,0],[655,5,655,6,0],[658,5,658,6,0],[659,9,659,44,0],[661,9,661,21,0],[663,9,663,23,0],[664,5,664,6,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\SharedRecipe.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerLibrary.Models
+{
+    /// &lt;summary&gt;
+    ///     The Shared Recipe class.
+    /// &lt;/summary&gt;
+    public class SharedRecipe
+    {
+        #region Properties
+
+        /// &lt;summary&gt;
+        ///     Gets or sets the Recipe Id for the Shared Recipe.
+        /// &lt;/summary&gt;
+        public Recipe Recipe { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the name of the recipe.
+        /// &lt;/summary&gt;
+        /// &lt;value&gt;
+        /// The name of the recipe.
+        /// &lt;/value&gt;
+        public string recipeName { get; set; }
+
+        /// &lt;summary&gt;
+        ///     Gets or sets the username of the user sharing the recipe.
+        /// &lt;/summary&gt;
+        public string SenderUsername { get; set; }
+
+        /// &lt;summary&gt;
+        ///     Gets or sets the username of the user receiving the recipe.
+        /// &lt;/summary&gt;
+        public string ReceiverUsername { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        /// &lt;summary&gt;
+        ///     Initializes the Shared Recipe with the specified recipe id, sender, and receiver.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipe&quot;&gt;The recipe being shared.&lt;/param&gt;
+        /// &lt;param name=&quot;senderUsername&quot;&gt;The user sending the recipe.&lt;/param&gt;
+        /// &lt;param name=&quot;receiverUsername&quot;&gt;The user receiving the recipe.&lt;/param&gt;
+        /// &lt;precondition&gt; none &lt;/precondition&gt;
+        /// &lt;postcondition&gt;
+        ///     this.RecipeId = recipeId &amp;&amp; this.SenderUsername = senderUsername &amp;&amp; this.receiverUsername =
+        ///     receiverUsername
+        /// &lt;/postcondition&gt;
+        public SharedRecipe(Recipe recipe, string senderUsername, string receiverUsername)
+        {
+            this.Recipe = recipe;
+            this.recipeName = recipe.Name;
+            this.SenderUsername = senderUsername;
+            this.ReceiverUsername = receiverUsername;
+        }
+
+        #endregion
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[13,32,13,36,1],[13,37,13,41,1],[21,36,21,40,1],[21,41,21,45,1],[26,40,26,44,1],[26,45,26,49,1],[31,42,31,46,1],[31,47,31,51,1],[48,9,48,91,1],[49,9,49,10,1],[50,13,50,34,1],[51,13,51,43,1],[52,13,52,50,1],[53,13,53,54,1],[54,9,54,10,1]]);
+    </script>
+  </body>
+</html>

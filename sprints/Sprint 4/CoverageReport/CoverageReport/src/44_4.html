@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeStepAdd.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerFinalDemoAdditions
+{
+    partial class RecipeStepAdd
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.stepDescriptionTextBox = new System.Windows.Forms.TextBox();
+            this.stepsDataGridView = new System.Windows.Forms.DataGridView();
+            this.addButton = new System.Windows.Forms.Button();
+            this.confirmButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.errorStepsFieldLabel = new System.Windows.Forms.Label();
+            this.stepsSuccessLabel = new System.Windows.Forms.Label();
+            this.stepNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stepDescriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.upColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.downColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(142, 23);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(242, 38);
+            this.label1.TabIndex = 0;
+            this.label1.Text = &quot;Add Recipe Steps&quot;;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(166, 100);
+            this.label3.Name = &quot;label3&quot;;
+            this.label3.Size = new System.Drawing.Size(171, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = &quot;Recipe Step Description:&quot;;
+            // 
+            // stepDescriptionTextBox
+            // 
+            this.stepDescriptionTextBox.Location = new System.Drawing.Point(166, 138);
+            this.stepDescriptionTextBox.Name = &quot;stepDescriptionTextBox&quot;;
+            this.stepDescriptionTextBox.Size = new System.Drawing.Size(171, 27);
+            this.stepDescriptionTextBox.TabIndex = 4;
+            this.stepDescriptionTextBox.Click += new System.EventHandler(this.stepDescriptionTextBox_Click);
+            // 
+            // stepsDataGridView
+            // 
+            this.stepsDataGridView.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.stepsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.stepsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.stepsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.stepNumberColumn,
+            this.stepDescriptionColumn,
+            this.upColumn,
+            this.downColumn,
+            this.removeColumn});
+            this.stepsDataGridView.Location = new System.Drawing.Point(30, 335);
+            this.stepsDataGridView.Name = &quot;stepsDataGridView&quot;;
+            this.stepsDataGridView.RowHeadersVisible = false;
+            this.stepsDataGridView.RowHeadersWidth = 51;
+            this.stepsDataGridView.RowTemplate.Height = 29;
+            this.stepsDataGridView.Size = new System.Drawing.Size(454, 234);
+            this.stepsDataGridView.TabIndex = 5;
+            this.stepsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellContentClick);
+            this.stepsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stepsDataGridView_CellValueChanged);
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(200, 256);
+            this.addButton.Name = &quot;addButton&quot;;
+            this.addButton.Size = new System.Drawing.Size(94, 29);
+            this.addButton.TabIndex = 6;
+            this.addButton.Text = &quot;Add&quot;;
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.Location = new System.Drawing.Point(122, 630);
+            this.confirmButton.Name = &quot;confirmButton&quot;;
+            this.confirmButton.Size = new System.Drawing.Size(94, 29);
+            this.confirmButton.TabIndex = 7;
+            this.confirmButton.Text = &quot;Confirm&quot;;
+            this.confirmButton.UseVisualStyleBackColor = true;
+            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(277, 630);
+            this.cancelButton.Name = &quot;cancelButton&quot;;
+            this.cancelButton.Size = new System.Drawing.Size(94, 29);
+            this.cancelButton.TabIndex = 8;
+            this.cancelButton.Text = &quot;Cancel&quot;;
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // errorStepsFieldLabel
+            // 
+            this.errorStepsFieldLabel.AutoSize = true;
+            this.errorStepsFieldLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorStepsFieldLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorStepsFieldLabel.Location = new System.Drawing.Point(152, 223);
+            this.errorStepsFieldLabel.Name = &quot;errorStepsFieldLabel&quot;;
+            this.errorStepsFieldLabel.Size = new System.Drawing.Size(219, 20);
+            this.errorStepsFieldLabel.TabIndex = 9;
+            this.errorStepsFieldLabel.Text = &quot;Please fill out step description&quot;;
+            this.errorStepsFieldLabel.Visible = false;
+            // 
+            // stepsSuccessLabel
+            // 
+            this.stepsSuccessLabel.AutoSize = true;
+            this.stepsSuccessLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.stepsSuccessLabel.ForeColor = System.Drawing.Color.Green;
+            this.stepsSuccessLabel.Location = new System.Drawing.Point(166, 223);
+            this.stepsSuccessLabel.Name = &quot;stepsSuccessLabel&quot;;
+            this.stepsSuccessLabel.Size = new System.Drawing.Size(178, 20);
+            this.stepsSuccessLabel.TabIndex = 11;
+            this.stepsSuccessLabel.Text = &quot;Step Added Successfully&quot;;
+            this.stepsSuccessLabel.Visible = false;
+            // 
+            // stepNumberColumn
+            // 
+            this.stepNumberColumn.HeaderText = &quot;Step Number&quot;;
+            this.stepNumberColumn.MinimumWidth = 6;
+            this.stepNumberColumn.Name = &quot;stepNumberColumn&quot;;
+            this.stepNumberColumn.Width = 75;
+            // 
+            // stepDescriptionColumn
+            // 
+            this.stepDescriptionColumn.HeaderText = &quot;Step Description&quot;;
+            this.stepDescriptionColumn.MinimumWidth = 6;
+            this.stepDescriptionColumn.Name = &quot;stepDescriptionColumn&quot;;
+            this.stepDescriptionColumn.Width = 115;
+            // 
+            // upColumn
+            // 
+            this.upColumn.HeaderText = &quot;&quot;;
+            this.upColumn.MinimumWidth = 6;
+            this.upColumn.Name = &quot;upColumn&quot;;
+            this.upColumn.Text = &quot;↑&quot;;
+            this.upColumn.UseColumnTextForButtonValue = true;
+            this.upColumn.Width = 45;
+            // 
+            // downColumn
+            // 
+            this.downColumn.HeaderText = &quot;&quot;;
+            this.downColumn.MinimumWidth = 6;
+            this.downColumn.Name = &quot;downColumn&quot;;
+            this.downColumn.Text = &quot;↓&quot;;
+            this.downColumn.UseColumnTextForButtonValue = true;
+            this.downColumn.Width = 45;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = &quot;Action&quot;;
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = &quot;removeColumn&quot;;
+            this.removeColumn.Text = &quot;Remove&quot;;
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 115;
+            // 
+            // RecipeStepAdd
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.stepsSuccessLabel);
+            this.Controls.Add(this.errorStepsFieldLabel);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.confirmButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.stepsDataGridView);
+            this.Controls.Add(this.stepDescriptionTextBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
+            this.Name = &quot;RecipeStepAdd&quot;;
+            this.Text = &quot;RecipeStepAdd&quot;;
+            this.Load += new System.EventHandler(this.RecipeStepAdd_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.stepsDataGridView)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private Label label1;
+        private Label label3;
+        private TextBox stepDescriptionTextBox;
+        private DataGridView stepsDataGridView;
+        private Button addButton;
+        private Button confirmButton;
+        private Button cancelButton;
+        private Label errorStepsFieldLabel;
+        private Label stepsSuccessLabel;
+        private DataGridViewTextBoxColumn stepNumberColumn;
+        private DataGridViewTextBoxColumn stepDescriptionColumn;
+        private DataGridViewButtonColumn upColumn;
+        private DataGridViewButtonColumn downColumn;
+        private DataGridViewButtonColumn removeColumn;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,130,0],[32,13,32,60,0],[33,13,33,60,0],[34,13,34,78,0],[35,13,35,78,0],[36,13,36,64,0],[37,13,37,68,0],[38,13,38,67,0],[39,13,39,74,0],[40,13,40,71,0],[41,13,41,90,0],[42,13,42,95,0],[43,13,43,81,0],[44,13,44,83,0],[45,13,45,85,0],[46,13,46,94,0],[47,13,47,34,0],[51,13,51,41,0],[52,13,52,141,0],[53,13,53,70,0],[54,13,54,41,0],[55,13,55,65,0],[56,13,56,38,0],[57,13,57,51,0],[61,13,61,41,0],[62,13,62,71,0],[63,13,63,41,0],[64,13,64,65,0],[65,13,65,38,0],[66,13,66,59,0],[70,13,70,87,0],[71,13,71,73,0],[72,13,72,81,0],[73,13,73,54,0],[74,13,74,109,0],[78,13,78,63,0],[79,13,79,111,0],[80,13,80,84,0],[81,13,81,152,0],[82,13,82,87,0],[83,13,83,95,0],[84,13,84,99,0],[85,13,85,94,0],[86,13,86,91,0],[87,13,87,136,0],[88,13,93,33,0],[94,13,94,81,0],[95,13,95,63,0],[96,13,96,62,0],[97,13,97,57,0],[98,13,98,60,0],[99,13,99,77,0],[100,13,100,49,0],[101,13,101,151,0],[102,13,102,151,0],[106,13,106,74,0],[107,13,107,47,0],[108,13,108,67,0],[109,13,109,41,0],[110,13,110,41,0],[111,13,111,59,0],[112,13,112,83,0],[116,13,116,78,0],[117,13,117,55,0],[118,13,118,71,0],[119,13,119,45,0],[120,13,120,49,0],[121,13,121,63,0],[122,13,122,91,0],[126,13,126,77,0],[127,13,127,53,0],[128,13,128,70,0],[129,13,129,44,0],[130,13,130,47,0],[131,13,131,62,0],[132,13,132,89,0],[136,13,136,55,0],[137,13,137,152,0],[138,13,138,76,0],[139,13,139,85,0],[140,13,140,69,0],[141,13,141,79,0],[142,13,142,52,0],[143,13,143,81,0],[144,13,144,55,0],[148,13,148,52,0],[149,13,149,149,0],[150,13,150,75,0],[151,13,151,82,0],[152,13,152,63,0],[153,13,153,76,0],[154,13,154,50,0],[155,13,155,69,0],[156,13,156,52,0],[160,13,160,62,0],[161,13,161,52,0],[162,13,162,61,0],[163,13,163,46,0],[167,13,167,72,0],[168,13,168,57,0],[169,13,169,71,0],[170,13,170,52,0],[174,13,174,43,0],[175,13,175,44,0],[176,13,176,45,0],[177,13,177,38,0],[178,13,178,62,0],[179,13,179,38,0],[183,13,183,45,0],[184,13,184,46,0],[185,13,185,49,0],[186,13,186,40,0],[187,13,187,64,0],[188,13,188,40,0],[192,13,192,53,0],[193,13,193,48,0],[194,13,194,53,0],[195,13,195,47,0],[196,13,196,66,0],[197,13,197,43,0],[201,13,201,74,0],[202,13,202,74,0],[203,13,203,65,0],[204,13,204,55,0],[205,13,205,58,0],[206,13,206,50,0],[207,13,207,51,0],[208,13,208,47,0],[209,13,209,55,0],[210,13,210,60,0],[211,13,211,44,0],[212,13,212,44,0],[213,13,213,41,0],[214,13,214,41,0],[215,13,215,75,0],[216,13,216,92,0],[217,13,217,38,0],[218,13,218,34,0],[220,9,220,10,0]]);
+    </script>
+  </body>
+</html>

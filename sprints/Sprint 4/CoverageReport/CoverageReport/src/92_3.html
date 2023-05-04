@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\RecipeIngredient.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml.Linq;
+
+namespace RecipePlannerLibrary.Models
+{
+    /// &lt;summary&gt;
+    ///     The Recipe Ingredient class.
+    /// &lt;/summary&gt;
+    public class RecipeIngredient
+    {
+        /// &lt;summary&gt;
+        /// Gets or sets the Recipe Id for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public int RecipeId { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Ingredient Name for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public string IngredientName { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Quantity for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public int Quantity { get; set; }
+
+        /// &lt;summary&gt;
+        /// Gets or sets the Measurement for the Recipe Ingredient.
+        /// &lt;/summary&gt;
+        public string Measurement { get; set; }
+
+        /// &lt;summary&gt;
+        /// Initializes the RecipeIngredient with the specified recipeId, ingredient name, quantity, and the measurement.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;recipeId&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;ingredientName&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;measurement&quot;&gt;&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.IngredientName = ingredientName &amp;&amp; this.Quantity = quantity &amp;&amp; this.Measurement = measurement&lt;/postcondition&gt;
+        public RecipeIngredient(int recipeId, string ingredientName, int quantity, string measurement)
+        {
+            this.RecipeId = recipeId;
+            this.IngredientName = ingredientName;
+            this.Quantity = quantity;
+            this.Measurement = measurement;
+        }
+
+        /// &lt;summary&gt;
+        ///     Initializes the RecipeIngredient with the specified ingredient name, quantity, and the measurement.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientName&quot;&gt;the ingredient name&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;the quantity&lt;/param&gt;
+        /// &lt;param name=&quot;measurement&quot;&gt;the measurement&lt;/param&gt;
+        public RecipeIngredient(string ingredientName, int quantity, string measurement)
+        {
+            this.IngredientName = ingredientName;
+            this.Quantity = quantity;
+            this.Measurement = measurement;
+        }
+
+        /// &lt;summary&gt;
+        /// Determines whether the specified &lt;see cref=&quot;System.Object&quot; /&gt;, is equal to this instance.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;obj&quot;&gt;The &lt;see cref=&quot;System.Object&quot; /&gt; to compare with this instance.&lt;/param&gt;
+        /// &lt;returns&gt;
+        ///   &lt;c&gt;true&lt;/c&gt; if the specified &lt;see cref=&quot;System.Object&quot; /&gt; is equal to this instance; otherwise, &lt;c&gt;false&lt;/c&gt;.
+        /// &lt;/returns&gt;
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            RecipeIngredient other = (RecipeIngredient)obj;
+            return IngredientName == other.IngredientName &amp;&amp; Quantity == other.Quantity &amp;&amp; Measurement == other.Measurement;
+        }
+
+        /// &lt;summary&gt;
+        /// Returns a hash code for this instance.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// &lt;/returns&gt;
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (IngredientName != null ? IngredientName.GetHashCode() : 0);
+                hash = hash * 23 + Quantity.GetHashCode();
+                hash = hash * 23 + (Measurement != null ? Measurement.GetHashCode() : 0);
+                return hash;
+            }
+        }
+
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,31,16,35,1],[16,36,16,40,1],[21,40,21,44,1],[21,45,21,49,1],[26,31,26,35,1],[26,36,26,40,1],[31,37,31,41,1],[31,42,31,46,1],[42,9,42,103,1],[43,9,43,10,1],[44,13,44,38,1],[45,13,45,50,1],[46,13,46,38,1],[47,13,47,44,1],[48,9,48,10,1],[56,9,56,89,1],[57,9,57,10,1],[58,13,58,50,1],[59,13,59,38,1],[60,13,60,44,1],[61,9,61,10,1],[71,9,71,10,1],[72,13,72,59,1],[73,17,73,30,0],[75,13,75,60,1],[76,13,76,125,1],[77,9,77,10,1],[86,9,86,10,1],[88,13,88,14,1],[89,17,89,31,1],[90,17,90,96,1],[91,17,91,59,1],[92,17,92,90,1],[93,17,93,29,1],[95,9,95,10,1]]);
+    </script>
+  </body>
+</html>

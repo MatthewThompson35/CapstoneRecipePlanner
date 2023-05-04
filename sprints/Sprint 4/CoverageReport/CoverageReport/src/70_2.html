@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerWebApplication\Views\Home\SharedRecipes.cshtml</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@model List&lt;RecipePlannerLibrary.Models.Recipe&gt;
+
+@{
+    ViewBag.Title = &quot;SharedRecipes&quot;;
+}
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;/&gt;
+    &lt;title&gt;@ViewBag.Title&lt;/title&gt;
+
+    &lt;style&gt;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 100%;
+        }
+
+        th { 
+            background-color: #f2f2f2; 
+        }
+
+        tr:nth-child(even) { 
+            background-color: #f2f2f2; 
+        }
+
+        tr:hover { 
+            background-color: grey; 
+        }
+
+        #logout {
+            background-color: #d9534f;
+            color: #fff;
+            position: fixed;
+            right: 10px;
+            top: 5px;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            color: #333;
+            font-family: &#39;Open Sans&#39;, sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-weight: bold;
+            margin: 0 0 20px;
+        }
+
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        #recipe-container {
+            display: flex;
+            margin: 50px auto;
+            max-width: 1200px;
+        }
+
+        .pagination { 
+            margin-top: 20px; 
+        }
+
+        #recipe-list {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #recipe-details-box {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+        }
+
+        .form-item {
+            background-color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #addForm {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #details {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #details &gt; div { display: none; }
+
+        .form-group {
+            align-items: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .form-group select {
+            font-size: 16px;
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        #errorMessage {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type=&quot;submit&quot;] {
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .right-align {
+            display: flex;
+            justify-content: flex-end;
+        }
+    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;recipe-container&quot;&gt;
+    &lt;button onclick=&quot;location.href=&#39;@Url.Action(&quot;Index&quot;)&#39;&quot; id=&quot;logout&quot;&gt;Logout&lt;/button&gt;
+    &lt;div id=&quot;recipe-list&quot;&gt;
+            &lt;h2&gt;&lt;center&gt;Recommended Recipes&lt;/center&gt;&lt;/h2&gt;
+        &lt;table id=&quot;all-recipes&quot;&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Shared By&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+            @foreach (var recipe in ViewBag.AllSharedRecipesOnPage)
+            {
+                &lt;tr onclick=&quot;showRecipe(&#39;@recipe.Recipe.RecipeId&#39;)&quot;&gt;
+                    &lt;td&gt;@recipe.Recipe.Name&lt;/td&gt;
+                    &lt;td&gt;@recipe.SenderUsername&lt;/td&gt;
+                &lt;/tr&gt;
+            }
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+
+        &lt;div class=&quot;pagination&quot; id=&quot;available-pagination&quot;&gt;
+                @if (ViewBag.currentSharedPage &gt; 1)
+            {
+                    &lt;a href=&quot;@Url.Action(&quot;goToSharedRecipePageAll&quot;, new {page = ViewBag.currentSharedPage - 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Previous Page&lt;/a&gt;
+            }
+            @for (var i = 1; i &lt;= ViewBag.totalPages; i++)
+            {
+                    &lt;a href=&quot;@Url.Action(&quot;goToSharedRecipePageAll&quot;, new {page = i})&quot; class=&quot;btn btn-primary page-button&quot;&gt;@i&lt;/a&gt;
+            }
+                @if (ViewBag.currentSharedPage &lt; ViewBag.totalPages)
+            {
+                    &lt;a href=&quot;@Url.Action(&quot;goToSharedRecipePageAll&quot;, new {page = ViewBag.currentSharedPage + 1})&quot; class=&quot;btn btn-primary page-button&quot;&gt;Next Page&lt;/a&gt;
+            }
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;recipe-details-box&quot; style=&quot;display: none; flex-direction: column; height: 1000px; overflow: auto;&quot;&gt;
+        &lt;div id=&quot;addForm&quot; class=&quot;form-item&quot;&gt;
+            &lt;form method=&quot;post&quot; id=&quot;addPlannedMeal&quot; style=&quot;display: none;&quot;&gt;
+                &lt;div class=&quot;form-group&quot;&gt;
+                    &lt;input type=&quot;hidden&quot; name=&quot;recipeId&quot; id=&quot;recipeId&quot; value=&quot;&quot;&gt;
+                    &lt;label for=&quot;week&quot;&gt;Week:&lt;/label&gt;
+                    &lt;select name=&quot;week&quot; id=&quot;week&quot;&gt;
+                        @foreach (var week in new[] {&quot;This Week&quot;, &quot;Next Week&quot;})
+                        {
+                            &lt;option value=&quot;@week&quot;&gt;@week&lt;/option&gt;
+                        }
+                    &lt;/select&gt;
+                    &lt;label for=&quot;day&quot;&gt;Day:&lt;/label&gt;
+                    &lt;select name=&quot;day&quot; id=&quot;day&quot;&gt;
+                        @foreach (var day in new[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;})
+                        {
+                            &lt;option value=&quot;@day&quot;&gt;@day&lt;/option&gt;
+                        }
+                    &lt;/select&gt;
+                    &lt;label for=&quot;type&quot;&gt;Meal Type:&lt;/label&gt;
+                    &lt;select name=&quot;type&quot; id=&quot;type&quot;&gt;
+                        @foreach (var type in new[] {&quot;Breakfast&quot;, &quot;Lunch&quot;, &quot;Dinner&quot;})
+                        {
+                            &lt;option value=&quot;@type&quot;&gt;@type&lt;/option&gt;
+                        }
+                    &lt;/select&gt;
+                    &lt;div id=&quot;errorMessage&quot; style=&quot;display: none;&quot;&gt;
+                        Are you sure You want to overwrite your previous meal?
+                    &lt;/div&gt;
+
+                &lt;/div&gt;
+                &lt;div class=&quot;button-group&quot;&gt;
+                    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;addPlannedMeal&quot; value=&quot;Add&quot;/&gt;
+                    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; hidden asp-action=&quot;UpdateThisWeeksMeal&quot; value=&quot;Confirm Update&quot;/&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+            &lt;div id=&quot;details&quot; class=&quot;form-item&quot;&gt;
+            &lt;form id=&quot;cookMeal&quot; method=&quot;POST&quot; class=&quot;right-align&quot;&gt;
+                &lt;input type=&quot;hidden&quot; id=&quot;recipeID&quot; name=&quot;recipeID&quot; value=&quot;&quot;&gt;
+                &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary page-button&quot; asp-action=&quot;CookMeal&quot; value=&quot;Cook Meal&quot; id=&quot;CookRecipe&quot; style=&quot;display: none;&quot;/&gt;
+            &lt;/form&gt;
+            @foreach (var recipe in ViewBag.AllRecipes)
+            {
+                &lt;div id=&quot;@recipe.Recipe.RecipeId&quot; style=&quot;display: none&quot;&gt;
+                    &lt;h3 class=&quot;recipe-name&quot;&gt;@recipe.Recipe.Name&lt;/h3&gt;
+                    &lt;p class=&quot;recipe-description&quot;&gt;@recipe.Recipe.Description&lt;/p&gt;
+                    &lt;h4&gt;Steps&lt;/h4&gt;
+                    &lt;ol class=&quot;recipe-steps&quot;&gt;
+                        @foreach (var step in recipe.Recipe.Steps)
+                        {
+                            &lt;li&gt;@step.stepDescription&lt;/li&gt;
+                        }
+                    &lt;/ol&gt;
+                    &lt;h4&gt;Ingredients&lt;/h4&gt;
+                    &lt;ul class=&quot;recipe-ingredients&quot;&gt;
+                        @foreach (var ingredient in recipe.Recipe.Ingredients)
+                        {
+                            &lt;li&gt;@ingredient.Quantity@ingredient.Measurement @ingredient.IngredientName&lt;/li&gt;
+                        }
+                    &lt;/ul&gt;
+                    @if (recipe.Recipe.Tags != null &amp;&amp; recipe.Recipe.Tags.Count &gt; 0)
+                    {
+                        &lt;h4&gt;Tags&lt;/h4&gt;
+                        &lt;ul class=&quot;recipe-tags&quot;&gt;
+                            @foreach (var tag in recipe.Recipe.Tags)
+                            {
+                                &lt;li&gt;@tag&lt;/li&gt;
+                            }
+                        &lt;/ul&gt;
+                    }
+                &lt;/div&gt;
+            }
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script&gt;
+    function showRecipe(recipeId) {
+        var recipeID = document.getElementById(&#39;recipeID&#39;)
+        var cookRecipe = document.getElementById(&#39;CookRecipe&#39;);
+        var recipeDetails = document.getElementById(&#39;recipe-details-box&#39;);
+        var recipeDiv = document.getElementById(recipeId);
+        var currentDiv = document.querySelector(&#39;#details &gt; div[style*=&quot;display: block&quot;]&#39;);
+        var addPlannedMealForm = document.getElementById(&#39;addPlannedMeal&#39;);
+        var recipeIdInput = addPlannedMealForm.querySelector(&#39;input[name=&quot;recipeId&quot;]&#39;);
+
+        recipeIdInput.value = recipeId;
+        recipeID.value = recipeId;
+
+        if (currentDiv) {
+            currentDiv.style.display = &#39;none&#39;;
+        }
+
+        recipeDiv.style.display = &#39;block&#39;;
+        addPlannedMealForm.style.display = &#39;block&#39;;
+        cookRecipe.style.display = &quot;block&quot;;
+        recipeDetails.style.display = &quot;flex&quot;;
+    }
+&lt;/script&gt;
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[4,5,4,37,0],[12,13,12,27,0],[169,37,169,58,0],[180,14,180,21,0],[180,23,180,33,0],[180,34,180,36,0],[180,37,180,67,0],[181,13,181,14,0],[182,42,182,66,0],[183,26,183,45,0],[184,26,184,48,0],[186,13,186,14,0],[191,18,191,52,0],[192,13,192,14,0],[193,30,193,113,0],[194,13,194,14,0],[195,19,195,28,0],[195,30,195,53,0],[195,55,195,58,0],[196,13,196,14,0],[197,30,197,85,0],[197,123,197,125,0],[198,13,198,14,0],[199,18,199,69,0],[200,13,200,14,0],[201,30,201,113,0],[202,13,202,14,0],[213,26,213,33,0],[213,35,213,43,0],[213,44,213,46,0],[213,47,213,79,0],[214,25,214,26,0],[215,45,215,50,0],[215,52,215,57,0],[216,25,216,26,0],[220,26,220,33,0],[220,35,220,42,0],[220,43,220,45,0],[220,46,220,130,0],[221,25,221,26,0],[222,45,222,49,0],[222,51,222,55,0],[223,25,223,26,0],[227,26,227,33,0],[227,35,227,43,0],[227,44,227,46,0],[227,47,227,85,0],[228,25,228,26,0],[229,45,229,50,0],[229,52,229,57,0],[230,25,230,26,0],[248,14,248,21,0],[248,23,248,33,0],[248,34,248,36,0],[248,37,248,55,0],[249,13,249,14,0],[250,26,250,50,0],[251,46,251,65,0],[252,52,252,78,0],[255,26,255,33,0],[255,35,255,43,0],[255,44,255,46,0],[255,47,255,66,0],[256,25,256,26,0],[257,34,257,55,0],[258,25,258,26,0],[262,26,262,33,0],[262,35,262,49,0],[262,50,262,52,0],[262,53,262,78,0],[263,25,263,26,0],[264,34,264,54,0],[264,54,264,77,0],[264,78,264,104,0],[265,25,265,26,0],[267,22,267,85,0],[268,21,268,22,0],[271,30,271,37,0],[271,39,271,46,0],[271,47,271,49,0],[271,50,271,68,0],[272,29,272,30,0],[273,38,273,42,0],[274,29,274,30,0],[276,21,276,22,0],[278,13,278,14,0]]);
+    </script>
+  </body>
+</html>
