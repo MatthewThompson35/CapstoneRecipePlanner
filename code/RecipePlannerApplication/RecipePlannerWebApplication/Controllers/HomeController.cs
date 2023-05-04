@@ -1176,106 +1176,129 @@ public class HomeController : Controller
     /// <returns>The Recipe Page Defaulted to page one</returns>
     public ActionResult addPlannedMeal(int recipeId, string week, string day, string type)
     {
-        var recipeID = recipeId;
-        var Week = week;
-        var Day = day;
-        var Type = type;
-        DayOfWeek dayOfWeek;
-        Enum.TryParse(day, out dayOfWeek);
-        DateTime date;
-        if (week.Equals("This Week"))
+        try
         {
-            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
-        }
-        else
-        {
-            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
-        }
+            var recipeID = recipeId;
+            var Week = week;
+            var Day = day;
+            var Type = type;
+            DayOfWeek dayOfWeek;
+            Enum.TryParse(day, out dayOfWeek);
+            DateTime date;
+            if (week.Equals("This Week"))
+            {
+                date = Util.GetDateOfWeekDay(dayOfWeek, "this");
+            }
+            else
+            {
+                date = Util.GetDateOfWeekDay(dayOfWeek, "next");
+            }
 
-        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
-        {
-            ViewBag.day = day;
-            ViewBag.type = type;
-            ViewBag.date = date;
-            ViewBag.recipeId = recipeId;
-            return View("OverwriteConformation");
-        }
+            if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+            {
+                ViewBag.day = day;
+                ViewBag.type = type;
+                ViewBag.date = date;
+                ViewBag.recipeId = recipeId;
+                return View("OverwriteConformation");
+            }
 
-        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
-        this.setupForRecipePage();
-        if (ViewBag.day == null)
-        {
-            ViewBag.day = "Monday";
-        }
+            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+            this.setupForRecipePage();
+            if (ViewBag.day == null)
+            {
+                ViewBag.day = "Monday";
+            }
 
-        if (ViewBag.type == null)
-        {
-            ViewBag.type = "Breakfast";
-        }
+            if (ViewBag.type == null)
+            {
+                ViewBag.type = "Breakfast";
+            }
 
-        if (ViewBag.week == null)
-        {
-            ViewBag.week = "This Week";
-        }
+            if (ViewBag.week == null)
+            {
+                ViewBag.week = "This Week";
+            }
 
-        if (ViewBag.AvailableRecipes == null)
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View("Index");
+            }
+        }
+        catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
-            return View("Index");
         }
 
         return View("RecipePage", ViewBag.AvailableRecipes);
     }
 
+    /// <summary>
+    /// Adds the planned meal from planned meals page.
+    /// </summary>
+    /// <param name="recipeId">The recipe identifier.</param>
+    /// <param name="week">The week.</param>
+    /// <param name="day">The day.</param>
+    /// <param name="type">The type.</param>
+    /// <returns></returns>
     public ActionResult addPlannedMealPlannedMealsPage(int recipeId, string week, string day, string type)
     {
-        var recipeID = recipeId;
-        var Week = week;
-        var Day = day;
-        var Type = type;
-        DayOfWeek dayOfWeek;
-        Enum.TryParse(day, out dayOfWeek);
-        DateTime date;
-        if (week.Equals("This Week"))
+        try
         {
-            date = Util.GetDateOfWeekDay(dayOfWeek, "this");
-        }
-        else
-        {
-            date = Util.GetDateOfWeekDay(dayOfWeek, "next");
-        }
+            var recipeID = recipeId;
+            var Week = week;
+            var Day = day;
+            var Type = type;
+            DayOfWeek dayOfWeek;
+            Enum.TryParse(day, out dayOfWeek);
+            DateTime date;
+            if (week.Equals("This Week"))
+            {
+                date = Util.GetDateOfWeekDay(dayOfWeek, "this");
+            }
+            else
+            {
+                date = Util.GetDateOfWeekDay(dayOfWeek, "next");
+            }
 
-        if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
-        {
-            ViewBag.day = day;
-            ViewBag.type = type;
-            ViewBag.date = date;
-            ViewBag.recipeId = recipeId;
-            return View("OverwriteConformation");
-        }
+            if (PlannedMealDal.exists(Connection.ConnectionString, Type, date))
+            {
+                ViewBag.day = day;
+                ViewBag.type = type;
+                ViewBag.date = date;
+                ViewBag.recipeId = recipeId;
+                return View("OverwriteConformation");
+            }
 
-        PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
-        this.setupForRecipePage();
-        if (ViewBag.day == null)
-        {
-            ViewBag.day = "Monday";
-        }
+            PlannedMealDal.addPlannedMeal(Connection.ConnectionString, recipeId, day, type, date);
+            this.setupForRecipePage();
+            if (ViewBag.day == null)
+            {
+                ViewBag.day = "Monday";
+            }
 
-        if (ViewBag.type == null)
-        {
-            ViewBag.type = "Breakfast";
-        }
+            if (ViewBag.type == null)
+            {
+                ViewBag.type = "Breakfast";
+            }
 
-        if (ViewBag.week == null)
-        {
-            ViewBag.week = "This Week";
-        }
+            if (ViewBag.week == null)
+            {
+                ViewBag.week = "This Week";
+            }
 
-        if (ViewBag.AvailableRecipes == null)
+            if (ViewBag.AvailableRecipes == null)
+            {
+                TempData["msg"] = "The connection to the server could not be made";
+                return View("Index");
+            }
+        }
+        catch (Exception ex)
         {
             TempData["msg"] = "The connection to the server could not be made";
-            return View("Index");
         }
+
         this.setupPlannedMeals();
         return View("PlannedMealsPage");
     }
@@ -1344,10 +1367,18 @@ public class HomeController : Controller
     /// <returns>The add ingredients page or login on bad server connection</returns>
     public ActionResult goToAddIngredientsPage()
     {
-        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
-        ViewBag.Measurements = measurements;
-        ViewBag.page = "pantry";
-        return View("AddIngredient", ViewBag.Measurements);
+        try
+        {
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            ViewBag.page = "pantry";
+            return View("AddIngredient", ViewBag.Measurements);
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     /// <summary>
@@ -1358,10 +1389,18 @@ public class HomeController : Controller
     /// <returns>The add ingredients page or login on bad server connection</returns>
     public ActionResult goToAddShoppingListIngredientsPage()
     {
-        var measurements = Enum.GetNames(typeof(Measurement)).ToList();
-        ViewBag.Measurements = measurements;
-        ViewBag.page = "shopping";
-        return View("AddIngredient", ViewBag.Measurements);
+        try
+        {
+            var measurements = Enum.GetNames(typeof(Measurement)).ToList();
+            ViewBag.Measurements = measurements;
+            ViewBag.page = "shopping";
+            return View("AddIngredient", ViewBag.Measurements);
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     /// <summary>
@@ -1372,8 +1411,16 @@ public class HomeController : Controller
     /// <returns>The shared recipes page or login on bad server connection</returns>
     public ActionResult goToSharedRecipesPage()
     {
-        this.setupForSharedRecipePage();
-        return View("SharedRecipes", ViewBag.Measurements);
+        try
+        {
+            this.setupForSharedRecipePage();
+            return View("SharedRecipes", ViewBag.Measurements);
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     /// <summary>
@@ -1385,16 +1432,24 @@ public class HomeController : Controller
     /// <returns>The planned meals page based on which week is given</returns>
     public ActionResult ToggleWeek(string currentWeek)
     {
-        if (currentWeek.Equals("Next Week"))
+        try
         {
-            this.goToPlannedMealsPage();
-        }
-        else
-        {
-            this.goToPlannedMealsPageNextWeek();
-        }
+            if (currentWeek.Equals("Next Week"))
+            {
+                this.goToPlannedMealsPage();
+            }
+            else
+            {
+                this.goToPlannedMealsPageNextWeek();
+            }
 
-        return View("PlannedMealsPage");
+            return View("PlannedMealsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     /// <summary>
@@ -1515,58 +1570,67 @@ public class HomeController : Controller
     /// <returns>The planned meals page or login on bad server connection</returns>
     public ActionResult goToPlannedMealsPage()
     {
-        ViewBag.CurrentWeek = "This Week";
-        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-        foreach (var recipe in recipes)
+        try
         {
-            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            ViewBag.CurrentWeek = "This Week";
+            List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
+
+            ViewBag.AllRecipes = recipes;
+            var breakfast = new List<string>();
+            var lunch = new List<string>();
+            var dinner = new List<string>();
+            var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            var daysOfWeek = new List<string>
+                {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Breakfast", "This Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                breakfast.Add(recipeName);
+            }
+
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Lunch", "This Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                lunch.Add(recipeName);
+            }
+
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Dinner", "This Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                dinner.Add(recipeName);
+            }
+
+            ViewBag.DefaultValues = breakfast;
+            ViewBag.Lunch = lunch;
+            ViewBag.Dinner = dinner;
+            ViewBag.Header = "This weeks meals";
+            ViewBag.CurrentWeek = "This Week";
+            return View("PlannedMealsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
         }
 
-        ViewBag.AllRecipes = recipes;
-        var breakfast = new List<string>();
-        var lunch = new List<string>();
-        var dinner = new List<string>();
-        var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
-        var daysOfWeek = new List<string>
-            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Breakfast", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            breakfast.Add(recipeName);
-        }
-
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Lunch", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            lunch.Add(recipeName);
-        }
-
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Dinner", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            dinner.Add(recipeName);
-        }
-
-        ViewBag.DefaultValues = breakfast;
-        ViewBag.Lunch = lunch;
-        ViewBag.Dinner = dinner;
-        ViewBag.Header = "This weeks meals";
-        ViewBag.CurrentWeek = "This Week";
-        return View("PlannedMealsPage");
+        return View("Index");
     }
 
     /// <summary>
-    ///     Purchases all shopping list and adds it to pantry.
-    /// </summary>
-    /// <precondition>none</precondition>
-    /// <postcondition>Pantry is updated with shopping list values</postcondition>
-    /// <returns>Ingredients Page or login on bag connection</returns>
-    public ActionResult purchaseAllShoppingList()
+        ///     Purchases all shopping list and adds it to pantry.
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>Pantry is updated with shopping list values</postcondition>
+        /// <returns>Ingredients Page or login on bag connection</returns>
+        public ActionResult purchaseAllShoppingList()
     {
         try
         {
@@ -1608,48 +1672,55 @@ public class HomeController : Controller
 
     private void setupPlannedMeals()
     {
-        ViewBag.CurrentWeek = "This Week";
-        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-        foreach (var recipe in recipes)
+        try
         {
-            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-        }
+            ViewBag.CurrentWeek = "This Week";
+            List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
 
-        ViewBag.AllRecipes = recipes;
-        var breakfast = new List<string>();
-        var lunch = new List<string>();
-        var dinner = new List<string>();
-        var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
-        var daysOfWeek = new List<string>
-            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        foreach (var day in daysOfWeek)
+            ViewBag.AllRecipes = recipes;
+            var breakfast = new List<string>();
+            var lunch = new List<string>();
+            var dinner = new List<string>();
+            var dictionary = PlannedMealDal.getThisWeeksMeals(Connection.ConnectionString);
+            var daysOfWeek = new List<string>
+                {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Breakfast", "This Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                breakfast.Add(recipeName);
+            }
+
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Lunch", "This Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                lunch.Add(recipeName);
+            }
+
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Dinner", "This Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                dinner.Add(recipeName);
+            }
+
+            ViewBag.DefaultValues = breakfast;
+            ViewBag.Lunch = lunch;
+            ViewBag.Dinner = dinner;
+            ViewBag.Header = "This weeks meals";
+            ViewBag.CurrentWeek = "This Week";
+        }
+        catch (Exception ex)
         {
-            var json = this.GetRecipeName(day, "Breakfast", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            breakfast.Add(recipeName);
+            TempData["msg"] = "The connection to the server could not be made";
         }
-
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Lunch", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            lunch.Add(recipeName);
-        }
-
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Dinner", "This Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            dinner.Add(recipeName);
-        }
-
-        ViewBag.DefaultValues = breakfast;
-        ViewBag.Lunch = lunch;
-        ViewBag.Dinner = dinner;
-        ViewBag.Header = "This weeks meals";
-        ViewBag.CurrentWeek = "This Week";
     }
 
     /// <summary>
@@ -1660,48 +1731,56 @@ public class HomeController : Controller
     /// <returns>The next week's planned meal page or login on bad server connection</returns>
     public ActionResult goToPlannedMealsPageNextWeek()
     {
-        ViewBag.CurrentWeek = "Next Week";
-        List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
-        foreach (var recipe in recipes)
+        try
         {
-            recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-            recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-            recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
-        }
+            ViewBag.CurrentWeek = "Next Week";
+            List<Recipe> recipes = RecipeDAL.getRecipes(Connection.ConnectionString);
+            foreach (var recipe in recipes)
+            {
+                recipe.Ingredients = RecipeDAL.getIngredientsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Steps = RecipeDAL.getStepsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+                recipe.Tags = RecipeDAL.getTagsForRecipe(recipe.RecipeId, Connection.ConnectionString);
+            }
 
-        ViewBag.AllRecipes = recipes;
-        var breakfast = new List<string>();
-        var daysOfWeek = new List<string>
-            {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        var lunch = new List<string>();
-        var dinner = new List<string>();
-        foreach (var day in daysOfWeek)
+            ViewBag.AllRecipes = recipes;
+            var breakfast = new List<string>();
+            var daysOfWeek = new List<string>
+                {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            var lunch = new List<string>();
+            var dinner = new List<string>();
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Breakfast", "Next Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                breakfast.Add(recipeName);
+            }
+
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Lunch", "Next Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                lunch.Add(recipeName);
+            }
+
+            foreach (var day in daysOfWeek)
+            {
+                var json = this.GetRecipeName(day, "Dinner", "Next Week");
+                var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
+                dinner.Add(recipeName);
+            }
+
+            ViewBag.DefaultValues = breakfast;
+            ViewBag.Lunch = lunch;
+            ViewBag.Dinner = dinner;
+            ViewBag.Header = "Next weeks meals";
+            ViewBag.CurrentWeek = "Next Week";
+            return View("PlannedMealsPage");
+        }
+        catch (Exception ex)
         {
-            var json = this.GetRecipeName(day, "Breakfast", "Next Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            breakfast.Add(recipeName);
+            TempData["msg"] = "The connection to the server could not be made";
         }
-
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Lunch", "Next Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            lunch.Add(recipeName);
-        }
-
-        foreach (var day in daysOfWeek)
-        {
-            var json = this.GetRecipeName(day, "Dinner", "Next Week");
-            var recipeName = (string) json.Value.GetType().GetProperty("RecipeName").GetValue(json.Value);
-            dinner.Add(recipeName);
-        }
-
-        ViewBag.DefaultValues = breakfast;
-        ViewBag.Lunch = lunch;
-        ViewBag.Dinner = dinner;
-        ViewBag.Header = "Next weeks meals";
-        ViewBag.CurrentWeek = "Next Week";
-        return View("PlannedMealsPage");
+        return View("Index");
     }
 
     /// <summary>
@@ -1810,29 +1889,37 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult CookMeal(int recipeID)
     {
-        var totalIngredients = IngredientDAL.getIngredients();
-        foreach (var ingredient in
-                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        try
         {
-            var existingIngredient = totalIngredients.Find(i =>
-                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
-
-            if (existingIngredient != null)
+            var totalIngredients = IngredientDAL.getIngredients();
+            foreach (var ingredient in
+                     RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
             {
-                if (existingIngredient.quantity - ingredient.Quantity > 0)
+                var existingIngredient = totalIngredients.Find(i =>
+                    i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+                if (existingIngredient != null)
                 {
-                    IngredientDAL.updateQuantity((int) existingIngredient.id,
-                        (int) existingIngredient.quantity - ingredient.Quantity);
-                }
-                else
-                {
-                    IngredientDAL.RemoveIngredient((int) existingIngredient.id, Connection.ConnectionString);
+                    if (existingIngredient.quantity - ingredient.Quantity > 0)
+                    {
+                        IngredientDAL.updateQuantity((int) existingIngredient.id,
+                            (int) existingIngredient.quantity - ingredient.Quantity);
+                    }
+                    else
+                    {
+                        IngredientDAL.RemoveIngredient((int) existingIngredient.id, Connection.ConnectionString);
+                    }
                 }
             }
-        }
 
-        this.setupIngredientsPage(1);
-        return View("IngredientsPage");
+            this.setupIngredientsPage(1);
+            return View("IngredientsPage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     /// <summary>
@@ -1843,28 +1930,36 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult CookMealConfirmation(int recipeID)
     {
-        ViewBag.id = recipeID;
-        bool hasAllIngredients = true;
-
-        var totalIngredients = IngredientDAL.getIngredients();
-        foreach (var ingredient in
-                 RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
+        try
         {
-            var existingIngredient = totalIngredients.Find(i =>
-                i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+            ViewBag.id = recipeID;
+            bool hasAllIngredients = true;
 
-            if (existingIngredient == null || existingIngredient.quantity - ingredient.Quantity < 0)
+            var totalIngredients = IngredientDAL.getIngredients();
+            foreach (var ingredient in
+                     RecipeDAL.getIngredientsForRecipe(recipeID, Connection.ConnectionString))
             {
-                hasAllIngredients = false;
+                var existingIngredient = totalIngredients.Find(i =>
+                    i.name == ingredient.IngredientName && i.measurement == ingredient.Measurement);
+
+                if (existingIngredient == null || existingIngredient.quantity - ingredient.Quantity < 0)
+                {
+                    hasAllIngredients = false;
+                }
             }
-        }
 
-        if (hasAllIngredients)
+            if (hasAllIngredients)
+            {
+                return View("CookMealConfirmation");
+            }
+
+            return View("MissingIngredientsConfirmation");
+        }
+        catch (Exception ex)
         {
-            return View("CookMealConfirmation");
+            TempData["msg"] = "The connection to the server could not be made";
         }
-
-        return View("MissingIngredientsConfirmation");
+        return View("Index");
     }
 
     /// <summary>
@@ -1876,37 +1971,45 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult ShareMeal(int sharedRecipeID)
     {
-        var username = Request.Form["txtUsername"].ToString();
-        var isValid = Database.ContainsUser(username).Count != 0;
-        var recipe =
-            new SharedRecipe(
-                RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(sharedRecipeID, Connection.ConnectionString),
-                    Connection.ConnectionString), ActiveUser.username, username);
-        if (RecipeDAL.ContainsSharedRecipe(recipe).Count > 0)
+        try
         {
-            ViewBag.ErrorMessage = "You have already shared this recipe with " + username;
-            this.setupForRecipePage();
-            return View("RecipePage");
-        }
-
-        if (isValid)
-        {
-            if (sharedRecipeID == 0)
+            var username = Request.Form["txtUsername"].ToString();
+            var isValid = Database.ContainsUser(username).Count != 0;
+            var recipe =
+                new SharedRecipe(
+                    RecipeDAL.getRecipeByName(RecipeDAL.getRecipeNameById(sharedRecipeID, Connection.ConnectionString),
+                        Connection.ConnectionString), ActiveUser.username, username);
+            if (RecipeDAL.ContainsSharedRecipe(recipe).Count > 0)
             {
-                ViewBag.ErrorMessage = "Please select a recipe and try again.";
+                ViewBag.ErrorMessage = "You have already shared this recipe with " + username;
                 this.setupForRecipePage();
                 return View("RecipePage");
             }
 
-            ViewBag.ErrorMessage = "";
-            RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
-            TempData["SharedRecipeID"] = sharedRecipeID;
-            return RedirectToAction("RecipePage");
-        }
+            if (isValid)
+            {
+                if (sharedRecipeID == 0)
+                {
+                    ViewBag.ErrorMessage = "Please select a recipe and try again.";
+                    this.setupForRecipePage();
+                    return View("RecipePage");
+                }
 
-        ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
-        this.setupForRecipePage();
-        return View("RecipePage");
+                ViewBag.ErrorMessage = "";
+                RecipeDAL.shareRecipe(username, sharedRecipeID, Connection.ConnectionString);
+                TempData["SharedRecipeID"] = sharedRecipeID;
+                return RedirectToAction("RecipePage");
+            }
+
+            ViewBag.ErrorMessage = "This is not a valid Username. Enter another and try again.";
+            this.setupForRecipePage();
+            return View("RecipePage");
+        }
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     /// <summary>
@@ -1915,19 +2018,27 @@ public class HomeController : Controller
     /// <returns>The current recipe page</returns>
     public IActionResult RecipePage()
     {
-        var sharedRecipeID = 0;
-        if (TempData["SharedRecipeID"] != null)
+        try
         {
-            sharedRecipeID = (int) TempData["SharedRecipeID"];
+            var sharedRecipeID = 0;
+            if (TempData["SharedRecipeID"] != null)
+            {
+                sharedRecipeID = (int) TempData["SharedRecipeID"];
+            }
+
+            List<SharedRecipe> allRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
+            var sharedRecipe = allRecipes.FirstOrDefault(r => r.Recipe.RecipeId == sharedRecipeID);
+            ViewBag.AllRecipes = allRecipes;
+            ViewBag.SharedRecipe = sharedRecipe;
+
+            this.setupForRecipePage();
+            return View();
         }
-
-        List<SharedRecipe> allRecipes = RecipeDAL.getSharedRecipes(Connection.ConnectionString);
-        var sharedRecipe = allRecipes.FirstOrDefault(r => r.Recipe.RecipeId == sharedRecipeID);
-        ViewBag.AllRecipes = allRecipes;
-        ViewBag.SharedRecipe = sharedRecipe;
-
-        this.setupForRecipePage();
-        return View();
+        catch (Exception ex)
+        {
+            TempData["msg"] = "The connection to the server could not be made";
+        }
+        return View("Index");
     }
 
     #endregion

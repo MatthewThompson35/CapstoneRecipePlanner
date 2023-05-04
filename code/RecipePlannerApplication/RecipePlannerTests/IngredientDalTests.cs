@@ -114,7 +114,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(measurement, reader.GetString("measurementType"));
         }
 
-
+        /// <summary>
+        /// Gets the ingredient identifier with valid ingredient name returns correct identifier.
+        /// </summary>
         [TestMethod]
         public void GetIngredientId_WithValidIngredientName_ReturnsCorrectId()
         {
@@ -128,6 +130,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(1, id);
         }
 
+        /// <summary>
+        /// Gets the ingredient identifier with invalid ingredient name returns zero.
+        /// </summary>
         [TestMethod]
         public void GetIngredientId_WithInvalidIngredientName_ReturnsZero()
         {
@@ -141,6 +146,9 @@ namespace RecipePlannerTests
             Assert.AreEqual(0, id);
         }
 
+        /// <summary>
+        /// Gets the ingredients from shopping list returns list of ingredients.
+        /// </summary>
         [TestMethod]
         public void GetIngredientsFromShoppingList_ReturnsListOfIngredients()
         {
