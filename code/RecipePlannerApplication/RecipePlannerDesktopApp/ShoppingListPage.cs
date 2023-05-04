@@ -13,6 +13,11 @@ using System.Windows.Forms;
 
 namespace RecipePlannerDesktopApplication
 {
+    /// <summary>
+    /// The class for the shopping list page
+    ///
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class ShoppingListPage : Form
     {
         private DataGridViewRow selectedRow;

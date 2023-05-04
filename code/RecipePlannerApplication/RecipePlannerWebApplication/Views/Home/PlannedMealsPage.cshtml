@@ -323,6 +323,13 @@
     }
     
     function removeColumn(day, mealType){
+        var recipeDetails = document.getElementById("recipe-details-box");
+        var allRecipes = recipeDetails.children;
+
+        for (var i = 0; i < allRecipes.length; i++) {
+            allRecipes[i].style.display = "none";
+        }
+        
         var dayDetails = day + mealType + "Details";
         var detailsElement = document.getElementById(dayDetails);
         var week = "@ViewBag.CurrentWeek"
@@ -340,6 +347,10 @@
                 console.log(xhr.responseText);
             }
         });
+        
+        var buttonElement = document.getElementById(day + mealType + "Button");
+        buttonElement.disabled = true;
+
         }
 
     function showRecipeDetails(day, mealType) {

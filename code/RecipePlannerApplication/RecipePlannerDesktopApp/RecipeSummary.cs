@@ -209,7 +209,7 @@ namespace RecipePlannerFinalDemoAdditions
         /// <summary>
         ///     Gets the ingredients information.
         /// </summary>
-        /// <returns>the ingreients information</returns>
+        /// <returns>the ingredients information</returns>
         public List<RecipeIngredient> GetIngredientData()
         {
             return this.recipeIngredients;
