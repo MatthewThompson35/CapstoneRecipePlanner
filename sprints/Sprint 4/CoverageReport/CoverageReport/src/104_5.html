@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\RecipeIngredientTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    /// &lt;summary&gt;
+    /// Test the recipe Ingredients class
+    /// &lt;/summary&gt;
+    [TestClass]
+    public class RecipeIngredientTests
+    {
+        /// &lt;summary&gt;
+        /// Tests the constructor.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestConstructor()
+        {
+            int recipeId = 1;
+            string ingredientName = &quot;Flour&quot;;
+            int quantity = 2;
+            string measurement = &quot;G&quot;;
+
+            RecipeIngredient ingredient = new RecipeIngredient(recipeId, ingredientName, quantity, measurement);
+
+            Assert.AreEqual(recipeId, ingredient.RecipeId);
+            Assert.AreEqual(ingredientName, ingredient.IngredientName);
+            Assert.AreEqual(quantity, ingredient.Quantity);
+            Assert.AreEqual(measurement, ingredient.Measurement);
+        }
+
+        /// &lt;summary&gt;
+        /// Equals the returns true when object is equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void Equals_ReturnsTrue_WhenObjectIsEqual()
+        {
+            // Arrange
+            RecipeIngredient ingredient1 = new RecipeIngredient(&quot;flour&quot;, 2, &quot;cups&quot;);
+            RecipeIngredient ingredient2 = new RecipeIngredient(&quot;flour&quot;, 2, &quot;cups&quot;);
+
+            // Act
+            bool result = ingredient1.Equals(ingredient2);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        /// &lt;summary&gt;
+        /// Equals the returns false when object is not equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void Equals_ReturnsFalse_WhenObjectIsNotEqual()
+        {
+            // Arrange
+            RecipeIngredient ingredient1 = new RecipeIngredient(&quot;flour&quot;, 2, &quot;cups&quot;);
+            RecipeIngredient ingredient2 = new RecipeIngredient(&quot;sugar&quot;, 2, &quot;cups&quot;);
+
+            // Act
+            bool result = ingredient1.Equals(ingredient2);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the hash code returns same hash code when object is equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetHashCode_ReturnsSameHashCode_WhenObjectIsEqual()
+        {
+            // Arrange
+            RecipeIngredient ingredient1 = new RecipeIngredient(&quot;flour&quot;, 2, &quot;cups&quot;);
+            RecipeIngredient ingredient2 = new RecipeIngredient(&quot;flour&quot;, 2, &quot;cups&quot;);
+
+            // Act
+            int hash1 = ingredient1.GetHashCode();
+            int hash2 = ingredient2.GetHashCode();
+
+            // Assert
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the hash code returns different hash code when object is not equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetHashCode_ReturnsDifferentHashCode_WhenObjectIsNotEqual()
+        {
+            // Arrange
+            RecipeIngredient ingredient1 = new RecipeIngredient(&quot;flour&quot;, 2, &quot;cups&quot;);
+            RecipeIngredient ingredient2 = new RecipeIngredient(&quot;sugar&quot;, 2, &quot;cups&quot;);
+
+            // Act
+            int hash1 = ingredient1.GetHashCode();
+            int hash2 = ingredient2.GetHashCode();
+
+            // Assert
+            Assert.AreNotEqual(hash1, hash2);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,10,1],[15,13,15,30,1],[16,13,16,45,1],[17,13,17,30,1],[18,13,18,38,1],[20,13,20,113,1],[22,13,22,60,1],[23,13,23,72,1],[24,13,24,60,1],[25,13,25,66,1],[26,9,26,10,1],[33,9,33,10,1],[35,13,35,85,1],[36,13,36,85,1],[39,13,39,59,1],[42,13,42,35,1],[43,9,43,10,1],[50,9,50,10,1],[52,13,52,85,1],[53,13,53,85,1],[56,13,56,59,1],[59,13,59,36,1],[60,9,60,10,1],[67,9,67,10,1],[69,13,69,85,1],[70,13,70,85,1],[73,13,73,51,1],[74,13,74,51,1],[77,13,77,43,1],[78,9,78,10,1],[85,9,85,10,1],[87,13,87,85,1],[88,13,88,85,1],[91,13,91,51,1],[92,13,92,51,1],[95,13,95,46,1],[96,9,96,10,1]]);
+    </script>
+  </body>
+</html>

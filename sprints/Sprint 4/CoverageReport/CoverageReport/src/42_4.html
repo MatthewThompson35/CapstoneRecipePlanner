@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeIngredientAdd.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerFinalDemoAdditions
+{
+    partial class RecipeIngredientAdd
+    {
+        /// &lt;summary&gt;
+        /// Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        /// Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ingredientNameTextBox = new System.Windows.Forms.TextBox();
+            this.quantityTextBox = new System.Windows.Forms.TextBox();
+            this.measurementComboBox = new System.Windows.Forms.ComboBox();
+            this.ingredientDataGridView = new System.Windows.Forms.DataGridView();
+            this.addButton = new System.Windows.Forms.Button();
+            this.confirmButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.errorIngredientsFieldsLabel = new System.Windows.Forms.Label();
+            this.errorQuantityLabel = new System.Windows.Forms.Label();
+            this.ingredientSuccessLabel = new System.Windows.Forms.Label();
+            this.errorMeasurementSelectionLabel = new System.Windows.Forms.Label();
+            this.ingredientNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.measurementColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removeColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientDataGridView)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(111, 9);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(321, 38);
+            this.label1.TabIndex = 0;
+            this.label1.Text = &quot;Add Recipe Ingredients&quot;;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(34, 152);
+            this.label2.Name = &quot;label2&quot;;
+            this.label2.Size = new System.Drawing.Size(124, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = &quot;Ingredient Name:&quot;;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(205, 152);
+            this.label3.Name = &quot;label3&quot;;
+            this.label3.Size = new System.Drawing.Size(68, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = &quot;Quantity:&quot;;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(363, 152);
+            this.label4.Name = &quot;label4&quot;;
+            this.label4.Size = new System.Drawing.Size(102, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = &quot;Measurement:&quot;;
+            // 
+            // ingredientNameTextBox
+            // 
+            this.ingredientNameTextBox.Location = new System.Drawing.Point(34, 186);
+            this.ingredientNameTextBox.Name = &quot;ingredientNameTextBox&quot;;
+            this.ingredientNameTextBox.Size = new System.Drawing.Size(125, 27);
+            this.ingredientNameTextBox.TabIndex = 4;
+            this.ingredientNameTextBox.Click += new System.EventHandler(this.ingredientNameTextBox_Click);
+            // 
+            // quantityTextBox
+            // 
+            this.quantityTextBox.Location = new System.Drawing.Point(205, 186);
+            this.quantityTextBox.Name = &quot;quantityTextBox&quot;;
+            this.quantityTextBox.Size = new System.Drawing.Size(125, 27);
+            this.quantityTextBox.TabIndex = 5;
+            this.quantityTextBox.Click += new System.EventHandler(this.quantityTextBox_Click);
+            // 
+            // measurementComboBox
+            // 
+            this.measurementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.measurementComboBox.FormattingEnabled = true;
+            this.measurementComboBox.Items.AddRange(new object[] {
+            &quot;COUNT&quot;,
+            &quot;OZ&quot;,
+            &quot;G&quot;});
+            this.measurementComboBox.Location = new System.Drawing.Point(363, 186);
+            this.measurementComboBox.Name = &quot;measurementComboBox&quot;;
+            this.measurementComboBox.Size = new System.Drawing.Size(125, 28);
+            this.measurementComboBox.TabIndex = 6;
+            this.measurementComboBox.Click += new System.EventHandler(this.measurementComboBox_Click);
+            // 
+            // ingredientDataGridView
+            // 
+            this.ingredientDataGridView.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ingredientDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.ingredientDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ingredientDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ingredientNameColumn,
+            this.quantityColumn,
+            this.measurementColumn,
+            this.removeColumn});
+            this.ingredientDataGridView.Location = new System.Drawing.Point(34, 348);
+            this.ingredientDataGridView.Name = &quot;ingredientDataGridView&quot;;
+            this.ingredientDataGridView.RowHeadersVisible = false;
+            this.ingredientDataGridView.RowHeadersWidth = 51;
+            this.ingredientDataGridView.RowTemplate.Height = 29;
+            this.ingredientDataGridView.Size = new System.Drawing.Size(454, 234);
+            this.ingredientDataGridView.TabIndex = 7;
+            this.ingredientDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientDataGridView_CellContentClick);
+            this.ingredientDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingredientDataGridView_CellValueChanged);
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(205, 267);
+            this.addButton.Name = &quot;addButton&quot;;
+            this.addButton.Size = new System.Drawing.Size(94, 29);
+            this.addButton.TabIndex = 8;
+            this.addButton.Text = &quot;Add&quot;;
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.Location = new System.Drawing.Point(137, 635);
+            this.confirmButton.Name = &quot;confirmButton&quot;;
+            this.confirmButton.Size = new System.Drawing.Size(94, 29);
+            this.confirmButton.TabIndex = 9;
+            this.confirmButton.Text = &quot;Confirm&quot;;
+            this.confirmButton.UseVisualStyleBackColor = true;
+            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(298, 635);
+            this.cancelButton.Name = &quot;cancelButton&quot;;
+            this.cancelButton.Size = new System.Drawing.Size(94, 29);
+            this.cancelButton.TabIndex = 10;
+            this.cancelButton.Text = &quot;Cancel&quot;;
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // errorIngredientsFieldsLabel
+            // 
+            this.errorIngredientsFieldsLabel.AutoSize = true;
+            this.errorIngredientsFieldsLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorIngredientsFieldsLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorIngredientsFieldsLabel.Location = new System.Drawing.Point(173, 244);
+            this.errorIngredientsFieldsLabel.Name = &quot;errorIngredientsFieldsLabel&quot;;
+            this.errorIngredientsFieldsLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorIngredientsFieldsLabel.TabIndex = 11;
+            this.errorIngredientsFieldsLabel.Text = &quot;Please fill out all fields.&quot;;
+            this.errorIngredientsFieldsLabel.Visible = false;
+            // 
+            // errorQuantityLabel
+            // 
+            this.errorQuantityLabel.AutoSize = true;
+            this.errorQuantityLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorQuantityLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorQuantityLabel.Location = new System.Drawing.Point(173, 172);
+            this.errorQuantityLabel.Name = &quot;errorQuantityLabel&quot;;
+            this.errorQuantityLabel.Size = new System.Drawing.Size(184, 20);
+            this.errorQuantityLabel.TabIndex = 12;
+            this.errorQuantityLabel.Text = &quot;Quantity is not a number&quot;;
+            this.errorQuantityLabel.Visible = false;
+            // 
+            // ingredientSuccessLabel
+            // 
+            this.ingredientSuccessLabel.AutoSize = true;
+            this.ingredientSuccessLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ingredientSuccessLabel.ForeColor = System.Drawing.Color.Green;
+            this.ingredientSuccessLabel.Location = new System.Drawing.Point(149, 244);
+            this.ingredientSuccessLabel.Name = &quot;ingredientSuccessLabel&quot;;
+            this.ingredientSuccessLabel.Size = new System.Drawing.Size(220, 20);
+            this.ingredientSuccessLabel.TabIndex = 13;
+            this.ingredientSuccessLabel.Text = &quot;Ingredient Successfully Added&quot;;
+            this.ingredientSuccessLabel.Visible = false;
+            // 
+            // errorMeasurementSelectionLabel
+            // 
+            this.errorMeasurementSelectionLabel.AutoSize = true;
+            this.errorMeasurementSelectionLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorMeasurementSelectionLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorMeasurementSelectionLabel.Location = new System.Drawing.Point(360, 172);
+            this.errorMeasurementSelectionLabel.Name = &quot;errorMeasurementSelectionLabel&quot;;
+            this.errorMeasurementSelectionLabel.Size = new System.Drawing.Size(142, 20);
+            this.errorMeasurementSelectionLabel.TabIndex = 14;
+            this.errorMeasurementSelectionLabel.Text = &quot;Select measuremet&quot;;
+            this.errorMeasurementSelectionLabel.Visible = false;
+            // 
+            // ingredientNameColumn
+            // 
+            this.ingredientNameColumn.HeaderText = &quot;Ingredient Name&quot;;
+            this.ingredientNameColumn.MinimumWidth = 6;
+            this.ingredientNameColumn.Name = &quot;ingredientNameColumn&quot;;
+            this.ingredientNameColumn.Width = 125;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.HeaderText = &quot;Quantity&quot;;
+            this.quantityColumn.MinimumWidth = 6;
+            this.quantityColumn.Name = &quot;quantityColumn&quot;;
+            this.quantityColumn.Width = 75;
+            // 
+            // measurementColumn
+            // 
+            this.measurementColumn.HeaderText = &quot;Measurement&quot;;
+            this.measurementColumn.MinimumWidth = 6;
+            this.measurementColumn.Name = &quot;measurementColumn&quot;;
+            this.measurementColumn.Width = 105;
+            // 
+            // removeColumn
+            // 
+            this.removeColumn.HeaderText = &quot;Action&quot;;
+            this.removeColumn.MinimumWidth = 6;
+            this.removeColumn.Name = &quot;removeColumn&quot;;
+            this.removeColumn.Text = &quot;Remove&quot;;
+            this.removeColumn.UseColumnTextForButtonValue = true;
+            this.removeColumn.Width = 90;
+            // 
+            // RecipeIngredientAdd
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.errorMeasurementSelectionLabel);
+            this.Controls.Add(this.ingredientSuccessLabel);
+            this.Controls.Add(this.errorQuantityLabel);
+            this.Controls.Add(this.errorIngredientsFieldsLabel);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.confirmButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.ingredientDataGridView);
+            this.Controls.Add(this.measurementComboBox);
+            this.Controls.Add(this.quantityTextBox);
+            this.Controls.Add(this.ingredientNameTextBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Name = &quot;RecipeIngredientAdd&quot;;
+            this.Text = &quot;RecipeIngredientAdd&quot;;
+            this.Load += new System.EventHandler(this.RecipeIngredientAdd_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ingredientDataGridView)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private TextBox ingredientNameTextBox;
+        private TextBox quantityTextBox;
+        private ComboBox measurementComboBox;
+        private DataGridView ingredientDataGridView;
+        private Button addButton;
+        private Button confirmButton;
+        private Button cancelButton;
+        private Label errorIngredientsFieldsLabel;
+        private Label errorQuantityLabel;
+        private Label ingredientSuccessLabel;
+        private Label errorMeasurementSelectionLabel;
+        private DataGridViewTextBoxColumn ingredientNameColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewTextBoxColumn measurementColumn;
+        private DataGridViewButtonColumn removeColumn;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,130,0],[32,13,32,60,0],[33,13,33,60,0],[34,13,34,60,0],[35,13,35,60,0],[36,13,36,77,0],[37,13,37,71,0],[38,13,38,76,0],[39,13,39,83,0],[40,13,40,64,0],[41,13,41,68,0],[42,13,42,67,0],[43,13,43,81,0],[44,13,44,72,0],[45,13,45,76,0],[46,13,46,84,0],[47,13,47,94,0],[48,13,48,88,0],[49,13,49,91,0],[50,13,50,85,0],[51,13,51,99,0],[52,13,52,34,0],[56,13,56,41,0],[57,13,57,141,0],[58,13,58,69,0],[59,13,59,41,0],[60,13,60,65,0],[61,13,61,38,0],[62,13,62,57,0],[66,13,66,41,0],[67,13,67,70,0],[68,13,68,41,0],[69,13,69,65,0],[70,13,70,38,0],[71,13,71,51,0],[75,13,75,41,0],[76,13,76,71,0],[77,13,77,41,0],[78,13,78,64,0],[79,13,79,38,0],[80,13,80,44,0],[84,13,84,41,0],[85,13,85,71,0],[86,13,86,41,0],[87,13,87,65,0],[88,13,88,38,0],[89,13,89,47,0],[93,13,93,85,0],[94,13,94,71,0],[95,13,95,80,0],[96,13,96,53,0],[97,13,97,107,0],[101,13,101,80,0],[102,13,102,59,0],[103,13,103,74,0],[104,13,104,47,0],[105,13,105,95,0],[109,13,109,102,0],[110,13,110,63,0],[111,13,114,19,0],[115,13,115,84,0],[116,13,116,67,0],[117,13,117,78,0],[118,13,118,51,0],[119,13,119,103,0],[123,13,123,68,0],[124,13,124,111,0],[125,13,125,84,0],[126,13,126,152,0],[127,13,127,87,0],[128,13,128,95,0],[129,13,129,99,0],[130,13,130,94,0],[131,13,131,96,0],[132,13,132,141,0],[133,13,137,33,0],[138,13,138,86,0],[139,13,139,73,0],[140,13,140,67,0],[141,13,141,62,0],[142,13,142,65,0],[143,13,143,82,0],[144,13,144,54,0],[145,13,145,161,0],[146,13,146,161,0],[150,13,150,74,0],[151,13,151,47,0],[152,13,152,67,0],[153,13,153,41,0],[154,13,154,41,0],[155,13,155,59,0],[156,13,156,83,0],[160,13,160,78,0],[161,13,161,55,0],[162,13,162,71,0],[163,13,163,45,0],[164,13,164,49,0],[165,13,165,63,0],[166,13,166,91,0],[170,13,170,77,0],[171,13,171,53,0],[172,13,172,70,0],[173,13,173,45,0],[174,13,174,47,0],[175,13,175,62,0],[176,13,176,89,0],[180,13,180,62,0],[181,13,181,159,0],[182,13,182,83,0],[183,13,183,92,0],[184,13,184,83,0],[185,13,185,86,0],[186,13,186,60,0],[187,13,187,83,0],[188,13,188,62,0],[192,13,192,53,0],[193,13,193,150,0],[194,13,194,74,0],[195,13,195,83,0],[196,13,196,65,0],[197,13,197,77,0],[198,13,198,51,0],[199,13,199,71,0],[200,13,200,53,0],[204,13,204,57,0],[205,13,205,154,0],[206,13,206,80,0],[207,13,207,87,0],[208,13,208,73,0],[209,13,209,81,0],[210,13,210,55,0],[211,13,211,80,0],[212,13,212,57,0],[216,13,216,65,0],[217,13,217,162,0],[218,13,218,86,0],[219,13,219,95,0],[220,13,220,89,0],[221,13,221,89,0],[222,13,222,63,0],[223,13,223,76,0],[224,13,224,65,0],[228,13,228,70,0],[229,13,229,56,0],[230,13,230,69,0],[231,13,231,51,0],[235,13,235,57,0],[236,13,236,50,0],[237,13,237,57,0],[238,13,238,44,0],[242,13,242,63,0],[243,13,243,53,0],[244,13,244,63,0],[245,13,245,48,0],[249,13,249,53,0],[250,13,250,48,0],[251,13,251,53,0],[252,13,252,47,0],[253,13,253,66,0],[254,13,254,42,0],[258,13,258,74,0],[259,13,259,74,0],[260,13,260,65,0],[261,13,261,68,0],[262,13,262,60,0],[263,13,263,56,0],[264,13,264,65,0],[265,13,265,50,0],[266,13,266,51,0],[267,13,267,47,0],[268,13,268,60,0],[269,13,269,57,0],[270,13,270,53,0],[271,13,271,59,0],[272,13,272,44,0],[273,13,273,44,0],[274,13,274,44,0],[275,13,275,44,0],[276,13,276,47,0],[277,13,277,47,0],[278,13,278,81,0],[279,13,279,97,0],[280,13,280,38,0],[281,13,281,34,0],[283,9,283,10,0]]);
+    </script>
+  </body>
+</html>

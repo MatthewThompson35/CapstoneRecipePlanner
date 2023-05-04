@@ -2,78 +2,89 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\RecipeIngredient.cs</title>
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Database\Util.cs</title>
     <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
   </head>
   <body>
     <pre id="content" class="source-code">
 using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace RecipePlannerLibrary.Models
+namespace RecipePlannerLibrary.Database
 {
     /// &lt;summary&gt;
-    ///     The Recipe Ingredient class.
+    /// The Utils class to be used throughout the project
     /// &lt;/summary&gt;
-    public class RecipeIngredient
+    public class Util
     {
         /// &lt;summary&gt;
-        /// Gets or sets the Recipe Id for the Recipe Ingredient.
+        /// Gets the hex string for password hashing.
         /// &lt;/summary&gt;
-        public int RecipeId { get; set; }
+        /// &lt;param name=&quot;inputString&quot;&gt;The input string.&lt;/param&gt;
+        /// &lt;precondition&gt;The input string must not be null.&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;The hex string generated from the input string&lt;/returns&gt;
+        public static string GetHex(string inputString)
+        {
+            var sb = new StringBuilder();
+
+            var bytes = Encoding.Unicode.GetBytes(inputString);
+            foreach (var t in bytes)
+            {
+                sb.Append(t.ToString(&quot;X2&quot;));
+            }
+            return sb.ToString();
+        }
 
         /// &lt;summary&gt;
-        /// Gets or sets the Ingredient Name for the Recipe Ingredient.
+        /// Gets the hash for password hashing.
         /// &lt;/summary&gt;
-        public string IngredientName { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Quantity for the Recipe Ingredient.
-        /// &lt;/summary&gt;
-        public int Quantity { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Measurement for the Recipe Ingredient.
-        /// &lt;/summary&gt;
-        public string Measurement { get; set; }
-
-        /// &lt;summary&gt;
-        /// Initializes the RecipeIngredient with the specified recipeId, ingredient name, quantity, and the measurement.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;recipeId&quot;&gt;&lt;/param&gt;
-        /// &lt;param name=&quot;ingredientName&quot;&gt;&lt;/param&gt;
-        /// &lt;param name=&quot;quantity&quot;&gt;&lt;/param&gt;
-        /// &lt;param name=&quot;measurement&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;inputString&quot;&gt;The input string.&lt;/param&gt;
         /// &lt;precondition&gt;none&lt;/precondition&gt;
-        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.IngredientName = ingredientName &amp;&amp; this.Quantity = quantity &amp;&amp; this.Measurement = measurement&lt;/postcondition&gt;
-        public RecipeIngredient(int recipeId, string ingredientName, int quantity, string measurement)
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;A string containing the hashed representation of the input string.&lt;/returns&gt;
+        public static string GetHash(string inputString)
         {
-            this.RecipeId = recipeId;
-            this.IngredientName = ingredientName;
-            this.Quantity = quantity;
-            this.Measurement = measurement;
+            using var provider = System.Security.Cryptography.MD5.Create();
+            StringBuilder builder = new StringBuilder();
+
+            foreach (byte b in provider.ComputeHash(Encoding.UTF8.GetBytes(inputString)))
+                builder.Append(b.ToString(&quot;x2&quot;).ToLower());
+
+            return builder.ToString();
         }
 
         /// &lt;summary&gt;
-        ///     Initializes the RecipeIngredient with the specified ingredient name, quantity, and the measurement.
+        /// Gets the date of week day.
         /// &lt;/summary&gt;
-        /// &lt;param name=&quot;ingredientName&quot;&gt;the ingredient name&lt;/param&gt;
-        /// &lt;param name=&quot;quantity&quot;&gt;the quantity&lt;/param&gt;
-        /// &lt;param name=&quot;measurement&quot;&gt;the measurement&lt;/param&gt;
-        public RecipeIngredient(string ingredientName, int quantity, string measurement)
+        /// &lt;param name=&quot;dayOfWeek&quot;&gt;The day of week.&lt;/param&gt;
+        /// &lt;param name=&quot;week&quot;&gt;The week.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;The date time of the weekday given as input.&lt;/returns&gt;
+        public static DateTime GetDateOfWeekDay(DayOfWeek dayOfWeek, string week)
         {
-            this.IngredientName = ingredientName;
-            this.Quantity = quantity;
-            this.Measurement = measurement;
+            int daysUntilCurrentWeekDay;
+            if (week.ToLower().Equals(&quot;next&quot;))
+            {
+                daysUntilCurrentWeekDay = ((int) dayOfWeek - (int) DateTime.Today.DayOfWeek);
+                daysUntilCurrentWeekDay += 7;
+            }
+            else
+            {
+                daysUntilCurrentWeekDay = ((int)dayOfWeek - (int)DateTime.Today.DayOfWeek);
+            }
+
+            return DateTime.Today.AddDays(daysUntilCurrentWeekDay);
         }
+
     }
 }
 
     </pre>
     <script type="text/javascript">
-      highlightRanges([[15,31,15,35,1],[15,36,15,40,1],[20,40,20,44,1],[20,45,20,49,1],[25,31,25,35,1],[25,36,25,40,1],[30,37,30,41,1],[30,42,30,46,1],[41,9,41,103,1],[42,9,42,10,1],[43,13,43,38,1],[44,13,44,50,1],[45,13,45,38,1],[46,13,46,44,1],[47,9,47,10,1],[55,9,55,89,0],[56,9,56,10,0],[57,13,57,50,0],[58,13,58,38,0],[59,13,59,44,0],[60,9,60,10,0]]);
+      highlightRanges([[19,9,19,10,1],[20,13,20,42,1],[22,13,22,64,1],[23,13,23,20,1],[23,22,23,27,1],[23,28,23,30,1],[23,31,23,36,1],[24,13,24,14,1],[25,17,25,45,1],[26,13,26,14,1],[27,13,27,34,1],[28,9,28,10,1],[38,9,38,10,1],[39,13,39,76,1],[40,13,40,57,1],[42,13,42,20,1],[42,22,42,28,1],[42,29,42,31,1],[42,32,42,89,1],[43,17,43,60,1],[45,13,45,39,1],[46,9,46,10,1],[57,9,57,10,1],[59,13,59,47,1],[60,13,60,14,1],[61,17,61,94,1],[62,17,62,46,1],[63,13,63,14,1],[65,13,65,14,1],[66,17,66,92,1],[67,13,67,14,1],[69,13,69,68,1],[70,9,70,10,1]]);
     </script>
   </body>
 </html>

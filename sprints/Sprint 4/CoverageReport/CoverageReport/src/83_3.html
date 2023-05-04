@@ -2,90 +2,198 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>C:\Users\matth\source\repos\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Models\Recipe.cs</title>
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerLibrary\Database\ShoppingListDAL.cs</title>
     <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
   </head>
   <body>
     <pre id="content" class="source-code">
+using MySql.Data.MySqlClient;
+using RecipePlannerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RecipePlannerLibrary.Models
+namespace RecipePlannerLibrary.Database
 {
     /// &lt;summary&gt;
-    ///     The Recipe class.
+    /// The Shopping list DAL that handles all of the methods for accessing or altering the shopping list
     /// &lt;/summary&gt;
-    public class Recipe
+    public class ShoppingListDAL
     {
         /// &lt;summary&gt;
-        /// Gets or sets the Recipe Id for the Recipe.
+        /// Gets the ingredients for the shopping list.
         /// &lt;/summary&gt;
-        public int RecipeId { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Name of the Recipe.
-        /// &lt;/summary&gt;
-        public string Name { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Description for the Recipe.
-        /// &lt;/summary&gt;
-        public string Description { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Steps for the Recipe.
-        /// &lt;/summary&gt;
-        public List&lt;RecipeStep&gt; Steps { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Ingredients for the Recipe.
-        /// &lt;/summary&gt;
-        public List&lt;RecipeIngredient&gt; Ingredients { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or sets the Tags for the Recipe.
-        /// &lt;/summary&gt;
-        public List&lt;string&gt; Tags { get; set; }
-
-        /// &lt;summary&gt;
-        ///     Initializes the Recipe with the specified recipe id, the recipe name, and the description.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;recipeId&quot;&gt;The recipe id of the recipe.&lt;/param&gt;
-        /// &lt;param name=&quot;name&quot;&gt;The name of the recipe.&lt;/param&gt;
-        /// &lt;param name=&quot;description&quot;&gt;The description of the recipe.&lt;/param&gt;
-        /// &lt;precondition&gt; none &lt;/precondition&gt;
-        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.Name = name &amp;&amp; this.Description = description&lt;/postcondition&gt;
-        public Recipe(int recipeId, string name, string description)
+        /// &lt;returns&gt;&lt;/returns&gt;
+        public static List&lt;Ingredient&gt; getIngredients(string connectionString)
         {
-            this.RecipeId = recipeId;
-            this.Name = name;
-            this.Description = description;
-            this.Steps = new List&lt;RecipeStep&gt;();
-            this.Ingredients = new List&lt;RecipeIngredient&gt;();
-            this.Tags = new List&lt;string&gt;();
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var ingredients = new List&lt;Ingredient&gt;();
+            var user = ActiveUser.username;
+            var query = @&quot;SELECT i.ingredientID, i.username, i.quantity, ii.ingredientName, ii.measurementType FROM shopping_list i, ingredient_info ii WHERE i.ingredientID = ii.ingredientID and username=@user;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@user&quot;, MySqlDbType.VarChar).Value = user;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var username = reader.GetString(1);
+                var name = reader.GetString(3);
+                var quantity = reader.GetInt32(2);
+                var id = reader.GetInt32(0);
+                var measurement = reader.GetString(4).ToUpper();
+
+                var ingredient = new Ingredient(username, name, quantity, id, measurement);
+
+                ingredients.Add(ingredient);
+            }
+
+            return ingredients;
         }
 
         /// &lt;summary&gt;
-        ///     Initializes the Recipe with the specified recipe id, and recipe name.
+        ///     Adds the shopping list ingredient with the specified data into the table
         /// &lt;/summary&gt;
-        /// &lt;param name=&quot;recipeId&quot;&gt;The recipe id of the recipe.&lt;/param&gt;
-        /// &lt;param name=&quot;name&quot;&gt;The name of the recipe.&lt;/param&gt;
-        /// &lt;precondition&gt; none &lt;/precondition&gt;
-        /// &lt;postcondition&gt; this.RecipeId = recipeId &amp;&amp; this.Name = name &lt;/postcondition&gt;
-        public Recipe(int recipeId, string name) 
+        /// &lt;param name=&quot;name&quot;&gt;The name of the ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;The quantity of the ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;measurement&quot;&gt;The measurement type of the ingredient.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;The ingredient is added to the database&lt;/postcondition&gt;
+        public static void addIngredient(string name, int quantity, string measurement, string connectionString)
         {
-            this.RecipeId = recipeId;
-            this.Name = name;
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            var query = @&quot;INSERT INTO ingredient_info (ingredientName, measurementType) SELECT @name, @measurement WHERE NOT EXISTS (SELECT 1 FROM ingredient_info WHERE ingredientName = @name); INSERT INTO shopping_list (ingredientID, username, quantity) SELECT ingredientID, @username, @quantity FROM ingredient_info WHERE ingredientName = @name;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@username&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.Parameters.Add(&quot;@name&quot;, MySqlDbType.VarChar).Value = name;
+            command.Parameters.Add(&quot;@quantity&quot;, MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add(&quot;@Measurement&quot;, MySqlDbType.VarChar).Value = measurement;
+            command.ExecuteNonQuery();
         }
 
         /// &lt;summary&gt;
-        ///     Initializes a default recipe object.
+        ///     Decrements the quantity of the shopping list ingredient with the given id in the database.
         /// &lt;/summary&gt;
-        public Recipe()
+        /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;The current quantity of the ingredient.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;Quantity for the given ingredient is decreased by 1&lt;/postcondition&gt;
+        public static void decrementQuantity(int id, int quantity, string connectionString)
         {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@quantity&quot;, MySqlDbType.Int32).Value = quantity - 1;
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            command.Parameters.Add(&quot;@username&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+        }
 
+        /// &lt;summary&gt;
+        ///     Increments the quantity of the shopping list ingredient in the database.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;The quantity of the ingredient.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;Quantity of the given ingredient is incremented by 1&lt;/postcondition&gt;
+        public static void incrementQuantity(int id, int quantity, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@quantity&quot;, MySqlDbType.Int32).Value = quantity + 1;
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            command.Parameters.Add(&quot;@username&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+        }
+
+        /// &lt;summary&gt;
+        ///     Removes the shopping list ingredient from the database.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;Ingredient is removed from the database&lt;/postcondition&gt;
+        public static void RemoveIngredient(int id, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Delete from shopping_list where ingredientID = @id AND USERNAME = @USER&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            command.Parameters.Add(&quot;@USER&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+        }
+
+        /// &lt;summary&gt;
+        ///     Gets the ingredients by the specified ingredient name in the shopping list
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;ingredientName&quot;&gt;Name of the ingredient.&lt;/param&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;none&lt;/postcondition&gt;
+        /// &lt;returns&gt;List of ingredients that match ingredient name.&lt;/returns&gt;
+        public static List&lt;Ingredient&gt; getIngredients(string ingredientName, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var ingredients = new List&lt;Ingredient&gt;();
+            var user = ActiveUser.username;
+            var query = @&quot;SELECT i.*, ii.ingredientName, ii.measurementType FROM shopping_list i, ingredient_info ii WHERE i.ingredientID = ii.ingredientID AND ii.ingredientName = @ingredientName AND username = @user;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@user&quot;, MySqlDbType.VarChar).Value = user;
+            command.Parameters.Add(&quot;@ingredientName&quot;, MySqlDbType.VarChar).Value = ingredientName;
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var username = reader.GetString(1);
+                var name = reader.GetString(3);
+                var quantity = reader.GetInt32(2);
+                var id = reader.GetInt32(0);
+                var measurement = reader.GetString(4);
+
+                var ingredient = new Ingredient(username, name, quantity, id, measurement);
+
+                ingredients.Add(ingredient);
+            }
+
+            return ingredients;
+        }
+
+        /// &lt;summary&gt;
+        ///     Updates the quantity of the ingredient in the database.
+        /// &lt;/summary&gt;
+        /// &lt;precondition&gt;none&lt;/precondition&gt;
+        /// &lt;postcondition&gt;Quantity of the given ingredient is updated by the given quantity.&lt;/postcondition&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The id of the ingredient.&lt;/param&gt;
+        /// &lt;param name=&quot;quantity&quot;&gt;The quantity of the ingredient.&lt;/param&gt;
+        public static void updateQuantity(int id, int quantity, string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;Update shopping_list set quantity = @quantity where ingredientID = @id and username = @username&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@quantity&quot;, MySqlDbType.Int32).Value = quantity;
+            command.Parameters.Add(&quot;@id&quot;, MySqlDbType.Int32).Value = id;
+            command.Parameters.Add(&quot;@username&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
+
+        }
+
+        /// &lt;summary&gt;
+        /// Removes all rows from the table where username matches.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;connectionString&quot;&gt;The connection string.&lt;/param&gt;
+        public static void removeAll(string connectionString)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var query = @&quot;DELETE FROM shopping_list WHERE USERNAME = @user;&quot;;
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.Add(&quot;@USER&quot;, MySqlDbType.VarChar).Value = ActiveUser.username;
+            command.ExecuteNonQuery();
         }
 
     }
@@ -93,7 +201,7 @@ namespace RecipePlannerLibrary.Models
 
     </pre>
     <script type="text/javascript">
-      highlightRanges([[15,31,15,35,1],[15,36,15,40,1],[20,30,20,34,1],[20,35,20,39,1],[25,37,25,41,1],[25,42,25,46,1],[30,41,30,45,1],[30,46,30,50,1],[35,53,35,57,1],[35,58,35,62,1],[40,36,40,40,1],[40,41,40,45,1],[50,9,50,69,1],[51,9,51,10,1],[52,13,52,38,1],[53,13,53,30,1],[54,13,54,44,1],[55,13,55,49,1],[56,13,56,61,1],[57,13,57,44,1],[58,9,58,10,1],[67,9,67,49,1],[68,9,68,10,1],[69,13,69,38,1],[70,13,70,30,1],[71,9,71,10,1],[76,9,76,24,1],[77,9,77,10,1],[79,9,79,10,1]]);
+      highlightRanges([[19,9,19,10,1],[20,13,20,74,1],[21,13,21,31,1],[22,13,22,54,1],[23,13,23,44,1],[24,13,24,213,1],[25,13,25,69,1],[26,13,26,79,1],[27,13,27,56,1],[28,13,28,34,1],[29,13,29,14,1],[30,17,30,52,1],[31,17,31,48,1],[32,17,32,51,1],[33,17,33,45,1],[34,17,34,65,1],[36,17,36,92,1],[38,17,38,45,1],[39,13,39,14,1],[41,13,41,32,1],[42,9,42,10,1],[53,9,53,10,1],[54,13,54,74,1],[55,13,55,31,1],[57,13,57,350,1],[58,13,58,69,1],[59,13,59,98,1],[60,13,60,79,1],[61,13,61,85,1],[62,13,62,93,1],[63,13,63,39,1],[64,9,64,10,1],[74,9,74,10,1],[75,13,75,74,1],[76,13,76,31,1],[77,13,77,124,1],[78,13,78,69,1],[79,13,79,89,1],[80,13,80,73,1],[81,13,81,98,1],[82,13,82,39,1],[83,9,83,10,1],[93,9,93,10,1],[94,13,94,74,1],[95,13,95,31,1],[96,13,96,124,1],[97,13,97,69,1],[98,13,98,89,1],[99,13,99,73,1],[100,13,100,98,1],[101,13,101,39,1],[102,9,102,10,1],[111,9,111,10,1],[112,13,112,74,1],[113,13,113,31,1],[114,13,114,100,1],[115,13,115,69,1],[116,13,116,73,1],[117,13,117,94,1],[118,13,118,39,1],[119,9,119,10,1],[129,9,129,10,1],[130,13,130,74,1],[131,13,131,31,1],[132,13,132,54,1],[133,13,133,44,1],[134,13,134,220,1],[135,13,135,69,1],[136,13,136,79,1],[137,13,137,99,1],[138,13,138,56,1],[139,13,139,34,1],[140,13,140,14,1],[141,17,141,52,1],[142,17,142,48,1],[143,17,143,51,1],[144,17,144,45,1],[145,17,145,55,1],[147,17,147,92,1],[149,17,149,45,1],[150,13,150,14,1],[152,13,152,32,1],[153,9,153,10,1],[163,9,163,10,1],[164,13,164,74,1],[165,13,165,31,1],[166,13,166,124,1],[167,13,167,69,1],[168,13,168,85,1],[169,13,169,73,1],[170,13,170,98,1],[171,13,171,39,1],[173,9,173,10,1],[180,9,180,10,1],[181,13,181,74,1],[182,13,182,31,1],[183,13,183,78,1],[184,13,184,69,1],[185,13,185,94,1],[186,13,186,39,1],[187,9,187,10,1]]);
     </script>
   </body>
 </html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerTests\RecipeStepTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerTests
+{
+    /// &lt;summary&gt;
+    /// Test the recipe step class
+    /// &lt;/summary&gt;
+    [TestClass]
+    public class RecipeStepTests
+    {
+        /// &lt;summary&gt;
+        /// Tests the constructor.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void TestConstructor()
+        {
+            int recipeId = 1;
+            int stepNumber = 2;
+            string stepDescription = &quot;Boil water&quot;;
+
+            RecipeStep step = new RecipeStep(recipeId, stepNumber, stepDescription);
+
+            Assert.AreEqual(recipeId, step.recipeId);
+            Assert.AreEqual(stepNumber, step.stepNumber);
+            Assert.AreEqual(stepDescription, step.stepDescription);
+        }
+
+        /// &lt;summary&gt;
+        /// Construct the sets properties correctly.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void Constructor_SetsPropertiesCorrectly()
+        {
+            // Arrange
+            int expectedStepNumber = 1;
+            string expectedStepDescription = &quot;Preheat the oven to 350&#176;F.&quot;;
+
+            // Act
+            RecipeStep recipeStep = new RecipeStep(expectedStepNumber, expectedStepDescription);
+
+            // Assert
+            Assert.AreEqual(expectedStepNumber, recipeStep.stepNumber);
+            Assert.AreEqual(expectedStepDescription, recipeStep.stepDescription);
+        }
+
+        /// &lt;summary&gt;
+        /// Equals the returns true when object is equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void Equals_ReturnsTrue_WhenObjectIsEqual()
+        {
+            // Arrange
+            RecipeStep step1 = new RecipeStep(1, &quot;Preheat the oven.&quot;);
+            RecipeStep step2 = new RecipeStep(1, &quot;Preheat the oven.&quot;);
+
+            // Act
+            bool result = step1.Equals(step2);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        /// &lt;summary&gt;
+        /// Equals the returns false when object is not equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void Equals_ReturnsFalse_WhenObjectIsNotEqual()
+        {
+            // Arrange
+            RecipeStep step1 = new RecipeStep(1, &quot;Preheat the oven.&quot;);
+            RecipeStep step2 = new RecipeStep(2, &quot;Preheat the oven.&quot;);
+
+            // Act
+            bool result = step1.Equals(step2);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the hash code returns same hash code when object is equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetHashCode_ReturnsSameHashCode_WhenObjectIsEqual()
+        {
+            // Arrange
+            RecipeStep step1 = new RecipeStep(1, &quot;Preheat the oven.&quot;);
+            RecipeStep step2 = new RecipeStep(1, &quot;Preheat the oven.&quot;);
+
+            // Act
+            int hash1 = step1.GetHashCode();
+            int hash2 = step2.GetHashCode();
+
+            // Assert
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the hash code returns different hash code when object is not equal.
+        /// &lt;/summary&gt;
+        [TestMethod]
+        public void GetHashCode_ReturnsDifferentHashCode_WhenObjectIsNotEqual()
+        {
+            // Arrange
+            RecipeStep step1 = new RecipeStep(1, &quot;Preheat the oven.&quot;);
+            RecipeStep step2 = new RecipeStep(2, &quot;Preheat the oven.&quot;);
+
+            // Act
+            int hash1 = step1.GetHashCode();
+            int hash2 = step2.GetHashCode();
+
+            // Assert
+            Assert.AreNotEqual(hash1, hash2);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,10,1],[15,13,15,30,1],[16,13,16,32,1],[17,13,17,51,1],[19,13,19,85,1],[21,13,21,54,1],[22,13,22,58,1],[23,13,23,68,1],[24,9,24,10,1],[31,9,31,10,1],[33,13,33,40,1],[34,13,34,75,1],[37,13,37,97,1],[40,13,40,72,1],[41,13,41,82,1],[42,9,42,10,1],[49,9,49,10,1],[51,13,51,71,1],[52,13,52,71,1],[55,13,55,47,1],[58,13,58,35,1],[59,9,59,10,1],[66,9,66,10,1],[68,13,68,71,1],[69,13,69,71,1],[72,13,72,47,1],[75,13,75,36,1],[76,9,76,10,1],[83,9,83,10,1],[85,13,85,71,1],[86,13,86,71,1],[89,13,89,45,1],[90,13,90,45,1],[93,13,93,43,1],[94,9,94,10,1],[101,9,101,10,1],[103,13,103,71,1],[104,13,104,71,1],[107,13,107,45,1],[108,13,108,45,1],[111,13,111,46,1],[112,9,112,10,1]]);
+    </script>
+  </body>
+</html>

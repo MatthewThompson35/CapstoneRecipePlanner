@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\RecipeSummary.Designer.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace RecipePlannerFinalDemoAdditions
+{
+    partial class RecipeSummary
+    {
+        /// &lt;summary&gt;
+        ///  Required designer variable.
+        /// &lt;/summary&gt;
+        private System.ComponentModel.IContainer components = null;
+
+        /// &lt;summary&gt;
+        ///  Clean up any resources being used.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;disposing&quot;&gt;true if managed resources should be disposed; otherwise, false.&lt;/param&gt;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing &amp;&amp; (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// &lt;summary&gt;
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// &lt;/summary&gt;
+        private void InitializeComponent()
+        {
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.descriptionTextBox = new System.Windows.Forms.TextBox();
+            this.ingredientsListView = new System.Windows.Forms.ListView();
+            this.ingredientNameColumn = new System.Windows.Forms.ColumnHeader();
+            this.quantityColumn = new System.Windows.Forms.ColumnHeader();
+            this.measurementColumn = new System.Windows.Forms.ColumnHeader();
+            this.stepsListView = new System.Windows.Forms.ListView();
+            this.stepNumColumn = new System.Windows.Forms.ColumnHeader();
+            this.stepDescriptionColumn = new System.Windows.Forms.ColumnHeader();
+            this.tagsListView = new System.Windows.Forms.ListView();
+            this.tagNameColumn = new System.Windows.Forms.ColumnHeader();
+            this.addIngredientButton = new System.Windows.Forms.Button();
+            this.addStepButton = new System.Windows.Forms.Button();
+            this.addTagButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.errorFieldsLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(137, 9);
+            this.label1.Name = &quot;label1&quot;;
+            this.label1.Size = new System.Drawing.Size(237, 38);
+            this.label1.TabIndex = 0;
+            this.label1.Text = &quot;Recipe Summary&quot;;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(65, 83);
+            this.label2.Name = &quot;label2&quot;;
+            this.label2.Size = new System.Drawing.Size(101, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = &quot;Recipe Name:&quot;;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(297, 83);
+            this.label3.Name = &quot;label3&quot;;
+            this.label3.Size = new System.Drawing.Size(137, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = &quot;Recipe Description:&quot;;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(63, 167);
+            this.label4.Name = &quot;label4&quot;;
+            this.label4.Size = new System.Drawing.Size(114, 28);
+            this.label4.TabIndex = 3;
+            this.label4.Text = &quot;Ingredients:&quot;;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(67, 353);
+            this.label5.Name = &quot;label5&quot;;
+            this.label5.Size = new System.Drawing.Size(63, 28);
+            this.label5.TabIndex = 4;
+            this.label5.Text = &quot;Steps:&quot;;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(67, 543);
+            this.label6.Name = &quot;label6&quot;;
+            this.label6.Size = new System.Drawing.Size(54, 28);
+            this.label6.TabIndex = 5;
+            this.label6.Text = &quot;Tags:&quot;;
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(65, 106);
+            this.nameTextBox.Name = &quot;nameTextBox&quot;;
+            this.nameTextBox.Size = new System.Drawing.Size(153, 27);
+            this.nameTextBox.TabIndex = 6;
+            // 
+            // descriptionTextBox
+            // 
+            this.descriptionTextBox.Location = new System.Drawing.Point(297, 106);
+            this.descriptionTextBox.Name = &quot;descriptionTextBox&quot;;
+            this.descriptionTextBox.Size = new System.Drawing.Size(153, 27);
+            this.descriptionTextBox.TabIndex = 7;
+            // 
+            // ingredientsListView
+            // 
+            this.ingredientsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ingredientNameColumn,
+            this.quantityColumn,
+            this.measurementColumn});
+            this.ingredientsListView.Location = new System.Drawing.Point(65, 198);
+            this.ingredientsListView.Name = &quot;ingredientsListView&quot;;
+            this.ingredientsListView.Size = new System.Drawing.Size(383, 139);
+            this.ingredientsListView.TabIndex = 8;
+            this.ingredientsListView.UseCompatibleStateImageBehavior = false;
+            this.ingredientsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // ingredientNameColumn
+            // 
+            this.ingredientNameColumn.Text = &quot;Ingredient Name&quot;;
+            this.ingredientNameColumn.Width = 125;
+            // 
+            // quantityColumn
+            // 
+            this.quantityColumn.Text = &quot;Quantity&quot;;
+            this.quantityColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.quantityColumn.Width = 75;
+            // 
+            // measurementColumn
+            // 
+            this.measurementColumn.Text = &quot;Measurement&quot;;
+            this.measurementColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.measurementColumn.Width = 125;
+            // 
+            // stepsListView
+            // 
+            this.stepsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.stepNumColumn,
+            this.stepDescriptionColumn});
+            this.stepsListView.Location = new System.Drawing.Point(65, 384);
+            this.stepsListView.Name = &quot;stepsListView&quot;;
+            this.stepsListView.Size = new System.Drawing.Size(383, 139);
+            this.stepsListView.TabIndex = 9;
+            this.stepsListView.UseCompatibleStateImageBehavior = false;
+            this.stepsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // stepNumColumn
+            // 
+            this.stepNumColumn.Text = &quot;Step Number&quot;;
+            this.stepNumColumn.Width = 125;
+            // 
+            // stepDescriptionColumn
+            // 
+            this.stepDescriptionColumn.Text = &quot;Step Description&quot;;
+            this.stepDescriptionColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.stepDescriptionColumn.Width = 125;
+            // 
+            // tagsListView
+            // 
+            this.tagsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.tagNameColumn});
+            this.tagsListView.Location = new System.Drawing.Point(65, 574);
+            this.tagsListView.Name = &quot;tagsListView&quot;;
+            this.tagsListView.Size = new System.Drawing.Size(383, 139);
+            this.tagsListView.TabIndex = 10;
+            this.tagsListView.UseCompatibleStateImageBehavior = false;
+            this.tagsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // tagNameColumn
+            // 
+            this.tagNameColumn.Text = &quot;Tag Name&quot;;
+            this.tagNameColumn.Width = 100;
+            // 
+            // addIngredientButton
+            // 
+            this.addIngredientButton.Location = new System.Drawing.Point(197, 166);
+            this.addIngredientButton.Name = &quot;addIngredientButton&quot;;
+            this.addIngredientButton.Size = new System.Drawing.Size(136, 29);
+            this.addIngredientButton.TabIndex = 11;
+            this.addIngredientButton.Text = &quot;Add Ingredient&quot;;
+            this.addIngredientButton.UseVisualStyleBackColor = true;
+            this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
+            // 
+            // addStepButton
+            // 
+            this.addStepButton.Location = new System.Drawing.Point(197, 352);
+            this.addStepButton.Name = &quot;addStepButton&quot;;
+            this.addStepButton.Size = new System.Drawing.Size(136, 29);
+            this.addStepButton.TabIndex = 12;
+            this.addStepButton.Text = &quot;Add Step&quot;;
+            this.addStepButton.UseVisualStyleBackColor = true;
+            this.addStepButton.Click += new System.EventHandler(this.addStepButton_Click);
+            // 
+            // addTagButton
+            // 
+            this.addTagButton.Location = new System.Drawing.Point(197, 542);
+            this.addTagButton.Name = &quot;addTagButton&quot;;
+            this.addTagButton.Size = new System.Drawing.Size(136, 29);
+            this.addTagButton.TabIndex = 13;
+            this.addTagButton.Text = &quot;Add Tag&quot;;
+            this.addTagButton.UseVisualStyleBackColor = true;
+            this.addTagButton.Click += new System.EventHandler(this.addTagButton_Click);
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(137, 750);
+            this.addButton.Name = &quot;addButton&quot;;
+            this.addButton.Size = new System.Drawing.Size(94, 29);
+            this.addButton.TabIndex = 14;
+            this.addButton.Text = &quot;Add&quot;;
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(297, 750);
+            this.cancelButton.Name = &quot;cancelButton&quot;;
+            this.cancelButton.Size = new System.Drawing.Size(94, 29);
+            this.cancelButton.TabIndex = 15;
+            this.cancelButton.Text = &quot;Cancel&quot;;
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // errorFieldsLabel
+            // 
+            this.errorFieldsLabel.AutoSize = true;
+            this.errorFieldsLabel.Font = new System.Drawing.Font(&quot;Segoe UI&quot;, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorFieldsLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorFieldsLabel.Location = new System.Drawing.Point(105, 727);
+            this.errorFieldsLabel.Name = &quot;errorFieldsLabel&quot;;
+            this.errorFieldsLabel.Size = new System.Drawing.Size(169, 20);
+            this.errorFieldsLabel.TabIndex = 16;
+            this.errorFieldsLabel.Text = &quot;Please fill out all fields.&quot;;
+            this.errorFieldsLabel.Visible = false;
+            // 
+            // RecipeSummary
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(514, 823);
+            this.Controls.Add(this.errorFieldsLabel);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.addTagButton);
+            this.Controls.Add(this.addStepButton);
+            this.Controls.Add(this.addIngredientButton);
+            this.Controls.Add(this.tagsListView);
+            this.Controls.Add(this.stepsListView);
+            this.Controls.Add(this.ingredientsListView);
+            this.Controls.Add(this.descriptionTextBox);
+            this.Controls.Add(this.nameTextBox);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Name = &quot;RecipeSummary&quot;;
+            this.Text = &quot;RecipeSummary&quot;;
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private TextBox nameTextBox;
+        private TextBox descriptionTextBox;
+        private ListView ingredientsListView;
+        private ListView stepsListView;
+        private ListView tagsListView;
+        private Button addIngredientButton;
+        private Button addStepButton;
+        private Button addTagButton;
+        private Button addButton;
+        private Button cancelButton;
+        private Label errorFieldsLabel;
+        private ColumnHeader stepNumColumn;
+        private ColumnHeader stepDescriptionColumn;
+        private ColumnHeader tagNameColumn;
+        private ColumnHeader ingredientNameColumn;
+        private ColumnHeader quantityColumn;
+        private ColumnHeader measurementColumn;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,9,8,68,0],[15,9,15,10,0],[16,13,16,51,0],[17,13,17,14,0],[18,17,18,38,0],[19,13,19,14,0],[20,13,20,37,0],[21,9,21,10,0],[30,9,30,10,0],[31,13,31,60,0],[32,13,32,60,0],[33,13,33,60,0],[34,13,34,60,0],[35,13,35,60,0],[36,13,36,60,0],[37,13,37,67,0],[38,13,38,74,0],[39,13,39,76,0],[40,13,40,81,0],[41,13,41,75,0],[42,13,42,78,0],[43,13,43,70,0],[44,13,44,74,0],[45,13,45,82,0],[46,13,46,69,0],[47,13,47,74,0],[48,13,48,74,0],[49,13,49,68,0],[50,13,50,67,0],[51,13,51,64,0],[52,13,52,67,0],[53,13,53,70,0],[54,13,54,34,0],[58,13,58,41,0],[59,13,59,141,0],[60,13,60,69,0],[61,13,61,41,0],[62,13,62,65,0],[63,13,63,38,0],[64,13,64,49,0],[68,13,68,41,0],[69,13,69,69,0],[70,13,70,41,0],[71,13,71,65,0],[72,13,72,38,0],[73,13,73,47,0],[77,13,77,41,0],[78,13,78,70,0],[79,13,79,41,0],[80,13,80,65,0],[81,13,81,38,0],[82,13,82,54,0],[86,13,86,41,0],[87,13,87,142,0],[88,13,88,70,0],[89,13,89,41,0],[90,13,90,65,0],[91,13,91,38,0],[92,13,92,47,0],[96,13,96,41,0],[97,13,97,142,0],[98,13,98,70,0],[99,13,99,41,0],[100,13,100,64,0],[101,13,101,38,0],[102,13,102,41,0],[106,13,106,41,0],[107,13,107,142,0],[108,13,108,70,0],[109,13,109,41,0],[110,13,110,64,0],[111,13,111,38,0],[112,13,112,40,0],[116,13,116,75,0],[117,13,117,51,0],[118,13,118,70,0],[119,13,119,43,0],[123,13,123,83,0],[124,13,124,65,0],[125,13,125,77,0],[126,13,126,50,0],[130,13,133,38,0],[134,13,134,83,0],[135,13,135,67,0],[136,13,136,79,0],[137,13,137,51,0],[138,13,138,78,0],[139,13,139,79,0],[143,13,143,64,0],[144,13,144,51,0],[148,13,148,51,0],[149,13,149,93,0],[150,13,150,44,0],[154,13,154,57,0],[155,13,155,96,0],[156,13,156,48,0],[160,13,162,42,0],[163,13,163,77,0],[164,13,164,55,0],[165,13,165,73,0],[166,13,166,45,0],[167,13,167,72,0],[168,13,168,73,0],[172,13,172,53,0],[173,13,173,44,0],[177,13,177,66,0],[178,13,178,100,0],[179,13,179,52,0],[183,13,184,34,0],[185,13,185,76,0],[186,13,186,53,0],[187,13,187,72,0],[188,13,188,45,0],[189,13,189,71,0],[190,13,190,72,0],[194,13,194,50,0],[195,13,195,44,0],[199,13,199,84,0],[200,13,200,67,0],[201,13,201,78,0],[202,13,202,52,0],[203,13,203,62,0],[204,13,204,69,0],[205,13,205,103,0],[209,13,209,78,0],[210,13,210,55,0],[211,13,211,72,0],[212,13,212,46,0],[213,13,213,50,0],[214,13,214,63,0],[215,13,215,91,0],[219,13,219,77,0],[220,13,220,53,0],[221,13,221,71,0],[222,13,222,45,0],[223,13,223,48,0],[224,13,224,62,0],[225,13,225,89,0],[229,13,229,74,0],[230,13,230,47,0],[231,13,231,67,0],[232,13,232,42,0],[233,13,233,41,0],[234,13,234,59,0],[235,13,235,83,0],[239,13,239,77,0],[240,13,240,53,0],[241,13,241,70,0],[242,13,242,45,0],[243,13,243,47,0],[244,13,244,62,0],[245,13,245,89,0],[249,13,249,51,0],[250,13,250,148,0],[251,13,251,72,0],[252,13,252,81,0],[253,13,253,61,0],[254,13,254,75,0],[255,13,255,49,0],[256,13,256,72,0],[257,13,257,51,0],[261,13,261,74,0],[262,13,262,74,0],[263,13,263,65,0],[264,13,264,54,0],[265,13,265,50,0],[266,13,266,47,0],[267,13,267,50,0],[268,13,268,51,0],[269,13,269,57,0],[270,13,270,50,0],[271,13,271,51,0],[272,13,272,57,0],[273,13,273,56,0],[274,13,274,49,0],[275,13,275,44,0],[276,13,276,44,0],[277,13,277,44,0],[278,13,278,44,0],[279,13,279,44,0],[280,13,280,44,0],[281,13,281,41,0],[282,13,282,41,0],[283,13,283,38,0],[284,13,284,34,0],[286,9,286,10,0]]);
+    </script>
+  </body>
+</html>

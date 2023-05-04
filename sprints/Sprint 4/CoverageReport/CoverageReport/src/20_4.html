@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\IngredientsPage.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.ComponentModel;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+
+namespace RecipePlannerDesktopApplication;
+
+/// &lt;summary&gt;
+///     Ingredients Page partial class.
+/// &lt;/summary&gt;
+/// &lt;seealso cref=&quot;System.Windows.Forms.Form&quot; /&gt;
+public partial class IngredientsPage : Form
+{
+    #region Data members
+
+    private DataGridViewRow selectedRow;
+    private int page = 1;
+    private readonly int pageSize = 8;
+    private readonly int totalPages;
+    private List&lt;Ingredient&gt; pageOneIngredients;
+
+    #endregion
+
+    #region Constructors
+
+    /// &lt;summary&gt;
+    ///     Initializes a new instance of the &lt;see cref=&quot;IngredientsPage&quot; /&gt; class.
+    /// &lt;/summary&gt;
+    public IngredientsPage()
+    {
+        this.InitializeComponent();
+
+        try
+        {
+            var ingriedents = IngredientDAL.getIngredients();
+            this.totalPages = (int) Math.Ceiling((double) ingriedents.Count / this.pageSize);
+            this.pageOneIngredients = ingriedents
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            var bindingList = new BindingList&lt;Ingredient&gt;(this.pageOneIngredients);
+            this.ingredientsGridView.DataSource = bindingList;
+            Refresh();
+        }
+        catch (Exception ex)
+        {
+            this.serverErrorLabel.Visible = true;
+            this.ingredientsGridView.Enabled = false;
+        }
+
+        Refresh();
+    }
+
+    #endregion
+
+    #region Methods
+
+    private void logoutButton_Click(object sender, EventArgs e)
+    {
+        Hide();
+        var login = new LoginPage();
+        login.Show();
+    }
+
+    private void addIngredientButton_Click(object sender, EventArgs e)
+    {
+        this.displayAddIngredientsPage();
+    }
+
+    private void displayAddIngredientsPage()
+    {
+        Hide();
+        var ingredientsPopup = new AddIngredientsPage(this);
+        ingredientsPopup.Show();
+    }
+
+    /// &lt;summary&gt;
+    ///     Updates the ingredients view with the page one ingredients.
+    /// &lt;/summary&gt;
+    public void UpdateIngredientsGridView()
+    {
+        try
+        {
+            var ingredients = IngredientDAL.getIngredients();
+            this.pageOneIngredients = ingredients
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+            var list = this.pageOneIngredients;
+            var bindingList = new BindingList&lt;Ingredient&gt;(list);
+
+            this.ingredientsGridView.DataSource = null;
+            this.ingredientsGridView.DataSource = bindingList;
+        }
+        catch (Exception ex)
+        {
+            this.serverErrorLabel.Visible = true;
+        }
+    }
+
+    private void ingredientsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        var rowIndex = e.RowIndex;
+        var columnIndex = e.ColumnIndex;
+        if (rowIndex &gt;= 0)
+        {
+            this.selectedRow = this.ingredientsGridView.Rows[rowIndex];
+            this.clickIngredientCell(columnIndex);
+        }
+    }
+
+    private void clickIngredientCell(int columnIndex)
+    {
+        try
+        {
+            if (this.selectedRow != null)
+            {
+                var id = 0;
+                var name = this.selectedRow.Cells[0].Value;
+                var quantity = (int) this.selectedRow.Cells[2].Value;
+                var list = IngredientDAL.getIngredients();
+                foreach (var item in list)
+                {
+                    if (item.name.Equals(name) &amp;&amp; item.quantity == quantity)
+                    {
+                        id = (int) item.id;
+                    }
+                }
+
+                if (columnIndex == 1)
+                {
+                    if (quantity &gt; 1)
+                    {
+                        IngredientDAL.decrementQuantity(id, quantity);
+                        this.UpdateIngredientsGridView();
+                    }
+                    else
+                    {
+                        IngredientDAL.RemoveIngredient(id, Connection.ConnectionString);
+                        this.UpdateIngredientsGridView();
+                    }
+                }
+
+                if (columnIndex == 3)
+                {
+                    IngredientDAL.incrementQuantity(id, quantity);
+                    this.UpdateIngredientsGridView();
+                }
+
+                if (columnIndex == 5)
+                {
+                    IngredientDAL.RemoveIngredient(id, Connection.ConnectionString);
+                    this.UpdateIngredientsGridView();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            this.serverErrorLabel.Visible = true;
+            this.ingredientsGridView.Enabled = false;
+        }
+    }
+
+    private void backButton_Click(object sender, EventArgs e)
+    {
+        Hide();
+
+        var homepage = new Homepage();
+        homepage.Show();
+    }
+
+    private void beginningButton_Click(object sender, EventArgs e)
+    {
+        this.page = 1;
+        var ingredients = IngredientDAL.getIngredients();
+        List&lt;Ingredient&gt; allIngredientsOnPage = ingredients
+            .Skip((this.page - 1) * this.pageSize)
+            .Take(this.pageSize)
+            .ToList();
+
+        this.pageLabel.Text = this.page.ToString();
+        var list = allIngredientsOnPage;
+        var bindingList = new BindingList&lt;Ingredient&gt;(list);
+
+        this.ingredientsGridView.DataSource = null;
+        this.ingredientsGridView.DataSource = bindingList;
+    }
+
+    private void prevButton_Click(object sender, EventArgs e)
+    {
+        if (this.page != 1)
+        {
+            this.page--;
+            var ingredients = IngredientDAL.getIngredients();
+            List&lt;Ingredient&gt; allIngredientsOnPage = ingredients
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList&lt;Ingredient&gt;(list);
+
+            this.ingredientsGridView.DataSource = null;
+            this.ingredientsGridView.DataSource = bindingList;
+        }
+    }
+
+    private void nextButton_Click(object sender, EventArgs e)
+    {
+        if (this.page != this.totalPages)
+        {
+            this.page++;
+            var ingredients = IngredientDAL.getIngredients();
+            List&lt;Ingredient&gt; allIngredientsOnPage = ingredients
+                .Skip((this.page - 1) * this.pageSize)
+                .Take(this.pageSize)
+                .ToList();
+
+            this.pageLabel.Text = this.page.ToString();
+            var list = allIngredientsOnPage;
+            var bindingList = new BindingList&lt;Ingredient&gt;(list);
+
+            this.ingredientsGridView.DataSource = null;
+            this.ingredientsGridView.DataSource = bindingList;
+        }
+    }
+
+    private void lastButtonClick(object sender, EventArgs e)
+    {
+        this.page = this.totalPages;
+        var ingredients = IngredientDAL.getIngredients();
+        List&lt;Ingredient&gt; allIngredientsOnPage = ingredients
+            .Skip((this.page - 1) * this.pageSize)
+            .Take(this.pageSize)
+            .ToList();
+
+        this.pageLabel.Text = this.page.ToString();
+        var list = allIngredientsOnPage;
+        var bindingList = new BindingList&lt;Ingredient&gt;(list);
+
+        this.ingredientsGridView.DataSource = null;
+        this.ingredientsGridView.DataSource = bindingList;
+    }
+
+    #endregion
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[17,5,17,26,0],[18,5,18,39,0],[29,5,29,29,0],[30,5,30,6,0],[31,9,31,36,0],[34,9,34,10,0],[35,13,35,62,0],[36,13,36,94,0],[37,13,40,27,0],[41,13,41,84,0],[42,13,42,63,0],[43,13,43,23,0],[44,9,44,10,0],[45,9,45,29,0],[46,9,46,10,0],[47,13,47,50,0],[48,13,48,54,0],[49,9,49,10,0],[51,9,51,19,0],[52,5,52,6,0],[59,5,59,6,0],[60,9,60,16,0],[61,9,61,37,0],[62,9,62,22,0],[63,5,63,6,0],[66,5,66,6,0],[67,9,67,42,0],[68,5,68,6,0],[71,5,71,6,0],[72,9,72,16,0],[73,9,73,61,0],[74,9,74,33,0],[75,5,75,6,0],[81,5,81,6,0],[83,9,83,10,0],[84,13,84,62,0],[85,13,88,27,0],[89,13,89,48,0],[90,13,90,65,0],[92,13,92,56,0],[93,13,93,63,0],[94,9,94,10,0],[95,9,95,29,0],[96,9,96,10,0],[97,13,97,50,0],[98,9,98,10,0],[99,5,99,6,0],[102,5,102,6,0],[103,9,103,35,0],[104,9,104,41,0],[105,9,105,27,0],[106,9,106,10,0],[107,13,107,72,0],[108,13,108,51,0],[109,9,109,10,0],[110,5,110,6,0],[113,5,113,6,0],[115,9,115,10,0],[116,13,116,42,0],[117,13,117,14,0],[118,17,118,28,0],[119,17,119,60,0],[120,17,120,70,0],[121,17,121,59,0],[122,17,122,24,0],[122,26,122,34,0],[122,35,122,37,0],[122,38,122,42,0],[123,17,123,18,0],[124,21,124,77,0],[125,21,125,22,0],[126,25,126,44,0],[127,21,127,22,0],[128,17,128,18,0],[130,17,130,38,0],[131,17,131,18,0],[132,21,132,38,0],[133,21,133,22,0],[134,25,134,71,0],[135,25,135,58,0],[136,21,136,22,0],[138,21,138,22,0],[139,25,139,89,0],[140,25,140,58,0],[141,21,141,22,0],[142,17,142,18,0],[144,17,144,38,0],[145,17,145,18,0],[146,21,146,67,0],[147,21,147,54,0],[148,17,148,18,0],[150,17,150,38,0],[151,17,151,18,0],[152,21,152,85,0],[153,21,153,54,0],[154,17,154,18,0],[155,13,155,14,0],[156,9,156,10,0],[157,9,157,29,0],[158,9,158,10,0],[159,13,159,50,0],[160,13,160,54,0],[161,9,161,10,0],[162,5,162,6,0],[165,5,165,6,0],[166,9,166,16,0],[168,9,168,39,0],[169,9,169,25,0],[170,5,170,6,0],[173,5,173,6,0],[174,9,174,23,0],[175,9,175,58,0],[176,9,179,23,0],[181,9,181,52,0],[182,9,182,41,0],[183,9,183,61,0],[185,9,185,52,0],[186,9,186,59,0],[187,5,187,6,0],[190,5,190,6,0],[191,9,191,28,0],[192,9,192,10,0],[193,13,193,25,0],[194,13,194,62,0],[195,13,198,27,0],[200,13,200,56,0],[201,13,201,45,0],[202,13,202,65,0],[204,13,204,56,0],[205,13,205,63,0],[206,9,206,10,0],[207,5,207,6,0],[210,5,210,6,0],[211,9,211,42,0],[212,9,212,10,0],[213,13,213,25,0],[214,13,214,62,0],[215,13,218,27,0],[220,13,220,56,0],[221,13,221,45,0],[222,13,222,65,0],[224,13,224,56,0],[225,13,225,63,0],[226,9,226,10,0],[227,5,227,6,0],[230,5,230,6,0],[231,9,231,37,0],[232,9,232,58,0],[233,9,236,23,0],[238,9,238,52,0],[239,9,239,41,0],[240,9,240,61,0],[242,9,242,52,0],[243,9,243,59,0],[244,5,244,6,0]]);
+    </script>
+  </body>
+</html>

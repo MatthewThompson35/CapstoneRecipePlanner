@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\matth\Desktop\Capstone\CapstoneRecipePlanner\CapstoneRecipePlanner\code\RecipePlannerApplication\RecipePlannerDesktopApp\AddSharedRecipe.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using RecipePlannerLibrary;
+using RecipePlannerLibrary.Database;
+using RecipePlannerLibrary.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace RecipePlannerDesktopApplication
+{
+    /// &lt;summary&gt;
+    /// The class for sharing a meal to another user
+    /// &lt;/summary&gt;
+    /// &lt;seealso cref=&quot;System.Windows.Forms.Form&quot; /&gt;
+    public partial class AddSharedRecipe : Form
+    {
+        private RecipeDetailsPage detailsPage;
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;AddSharedRecipe&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;page&quot;&gt;The page.&lt;/param&gt;
+        public AddSharedRecipe(RecipeDetailsPage page)
+        {
+            InitializeComponent();
+            this.detailsPage = page;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.detailsPage.Show();
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            this.errorLabel.Visible = false;
+            var username = this.userTextBox.Text;
+            var isValid = Database.ContainsUser(username).Count != 0;
+            var recipe =
+                new SharedRecipe(
+                    RecipeDAL.getRecipeByName(
+                        RecipeDAL.getRecipeNameById(this.detailsPage.getRecipeId(), Connection.ConnectionString),
+                        Connection.ConnectionString), ActiveUser.username, username);
+            if (RecipeDAL.ContainsSharedRecipe(recipe).Count &gt; 0)
+            {
+                this.errorLabel.Text = &quot;You have already shared this recipe with &quot; + username;
+                this.errorLabel.Visible = true;
+            }
+
+            if (isValid &amp;&amp; RecipeDAL.ContainsSharedRecipe(recipe).Count == 0)
+            {
+                RecipeDAL.shareRecipe(username, this.detailsPage.getRecipeId(), Connection.ConnectionString);
+                this.Hide();
+                this.detailsPage.Show();
+            }
+
+            if(!isValid)
+            {
+                this.errorLabel.Text = &quot;Username &quot; + username + &quot; does not exist&quot;;
+                this.errorLabel.Visible = true;
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[29,9,29,55,0],[30,9,30,10,0],[31,13,31,35,0],[32,13,32,37,0],[33,9,33,10,0],[36,9,36,10,0],[37,13,37,25,0],[38,13,38,37,0],[39,9,39,10,0],[42,9,42,10,0],[43,13,43,45,0],[44,13,44,50,0],[45,13,45,70,0],[46,13,50,86,0],[51,13,51,66,0],[52,13,52,14,0],[53,17,53,95,0],[54,17,54,48,0],[55,13,55,14,0],[57,13,57,78,0],[58,13,58,14,0],[59,17,59,110,0],[60,17,60,29,0],[61,17,61,41,0],[62,13,62,14,0],[64,13,64,25,0],[65,13,65,14,0],[66,17,66,83,0],[67,17,67,48,0],[68,13,68,14,0],[69,9,69,10,0]]);
+    </script>
+  </body>
+</html>
