@@ -452,7 +452,7 @@
         var errorLabel = document.getElementById('recipe-error');
         var stepsString = "";
         var ingredientsString = "";
-        errorLabel.textContent = 'clicked';
+        errorLabel.textContent = 'Recipe with this name has already been added';
         const recipeNameInput = document.getElementById('recipeName');
         const recipeDescriptionInput = document.getElementById('description');
 
@@ -463,11 +463,15 @@
         if(recipeDescriptionInput === ''){
             errorLabel.textContent = 'Please enter a Description';
             }
-        
-   
+        var exists = false;
+        ViewBag.all.forEach(function (recipe) {
+            if (recipe.name === name) {
+               event.preventDefault();
+            }
+        });
 
         const recipeDescription = recipeDescriptionInput.value;
-
+        if (!exists){
         if (ingredientsRows.length > 0 && tagsRows.length > 0 && stepsRows.length > 0 && recipeName != null && recipeDescription != null) {
             for (let i = 0; i < ingredientsRows.length; i++) {
                 const cells = ingredientsRows[i].getElementsByTagName('td');
@@ -504,11 +508,7 @@
                 method: 'POST',
                 data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                 success: function (response) {
-                    if ('@ViewBag.error' === '') {
-                        alert("Recipe was added successfully");
-                    } else {
-                        alert("Recipe was not added because it is a duplicate");
-                    }
+                        errorLabel.textContent = '';
                 },
                 error: function (xhr, status, error) {
                     console.log('Error adding recipe:', error);
@@ -518,6 +518,9 @@
             event.preventDefault();
             errorLabel.textContent = 'ALL FIELDS MUST HAVE VALUES!';
         }
+        } else {
+            errorLabel.textContent = 'Recipe has already been added with this name';
+            }
     }
 
     function addTag() {
