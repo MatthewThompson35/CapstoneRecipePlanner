@@ -153,18 +153,18 @@
         margin-right: 10px;
         padding: 5px 10px;
     }
-    .move-button {
-        margin-left: 5px;
-    }
+
+    .move-button { margin-left: 5px; }
 
 </style>
 
 <div class="row">
     <div class="col-md-12">
-        @if (ViewBag.Error != null)
+        @if (ViewBag.error == null)
         {
-            <label class="error" style="color: red">@ViewBag.Error</label>
+            <input type="hidden" id="error" value="@ViewBag.error"/>
         }
+
         <span id="recipe-error" style="color: red;"></span>
         <div class="form-group">
             <label for="recipeName">Recipe Name:</label>
@@ -199,7 +199,7 @@
 
                 </div>
                 <div class="button-group">
-                    <input type="button" onclick="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton" value="Add Ingredient" />
+                    <input type="button" onclick="addIngredient()" class="btn btn-primary page-button" id="addIngredientButton" value="Add Ingredient"/>
                     <input type="button" value="Cancel" id="cancelAddIngredient"/>
                 </div>
             </form>
@@ -266,11 +266,11 @@
             </table>
         </div>
         <form id="buttons">
-            <input type="submit"  class="btn btn-primary page-button" id="addRecipeButton" value="Add Recipe" />
+            <input type="submit" class="btn btn-primary page-button" id="addRecipeButton" value="Add Recipe"/>
             <input type="submit" class="btn btn-primary page-button" asp-action="goToRecipePage" value="Cancel" id="cancelRecipe"/>
         </form>
         <form id="goToRecipePage" asp-action="goToRecipePageAll">
-            <input type="submit" asp-action="goToRecipePage" class="btn btn-primary page-button" id="goRecipePage" hidden value="Add Recipe" />
+            <input type="submit" asp-action="goToRecipePage" class="btn btn-primary page-button" id="goRecipePage" hidden value="Add Recipe"/>
         </form>
     </div>
 </div>
@@ -464,24 +464,11 @@
             errorLabel.textContent = 'Please enter a Description';
             }
         
-        var exists = false;
-        $.ajax({
-            url: "@Url.Action("CheckRecipeExists", "Home")",
-            method: 'POST',
-            data: { recipeName: recipeName },
-            success: function (response) {
-                exists = response.Exists;
-                console.log('Recipe exists:', exists);
-            },
-            error: function (xhr, status, error) {
-                console.log('Error checking recipe:', error);
-            }
-        });
+   
 
         const recipeDescription = recipeDescriptionInput.value;
 
         if (ingredientsRows.length > 0 && tagsRows.length > 0 && stepsRows.length > 0 && recipeName != null && recipeDescription != null) {
-            if(!exists) {
             for (let i = 0; i < ingredientsRows.length; i++) {
                 const cells = ingredientsRows[i].getElementsByTagName('td');
                 var ingredientString = `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent}`;
@@ -517,17 +504,16 @@
                 method: 'POST',
                 data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                 success: function (response) {
-                        $("#goRecipePage").trigger("click"); // triggers the click event on the button with id="goRecipePage"
-                    },
+                    if ('@ViewBag.error' === '') {
+                        alert("Recipe was added successfully");
+                    } else {
+                        alert("Recipe was not added because it is a duplicate");
+                    }
+                },
                 error: function (xhr, status, error) {
                     console.log('Error adding recipe:', error);
-                    }
-            });
-            }
-            else {
-                event.preventDefault();
-                errorLabel.textContent = 'Recipe with this name already exists';
                 }
+            });
         } else {
             event.preventDefault();
             errorLabel.textContent = 'ALL FIELDS MUST HAVE VALUES!';
