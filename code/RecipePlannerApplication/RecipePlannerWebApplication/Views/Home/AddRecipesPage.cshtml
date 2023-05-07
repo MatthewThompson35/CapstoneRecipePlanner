@@ -442,6 +442,7 @@
     });
 
     function addRecipe(event) {
+        event.preventDefault();
         const ingredientsTable = document.getElementById('IngredientsTable');
         const ingredientsTbody = ingredientsTable.getElementsByTagName('tbody')[0];
         const ingredientsRows = ingredientsTbody.getElementsByTagName('tr');
@@ -457,18 +458,31 @@
         var errorLabel = document.getElementById('recipe-error');
         var stepsString = "";
         var ingredientsString = "";
-        errorLabel.textContent = 'clicked';
+        errorLabel.textContent = '';
+        errorLabel.style.color = 'red';
         const recipeNameInput = document.getElementById('recipeName');
         const recipeDescriptionInput = document.getElementById('description');
 
         const recipeName = recipeNameInput.value;
+        var namesJson = '@Html.Raw(Json.Serialize(ViewBag.names))';
+        var names = JSON.parse(namesJson);
+        var recipeExists = false;
+        names.forEach(function (name) {
+            console.log(name);
+            if (name === recipeName) {
+                event.preventDefault();
+                recipeExists = true;
+                errorLabel.textContent = 'Recipe was already added';
+                return;
+            }
+        });
         if (recipeName === '') {
             errorLabel.textContent = 'Please enter a Recipe Name';
         }
         if (recipeDescriptionInput === '') {
             errorLabel.textContent = 'Please enter a Description';
         }
-
+        console.log(recipeExists)
         var exists = false;
         $.ajax({
             url: "@Url.Action("CheckRecipeExists", "Home")",
@@ -522,6 +536,32 @@
                     method: 'POST',
                     data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                     success: function (response) {
+                        if(!recipeExists){
+                            const ingredientsTableBody = document.querySelector('#IngredientsTable tbody');
+                            ingredientsTableBody.innerHTML = '';
+                            const stepsTableBody = document.querySelector('#StepsTable tbody');
+                            stepsTableBody.innerHTML = '';
+                            const tagsTableBody = document.querySelector('#TagsTable tbody');
+                            tagsTableBody.innerHTML = '';
+                            var addForm = document.getElementById("addForm");
+                            addForm.style.display = "none";
+                            var stepForm = document.getElementById("addStepForm");
+                            stepForm.style.display = "none";
+                            var tagForm = document.getElementById("addTagForm");
+                            tagForm.style.display = "none";
+                            const showIngredientsForm = document.getElementById('showIngredientsForm');
+                            showIngredientsForm.style.display = 'block';
+
+                            const showStepForm = document.getElementById('showStepForm');
+                            showStepForm.style.display = 'block';
+
+                            const showTagsForm = document.getElementById('showTagsForm');
+                            showTagsForm.style.display = 'block';
+                            recipeNameInput.value = '';
+                            recipeDescriptionInput.value = '';
+                            errorLabel.textContent = 'Recipe was successfully added';
+                            errorLabel.style.color = 'green';
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.log('Error adding recipe:', error);
@@ -666,8 +706,8 @@
         }
 
         document.getElementById('txtIngredientName').value = '';
-        showAddForm.style.display = "block";
         document.getElementById('txtQuantity').value = '';
+        showAddForm.style.display = "block";
         var addForm = document.getElementById("addForm");
         addForm.style.display = "none";
     }
