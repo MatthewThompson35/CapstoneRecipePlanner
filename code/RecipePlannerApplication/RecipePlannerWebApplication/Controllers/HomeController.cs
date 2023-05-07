@@ -610,7 +610,6 @@ public class HomeController : Controller
                 var meas = Enum.GetNames(typeof(Measurement)).ToList();
                 ViewBag.Measurements = meas;
                 ViewBag.page = "pantry";
-                TempData["msg"] = "Recipe Was Added Successfully";
                 this.setupForRecipePage();
                 return View("RecipePage");
             }
@@ -936,6 +935,12 @@ public class HomeController : Controller
             ViewBag.Measurements = measurements;
             ViewBag.page = "pantry";
             ViewBag.all = RecipeDAL.getRecipes(Connection.ConnectionString);
+            List<String> names = new List<String>();
+            foreach (Recipe recipe in RecipeDAL.getRecipes(Connection.ConnectionString))
+            {
+                names.Add(recipe.Name);
+            }
+            ViewBag.names = names;
             return View("AddRecipesPage", ViewBag.Measurements);
         }
         catch (Exception ex)
