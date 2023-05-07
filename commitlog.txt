@@ -1,3 +1,62 @@
+commit e39a6b5fdd9749d3a947f1a63861899a0da3fbaa
+Merge: 3ec11c8 da767e8
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Sun May 7 16:50:42 2023 -0400
+
+    Merge pull request #119 from MatthewThompson35/addFixFinal
+    
+    Fixed the outstanding issue with add feedback
+
+commit da767e8ce6a131796867d17026698b8834fc574b
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Sun May 7 15:50:57 2023 -0400
+
+    Fixed the outstanding issue with add feedback
+    
+    Now gives feedback when attempting to add
+
+commit 3ec11c8ad87781606e72d5dea297cf40acd04888
+Merge: 86f9744 8a58a56
+Author: JaneraSmith <93213270+JaneraSmith@users.noreply.github.com>
+Date:   Fri May 5 23:45:59 2023 -0400
+
+    Merge pull request #118 from MatthewThompson35/FixBrokenAddRecipeFinal
+    
+    Fixed adding recipe problem
+
+commit 8a58a5631f11909c4932deb15fd18550f1b20a8c
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri May 5 23:44:10 2023 -0400
+
+    Fixed adding recipe problem
+    
+    Adding recipe now adds recipe
+
+commit 86f97447dee4ce50835fbd2a951e5e4f746f0afd
+Merge: a692b80 75b583a
+Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>
+Date:   Fri May 5 22:40:51 2023 -0400
+
+    Merge pull request #117 from MatthewThompson35/testt
+    
+    Testt
+
+commit 75b583a77a3408e941ac7e7dce15690615525158
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri May 5 22:36:12 2023 -0400
+
+    Fixed adding duplicate recipe goes to recipe page
+    
+    no longer goes to the recipe page
+
+commit 3aee0d81985005a53da1bf7ffd2581fb4caa7111
+Author: Matthew Thompson <mthomp35@my.westga.edu>
+Date:   Fri May 5 21:24:42 2023 -0400
+
+    Testing fixing add Recipe
+    
+    Nothing working as of now
+
 commit a692b80b7b42d773a6614fcb7401ac683b35ebfd
 Merge: 5433aab ef398b5
 Author: Matthew Thompson <93340660+MatthewThompson35@users.noreply.github.com>

@@ -441,6 +441,9 @@
         addRecipe(event);
     });
 
+    var namesJson = '@Html.Raw(Json.Serialize(ViewBag.names))';
+    var names = JSON.parse(namesJson);
+
     function addRecipe(event) {
         event.preventDefault();
         const ingredientsTable = document.getElementById('IngredientsTable');
@@ -464,8 +467,6 @@
         const recipeDescriptionInput = document.getElementById('description');
 
         const recipeName = recipeNameInput.value;
-        var namesJson = '@Html.Raw(Json.Serialize(ViewBag.names))';
-        var names = JSON.parse(namesJson);
         var recipeExists = false;
         names.forEach(function (name) {
             console.log(name);
@@ -478,9 +479,11 @@
         });
         if (recipeName === '') {
             errorLabel.textContent = 'Please enter a Recipe Name';
+            return;
         }
         if (recipeDescriptionInput === '') {
             errorLabel.textContent = 'Please enter a Description';
+            return;
         }
         console.log(recipeExists)
         var exists = false;
@@ -499,7 +502,7 @@
 
         const recipeDescription = recipeDescriptionInput.value;
 
-        if (ingredientsRows.length > 0 && tagsRows.length > 0 && stepsRows.length > 0 && recipeName != null && recipeDescription != null) {
+        if (ingredientsRows.length > 0 && tagsRows.length > 0 && stepsRows.length > 0 && recipeName != null && recipeDescription != null && recipeName != '' && recipeDescription != '') {
             if (!exists) {
                 for (let i = 0; i < ingredientsRows.length; i++) {
                     const cells = ingredientsRows[i].getElementsByTagName('td');
@@ -537,6 +540,7 @@
                     data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                     success: function (response) {
                         if(!recipeExists){
+                            names.push(recipeName);
                             const ingredientsTableBody = document.querySelector('#IngredientsTable tbody');
                             ingredientsTableBody.innerHTML = '';
                             const stepsTableBody = document.querySelector('#StepsTable tbody');
