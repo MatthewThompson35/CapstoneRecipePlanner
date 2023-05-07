@@ -441,6 +441,9 @@
         addRecipe(event);
     });
 
+    var namesJson = '@Html.Raw(Json.Serialize(ViewBag.names))';
+    var names = JSON.parse(namesJson);
+
     function addRecipe(event) {
         event.preventDefault();
         const ingredientsTable = document.getElementById('IngredientsTable');
@@ -464,8 +467,6 @@
         const recipeDescriptionInput = document.getElementById('description');
 
         const recipeName = recipeNameInput.value;
-        var namesJson = '@Html.Raw(Json.Serialize(ViewBag.names))';
-        var names = JSON.parse(namesJson);
         var recipeExists = false;
         names.forEach(function (name) {
             console.log(name);
@@ -537,6 +538,7 @@
                     data: { recipeName: recipeName, description: recipeDescription, steps: stepsString, ingredients: ingredientsString, tags: tagsString },
                     success: function (response) {
                         if(!recipeExists){
+                            names.push(recipeName);
                             const ingredientsTableBody = document.querySelector('#IngredientsTable tbody');
                             ingredientsTableBody.innerHTML = '';
                             const stepsTableBody = document.querySelector('#StepsTable tbody');
